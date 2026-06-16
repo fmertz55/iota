@@ -29,12 +29,20 @@ pip install -r requirements.txt
 python src/iota_rig.py --config config.yaml --objective "Baseline active_iotas=1"
 ```
 
+The SQLite database lives at:
+
+```text
+data/iota_lab.db
+```
+
 Each run creates a numbered experiment:
 
 ```text
 data/iota_lab.db
 experiments/IOTA-000001.md
 output/IOTA-000001/
+output/experiments/
+output/dashboard/index.html
 ```
 
 You get:
@@ -44,6 +52,29 @@ You get:
 - `metrics_timeseries.png`
 - `slice_*.png`
 - `scatter_*.png`
+- `dashboard/index.html`
+
+## Dashboard
+
+Open the generated dashboard directly:
+
+```bash
+open output/dashboard/index.html
+```
+
+Or serve the repo locally:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then visit:
+
+```text
+http://localhost:8000/output/dashboard/
+```
+
+The dashboard is static HTML generated from `data/iota_lab.db`. It refreshes every 15 seconds and is regenerated at each snapshot interval during a run, so it can be used during a run or after it completes.
 
 The SQLite database stores:
 
@@ -53,6 +84,16 @@ The SQLite database stores:
 - `observations`
 - `parameter_diffs`
 - `summary_metrics`
+- `config_snapshots`
+
+## Modules
+
+```text
+src/iota_rig.py           # core simulation and universe snapshots
+src/experiment_db.py      # SQLite schema, config hashes, parameter diffs
+src/experiment_runner.py  # create experiment, run simulation, record outputs
+src/metrics.py            # coherence, entropy, run plots, experiment plots
+```
 
 ## Experiment safety
 
