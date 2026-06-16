@@ -50,7 +50,7 @@ constants:
 run:
   ticks: 256
   snapshot_every: 16
-  stop_active_iotas: 50000
+  stop_active_iotas: 30000
   output_dir: output
 
 visualization:
