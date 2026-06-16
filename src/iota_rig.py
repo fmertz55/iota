@@ -30,32 +30,61 @@ CUBE26 = np.array([
     if not (dx == 0 and dy == 0 and dz == 0)
 ], dtype=np.int16)
 
+DEFAULT_VECTOR_BANDS = {
+    "move": (0, 25),
+    "reflect": (26, 51),
+    "diffuse": (52, 63),
+}
+
+
 def load_config(path: str | Path) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
 
-def make_vectors(cfg: Dict[str, Any], rng: np.random.Generator) -> np.ndarray:
-    mode = cfg["vectors"].get("mode", "cube26")
-    count = int(cfg["vectors"].get("vector_count", 64))
+def initial_conditions(cfg: Dict[str, Any]) -> Dict[str, float]:
+    size = int(cfg["grid"].get("size", 64))
+    total_iotas = size**3
+    active_iotas = min(int(cfg["init"].get("active_iotas", 1)), total_iotas)
+    density = active_iotas / total_iotas if total_iotas else 0.0
+    return {
+        "initial_active_iotas": float(active_iotas),
+        "total_iotas": float(total_iotas),
+        "initial_density": float(density),
+        "initial_density_percent": float(density * 100.0),
+    }
+
+
+def _base_vectors(mode: str, count: int, rng: np.random.Generator) -> np.ndarray:
     if mode == "cube6":
-        base = CUBE6
-    elif mode == "cube26":
-        base = CUBE26
-    elif mode == "random64":
-        # Random local-ish vectors in [-1,1]^3 excluding zero.
+        return CUBE6
+    if mode == "cube26":
+        return CUBE26
+    if mode == "random64":
         vals = []
         while len(vals) < count:
             v = rng.integers(-1, 2, size=3)
             if np.any(v != 0):
                 vals.append(tuple(int(x) for x in v))
         return np.array(vals, dtype=np.int16)
-    else:
-        raise ValueError(f"Unknown vector mode: {mode}")
+    raise ValueError(f"Unknown vector mode: {mode}")
 
-    # Map 64 vector states onto repeated physical neighbor vectors.
+
+def make_vector_states(cfg: Dict[str, Any], rng: np.random.Generator) -> tuple[np.ndarray, tuple[str, ...]]:
+    mode = cfg["vectors"].get("mode", "cube26")
+    count = int(cfg["vectors"].get("vector_count", 64))
+    base = _base_vectors(mode, count, rng)
+
     reps = math.ceil(count / len(base))
-    return np.tile(base, (reps, 1))[:count].astype(np.int16)
+    directions = np.tile(base, (reps, 1))[:count].astype(np.int16)
+
+    behaviors = ["move"] * count
+    bands = cfg["vectors"].get("behavior_bands", DEFAULT_VECTOR_BANDS)
+    for behavior, span in bands.items():
+        start, end = int(span[0]), int(span[1])
+        for idx in range(max(0, start), min(count - 1, end) + 1):
+            behaviors[idx] = str(behavior)
+    return directions, tuple(behaviors)
 
 
 @dataclass
@@ -66,6 +95,7 @@ class World:
     V: np.ndarray
     P: np.ndarray
     vectors: np.ndarray
+    vector_behaviors: tuple[str, ...]
     wrap: bool
     rng: np.random.Generator
 
@@ -79,7 +109,7 @@ def init_world(cfg: Dict[str, Any]) -> World:
     wrap = bool(cfg["grid"].get("wrap", True))
     seed = int(cfg["init"].get("seed", 42))
     rng = np.random.default_rng(seed)
-    vectors = make_vectors(cfg, rng)
+    vectors, vector_behaviors = make_vector_states(cfg, rng)
 
     active = np.zeros((size, size, size), dtype=bool)
     A = np.zeros((size, size, size), dtype=np.uint8)
@@ -110,7 +140,28 @@ def init_world(cfg: Dict[str, Any]) -> World:
         V[x, y, z] = rng.integers(0, len(vectors))
         P[x, y, z] = rng.integers(pr[0], pr[1] + 1)
 
-    return World(active, A, R, V, P, vectors, wrap, rng)
+    return World(active, A, R, V, P, vectors, vector_behaviors, wrap, rng)
+
+
+def vector_step(world: World, v_idx: int, a: int, r: int, p: int) -> tuple[int, int, int, str]:
+    behavior = world.vector_behaviors[v_idx]
+    dx, dy, dz = world.vectors[v_idx]
+    if behavior == "reflect":
+        return -int(dx), -int(dy), -int(dz), behavior
+    if behavior == "diffuse":
+        diffuse_idx = (v_idx + a + r + p) % len(world.vectors)
+        ddx, ddy, ddz = world.vectors[diffuse_idx]
+        return int(ddx), int(ddy), int(ddz), behavior
+    return int(dx), int(dy), int(dz), behavior
+
+
+def rotate_vector_state(world: World, v_idx: int, payload: int) -> int:
+    behavior = world.vector_behaviors[v_idx]
+    indices = [idx for idx, candidate in enumerate(world.vector_behaviors) if candidate == behavior]
+    if not indices:
+        return (v_idx + payload) % len(world.vectors)
+    offset = indices.index(v_idx)
+    return indices[(offset + payload) % len(indices)]
 
 
 def decay(distance: float, r: int, mode: str) -> float:
@@ -153,7 +204,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         if a == 0 or r == 0:
             continue
         v_idx = int(world.V[x, y, z]) % len(world.vectors)
-        dx, dy, dz = world.vectors[v_idx]
+        p = int(world.P[x, y, z])
+        dx, dy, dz, behavior = vector_step(world, v_idx, a, r, p)
 
         # One direct vector pass per tick. Range controls influence magnitude, not multi-hop fanout yet.
         tx, ty, tz = int(x + dx), int(y + dy), int(z + dz)
@@ -164,6 +216,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
 
         d = math.sqrt(int(dx)**2 + int(dy)**2 + int(dz)**2)
         influence = (a / 7.0) * decay(d, r, decay_mode)
+        if behavior == "diffuse":
+            influence *= 0.5
         if influence <= 0:
             continue
 
@@ -187,7 +241,7 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                 payload_changes += 1
             next_P[tx, ty, tz] = new_p
             # Let payload shape propagation by rotating vector slightly.
-            next_V[tx, ty, tz] = np.uint8((v_idx + new_p) % len(world.vectors))
+            next_V[tx, ty, tz] = np.uint8(rotate_vector_state(world, v_idx, new_p))
         else:
             # Below threshold, inherit vector only weakly/stochastically.
             if world.rng.random() < influence * 0.125:
@@ -256,7 +310,7 @@ def save_scatter(world: World, out: Path, tick: int, cfg: Dict[str, Any]) -> Non
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Octal iota test rig")
     parser.add_argument("--config", default="config.yaml")
-    parser.add_argument("--objective", default="Unspecified")
+    parser.add_argument("--objective", default=None)
     parser.add_argument("--notes", default="")
     parser.add_argument("--force", action="store_true", help="allow more than one changed parameter")
     args = parser.parse_args()

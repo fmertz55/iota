@@ -1,5 +1,9 @@
 # Iota Rig configuration
 # Octal-first default: A,R,P are 0..7. V is 0..(vector_count-1).
+experiment:
+  id: IOTA-000001
+  objective: Single active iota baseline
+
 lab:
   database: data/iota_lab.db
   experiments_dir: experiments
@@ -10,7 +14,9 @@ grid:
 
 init:
   seed: 42
-  active_iotas: 1       # try 1, 8, 64, 512
+  active_iotas: 1
+  total_iotas: auto
+  initial_density: auto
   mode: random          # random | center
   amplitude_range: [1, 7]
   range_range: [1, 7]
@@ -19,6 +25,10 @@ init:
 vectors:
   mode: cube26          # cube6 | cube26 | random64
   vector_count: 64      # V encoded in two octal digits: 00..77 = 64 states
+  behavior_bands:
+    move: [0, 25]
+    reflect: [26, 51]
+    diffuse: [52, 63]
 
 constants:
   # Tunable interaction constants. Start octal-like fractions.

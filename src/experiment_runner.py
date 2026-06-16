@@ -13,7 +13,7 @@ from experiment_db import (
     insert_summary_metrics,
     open_database,
 )
-from iota_rig import init_world, load_config, save_scatter, save_slice, step
+from iota_rig import initial_conditions, init_world, load_config, save_scatter, save_slice, step
 from metrics import (
     collect_metrics,
     metrics_summary,
@@ -44,6 +44,8 @@ def ensure_experiment_template(experiments_dir: Path) -> None:
 
 ## Notes
 
+## Initial Conditions
+
 ## Metrics Summary
 
 ## Result
@@ -64,6 +66,7 @@ def write_experiment_notebook(
     diffs: list[tuple[str, str | None, str | None]],
     summary: dict[str, float],
     output_dir: Path,
+    init_metadata: dict[str, float],
 ) -> None:
     ensure_experiment_template(experiments_dir)
     label = f"IOTA-{experiment_id:06d}"
@@ -85,6 +88,12 @@ def write_experiment_notebook(
     metrics_text = "\n".join(
         f"- {name}: {value}"
         for name, value in summary.items()
+    )
+    density_text = (
+        f"- Initial Active Iotas: {int(init_metadata['initial_active_iotas'])}\n"
+        f"- Total Iotas: {int(init_metadata['total_iotas'])}\n"
+        f"- Initial Density: {init_metadata['initial_density']:.12f}\n"
+        f"- Initial Density Percent: {init_metadata['initial_density_percent']:.6f}%"
     )
     (experiments_dir / f"{label}.md").write_text(
         f"""# {label}
@@ -108,6 +117,10 @@ def write_experiment_notebook(
 ## Notes
 
 {notes or "None"}
+
+## Initial Conditions
+
+{density_text}
 
 ## Output
 
@@ -138,11 +151,14 @@ def lab_paths(config_path: str | Path, cfg: dict[str, Any]) -> tuple[Path, Path,
     return db_path, experiments_dir, output_root, comparison_dir
 
 
-def run_experiment(config_path: str, objective: str, notes: str, force: bool) -> None:
+def run_experiment(config_path: str, objective: str | None, notes: str, force: bool) -> None:
     cfg = load_config(config_path)
+    experiment_cfg = cfg.get("experiment", {})
+    resolved_objective = objective or experiment_cfg.get("objective", "Unspecified")
+    init_metadata = initial_conditions(cfg)
     db_path, experiments_dir, output_root, comparison_dir = lab_paths(config_path, cfg)
     conn = open_database(db_path)
-    experiment_id, timestamp, diffs = create_experiment(conn, cfg, objective, notes, force)
+    experiment_id, timestamp, diffs = create_experiment(conn, cfg, resolved_objective, notes, force)
     label = f"IOTA-{experiment_id:06d}"
 
     world = init_world(cfg)
@@ -153,6 +169,12 @@ def run_experiment(config_path: str, objective: str, notes: str, force: bool) ->
     snapshot_every = int(cfg["run"].get("snapshot_every", 8))
     run_metrics: list[dict[str, float]] = []
     start = time.perf_counter()
+
+    print(
+        f"initial_density={int(init_metadata['initial_active_iotas'])}/"
+        f"{int(init_metadata['total_iotas'])} "
+        f"({init_metadata['initial_density_percent']:.6f}%)"
+    )
 
     save_slice(world, out, 0, cfg)
     save_scatter(world, out, 0, cfg)
@@ -180,18 +202,19 @@ def run_experiment(config_path: str, objective: str, notes: str, force: bool) ->
 
     save_run_metrics(run_metrics, out)
     elapsed = time.perf_counter() - start
-    summary = metrics_summary(run_metrics, elapsed)
+    summary = metrics_summary(run_metrics, elapsed, init_metadata)
     insert_summary_metrics(conn, experiment_id, summary)
     write_experiment_notebook(
         experiments_dir,
         experiment_id,
         timestamp,
-        objective,
+        resolved_objective,
         notes,
         config_hash(cfg),
         diffs,
         summary,
         out,
+        init_metadata,
     )
     save_experiment_comparison_plots(conn, comparison_dir)
     dashboard_path = save_dashboard(conn, output_root)

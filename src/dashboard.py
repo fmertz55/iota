@@ -51,7 +51,15 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
         """
         SELECT experiment_id, parameter_name, parameter_value
         FROM parameters
-        WHERE parameter_name IN ('init.active_iotas', 'run.ticks', 'grid.size')
+        WHERE parameter_name IN (
+            'experiment.id',
+            'init.active_iotas',
+            'init.initial_density',
+            'init.total_iotas',
+            'run.ticks',
+            'grid.size',
+            'vectors.vector_count'
+        )
         ORDER BY experiment_id, parameter_name
         """,
     )
@@ -411,10 +419,16 @@ def _html_shell(data: dict[str, Any]) -> str:
 
     function renderOverview(experiment) {{
       const summary = experiment.summary;
+      const initialActive = summary.initial_active_iotas ?? decodeJson(experiment.parameters['init.active_iotas']);
+      const totalIotas = summary.total_iotas ?? decodeJson(experiment.parameters['init.total_iotas']);
+      const densityPercent = summary.initial_density_percent;
       document.getElementById('overview').innerHTML = `
         <h2>${{experiment.label}}</h2>
         <p class="muted">${{experiment.objective || 'Unspecified'}} · ${{experiment.timestamp}}</p>
         <div class="stats">
+          <div class="stat"><span>Initial Active</span><strong>${{fmt(initialActive, 0)}}</strong></div>
+          <div class="stat"><span>Total Iotas</span><strong>${{fmt(totalIotas, 0)}}</strong></div>
+          <div class="stat"><span>Initial Density</span><strong>${{fmt(densityPercent, 6)}}%</strong></div>
           <div class="stat"><span>Peak Active</span><strong>${{fmt(summary.peak_active_iotas, 0)}}</strong></div>
           <div class="stat"><span>Final Active</span><strong>${{fmt(summary.final_active_iotas, 0)}}</strong></div>
           <div class="stat"><span>Largest Coherence</span><strong>${{fmt(summary.largest_coherence, 0)}}</strong></div>

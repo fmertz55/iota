@@ -2,12 +2,19 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-DIFF_IGNORES = {"lab.database", "lab.experiments_dir", "run.output_dir"}
+DIFF_IGNORES = {
+    "experiment.id",
+    "experiment.objective",
+    "lab.database",
+    "lab.experiments_dir",
+    "run.output_dir",
+}
 
 
 def canonical_config(cfg: dict[str, Any]) -> str:
@@ -115,6 +122,16 @@ def latest_experiment_id(conn: sqlite3.Connection) -> int | None:
     return int(row[0]) if row and row[0] is not None else None
 
 
+def configured_experiment_id(cfg: dict[str, Any]) -> int | None:
+    experiment_id = cfg.get("experiment", {}).get("id")
+    if experiment_id is None:
+        return None
+    match = re.fullmatch(r"IOTA-(\d{6})", str(experiment_id).strip().upper())
+    if not match:
+        raise SystemExit(f"experiment.id must look like IOTA-000001, got {experiment_id!r}")
+    return int(match.group(1))
+
+
 def load_parameters(conn: sqlite3.Connection, experiment_id: int) -> dict[str, str]:
     rows = conn.execute(
         """
@@ -166,13 +183,23 @@ def create_experiment(
 
     timestamp = datetime.now(timezone.utc).isoformat()
     cfg_hash = config_hash(cfg)
-    cursor = conn.execute(
-        """
-        INSERT INTO experiments (timestamp, objective, notes, config_hash)
-        VALUES (?, ?, ?, ?)
-        """,
-        (timestamp, objective, notes, cfg_hash),
-    )
+    configured_id = configured_experiment_id(cfg)
+    if configured_id is None:
+        cursor = conn.execute(
+            """
+            INSERT INTO experiments (timestamp, objective, notes, config_hash)
+            VALUES (?, ?, ?, ?)
+            """,
+            (timestamp, objective, notes, cfg_hash),
+        )
+    else:
+        cursor = conn.execute(
+            """
+            INSERT INTO experiments (experiment_id, timestamp, objective, notes, config_hash)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (configured_id, timestamp, objective, notes, cfg_hash),
+        )
     experiment_id = int(cursor.lastrowid)
     conn.execute(
         """

@@ -14,6 +14,30 @@ P = payload, octal 0..7
 
 The grid defaults to `64 x 64 x 64` and can be raised toward `256 x 256 x 256` if memory and runtime allow.
 
+The default baseline is stamped in `config.yaml` as:
+
+```yaml
+experiment:
+  id: IOTA-000001
+  objective: Single active iota baseline
+```
+
+For the default `64^3` grid with one active iota, the initial density is:
+
+```text
+1 / 262144 = 0.000381%
+```
+
+The config keeps `init.total_iotas` and `init.initial_density` as `auto`; the runner resolves and logs them for each experiment.
+
+Vector state `V` remains a 64-state octal field. With the default `cube26` mode, those states are interpreted as:
+
+```text
+0-25   move
+26-51  reflect
+52-63  diffuse
+```
+
 ## Install
 
 ```bash
@@ -28,6 +52,8 @@ pip install -r requirements.txt
 ```bash
 python src/iota_rig.py --config config.yaml --objective "Baseline active_iotas=1"
 ```
+
+If `--objective` is omitted, the runner uses `experiment.objective` from `config.yaml`.
 
 The SQLite database lives at:
 
@@ -121,11 +147,16 @@ active_iotas: 2
 active_iotas: 4
 active_iotas: 8
 active_iotas: 16
-active_iotas: 32
-active_iotas: 64
-active_iotas: 128
-active_iotas: 256
-active_iotas: 512
+```
+
+For the first density sweep, keep all other parameters fixed and update `experiment.id` alongside `init.active_iotas`:
+
+```text
+IOTA-000001 active_iotas=1
+IOTA-000002 active_iotas=2
+IOTA-000003 active_iotas=4
+IOTA-000004 active_iotas=8
+IOTA-000005 active_iotas=16
 ```
 
 Try these vector modes:

@@ -112,9 +112,14 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
     plt.close(fig)
 
 
-def metrics_summary(metrics: list[dict[str, float]], execution_time: float) -> dict[str, float]:
+def metrics_summary(
+    metrics: list[dict[str, float]],
+    execution_time: float,
+    init_metadata: dict[str, float] | None = None,
+) -> dict[str, float]:
+    init_metadata = init_metadata or {}
     if not metrics:
-        return {
+        summary = {
             "peak_active_iotas": 0,
             "final_active_iotas": 0,
             "largest_coherence": 0,
@@ -123,9 +128,11 @@ def metrics_summary(metrics: list[dict[str, float]], execution_time: float) -> d
             "persistence": 0.0,
             "execution_time_seconds": execution_time,
         }
+        summary.update(init_metadata)
+        return summary
     active = [int(m["active_iotas"]) for m in metrics]
     nonzero_ticks = sum(1 for value in active if value > 0)
-    return {
+    summary = {
         "peak_active_iotas": max(active),
         "final_active_iotas": active[-1],
         "largest_coherence": max(int(m["largest_coherence"]) for m in metrics),
@@ -134,6 +141,8 @@ def metrics_summary(metrics: list[dict[str, float]], execution_time: float) -> d
         "persistence": float(nonzero_ticks / len(metrics)),
         "execution_time_seconds": execution_time,
     }
+    summary.update(init_metadata)
+    return summary
 
 
 def save_experiment_comparison_plots(conn: sqlite3.Connection, output_root: Path) -> None:
