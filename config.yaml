@@ -3,7 +3,7 @@
 simulation_version: iota-rig-v0.1.0
 
 experiment:
-  objective: Bounded valence=2 growth curve
+  objective: Valence=2 short growth curve
 
 lab:
   database: data/iota_lab.db
