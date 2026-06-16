@@ -187,6 +187,7 @@ def metrics_summary(
     metrics: list[dict[str, float]],
     execution_time: float,
     init_metadata: dict[str, float] | None = None,
+    early_stopped: bool = False,
 ) -> dict[str, float]:
     init_metadata = init_metadata or {}
     if not metrics:
@@ -197,6 +198,8 @@ def metrics_summary(
             "coherence_count": 0,
             "peak_coherence_ratio": 0.0,
             "final_coherence_ratio": 0.0,
+            "final_tick": 0,
+            "early_stopped": float(early_stopped),
             "entropy": 0.0,
             "persistence": 0.0,
             "execution_time_seconds": execution_time,
@@ -212,6 +215,8 @@ def metrics_summary(
         "coherence_count": int(metrics[-1]["coherence_count"]),
         "peak_coherence_ratio": max(float(m["coherence_ratio"]) for m in metrics),
         "final_coherence_ratio": float(metrics[-1]["coherence_ratio"]),
+        "final_tick": int(metrics[-1]["tick"]),
+        "early_stopped": float(early_stopped),
         "entropy": float(metrics[-1]["entropy"]),
         "persistence": float(nonzero_ticks / len(metrics)),
         "execution_time_seconds": execution_time,

@@ -269,7 +269,12 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
 
     ticks = int(cfg["run"].get("ticks", 256))
     snapshot_every = int(cfg["run"].get("snapshot_every", 8))
+    stop_active_iotas = cfg["run"].get("stop_active_iotas")
+    stop_active_iotas = int(stop_active_iotas) if stop_active_iotas is not None else None
+    stop_coherence_ratio = cfg["run"].get("stop_coherence_ratio")
+    stop_coherence_ratio = float(stop_coherence_ratio) if stop_coherence_ratio is not None else None
     run_metrics: list[dict[str, float]] = []
+    early_stop_reason: str | None = None
     start = time.perf_counter()
 
     print(
@@ -291,7 +296,16 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
         metric = collect_metrics(world, tick, extras)
         run_metrics.append(metric)
         insert_metric(conn, experiment_id, metric)
-        if tick % snapshot_every == 0 or tick == ticks:
+        if stop_active_iotas is not None and int(metric["active_iotas"]) >= stop_active_iotas:
+            early_stop_reason = f"active_iotas >= {stop_active_iotas}"
+        elif (
+            stop_coherence_ratio is not None
+            and int(metric["active_iotas"]) > 0
+            and float(metric["coherence_ratio"]) >= stop_coherence_ratio
+        ):
+            early_stop_reason = f"coherence_ratio >= {stop_coherence_ratio}"
+
+        if tick % snapshot_every == 0 or tick == ticks or early_stop_reason is not None:
             save_slice(world, out, tick, cfg)
             save_scatter(world, out, tick, cfg)
             register_snapshot_artifacts(conn, experiment_id, base_dir, out, tick)
@@ -304,12 +318,32 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
                 f"coherences={metric['coherence_count']} "
                 f"entropy={metric['entropy']:.3f}"
             )
+        if early_stop_reason is not None:
+            print(f"early_stop tick={tick} reason={early_stop_reason}")
+            break
 
     save_run_metrics(run_metrics, out)
     register_run_artifacts(conn, experiment_id, base_dir, out)
     elapsed = time.perf_counter() - start
-    summary = metrics_summary(run_metrics, elapsed, init_metadata)
+    summary = metrics_summary(run_metrics, elapsed, init_metadata, early_stop_reason is not None)
     insert_summary_metrics(conn, experiment_id, summary)
+    if early_stop_reason is not None:
+        conn.execute(
+            """
+            UPDATE observations
+            SET result = ?,
+                summary = ?,
+                next_experiment = ?
+            WHERE experiment_id = ?
+            """,
+            (
+                "early_stopped",
+                f"Stopped at tick {int(summary['final_tick'])}: {early_stop_reason}.",
+                "Inspect final metrics and adjust stop thresholds or tick caps for the next sweep.",
+                experiment_id,
+            ),
+        )
+        conn.commit()
     write_experiment_notebook(
         experiments_dir,
         experiment_id,
@@ -323,7 +357,8 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
         out,
         init_metadata,
     )
-    apply_snapshot_retention(conn, experiment_id, base_dir, out, ticks, snapshot_every, cfg)
+    final_tick = int(summary["final_tick"])
+    apply_snapshot_retention(conn, experiment_id, base_dir, out, final_tick, snapshot_every, cfg)
     save_experiment_comparison_plots(conn, comparison_dir)
     register_comparison_artifacts(conn, experiment_id, base_dir, comparison_dir)
     dashboard_path = save_dashboard(conn, output_root)

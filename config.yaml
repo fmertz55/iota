@@ -3,7 +3,7 @@
 simulation_version: iota-rig-v0.1.0
 
 experiment:
-  objective: Valence=2 partial expansion
+  objective: Bounded valence=2 growth curve
 
 lab:
   database: data/iota_lab.db
@@ -48,8 +48,9 @@ constants:
   valence: 2                    # maximum simultaneous productive relationships
 
 run:
-  ticks: 1024
+  ticks: 256
   snapshot_every: 16
+  stop_active_iotas: 50000
   output_dir: output
 
 visualization:
