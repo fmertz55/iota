@@ -3,7 +3,7 @@
 simulation_version: iota-rig-v0.1.0
 
 experiment:
-  objective: Amplitude coupling sweep endpoint
+  objective: One-iota amplitude coupling sweep endpoint
 
 lab:
   database: data/iota_lab.db
@@ -21,7 +21,7 @@ grid:
 
 init:
   seed: 42
-  active_iotas: 512
+  active_iotas: 1
   total_iotas: auto
   initial_density: auto
   mode: random          # random | center
@@ -39,7 +39,7 @@ vectors:
 
 constants:
   # Tunable interaction constants. Start octal-like fractions.
-  amplitude_coupling: 0.5
+  amplitude_coupling: 1.0
   range_coupling: 0.125         # 1/8
   payload_takeover: 0.5         # threshold for target payload replacement
   mutation_rate: 0.0            # chance to perturb payload after exchange

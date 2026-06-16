@@ -16,6 +16,7 @@ DIFF_IGNORES = {
     "run.output_dir",
     "simulation_version",
 }
+DIFF_IGNORE_PREFIXES = ("artifacts.",)
 
 
 def canonical_config(cfg: dict[str, Any]) -> str:
@@ -196,7 +197,7 @@ def detect_parameter_diffs(
 ) -> list[tuple[str, str | None, str | None]]:
     diffs = []
     for name in sorted(set(previous) | set(current)):
-        if name in DIFF_IGNORES:
+        if name in DIFF_IGNORES or name.startswith(DIFF_IGNORE_PREFIXES):
             continue
         old_value = previous.get(name)
         new_value = current.get(name)
