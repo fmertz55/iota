@@ -3,7 +3,7 @@
 simulation_version: iota-rig-v0.1.0
 
 experiment:
-  objective: Conservation overwrite law test
+  objective: Valence=2 partial expansion
 
 lab:
   database: data/iota_lab.db
@@ -44,7 +44,8 @@ constants:
   payload_takeover: 0.5         # threshold for target payload replacement
   mutation_rate: 0.0            # chance to perturb payload after exchange
   decay_mode: inverse_square    # none | inverse | inverse_square | exponential
-  conservation: overwrite       # soft | overwrite
+  conservation: soft            # soft | overwrite
+  valence: 2                    # maximum simultaneous productive relationships
 
 run:
   ticks: 1024

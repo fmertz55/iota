@@ -212,6 +212,17 @@ decay_mode: inverse_square
 decay_mode: exponential
 ```
 
+## Valence
+
+`constants.valence` controls the maximum number of simultaneous productive relationships an active iota can maintain after local candidate scoring. It is not direct copying: candidates are scored by the existing influence rule, then conservation, decay, payload transfer, and rounding still decide what persists.
+
+```yaml
+constants:
+  valence: 1
+```
+
+The original v0.1.0 behavior is equivalent to `valence: 1`.
+
 ## First big question
 
 Could the initial non-dark iota count be one?
