@@ -45,7 +45,7 @@ constants:
   mutation_rate: 0.0            # chance to perturb payload after exchange
   decay_mode: inverse_square    # none | inverse | inverse_square | exponential
   conservation: soft            # soft | overwrite
-  valence: 2                    # maximum simultaneous productive relationships
+  valence: 1                    # maximum simultaneous productive relationships
 
 run:
   ticks: 256
