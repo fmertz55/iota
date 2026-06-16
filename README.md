@@ -80,6 +80,14 @@ You get:
 - `scatter_*.png`
 - `dashboard/index.html`
 
+`metrics.csv`, the database, and the dashboard include `coherence_ratio`, defined as:
+
+```text
+largest_coherence / active_iotas
+```
+
+This is the normalized aggregation signal to watch when active iotas grow faster than coherent structures.
+
 ## Dashboard
 
 Open the generated dashboard directly:
@@ -175,6 +183,17 @@ IOTA-000003 active_iotas=4
 IOTA-000004 active_iotas=8
 IOTA-000005 active_iotas=16
 ```
+
+For the next interaction sweep, vary only amplitude coupling and repeat each value across seeds:
+
+```bash
+python src/parameter_sweep.py constants.amplitude_coupling \
+  0.05 0.10 0.15 0.20 0.25 0.50 \
+  --seeds 42 43 44 \
+  --objective "Amplitude coupling sweep"
+```
+
+The sweep runner starts from the latest recorded config snapshot in `data/iota_lab.db` and walks values/seeds in a serpentine order so each recorded experiment still changes exactly one controlled parameter.
 
 Try these vector modes:
 

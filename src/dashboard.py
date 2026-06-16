@@ -57,6 +57,7 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
             'init.active_iotas',
             'init.initial_density',
             'init.total_iotas',
+            'constants.amplitude_coupling',
             'run.ticks',
             'grid.size',
             'vectors.vector_count'
@@ -75,7 +76,14 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
     metrics = _rows(
         conn,
         """
-        SELECT experiment_id, tick, active_iotas, largest_coherence, coherence_count, entropy
+        SELECT
+            experiment_id,
+            tick,
+            active_iotas,
+            largest_coherence,
+            coherence_count,
+            coherence_ratio,
+            entropy
         FROM metrics
         ORDER BY experiment_id, tick
         """,
@@ -116,6 +124,7 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
                 "active_iotas": row["active_iotas"],
                 "largest_coherence": row["largest_coherence"],
                 "coherence_count": row["coherence_count"],
+                "coherence_ratio": row["coherence_ratio"],
                 "entropy": row["entropy"],
             }
         )
@@ -353,6 +362,10 @@ def _html_shell(data: dict[str, Any]) -> str:
             <div class="plot" id="coherence-plot"></div>
           </div>
           <div>
+            <h3>Coherence Ratio</h3>
+            <div class="plot" id="ratio-plot"></div>
+          </div>
+          <div>
             <h3>Entropy</h3>
             <div class="plot" id="entropy-plot"></div>
           </div>
@@ -429,11 +442,12 @@ def _html_shell(data: dict[str, Any]) -> str:
       const list = document.getElementById('experiment-list');
       list.innerHTML = DATA.experiments.map((experiment, index) => {{
         const active = decodeJson(experiment.parameters['init.active_iotas']);
+        const coupling = decodeJson(experiment.parameters['constants.amplitude_coupling']);
         const peak = experiment.summary.largest_coherence;
         return `
           <button class="experiment-button ${{index === selectedIndex ? 'active' : ''}}" data-index="${{index}}">
             <strong>${{experiment.label}}</strong>
-            <span>active=${{active ?? 'n/a'}}</span>
+            <span>active=${{active ?? 'n/a'}} · kA=${{coupling ?? 'n/a'}}</span>
             <span>${{experiment.objective || 'Unspecified'}}</span>
             <span>peak=${{fmt(peak, 0)}}</span>
           </button>
@@ -452,6 +466,7 @@ def _html_shell(data: dict[str, Any]) -> str:
       const initialActive = summary.initial_active_iotas ?? decodeJson(experiment.parameters['init.active_iotas']);
       const totalIotas = summary.total_iotas ?? decodeJson(experiment.parameters['init.total_iotas']);
       const densityPercent = summary.initial_density_percent;
+      const amplitudeCoupling = decodeJson(experiment.parameters['constants.amplitude_coupling']);
       document.getElementById('overview').innerHTML = `
         <h2>${{experiment.label}}</h2>
         <p class="muted">${{experiment.objective || 'Unspecified'}} · ${{experiment.timestamp}}</p>
@@ -462,6 +477,8 @@ def _html_shell(data: dict[str, Any]) -> str:
           <div class="stat"><span>Peak Active</span><strong>${{fmt(summary.peak_active_iotas, 0)}}</strong></div>
           <div class="stat"><span>Final Active</span><strong>${{fmt(summary.final_active_iotas, 0)}}</strong></div>
           <div class="stat"><span>Largest Coherence</span><strong>${{fmt(summary.largest_coherence, 0)}}</strong></div>
+          <div class="stat"><span>Final Coherence Ratio</span><strong>${{fmt(summary.final_coherence_ratio, 6)}}</strong></div>
+          <div class="stat"><span>Amplitude Coupling</span><strong>${{fmt(amplitudeCoupling)}}</strong></div>
           <div class="stat"><span>Entropy</span><strong>${{fmt(summary.entropy)}}</strong></div>
           <div class="stat"><span>Artifacts</span><strong>${{experiment.artifacts.count}}</strong></div>
         </div>
@@ -525,6 +542,7 @@ def _html_shell(data: dict[str, Any]) -> str:
       renderOverview(experiment);
       renderPlot('active-plot', experiment, 'active_iotas', 'series-a');
       renderPlot('coherence-plot', experiment, 'largest_coherence', 'series-b');
+      renderPlot('ratio-plot', experiment, 'coherence_ratio', 'series-b');
       renderPlot('entropy-plot', experiment, 'entropy', 'series-c');
       renderPlot('count-plot', experiment, 'coherence_count', 'series-b');
       renderDiffs(experiment);

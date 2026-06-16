@@ -141,6 +141,24 @@ def open_database(path: Path) -> sqlite3.Connection:
             "ALTER TABLE experiments "
             "ADD COLUMN simulation_version TEXT NOT NULL DEFAULT 'unknown'"
         )
+    metric_columns = {
+        str(row[1])
+        for row in conn.execute("PRAGMA table_info(metrics)").fetchall()
+    }
+    if "coherence_ratio" not in metric_columns:
+        conn.execute(
+            "ALTER TABLE metrics "
+            "ADD COLUMN coherence_ratio REAL NOT NULL DEFAULT 0.0"
+        )
+        conn.execute(
+            """
+            UPDATE metrics
+            SET coherence_ratio = CASE
+                WHEN active_iotas > 0 THEN CAST(largest_coherence AS REAL) / active_iotas
+                ELSE 0.0
+            END
+            """
+        )
     conn.commit()
     return conn
 
@@ -357,9 +375,10 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             active_iotas,
             largest_coherence,
             coherence_count,
+            coherence_ratio,
             entropy
         )
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
         (
             experiment_id,
@@ -367,6 +386,7 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             int(metric["active_iotas"]),
             int(metric["largest_coherence"]),
             int(metric["coherence_count"]),
+            float(metric["coherence_ratio"]),
             float(metric["entropy"]),
         ),
     )
