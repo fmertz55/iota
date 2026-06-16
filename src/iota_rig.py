@@ -312,7 +312,11 @@ if __name__ == "__main__":
     parser.add_argument("--config", default="config.yaml")
     parser.add_argument("--objective", default=None)
     parser.add_argument("--notes", default="")
-    parser.add_argument("--force", action="store_true", help="allow more than one changed parameter")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="deprecated; the one-parameter protocol is always enforced",
+    )
     args = parser.parse_args()
     from experiment_runner import run_experiment
 

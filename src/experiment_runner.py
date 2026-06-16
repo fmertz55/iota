@@ -6,12 +6,16 @@ from typing import Any
 
 from dashboard import save_dashboard
 from experiment_db import (
+    artifact_path,
     config_hash,
     create_experiment,
     display_value,
     insert_metric,
     insert_summary_metrics,
+    mark_artifact_pruned,
     open_database,
+    register_artifact,
+    simulation_version,
 )
 from iota_rig import initial_conditions, init_world, load_config, save_scatter, save_slice, step
 from metrics import (
@@ -42,6 +46,8 @@ def ensure_experiment_template(experiments_dir: Path) -> None:
 
 ## Configuration Hash
 
+## Simulation Version
+
 ## Notes
 
 ## Initial Conditions
@@ -63,6 +69,7 @@ def write_experiment_notebook(
     objective: str,
     notes: str,
     cfg_hash: str,
+    sim_version: str,
     diffs: list[tuple[str, str | None, str | None]],
     summary: dict[str, float],
     output_dir: Path,
@@ -114,6 +121,10 @@ def write_experiment_notebook(
 
 {cfg_hash}
 
+## Simulation Version
+
+{sim_version}
+
 ## Notes
 
 {notes or "None"}
@@ -151,8 +162,99 @@ def lab_paths(config_path: str | Path, cfg: dict[str, Any]) -> tuple[Path, Path,
     return db_path, experiments_dir, output_root, comparison_dir
 
 
+def register_snapshot_artifacts(
+    conn,
+    experiment_id: int,
+    base_dir: Path,
+    out: Path,
+    tick: int,
+) -> None:
+    register_artifact(
+        conn,
+        experiment_id,
+        "slice_png",
+        out / f"slice_{tick:06d}.png",
+        base_dir,
+        tick=tick,
+    )
+    register_artifact(
+        conn,
+        experiment_id,
+        "scatter_png",
+        out / f"scatter_{tick:06d}.png",
+        base_dir,
+        tick=tick,
+    )
+
+
+def register_run_artifacts(conn, experiment_id: int, base_dir: Path, out: Path) -> None:
+    artifact_types = {
+        "metrics.csv": "metrics_csv",
+        "active_over_time.png": "run_plot",
+        "metrics_timeseries.png": "run_plot",
+    }
+    for filename, artifact_type in artifact_types.items():
+        register_artifact(conn, experiment_id, artifact_type, out / filename, base_dir)
+
+
+def register_comparison_artifacts(
+    conn,
+    experiment_id: int,
+    base_dir: Path,
+    comparison_dir: Path,
+) -> None:
+    for path in sorted(comparison_dir.glob("*.png")):
+        register_artifact(conn, experiment_id, "comparison_plot", path, base_dir)
+
+
+def should_retain_snapshot(tick: int, ticks: int, snapshot_every: int, cfg: dict[str, Any]) -> bool:
+    artifact_cfg = cfg.get("artifacts", {})
+    if tick == 0 and bool(artifact_cfg.get("keep_initial", True)):
+        return True
+    if tick == ticks and bool(artifact_cfg.get("keep_final", True)):
+        return True
+    keep_every = int(artifact_cfg.get("keep_every_n_snapshots", 0))
+    if keep_every <= 0 or snapshot_every <= 0 or tick % snapshot_every != 0:
+        return False
+    snapshot_index = tick // snapshot_every
+    return snapshot_index > 0 and snapshot_index % keep_every == 0
+
+
+def apply_snapshot_retention(
+    conn,
+    experiment_id: int,
+    base_dir: Path,
+    out: Path,
+    ticks: int,
+    snapshot_every: int,
+    cfg: dict[str, Any],
+) -> None:
+    delete_unregistered = bool(cfg.get("artifacts", {}).get("delete_unregistered", False))
+    for path in sorted(out.glob("slice_*.png")) + sorted(out.glob("scatter_*.png")):
+        try:
+            tick = int(path.stem.rsplit("_", 1)[1])
+        except (IndexError, ValueError):
+            continue
+        registered = conn.execute(
+            """
+            SELECT 1
+            FROM artifacts
+            WHERE experiment_id = ?
+              AND path = ?
+            """,
+            (experiment_id, artifact_path(path, base_dir)),
+        ).fetchone()
+        if registered is None and not delete_unregistered:
+            continue
+        if should_retain_snapshot(tick, ticks, snapshot_every, cfg):
+            continue
+        path.unlink()
+        mark_artifact_pruned(conn, experiment_id, path, base_dir)
+
+
 def run_experiment(config_path: str, objective: str | None, notes: str, force: bool) -> None:
     cfg = load_config(config_path)
+    base_dir = Path(config_path).resolve().parent
     experiment_cfg = cfg.get("experiment", {})
     resolved_objective = objective or experiment_cfg.get("objective", "Unspecified")
     init_metadata = initial_conditions(cfg)
@@ -178,6 +280,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
 
     save_slice(world, out, 0, cfg)
     save_scatter(world, out, 0, cfg)
+    register_snapshot_artifacts(conn, experiment_id, base_dir, out, 0)
     initial_metric = collect_metrics(world, 0)
     run_metrics.append(initial_metric)
     insert_metric(conn, experiment_id, initial_metric)
@@ -191,7 +294,9 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
         if tick % snapshot_every == 0 or tick == ticks:
             save_slice(world, out, tick, cfg)
             save_scatter(world, out, tick, cfg)
+            register_snapshot_artifacts(conn, experiment_id, base_dir, out, tick)
             save_run_metrics(run_metrics, out)
+            register_run_artifacts(conn, experiment_id, base_dir, out)
             dashboard_path = save_dashboard(conn, output_root)
             print(
                 f"tick={tick} active={metric['active_iotas']} "
@@ -201,6 +306,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
             )
 
     save_run_metrics(run_metrics, out)
+    register_run_artifacts(conn, experiment_id, base_dir, out)
     elapsed = time.perf_counter() - start
     summary = metrics_summary(run_metrics, elapsed, init_metadata)
     insert_summary_metrics(conn, experiment_id, summary)
@@ -211,12 +317,15 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
         resolved_objective,
         notes,
         config_hash(cfg),
+        simulation_version(cfg),
         diffs,
         summary,
         out,
         init_metadata,
     )
+    apply_snapshot_retention(conn, experiment_id, base_dir, out, ticks, snapshot_every, cfg)
     save_experiment_comparison_plots(conn, comparison_dir)
+    register_comparison_artifacts(conn, experiment_id, base_dir, comparison_dir)
     dashboard_path = save_dashboard(conn, output_root)
     conn.close()
 
@@ -225,8 +334,6 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     elif len(diffs) == 1:
         name, old, new = diffs[0]
         print(f"Changed parameter: {name} {display_value(old)} -> {display_value(new)}")
-    else:
-        print(f"Forced run with {len(diffs)} changed parameters")
     print(f"Experiment: {label}")
     print(f"Database: {db_path}")
     print(f"Notebook: {experiments_dir / f'{label}.md'}")

@@ -33,7 +33,7 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
     experiments = _rows(
         conn,
         """
-        SELECT experiment_id, timestamp, objective, notes, config_hash
+        SELECT experiment_id, timestamp, objective, notes, config_hash, simulation_version
         FROM experiments
         ORDER BY experiment_id
         """,
@@ -53,6 +53,7 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
         FROM parameters
         WHERE parameter_name IN (
             'experiment.id',
+            'simulation_version',
             'init.active_iotas',
             'init.initial_density',
             'init.total_iotas',
@@ -77,6 +78,15 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
         SELECT experiment_id, tick, active_iotas, largest_coherence, coherence_count, entropy
         FROM metrics
         ORDER BY experiment_id, tick
+        """,
+    )
+    artifacts = _rows(
+        conn,
+        """
+        SELECT experiment_id, COUNT(*) AS artifact_count, COALESCE(SUM(bytes), 0) AS artifact_bytes
+        FROM artifacts
+        WHERE retained = 1
+        GROUP BY experiment_id
         """,
     )
 
@@ -110,6 +120,14 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
             }
         )
 
+    artifacts_by_experiment = {
+        row["experiment_id"]: {
+            "count": row["artifact_count"],
+            "bytes": row["artifact_bytes"],
+        }
+        for row in artifacts
+    }
+
     experiment_data = []
     for row in experiments:
         experiment_id = row["experiment_id"]
@@ -121,7 +139,12 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
                 "objective": row["objective"],
                 "notes": row["notes"],
                 "config_hash": row["config_hash"],
+                "simulation_version": row["simulation_version"],
                 "summary": summary_by_experiment.get(experiment_id, {}),
+                "artifacts": artifacts_by_experiment.get(
+                    experiment_id,
+                    {"count": 0, "bytes": 0},
+                ),
                 "parameters": params_by_experiment.get(experiment_id, {}),
                 "diffs": diffs_by_experiment.get(experiment_id, []),
                 "series": series_by_experiment.get(experiment_id, []),
@@ -364,6 +387,13 @@ def _html_shell(data: dict[str, Any]) -> str:
       return Number.isInteger(number) ? String(number) : number.toFixed(digits);
     }}
 
+    function fmtBytes(value) {{
+      const bytes = Number(value || 0);
+      if (bytes < 1024) return `${{bytes}} B`;
+      if (bytes < 1024 * 1024) return `${{(bytes / 1024).toFixed(1)}} KB`;
+      return `${{(bytes / (1024 * 1024)).toFixed(1)}} MB`;
+    }}
+
     function decodeJson(value) {{
       try {{ return JSON.parse(value); }} catch (_) {{ return value ?? 'n/a'; }}
     }}
@@ -433,9 +463,12 @@ def _html_shell(data: dict[str, Any]) -> str:
           <div class="stat"><span>Final Active</span><strong>${{fmt(summary.final_active_iotas, 0)}}</strong></div>
           <div class="stat"><span>Largest Coherence</span><strong>${{fmt(summary.largest_coherence, 0)}}</strong></div>
           <div class="stat"><span>Entropy</span><strong>${{fmt(summary.entropy)}}</strong></div>
+          <div class="stat"><span>Artifacts</span><strong>${{experiment.artifacts.count}}</strong></div>
         </div>
         <table>
           <tr><th>Config Hash</th><td><code>${{experiment.config_hash}}</code></td></tr>
+          <tr><th>Simulation Version</th><td><code>${{experiment.simulation_version}}</code></td></tr>
+          <tr><th>Artifact Storage</th><td>${{fmtBytes(experiment.artifacts.bytes)}}</td></tr>
           <tr><th>Persistence</th><td>${{fmt(summary.persistence)}}</td></tr>
           <tr><th>Execution Time</th><td>${{fmt(summary.execution_time_seconds)}} seconds</td></tr>
         </table>

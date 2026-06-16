@@ -9,6 +9,48 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def _plot_initial_active_metric(
+    conn: sqlite3.Connection,
+    output_root: Path,
+    metric_name: str,
+    y_label: str,
+    title: str,
+    filename: str,
+) -> None:
+    rows = conn.execute(
+        """
+        SELECT
+            p.experiment_id,
+            p.parameter_value,
+            s.metric_value
+        FROM parameters p
+        JOIN summary_metrics s ON s.experiment_id = p.experiment_id
+        WHERE p.parameter_name = 'init.active_iotas'
+          AND s.metric_name = ?
+        ORDER BY p.experiment_id
+        """,
+        (metric_name,),
+    ).fetchall()
+    if not rows:
+        return
+
+    initial_active = [int(float(parameter_value)) for _, parameter_value, _ in rows]
+    metric_values = [float(metric_value) for _, _, metric_value in rows]
+    labels = [f"IOTA-{int(experiment_id):06d}" for experiment_id, _, _ in rows]
+
+    plt.figure(figsize=(8, 5))
+    plt.scatter(initial_active, metric_values)
+    for x, y, label in zip(initial_active, metric_values, labels):
+        plt.annotate(label, (x, y), textcoords="offset points", xytext=(4, 4), fontsize=7)
+    plt.xscale("log", base=2)
+    plt.xlabel("Initial Active Iotas")
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.tight_layout()
+    plt.savefig(output_root / filename, dpi=140)
+    plt.close()
+
+
 def coherence_stats(world: Any) -> tuple[int, int]:
     active_coords = {tuple(int(v) for v in coord) for coord in np.argwhere(world.active)}
     if not active_coords:
@@ -178,34 +220,27 @@ def save_experiment_comparison_plots(conn: sqlite3.Connection, output_root: Path
     fig.savefig(output_root / "experiments_timeseries.png", dpi=140)
     plt.close(fig)
 
-    scatter_rows = conn.execute(
-        """
-        SELECT
-            p.experiment_id,
-            p.parameter_value,
-            s.metric_value
-        FROM parameters p
-        JOIN summary_metrics s ON s.experiment_id = p.experiment_id
-        WHERE p.parameter_name = 'init.active_iotas'
-          AND s.metric_name = 'largest_coherence'
-        ORDER BY p.experiment_id
-        """
-    ).fetchall()
-    if not scatter_rows:
-        return
-
-    initial_active = [int(float(parameter_value)) for _, parameter_value, _ in scatter_rows]
-    peak_coherence = [float(metric_value) for _, _, metric_value in scatter_rows]
-    labels = [f"IOTA-{int(experiment_id):06d}" for experiment_id, _, _ in scatter_rows]
-
-    plt.figure(figsize=(8, 5))
-    plt.scatter(initial_active, peak_coherence)
-    for x, y, label in zip(initial_active, peak_coherence, labels):
-        plt.annotate(label, (x, y), textcoords="offset points", xytext=(4, 4), fontsize=7)
-    plt.xscale("log", base=2)
-    plt.xlabel("Initial Active Iotas")
-    plt.ylabel("Peak Largest Coherence")
-    plt.title("Initial Active Iotas vs Peak Coherence")
-    plt.tight_layout()
-    plt.savefig(output_root / "initial_active_vs_peak_coherence.png", dpi=140)
-    plt.close()
+    _plot_initial_active_metric(
+        conn,
+        output_root,
+        "largest_coherence",
+        "Peak Largest Coherence",
+        "Initial Active Iotas vs Peak Coherence",
+        "initial_active_vs_peak_coherence.png",
+    )
+    _plot_initial_active_metric(
+        conn,
+        output_root,
+        "persistence",
+        "Persistence",
+        "Initial Active Iotas vs Persistence",
+        "initial_active_vs_persistence.png",
+    )
+    _plot_initial_active_metric(
+        conn,
+        output_root,
+        "entropy",
+        "Final Entropy",
+        "Initial Active Iotas vs Entropy",
+        "initial_active_vs_entropy.png",
+    )

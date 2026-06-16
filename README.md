@@ -17,8 +17,8 @@ The grid defaults to `64 x 64 x 64` and can be raised toward `256 x 256 x 256` i
 The default baseline is stamped in `config.yaml` as:
 
 ```yaml
+simulation_version: iota-rig-v0.1.0
 experiment:
-  id: IOTA-000001
   objective: Single active iota baseline
 ```
 
@@ -111,6 +111,23 @@ The SQLite database stores:
 - `parameter_diffs`
 - `summary_metrics`
 - `config_snapshots`
+- `artifacts`
+
+## Artifact retention
+
+PNG files stay on disk; the database stores artifact metadata, paths, hashes, byte counts, and retention state. This keeps experiment queries fast while still making generated evidence auditable.
+
+Default retention keeps the initial snapshot, final snapshot, every fourth intermediate snapshot, comparison plots, and CSV metrics:
+
+```yaml
+artifacts:
+  keep_initial: true
+  keep_final: true
+  keep_every_n_snapshots: 4
+  delete_unregistered: false
+```
+
+For large sweeps, lower `run.snapshot_every` only when you need dense visual evidence. Metrics are recorded every tick regardless of PNG retention.
 
 ## Modules
 
@@ -131,11 +148,11 @@ If one parameter changed, the run records:
 Changed parameter: init.active_iotas 64 -> 128
 ```
 
-If more than one parameter changed, the run refuses to start. Use `--force` only when you intentionally want to contaminate the one-parameter rule:
+After the baseline, the runner refuses to start unless exactly one controlled parameter changed. This prevents duplicate runs and multi-parameter changes from entering the lab history as normal experiments.
 
-```bash
-python src/iota_rig.py --config config.yaml --force --objective "Intentional multi-parameter run"
-```
+The protocol is documented in `docs/experimental_protocol.md`.
+
+Every experiment also records `simulation_version`, so results from changed simulation rules can be separated from controlled parameter sweeps.
 
 ## First experiments
 
@@ -149,7 +166,7 @@ active_iotas: 8
 active_iotas: 16
 ```
 
-For the first density sweep, keep all other parameters fixed and update `experiment.id` alongside `init.active_iotas`:
+For the first density sweep, keep all other parameters fixed and change only `init.active_iotas`:
 
 ```text
 IOTA-000001 active_iotas=1

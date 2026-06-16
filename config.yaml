@@ -1,12 +1,19 @@
 # Iota Rig configuration
 # Octal-first default: A,R,P are 0..7. V is 0..(vector_count-1).
+simulation_version: iota-rig-v0.1.0
+
 experiment:
-  id: IOTA-000001
   objective: Single active iota baseline
 
 lab:
   database: data/iota_lab.db
   experiments_dir: experiments
+
+artifacts:
+  keep_initial: true
+  keep_final: true
+  keep_every_n_snapshots: 4
+  delete_unregistered: false
 
 grid:
   size: 64              # 64 supports 64^3. Try 128 or 256 later.
