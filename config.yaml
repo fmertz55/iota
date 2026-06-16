@@ -3,7 +3,7 @@
 simulation_version: iota-rig-v0.1.0
 
 experiment:
-  objective: One-iota range sweep endpoint
+  objective: R5 propagation threshold ticks sweep endpoint
 
 lab:
   database: data/iota_lab.db
@@ -47,7 +47,7 @@ constants:
   conservation: soft            # soft | overwrite
 
 run:
-  ticks: 32
+  ticks: 1024
   snapshot_every: 16
   output_dir: output
 
