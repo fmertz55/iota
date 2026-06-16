@@ -178,6 +178,73 @@ def decay(distance: float, r: int, mode: str) -> float:
     raise ValueError(f"Unknown decay mode: {mode}")
 
 
+def local_candidates(
+    world: World,
+    x: int,
+    y: int,
+    z: int,
+    v_idx: int,
+    a: int,
+    r: int,
+    p: int,
+    decay_mode: str,
+    valence: int,
+) -> list[dict[str, Any]]:
+    if valence <= 0:
+        return []
+
+    candidate_steps = []
+    seen_steps = set()
+    primary = vector_step(world, v_idx, a, r, p)
+    candidate_steps.append(primary)
+    seen_steps.add(primary[:3])
+
+    if valence > 1:
+        behavior = primary[3]
+        for dx, dy, dz in world.vectors:
+            step_key = (int(dx), int(dy), int(dz))
+            if step_key in seen_steps:
+                continue
+            seen_steps.add(step_key)
+            distance = math.sqrt(step_key[0] ** 2 + step_key[1] ** 2 + step_key[2] ** 2)
+            if distance <= max(r, 1):
+                candidate_steps.append((step_key[0], step_key[1], step_key[2], behavior))
+
+    candidates = []
+    seen_targets = set()
+    for order, (dx, dy, dz, behavior) in enumerate(candidate_steps):
+        tx, ty, tz = int(x + dx), int(y + dy), int(z + dz)
+        if world.wrap:
+            tx %= world.size
+            ty %= world.size
+            tz %= world.size
+        elif not (0 <= tx < world.size and 0 <= ty < world.size and 0 <= tz < world.size):
+            continue
+        target = (tx, ty, tz)
+        if target in seen_targets:
+            continue
+        seen_targets.add(target)
+
+        distance = math.sqrt(int(dx) ** 2 + int(dy) ** 2 + int(dz) ** 2)
+        influence = (a / 7.0) * decay(distance, r, decay_mode)
+        if behavior == "diffuse":
+            influence *= 0.5
+        if influence <= 0:
+            continue
+        candidates.append(
+            {
+                "target": target,
+                "step": (int(dx), int(dy), int(dz)),
+                "behavior": behavior,
+                "influence": influence,
+                "order": order,
+            }
+        )
+
+    candidates.sort(key=lambda row: (-float(row["influence"]), int(row["order"])))
+    return candidates[:valence]
+
+
 def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     size = world.size
     kA = float(cfg["constants"].get("amplitude_coupling", 0.125))
@@ -186,6 +253,7 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     mu = float(cfg["constants"].get("mutation_rate", 0.0))
     decay_mode = cfg["constants"].get("decay_mode", "inverse_square")
     conservation = cfg["constants"].get("conservation", "soft")
+    valence = max(1, int(cfg["constants"].get("valence", 1)))
 
     next_active = world.active.copy()
     next_A = world.A.astype(np.float32).copy()
@@ -205,47 +273,36 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             continue
         v_idx = int(world.V[x, y, z]) % len(world.vectors)
         p = int(world.P[x, y, z])
-        dx, dy, dz, behavior = vector_step(world, v_idx, a, r, p)
+        candidates = local_candidates(world, int(x), int(y), int(z), v_idx, a, r, p, decay_mode, valence)
 
-        # One direct vector pass per tick. Range controls influence magnitude, not multi-hop fanout yet.
-        tx, ty, tz = int(x + dx), int(y + dy), int(z + dz)
-        if world.wrap:
-            tx %= size; ty %= size; tz %= size
-        elif not (0 <= tx < size and 0 <= ty < size and 0 <= tz < size):
-            continue
+        for candidate in candidates:
+            tx, ty, tz = candidate["target"]
+            influence = float(candidate["influence"])
+            exchanges += 1
+            next_active[tx, ty, tz] = True
 
-        d = math.sqrt(int(dx)**2 + int(dy)**2 + int(dz)**2)
-        influence = (a / 7.0) * decay(d, r, decay_mode)
-        if behavior == "diffuse":
-            influence *= 0.5
-        if influence <= 0:
-            continue
+            # Amplitude/range exchange: octal fields remain clipped to 0..7.
+            if conservation == "overwrite":
+                next_A[tx, ty, tz] = a
+                next_R[tx, ty, tz] = r
+            else:
+                next_A[tx, ty, tz] = (1 - kA * influence) * next_A[tx, ty, tz] + (kA * influence) * a
+                next_R[tx, ty, tz] = (1 - kR * influence) * next_R[tx, ty, tz] + (kR * influence) * r
 
-        exchanges += 1
-        next_active[tx, ty, tz] = True
-
-        # Amplitude/range exchange: octal fields remain clipped to 0..7.
-        if conservation == "overwrite":
-            next_A[tx, ty, tz] = a
-            next_R[tx, ty, tz] = r
-        else:
-            next_A[tx, ty, tz] = (1 - kA * influence) * next_A[tx, ty, tz] + (kA * influence) * a
-            next_R[tx, ty, tz] = (1 - kR * influence) * next_R[tx, ty, tz] + (kR * influence) * r
-
-        # Payload exchange: discrete octal takeover when influence clears threshold.
-        if influence >= thetaP:
-            new_p = int(world.P[x, y, z])
-            if mu > 0 and world.rng.random() < mu:
-                new_p = int((new_p + world.rng.choice([-1, 1])) % 8)
-            if int(next_P[tx, ty, tz]) != new_p:
-                payload_changes += 1
-            next_P[tx, ty, tz] = new_p
-            # Let payload shape propagation by rotating vector slightly.
-            next_V[tx, ty, tz] = np.uint8(rotate_vector_state(world, v_idx, new_p))
-        else:
-            # Below threshold, inherit vector only weakly/stochastically.
-            if world.rng.random() < influence * 0.125:
-                next_V[tx, ty, tz] = np.uint8(v_idx)
+            # Payload exchange: discrete octal takeover when influence clears threshold.
+            if influence >= thetaP:
+                new_p = int(world.P[x, y, z])
+                if mu > 0 and world.rng.random() < mu:
+                    new_p = int((new_p + world.rng.choice([-1, 1])) % 8)
+                if int(next_P[tx, ty, tz]) != new_p:
+                    payload_changes += 1
+                next_P[tx, ty, tz] = new_p
+                # Let payload shape propagation by rotating vector slightly.
+                next_V[tx, ty, tz] = np.uint8(rotate_vector_state(world, v_idx, new_p))
+            else:
+                # Below threshold, inherit vector only weakly/stochastically.
+                if world.rng.random() < influence * 0.125:
+                    next_V[tx, ty, tz] = np.uint8(v_idx)
 
     world.active = next_active
     world.A = np.clip(np.rint(next_A), 0, 7).astype(np.uint8)
