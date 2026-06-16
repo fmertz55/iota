@@ -56,12 +56,25 @@ def rotate_to_start(values: list[int], start: int) -> list[int]:
     return values[index:] + values[:index]
 
 
+def parse_value(raw_value: str) -> Any:
+    try:
+        return yaml.safe_load(raw_value)
+    except yaml.YAMLError as exc:
+        raise SystemExit(f"Could not parse sweep value {raw_value!r}: {exc}") from exc
+
+
+def display_sweep_value(value: Any) -> str:
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, separators=(",", ":"))
+    return str(value)
+
+
 def sweep_configs(
     base_cfg: dict[str, Any],
     parameter_path: str,
-    parameter_values: list[float],
+    parameter_values: list[Any],
     seeds: list[int],
-) -> list[tuple[dict[str, Any], float, int]]:
+) -> list[tuple[dict[str, Any], Any, int]]:
     current_seed = int(get_nested(base_cfg, "init.seed"))
     seed_order = rotate_to_start(seeds, current_seed)
     configs = []
@@ -79,7 +92,7 @@ def sweep_configs(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run a controlled one-parameter sweep.")
     parser.add_argument("parameter", help="Dotted config path, e.g. constants.amplitude_coupling")
-    parser.add_argument("values", nargs="+", type=float, help="Parameter values to sweep")
+    parser.add_argument("values", nargs="+", help="YAML values to sweep, e.g. 0.5 or '[3,3]'")
     parser.add_argument("--config", default="config.yaml")
     parser.add_argument("--seeds", nargs="+", type=int, default=[42, 43, 44])
     parser.add_argument("--objective", default="Amplitude coupling sweep")
@@ -94,10 +107,11 @@ def main() -> None:
     base_cfg = latest_config(conn) or file_cfg
     conn.close()
 
-    configs = sweep_configs(base_cfg, args.parameter, args.values, args.seeds)
+    parameter_values = [parse_value(value) for value in args.values]
+    configs = sweep_configs(base_cfg, args.parameter, parameter_values, args.seeds)
     if args.dry_run:
         for _, parameter_value, seed in configs:
-            print(f"{args.parameter}={parameter_value} init.seed={seed}")
+            print(f"{args.parameter}={display_sweep_value(parameter_value)} init.seed={seed}")
         return
 
     base_dir = config_path.resolve().parent
@@ -114,7 +128,8 @@ def main() -> None:
     try:
         for cfg, parameter_value, seed in configs:
             temp_path.write_text(yaml.safe_dump(cfg, sort_keys=False), encoding="utf-8")
-            objective = f"{args.objective}: {args.parameter}={parameter_value}, seed={seed}"
+            value_text = display_sweep_value(parameter_value)
+            objective = f"{args.objective}: {args.parameter}={value_text}, seed={seed}"
             run_experiment(str(temp_path), objective, args.notes, force=False)
     finally:
         temp_path.unlink(missing_ok=True)

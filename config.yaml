@@ -3,7 +3,7 @@
 simulation_version: iota-rig-v0.1.0
 
 experiment:
-  objective: One-iota amplitude coupling sweep endpoint
+  objective: One-iota range sweep endpoint
 
 lab:
   database: data/iota_lab.db
@@ -26,7 +26,7 @@ init:
   initial_density: auto
   mode: random          # random | center
   amplitude_range: [1, 7]
-  range_range: [1, 7]
+  range_range: [7, 7]
   payload_range: [0, 7]
 
 vectors:
