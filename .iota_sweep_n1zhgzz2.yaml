@@ -1,0 +1,62 @@
+artifacts:
+  delete_unregistered: false
+  keep_every_n_snapshots: 4
+  keep_final: true
+  keep_initial: true
+constants:
+  amplitude_coupling: 1.0
+  bond_probability: 0.003
+  conservation: soft
+  decay_mode: inverse_square
+  mutation_rate: 0.0
+  payload_takeover: 0.5
+  range_coupling: 1.0
+  valence: 2
+experiment:
+  objective: Valence=2 short growth curve
+grid:
+  size: 64
+  wrap: true
+init:
+  active_iotas: 8
+  amplitude_range:
+  - 1
+  - 7
+  initial_density: auto
+  mode: random
+  payload_range:
+  - 0
+  - 7
+  range_range:
+  - 7
+  - 7
+  seed: 46
+  total_iotas: auto
+lab:
+  database: data/iota_lab.db
+  experiments_dir: experiments
+run:
+  output_dir: output
+  snapshot_every: 256
+  stop_active_iotas: 30000
+  stop_coherence_min_active: 1000
+  stop_coherence_ratio: 0.97
+  ticks: 4096
+simulation_version: iota-rig-v0.1.1
+vectors:
+  behavior_bands:
+    diffuse:
+    - 52
+    - 63
+    move:
+    - 0
+    - 25
+    reflect:
+    - 26
+    - 51
+  mode: cube26
+  vector_count: 64
+visualization:
+  max_points: 20000
+  slice_axis: z
+  slice_index: 32
