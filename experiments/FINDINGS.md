@@ -213,6 +213,10 @@ This is already recorded as `coherence_ratio`.
 - `output/findings/finding_004_active_vs_tick.png`
 - `output/findings/finding_004_secondary_exchanges_vs_tick.png`
 - `output/findings/finding_004_cumulative_secondary_exchanges_vs_tick.png`
+- `output/findings/finding_004_morphology_classification.csv`
+- `output/findings/finding_004_morphology_by_initial_active.csv`
+- `output/findings/finding_004_morphology_regimes.png`
+- `output/findings/finding_004_morphology_by_initial_active.png`
 
 ### Interpretation
 
@@ -225,3 +229,37 @@ This suggests the low-coupling regime is better described as morphology-sensitiv
 `trace -> dominant component -> fragmented expansion`
 
 The relevant phase quantity appears to be connectedness, not activity alone.
+
+### Derived Morphology Metrics
+
+Each run was classified from existing metrics only. No simulation parameters were changed.
+
+Derived quantities:
+
+- `peak_lcf`: maximum observed largest component fraction
+- `time_to_peak_lcf`: tick where `peak_lcf` occurs
+- `final_lcf`: final `coherence_ratio`
+- `fragmentation_index`: `coherence_count / active_iotas`
+- `regime`: morphology label derived from final active count and final LCF
+
+Regime counts:
+
+| Regime | Count |
+|---|---:|
+| trace | 4 |
+| dominant_coherent | 3 |
+| intermediate_dominant | 6 |
+| intermediate_fragmented | 1 |
+| fragmented_active | 7 |
+
+Aggregate morphology by initial active count:
+
+| Initial Active | Runs | Avg Final Active | Avg Final LCF | Max Final LCF | Fragmented Active Runs | Dominant Coherent Runs |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 1 | 1054.0 | 0.953 | 0.953 | 0 | 1 |
+| 2 | 5 | 56.0 | 0.598 | 0.836 | 0 | 0 |
+| 4 | 5 | 1963.8 | 0.693 | 0.929 | 1 | 2 |
+| 8 | 5 | 2734.6 | 0.569 | 0.766 | 3 | 0 |
+| 16 | 5 | 4361.2 | 0.447 | 0.654 | 3 | 0 |
+
+The morphology classifier makes the central result explicit: `init.active_iotas=4` produced the best coherence balance, while `init.active_iotas=8` and `16` produced more activity but more fragmented growth.
