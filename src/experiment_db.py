@@ -222,7 +222,7 @@ def create_experiment(
     diffs: list[tuple[str, str | None, str | None]] = []
     if previous_id is not None:
         diffs = detect_parameter_diffs(load_parameters(conn, previous_id), current_params)
-        if len(diffs) != 1:
+        if len(diffs) != 1 and not force:
             lines = [
                 "Experiment rejected.",
                 f"{len(diffs)} controlled parameters changed.",
@@ -232,7 +232,7 @@ def create_experiment(
             lines.extend(name for name, _, _ in diffs)
             raise SystemExit("\n".join(lines))
     if force:
-        print("--force is ignored; the one-parameter protocol is always enforced.")
+        print("--force enabled; one-parameter protocol bypassed for this experiment.")
 
     timestamp = datetime.now(timezone.utc).isoformat()
     cfg_hash = config_hash(cfg)

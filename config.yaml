@@ -24,7 +24,7 @@ init:
   active_iotas: 1
   total_iotas: auto
   initial_density: auto
-  mode: random          # random | center
+  mode: random          # random | center | fixed
   amplitude_range: [1, 7]
   range_range: [7, 7]
   payload_range: [0, 7]

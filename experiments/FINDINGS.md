@@ -324,3 +324,68 @@ while:
 - `output/findings/finding_005_seed_44_45_metrics_components.png`
 - `output/findings/finding_005_seed_44_45_metrics_cumulative_secondary.png`
 - `output/findings/finding_005_seed_44_45_metrics_payload_fraction.png`
+
+## Finding 006: Amplitude Diversity Is Sufficient for Fixed-Geometry Nucleation
+
+### Status
+
+Controlled fixed-initial-state diagnostic. This experiment intentionally bypassed the one-parameter guard because the setup required switching from random initialization to explicit fixed iotas.
+
+### Setup
+
+All variants used:
+
+- Same four seed-44 coordinates from the favorable `init.active_iotas=4` geometry
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `init.active_iotas = 4`
+- `R = 7` for every initial iota
+- `run.ticks = 4096`
+
+Only initial `A`, `P`, and `V` composition varied.
+
+Uniform baseline values:
+
+- `A = [4,4,4,4]`
+- `P = [4,4,4,4]`
+- `V = [49,49,49,49]`
+
+Diverse values:
+
+- `A = [2,7,7,3]`
+- `P = [2,1,0,5]`
+- `V = [6,34,54,43]`
+
+### Result
+
+| Variant | Final Tick | Final Active | Largest Coherence | Final LCF | Components | Time to LCF 0.95 | Time to LCF 0.97 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| A diversity only | 3279 | 6442 | 6327 | 0.982 | 51 | 3279 | 3279 |
+| P diversity only | 4096 | 260 | 83 | 0.319 | 31 | — | — |
+| V diversity only | 4096 | 518 | 243 | 0.469 | 36 | — | — |
+| A + P diversity | 4096 | 2447 | 2023 | 0.827 | 67 | — | — |
+| A + V diversity | 4096 | 2876 | 2722 | 0.946 | 30 | — | — |
+| P + V diversity | 4096 | 601 | 285 | 0.474 | 30 | — | — |
+| A + P + V diversity | 4096 | 5837 | 5537 | 0.949 | 66 | — | — |
+
+### Interpretation
+
+Amplitude diversity alone was sufficient to trigger coherent collapse in this fixed geometry.
+
+Payload diversity alone and vector/behavior diversity alone did not nucleate large-scale coherence. Adding payload diversity to amplitude diversity reduced coherence relative to amplitude diversity alone. Adding vector/behavior diversity to amplitude diversity produced a strong near-threshold morphology, but still did not cross the guarded `0.97` stop.
+
+This falsifies the working bet that payload diversity plus amplitude spread would be strongest. In this fixed geometry and coupling regime, initial amplitude heterogeneity is the primary driver.
+
+Working interpretation:
+
+`low coupling + favorable geometry + amplitude heterogeneity -> coherent nucleation`
+
+Payload and vector diversity are not automatically beneficial. They can add fragmentation unless amplitude heterogeneity already produces a coherent growth front.
+
+### Artifacts
+
+- `output/findings/finding_006_composition_variants_summary.csv`
+- `output/findings/finding_006_composition_variants_timeseries.csv`
+- `output/findings/finding_006_composition_variants_final_lcf.png`
+- `output/findings/finding_006_composition_variants_lcf_timeseries.png`
+- `output/findings/finding_006_composition_variants_active_timeseries.png`
