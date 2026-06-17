@@ -1,6 +1,6 @@
 # Iota Rig configuration
 # Octal-first default: A,R,P are 0..7. V is 0..(vector_count-1).
-simulation_version: iota-rig-v0.1.0
+simulation_version: iota-rig-v0.1.1
 
 experiment:
   objective: Valence=2 short growth curve
@@ -45,12 +45,15 @@ constants:
   mutation_rate: 0.0            # chance to perturb payload after exchange
   decay_mode: inverse_square    # none | inverse | inverse_square | exponential
   conservation: soft            # soft | overwrite
-  valence: 1                    # maximum simultaneous productive relationships
+  valence: 2                    # maximum simultaneous productive relationships
+  bond_probability: 0.0         # probability for non-primary productive relationship slots
 
 run:
-  ticks: 256
-  snapshot_every: 16
+  ticks: 4096
+  snapshot_every: 256
   stop_active_iotas: 30000
+  stop_coherence_ratio: 0.97
+  stop_coherence_min_active: 1000
   output_dir: output
 
 visualization:

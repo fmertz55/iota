@@ -189,6 +189,7 @@ def local_candidates(
     p: int,
     decay_mode: str,
     valence: int,
+    bond_probability: float,
 ) -> list[dict[str, Any]]:
     if valence <= 0:
         return []
@@ -242,7 +243,19 @@ def local_candidates(
         )
 
     candidates.sort(key=lambda row: (-float(row["influence"]), int(row["order"])))
-    return candidates[:valence]
+
+    selected = []
+    primary_candidates = [candidate for candidate in candidates if int(candidate["order"]) == 0]
+    if primary_candidates:
+        selected.append(primary_candidates[0])
+
+    additional_slots = max(0, valence - len(selected))
+    additional_candidates = [candidate for candidate in candidates if int(candidate["order"]) != 0]
+    for candidate in additional_candidates[:additional_slots]:
+        if world.rng.random() < bond_probability:
+            selected.append(candidate)
+
+    return selected
 
 
 def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
@@ -254,6 +267,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     decay_mode = cfg["constants"].get("decay_mode", "inverse_square")
     conservation = cfg["constants"].get("conservation", "soft")
     valence = max(1, int(cfg["constants"].get("valence", 1)))
+    bond_probability = float(cfg["constants"].get("bond_probability", 1.0))
+    bond_probability = min(1.0, max(0.0, bond_probability))
 
     next_active = world.active.copy()
     next_A = world.A.astype(np.float32).copy()
@@ -263,6 +278,7 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
 
     coords = np.argwhere(world.active)
     exchanges = 0
+    secondary_exchanges = 0
     payload_changes = 0
 
     # Simple sparse update: iterate only active/non-dark iotas.
@@ -273,12 +289,26 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             continue
         v_idx = int(world.V[x, y, z]) % len(world.vectors)
         p = int(world.P[x, y, z])
-        candidates = local_candidates(world, int(x), int(y), int(z), v_idx, a, r, p, decay_mode, valence)
+        candidates = local_candidates(
+            world,
+            int(x),
+            int(y),
+            int(z),
+            v_idx,
+            a,
+            r,
+            p,
+            decay_mode,
+            valence,
+            bond_probability,
+        )
 
         for candidate in candidates:
             tx, ty, tz = candidate["target"]
             influence = float(candidate["influence"])
             exchanges += 1
+            if int(candidate["order"]) != 0:
+                secondary_exchanges += 1
             next_active[tx, ty, tz] = True
 
             # Amplitude/range exchange: octal fields remain clipped to 0..7.
@@ -315,6 +345,7 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     max_payload_fraction = float(payload_hist.max() / active_count) if active_count else 0.0
     return {
         "exchanges": exchanges,
+        "secondary_exchanges": secondary_exchanges,
         "payload_changes": payload_changes,
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,

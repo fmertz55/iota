@@ -273,6 +273,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     stop_active_iotas = int(stop_active_iotas) if stop_active_iotas is not None else None
     stop_coherence_ratio = cfg["run"].get("stop_coherence_ratio")
     stop_coherence_ratio = float(stop_coherence_ratio) if stop_coherence_ratio is not None else None
+    stop_coherence_min_active = int(cfg["run"].get("stop_coherence_min_active", 1))
     run_metrics: list[dict[str, float]] = []
     early_stop_reason: str | None = None
     start = time.perf_counter()
@@ -300,10 +301,13 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
             early_stop_reason = f"active_iotas >= {stop_active_iotas}"
         elif (
             stop_coherence_ratio is not None
-            and int(metric["active_iotas"]) > 0
+            and int(metric["active_iotas"]) >= stop_coherence_min_active
             and float(metric["coherence_ratio"]) >= stop_coherence_ratio
         ):
-            early_stop_reason = f"coherence_ratio >= {stop_coherence_ratio}"
+            early_stop_reason = (
+                f"coherence_ratio >= {stop_coherence_ratio} "
+                f"with active_iotas >= {stop_coherence_min_active}"
+            )
 
         if tick % snapshot_every == 0 or tick == ticks or early_stop_reason is not None:
             save_slice(world, out, tick, cfg)

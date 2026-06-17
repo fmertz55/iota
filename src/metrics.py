@@ -145,6 +145,7 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "coherence_ratio",
         "entropy",
         "exchanges",
+        "secondary_exchanges",
         "payload_changes",
         "mean_A",
         "mean_R",
@@ -208,6 +209,11 @@ def metrics_summary(
         return summary
     active = [int(m["active_iotas"]) for m in metrics]
     nonzero_ticks = sum(1 for value in active if value > 0)
+    secondary_ticks = [
+        int(m["tick"])
+        for m in metrics
+        if int(float(m.get("secondary_exchanges", 0))) > 0
+    ]
     summary = {
         "peak_active_iotas": max(active),
         "final_active_iotas": active[-1],
@@ -219,6 +225,10 @@ def metrics_summary(
         "early_stopped": float(early_stopped),
         "entropy": float(metrics[-1]["entropy"]),
         "persistence": float(nonzero_ticks / len(metrics)),
+        "total_secondary_exchanges": float(
+            sum(int(float(m.get("secondary_exchanges", 0))) for m in metrics)
+        ),
+        "first_secondary_exchange_tick": float(secondary_ticks[0] if secondary_ticks else -1),
         "execution_time_seconds": execution_time,
     }
     summary.update(init_metadata)

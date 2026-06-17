@@ -14,8 +14,10 @@ DIFF_IGNORES = {
     "lab.database",
     "lab.experiments_dir",
     "run.output_dir",
+    "run.snapshot_every",
     "run.stop_active_iotas",
     "run.stop_coherence_ratio",
+    "run.stop_coherence_min_active",
     "simulation_version",
 }
 DIFF_IGNORE_PREFIXES = ("artifacts.",)

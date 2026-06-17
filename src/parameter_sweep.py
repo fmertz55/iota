@@ -94,6 +94,7 @@ def main() -> None:
     parser.add_argument("parameter", help="Dotted config path, e.g. constants.amplitude_coupling")
     parser.add_argument("values", nargs="+", help="YAML values to sweep, e.g. 0.5 or '[3,3]'")
     parser.add_argument("--config", default="config.yaml")
+    parser.add_argument("--base", choices=["latest", "file"], default="latest")
     parser.add_argument("--seeds", nargs="+", type=int, default=[42, 43, 44])
     parser.add_argument("--objective", default="Amplitude coupling sweep")
     parser.add_argument("--notes", default="")
@@ -104,7 +105,7 @@ def main() -> None:
     file_cfg = load_config(config_path)
     db_path, _, _, _ = lab_paths(config_path, file_cfg)
     conn = open_database(db_path)
-    base_cfg = latest_config(conn) or file_cfg
+    base_cfg = file_cfg if args.base == "file" else latest_config(conn) or file_cfg
     conn.close()
 
     parameter_values = [parse_value(value) for value in args.values]

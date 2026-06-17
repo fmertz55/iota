@@ -17,7 +17,7 @@ The grid defaults to `64 x 64 x 64` and can be raised toward `256 x 256 x 256` i
 The default baseline is stamped in `config.yaml` as:
 
 ```yaml
-simulation_version: iota-rig-v0.1.0
+simulation_version: iota-rig-v0.1.1
 experiment:
   objective: Single active iota baseline
 ```
@@ -193,7 +193,7 @@ python src/parameter_sweep.py constants.amplitude_coupling \
   --objective "Amplitude coupling sweep"
 ```
 
-The sweep runner starts from the latest recorded config snapshot in `data/iota_lab.db` and walks values/seeds in a serpentine order so each recorded experiment still changes exactly one controlled parameter.
+The sweep runner starts from the latest recorded config snapshot in `data/iota_lab.db` and walks values/seeds in a serpentine order so each recorded experiment still changes exactly one controlled parameter. Use `--base file` when a rule or metadata change in `config.yaml` must be the sweep baseline instead.
 
 Try these vector modes:
 
@@ -219,9 +219,12 @@ decay_mode: exponential
 ```yaml
 constants:
   valence: 1
+  bond_probability: 0.0
 ```
 
 The original v0.1.0 behavior is equivalent to `valence: 1`.
+
+`constants.bond_probability` gates non-primary productive relationship slots after candidate scoring. The primary vector target remains deterministic; each additional valence slot independently admits the next highest-scored candidate, then the existing conservation, decay, payload, and rounding rules apply unchanged.
 
 ## First big question
 
