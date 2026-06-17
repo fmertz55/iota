@@ -123,7 +123,21 @@ def init_world(cfg: Dict[str, Any]) -> World:
     rr = cfg["init"].get("range_range", [1, 7])
     pr = cfg["init"].get("payload_range", [0, 7])
 
-    if mode == "center":
+    if mode == "fixed":
+        fixed_iotas = cfg["init"].get("fixed_iotas", [])
+        if not fixed_iotas:
+            raise ValueError("init.mode=fixed requires init.fixed_iotas")
+        coords = []
+        for iota in fixed_iotas:
+            x, y, z = (int(value) for value in iota["coord"])
+            if wrap:
+                x %= size
+                y %= size
+                z %= size
+            elif not (0 <= x < size and 0 <= y < size and 0 <= z < size):
+                raise ValueError(f"Fixed iota coordinate out of bounds: {(x, y, z)}")
+            coords.append((x, y, z))
+    elif mode == "center":
         coords = [(size // 2, size // 2, size // 2)]
         while len(coords) < n:
             offset = rng.integers(-2, 3, size=3)
@@ -133,12 +147,21 @@ def init_world(cfg: Dict[str, Any]) -> World:
         flat = rng.choice(size**3, size=min(n, size**3), replace=False)
         coords = [np.unravel_index(int(idx), (size, size, size)) for idx in flat]
 
-    for x, y, z in coords:
-        active[x, y, z] = True
-        A[x, y, z] = rng.integers(ar[0], ar[1] + 1)
-        R[x, y, z] = rng.integers(rr[0], rr[1] + 1)
-        V[x, y, z] = rng.integers(0, len(vectors))
-        P[x, y, z] = rng.integers(pr[0], pr[1] + 1)
+    if mode == "fixed":
+        for coord, iota in zip(coords, fixed_iotas):
+            x, y, z = coord
+            active[x, y, z] = True
+            A[x, y, z] = np.uint8(max(0, min(7, int(iota["A"]))))
+            R[x, y, z] = np.uint8(max(0, min(7, int(iota["R"]))))
+            V[x, y, z] = np.uint8(int(iota["V"]) % len(vectors))
+            P[x, y, z] = np.uint8(max(0, min(7, int(iota["P"]))))
+    else:
+        for x, y, z in coords:
+            active[x, y, z] = True
+            A[x, y, z] = rng.integers(ar[0], ar[1] + 1)
+            R[x, y, z] = rng.integers(rr[0], rr[1] + 1)
+            V[x, y, z] = rng.integers(0, len(vectors))
+            P[x, y, z] = rng.integers(pr[0], pr[1] + 1)
 
     return World(active, A, R, V, P, vectors, vector_behaviors, wrap, rng)
 

@@ -263,3 +263,64 @@ Aggregate morphology by initial active count:
 | 16 | 5 | 4361.2 | 0.447 | 0.654 | 3 | 0 |
 
 The morphology classifier makes the central result explicit: `init.active_iotas=4` produced the best coherence balance, while `init.active_iotas=8` and `16` produced more activity but more fragmented growth.
+
+## Finding 005: Seed Geometry Controls Low-Coupling Morphology
+
+### Status
+
+Confirmed diagnostic from existing completed metrics. No new simulation parameters were introduced.
+
+### Setup
+
+Reference diagnostic:
+
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `init.active_iotas = 4`
+- Seeds compared: `44` and `45`
+- Control comparison: same `p` and seeds with `init.active_iotas = 1`
+
+### Result
+
+| Initial Active | Seed | Experiment | Final Tick | Final Active | Largest Coherence | Final LCF | Components | Cumulative Secondary Exchanges |
+|---:|---:|---|---:|---:|---:|---:|---:|---:|
+| 4 | 44 | IOTA-000168 | 3033 | 4122 | 4001 | 0.971 | 18 | 15845 |
+| 4 | 45 | IOTA-000167 | 4096 | 4565 | 3410 | 0.747 | 61 | 16003 |
+| 1 | 44 | IOTA-000136 | 4096 | 3 | 3 | 1.000 | 1 | 20 |
+| 1 | 45 | IOTA-000135 | 4096 | 428 | 413 | 0.965 | 10 | 1849 |
+
+The seed-44 advantage is not a scalar property of seed `44`. It appears only in the `init.active_iotas=4` geometry. With one initial active iota, seed `44` remains trace-limited while seed `45` grows a coherent small component.
+
+### Initial Geometry Contrast
+
+At `init.active_iotas=4`:
+
+- Seed `44` starts with mixed payloads `2,1,0,5`, mixed behaviors `move,reflect,diffuse,reflect`, and two max-amplitude cells with `A=7`.
+- Seed `45` starts with homogeneous payload `P=4` across all four cells, all `reflect` behavior, and lower state diversity.
+- Seed `44` initial cells are farther apart, with nearest-neighbor distances around `26–35`.
+- Seed `45` has three closer initial cells, with nearest-neighbor distances around `13–15`, plus one farther cell.
+
+### Interpretation
+
+The diagnostic supports a geometry-sensitive nucleation mechanism rather than a simple coupling threshold.
+
+Secondary exchange count alone does not explain the result: seeds `44` and `45` have nearly equal cumulative secondary exchanges in the `init.active_iotas=4` comparison. The difference is how those exchanges attach to an already coherent reachable region.
+
+Working interpretation:
+
+`low coupling + favorable initial state diversity + favorable local attachment geometry -> coherent collapse`
+
+while:
+
+`low coupling + homogeneous or poorly attached local geometry -> fragmented expansion`
+
+### Artifacts
+
+- `output/findings/finding_005_seed_44_45_metrics_summary.csv`
+- `output/findings/finding_005_seed_44_45_metrics_timeseries.csv`
+- `output/findings/finding_005_seed_44_45_metrics_initial_conditions.csv`
+- `output/findings/finding_005_seed_44_45_metrics_lcf.png`
+- `output/findings/finding_005_seed_44_45_metrics_active.png`
+- `output/findings/finding_005_seed_44_45_metrics_components.png`
+- `output/findings/finding_005_seed_44_45_metrics_cumulative_secondary.png`
+- `output/findings/finding_005_seed_44_45_metrics_payload_fraction.png`
