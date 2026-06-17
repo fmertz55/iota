@@ -151,3 +151,72 @@ This falsifies the broad version of the hypothesis for the tested horizon: any n
 The sharper statement is: rare secondary bonds can seed coherent visible structure only after enough secondary exchanges accumulate. In this run, `p=0.0001` produced 4 secondary exchanges and no large structure, `p=0.001` produced 166 and still did not reach the criterion, while `p=0.005` produced 1692 and crossed the giant-component threshold.
 
 The immediate next question is seed robustness near the boundary: repeat `p=0.001`, `0.0025`, and `0.005` across multiple seeds.
+
+## Finding 004: Low-Coupling Morphology Is Not Binary
+
+At `constants.bond_probability=0.003`, increasing `init.active_iotas` does not monotonically increase coherent percolation. Instead, it changes morphology: some runs form a dominant component, while others generate broad fragmented activity.
+
+The key quantity is largest component fraction:
+
+`LCF = largest_coherence / active_iotas`
+
+This is already recorded as `coherence_ratio`.
+
+### Conditions
+
+- `simulation_version`: `iota-rig-v0.1.1`
+- `constants.bond_probability`: 0.003
+- `constants.valence`: 2
+- `init.range_range`: `[7,7]`
+- `constants.amplitude_coupling`: 1.0
+- `constants.range_coupling`: 1.0
+- `constants.conservation`: `soft`
+- `run.ticks`: 4096
+- `run.stop_coherence_ratio`: 0.97
+- `run.stop_coherence_min_active`: 1000
+- `run.stop_active_iotas`: 30000
+
+### Evidence
+
+| Initial Active | Seed | Final Active | Largest Coherence | LCF |
+|---:|---:|---:|---:|---:|
+| 1 | 42 | 1054 | 1004 | 0.953 |
+| 2 | 42 | 67 | 56 | 0.836 |
+| 2 | 43 | 6 | 3 | 0.500 |
+| 2 | 44 | 8 | 3 | 0.375 |
+| 2 | 45 | 188 | 138 | 0.734 |
+| 2 | 46 | 11 | 6 | 0.545 |
+| 4 | 42 | 3048 | 2650 | 0.869 |
+| 4 | 43 | 1960 | 656 | 0.335 |
+| 4 | 44 | 1956 | 1818 | 0.929 |
+| 4 | 45 | 2061 | 1268 | 0.615 |
+| 4 | 46 | 794 | 570 | 0.718 |
+| 8 | 42 | 2899 | 1220 | 0.421 |
+| 8 | 43 | 1439 | 967 | 0.672 |
+| 8 | 44 | 3622 | 1751 | 0.483 |
+| 8 | 45 | 2611 | 1999 | 0.766 |
+| 8 | 46 | 3102 | 1560 | 0.503 |
+| 16 | 42 | 4519 | 2552 | 0.565 |
+| 16 | 43 | 2992 | 1956 | 0.654 |
+| 16 | 44 | 7585 | 3045 | 0.401 |
+| 16 | 45 | 650 | 122 | 0.188 |
+| 16 | 46 | 6060 | 2601 | 0.429 |
+
+### Artifacts
+
+- `output/findings/finding_004_lcf_geometry_summary.csv`
+- `output/findings/finding_004_lcf_geometry_timeseries.csv`
+- `output/findings/finding_004_lcf_geometry_timeseries.png`
+- `output/findings/finding_004_lcf_geometry_scatter.png`
+
+### Interpretation
+
+The result does not support a simple rule that more initial active iotas make coherent percolation more likely.
+
+The strongest dominant-component cases occurred at `init.active_iotas=4`, especially seeds 42 and 44. Higher initial counts often produced more active iotas but lower LCF, consistent with competing growth domains rather than one coherent collapse.
+
+This suggests the low-coupling regime is better described as morphology-sensitive critical growth:
+
+`trace -> dominant component -> fragmented expansion`
+
+The relevant phase quantity appears to be connectedness, not activity alone.
