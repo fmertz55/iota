@@ -208,6 +208,11 @@ This is already recorded as `coherence_ratio`.
 - `output/findings/finding_004_lcf_geometry_timeseries.csv`
 - `output/findings/finding_004_lcf_geometry_timeseries.png`
 - `output/findings/finding_004_lcf_geometry_scatter.png`
+- `output/findings/finding_004_grouped_metrics_timeseries.csv`
+- `output/findings/finding_004_lcf_vs_tick.png`
+- `output/findings/finding_004_active_vs_tick.png`
+- `output/findings/finding_004_secondary_exchanges_vs_tick.png`
+- `output/findings/finding_004_cumulative_secondary_exchanges_vs_tick.png`
 
 ### Interpretation
 
