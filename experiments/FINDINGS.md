@@ -389,3 +389,83 @@ Payload and vector diversity are not automatically beneficial. They can add frag
 - `output/findings/finding_006_composition_variants_final_lcf.png`
 - `output/findings/finding_006_composition_variants_lcf_timeseries.png`
 - `output/findings/finding_006_composition_variants_active_timeseries.png`
+
+## Finding 007: Coherence Is Gradient-Selected, Not Amplitude-Maximized
+
+### Status
+
+Controlled fixed-geometry amplitude-spread diagnostic.
+
+### Setup
+
+All variants used:
+
+- Same four fixed coordinates as Finding 006
+- Uniform payload: `P = [4,4,4,4]`
+- Uniform vector state: `V = [49,49,49,49]`
+- `R = 7` for every initial iota
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+
+Only initial amplitude pattern varied.
+
+### Result
+
+| Variant | Final Tick | Final Active | Largest Coherence | Active Outside Largest | Final LCF | Components | Time to LCF 0.97 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `A_4444` | 4096 | 432 | 121 | 311 | 0.280 | 38 | — |
+| `A_5444` | 4096 | 953 | 460 | 493 | 0.483 | 52 | — |
+| `A_6444` | 4096 | 1967 | 1611 | 356 | 0.819 | 48 | — |
+| `A_7444` | 4096 | 6212 | 5850 | 362 | 0.942 | 64 | — |
+| `A_7744` | 3693 | 10244 | 9938 | 306 | 0.970 | 78 | 3693 |
+| `A_7774` | 4096 | 14726 | 10002 | 4724 | 0.679 | 95 | — |
+| `A_7777` | 4096 | 24383 | 14028 | 10355 | 0.575 | 143 | — |
+
+### Interpretation
+
+The result is not amplitude monotonicity.
+
+Increasing amplitude from `A_4444` through `A_7744` improves coherent growth, but additional high-amplitude seeds after `A_7744` increase total activity while reducing single-component dominance.
+
+This supports a gradient-selection mechanism:
+
+`too little A contrast -> weak growth`
+
+`one high-A anchor -> coherent growth`
+
+`two high-A anchors -> strongest coherent growth`
+
+`three or four high-A anchors -> competing fronts / fragmentation`
+
+The best current interpretation is:
+
+`coherent nucleation requires amplitude asymmetry, but too much high-amplitude uniformity destroys the dominant gradient`
+
+This refines Finding 006: amplitude heterogeneity matters, but the useful quantity is not simply spread or total amplitude. The useful condition appears to be a limited high-amplitude anchor set embedded in lower-amplitude context.
+
+### Instrumentation Gap
+
+The current persisted metrics include component count and largest component size, but not full component-size distribution or per-component state statistics.
+
+The desired next diagnostics are:
+
+- `top_5_component_sizes`
+- `mean_A_by_component`
+- `frontier_count`
+- component-level payload/vector composition
+
+Those require either replaying final worlds or adding runtime component diagnostics/state snapshots. For this finding, `coherence_count`, `active_outside_largest`, and `final_lcf` already show the fragmentation pattern clearly:
+
+- `A_7744`: only `306` active iotas outside the largest component
+- `A_7774`: `4724` outside the largest component
+- `A_7777`: `10355` outside the largest component
+
+### Artifacts
+
+- `output/findings/finding_007_amplitude_spread_summary.csv`
+- `output/findings/finding_007_amplitude_spread_timeseries.csv`
+- `output/findings/finding_007_amplitude_spread_final_lcf.png`
+- `output/findings/finding_007_amplitude_spread_active_vs_largest.png`
+- `output/findings/finding_007_amplitude_spread_fragmentation.png`
+- `output/findings/finding_007_amplitude_spread_lcf_timeseries.png`
