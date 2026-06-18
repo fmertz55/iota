@@ -1,0 +1,99 @@
+simulation_version: iota-rig-v0.1.1
+experiment:
+  objective: 128 grid scale test
+  variant: A_4774_128_cube26
+lab:
+  database: data/iota_lab.db
+  experiments_dir: experiments
+artifacts:
+  keep_initial: true
+  keep_final: true
+  keep_every_n_snapshots: 4
+  delete_unregistered: false
+grid:
+  size: 128
+  wrap: true
+init:
+  seed: 42
+  active_iotas: 4
+  total_iotas: auto
+  initial_density: auto
+  mode: fixed
+  amplitude_range:
+  - 1
+  - 7
+  range_range:
+  - 7
+  - 7
+  payload_range:
+  - 0
+  - 7
+  fixed_iotas:
+  - coord:
+    - 7
+    - 54
+    - 1
+    A: 4
+    R: 7
+    V: 49
+    P: 4
+  - coord:
+    - 16
+    - 33
+    - 14
+    A: 7
+    R: 7
+    V: 49
+    P: 4
+  - coord:
+    - 42
+    - 43
+    - 24
+    A: 7
+    R: 7
+    V: 49
+    P: 4
+  - coord:
+    - 52
+    - 26
+    - 55
+    A: 4
+    R: 7
+    V: 49
+    P: 4
+vectors:
+  mode: cube26
+  vector_count: 64
+  behavior_bands:
+    move:
+    - 0
+    - 25
+    reflect:
+    - 26
+    - 51
+    diffuse:
+    - 52
+    - 63
+constants:
+  amplitude_coupling: 1.0
+  range_coupling: 1.0
+  payload_takeover: 0.5
+  mutation_rate: 0.0
+  decay_mode: inverse_square
+  conservation: soft
+  valence: 2
+  bond_probability: 0.005
+  neighbor_mode: cube26
+run:
+  ticks: 4096
+  snapshot_every: 4096
+  stop_active_iotas: 100000
+  stop_coherence_ratio: 0.97
+  stop_coherence_min_active: 1000
+  output_dir: output
+  metric_every: 128
+  dashboard: false
+visualization:
+  max_points: 20000
+  slice_axis: z
+  slice_index: 32
