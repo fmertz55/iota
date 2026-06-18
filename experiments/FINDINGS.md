@@ -696,6 +696,22 @@ The final active density was:
 
 `12328 / 16777216 ≈ 0.073%`
 
+### Scale Comparison
+
+Direct seed-42 comparison across grid sizes:
+
+| Grid Size | Experiment | Seed | Final Tick | Final Active | Largest Coherence | Final LCF | Tick LCF >= 0.95 | Tick LCF >= 0.97 | Runtime |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 64 | IOTA-000247 | 42 | 3648 | 8585 | 8328 | 0.970 | 3072 | 3648 | 410s |
+| 128 | IOTA-000263 | 42 | 4096 | 11664 | 11335 | 0.972 | 3072 | 4096 | 633s |
+| 256 | IOTA-000268 | 42 | 4096 | 12328 | 11992 | 0.973 | 3072 | 4096 | 1020s |
+
+The key scale result is not that active count grows with volume. It mostly does not. The key result is that the dominant coherent morphology persists as available dark volume increases by 64x from `64³` to `256³`.
+
+The tick of nucleation/collapse is also stable at the available metric resolution:
+
+`LCF >= 0.95` first appears at tick `3072` for all three comparable seed-42 runs.
+
 ### Timeseries Read
 
 The run remained fragmented through mid-run, then collapsed into a dominant coherent component:
@@ -723,7 +739,33 @@ The current scale read is:
 
 `local amplitude-gradient geometry + sufficient candidate connectivity -> scale-stable coherent nucleation`
 
+### Paper Planning Bridge
+
+This finding changes the project status from exploratory rig-building to paper-candidate evidence.
+
+The minimum defensible paper claim is not that the model explains any physical universe. The defensible claim is:
+
+`A minimal octal iota substrate exhibits a reproducible transition from fragmented activity to scale-stable coherent nucleation when relational capacity, amplitude-gradient placement, and face+edge local connectivity are present.`
+
+The core result chain is now:
+
+1. `valence = 1` produces trace-limited propagation.
+2. `valence = 2` enables coherent percolation.
+3. Low coupling produces seed-sensitive/nucleation-limited growth.
+4. Amplitude heterogeneity alone is sufficient in fixed geometry.
+5. Amplitude placement controls morphology.
+6. Face+edge candidate connectivity is sufficient; face-only connectivity fails.
+7. The `A_4774` morphology survives `64³ -> 128³ -> 256³` scaling.
+
+Before drafting, the remaining paper-critical work is:
+
+- Freeze a versioned experiment manifest for the main figures.
+- Produce publication-grade plots from Findings 001, 008, 009, 010, and 011.
+- Add exact reproducibility instructions: config hashes, scripts, seeds, and database/artifact paths.
+- Decide whether the paper frames this as artificial life, cellular automata, graph/percolation dynamics, or computational physics.
+
 ### Artifacts
 
 - `output/findings/finding_011_scale_256_timeseries.csv`
 - `output/findings/finding_011_scale_256_summary.csv`
+- `output/findings/finding_011_scale_comparison.csv`
