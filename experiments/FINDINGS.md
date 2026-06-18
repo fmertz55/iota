@@ -660,3 +660,70 @@ The next scale test should be exactly one guarded `256³` probe using the same s
 
 - `output/findings/finding_010_scale_128_raw.csv`
 - `output/findings/finding_010_scale_128_summary.csv`
+
+## Finding 011: A_4774 Coherent Morphology Survives 256³ Single-Seed Probe
+
+### Status
+
+Single guarded scale probe.
+
+### Setup
+
+The run used:
+
+- `grid.size = 256`
+- `A = [4,7,7,4]`
+- Same four fixed coordinates as Findings 006-010
+- Uniform payload: `P = [4,4,4,4]`
+- Uniform vector state: `V = [49,49,49,49]`
+- `R = 7` for every initial iota
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+- Seed `42`
+
+Dashboard generation was disabled and metrics were sampled every 256 ticks for scale safety.
+
+### Result
+
+| Grid Size | Seed | Final Tick | Final Active | Largest Coherence | Final LCF | Coherence Count |
+|---:|---:|---:|---:|---:|---:|---:|
+| 256 | 42 | 4096 | 12328 | 11992 | 0.973 | 90 |
+
+The final active density was:
+
+`12328 / 16777216 ≈ 0.073%`
+
+### Timeseries Read
+
+The run remained fragmented through mid-run, then collapsed into a dominant coherent component:
+
+| Tick | Active | Largest | LCF |
+|---:|---:|---:|---:|
+| 2048 | 2806 | 1316 | 0.469 |
+| 2560 | 4326 | 2150 | 0.497 |
+| 2816 | 5209 | 2686 | 0.516 |
+| 3072 | 6258 | 6049 | 0.967 |
+| 3584 | 8322 | 8053 | 0.968 |
+| 4096 | 12328 | 11992 | 0.973 |
+
+### Interpretation
+
+The `A_4774` coherent morphology survived the 64x volume increase from `64³` to `256³` in the seed-42 probe.
+
+This strongly weakens the scale-artifact objection. The system forms a high-LCF coherent component in a substrate that is overwhelmingly dark:
+
+`99.927%` of the 256³ grid remains inactive at final tick.
+
+The transition timing is also important. Coherence did not start dominant. It emerged abruptly between ticks `2816` and `3072`, consistent with a nucleation/collapse phase rather than simple monotonic aggregation.
+
+The current scale read is:
+
+`local amplitude-gradient geometry + sufficient candidate connectivity -> scale-stable coherent nucleation`
+
+### Artifacts
+
+- `output/findings/finding_011_scale_256_timeseries.csv`
+- `output/findings/finding_011_scale_256_summary.csv`
