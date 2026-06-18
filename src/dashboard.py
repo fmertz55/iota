@@ -60,6 +60,7 @@ def _load_dashboard_data(conn: sqlite3.Connection, output_root: Path, dashboard_
             'constants.amplitude_coupling',
             'constants.valence',
             'constants.bond_probability',
+            'constants.neighbor_mode',
             'run.ticks',
             'grid.size',
             'vectors.vector_count'
@@ -447,11 +448,12 @@ def _html_shell(data: dict[str, Any]) -> str:
         const coupling = decodeJson(experiment.parameters['constants.amplitude_coupling']);
         const valence = decodeJson(experiment.parameters['constants.valence']);
         const bondProbability = decodeJson(experiment.parameters['constants.bond_probability']);
+        const neighborMode = decodeJson(experiment.parameters['constants.neighbor_mode']);
         const peak = experiment.summary.largest_coherence;
         return `
           <button class="experiment-button ${{index === selectedIndex ? 'active' : ''}}" data-index="${{index}}">
             <strong>${{experiment.label}}</strong>
-            <span>active=${{active ?? 'n/a'}} · kA=${{coupling ?? 'n/a'}} · valence=${{valence ?? 'n/a'}} · pBond=${{bondProbability ?? 'n/a'}}</span>
+            <span>active=${{active ?? 'n/a'}} · kA=${{coupling ?? 'n/a'}} · valence=${{valence ?? 'n/a'}} · pBond=${{bondProbability ?? 'n/a'}} · neighbors=${{neighborMode ?? 'n/a'}}</span>
             <span>${{experiment.objective || 'Unspecified'}}</span>
             <span>peak=${{fmt(peak, 0)}}</span>
           </button>
@@ -473,6 +475,7 @@ def _html_shell(data: dict[str, Any]) -> str:
       const amplitudeCoupling = decodeJson(experiment.parameters['constants.amplitude_coupling']);
       const valence = decodeJson(experiment.parameters['constants.valence']);
       const bondProbability = decodeJson(experiment.parameters['constants.bond_probability']);
+      const neighborMode = decodeJson(experiment.parameters['constants.neighbor_mode']);
       document.getElementById('overview').innerHTML = `
         <h2>${{experiment.label}}</h2>
         <p class="muted">${{experiment.objective || 'Unspecified'}} · ${{experiment.timestamp}}</p>
@@ -487,6 +490,7 @@ def _html_shell(data: dict[str, Any]) -> str:
           <div class="stat"><span>Amplitude Coupling</span><strong>${{fmt(amplitudeCoupling)}}</strong></div>
           <div class="stat"><span>Valence</span><strong>${{fmt(valence, 0)}}</strong></div>
           <div class="stat"><span>Bond Probability</span><strong>${{fmt(bondProbability)}}</strong></div>
+          <div class="stat"><span>Neighbor Mode</span><strong>${{neighborMode ?? 'n/a'}}</strong></div>
           <div class="stat"><span>Entropy</span><strong>${{fmt(summary.entropy)}}</strong></div>
           <div class="stat"><span>Artifacts</span><strong>${{experiment.artifacts.count}}</strong></div>
         </div>

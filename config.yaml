@@ -47,6 +47,7 @@ constants:
   conservation: soft            # soft | overwrite
   valence: 2                    # maximum simultaneous productive relationships
   bond_probability: 0.0         # probability for non-primary productive relationship slots
+  neighbor_mode: cube26         # candidate target geometry: cube26 | face18 | face6 | edge12 | corner8
 
 run:
   ticks: 4096

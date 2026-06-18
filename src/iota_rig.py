@@ -30,6 +30,24 @@ CUBE26 = np.array([
     if not (dx == 0 and dy == 0 and dz == 0)
 ], dtype=np.int16)
 
+EDGE12 = np.array([
+    (dx, dy, dz)
+    for dx, dy, dz in CUBE26
+    if abs(int(dx)) + abs(int(dy)) + abs(int(dz)) == 2
+], dtype=np.int16)
+
+CORNER8 = np.array([
+    (dx, dy, dz)
+    for dx, dy, dz in CUBE26
+    if abs(int(dx)) + abs(int(dy)) + abs(int(dz)) == 3
+], dtype=np.int16)
+
+FACE18 = np.array([
+    (dx, dy, dz)
+    for dx, dy, dz in CUBE26
+    if abs(int(dx)) + abs(int(dy)) + abs(int(dz)) <= 2
+], dtype=np.int16)
+
 DEFAULT_VECTOR_BANDS = {
     "move": (0, 25),
     "reflect": (26, 51),
@@ -68,6 +86,20 @@ def _base_vectors(mode: str, count: int, rng: np.random.Generator) -> np.ndarray
                 vals.append(tuple(int(x) for x in v))
         return np.array(vals, dtype=np.int16)
     raise ValueError(f"Unknown vector mode: {mode}")
+
+
+def candidate_neighbor_steps(mode: str) -> np.ndarray:
+    if mode == "cube26":
+        return CUBE26
+    if mode == "face18" or mode == "face6_plus_edge12":
+        return FACE18
+    if mode == "face6" or mode == "cube6":
+        return CUBE6
+    if mode == "edge12":
+        return EDGE12
+    if mode == "corner8":
+        return CORNER8
+    raise ValueError(f"Unknown neighbor mode: {mode}")
 
 
 def make_vector_states(cfg: Dict[str, Any], rng: np.random.Generator) -> tuple[np.ndarray, tuple[str, ...]]:
@@ -213,6 +245,7 @@ def local_candidates(
     decay_mode: str,
     valence: int,
     bond_probability: float,
+    neighbor_mode: str = "cube26",
 ) -> list[dict[str, Any]]:
     if valence <= 0:
         return []
@@ -225,7 +258,7 @@ def local_candidates(
 
     if valence > 1:
         behavior = primary[3]
-        for dx, dy, dz in world.vectors:
+        for dx, dy, dz in candidate_neighbor_steps(neighbor_mode):
             step_key = (int(dx), int(dy), int(dz))
             if step_key in seen_steps:
                 continue
@@ -292,6 +325,7 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     valence = max(1, int(cfg["constants"].get("valence", 1)))
     bond_probability = float(cfg["constants"].get("bond_probability", 1.0))
     bond_probability = min(1.0, max(0.0, bond_probability))
+    neighbor_mode = str(cfg["constants"].get("neighbor_mode", "cube26"))
 
     next_active = world.active.copy()
     next_A = world.A.astype(np.float32).copy()
@@ -324,6 +358,7 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             decay_mode,
             valence,
             bond_probability,
+            neighbor_mode,
         )
 
         for candidate in candidates:

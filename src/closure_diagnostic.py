@@ -78,7 +78,22 @@ def candidate_rows_for_cell(world: Any, cfg: dict[str, Any], coord: tuple[int, i
     p = int(world.P[x, y, z])
     valence = max(1, int(cfg["constants"].get("valence", 1)))
     decay_mode = cfg["constants"].get("decay_mode", "inverse_square")
-    return local_candidates(world, x, y, z, v_idx, a, r, p, decay_mode, valence)
+    bond_probability = float(cfg["constants"].get("bond_probability", 1.0))
+    neighbor_mode = str(cfg["constants"].get("neighbor_mode", "cube26"))
+    return local_candidates(
+        world,
+        x,
+        y,
+        z,
+        v_idx,
+        a,
+        r,
+        p,
+        decay_mode,
+        valence,
+        bond_probability,
+        neighbor_mode,
+    )
 
 
 def limited_values(values: set[tuple[int, int, int]], limit: int) -> list[tuple[int, int, int] | str]:
