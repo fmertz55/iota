@@ -769,3 +769,73 @@ Before drafting, the remaining paper-critical work is:
 - `output/findings/finding_011_scale_256_timeseries.csv`
 - `output/findings/finding_011_scale_256_summary.csv`
 - `output/findings/finding_011_scale_comparison.csv`
+
+## Finding 012: Multiple Coherent Nuclei Can Coexist in 256³
+
+### Status
+
+Controlled multi-nucleus coexistence probe.
+
+### Setup
+
+All runs used:
+
+- `grid.size = 256`
+- Translated copies of the `A_4774` nucleus
+- Uniform payload: `P = [4,4,4,4]` per nucleus
+- Uniform vector state: `V = [49,49,49,49]` per nucleus
+- `R = 7` for every initial iota
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+- Seed `42`
+
+Global LCF early stopping was disabled. Multiple healthy coherent bodies necessarily reduce largest-component fraction.
+
+### Result
+
+| Nuclei | Final Active | Largest | LCF | Components | Top 1 | Top 2 | Top 3 | Top 2 Coverage | Top 3 Coverage |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2 | 20447 | 10528 | 0.515 | 201 | 10528 | 9065 | 151 | 0.958 | 0.966 |
+| 4 | 61642 | 35230 | 0.572 | 398 | 35230 | 17394 | 7548 | 0.854 | 0.976 |
+
+### Interpretation
+
+The two-nucleus run produced two dominant coherent bodies rather than one merged body or many fragments.
+
+The low global LCF is therefore not failure. For two nuclei:
+
+`(component_1 + component_2) / active = 0.958`
+
+This indicates stable coexistence of separate coherent domains at large separation.
+
+The four-nucleus run did not produce four equal coherent bodies. It produced one dominant body, two substantial secondary bodies, and a small fourth/fifth tail:
+
+`top_3 / active = 0.976`
+
+This suggests that far-separated coherent nuclei can coexist, but growth is not symmetric under this fixed seed and placement. Multi-nucleus systems introduce competition or unequal nucleation efficiency even when each nucleus has identical internal composition.
+
+The current read is:
+
+`coherent bodies can coexist at separation, but multi-domain morphology is not guaranteed to remain equal or independent`
+
+### Next Test
+
+Run a two-nucleus interaction-distance probe:
+
+- Far baseline: existing `IOTA-000269`
+- Medium separation: translated by ~64 cells
+- Near separation: translated by ~24 cells
+
+The question shifts from coexistence to interaction:
+
+- merge
+- exclude/domain-boundary formation
+- fragment at collision
+- absorb/competitive dominance
+
+### Artifacts
+
+- `output/findings/finding_012_multi_nucleus_256_summary.csv`
