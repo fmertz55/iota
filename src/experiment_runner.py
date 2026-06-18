@@ -270,6 +270,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     ticks = int(cfg["run"].get("ticks", 256))
     snapshot_every = int(cfg["run"].get("snapshot_every", 8))
     metric_every = max(1, int(cfg["run"].get("metric_every", 1)))
+    dashboard_enabled = bool(cfg["run"].get("dashboard", True))
     stop_active_iotas = cfg["run"].get("stop_active_iotas")
     stop_active_iotas = int(stop_active_iotas) if stop_active_iotas is not None else None
     stop_coherence_ratio = cfg["run"].get("stop_coherence_ratio")
@@ -291,7 +292,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     initial_metric = collect_metrics(world, 0)
     run_metrics.append(initial_metric)
     insert_metric(conn, experiment_id, initial_metric)
-    dashboard_path = save_dashboard(conn, output_root)
+    dashboard_path = save_dashboard(conn, output_root) if dashboard_enabled else None
 
     for tick in range(1, ticks + 1):
         extras = step(world, cfg)
@@ -319,7 +320,8 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
             register_snapshot_artifacts(conn, experiment_id, base_dir, out, tick)
             save_run_metrics(run_metrics, out)
             register_run_artifacts(conn, experiment_id, base_dir, out)
-            dashboard_path = save_dashboard(conn, output_root)
+            if dashboard_enabled:
+                dashboard_path = save_dashboard(conn, output_root)
             print(
                 f"tick={tick} active={metric['active_iotas']} "
                 f"largest_coherence={metric['largest_coherence']} "
@@ -369,7 +371,8 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     apply_snapshot_retention(conn, experiment_id, base_dir, out, final_tick, snapshot_every, cfg)
     save_experiment_comparison_plots(conn, comparison_dir)
     register_comparison_artifacts(conn, experiment_id, base_dir, comparison_dir)
-    dashboard_path = save_dashboard(conn, output_root)
+    if dashboard_enabled:
+        dashboard_path = save_dashboard(conn, output_root)
     conn.close()
 
     if not diffs:
@@ -382,4 +385,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     print(f"Notebook: {experiments_dir / f'{label}.md'}")
     print(f"Output: {out}")
     print(f"Experiment plots: {comparison_dir}")
-    print(f"Dashboard: {dashboard_path}")
+    if dashboard_path is not None:
+        print(f"Dashboard: {dashboard_path}")
+    else:
+        print("Dashboard: disabled for this run")

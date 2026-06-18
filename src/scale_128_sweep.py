@@ -96,6 +96,7 @@ def variant_config(base_cfg: dict[str, Any], seed: int) -> dict[str, Any]:
             "stop_active_iotas": 100000,
             "stop_coherence_ratio": 0.97,
             "stop_coherence_min_active": 1000,
+            "dashboard": False,
         }
     )
     return cfg
