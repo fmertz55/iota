@@ -76,14 +76,15 @@ def _plot_initial_active_metric(
     )
 
 
-def coherence_stats(world: Any) -> tuple[int, int]:
+def coherence_stats(world: Any) -> tuple[int, int, list[int]]:
     active_coords = {tuple(int(v) for v in coord) for coord in np.argwhere(world.active)}
     if not active_coords:
-        return 0, 0
+        return 0, 0, []
 
     size = world.size
     largest = 0
     count = 0
+    component_sizes = []
     neighbors = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
     while active_coords:
         count += 1
@@ -105,7 +106,9 @@ def coherence_stats(world: Any) -> tuple[int, int]:
                     active_coords.remove(neighbor)
                     stack.append(neighbor)
         largest = max(largest, component_size)
-    return largest, count
+        component_sizes.append(component_size)
+    component_sizes.sort(reverse=True)
+    return largest, count, component_sizes
 
 
 def payload_entropy(world: Any) -> float:
@@ -119,7 +122,7 @@ def payload_entropy(world: Any) -> float:
 
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
-    largest, count = coherence_stats(world)
+    largest, count, component_sizes = coherence_stats(world)
     coherence_ratio = float(largest / active_count) if active_count else 0.0
     metric = {
         "tick": int(tick),
@@ -129,6 +132,8 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
         "coherence_ratio": coherence_ratio,
         "entropy": payload_entropy(world),
     }
+    for index in range(5):
+        metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
     if extras:
         metric.update(extras)
     return metric
@@ -144,6 +149,11 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "coherence_count",
         "coherence_ratio",
         "entropy",
+        "component_size_1",
+        "component_size_2",
+        "component_size_3",
+        "component_size_4",
+        "component_size_5",
         "exchanges",
         "secondary_exchanges",
         "payload_changes",

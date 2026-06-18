@@ -469,3 +469,76 @@ Those require either replaying final worlds or adding runtime component diagnost
 - `output/findings/finding_007_amplitude_spread_active_vs_largest.png`
 - `output/findings/finding_007_amplitude_spread_fragmentation.png`
 - `output/findings/finding_007_amplitude_spread_lcf_timeseries.png`
+
+## Finding 008: Amplitude Placement Controls Coherence Morphology
+
+### Status
+
+Controlled amplitude-position permutation sweep.
+
+### Setup
+
+All variants used:
+
+- Same four fixed coordinates as Findings 006 and 007
+- Uniform payload: `P = [4,4,4,4]`
+- Uniform vector state: `V = [49,49,49,49]`
+- `R = 7` for every initial iota
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+- Seeds `42-46`
+
+Only the positions of high-amplitude initial iotas varied.
+
+### Result
+
+| Variant | Mean LCF | Std LCF | Min LCF | Max LCF | Mean Active | Success LCF >= 0.95 |
+|---|---:|---:|---:|---:|---:|---:|
+| `A_4447` | 0.922 | 0.011 | 0.904 | 0.933 | 5819 | 0/5 |
+| `A_4474` | 0.933 | 0.019 | 0.901 | 0.956 | 6349 | 1/5 |
+| `A_4477` | 0.613 | 0.178 | 0.480 | 0.964 | 8943 | 1/5 |
+| `A_4744` | 0.905 | 0.044 | 0.823 | 0.956 | 5429 | 1/5 |
+| `A_4747` | 0.710 | 0.211 | 0.490 | 0.971 | 9103 | 2/5 |
+| `A_4774` | 0.970 | 0.001 | 0.968 | 0.972 | 9873 | 5/5 |
+| `A_7444` | 0.914 | 0.022 | 0.879 | 0.942 | 4490 | 0/5 |
+| `A_7447` | 0.636 | 0.165 | 0.497 | 0.960 | 10274 | 1/5 |
+| `A_7474` | 0.654 | 0.154 | 0.543 | 0.958 | 9819 | 1/5 |
+| `A_7744` | 0.792 | 0.212 | 0.500 | 0.967 | 9131 | 3/5 |
+
+### Interpretation
+
+Amplitude contrast is not enough by itself. The specific placement of high-amplitude anchors strongly controls whether growth becomes one dominant coherent component or fragments into competing fronts.
+
+The strongest result is `A_4774`: all five seeds converged to a stable high-LCF morphology near `0.97`, with extremely low variance. Other two-anchor placements often produced similar or higher activity but lower LCF, implying fragmented growth rather than coherent takeover.
+
+This revises Finding 007:
+
+`coherent nucleation is gradient-selected and geometry-sensitive`
+
+The high-amplitude anchors need to occupy a favorable relation to the fixed local update geometry. More high-amplitude sources, or poorly placed high-amplitude pairs, can increase activity while reducing coherent dominance.
+
+### Next Test
+
+Run a geometry-thinning diagnostic using the robust winner:
+
+- `A_4774`
+- `N0 = 4`
+- `R = 7`
+- `constants.valence = 2`
+- `constants.bond_probability = 0.005`
+- `conservation = soft`
+- Same fixed coordinates, payloads, vector states, and seeds
+
+Add a new `constants.neighbor_mode` that only changes the secondary candidate-neighbor set. Do not change `vectors.mode`, because that would confound candidate geometry with primary vector behavior.
+
+First pass:
+
+- `cube26`
+- `face18`
+- `face6`
+
+### Artifacts
+
+- `output/findings/finding_008_amplitude_position_permutation_raw.csv`
+- `output/findings/finding_008_amplitude_position_permutation_summary.csv`

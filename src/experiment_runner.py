@@ -269,6 +269,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
 
     ticks = int(cfg["run"].get("ticks", 256))
     snapshot_every = int(cfg["run"].get("snapshot_every", 8))
+    metric_every = max(1, int(cfg["run"].get("metric_every", 1)))
     stop_active_iotas = cfg["run"].get("stop_active_iotas")
     stop_active_iotas = int(stop_active_iotas) if stop_active_iotas is not None else None
     stop_coherence_ratio = cfg["run"].get("stop_coherence_ratio")
@@ -294,6 +295,9 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
 
     for tick in range(1, ticks + 1):
         extras = step(world, cfg)
+        should_collect_metric = tick % metric_every == 0 or tick == ticks
+        if not should_collect_metric:
+            continue
         metric = collect_metrics(world, tick, extras)
         run_metrics.append(metric)
         insert_metric(conn, experiment_id, metric)

@@ -395,7 +395,6 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             float(metric["entropy"]),
         ),
     )
-    conn.commit()
 
 
 def insert_summary_metrics(
