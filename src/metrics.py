@@ -76,23 +76,29 @@ def _plot_initial_active_metric(
     )
 
 
-def coherence_stats(world: Any) -> tuple[int, int, list[int]]:
+def coherence_stats(world: Any) -> tuple[int, int, list[int], list[tuple[float, float, float]]]:
     active_coords = {tuple(int(v) for v in coord) for coord in np.argwhere(world.active)}
     if not active_coords:
-        return 0, 0, []
+        return 0, 0, [], []
 
     size = world.size
     largest = 0
     count = 0
-    component_sizes = []
+    components: list[tuple[int, tuple[float, float, float]]] = []
     neighbors = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
     while active_coords:
         count += 1
         component_size = 0
+        sum_x = 0
+        sum_y = 0
+        sum_z = 0
         stack = [active_coords.pop()]
         while stack:
             x, y, z = stack.pop()
             component_size += 1
+            sum_x += x
+            sum_y += y
+            sum_z += z
             for dx, dy, dz in neighbors:
                 nx, ny, nz = x + dx, y + dy, z + dz
                 if world.wrap:
@@ -106,9 +112,20 @@ def coherence_stats(world: Any) -> tuple[int, int, list[int]]:
                     active_coords.remove(neighbor)
                     stack.append(neighbor)
         largest = max(largest, component_size)
-        component_sizes.append(component_size)
-    component_sizes.sort(reverse=True)
-    return largest, count, component_sizes
+        components.append(
+            (
+                component_size,
+                (
+                    sum_x / component_size,
+                    sum_y / component_size,
+                    sum_z / component_size,
+                ),
+            )
+        )
+    components.sort(key=lambda item: item[0], reverse=True)
+    component_sizes = [component[0] for component in components]
+    component_centroids = [component[1] for component in components]
+    return largest, count, component_sizes, component_centroids
 
 
 def payload_entropy(world: Any) -> float:
@@ -122,8 +139,20 @@ def payload_entropy(world: Any) -> float:
 
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
-    largest, count, component_sizes = coherence_stats(world)
+    largest, count, component_sizes, component_centroids = coherence_stats(world)
     coherence_ratio = float(largest / active_count) if active_count else 0.0
+    top2_coverage = (
+        float(sum(component_sizes[:2]) / active_count)
+        if active_count and len(component_sizes) >= 2
+        else coherence_ratio
+    )
+    centroid_distance_1_2 = 0.0
+    if len(component_centroids) >= 2:
+        first = component_centroids[0]
+        second = component_centroids[1]
+        centroid_distance_1_2 = float(
+            np.sqrt(sum((first[index] - second[index]) ** 2 for index in range(3)))
+        )
     metric = {
         "tick": int(tick),
         "active_iotas": active_count,
@@ -131,6 +160,8 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
         "coherence_count": int(count),
         "coherence_ratio": coherence_ratio,
         "entropy": payload_entropy(world),
+        "top2_component_coverage": top2_coverage,
+        "component_centroid_distance_1_2": centroid_distance_1_2,
     }
     for index in range(5):
         metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
@@ -154,6 +185,8 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "component_size_3",
         "component_size_4",
         "component_size_5",
+        "top2_component_coverage",
+        "component_centroid_distance_1_2",
         "exchanges",
         "secondary_exchanges",
         "payload_changes",
