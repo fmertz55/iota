@@ -542,3 +542,58 @@ First pass:
 
 - `output/findings/finding_008_amplitude_position_permutation_raw.csv`
 - `output/findings/finding_008_amplitude_position_permutation_summary.csv`
+
+## Finding 009: Face-Only Geometry Breaks A_4774 Coherent Nucleation
+
+### Status
+
+Controlled geometry-thinning diagnostic.
+
+### Setup
+
+All variants used the robust Finding 008 winner:
+
+- `A = [4,7,7,4]`
+- Same four fixed coordinates
+- Uniform payload: `P = [4,4,4,4]`
+- Uniform vector state: `V = [49,49,49,49]`
+- `R = 7` for every initial iota
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+- Seeds `42-46`
+
+Only `constants.neighbor_mode` changed. `vectors.mode` remained `cube26`, so primary vector behavior was not changed.
+
+### Result
+
+| Neighbor Mode | Mean LCF | Std LCF | Min LCF | Max LCF | Mean Active | Mean Largest | Success LCF >= 0.95 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `cube26` | 0.970 | 0.001 | 0.968 | 0.972 | 9873 | 9578 | 5/5 |
+| `face18` | 0.970 | 0.001 | 0.968 | 0.972 | 9873 | 9578 | 5/5 |
+| `face6` | 0.549 | 0.092 | 0.482 | 0.730 | 5248 | 2871 | 0/5 |
+
+### Interpretation
+
+The result cleanly separates dense-neighbor availability from minimum connectivity.
+
+`face18` exactly reproduced `cube26` across all five seeds, so corner-neighbor candidates are not required for the `A_4774` coherent morphology.
+
+`face6` failed across all five seeds. Activity still grew, but it fragmented:
+
+- lower total active count
+- much smaller largest component
+- no LCF >= 0.95 successes
+
+This supports a minimum local-connectivity condition:
+
+`face + edge candidate reachability is sufficient`
+
+`face-only candidate reachability is insufficient`
+
+The mechanism is therefore not simply amplitude placement or stochastic seed luck. It requires the favorable `A_4774` gradient plus enough local geometric connectivity to form a single dominant component.
+
+### Artifacts
+
+- `output/findings/finding_009_geometry_thinning_raw.csv`
+- `output/findings/finding_009_geometry_thinning_summary.csv`
