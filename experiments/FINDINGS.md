@@ -597,3 +597,66 @@ The mechanism is therefore not simply amplitude placement or stochastic seed luc
 
 - `output/findings/finding_009_geometry_thinning_raw.csv`
 - `output/findings/finding_009_geometry_thinning_summary.csv`
+
+## Finding 010: A_4774 Coherent Morphology Survives 128³ Scale
+
+### Status
+
+Controlled scale diagnostic.
+
+### Setup
+
+All runs used:
+
+- `grid.size = 128`
+- `A = [4,7,7,4]`
+- Same four fixed coordinates as Findings 006-009
+- Uniform payload: `P = [4,4,4,4]`
+- Uniform vector state: `V = [49,49,49,49]`
+- `R = 7` for every initial iota
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+- Seeds `42-46`
+
+Coordinates were intentionally not scaled. This isolates increased dark volume and boundary distance from changes in initial geometry.
+
+### Result
+
+| Seed | Final Active | Largest Coherence | Final LCF |
+|---:|---:|---:|---:|
+| 42 | 11664 | 11335 | 0.972 |
+| 43 | 9654 | 9349 | 0.968 |
+| 44 | 10870 | 10551 | 0.971 |
+| 45 | 22144 | 21610 | 0.976 |
+| 46 | 12962 | 12499 | 0.964 |
+
+Summary:
+
+- Mean LCF: `0.970`
+- Std LCF: `0.004`
+- Success LCF >= 0.95: `5/5`
+- Success LCF >= 0.97: `3/5`
+
+### Interpretation
+
+The `A_4774` coherent morphology survives an 8x volume increase from `64³` to `128³`.
+
+This weakens the boundary-artifact objection. With the same local initial geometry but much more dark volume, the system still forms one dominant coherent component across all five seeds.
+
+The active counts remain local-scale rather than volume-filling:
+
+`mean active / total iotas = 13458.8 / 2097152 ≈ 0.64%`
+
+This supports the current interpretation:
+
+`coherent nucleation is local, geometry-sensitive, and scale-stable at 128³`
+
+The next scale test should be exactly one guarded `256³` probe using the same setup and seed `42`.
+
+### Artifacts
+
+- `output/findings/finding_010_scale_128_raw.csv`
+- `output/findings/finding_010_scale_128_summary.csv`

@@ -1,0 +1,2 @@
+grid_size,n,mean_lcf,std_lcf,min_lcf,max_lcf,mean_active,mean_largest,success_lcf_0_95,success_lcf_0_97
+128,5,0.970204,0.003829,0.964280,0.975885,13458.80,13068.80,5,3
