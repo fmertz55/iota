@@ -839,3 +839,78 @@ The question shifts from coexistence to interaction:
 ### Artifacts
 
 - `output/findings/finding_012_multi_nucleus_256_summary.csv`
+
+## Finding 013: Two-Nucleus Distance Controls Coexistence vs Integration
+
+### Status
+
+Controlled two-nucleus distance interaction probe.
+
+### Setup
+
+All runs used:
+
+- `grid.size = 256`
+- Two translated `A_4774` nuclei
+- Uniform payload: `P = [4,4,4,4]` per nucleus
+- Uniform vector state: `V = [49,49,49,49]` per nucleus
+- `R = 7` for every initial iota
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 4096`
+- Seed `42`
+
+The far baseline is `IOTA-000269`. The medium and near variants changed only the separation between translated nuclei.
+
+### Result
+
+| Separation | Experiment | Final Active | Largest | LCF | Top 1 | Top 2 | Top 2 Coverage | Components |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| far | IOTA-000269 | 20447 | 10528 | 0.515 | 10528 | 9065 | 0.958 | 201 |
+| medium | IOTA-000271 | 20365 | 10624 | 0.522 | 10624 | 8881 | 0.958 | 207 |
+| near | IOTA-000272 | 37845 | 37195 | 0.983 | 37195 | 105 | 0.986 | 142 |
+
+### Interpretation
+
+Far and medium separations produced effectively the same morphology: two dominant coherent bodies with high top-2 coverage.
+
+This supports stable coexistence/domain separation at those distances:
+
+`far top2 / active = 0.958`
+
+`medium top2 / active = 0.958`
+
+Near separation produced a qualitatively different result. The two nuclei integrated into one dominant coherent body:
+
+`near largest / active = 0.983`
+
+The near case is therefore an integration/absorption regime, not a complexity-generating collision regime. It is useful because it bounds the model:
+
+- separated coherent bodies can coexist
+- close coherent bodies can collapse into one dominant absorber
+- the transition between those regimes depends on separation
+
+The current distance read is:
+
+`two-nucleus interaction has a separation-dependent phase: coexistence at far/medium distance, integration at near distance`
+
+### Next Test
+
+The next long-time test should not use the near case. Near already became the absorber case by tick `4096`.
+
+The paper-relevant long-time question is whether the medium case remains two-domain or eventually collapses:
+
+- `grid.size = 256`
+- two `A_4774` nuclei
+- medium separation
+- seed `42`
+- `ticks = 8192` first
+- no global LCF early stop
+
+If medium remains two-domain at longer time, that supports persistent domain formation. If it eventually integrates, then coexistence is finite-time metastability rather than a stable long-time structure.
+
+### Artifacts
+
+- `output/findings/finding_013_two_nucleus_distance_summary.csv`
