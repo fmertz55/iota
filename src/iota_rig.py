@@ -326,6 +326,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     bond_probability = float(cfg["constants"].get("bond_probability", 1.0))
     bond_probability = min(1.0, max(0.0, bond_probability))
     neighbor_mode = str(cfg["constants"].get("neighbor_mode", "cube26"))
+    cross_payload_coupling = float(cfg["constants"].get("cross_payload_coupling", 1.0))
+    same_payload_coupling = float(cfg["constants"].get("same_payload_coupling", 1.0))
 
     next_active = world.active.copy()
     next_A = world.A.astype(np.float32).copy()
@@ -364,6 +366,16 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         for candidate in candidates:
             tx, ty, tz = candidate["target"]
             influence = float(candidate["influence"])
+            payload_multiplier = 1.0
+            if bool(world.active[tx, ty, tz]):
+                payload_multiplier = (
+                    same_payload_coupling
+                    if int(world.P[tx, ty, tz]) == p
+                    else cross_payload_coupling
+                )
+            influence *= payload_multiplier
+            if influence <= 0:
+                continue
             exchanges += 1
             if int(candidate["order"]) != 0:
                 secondary_exchanges += 1

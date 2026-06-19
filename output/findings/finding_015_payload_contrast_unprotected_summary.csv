@@ -1,0 +1,2 @@
+experiment_id,stopped_manually,last_tick,last_active,last_largest,last_lcf,last_components,tick_lcf_0_95,tick_lcf_0_97
+274,1,6400,61444,60053,0.9773614999023501,219,4352,5888

@@ -48,6 +48,8 @@ constants:
   valence: 2                    # maximum simultaneous productive relationships
   bond_probability: 0.0         # probability for non-primary productive relationship slots
   neighbor_mode: cube26         # candidate target geometry: cube26 | face18 | face6 | edge12 | corner8
+  same_payload_coupling: 1.0    # influence multiplier for active same-payload targets
+  cross_payload_coupling: 1.0   # influence multiplier for active different-payload targets
 
 run:
   ticks: 4096

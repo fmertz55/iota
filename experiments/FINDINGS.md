@@ -991,3 +991,67 @@ The next scientific question is what rule or conserved quantity stabilizes domai
 
 - `output/findings/finding_014_medium_long_time_summary.csv`
 - `output/findings/finding_014_medium_long_time_transition.csv`
+
+## Finding 015: Payload Contrast Alone Does Not Protect Identity
+
+### Status
+
+Stopped diagnostic after the result was clear.
+
+### Setup
+
+The run used:
+
+- `grid.size = 256`
+- Two medium-separated `A_4774` nuclei
+- Nucleus 1 payload: `P = 4`
+- Nucleus 2 payload: `P = 0`
+- Same amplitude, range, vector state, geometry, and seed as Finding 014
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 8192`
+- Seed `42`
+
+Metrics were committed every 256 ticks. The run was manually stopped after tick `6400` because it had already integrated.
+
+### Result
+
+| Tick | Active | Largest | LCF | Components |
+|---:|---:|---:|---:|---:|
+| 4096 | 16007 | 15204 | 0.950 | 136 |
+| 5120 | 24947 | 23981 | 0.961 | 168 |
+| 5888 | 45568 | 44367 | 0.974 | 193 |
+| 6400 | 61444 | 60053 | 0.977 | 219 |
+
+The unprotected payload-contrast run crossed:
+
+- `LCF >= 0.95` by tick `4352`
+- `LCF >= 0.97` by tick `5888`
+
+### Interpretation
+
+Payload contrast alone does not protect coherent identity.
+
+Changing one nucleus from `P=4` to `P=0` did not preserve a two-domain state. It integrated into one dominant component. Under the current exchange rule, payload labels state but does not meaningfully gate coupling.
+
+This sharpens the missing-law diagnosis:
+
+`different state, same coupling -> eventual absorption`
+
+To support persistent difference, state labels must affect interaction probability or influence. Otherwise payload is descriptive metadata, not a physical state variable.
+
+### Next Test
+
+Add a single compatibility diagnostic:
+
+- same medium-separated `P=4` vs `P=0` setup
+- same-payload coupling multiplier: `1.0`
+- cross-payload coupling multiplier: `0.1`
+- run to `8192` ticks or active cap
+
+If top-2 coverage stays high past the unprotected integration window, compatibility coupling is a plausible protection mechanism.
+
+### Artifacts
+
+- `output/findings/finding_015_payload_contrast_unprotected_timeseries.csv`
+- `output/findings/finding_015_payload_contrast_unprotected_summary.csv`
