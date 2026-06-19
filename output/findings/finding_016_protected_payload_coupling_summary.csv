@@ -1,0 +1,3 @@
+experiment_id,label,final_or_last_tick,active,largest,lcf,components,tick_lcf_0_95,tick_lcf_0_97,early_stopped_or_manual,runtime_seconds
+274,unprotected_payload_contrast,6400,61444,60053,0.9773614999023501,219,4352,5888,1,0.0
+275,protected_cross_payload_0_1,8192,1537,166,0.10800260247234873,124,,,0,1076.9418025829946

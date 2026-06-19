@@ -1055,3 +1055,91 @@ If top-2 coverage stays high past the unprotected integration window, compatibil
 
 - `output/findings/finding_015_payload_contrast_unprotected_timeseries.csv`
 - `output/findings/finding_015_payload_contrast_unprotected_summary.csv`
+
+## Finding 016: State-Dependent Coupling Protects Identity
+
+### Status
+
+Single protected-coupling diagnostic.
+
+### Setup
+
+The protected run repeated the medium-separated `P=4` vs `P=0` two-nucleus diagnostic from Finding 015, with one rule change:
+
+- `same_payload_coupling = 1.0`
+- `cross_payload_coupling = 0.1`
+
+The attenuation applies only when the target is already active. Dark substrate cells still accept influence normally, so the default dark payload value does not privilege either payload state.
+
+All other controlled variables remained fixed:
+
+- `grid.size = 256`
+- two medium-separated `A_4774` nuclei
+- seed `42`
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- `run.ticks = 8192`
+- no global LCF early stop
+
+### Result
+
+| Run | Tick | Active | Largest | LCF | Components | LCF >= 0.95 | LCF >= 0.97 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| unprotected payload contrast | 6400 | 61444 | 60053 | 0.977 | 219 | 4352 | 5888 |
+| protected cross-payload `0.1` | 8192 | 1537 | 166 | 0.108 | 124 | — | — |
+
+Final protected component sizes:
+
+| Tick | Active | Top 1 | Top 2 | Top 3 | Top 4 | Top 5 | Top 2 Coverage |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 8192 | 1537 | 166 | 156 | 51 | 50 | 50 | 0.209 |
+
+### Interpretation
+
+State-dependent coupling protected identity.
+
+Plain payload contrast failed because different states still coupled with full strength. With cross-payload coupling reduced to `0.1`, the same medium-separated `P=4` vs `P=0` setup no longer integrated into a dominant absorber by tick `8192`.
+
+This is the first result showing that the model can preserve persistent difference when state affects interaction strength.
+
+The result also changes the interpretation of payload:
+
+`payload as label -> absorbed`
+
+`payload as coupling state -> protected`
+
+This supports the working principle:
+
+`not all information couples equally`
+
+### Caveat
+
+The protected result did not produce two large coherent domains. It produced many small-to-medium components with low global LCF. That means compatibility coupling prevented absorption, but it may also have suppressed large coherent growth too strongly at `cross_payload_coupling = 0.1`.
+
+The next question is not whether compatibility matters. It does. The next question is where the useful regime lies between:
+
+- `cross_payload_coupling = 1.0`: absorption
+- `cross_payload_coupling = 0.1`: protected but weak/fragmented growth
+
+### Next Test
+
+Run a minimal compatibility-coupling band:
+
+- `cross_payload_coupling = 0.25`
+- `cross_payload_coupling = 0.50`
+- `cross_payload_coupling = 0.75`
+
+Same setup, same seed, same medium separation.
+
+Success criterion is not maximum LCF. The target is persistent multi-domain structure:
+
+- top-2 coverage remains meaningful
+- no single absorber dominates
+- active growth remains nontrivial
+
+### Artifacts
+
+- `output/findings/finding_016_protected_payload_coupling_summary.csv`
+- `output/findings/finding_016_protected_payload_coupling_timeseries.csv`
