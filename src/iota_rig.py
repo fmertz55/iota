@@ -126,6 +126,8 @@ class World:
     R: np.ndarray
     V: np.ndarray
     P: np.ndarray
+    previous_active: np.ndarray
+    previous_V: np.ndarray
     vectors: np.ndarray
     vector_behaviors: tuple[str, ...]
     wrap: bool
@@ -195,7 +197,7 @@ def init_world(cfg: Dict[str, Any]) -> World:
             V[x, y, z] = rng.integers(0, len(vectors))
             P[x, y, z] = rng.integers(pr[0], pr[1] + 1)
 
-    return World(active, A, R, V, P, vectors, vector_behaviors, wrap, rng)
+    return World(active, A, R, V, P, active.copy(), V.copy(), vectors, vector_behaviors, wrap, rng)
 
 
 def vector_step(world: World, v_idx: int, a: int, r: int, p: int) -> tuple[int, int, int, str]:
@@ -231,6 +233,15 @@ def decay(distance: float, r: int, mode: str) -> float:
     if mode == "exponential":
         return math.exp(-distance / max(r, 1))
     raise ValueError(f"Unknown decay mode: {mode}")
+
+
+def vector_alignment(first: tuple[int, int, int], second: tuple[int, int, int]) -> float:
+    first_norm = math.sqrt(sum(value * value for value in first))
+    second_norm = math.sqrt(sum(value * value for value in second))
+    if first_norm == 0.0 or second_norm == 0.0:
+        return 0.0
+    dot = sum(a * b for a, b in zip(first, second))
+    return max(-1.0, min(1.0, dot / (first_norm * second_norm)))
 
 
 def local_candidates(
@@ -329,6 +340,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     cross_payload_coupling = float(cfg["constants"].get("cross_payload_coupling", 1.0))
     same_payload_coupling = float(cfg["constants"].get("same_payload_coupling", 1.0))
 
+    old_active = world.active.copy()
+    old_V = world.V.copy()
     next_active = world.active.copy()
     next_A = world.A.astype(np.float32).copy()
     next_R = world.R.astype(np.float32).copy()
@@ -339,6 +352,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     exchanges = 0
     secondary_exchanges = 0
     payload_changes = 0
+    exchange_alignments: list[float] = []
+    secondary_exchange_alignments: list[float] = []
 
     # Simple sparse update: iterate only active/non-dark iotas.
     for x, y, z in coords:
@@ -348,6 +363,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             continue
         v_idx = int(world.V[x, y, z]) % len(world.vectors)
         p = int(world.P[x, y, z])
+        primary_dx, primary_dy, primary_dz, _ = vector_step(world, v_idx, a, r, p)
+        primary_step = (primary_dx, primary_dy, primary_dz)
         candidates = local_candidates(
             world,
             int(x),
@@ -379,6 +396,10 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             exchanges += 1
             if int(candidate["order"]) != 0:
                 secondary_exchanges += 1
+            alignment = vector_alignment(primary_step, candidate["step"])
+            exchange_alignments.append(alignment)
+            if int(candidate["order"]) != 0:
+                secondary_exchange_alignments.append(alignment)
             next_active[tx, ty, tz] = True
 
             # Amplitude/range exchange: octal fields remain clipped to 0..7.
@@ -404,6 +425,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                 if world.rng.random() < influence * 0.125:
                     next_V[tx, ty, tz] = np.uint8(v_idx)
 
+    world.previous_active = old_active
+    world.previous_V = old_V
     world.active = next_active
     world.A = np.clip(np.rint(next_A), 0, 7).astype(np.uint8)
     world.R = np.clip(np.rint(next_R), 0, 7).astype(np.uint8)
@@ -413,6 +436,14 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     active_count = int(world.active.sum())
     payload_hist = np.bincount(world.P[world.active], minlength=8) if active_count else np.zeros(8)
     max_payload_fraction = float(payload_hist.max() / active_count) if active_count else 0.0
+    exchange_turn_degrees = [
+        math.degrees(math.acos(max(-1.0, min(1.0, alignment))))
+        for alignment in exchange_alignments
+    ]
+    secondary_turn_degrees = [
+        math.degrees(math.acos(max(-1.0, min(1.0, alignment))))
+        for alignment in secondary_exchange_alignments
+    ]
     return {
         "exchanges": exchanges,
         "secondary_exchanges": secondary_exchanges,
@@ -420,6 +451,26 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
         "max_payload_fraction": max_payload_fraction,
+        "mean_exchange_alignment": (
+            float(sum(exchange_alignments) / len(exchange_alignments))
+            if exchange_alignments
+            else 0.0
+        ),
+        "mean_exchange_turn_degrees": (
+            float(sum(exchange_turn_degrees) / len(exchange_turn_degrees))
+            if exchange_turn_degrees
+            else 0.0
+        ),
+        "mean_secondary_exchange_alignment": (
+            float(sum(secondary_exchange_alignments) / len(secondary_exchange_alignments))
+            if secondary_exchange_alignments
+            else 0.0
+        ),
+        "mean_secondary_exchange_turn_degrees": (
+            float(sum(secondary_turn_degrees) / len(secondary_turn_degrees))
+            if secondary_turn_degrees
+            else 0.0
+        ),
     }
 
 

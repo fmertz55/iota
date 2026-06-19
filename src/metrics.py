@@ -137,6 +137,54 @@ def payload_entropy(world: Any) -> float:
     return float(-np.sum(probabilities * np.log2(probabilities)))
 
 
+def vector_persistence_stats(world: Any) -> dict[str, float]:
+    if not hasattr(world, "previous_active") or not hasattr(world, "previous_V"):
+        return {
+            "vector_continuing_iotas": 0.0,
+            "vector_changed_iotas": 0.0,
+            "vector_persistence_ratio": 0.0,
+            "mean_vector_alignment": 0.0,
+            "mean_vector_turn_degrees": 0.0,
+        }
+
+    continuing = world.active & world.previous_active
+    continuing_count = int(continuing.sum())
+    if continuing_count == 0:
+        return {
+            "vector_continuing_iotas": 0.0,
+            "vector_changed_iotas": 0.0,
+            "vector_persistence_ratio": 0.0,
+            "mean_vector_alignment": 0.0,
+            "mean_vector_turn_degrees": 0.0,
+        }
+
+    previous_indices = world.previous_V[continuing].astype(np.int64) % len(world.vectors)
+    current_indices = world.V[continuing].astype(np.int64) % len(world.vectors)
+    changed_count = int(np.count_nonzero(previous_indices != current_indices))
+    previous_vectors = world.vectors[previous_indices].astype(np.float64)
+    current_vectors = world.vectors[current_indices].astype(np.float64)
+    dot = np.sum(previous_vectors * current_vectors, axis=1)
+    previous_norm = np.linalg.norm(previous_vectors, axis=1)
+    current_norm = np.linalg.norm(current_vectors, axis=1)
+    denominator = previous_norm * current_norm
+    valid = denominator > 0
+    if not np.any(valid):
+        mean_alignment = 0.0
+        mean_turn_degrees = 0.0
+    else:
+        alignments = np.clip(dot[valid] / denominator[valid], -1.0, 1.0)
+        mean_alignment = float(np.mean(alignments))
+        mean_turn_degrees = float(np.degrees(np.mean(np.arccos(alignments))))
+
+    return {
+        "vector_continuing_iotas": float(continuing_count),
+        "vector_changed_iotas": float(changed_count),
+        "vector_persistence_ratio": float(1.0 - (changed_count / continuing_count)),
+        "mean_vector_alignment": mean_alignment,
+        "mean_vector_turn_degrees": mean_turn_degrees,
+    }
+
+
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
     largest, count, component_sizes, component_centroids = coherence_stats(world)
@@ -165,6 +213,7 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
     }
     for index in range(5):
         metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
+    metric.update(vector_persistence_stats(world))
     if extras:
         metric.update(extras)
     return metric
@@ -193,6 +242,15 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "mean_A",
         "mean_R",
         "max_payload_fraction",
+        "vector_continuing_iotas",
+        "vector_changed_iotas",
+        "vector_persistence_ratio",
+        "mean_vector_alignment",
+        "mean_vector_turn_degrees",
+        "mean_exchange_alignment",
+        "mean_exchange_turn_degrees",
+        "mean_secondary_exchange_alignment",
+        "mean_secondary_exchange_turn_degrees",
     ]
     with open(out / "metrics.csv", "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=keys, extrasaction="ignore")
@@ -246,6 +304,11 @@ def metrics_summary(
             "early_stopped": float(early_stopped),
             "entropy": 0.0,
             "persistence": 0.0,
+            "final_vector_persistence_ratio": 0.0,
+            "final_mean_vector_alignment": 0.0,
+            "final_mean_vector_turn_degrees": 0.0,
+            "mean_exchange_turn_degrees": 0.0,
+            "mean_secondary_exchange_turn_degrees": 0.0,
             "execution_time_seconds": execution_time,
         }
         summary.update(init_metadata)
@@ -254,6 +317,16 @@ def metrics_summary(
     nonzero_ticks = sum(1 for value in active if value > 0)
     secondary_ticks = [
         int(m["tick"])
+        for m in metrics
+        if int(float(m.get("secondary_exchanges", 0))) > 0
+    ]
+    exchange_turn_rows = [
+        float(m.get("mean_exchange_turn_degrees", 0.0))
+        for m in metrics
+        if int(float(m.get("exchanges", 0))) > 0
+    ]
+    secondary_turn_rows = [
+        float(m.get("mean_secondary_exchange_turn_degrees", 0.0))
         for m in metrics
         if int(float(m.get("secondary_exchanges", 0))) > 0
     ]
@@ -272,6 +345,15 @@ def metrics_summary(
             sum(int(float(m.get("secondary_exchanges", 0))) for m in metrics)
         ),
         "first_secondary_exchange_tick": float(secondary_ticks[0] if secondary_ticks else -1),
+        "final_vector_persistence_ratio": float(metrics[-1].get("vector_persistence_ratio", 0.0)),
+        "final_mean_vector_alignment": float(metrics[-1].get("mean_vector_alignment", 0.0)),
+        "final_mean_vector_turn_degrees": float(metrics[-1].get("mean_vector_turn_degrees", 0.0)),
+        "mean_exchange_turn_degrees": float(
+            np.mean(exchange_turn_rows) if exchange_turn_rows else 0.0
+        ),
+        "mean_secondary_exchange_turn_degrees": float(
+            np.mean(secondary_turn_rows) if secondary_turn_rows else 0.0
+        ),
         "execution_time_seconds": execution_time,
     }
     summary.update(init_metadata)
