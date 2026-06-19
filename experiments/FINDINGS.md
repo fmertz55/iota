@@ -914,3 +914,80 @@ If medium remains two-domain at longer time, that supports persistent domain for
 ### Artifacts
 
 - `output/findings/finding_013_two_nucleus_distance_summary.csv`
+
+## Finding 014: Medium-Separation Coexistence Is Metastable at Long Time
+
+### Status
+
+Long-time extension of the medium two-nucleus interaction case.
+
+### Setup
+
+The run extended `IOTA-000271` from `4096` ticks to `8192` ticks:
+
+- `grid.size = 256`
+- Two `A_4774` nuclei
+- Medium separation
+- Seed `42`
+- Uniform payload: `P = [4,4,4,4]` per nucleus
+- Uniform vector state: `V = [49,49,49,49]` per nucleus
+- `R = 7`
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.bond_probability = 0.005`
+- `constants.valence = 2`
+- No global LCF early stop
+- `stop_active_iotas = 100000`
+
+### Result
+
+| Run | Final Tick | Final Active | Largest | LCF | Top 1 | Top 2 | Top 2 Coverage | Early Stop |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| medium 4096 | 4096 | 20365 | 10624 | 0.522 | 10624 | 8881 | 0.958 | no |
+| medium 8192 | 7424 | 107437 | 105826 | 0.985 | 105826 | 402 | 0.989 | active cap |
+
+The long run did not reach `8192` ticks. It hit the `100000` active-iota cap at the sampled tick `7424`.
+
+### Transition
+
+The decisive transition occurred between ticks `5120` and `5376`:
+
+| Tick | Active | Largest | LCF | Top 1 | Top 2 | Top 2 Coverage |
+|---:|---:|---:|---:|---:|---:|---:|
+| 4096 | 20365 | 10624 | 0.522 | 10624 | 8881 | 0.958 |
+| 4608 | 28683 | 14169 | 0.494 | 14169 | 13639 | 0.969 |
+| 4864 | 33263 | 16205 | 0.487 | 16205 | 16129 | 0.972 |
+| 5120 | 38052 | 18707 | 0.492 | 18707 | 18374 | 0.974 |
+| 5376 | 43396 | 42582 | 0.981 | 42582 | 158 | 0.985 |
+| 7424 | 107437 | 105826 | 0.985 | 105826 | 402 | 0.989 |
+
+### Interpretation
+
+Medium-separation two-domain coexistence is not stable at longer time under this rule set. It is metastable.
+
+From tick `4096` through tick `5120`, the system preserves two dominant coherent domains with high top-2 coverage. By tick `5376`, those domains collapse into one dominant absorbing component.
+
+This is the strongest evidence so far for a time-dependent interaction regime:
+
+`far/medium separation -> temporary coexistence`
+
+`longer time -> integration/absorption`
+
+The important distinction from the near case is timing. Near separation integrates by tick `4096`; medium separation remains two-domain at tick `4096` but integrates by tick `5376`.
+
+This weakens the “persistent complexity” interpretation for the current rule set. The model currently supports coherent nucleation and temporary multi-domain coexistence, but longer time favors absorption unless another stabilizing mechanism exists.
+
+### Paper Implication
+
+This is still paper-relevant, but it changes the claim.
+
+The defensible claim is not yet persistent open-ended complexity. The defensible claim is:
+
+`minimal local rules produce scale-stable coherent nucleation, multi-domain coexistence, and separation-dependent metastable integration`
+
+The next scientific question is what rule or conserved quantity stabilizes domain boundaries without adding arbitrary behavior.
+
+### Artifacts
+
+- `output/findings/finding_014_medium_long_time_summary.csv`
+- `output/findings/finding_014_medium_long_time_transition.csv`
