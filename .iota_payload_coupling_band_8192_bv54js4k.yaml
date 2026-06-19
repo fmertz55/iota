@@ -1,7 +1,7 @@
 simulation_version: iota-rig-v0.1.1
 experiment:
   objective: 256 medium two-nucleus payload coupling band
-  variant: A_4774_256_cube26_2_nuclei_medium_payload_4_vs_0_cross_0_25_8192
+  variant: A_4774_256_cube26_2_nuclei_medium_payload_4_vs_0_cross_0_5_8192
   nucleus_count: 2
   nucleus_separation: medium
   nucleus_payloads: 4_vs_0
@@ -120,7 +120,7 @@ constants:
   bond_probability: 0.005
   neighbor_mode: cube26
   same_payload_coupling: 1.0
-  cross_payload_coupling: 0.25
+  cross_payload_coupling: 0.5
 run:
   ticks: 8192
   snapshot_every: 8192
