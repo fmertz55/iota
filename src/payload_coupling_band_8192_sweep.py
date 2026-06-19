@@ -17,10 +17,6 @@ SEED = 42
 OBJECTIVE = "256 medium two-nucleus payload coupling band"
 BASE_VARIANT = "A_4774_256_cube26_2_nuclei_medium_payload_4_vs_0"
 COUPLINGS = [
-    ("alpha", 0.007297),
-    ("0_025", 0.025),
-    ("0_05", 0.05),
-    ("0_1", 0.10),
     ("0_25", 0.25),
     ("0_5", 0.50),
     ("0_75", 0.75),
