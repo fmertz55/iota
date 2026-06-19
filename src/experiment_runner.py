@@ -271,6 +271,8 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     snapshot_every = int(cfg["run"].get("snapshot_every", 8))
     metric_every = max(1, int(cfg["run"].get("metric_every", 1)))
     dashboard_enabled = bool(cfg["run"].get("dashboard", True))
+    commit_metrics = bool(cfg["run"].get("commit_metrics", False))
+    heartbeat_every = int(cfg["run"].get("heartbeat_every", snapshot_every))
     stop_active_iotas = cfg["run"].get("stop_active_iotas")
     stop_active_iotas = int(stop_active_iotas) if stop_active_iotas is not None else None
     stop_coherence_ratio = cfg["run"].get("stop_coherence_ratio")
@@ -302,6 +304,8 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
         metric = collect_metrics(world, tick, extras)
         run_metrics.append(metric)
         insert_metric(conn, experiment_id, metric)
+        if commit_metrics:
+            conn.commit()
         if stop_active_iotas is not None and int(metric["active_iotas"]) >= stop_active_iotas:
             early_stop_reason = f"active_iotas >= {stop_active_iotas}"
         elif (
@@ -314,6 +318,15 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
                 f"with active_iotas >= {stop_coherence_min_active}"
             )
 
+        should_print_heartbeat = heartbeat_every > 0 and tick % heartbeat_every == 0
+        if should_print_heartbeat:
+            print(
+                f"tick={tick} active={metric['active_iotas']} "
+                f"largest_coherence={metric['largest_coherence']} "
+                f"coherence_ratio={metric['coherence_ratio']:.3f} "
+                f"coherences={metric['coherence_count']}"
+            )
+
         if tick % snapshot_every == 0 or tick == ticks or early_stop_reason is not None:
             save_slice(world, out, tick, cfg)
             save_scatter(world, out, tick, cfg)
@@ -322,12 +335,13 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
             register_run_artifacts(conn, experiment_id, base_dir, out)
             if dashboard_enabled:
                 dashboard_path = save_dashboard(conn, output_root)
-            print(
-                f"tick={tick} active={metric['active_iotas']} "
-                f"largest_coherence={metric['largest_coherence']} "
-                f"coherences={metric['coherence_count']} "
-                f"entropy={metric['entropy']:.3f}"
-            )
+            if not should_print_heartbeat:
+                print(
+                    f"tick={tick} active={metric['active_iotas']} "
+                    f"largest_coherence={metric['largest_coherence']} "
+                    f"coherences={metric['coherence_count']} "
+                    f"entropy={metric['entropy']:.3f}"
+                )
         if early_stop_reason is not None:
             print(f"early_stop tick={tick} reason={early_stop_reason}")
             break
