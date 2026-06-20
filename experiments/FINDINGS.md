@@ -1143,3 +1143,207 @@ Success criterion is not maximum LCF. The target is persistent multi-domain stru
 
 - `output/findings/finding_016_protected_payload_coupling_summary.csv`
 - `output/findings/finding_016_protected_payload_coupling_timeseries.csv`
+
+## Finding 017: Payload-Coupling Transition Is Sharp and Discrete-Looking
+
+### Status
+
+Compatibility-coupling boundary localization at `256^3`, `4096` ticks.
+
+### Setup
+
+The boundary search repeated the medium-separated two-nucleus setup:
+
+- two `A_4774` nuclei
+- one nucleus payload `P = 4`
+- one nucleus payload `P = 0`
+- `grid.size = 256`
+- seed `42`
+- `R = 7`
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.valence = 2`
+- `constants.bond_probability = 0.005`
+- `same_payload_coupling = 1.0`
+- variable `cross_payload_coupling`
+- `run.ticks = 4096`
+
+The success criterion was morphology, not maximum LCF. The target was persistent hierarchy:
+
+- nontrivial active growth
+- no dust-only suppression
+- no single absorber
+- meaningful top-5 and top-20 component coverage
+
+### Result
+
+| Coupling | Run | Active | Largest | LCF | Components | Top 5 | Top 20 | Component Entropy | Class |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---|
+| 0.200000 | IOTA-000283 | 841 | 105 | 0.125 | 81 | 0.334 | 0.674 | 5.362 | protected |
+| 0.206250 | IOTA-000286 | 927 | 106 | 0.114 | 93 | 0.309 | 0.672 | 5.497 | protected |
+| 0.209375 | IOTA-000287 | 927 | 106 | 0.114 | 93 | 0.309 | 0.672 | 5.497 | protected |
+| 0.2109375 | IOTA-000288 | 15713 | 15054 | 0.958 | 143 | 0.969 | 0.985 | 0.495 | absorber |
+| 0.212500 | IOTA-000285 | 14271 | 13574 | 0.951 | 105 | 0.965 | 0.985 | 0.547 | absorber |
+| 0.225000 | IOTA-000284 | 14573 | 13869 | 0.952 | 109 | 0.965 | 0.986 | 0.541 | absorber |
+| 0.250000 | IOTA-000278 | 41586 | 40239 | 0.968 | 123 | — | — | — | absorber |
+
+The localized bracket is:
+
+`0.209375 < p* < 0.2109375`
+
+### Interpretation
+
+The transition is not smooth at the measured resolution.
+
+Two adjacent protected rows, `0.20625` and `0.209375`, produced identical final metrics. The next tested value, `0.2109375`, crossed hard into a giant absorbing component. This suggests the decimal parameter is not directly creating a gradual morphology change. Instead, it changes whether a discrete event passes a downstream eligibility threshold.
+
+Once the threshold is crossed, the system enters the same absorber attractor seen at higher coupling values. Coupling mainly changes event timing and trajectory details, not the final morphology class.
+
+The useful question therefore shifted from:
+
+`What exact decimal creates hierarchy?`
+
+to:
+
+`What discrete event flips the system from protected to absorber?`
+
+### Artifacts
+
+- `output/IOTA-000283/metrics.csv`
+- `output/IOTA-000284/metrics.csv`
+- `output/IOTA-000285/metrics.csv`
+- `output/IOTA-000286/metrics.csv`
+- `output/IOTA-000287/metrics.csv`
+- `output/IOTA-000288/metrics.csv`
+
+## Finding 018: A Single Vector-Inheritance Event Causes the Absorber Transition
+
+### Status
+
+Paired event-trace diagnostic and counterfactual continuation.
+
+### Setup
+
+Two paired runs were instrumented from identical initial state and seed:
+
+- protected side: `cross_payload_coupling = 0.209375`
+- absorber side: `cross_payload_coupling = 0.2109375`
+
+The tracer logged productive exchange events with:
+
+- tick and within-tick sequence
+- actor and target coordinates
+- actor and target state
+- event subtype
+- base influence
+- payload multiplier
+- final influence
+- vector inheritance draw and threshold
+- rounded A/R outcomes
+- component identity and size
+- bridge status
+
+The trace stopped at the first semantic divergence between the two runs.
+
+### First Numeric Difference
+
+The first numeric cross-payload influence difference occurred at tick `2`, sequence `2`.
+
+That event did not change semantic outcome:
+
+- low influence: `0.039880952380952385`
+- high influence: `0.04017857142857143`
+- vector inheritance failed in both runs
+- rounded A/R values remained identical
+- payload takeover failed in both runs
+
+This confirms that numeric differences existed early, but they were not yet state-changing.
+
+### First Semantic Divergence
+
+The first state-changing divergence occurred at tick `337`, sequence `15`.
+
+| Field | Low `0.209375` | High `0.2109375` |
+|---|---:|---:|
+| Actor | `(40, 43, 24)` | `(40, 43, 24)` |
+| Target | `(41, 43, 23)` | `(41, 43, 23)` |
+| Actor state | `A=7, R=7, V=31, P=4` | `A=7, R=7, V=31, P=4` |
+| Target prior state | `A=3, R=3, V=0, P=0` | `A=3, R=3, V=0, P=0` |
+| Event subtype | primary | primary |
+| Payload class | cross-payload | cross-payload |
+| Base influence | `0.5` | `0.5` |
+| Coupling multiplier | `0.209375` | `0.2109375` |
+| Final influence | `0.1046875` | `0.10546875` |
+| Vector inheritance draw | `0.01315728279463102` | `0.01315728279463102` |
+| Vector inheritance threshold | `0.0130859375` | `0.01318359375` |
+| Vector inheritance | false | true |
+| Target next V | `0` | `31` |
+
+The high-coupling run crossed the vector-inheritance threshold by:
+
+`0.01318359375 - 0.01315728279463102 = 0.000026310955368977`
+
+The low-coupling run missed it by:
+
+`0.01315728279463102 - 0.0130859375 = 0.000071345294631022`
+
+No payload takeover occurred. Rounded `A` and `R` were unchanged between the two cases. The semantic difference was specifically:
+
+`target V remains 0`
+
+versus
+
+`target inherits V=31`
+
+### Counterfactual Test
+
+At tick `337`, immediately after the divergence:
+
+- forced low run: set target `(41,43,23)` to `V=31`
+- forced high run: set target `(41,43,23)` back to `V=0`
+
+All other state remained unchanged.
+
+### Counterfactual Result
+
+| Variant | Coupling | Forced V | Active | Largest | LCF | Components | Class |
+|---|---:|---:|---:|---:|---:|---:|---|
+| low natural | 0.209375 | no | 927 | 106 | 0.114 | 93 | protected |
+| high natural | 0.2109375 | no | 15713 | 15054 | 0.958 | 143 | absorber |
+| low forced high-vector | 0.209375 | `V=31` | 15713 | 15054 | 0.958 | 143 | absorber |
+| high forced low-vector | 0.2109375 | `V=0` | 927 | 106 | 0.114 | 93 | protected |
+
+The forced variants swapped outcomes exactly.
+
+This establishes the tick-337 vector-inheritance event as causal for the protected/absorber fate split under this seed and setup.
+
+### Interpretation
+
+The critical transition is caused by a discrete vector-state inheritance event, not by smooth accumulation of the coupling decimal.
+
+The coupling value changes the vector inheritance threshold just enough for one random draw to pass. That single pass changes the local directional state from `V=0` to `V=31`. The altered vector state then seeds a connectivity cascade that becomes the giant absorbing component.
+
+This is the strongest mechanistic result so far:
+
+`near-boundary cross-payload coupling -> vector inheritance pass/fail -> directional state flip -> cascade fate`
+
+### Angular-Momentum Read
+
+The absorber run did not show a macroscopic angular-momentum signal:
+
+- final vector persistence ratio: `0.999745`
+- final mean vector alignment: `0.999598`
+- final mean vector turn: `0.0319°`
+- mean exchange turn: `0.447°`
+- mean secondary-exchange turn: `90.516°`
+
+The important directional mechanism was not sustained rotation. It was a single inherited vector state that redirected future growth.
+
+### Artifacts
+
+- `src/payload_coupling_divergence_trace.py`
+- `src/payload_coupling_divergence_continuation.py`
+- `output/findings/finding_018_payload_coupling_divergence_trace.json`
+- `output/findings/finding_018_payload_coupling_first_semantic_divergence.csv`
+- `output/findings/finding_018_payload_coupling_divergence_continuation.csv`
+- `output/findings/finding_018_payload_coupling_divergence_continuation.json`
