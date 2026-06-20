@@ -11,8 +11,8 @@ from iota_rig import load_config
 from payload_coupling_bracket_4096_sweep import probe_config, variant_name
 
 
-LABEL = "0_209375"
-COUPLING = 0.209375
+LABEL = "0_2109375"
+COUPLING = 0.2109375
 OBJECTIVE = "256 payload coupling bisection probe"
 
 
