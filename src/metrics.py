@@ -185,6 +185,37 @@ def vector_persistence_stats(world: Any) -> dict[str, float]:
     }
 
 
+def component_hierarchy_stats(component_sizes: list[int], active_count: int) -> dict[str, float]:
+    if active_count <= 0 or not component_sizes:
+        return {
+            "top1_component_fraction": 0.0,
+            "top5_component_coverage": 0.0,
+            "top20_component_coverage": 0.0,
+            "component_size_entropy": 0.0,
+            "component_size_slope": 0.0,
+        }
+
+    sizes = np.array(component_sizes, dtype=np.float64)
+    probabilities = sizes / float(active_count)
+    nonzero_probabilities = probabilities[probabilities > 0]
+    entropy = float(-np.sum(nonzero_probabilities * np.log2(nonzero_probabilities)))
+
+    slope = 0.0
+    ranked_sizes = sizes[:20]
+    positive = ranked_sizes > 0
+    if int(np.count_nonzero(positive)) >= 2:
+        ranks = np.arange(1, len(ranked_sizes) + 1, dtype=np.float64)[positive]
+        slope = float(np.polyfit(np.log(ranks), np.log(ranked_sizes[positive]), 1)[0])
+
+    return {
+        "top1_component_fraction": float(sizes[0] / active_count),
+        "top5_component_coverage": float(np.sum(sizes[:5]) / active_count),
+        "top20_component_coverage": float(np.sum(sizes[:20]) / active_count),
+        "component_size_entropy": entropy,
+        "component_size_slope": slope,
+    }
+
+
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
     largest, count, component_sizes, component_centroids = coherence_stats(world)
@@ -211,8 +242,9 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
         "top2_component_coverage": top2_coverage,
         "component_centroid_distance_1_2": centroid_distance_1_2,
     }
-    for index in range(5):
+    for index in range(20):
         metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
+    metric.update(component_hierarchy_stats(component_sizes, active_count))
     metric.update(vector_persistence_stats(world))
     if extras:
         metric.update(extras)
@@ -234,7 +266,27 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "component_size_3",
         "component_size_4",
         "component_size_5",
+        "component_size_6",
+        "component_size_7",
+        "component_size_8",
+        "component_size_9",
+        "component_size_10",
+        "component_size_11",
+        "component_size_12",
+        "component_size_13",
+        "component_size_14",
+        "component_size_15",
+        "component_size_16",
+        "component_size_17",
+        "component_size_18",
+        "component_size_19",
+        "component_size_20",
         "top2_component_coverage",
+        "top1_component_fraction",
+        "top5_component_coverage",
+        "top20_component_coverage",
+        "component_size_entropy",
+        "component_size_slope",
         "component_centroid_distance_1_2",
         "exchanges",
         "secondary_exchanges",
@@ -309,6 +361,11 @@ def metrics_summary(
             "final_mean_vector_turn_degrees": 0.0,
             "mean_exchange_turn_degrees": 0.0,
             "mean_secondary_exchange_turn_degrees": 0.0,
+            "final_top1_component_fraction": 0.0,
+            "final_top5_component_coverage": 0.0,
+            "final_top20_component_coverage": 0.0,
+            "final_component_size_entropy": 0.0,
+            "final_component_size_slope": 0.0,
             "execution_time_seconds": execution_time,
         }
         summary.update(init_metadata)
@@ -354,6 +411,11 @@ def metrics_summary(
         "mean_secondary_exchange_turn_degrees": float(
             np.mean(secondary_turn_rows) if secondary_turn_rows else 0.0
         ),
+        "final_top1_component_fraction": float(metrics[-1].get("top1_component_fraction", 0.0)),
+        "final_top5_component_coverage": float(metrics[-1].get("top5_component_coverage", 0.0)),
+        "final_top20_component_coverage": float(metrics[-1].get("top20_component_coverage", 0.0)),
+        "final_component_size_entropy": float(metrics[-1].get("component_size_entropy", 0.0)),
+        "final_component_size_slope": float(metrics[-1].get("component_size_slope", 0.0)),
         "execution_time_seconds": execution_time,
     }
     summary.update(init_metadata)
