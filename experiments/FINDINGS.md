@@ -1,5 +1,158 @@
 # Findings
 
+## Field Terminology Alignment
+
+The working rig vocabulary is retained for reproducibility, but paper-facing interpretation should use standard terms from percolation theory, network science, cellular automata, and nonlinear dynamics where possible.
+
+| Rig Term | Field-Aligned Term | Use |
+|---|---|---|
+| active iotas | active sites / occupied sites | Count of non-dark lattice cells. |
+| largest coherence | largest connected component / giant component | Size of the largest active connected component. |
+| coherence ratio / LCF | largest-component fraction / order parameter | `largest_connected_component / active_sites`. |
+| coherence count | connected-component count / cluster count | Number of active connected components. |
+| valence | coordination capacity / maximum productive degree | Maximum simultaneous productive relationships an active site can express. |
+| bond_probability | secondary-edge occupation probability / stochastic bond occupation | Probability that a non-primary productive relationship is admitted after candidate scoring. |
+| neighbor_mode | interaction neighborhood / lattice connectivity | Candidate geometry, e.g. face-only versus face+edge versus full Moore-like neighborhood. |
+| A_4774 nucleus | heterogeneous nucleation seed / amplitude-gradient seed | Fixed local initial condition with amplitude contrast and placement. |
+| protected regime | fragmented / subcritical / non-percolating regime | Low-LCF regime where no absorbing giant component forms. |
+| absorber regime | absorbing-state-like giant-component takeover | High-LCF regime where one component captures most active sites. |
+| payload coupling | state-dependent interaction strength / compatibility coupling | Payload-dependent attenuation or compatibility gate. |
+| vector inheritance event | directional-state inheritance / state-transition gate | Event where one site inherits the directional state of another. |
+| first semantic divergence | critical event / basin-selection event | First state-changing event that sends matched runs to different attractors. |
+| scale test | finite-size scaling / scaling robustness probe | Check whether morphology survives larger lattice volumes. |
+| seed | stochastic realization / disorder realization | Fixed random initialization and event schedule realization. |
+
+Terminology discipline:
+
+- Use `giant connected component`, `largest-component fraction`, and `cluster count` in paper-facing plots and captions.
+- Use `discontinuous`, `threshold-like`, or `first-order-like` only with the qualifier `like` until seed ensembles and finite-size scaling support a stronger claim.
+- Use `nucleation-like` for single-seed or single-event mechanisms until robustness across stochastic realizations is established.
+- Use `absorbing component` or `single-cluster takeover` instead of `complexity` when the result is one dominant high-LCF component.
+- Use `state-dependent compatibility coupling` instead of bare `payload protection` when describing the mechanism in Findings 016-018.
+- Treat `metastable` cautiously: in the current irreversible activation model, `finite-time coexistence` and `time-to-merger` are often more precise.
+
+## Reference Marker: Pre-Vectorization Baseline
+
+Current reference implementation marker:
+
+- Date: `2026-06-20`
+- Branch: `main`
+- Reference remote: `origin/main`
+- Reference commit: `7e2f45b`
+- Reference meaning: pre-vectorization baseline for Findings 001-018 and the active seed-ensemble boundary test.
+
+Before any vectorized engine replaces the current implementation, it must satisfy trajectory-level equivalence against this reference. Finding 018 is especially sensitive: one exact directional-state inheritance event at tick `337`, sequence `15`, changes the system from the protected regime to the absorbing-component regime. Any change to update ordering, random-number consumption, candidate ordering, or component labeling can silently alter that result.
+
+Minimum equivalence requirements:
+
+- Reproduce the protected/absorber split for `cross_payload_coupling=0.209375` versus `0.2109375`.
+- Reproduce the first semantic divergence at tick `337`, sequence `15`.
+- Reproduce the vector inheritance draw `0.01315728279463102` and pass/fail thresholds.
+- Reproduce final active-site count, largest connected component, LCF, and cluster count for the paired runs.
+- Preserve within-tick event ordering or explicitly prove order-independent accumulation gives the same trajectory on golden cases.
+
+## Engineering Roadmap
+
+All roadmap items reference the baseline marker above.
+
+1. Vectorize only behind golden trajectory tests. The current engine uses a pure-Python per-active-site update loop and full component analysis at each metric snapshot. Vectorization should target update candidate generation, contribution accumulation, and component labeling, but it must first pass the Finding 018 equivalence suite.
+2. Match measurement connectivity to growth connectivity. `coherence_stats` should accept the configured interaction neighborhood so largest-component metrics can be reported under face-only, face+edge, or full-neighborhood connectivity.
+3. Add deactivation or decay only as a new controlled law. Current active sites are effectively irreversible. A death/subthreshold rule would change the model class and should be introduced as a versioned experiment, not as a silent fix.
+4. Make within-tick updates order-independent. Multiple sources currently update targets through sequential blending. A scatter/accumulate phase followed by one target update per tick would make the dynamics easier to reason about and vectorize.
+5. Guard against silent no-op sweeps. Swept dotted keys should be validated against known-consumed config paths so a tidy parameter table cannot be produced for a parameter the engine never reads.
+6. Keep local refs synchronized before major experiments. This checkout currently resolves `HEAD...origin/main` as `0 0`; if that changes, sync before interpreting new runs.
+
+## Paper-Critical Validation Gate
+
+Findings 017-018 should not be treated as a general law until two validation tests resolve.
+
+The important correction is that bisection guarantees a first divergence, but it does not guarantee that the first divergence is outcome-pivotal. Finding 18 is nontrivial because the bidirectional counterfactual intervention swapped both final outcomes exactly. That establishes causal necessity and sufficiency for this one seed and setup, not generality across stochastic realizations.
+
+### 1. Boundary Seed Ensemble
+
+Run the protected/absorber boundary across a seed ensemble, using the same medium-separated `P=4` versus `P=0` two-nucleus setup.
+
+Question:
+
+- Does the transition point cluster tightly across stochastic realizations?
+- Or does each seed have its own knife-edge, producing a smooth ensemble-level sigmoid?
+- Is the outcome distribution genuinely bimodal, or does the LCF gap fill in across seeds?
+
+Interpretation:
+
+- Tight clustering plus bimodality supports a sharp, characterizable transition.
+- Wide scatter weakens Finding 017 as a general claim and reframes Finding 018 as a single-realization basin-selection mechanism.
+
+Current run:
+
+- Script: `src/payload_coupling_seed_ensemble_4096_sweep.py`
+- Couplings: `0.209375`, `0.2109375`
+- Seeds: `42-71`
+- Status: active as of this document update.
+
+### 2. Finite-Size Scaling
+
+Run the same boundary comparison across lattice sizes after the seed ensemble is summarized.
+
+Question:
+
+- Does the protected-to-absorber jump sharpen as `L` grows?
+- Or does it round off with scale?
+
+Interpretation:
+
+- Sharpening with size supports a first-order-like discontinuous transition in this substrate.
+- Rounding with size suggests a finite-size artifact or seed-specific basin split.
+
+The existing `64^3 -> 128^3 -> 256^3` scale probes are boundary-artifact tests because they keep the local initial coordinates unchanged while increasing available dark volume. They are not yet a conventional finite-size scaling study. A proper finite-size protocol needs consistent geometry, observation time, density, and order-parameter definitions as `L` changes.
+
+### 3. Mechanism Replication
+
+The make-or-break test for Finding 018 is not only whether `p*` clusters across seeds. It is whether the same event class repeatedly selects the basin.
+
+For each seed near its boundary:
+
+- repeat the paired divergence trace;
+- identify the first consequential divergence;
+- classify whether the divergence is directional-state inheritance, payload takeover, rounded A/R transfer, target selection, or another event class;
+- intervene on the divergent state variable;
+- test whether the one-state intervention reproduces the opposite fate;
+- test whether the swap works in both parameter directions.
+
+Interpretation:
+
+- If vector inheritance repeatedly acts as the basin selector, Finding 018 generalizes as a mechanism even if each seed has a different `p*`.
+- If `p*` clusters tightly but different event classes cause the fate split, then the transition may be robust while the Finding 018 mechanism is seed-specific.
+
+### 4. Committor Analysis
+
+A stronger causal test is a committor-style experiment. Save the state immediately before the tick-337 event, then launch many independent future random continuations after setting the target state to each alternative:
+
+- `do(V=0)`
+- `do(V=31)`
+
+Estimate:
+
+- `Pr(absorber | do(V=0))`
+- `Pr(absorber | do(V=31))`
+
+If those probabilities are near `0` and `1`, respectively, the vector state is a robust basin selector rather than an accident of one downstream RNG stream. This is the cleanest way to test whether the identified variable lies on the transition boundary.
+
+### Interpretive Boundary
+
+The PSA/identity interpretation should be framed carefully:
+
+`a single microscopic directional-state inheritance event can tip identity-preserving fragmentation into dissolution`
+
+That is a legitimate interpretive angle if labeled as interpretation. The empirical claim remains the measured transition, ensemble robustness, finite-size behavior, and counterfactual causal test.
+
+Current scope:
+
+- Established: for seed `42` and the current setup, the tick-337 directional-state inheritance event is necessary and sufficient for absorber versus protected fate.
+- Not established: that directional-state inheritance is the usual mechanism across seeds, or that the compatibility-coupling response is a thermodynamic first-order transition.
+
+Paper framing should therefore treat Finding 018 as a rigorous one-trajectory causal discovery whose generality requires replication. The bidirectional intervention is the substantive result; the broader transition claim depends on seed ensembles, mechanism replication, committor analysis, and finite-size behavior.
+
 ## Finding 001: Valence-2 Coherent Percolation
 
 Under soft conservation, one active iota with `range_range=[7,7]`, `amplitude_coupling=1.0`, and `range_coupling=1.0` transitions from trace-limited propagation to single-component coherent growth when `constants.valence` increases from `1` to `2`.
