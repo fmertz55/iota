@@ -1500,3 +1500,201 @@ The important directional mechanism was not sustained rotation. It was a single 
 - `output/findings/finding_018_payload_coupling_first_semantic_divergence.csv`
 - `output/findings/finding_018_payload_coupling_divergence_continuation.csv`
 - `output/findings/finding_018_payload_coupling_divergence_continuation.json`
+
+## Finding 019: Boundary Seed Ensemble Is Heavy-Tailed
+
+### Status
+
+Completed seed-ensemble boundary census for the Finding 017-018 bracket.
+
+### Setup
+
+The ensemble repeated the medium-separated two-nucleus setup:
+
+- two `A_4774` nuclei
+- one nucleus payload `P = 4`
+- one nucleus payload `P = 0`
+- `grid.size = 256`
+- `R = 7`
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+- `constants.valence = 2`
+- `constants.bond_probability = 0.005`
+- `same_payload_coupling = 1.0`
+- `run.ticks = 4096`
+- seeds `42-71`
+
+Only two cross-payload coupling values were tested:
+
+- protected-side bracket: `cross_payload_coupling = 0.209375`
+- absorber-side bracket: `cross_payload_coupling = 0.2109375`
+
+The completed census contains `60` completed runs across `30` seeds. One interrupted partial seed-49 record exists in the database without `final_tick` and is excluded from the summary.
+
+### Result
+
+| Regime | Seeds | Count |
+|---|---|---:|
+| bracket-sensitive absorber flip | `42`, `56` | 2 |
+| bracket-insensitive high-dominant | `45`, `50`, `61` | 3 |
+| bracket-insensitive protected / dust-like | all remaining seeds | 25 |
+
+Notable seeds:
+
+| Seed | Low Active | Low LCF | High Active | High LCF | Read |
+|---:|---:|---:|---:|---:|---|
+| 42 | 927 | 0.114 | 15713 | 0.958 | bracket-sensitive absorber flip |
+| 45 | 6906 | 0.906 | 6981 | 0.903 | high-dominant, bracket-insensitive |
+| 50 | 9658 | 0.915 | 9658 | 0.915 | high-dominant, bracket-insensitive |
+| 56 | 987 | 0.158 | 26193 | 0.974 | bracket-sensitive absorber flip |
+| 61 | 14096 | 0.942 | 14096 | 0.942 | high-dominant, bracket-insensitive |
+
+### Interpretation
+
+The ensemble does not support a universal transition at the exact decimal bracket.
+
+The stronger interpretation is a heavy-tailed basin landscape:
+
+`many protected realizations -> few high-dominant near-absorber realizations -> rare bracket-sensitive absorber flips`
+
+This reframes Finding 017. The seed-42 bracket remains real, but it is not a population-wide threshold at the tested resolution. Most stochastic realizations do not care about the `0.209375 -> 0.2109375` perturbation. Rare realizations do, and the rare transitions can have substantially different morphology.
+
+Seed `56` is especially important because it also flips across the bracket, but its absorber-side morphology is not a replay of seed `42`:
+
+- seed `42` high side: `15713` active, `LCF = 0.958`
+- seed `56` high side: `26193` active, `LCF = 0.974`
+
+The mechanism census is therefore now the central validation problem. The question is not only whether a rare seed flips. It is whether the same small set of event classes repeatedly selects the basin.
+
+Candidate basin-selector classes remain:
+
+- directional-state inheritance
+- payload takeover
+- rounded A/R threshold crossing
+- target-selection or secondary-bond admission
+- inter-component bridge formation
+- early geometry attachment to a coherent growth front
+
+### Complexity Boundary
+
+This ensemble still does not establish persistent complexity.
+
+The observed seed-level classes are:
+
+- protected fragmented / dust-like regimes
+- high-dominant but bracket-insensitive regimes
+- absorbing-component takeover regimes
+
+No run in this bracket produced a stable multi-domain or open-ended complex morphology. The current claim should remain basin selection and coherent nucleation, not persistent complexity.
+
+### Next Test
+
+Trace seed `56` using the same paired divergence method as Finding 018:
+
+- identify the first semantic divergence;
+- classify the event class;
+- compare it to the seed-42 tick-337 directional-state inheritance event;
+- if the event is plausible as a basin selector, run a bidirectional counterfactual continuation.
+
+If seed `56` also flips by directional-state inheritance, Finding 018 begins to generalize as a mechanism. If it flips by another event class, then the transition may be robust while the seed-42 mechanism is only one member of a small basin-selection taxonomy.
+
+### Seed 56 Trace Result
+
+Seed `56` also flipped by directional-state inheritance.
+
+The first numeric cross-payload influence difference again occurred at tick `2`, sequence `2`, without semantic effect.
+
+The first gate divergence occurred at tick `288`, sequence `6`, but it did not change state. The high-coupling run passed vector inheritance while the low-coupling run failed, but actor and target already had the same vector state `V=27`, so `next_V` remained `27` on both sides.
+
+The first state-changing divergence occurred at tick `408`, sequence `19`.
+
+| Field | Low `0.209375` | High `0.2109375` |
+|---|---:|---:|
+| Actor | `(41, 43, 24)` | `(41, 43, 24)` |
+| Target | `(42, 44, 24)` | `(42, 44, 24)` |
+| Actor state | `A=7, R=7, V=27, P=4` | `A=7, R=7, V=27, P=4` |
+| Target prior state | `A=4, R=4, V=0, P=0` | `A=4, R=4, V=0, P=0` |
+| Event subtype | primary | primary |
+| Payload class | cross-payload | cross-payload |
+| Base influence | `0.5` | `0.5` |
+| Coupling multiplier | `0.209375` | `0.2109375` |
+| Final influence | `0.1046875` | `0.10546875` |
+| Vector inheritance draw | `0.013103245979836031` | `0.013103245979836031` |
+| Vector inheritance threshold | `0.0130859375` | `0.01318359375` |
+| Vector inheritance | false | true |
+| Target next V | `0` | `27` |
+
+The high-coupling run crossed the vector-inheritance threshold by:
+
+`0.01318359375 - 0.013103245979836031 = 0.000080347770163966`
+
+The low-coupling run missed it by:
+
+`0.013103245979836031 - 0.0130859375 = 0.000017308479836034`
+
+As with seed `42`, there was no payload takeover and no rounded A/R divergence. The state-changing difference was specifically:
+
+`target V remains 0`
+
+versus
+
+`target inherits V=27`
+
+### Seed 56 Counterfactual
+
+At tick `408`, immediately after the divergence:
+
+- forced low run: set target `(42,44,24)` to `V=27`
+- forced high run: set target `(42,44,24)` back to `V=0`
+
+All other state remained unchanged.
+
+| Variant | Coupling | Forced V | Active | Largest | LCF | Components | Class |
+|---|---:|---:|---:|---:|---:|---:|---|
+| low natural | 0.209375 | no | 987 | 156 | 0.158 | 85 | protected |
+| high natural | 0.2109375 | no | 26193 | 25518 | 0.974 | 123 | absorber |
+| low forced high-vector | 0.209375 | `V=27` | 26193 | 25518 | 0.974 | 123 | absorber |
+| high forced low-vector | 0.2109375 | `V=0` | 987 | 156 | 0.158 | 85 | protected |
+
+The forced variants swapped outcomes exactly.
+
+This means seed `56` is also a single-event directional-state inheritance basin switch, not a diffuse multi-event accumulation or a late connectivity-threshold cascade.
+
+### Mechanism Comparison
+
+Seeds `42` and `56` differ substantially in final morphology, but share the same basin-selector class.
+
+| Seed | Divergence Tick | Target | Low V Outcome | High V Outcome | High Active | High LCF |
+|---:|---:|---|---:|---:|---:|---:|
+| 42 | 337 | `(41,43,23)` | `0` | `31` | 15713 | 0.958 |
+| 56 | 408 | `(42,44,24)` | `0` | `27` | 26193 | 0.974 |
+
+The shared mechanism is:
+
+`near-boundary cross-payload coupling -> vector inheritance pass/fail -> directional-state flip -> absorber/protected fate`
+
+This now generalizes Finding 018 from one realization to two independent bracket-sensitive realizations.
+
+The high-dominant controls `45`, `50`, and `61` are important because they show that high-LCF-ish morphology can occur without bracket sensitivity:
+
+- seed `45`: low `LCF=0.906`, high `LCF=0.903`
+- seed `50`: low `LCF=0.915`, high `LCF=0.915`
+- seed `61`: low `LCF=0.942`, high `LCF=0.942`
+
+Those controls separate two phenomena:
+
+- high-dominant morphology can arise from seed geometry independent of the bracket perturbation;
+- bracket-sensitive absorber takeover, in the two observed cases, is selected by a single vector-inheritance event.
+
+### Artifacts
+
+- `src/payload_coupling_seed_ensemble_4096_sweep.py`
+- `src/payload_coupling_seed56_divergence_trace.py`
+- `src/payload_coupling_seed56_divergence_continuation.py`
+- `output/findings/finding_019_payload_coupling_seed_ensemble_raw.csv`
+- `output/findings/finding_019_payload_coupling_seed_ensemble_summary.csv`
+- `output/findings/finding_019_payload_coupling_seed_ensemble_summary.json`
+- `output/findings/finding_019_seed56_payload_coupling_divergence_trace.json`
+- `output/findings/finding_019_seed56_payload_coupling_first_state_divergence.csv`
+- `output/findings/finding_019_seed56_payload_coupling_divergence_continuation.csv`
+- `output/findings/finding_019_seed56_payload_coupling_divergence_continuation.json`

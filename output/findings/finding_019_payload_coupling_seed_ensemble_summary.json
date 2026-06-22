@@ -1,0 +1,27 @@
+{
+  "seed_range": [
+    42,
+    71
+  ],
+  "couplings": [
+    0.209375,
+    0.2109375
+  ],
+  "completed_runs": 60,
+  "completed_seeds": 30,
+  "regime_counts": {
+    "bracket_sensitive_absorber_flip": 2,
+    "bracket_insensitive_protected": 25,
+    "bracket_insensitive_high_dominant": 3
+  },
+  "bracket_sensitive_seeds": [
+    42,
+    56
+  ],
+  "high_dominant_bracket_insensitive_seeds": [
+    45,
+    50,
+    61
+  ],
+  "notes": "One interrupted partial seed-49 record exists in the database without final_tick and is excluded by this summary."
+}

@@ -1,0 +1,71 @@
+{
+  "seed": 56,
+  "divergence_tick": 408,
+  "divergence_target": [
+    42,
+    44,
+    24
+  ],
+  "natural_low_coupling": 0.209375,
+  "natural_high_coupling": 0.2109375,
+  "natural_reference_final": {
+    "low_natural": {
+      "active_iotas": 987,
+      "largest_coherence": 156,
+      "coherence_ratio": 0.158,
+      "coherence_count": 85
+    },
+    "high_natural": {
+      "active_iotas": 26193,
+      "largest_coherence": 25518,
+      "coherence_ratio": 0.974,
+      "coherence_count": 123
+    }
+  },
+  "forced_vector_test": {
+    "low_force_high_vector": "set V(42, 44, 24)=27 after tick 408",
+    "high_force_low_vector": "set V(42, 44, 24)=0 after tick 408"
+  },
+  "final_rows": [
+    {
+      "label": "low_force_high_vector",
+      "coupling": 0.209375,
+      "tick": 4096,
+      "active_iotas": 26193,
+      "largest_coherence": 25518,
+      "coherence_ratio": 0.9742297560416905,
+      "coherence_count": 123,
+      "component_size_1": 25518,
+      "component_size_2": 145,
+      "component_size_3": 24,
+      "top5_component_coverage": 0.9824762341083496,
+      "top20_component_coverage": 0.9919062344901309,
+      "component_size_entropy": 0.311812555323575,
+      "divergence_target_V": 27,
+      "divergence_target_active": true,
+      "divergence_target_A": 4,
+      "divergence_target_R": 4,
+      "divergence_target_P": 0
+    },
+    {
+      "label": "high_force_low_vector",
+      "coupling": 0.2109375,
+      "tick": 4096,
+      "active_iotas": 987,
+      "largest_coherence": 156,
+      "coherence_ratio": 0.1580547112462006,
+      "coherence_count": 85,
+      "component_size_1": 156,
+      "component_size_2": 135,
+      "component_size_3": 32,
+      "top5_component_coverage": 0.3900709219858156,
+      "top20_component_coverage": 0.7315096251266464,
+      "component_size_entropy": 5.142020676657951,
+      "divergence_target_V": 27,
+      "divergence_target_active": true,
+      "divergence_target_A": 4,
+      "divergence_target_R": 4,
+      "divergence_target_P": 0
+    }
+  ]
+}
