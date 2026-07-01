@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -23,6 +24,34 @@ from payload_coupling_divergence_trace import (
 
 MAX_TICKS = 4096
 OUTPUT_DIR = Path("output/findings")
+RAW_PATH = OUTPUT_DIR / "finding_020_committor_raw.csv"
+SUMMARY_PATH = OUTPUT_DIR / "finding_020_committor_summary.csv"
+JSON_PATH = OUTPUT_DIR / "finding_020_committor_summary.json"
+RAW_FIELDNAMES = [
+    "seed",
+    "law",
+    "coupling",
+    "condition",
+    "forced_v",
+    "sample_index",
+    "continuation_seed",
+    "divergence_tick",
+    "target",
+    "final_tick",
+    "early_absorber_stop",
+    "active_iotas",
+    "largest_coherence",
+    "coherence_ratio",
+    "coherence_count",
+    "component_size_1",
+    "component_size_2",
+    "component_size_3",
+    "top5_component_coverage",
+    "top20_component_coverage",
+    "component_size_entropy",
+    "classification",
+    "forced_target_V",
+]
 
 
 @dataclass(frozen=True)
@@ -170,12 +199,76 @@ def summarize(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return summary_rows
 
 
+def row_key(row: dict[str, Any]) -> tuple[int, str, str, int, int]:
+    return (
+        int(row["seed"]),
+        str(row["law"]),
+        str(row["condition"]),
+        int(row["sample_index"]),
+        int(row["continuation_seed"]),
+    )
+
+
+def load_existing_rows(path: Path) -> list[dict[str, Any]]:
+    if not path.exists() or path.stat().st_size == 0:
+        return []
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def append_raw_row(path: Path, row: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    needs_header = not path.exists() or path.stat().st_size == 0
+    with path.open("a", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=RAW_FIELDNAMES)
+        if needs_header:
+            writer.writeheader()
+        writer.writerow({key: row.get(key, "") for key in RAW_FIELDNAMES})
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def write_current_summary(
+    rows: list[dict[str, Any]],
+    args: argparse.Namespace,
+    raw_path: Path,
+    summary_path: Path,
+    json_path: Path,
+) -> None:
+    if not rows:
+        return
+    summary_rows = summarize(rows)
+    with summary_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(summary_rows[0].keys()))
+        writer.writeheader()
+        writer.writerows(summary_rows)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+    summary = {
+        "samples_per_condition_requested": args.samples,
+        "samples_completed": len(rows),
+        "seeds": args.seeds,
+        "max_ticks": MAX_TICKS,
+        "early_absorber": args.early_absorber,
+        "raw_path": str(raw_path),
+        "summary_path": str(summary_path),
+        "summary_rows": summary_rows,
+    }
+    json_path.write_text(json.dumps(summary, indent=2, default=str), encoding="utf-8")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--samples", type=int, default=10)
     parser.add_argument("--seeds", type=int, nargs="+", default=[42, 56])
     parser.add_argument("--rng-seed-base", type=int, default=20260622)
     parser.add_argument("--early-absorber", action="store_true")
+    parser.add_argument(
+        "--restart",
+        action="store_true",
+        help="Ignore existing committor CSV rows and start a fresh output file.",
+    )
     return parser.parse_args()
 
 
@@ -183,7 +276,17 @@ def main() -> None:
     args = parse_args()
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     base_cfg = load_config("config.yaml")
-    rows: list[dict[str, Any]] = []
+    if args.restart:
+        RAW_PATH.unlink(missing_ok=True)
+        SUMMARY_PATH.unlink(missing_ok=True)
+        JSON_PATH.unlink(missing_ok=True)
+        rows: list[dict[str, Any]] = []
+    else:
+        rows = load_existing_rows(RAW_PATH)
+        if rows:
+            print(f"resuming from {RAW_PATH}: completed_rows={len(rows)}")
+            write_current_summary(rows, args, RAW_PATH, SUMMARY_PATH, JSON_PATH)
+    completed = {row_key(row) for row in rows}
     laws = [
         ("low", LOW_LABEL, LOW_COUPLING),
         ("high", HIGH_LABEL, HIGH_COUPLING),
@@ -208,6 +311,13 @@ def main() -> None:
                         + condition_index * 10_000
                         + sample_index
                     )
+                    key = (seed, law, condition, sample_index, continuation_seed)
+                    if key in completed:
+                        print(
+                            f"skipping completed seed={seed} law={law} "
+                            f"condition={condition} sample={sample_index + 1}/{args.samples}"
+                        )
+                        continue
                     progress_label = (
                         f"seed={seed} law={law} condition={condition} "
                         f"sample={sample_index + 1}/{args.samples}"
@@ -235,6 +345,9 @@ def main() -> None:
                     }
                     row.update(result)
                     rows.append(row)
+                    completed.add(key)
+                    append_raw_row(RAW_PATH, row)
+                    write_current_summary(rows, args, RAW_PATH, SUMMARY_PATH, JSON_PATH)
                     print(
                         f"seed={seed} law={law} condition={condition} "
                         f"sample={sample_index + 1}/{args.samples} "
@@ -242,31 +355,8 @@ def main() -> None:
                         f"active={row['active_iotas']} lcf={row['coherence_ratio']:.3f}"
                     )
 
-    raw_path = OUTPUT_DIR / "finding_020_committor_raw.csv"
-    with raw_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
-        writer.writeheader()
-        writer.writerows(rows)
-
-    summary_rows = summarize(rows)
-    summary_path = OUTPUT_DIR / "finding_020_committor_summary.csv"
-    with summary_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(summary_rows[0].keys()))
-        writer.writeheader()
-        writer.writerows(summary_rows)
-
-    summary = {
-        "samples_per_condition": args.samples,
-        "seeds": args.seeds,
-        "max_ticks": MAX_TICKS,
-        "early_absorber": args.early_absorber,
-        "raw_path": str(raw_path),
-        "summary_path": str(summary_path),
-        "summary_rows": summary_rows,
-    }
-    json_path = OUTPUT_DIR / "finding_020_committor_summary.json"
-    json_path.write_text(json.dumps(summary, indent=2, default=str), encoding="utf-8")
-    print(json.dumps(summary, indent=2, default=str))
+    write_current_summary(rows, args, RAW_PATH, SUMMARY_PATH, JSON_PATH)
+    print(JSON_PATH.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
