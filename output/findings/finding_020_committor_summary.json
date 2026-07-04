@@ -1,6 +1,6 @@
 {
   "samples_per_condition_requested": 50,
-  "samples_completed": 258,
+  "samples_completed": 400,
   "seeds": [
     42,
     56
@@ -70,29 +70,29 @@
       "seed": 56,
       "law": "high",
       "forced_v": 0,
-      "samples": 1,
-      "absorber_count": 0,
-      "absorber_probability": 0.0,
-      "high_dominant_count": 0,
-      "high_dominant_probability": 0.0,
-      "protected_count": 1,
-      "protected_probability": 1.0,
-      "mean_active_iotas": 905.0,
-      "mean_coherence_ratio": 0.19779005524861878
+      "samples": 50,
+      "absorber_count": 5,
+      "absorber_probability": 0.1,
+      "high_dominant_count": 7,
+      "high_dominant_probability": 0.14,
+      "protected_count": 38,
+      "protected_probability": 0.76,
+      "mean_active_iotas": 4009.04,
+      "mean_coherence_ratio": 0.3707367762778431
     },
     {
       "seed": 56,
       "law": "high",
       "forced_v": 27,
-      "samples": 1,
-      "absorber_count": 0,
-      "absorber_probability": 0.0,
-      "high_dominant_count": 0,
-      "high_dominant_probability": 0.0,
-      "protected_count": 1,
-      "protected_probability": 1.0,
-      "mean_active_iotas": 828.0,
-      "mean_coherence_ratio": 0.1956521739130435
+      "samples": 50,
+      "absorber_count": 2,
+      "absorber_probability": 0.04,
+      "high_dominant_count": 6,
+      "high_dominant_probability": 0.12,
+      "protected_count": 42,
+      "protected_probability": 0.84,
+      "mean_active_iotas": 2678.1,
+      "mean_coherence_ratio": 0.30256415026099365
     },
     {
       "seed": 56,
@@ -112,15 +112,15 @@
       "seed": 56,
       "law": "low",
       "forced_v": 27,
-      "samples": 6,
-      "absorber_count": 1,
-      "absorber_probability": 0.16666666666666666,
-      "high_dominant_count": 1,
-      "high_dominant_probability": 0.16666666666666666,
-      "protected_count": 4,
-      "protected_probability": 0.6666666666666666,
-      "mean_active_iotas": 5283.0,
-      "mean_coherence_ratio": 0.43558132078883577
+      "samples": 50,
+      "absorber_count": 3,
+      "absorber_probability": 0.06,
+      "high_dominant_count": 3,
+      "high_dominant_probability": 0.06,
+      "protected_count": 44,
+      "protected_probability": 0.88,
+      "mean_active_iotas": 2294.44,
+      "mean_coherence_ratio": 0.26734650184601827
     }
   ]
 }

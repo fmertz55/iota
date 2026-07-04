@@ -148,7 +148,7 @@ src/metrics.py            # coherence, entropy, run plots, experiment plots
 
 ## Experiment safety
 
-Every new run compares its flattened config against the previous experiment in `data/iota_lab.db`.
+Every new run compares its flattened user-configured inputs against the previous experiment in `data/iota_lab.db`.
 
 If one parameter changed, the run records:
 
@@ -161,6 +161,8 @@ After the baseline, the runner refuses to start unless exactly one controlled pa
 The protocol is documented in `docs/experimental_protocol.md`.
 
 Every experiment also records `simulation_version`, so results from changed simulation rules can be separated from controlled parameter sweeps.
+
+Version changes are lineage boundaries: use a new baseline or an explicit equivalence gate before comparing across `simulation_version` values. Future branching experiments should use an explicit parent experiment rather than relying only on chronological order.
 
 ## First experiments
 
@@ -224,7 +226,7 @@ constants:
 
 The original v0.1.0 behavior is equivalent to `valence: 1`.
 
-`constants.bond_probability` gates non-primary productive relationship slots after candidate scoring. The primary vector target remains deterministic; each additional valence slot independently admits the next highest-scored candidate, then the existing conservation, decay, payload, and rounding rules apply unchanged.
+`constants.bond_probability` gates non-primary productive relationship slots after candidate scoring. The primary vector target remains deterministic; each additional valence slot independently admits the next highest-scored candidate, then the existing conservation, payload, vector-inheritance, and rounding rules apply unchanged. This is a ranked, directed, state-dependent edge-occupation rule, not ordinary independent bond percolation.
 
 ## First big question
 

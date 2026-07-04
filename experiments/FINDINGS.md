@@ -11,8 +11,8 @@ The working rig vocabulary is retained for reproducibility, but paper-facing int
 | coherence ratio / LCF | largest-component fraction / order parameter | `largest_connected_component / active_sites`. |
 | coherence count | connected-component count / cluster count | Number of active connected components. |
 | valence | coordination capacity / maximum productive degree | Maximum simultaneous productive relationships an active site can express. |
-| bond_probability | secondary-edge occupation probability / stochastic bond occupation | Probability that a non-primary productive relationship is admitted after candidate scoring. |
-| neighbor_mode | interaction neighborhood / lattice connectivity | Candidate geometry, e.g. face-only versus face+edge versus full Moore-like neighborhood. |
+| bond_probability | ranked secondary-edge occupation probability / modified stochastic bond occupation | Probability that a non-primary productive relationship is admitted after candidate scoring; not ordinary independent bond percolation. |
+| neighbor_mode | interaction neighborhood / lattice connectivity | Candidate geometry: `face6` is a 3D von Neumann neighborhood, `face18` is face+edge connectivity, and `cube26` is a 3D Moore neighborhood. |
 | A_4774 nucleus | heterogeneous nucleation seed / amplitude-gradient seed | Fixed local initial condition with amplitude contrast and placement. |
 | protected regime | fragmented / subcritical / non-percolating regime | Low-LCF regime where no absorbing giant component forms. |
 | absorber regime | absorbing-state-like giant-component takeover | High-LCF regime where one component captures most active sites. |
@@ -25,6 +25,7 @@ The working rig vocabulary is retained for reproducibility, but paper-facing int
 Terminology discipline:
 
 - Use `giant connected component`, `largest-component fraction`, and `cluster count` in paper-facing plots and captions.
+- Describe `bond_probability` as a ranked, directed, state-dependent edge-occupation rule when contrasting with standard bond percolation.
 - Use `discontinuous`, `threshold-like`, or `first-order-like` only with the qualifier `like` until seed ensembles and finite-size scaling support a stronger claim.
 - Use `nucleation-like` for single-seed or single-event mechanisms until robustness across stochastic realizations is established.
 - Use `absorbing component` or `single-cluster takeover` instead of `complexity` when the result is one dominant high-LCF component.
@@ -1698,3 +1699,117 @@ Those controls separate two phenomena:
 - `output/findings/finding_019_seed56_payload_coupling_first_state_divergence.csv`
 - `output/findings/finding_019_seed56_payload_coupling_divergence_continuation.csv`
 - `output/findings/finding_019_seed56_payload_coupling_divergence_continuation.json`
+
+## Finding 020: Committor Test Shows Path-Dependent Basin Selection
+
+### Status
+
+Completed committor-style continuation test for the two bracket-sensitive seeds from Findings 018-019.
+
+### Setup
+
+The test saved the state at the traced state-changing directional-inheritance event for each seed, forced the target vector state to each alternative, and launched independent future random continuations.
+
+Seeds and interventions:
+
+- seed `42`: checkpoint at tick `337`, target `(41,43,23)`, alternatives `do(V=0)` and `do(V=31)`
+- seed `56`: checkpoint at tick `408`, target `(42,44,24)`, alternatives `do(V=0)` and `do(V=27)`
+
+For each seed, both coupling laws were tested:
+
+- protected-side law: `cross_payload_coupling = 0.209375`
+- absorber-side law: `cross_payload_coupling = 0.2109375`
+
+Each condition used `50` independent continuations, for `400` total completed runs. Early absorber stopping was enabled, with the absorber criterion based on high largest-component fraction.
+
+### Result
+
+| Seed | Law | Forced V | Samples | Absorber | High-Dominant | Protected | Mean Active | Mean LCF |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|
+| 42 | high | 0 | 50 | 0.08 | 0.00 | 0.92 | 2032.22 | 0.196 |
+| 42 | high | 31 | 50 | 0.10 | 0.02 | 0.88 | 2018.30 | 0.219 |
+| 42 | low | 0 | 50 | 0.18 | 0.08 | 0.74 | 3308.92 | 0.339 |
+| 42 | low | 31 | 50 | 0.04 | 0.10 | 0.86 | 2464.38 | 0.239 |
+| 56 | high | 0 | 50 | 0.10 | 0.14 | 0.76 | 4009.04 | 0.371 |
+| 56 | high | 27 | 50 | 0.04 | 0.12 | 0.84 | 2678.10 | 0.303 |
+| 56 | low | 0 | 50 | 0.08 | 0.10 | 0.82 | 3488.50 | 0.323 |
+| 56 | low | 27 | 50 | 0.06 | 0.06 | 0.88 | 2294.44 | 0.267 |
+
+The expected strong-basin-selector result did not occur. Forcing the absorber-side vector did not produce absorber fate in most continuations.
+
+Instead, absorber probabilities remained low across all conditions:
+
+- seed `42`, `do(V=31)`: absorber probability `0.10` under the high law and `0.04` under the low law
+- seed `56`, `do(V=27)`: absorber probability `0.04` under the high law and `0.06` under the low law
+
+### Interpretation
+
+The traced directional-state inheritance events are real path-specific causes, but they are not deterministic committor basin switches under independent future random continuations.
+
+Findings 018-019 established:
+
+`given the recorded future random stream, changing one target vector state swaps protected versus absorber fate`
+
+Finding 020 establishes the stronger correction:
+
+`under independent future random streams, the same forced vector state usually does not force absorber fate`
+
+The best current interpretation is path-dependent basin selection:
+
+`directional-state inheritance event + compatible downstream stochastic exchange history -> possible absorber takeover`
+
+This weakens the strongest version of the basin-boundary claim. The microscopic vector inheritance event is necessary and sufficient for the recorded continuation, but not sufficient by itself across the sampled continuation ensemble.
+
+### Complexity Boundary
+
+The committor results are scientifically useful for the complexity search because they separate three regimes:
+
+- absorber: high-LCF single-cluster takeover
+- protected dust: low-activity, low-LCF fragmented continuation
+- edge-coherent protected: high activity with incomplete component takeover
+
+The edge-coherent protected cases are the immediate targets for second-order coherence diagnostics. They preserve substantial activity without allowing one component to fully absorb the future.
+
+Largest protected exception cases:
+
+| Seed | Law | Condition | Forced V | Sample Index | Continuation Seed | Active | LCF | Component Entropy |
+|---:|---|---|---:|---:|---:|---:|---:|---:|
+| 56 | low | protected_vector | 0 | 35 | 76260657 | 33023 | 0.693 | 1.100 |
+| 42 | high | protected_vector | 0 | 26 | 62360648 | 28327 | 0.630 | 1.125 |
+| 56 | high | protected_vector | 0 | 48 | 76360670 | 21411 | 0.631 | 1.288 |
+
+These are not absorber successes and should not be counted as stable complexity yet. They are candidate edge-coherent states: large, organized, and not fully monopolized by a single connected component.
+
+High-dominant near-collapse cases should be retained as controls:
+
+| Seed | Law | Condition | Forced V | Sample Index | Continuation Seed | Active | LCF |
+|---:|---|---|---:|---:|---:|---:|---:|
+| 56 | low | absorber_vector | 27 | 1 | 76270623 | 15450 | 0.948 |
+| 56 | high | protected_vector | 0 | 41 | 76360663 | 14860 | 0.949 |
+| 56 | high | absorber_vector | 27 | 16 | 76370638 | 14517 | 0.944 |
+| 42 | low | absorber_vector | 31 | 17 | 62270639 | 14357 | 0.944 |
+
+### Next Test
+
+Run second-order coherence diagnostics on the largest edge-coherent protected cases before launching another broad sweep.
+
+Priority diagnostics:
+
+1. component lineage and merge history;
+2. top-k component persistence over time;
+3. center-free circulation / directed exchange-loop bias;
+4. centroid-relative rotation as a secondary spatial diagnostic;
+5. vector-inheritance ancestry for the high-activity protected cases.
+
+The immediate first target is:
+
+`seed=56`, `law=low`, `condition=protected_vector`, `sample_index=35`, `continuation_seed=76260657`
+
+### Artifacts
+
+- `src/payload_coupling_committor_analysis.py`
+- `src/second_order_coherence_diagnostic.py`
+- `src/committor_exception_catalog.py`
+- `output/findings/finding_020_committor_raw.csv`
+- `output/findings/finding_020_committor_summary.csv`
+- `output/findings/finding_020_committor_summary.json`
