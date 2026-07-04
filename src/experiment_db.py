@@ -94,6 +94,15 @@ def open_database(path: Path) -> sqlite3.Connection:
             active_iotas INTEGER NOT NULL,
             largest_coherence INTEGER NOT NULL,
             coherence_count INTEGER NOT NULL,
+            largest_coherence_face6 INTEGER,
+            coherence_count_face6 INTEGER,
+            coherence_ratio_face6 REAL,
+            largest_coherence_face18 INTEGER,
+            coherence_count_face18 INTEGER,
+            coherence_ratio_face18 REAL,
+            largest_coherence_cube26 INTEGER,
+            coherence_count_cube26 INTEGER,
+            coherence_ratio_cube26 REAL,
             entropy REAL NOT NULL,
             PRIMARY KEY (experiment_id, tick),
             FOREIGN KEY (experiment_id) REFERENCES experiments(experiment_id)
@@ -164,6 +173,32 @@ def open_database(path: Path) -> sqlite3.Connection:
             END
             """
         )
+        metric_columns.add("coherence_ratio")
+    connectivity_columns = {
+        "largest_coherence_face6": "INTEGER",
+        "coherence_count_face6": "INTEGER",
+        "coherence_ratio_face6": "REAL",
+        "largest_coherence_face18": "INTEGER",
+        "coherence_count_face18": "INTEGER",
+        "coherence_ratio_face18": "REAL",
+        "largest_coherence_cube26": "INTEGER",
+        "coherence_count_cube26": "INTEGER",
+        "coherence_ratio_cube26": "REAL",
+    }
+    for column_name, column_type in connectivity_columns.items():
+        if column_name not in metric_columns:
+            conn.execute(f"ALTER TABLE metrics ADD COLUMN {column_name} {column_type}")
+    conn.execute(
+        """
+        UPDATE metrics
+        SET largest_coherence_face6 = COALESCE(largest_coherence_face6, largest_coherence),
+            coherence_count_face6 = COALESCE(coherence_count_face6, coherence_count),
+            coherence_ratio_face6 = COALESCE(coherence_ratio_face6, coherence_ratio)
+        WHERE largest_coherence_face6 IS NULL
+           OR coherence_count_face6 IS NULL
+           OR coherence_ratio_face6 IS NULL
+        """
+    )
     conn.commit()
     return conn
 
@@ -381,9 +416,18 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             largest_coherence,
             coherence_count,
             coherence_ratio,
+            largest_coherence_face6,
+            coherence_count_face6,
+            coherence_ratio_face6,
+            largest_coherence_face18,
+            coherence_count_face18,
+            coherence_ratio_face18,
+            largest_coherence_cube26,
+            coherence_count_cube26,
+            coherence_ratio_cube26,
             entropy
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             experiment_id,
@@ -392,6 +436,15 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             int(metric["largest_coherence"]),
             int(metric["coherence_count"]),
             float(metric["coherence_ratio"]),
+            int(metric.get("largest_coherence_face6", metric["largest_coherence"])),
+            int(metric.get("coherence_count_face6", metric["coherence_count"])),
+            float(metric.get("coherence_ratio_face6", metric["coherence_ratio"])),
+            int(metric.get("largest_coherence_face18", 0)),
+            int(metric.get("coherence_count_face18", 0)),
+            float(metric.get("coherence_ratio_face18", 0.0)),
+            int(metric.get("largest_coherence_cube26", 0)),
+            int(metric.get("coherence_count_cube26", 0)),
+            float(metric.get("coherence_ratio_cube26", 0.0)),
             float(metric["entropy"]),
         ),
     )

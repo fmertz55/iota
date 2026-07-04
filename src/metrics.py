@@ -8,6 +8,11 @@ from typing import Any
 import matplotlib.pyplot as plt
 import numpy as np
 
+from iota_rig import candidate_neighbor_steps
+
+
+CONNECTIVITY_MODES = ("face6", "face18", "cube26")
+
 
 def _plot_parameter_metric(
     conn: sqlite3.Connection,
@@ -76,7 +81,10 @@ def _plot_initial_active_metric(
     )
 
 
-def coherence_stats(world: Any) -> tuple[int, int, list[int], list[tuple[float, float, float]]]:
+def coherence_stats(
+    world: Any,
+    connectivity: str = "face6",
+) -> tuple[int, int, list[int], list[tuple[float, float, float]]]:
     active_coords = {tuple(int(v) for v in coord) for coord in np.argwhere(world.active)}
     if not active_coords:
         return 0, 0, [], []
@@ -85,7 +93,10 @@ def coherence_stats(world: Any) -> tuple[int, int, list[int], list[tuple[float, 
     largest = 0
     count = 0
     components: list[tuple[int, tuple[float, float, float]]] = []
-    neighbors = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
+    neighbors = tuple(
+        (int(dx), int(dy), int(dz))
+        for dx, dy, dz in candidate_neighbor_steps(connectivity)
+    )
     while active_coords:
         count += 1
         component_size = 0
@@ -126,6 +137,22 @@ def coherence_stats(world: Any) -> tuple[int, int, list[int], list[tuple[float, 
     component_sizes = [component[0] for component in components]
     component_centroids = [component[1] for component in components]
     return largest, count, component_sizes, component_centroids
+
+
+def component_top2_coverage(component_sizes: list[int], active_count: int, fallback: float) -> float:
+    if not active_count:
+        return 0.0
+    if len(component_sizes) >= 2:
+        return float(sum(component_sizes[:2]) / active_count)
+    return fallback
+
+
+def component_centroid_distance(component_centroids: list[tuple[float, float, float]]) -> float:
+    if len(component_centroids) < 2:
+        return 0.0
+    first = component_centroids[0]
+    second = component_centroids[1]
+    return float(np.sqrt(sum((first[index] - second[index]) ** 2 for index in range(3))))
 
 
 def payload_entropy(world: Any) -> float:
@@ -218,20 +245,14 @@ def component_hierarchy_stats(component_sizes: list[int], active_count: int) -> 
 
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
-    largest, count, component_sizes, component_centroids = coherence_stats(world)
+    component_stats = {
+        connectivity: coherence_stats(world, connectivity)
+        for connectivity in CONNECTIVITY_MODES
+    }
+    largest, count, component_sizes, component_centroids = component_stats["face6"]
     coherence_ratio = float(largest / active_count) if active_count else 0.0
-    top2_coverage = (
-        float(sum(component_sizes[:2]) / active_count)
-        if active_count and len(component_sizes) >= 2
-        else coherence_ratio
-    )
-    centroid_distance_1_2 = 0.0
-    if len(component_centroids) >= 2:
-        first = component_centroids[0]
-        second = component_centroids[1]
-        centroid_distance_1_2 = float(
-            np.sqrt(sum((first[index] - second[index]) ** 2 for index in range(3)))
-        )
+    top2_coverage = component_top2_coverage(component_sizes, active_count, coherence_ratio)
+    centroid_distance_1_2 = component_centroid_distance(component_centroids)
     metric = {
         "tick": int(tick),
         "active_iotas": active_count,
@@ -245,10 +266,57 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
     for index in range(20):
         metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
     metric.update(component_hierarchy_stats(component_sizes, active_count))
+    for connectivity, (mode_largest, mode_count, mode_sizes, mode_centroids) in component_stats.items():
+        mode_ratio = float(mode_largest / active_count) if active_count else 0.0
+        metric[f"largest_coherence_{connectivity}"] = int(mode_largest)
+        metric[f"coherence_count_{connectivity}"] = int(mode_count)
+        metric[f"coherence_ratio_{connectivity}"] = mode_ratio
+        metric[f"top2_component_coverage_{connectivity}"] = component_top2_coverage(
+            mode_sizes,
+            active_count,
+            mode_ratio,
+        )
+        metric[f"component_centroid_distance_1_2_{connectivity}"] = component_centroid_distance(
+            mode_centroids
+        )
+        for index in range(20):
+            metric[f"component_size_{index + 1}_{connectivity}"] = (
+                int(mode_sizes[index]) if index < len(mode_sizes) else 0
+            )
+        for key, value in component_hierarchy_stats(mode_sizes, active_count).items():
+            metric[f"{key}_{connectivity}"] = value
     metric.update(vector_persistence_stats(world))
     if extras:
         metric.update(extras)
     return metric
+
+
+def connectivity_metric_keys() -> list[str]:
+    keys: list[str] = []
+    for connectivity in CONNECTIVITY_MODES:
+        keys.extend(
+            [
+                f"largest_coherence_{connectivity}",
+                f"coherence_count_{connectivity}",
+                f"coherence_ratio_{connectivity}",
+            ]
+        )
+        keys.extend(
+            f"component_size_{index + 1}_{connectivity}"
+            for index in range(20)
+        )
+        keys.extend(
+            [
+                f"top2_component_coverage_{connectivity}",
+                f"top1_component_fraction_{connectivity}",
+                f"top5_component_coverage_{connectivity}",
+                f"top20_component_coverage_{connectivity}",
+                f"component_size_entropy_{connectivity}",
+                f"component_size_slope_{connectivity}",
+                f"component_centroid_distance_1_2_{connectivity}",
+            ]
+        )
+    return keys
 
 
 def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
@@ -261,6 +329,7 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "coherence_count",
         "coherence_ratio",
         "entropy",
+        *connectivity_metric_keys(),
         "component_size_1",
         "component_size_2",
         "component_size_3",
@@ -305,7 +374,7 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "mean_secondary_exchange_turn_degrees",
     ]
     with open(out / "metrics.csv", "w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=keys, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=keys, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         for row in metrics:
             writer.writerow(row)
@@ -368,6 +437,20 @@ def metrics_summary(
             "final_component_size_slope": 0.0,
             "execution_time_seconds": execution_time,
         }
+        for connectivity in CONNECTIVITY_MODES:
+            summary.update(
+                {
+                    f"largest_coherence_{connectivity}": 0,
+                    f"coherence_count_{connectivity}": 0,
+                    f"peak_coherence_ratio_{connectivity}": 0.0,
+                    f"final_coherence_ratio_{connectivity}": 0.0,
+                    f"final_top1_component_fraction_{connectivity}": 0.0,
+                    f"final_top5_component_coverage_{connectivity}": 0.0,
+                    f"final_top20_component_coverage_{connectivity}": 0.0,
+                    f"final_component_size_entropy_{connectivity}": 0.0,
+                    f"final_component_size_slope_{connectivity}": 0.0,
+                }
+            )
         summary.update(init_metadata)
         return summary
     active = [int(m["active_iotas"]) for m in metrics]
@@ -418,6 +501,38 @@ def metrics_summary(
         "final_component_size_slope": float(metrics[-1].get("component_size_slope", 0.0)),
         "execution_time_seconds": execution_time,
     }
+    for connectivity in CONNECTIVITY_MODES:
+        summary.update(
+            {
+                f"largest_coherence_{connectivity}": max(
+                    int(m.get(f"largest_coherence_{connectivity}", 0)) for m in metrics
+                ),
+                f"coherence_count_{connectivity}": int(
+                    metrics[-1].get(f"coherence_count_{connectivity}", 0)
+                ),
+                f"peak_coherence_ratio_{connectivity}": max(
+                    float(m.get(f"coherence_ratio_{connectivity}", 0.0)) for m in metrics
+                ),
+                f"final_coherence_ratio_{connectivity}": float(
+                    metrics[-1].get(f"coherence_ratio_{connectivity}", 0.0)
+                ),
+                f"final_top1_component_fraction_{connectivity}": float(
+                    metrics[-1].get(f"top1_component_fraction_{connectivity}", 0.0)
+                ),
+                f"final_top5_component_coverage_{connectivity}": float(
+                    metrics[-1].get(f"top5_component_coverage_{connectivity}", 0.0)
+                ),
+                f"final_top20_component_coverage_{connectivity}": float(
+                    metrics[-1].get(f"top20_component_coverage_{connectivity}", 0.0)
+                ),
+                f"final_component_size_entropy_{connectivity}": float(
+                    metrics[-1].get(f"component_size_entropy_{connectivity}", 0.0)
+                ),
+                f"final_component_size_slope_{connectivity}": float(
+                    metrics[-1].get(f"component_size_slope_{connectivity}", 0.0)
+                ),
+            }
+        )
     summary.update(init_metadata)
     return summary
 

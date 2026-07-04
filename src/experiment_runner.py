@@ -17,7 +17,15 @@ from experiment_db import (
     register_artifact,
     simulation_version,
 )
-from iota_rig import initial_conditions, init_world, load_config, save_scatter, save_slice, step
+from iota_rig import (
+    initial_conditions,
+    init_world,
+    load_config,
+    save_scatter,
+    save_slice,
+    save_world_state,
+    step,
+)
 from metrics import (
     collect_metrics,
     metrics_summary,
@@ -190,6 +198,7 @@ def register_snapshot_artifacts(
 def register_run_artifacts(conn, experiment_id: int, base_dir: Path, out: Path) -> None:
     artifact_types = {
         "metrics.csv": "metrics_csv",
+        "final_state.npz": "final_state_npz",
         "active_over_time.png": "run_plot",
         "metrics_timeseries.png": "run_plot",
     }
@@ -346,10 +355,22 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
             print(f"early_stop tick={tick} reason={early_stop_reason}")
             break
 
-    save_run_metrics(run_metrics, out)
-    register_run_artifacts(conn, experiment_id, base_dir, out)
     elapsed = time.perf_counter() - start
     summary = metrics_summary(run_metrics, elapsed, init_metadata, early_stop_reason is not None)
+    save_world_state(
+        world,
+        out / "final_state.npz",
+        {
+            "experiment_id": experiment_id,
+            "label": label,
+            "final_tick": int(summary["final_tick"]),
+            "early_stopped": bool(early_stop_reason is not None),
+            "config_hash": config_hash(cfg),
+            "simulation_version": simulation_version(cfg),
+        },
+    )
+    save_run_metrics(run_metrics, out)
+    register_run_artifacts(conn, experiment_id, base_dir, out)
     insert_summary_metrics(conn, experiment_id, summary)
     if early_stop_reason is not None:
         conn.execute(

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import math
 from dataclasses import dataclass
 from pathlib import Path
@@ -136,6 +137,45 @@ class World:
     @property
     def size(self) -> int:
         return int(self.active.shape[0])
+
+
+def save_world_state(world: World, path: Path, metadata: dict[str, Any] | None = None) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(
+        path,
+        active=world.active,
+        A=world.A,
+        R=world.R,
+        V=world.V,
+        P=world.P,
+        previous_active=world.previous_active,
+        previous_V=world.previous_V,
+        vectors=world.vectors,
+        vector_behaviors=np.array(world.vector_behaviors, dtype=str),
+        wrap=np.array(world.wrap),
+        rng_state_json=np.array(json.dumps(world.rng.bit_generator.state, sort_keys=True)),
+        metadata_json=np.array(json.dumps(metadata or {}, sort_keys=True, default=str)),
+    )
+
+
+def load_world_state(path: Path) -> World:
+    with np.load(path, allow_pickle=False) as data:
+        rng = np.random.default_rng()
+        rng_state_json = str(data["rng_state_json"].item())
+        rng.bit_generator.state = json.loads(rng_state_json)
+        return World(
+            active=data["active"].astype(bool),
+            A=data["A"].astype(np.uint8),
+            R=data["R"].astype(np.uint8),
+            V=data["V"].astype(np.uint8),
+            P=data["P"].astype(np.uint8),
+            previous_active=data["previous_active"].astype(bool),
+            previous_V=data["previous_V"].astype(np.uint8),
+            vectors=data["vectors"].astype(np.int16),
+            vector_behaviors=tuple(str(value) for value in data["vector_behaviors"].tolist()),
+            wrap=bool(data["wrap"].item()),
+            rng=rng,
+        )
 
 
 def init_world(cfg: Dict[str, Any]) -> World:

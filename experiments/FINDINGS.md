@@ -8,8 +8,8 @@ The working rig vocabulary is retained for reproducibility, but paper-facing int
 |---|---|---|
 | active iotas | active sites / occupied sites | Count of non-dark lattice cells. |
 | largest coherence | largest connected component / giant component | Size of the largest active connected component. |
-| coherence ratio / LCF | largest-component fraction / order parameter | `largest_connected_component / active_sites`. |
-| coherence count | connected-component count / cluster count | Number of active connected components. |
+| coherence ratio / LCF | largest-component fraction / order parameter | `largest_connected_component / active_sites`, always relative to a stated connectivity graph. |
+| coherence count | connected-component count / cluster count | Number of active connected components under a stated connectivity graph. |
 | valence | coordination capacity / maximum productive degree | Maximum simultaneous productive relationships an active site can express. |
 | bond_probability | ranked secondary-edge occupation probability / modified stochastic bond occupation | Probability that a non-primary productive relationship is admitted after candidate scoring; not ordinary independent bond percolation. |
 | neighbor_mode | interaction neighborhood / lattice connectivity | Candidate geometry: `face6` is a 3D von Neumann neighborhood, `face18` is face+edge connectivity, and `cube26` is a 3D Moore neighborhood. |
@@ -25,6 +25,7 @@ The working rig vocabulary is retained for reproducibility, but paper-facing int
 Terminology discipline:
 
 - Use `giant connected component`, `largest-component fraction`, and `cluster count` in paper-facing plots and captions.
+- Report connectivity explicitly for component metrics: `LCF_face6`, `LCF_face18`, and `LCF_cube26` are distinct measurements, not interchangeable aliases.
 - Describe `bond_probability` as a ranked, directed, state-dependent edge-occupation rule when contrasting with standard bond percolation.
 - Use `discontinuous`, `threshold-like`, or `first-order-like` only with the qualifier `like` until seed ensembles and finite-size scaling support a stronger claim.
 - Use `nucleation-like` for single-seed or single-event mechanisms until robustness across stochastic realizations is established.
@@ -56,18 +57,41 @@ Minimum equivalence requirements:
 
 All roadmap items reference the baseline marker above.
 
-1. Vectorize only behind golden trajectory tests. The current engine uses a pure-Python per-active-site update loop and full component analysis at each metric snapshot. Vectorization should target update candidate generation, contribution accumulation, and component labeling, but it must first pass the Finding 018 equivalence suite.
-2. Match measurement connectivity to growth connectivity. `coherence_stats` should accept the configured interaction neighborhood so largest-component metrics can be reported under face-only, face+edge, or full-neighborhood connectivity.
-3. Add deactivation or decay only as a new controlled law. Current active sites are effectively irreversible. A death/subthreshold rule would change the model class and should be introduced as a versioned experiment, not as a silent fix.
-4. Make within-tick updates order-independent. Multiple sources currently update targets through sequential blending. A scatter/accumulate phase followed by one target update per tick would make the dynamics easier to reason about and vectorize.
-5. Guard against silent no-op sweeps. Swept dotted keys should be validated against known-consumed config paths so a tidy parameter table cannot be produced for a parameter the engine never reads.
-6. Keep local refs synchronized before major experiments. This checkout currently resolves `HEAD...origin/main` as `0 0`; if that changes, sync before interpreting new runs.
+1. Repair component measurement before new second-order claims. Historical LCF values are valid as face-connectivity measurements, but the current `coherence_stats` graph does not match the `cube26` interaction graph used by Findings 017-020. Add explicit `face6`, `face18`, and `cube26` component metrics before interpreting edge-coherent cases.
+2. Recompute key regime classifications under all component graphs. Re-score the seed-42 and seed-56 natural/counterfactual rows, the high-dominant controls `45`, `50`, `61`, representative protected/dust seeds, and the largest Finding 020 protected exceptions.
+3. Separate discovery and comparison protocols. Early stopping is acceptable for cheap classification, but fixed-horizon runs with early stopping disabled are required for time-series comparisons and paper-grade morphology tables.
+4. Vectorize only behind golden trajectory tests. The current engine uses a pure-Python per-active-site update loop and full component analysis at each metric snapshot. Vectorization should target update candidate generation, contribution accumulation, and component labeling, but it must first pass the Finding 018 equivalence suite.
+5. Add deactivation or decay only as a new controlled law. Current active sites are effectively irreversible. A death/subthreshold rule would change the model class and should be introduced as a versioned experiment, not as a silent fix.
+6. Make within-tick updates order-independent. Multiple sources currently update targets through sequential blending. A scatter/accumulate phase followed by one target update per tick would make the dynamics easier to reason about and vectorize.
+7. Guard against silent no-op sweeps. Swept dotted keys should be validated against known-consumed config paths so a tidy parameter table cannot be produced for a parameter the engine never reads.
+8. Keep local refs synchronized before major experiments. This checkout currently resolves `HEAD...origin/main` as `0 0`; if that changes, sync before interpreting new runs.
 
 ## Paper-Critical Validation Gate
 
-Findings 017-018 should not be treated as a general law until two validation tests resolve.
+Findings 017-020 should not be treated as a general law without the validation gates below.
 
-The important correction is that bisection guarantees a first divergence, but it does not guarantee that the first divergence is outcome-pivotal. Finding 18 is nontrivial because the bidirectional counterfactual intervention swapped both final outcomes exactly. That establishes causal necessity and sufficiency for this one seed and setup, not generality across stochastic realizations.
+The important correction is that bisection guarantees a first divergence, but it does not guarantee that the first divergence is outcome-pivotal. Finding 018 is nontrivial because the bidirectional counterfactual intervention swapped both final outcomes exactly. Finding 019 replicated that replay-pivotal event class in seed `56`. Finding 020 then showed that the same vector state is not a robust deterministic committor under independent future random streams.
+
+### 0. Measurement Connectivity Repair
+
+Before running second-order coherence diagnostics, repair the component measurement layer.
+
+The current key experiments use `vectors.mode = cube26` and `constants.neighbor_mode = cube26`, while the historical largest-component fraction is measured with face-only connectivity. That means a structure can be dynamically connected through the interaction graph but counted as fragmented by the measurement graph.
+
+Protocol:
+
+- retain historical LCF values as `LCF_face6`;
+- add `LCF_face18`, `LCF_cube26`, `component_count_face18`, and `component_count_cube26`;
+- update diagnostics to accept an explicit component-connectivity mode;
+- rerun the key rows from Findings 017-020 under all three graphs;
+- only then classify protected, high-dominant, absorber, and edge-coherent cases.
+
+Interpretation:
+
+- If `LCF_face6` is low but `LCF_cube26` is high, the run is not simply fragmented. It is interaction-neighborhood coherent but face-fragmented.
+- If all LCF variants remain low, the protected/dust label is stronger.
+- If all LCF variants remain high, the absorber/high-dominant label is robust.
+- If labels change by graph, the result should be reported as connectivity-relative rather than silently collapsed into one regime.
 
 ### 1. Boundary Seed Ensemble
 
@@ -89,7 +113,7 @@ Current run:
 - Script: `src/payload_coupling_seed_ensemble_4096_sweep.py`
 - Couplings: `0.209375`, `0.2109375`
 - Seeds: `42-71`
-- Status: active as of this document update.
+- Status: completed in Finding 019.
 
 ### 2. Finite-Size Scaling
 
@@ -127,17 +151,22 @@ Interpretation:
 
 ### 4. Committor Analysis
 
-A stronger causal test is a committor-style experiment. Save the state immediately before the tick-337 event, then launch many independent future random continuations after setting the target state to each alternative:
+A stronger causal test is a committor-style experiment. Save the state immediately before each traced vector-inheritance event, then launch many independent future random continuations after setting the target state to each alternative:
 
-- `do(V=0)`
-- `do(V=31)`
+- seed `42`: `do(V=0)` versus `do(V=31)`
+- seed `56`: `do(V=0)` versus `do(V=27)`
 
 Estimate:
 
-- `Pr(absorber | do(V=0))`
-- `Pr(absorber | do(V=31))`
+- `Pr(absorber | protected-side vector)`
+- `Pr(absorber | absorber-side vector)`
 
 If those probabilities are near `0` and `1`, respectively, the vector state is a robust basin selector rather than an accident of one downstream RNG stream. This is the cleanest way to test whether the identified variable lies on the transition boundary.
+
+Current result:
+
+- Finding 020 did not produce near-`0` versus near-`1` committor probabilities.
+- The vector state is replay-pivotal under the recorded future random stream, but not sufficient by itself under independent continuation streams.
 
 ### Interpretive Boundary
 
@@ -149,10 +178,11 @@ That is a legitimate interpretive angle if labeled as interpretation. The empiri
 
 Current scope:
 
-- Established: for seed `42` and the current setup, the tick-337 directional-state inheritance event is necessary and sufficient for absorber versus protected fate.
-- Not established: that directional-state inheritance is the usual mechanism across seeds, or that the compatibility-coupling response is a thermodynamic first-order transition.
+- Established: for seeds `42` and `56`, under the recorded future random stream, the traced directional-state inheritance event is necessary and sufficient for absorber versus protected fate.
+- Not established: that the vector state is a robust committor-pivotal state under independent future random streams, or that the compatibility-coupling response is a thermodynamic first-order transition.
+- Provisional: morphology labels based on LCF remain connectivity-relative until Finding 021's measurement pass is completed.
 
-Paper framing should therefore treat Finding 018 as a rigorous one-trajectory causal discovery whose generality requires replication. The bidirectional intervention is the substantive result; the broader transition claim depends on seed ensembles, mechanism replication, committor analysis, and finite-size behavior.
+Paper framing should therefore treat Findings 018-020 as trajectory-level causal discoveries plus a committor correction. The bidirectional interventions are substantive replay results; the broader transition claim depends on connectivity-aware morphology measurement, mechanism replication, committor analysis, and finite-size behavior.
 
 ## Finding 001: Valence-2 Coherent Percolation
 
@@ -1768,7 +1798,9 @@ The committor results are scientifically useful for the complexity search becaus
 - protected dust: low-activity, low-LCF fragmented continuation
 - edge-coherent protected: high activity with incomplete component takeover
 
-The edge-coherent protected cases are the immediate targets for second-order coherence diagnostics. They preserve substantial activity without allowing one component to fully absorb the future.
+These labels are provisional until component metrics are recomputed under face6, face18, and cube26 connectivity. The current LCF values are face-connectivity LCF values. A case that looks fragmented under face6 may be coherent under the interaction-neighborhood graph that actually generated it.
+
+The edge-coherent protected cases remain the immediate scientific target, but not the immediate engineering target. First verify that they are genuinely non-absorbing under matched connectivity. They preserve substantial activity without allowing one face-connected component to fully absorb the future.
 
 Largest protected exception cases:
 
@@ -1791,7 +1823,16 @@ High-dominant near-collapse cases should be retained as controls:
 
 ### Next Test
 
-Run second-order coherence diagnostics on the largest edge-coherent protected cases before launching another broad sweep.
+Do not run second-order coherence diagnostics as the next step. First repair and rerun connectivity-aware component measurement.
+
+Immediate measurement pass:
+
+1. Add component metrics for `face6`, `face18`, and `cube26`.
+2. Recompute Finding 020 exception rows under all three connectivity graphs.
+3. Reclassify edge-coherent protected cases using matched interaction-neighborhood connectivity.
+4. Keep the original face6 rows for historical comparison.
+
+Then run second-order coherence diagnostics on the largest cases that remain high-activity and non-absorbing under cube26.
 
 Priority diagnostics:
 
@@ -1813,3 +1854,103 @@ The immediate first target is:
 - `output/findings/finding_020_committor_raw.csv`
 - `output/findings/finding_020_committor_summary.csv`
 - `output/findings/finding_020_committor_summary.json`
+
+## Finding 021: Coherence Is Connectivity-Relative
+
+### Status
+
+Methodological synthesis from code review of the test rig and Findings 017-020. No new simulation result is claimed here.
+
+### Trigger
+
+The key payload-coupling experiments use full-neighborhood growth:
+
+- `vectors.mode = cube26`
+- `constants.neighbor_mode = cube26`
+
+The current component measurement uses face-only connectivity in `coherence_stats`, and the second-order diagnostic also labels components with face-only connectivity. Therefore the reported LCF in Findings 017-020 is best read as `LCF_face6`, not as the largest-component fraction of the same relation graph that generated the structure.
+
+### Synthesis
+
+This does not invalidate the seed-42 and seed-56 causal replay results.
+
+Those results depended on large active-count and fate swaps:
+
+- seed `42`: low natural `927` active, high natural `15713` active, and bidirectional vector forcing swapped the outcomes exactly;
+- seed `56`: low natural `987` active, high natural `26193` active, and bidirectional vector forcing swapped the outcomes exactly.
+
+Those macroscopic active-count cascades survive the connectivity critique. What becomes provisional is the regime label attached to the final morphology:
+
+- `protected`
+- `fragmented`
+- `high-dominant`
+- `absorber`
+- `edge-coherent protected`
+
+Those labels must be recomputed under the measurement graph being used.
+
+### Interpretation
+
+There is not one absolute coherence measurement. Coherence is relative to an allowed relation graph.
+
+Practical consequence:
+
+- `face6` coherence measures literal face adjacency.
+- `face18` coherence measures face-plus-edge adjacency.
+- `cube26` coherence measures the full interaction-neighborhood adjacency used by the key growth experiments.
+
+A run can therefore be face-fragmented but interaction-neighborhood coherent. That is not merely a bookkeeping artifact. It may be the scientifically interesting middle class: form that is coherent at the grammar scale that produced it, but fragmented under stricter local contact.
+
+### Measurement Protocol
+
+Going forward, component tables should report these side by side:
+
+| Metric | Meaning |
+|---|---|
+| `largest_component_face6` | Largest face-connected active component. |
+| `largest_component_face18` | Largest face-or-edge-connected active component. |
+| `largest_component_cube26` | Largest full-neighborhood active component. |
+| `LCF_face6` | `largest_component_face6 / active_sites`. |
+| `LCF_face18` | `largest_component_face18 / active_sites`. |
+| `LCF_cube26` | `largest_component_cube26 / active_sites`. |
+| `component_count_face6` | Face-connected component count. |
+| `component_count_face18` | Face-or-edge-connected component count. |
+| `component_count_cube26` | Full-neighborhood component count. |
+
+Historical `LCF` columns should not be overwritten. They should be relabeled or interpreted as `LCF_face6` unless a run explicitly used a different component graph.
+
+### Reanalysis Targets
+
+Minimum rows to recompute before second-order coherence:
+
+| Group | Rows |
+|---|---|
+| Seed-42 bracket | low natural, high natural, low forced `V=31`, high forced `V=0`. |
+| Seed-56 bracket | low natural, high natural, low forced `V=27`, high forced `V=0`. |
+| High-dominant controls | seeds `45`, `50`, and `61` at both bracket couplings. |
+| Protected/dust controls | representative non-flipping seeds from Finding 019. |
+| Committor exceptions | largest high-activity protected rows from Finding 020. |
+
+Classification rule:
+
+- `absorber`: high LCF under all tested connectivity graphs, or explicitly high under the declared graph.
+- `face-fragmented / cube-coherent`: low `LCF_face6` but high `LCF_cube26`.
+- `protected dust`: low activity and low LCF under all tested graphs.
+- `edge-coherent protected`: high activity, non-absorbing under cube26, and persistent multi-component structure under the relevant graph.
+
+### Next Steps
+
+1. Add a shared connectivity helper backed by the same neighbor sets used by the interaction rules.
+2. Extend `coherence_stats` and diagnostics to compute `face6`, `face18`, and `cube26` metrics side by side.
+3. Rerun the reanalysis targets above and write a compact comparison table.
+4. Update Findings 017-020 labels only where the multi-graph results require it.
+5. Run second-order coherence diagnostics only on cases that remain high-activity and non-absorbing after the multi-connectivity pass.
+
+### Protocol Boundary
+
+Use two run protocols from here forward:
+
+- classification protocol: early stopping allowed, intended for cheap screening;
+- comparison protocol: fixed horizon, early stopping disabled, intended for paper-grade morphology and time-series comparisons.
+
+Finding 020 remains a strong correction to the deterministic story: the vector-inheritance events are replay-pivotal under the recorded future random stream, but not robust committor-pivotal states under independent continuations. The next measurement pass should preserve that distinction while making the morphology labels connectivity-explicit.

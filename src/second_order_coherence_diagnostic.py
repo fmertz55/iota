@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from iota_rig import load_config
+from iota_rig import candidate_neighbor_steps, load_config
 from payload_coupling_committor_analysis import (
     HIGH_COUPLING,
     HIGH_LABEL,
@@ -26,7 +26,6 @@ from payload_coupling_divergence_trace import trace_step
 
 
 OUTPUT_DIR = Path("output/findings")
-NEIGHBORS_6 = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
 
 
 def entropy_from_counts(counts: np.ndarray) -> float:
@@ -37,9 +36,18 @@ def entropy_from_counts(counts: np.ndarray) -> float:
     return float(-np.sum(probabilities * np.log2(probabilities)))
 
 
-def component_records(world: Any, top_components: int, min_size: int) -> list[dict[str, Any]]:
+def component_records(
+    world: Any,
+    top_components: int,
+    min_size: int,
+    connectivity: str,
+) -> list[dict[str, Any]]:
     active_coords = {tuple(int(value) for value in coord) for coord in np.argwhere(world.active)}
     components: list[dict[str, Any]] = []
+    neighbors = tuple(
+        (int(dx), int(dy), int(dz))
+        for dx, dy, dz in candidate_neighbor_steps(connectivity)
+    )
 
     while active_coords:
         start = active_coords.pop()
@@ -47,7 +55,7 @@ def component_records(world: Any, top_components: int, min_size: int) -> list[di
         queue: deque[tuple[int, int, int]] = deque([start])
         while queue:
             x, y, z = queue.popleft()
-            for dx, dy, dz in NEIGHBORS_6:
+            for dx, dy, dz in neighbors:
                 nx, ny, nz = x + dx, y + dy, z + dz
                 if world.wrap:
                     nx %= world.size
@@ -302,6 +310,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--top-components", type=int, default=20)
     parser.add_argument("--min-component-size", type=int, default=10)
     parser.add_argument("--min-overlap-fraction", type=float, default=0.25)
+    parser.add_argument("--connectivity", choices=["face6", "face18", "cube26"], default="cube26")
     parser.add_argument("--output-prefix", default="")
     return parser.parse_args()
 
@@ -329,6 +338,7 @@ def main() -> None:
     prefix = args.output_prefix or (
         "finding_021_second_order"
         f"_seed{args.seed}_{args.law}_{args.condition}_sample{args.sample_index}"
+        f"_{args.connectivity}"
     )
     component_rows: list[dict[str, Any]] = []
     interval_rows: list[dict[str, Any]] = []
@@ -342,7 +352,12 @@ def main() -> None:
         if tick % args.sample_every != 0 and tick != args.max_ticks:
             continue
 
-        components = component_records(world, args.top_components, args.min_component_size)
+        components = component_records(
+            world,
+            args.top_components,
+            args.min_component_size,
+            args.connectivity,
+        )
         tracked_rows, previous_tracks, next_track_id = assign_tracks(
             components,
             previous_tracks,
@@ -392,6 +407,7 @@ def main() -> None:
         "sample_index": args.sample_index,
         "continuation_seed": continuation_seed,
         "forced_v": forced_v,
+        "connectivity": args.connectivity,
         "divergence_tick": event.divergence_tick,
         "target": event.target,
         "sample_every": args.sample_every,
