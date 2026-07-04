@@ -1,0 +1,15 @@
+=== 2026-07-04T10:44:16-04:00 seed=56 law=low condition=protected_vector sample=35 ===
+resuming from output/findings/finding_020_committor_raw.csv: completed_rows=400
+building checkpoint seed=56 law=low
+refreshing seed=56 law=low condition=protected_vector sample=36/50
+seed=56 law=low condition=protected_vector sample=36/50 tick=512 active=194
+seed=56 law=low condition=protected_vector sample=36/50 tick=768 active=264
+seed=56 law=low condition=protected_vector sample=36/50 tick=1024 active=705
+seed=56 law=low condition=protected_vector sample=36/50 tick=1280 active=2212
+seed=56 law=low condition=protected_vector sample=36/50 tick=1536 active=4562
+seed=56 law=low condition=protected_vector sample=36/50 tick=1792 active=6743
+seed=56 law=low condition=protected_vector sample=36/50 tick=2048 active=9724
+seed=56 law=low condition=protected_vector sample=36/50 tick=2304 active=13480
+seed=56 law=low condition=protected_vector sample=36/50 tick=2560 active=16534
+seed=56 law=low condition=protected_vector sample=36/50 tick=2816 active=19135
+seed=56 law=low condition=protected_vector sample=36/50 tick=3072 active=21923

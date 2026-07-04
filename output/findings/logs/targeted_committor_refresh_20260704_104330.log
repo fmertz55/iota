@@ -1,0 +1,3 @@
+=== 2026-07-04T10:43:30-04:00 seed=56 law=low condition=protected_vector sample=35 ===
+resuming from output/findings/finding_020_committor_raw.csv: completed_rows=400
+building checkpoint seed=56 law=low

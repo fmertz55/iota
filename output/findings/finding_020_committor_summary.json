@@ -2,18 +2,17 @@
   "samples_per_condition_requested": 50,
   "samples_completed": 400,
   "seeds": [
-    42,
     56
   ],
   "laws": [
-    "low",
-    "high"
+    "low"
   ],
   "conditions": [
-    "protected_vector",
-    "absorber_vector"
+    "protected_vector"
   ],
-  "sample_indexes": null,
+  "sample_indexes": [
+    35
+  ],
   "max_ticks": 4096,
   "early_absorber": true,
   "raw_path": "output/findings/finding_020_committor_raw.csv",
