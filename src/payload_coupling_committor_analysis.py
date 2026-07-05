@@ -428,13 +428,25 @@ def write_current_summary(
         handle.flush()
         os.fsync(handle.fileno())
 
+    law_order = {"low": 0, "high": 1}
+    condition_order = {"protected_vector": 0, "absorber_vector": 1}
     summary = {
+        "summary_scope": "all_loaded_rows",
         "samples_per_condition_requested": args.samples,
         "samples_completed": len(rows),
-        "seeds": args.seeds,
-        "laws": args.laws,
-        "conditions": args.conditions,
-        "sample_indexes": args.sample_indexes,
+        "seeds": sorted({int(row["seed"]) for row in rows}),
+        "laws": sorted({str(row["law"]) for row in rows}, key=lambda value: law_order.get(value, 99)),
+        "conditions": sorted(
+            {str(row["condition"]) for row in rows},
+            key=lambda value: condition_order.get(value, 99),
+        ),
+        "sample_indexes": sorted({int(row["sample_index"]) for row in rows}),
+        "last_run_filter": {
+            "seeds": args.seeds,
+            "laws": args.laws,
+            "conditions": args.conditions,
+            "sample_indexes": args.sample_indexes,
+        },
         "max_ticks": MAX_TICKS,
         "early_absorber": args.early_absorber,
         "raw_path": str(raw_path),
@@ -502,10 +514,10 @@ def main() -> None:
     completed = {row_key(row) for row in rows}
     row_indexes = {row_key(row): index for index, row in enumerate(rows)}
     laws = [
-        ("low", LOW_LABEL, LOW_COUPLING),
-        ("high", HIGH_LABEL, HIGH_COUPLING),
+        (0, "low", LOW_LABEL, LOW_COUPLING),
+        (1, "high", HIGH_LABEL, HIGH_COUPLING),
     ]
-    laws = [entry for entry in laws if entry[0] in set(args.laws)]
+    laws = [entry for entry in laws if entry[1] in set(args.laws)]
     sample_indexes = args.sample_indexes if args.sample_indexes is not None else list(range(args.samples))
     invalid_sample_indexes = [index for index in sample_indexes if index < 0 or index >= args.samples]
     if invalid_sample_indexes:
@@ -515,7 +527,7 @@ def main() -> None:
 
     for seed in args.seeds:
         event = SEED_EVENTS[seed]
-        for law_index, (law, label, coupling) in enumerate(laws):
+        for law_index, law, label, coupling in laws:
             cfg = seed_config(base_cfg, seed, label, coupling)
             print(f"building checkpoint seed={seed} law={law}")
             checkpoint = checkpoint_world(cfg, event)
