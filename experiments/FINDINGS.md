@@ -1790,6 +1790,16 @@ The best current interpretation is path-dependent basin selection:
 
 This weakens the strongest version of the basin-boundary claim. The microscopic vector inheritance event is necessary and sufficient for the recorded continuation, but not sufficient by itself across the sampled continuation ensemble.
 
+Current causal frame:
+
+- Law defines the reachable transition space.
+- Kick resolves the first asymmetry and selects a basin/history.
+- History compounds local constraints into valence.
+- Valence changes which future transitions become easy, hard, or effectively inaccessible.
+- Connectivity changes how coherent extent is observed or classified, but so far does not appear to be the primary selector of outcome.
+
+The state space may be broadly reachable in principle, but reachability from here is history-conditioned.
+
 ### Complexity Boundary
 
 The committor results are scientifically useful for the complexity search because they separate three regimes:
