@@ -144,6 +144,13 @@ Under that path, the Finding 018 replay suite must still reproduce:
 - vector inheritance draw `0.01315728279463102`;
 - final paired active-site counts, largest connected component, LCF, and cluster count.
 
+Gate result on `2026-07-07`: pass.
+
+- Trace replay reproduced tick `337`, sequence `15`, target `(41,43,23)`, vector inheritance draw `0.01315728279463102`, low `V=0`, and high `V=31`.
+- Continuation replay reproduced low natural and high-forced protected rows: `927` active sites, largest component `106`, LCF `0.11434735706580366`, cluster count `93`.
+- Continuation replay reproduced high natural and low-forced absorber rows: `15713` active sites, largest component `15054`, LCF `0.9580602049258575`, cluster count `143`.
+- The final continuation check used a temporary parallel runner around the same `probe_config`, `trace_step`, `step`, and `metric_row` functions because the canonical serial four-branch script is single-core and long-running.
+
 ## First Predictions
 
 1. Budget-bounded growth: active count is bounded by the conserved amplitude ledger.

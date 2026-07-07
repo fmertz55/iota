@@ -246,15 +246,26 @@ def component_hierarchy_stats(component_sizes: list[int], active_count: int) -> 
 def ledger_stats(world: Any) -> dict[str, float]:
     active_count = int(world.active.sum())
     active_A = int(np.sum(world.A[world.active], dtype=np.int64)) if active_count else 0
-    latent_A_array = getattr(world, "latent_A", None)
     ledger_enabled = bool(getattr(world, "ledger_enabled", False))
+    if not ledger_enabled:
+        return {
+            "total_A": float(active_A),
+            "active_A": float(active_A),
+            "latent_A": 0.0,
+            "depleted_cells": 0.0,
+            "ledger_error": 0.0,
+            "deactivation_events": 0.0,
+            "amplitude_transfers": 0.0,
+            "failed_transfer_gates": 0.0,
+        }
+    latent_A_array = getattr(world, "latent_A", None)
     if latent_A_array is None:
         latent_A = 0
         depleted_cells = 0
     else:
         inactive = ~world.active
         latent_A = int(np.sum(latent_A_array[inactive], dtype=np.int64))
-        depleted_cells = int(np.count_nonzero(inactive & (latent_A_array == 0))) if ledger_enabled else 0
+        depleted_cells = int(np.count_nonzero(inactive & (latent_A_array == 0)))
     total_A = active_A + latent_A
     initial_total_A = int(getattr(world, "initial_total_A", total_A))
     return {
@@ -262,7 +273,7 @@ def ledger_stats(world: Any) -> dict[str, float]:
         "active_A": float(active_A),
         "latent_A": float(latent_A),
         "depleted_cells": float(depleted_cells),
-        "ledger_error": float(total_A - initial_total_A) if ledger_enabled else 0.0,
+        "ledger_error": float(total_A - initial_total_A),
         "deactivation_events": 0.0,
         "amplitude_transfers": 0.0,
         "failed_transfer_gates": 0.0,
