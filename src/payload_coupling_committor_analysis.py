@@ -11,6 +11,7 @@ from typing import Any
 
 import numpy as np
 
+from continuation import classify_outcome, clone_world
 from experiment_db import artifact_hash
 from iota_rig import World, init_world, load_config, save_world_state, step
 from metrics import collect_metrics
@@ -123,22 +124,6 @@ def seed_config(base_cfg: dict[str, Any], seed: int, label: str, coupling: float
     return cfg
 
 
-def clone_world(world: World, rng_seed: int) -> World:
-    return World(
-        active=world.active.copy(),
-        A=world.A.copy(),
-        R=world.R.copy(),
-        V=world.V.copy(),
-        P=world.P.copy(),
-        previous_active=world.previous_active.copy(),
-        previous_V=world.previous_V.copy(),
-        vectors=world.vectors.copy(),
-        vector_behaviors=tuple(world.vector_behaviors),
-        wrap=world.wrap,
-        rng=np.random.default_rng(rng_seed),
-    )
-
-
 def checkpoint_world(cfg: dict[str, Any], event: SeedEvent) -> World:
     world = init_world(cfg)
     for tick in range(1, event.divergence_tick + 1):
@@ -147,13 +132,7 @@ def checkpoint_world(cfg: dict[str, Any], event: SeedEvent) -> World:
 
 
 def classify(metric: dict[str, Any], connectivity: str = "face6") -> str:
-    ratio_key = "coherence_ratio" if connectivity == "face6" else f"coherence_ratio_{connectivity}"
-    coherence_ratio = float(metric[ratio_key])
-    if metric["active_iotas"] >= 1000 and coherence_ratio >= 0.95:
-        return "absorber"
-    if metric["active_iotas"] >= 1000 and coherence_ratio >= 0.90:
-        return "high_dominant"
-    return "protected"
+    return classify_outcome(metric, connectivity)
 
 
 def run_continuation(

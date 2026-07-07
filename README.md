@@ -144,6 +144,8 @@ src/iota_rig.py           # core simulation and universe snapshots
 src/experiment_db.py      # SQLite schema, config hashes, parameter diffs
 src/experiment_runner.py  # create experiment, run simulation, record outputs
 src/metrics.py            # coherence, entropy, run plots, experiment plots
+src/continuation.py       # shared continuation cloning and outcome classification
+src/openness_timeline.py  # resampled-future openness timeline measurement
 ```
 
 ## Experiment safety
@@ -227,6 +229,51 @@ constants:
 The original v0.1.0 behavior is equivalent to `valence: 1`.
 
 `constants.bond_probability` gates non-primary productive relationship slots after candidate scoring. The primary vector target remains deterministic; each additional valence slot independently admits the next highest-scored candidate, then the existing conservation, payload, vector-inheritance, and rounding rules apply unchanged. This is a ranked, directed, state-dependent edge-occupation rule, not ordinary independent bond percolation.
+
+## Openness Timeline
+
+The committor machinery from Finding 020 is now generalized into an openness instrument. At a saved state `s_t`, the runner launches independent future random continuations and estimates:
+
+```text
+O(t) = H(Pr(outcome class | s_t)) / log(3)
+```
+
+The three outcome classes are `absorber`, `high_dominant`, and `protected`, classified under an explicit component graph such as `cube26`. Low `O(t)` means the checkpoint has a nearly closed future under the sampled horizon; high `O(t)` means the future remains non-degenerate.
+
+Development-scale run:
+
+```bash
+python src/openness_timeline.py \
+  --config config.yaml \
+  --ticks 1024 \
+  --checkpoint-every 256 \
+  --horizon 512 \
+  --samples 8 \
+  --connectivity cube26
+```
+
+Paper-grade runs should increase `--samples`, `--horizon`, and lattice size only after the 64^3 protocol is stable. Outputs are written under `output/findings/`:
+
+```text
+finding_022_openness_timeline_raw.csv
+finding_022_openness_timeline_summary.csv
+finding_022_openness_timeline_summary.json
+finding_022_openness_timeline_states/
+```
+
+The summary also records a top-k component persistence proxy and `complexity_score = component_persistence * openness`. This is a measurement instrument, not a new law; it works against the current `iota-rig-v0.1.1` dynamics.
+
+## Versioned v0.2 Direction
+
+The current rig is an irreversible growth substrate. It can show grammar, nucleation, and path-dependent basin selection, but it cannot yet make mass/energy language falsifiable because it has no hard conserved ledger and no deactivation.
+
+The proposed next law family is documented in:
+
+```text
+docs/IOTA_RIG_V0_2_LAW_SPEC.md
+```
+
+Do not silently add deactivation or hard conservation to existing v0.1 runs. They are version boundaries and should use a new `simulation_version`, a fresh baseline, and golden checks against the Finding 018 replay suite.
 
 ## First big question
 

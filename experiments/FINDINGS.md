@@ -19,6 +19,10 @@ The working rig vocabulary is retained for reproducibility, but paper-facing int
 | payload coupling | state-dependent interaction strength / compatibility coupling | Payload-dependent attenuation or compatibility gate. |
 | vector inheritance event | directional-state inheritance / state-transition gate | Event where one site inherits the directional state of another. |
 | first semantic divergence | critical event / basin-selection event | First state-changing event that sends matched runs to different attractors. |
+| openness `O(t)` | outcome-distribution entropy / committor entropy | Normalized entropy of independently resampled future outcome classes from state `s_t`. |
+| commitment time `t_c` | first passage to low committor entropy | First checkpoint where sampled future outcomes collapse below a declared openness threshold. |
+| durable form without closed future | persistent structure with non-degenerate future | Candidate complexity definition: component-lineage persistence times openness. |
+| constraint-accumulation rate | committor-entropy decay rate | `-dO/dt`, estimated between scheduled checkpoints. |
 | scale test | finite-size scaling / scaling robustness probe | Check whether morphology survives larger lattice volumes. |
 | seed | stochastic realization / disorder realization | Fixed random initialization and event schedule realization. |
 
@@ -32,6 +36,7 @@ Terminology discipline:
 - Use `absorbing component` or `single-cluster takeover` instead of `complexity` when the result is one dominant high-LCF component.
 - Use `state-dependent compatibility coupling` instead of bare `payload protection` when describing the mechanism in Findings 016-018.
 - Treat `metastable` cautiously: in the current irreversible activation model, `finite-time coexistence` and `time-to-merger` are often more precise.
+- When using `durable form without closed future`, explicitly connect it to open-ended evolution, absorbing states, edge-of-chaos language, and assembly-theory-adjacent durable-form vocabulary. The phrase is a sharpening of those themes, not a replacement for related work.
 
 ## Reference Marker: Pre-Vectorization Baseline
 
@@ -60,11 +65,12 @@ All roadmap items reference the baseline marker above.
 1. Repair component measurement before new second-order claims. Historical LCF values are valid as face-connectivity measurements, but the current `coherence_stats` graph does not match the `cube26` interaction graph used by Findings 017-020. Add explicit `face6`, `face18`, and `cube26` component metrics before interpreting edge-coherent cases.
 2. Recompute key regime classifications under all component graphs. Re-score the seed-42 and seed-56 natural/counterfactual rows, the high-dominant controls `45`, `50`, `61`, representative protected/dust seeds, and the largest Finding 020 protected exceptions.
 3. Separate discovery and comparison protocols. Early stopping is acceptable for cheap classification, but fixed-horizon runs with early stopping disabled are required for time-series comparisons and paper-grade morphology tables.
-4. Vectorize only behind golden trajectory tests. The current engine uses a pure-Python per-active-site update loop and full component analysis at each metric snapshot. Vectorization should target update candidate generation, contribution accumulation, and component labeling, but it must first pass the Finding 018 equivalence suite.
-5. Add deactivation or decay only as a new controlled law. Current active sites are effectively irreversible. A death/subthreshold rule would change the model class and should be introduced as a versioned experiment, not as a silent fix.
-6. Make within-tick updates order-independent. Multiple sources currently update targets through sequential blending. A scatter/accumulate phase followed by one target update per tick would make the dynamics easier to reason about and vectorize.
-7. Guard against silent no-op sweeps. Swept dotted keys should be validated against known-consumed config paths so a tidy parameter table cannot be produced for a parameter the engine never reads.
-8. Keep local refs synchronized before major experiments. This checkout currently resolves `HEAD...origin/main` as `0 0`; if that changes, sync before interpreting new runs.
+4. Run openness timelines before changing the law. Use `src/openness_timeline.py` to estimate `O(t)`, commitment time, and component-persistence-weighted complexity under v0.1 before using the same instrument on v0.2.
+5. Vectorize only behind golden trajectory tests. The current engine uses a pure-Python per-active-site update loop and full component analysis at each metric snapshot. Vectorization should target update candidate generation, contribution accumulation, and component labeling, but it must first pass the Finding 018 equivalence suite.
+6. Add deactivation or decay only as a new controlled law. Current active sites are effectively irreversible. A death/subthreshold rule would change the model class and should be introduced as a versioned experiment, not as a silent fix.
+7. Make within-tick updates order-independent. Multiple sources currently update targets through sequential blending. A scatter/accumulate phase followed by one target update per tick would make the dynamics easier to reason about and vectorize.
+8. Guard against silent no-op sweeps. Swept dotted keys should be validated against known-consumed config paths so a tidy parameter table cannot be produced for a parameter the engine never reads.
+9. Keep local refs synchronized before major experiments. This checkout currently resolves `HEAD...origin/main` as `0 0`; if that changes, sync before interpreting new runs.
 
 ## Paper-Critical Validation Gate
 
@@ -1964,3 +1970,102 @@ Use two run protocols from here forward:
 - comparison protocol: fixed horizon, early stopping disabled, intended for paper-grade morphology and time-series comparisons.
 
 Finding 020 remains a strong correction to the deterministic story: the vector-inheritance events are replay-pivotal under the recorded future random stream, but not robust committor-pivotal states under independent continuations. The next measurement pass should preserve that distinction while making the morphology labels connectivity-explicit.
+
+## Finding 022: Openness Timeline Instrument
+
+### Status
+
+Protocol and runner added. No simulation result is claimed yet.
+
+### Trigger
+
+The current project framing defines the hunted middle regime as:
+
+`durable form without closed future`
+
+Finding 020 already built the key causal instrument: save a state, resample independent future random continuations, and measure the outcome distribution. The next step is to run that instrument on scheduled checkpoints instead of only on traced divergence events.
+
+### Definition
+
+For a checkpoint state `s_t`:
+
+```text
+O(t) = H(Pr(outcome class | s_t)) / log(C)
+```
+
+where `C = 3` for the current outcome classes:
+
+- `absorber`
+- `high_dominant`
+- `protected`
+
+The commitment time is:
+
+```text
+t_c = first checkpoint where O(t) < epsilon
+```
+
+The constraint-accumulation rate is estimated between checkpoints:
+
+```text
+-dO/dt
+```
+
+The provisional complexity score is:
+
+```text
+component_persistence(t) * O(t)
+```
+
+This is not an assertion that v0.1 produces complexity. It is the measurement needed to test whether v0.1 closes its future and whether v0.2 keeps it open longer.
+
+### Operational Form
+
+The runner:
+
+1. follows one base trajectory;
+2. saves checkpoints on a tick schedule;
+3. launches `N` independent continuations from each checkpoint;
+4. classifies each future under an explicit connectivity graph, defaulting to `cube26`;
+5. emits per-continuation rows and per-checkpoint openness summaries;
+6. estimates top-k component persistence along the base trajectory.
+
+Development-scale example:
+
+```bash
+python src/openness_timeline.py \
+  --config config.yaml \
+  --ticks 1024 \
+  --checkpoint-every 256 \
+  --horizon 512 \
+  --samples 8 \
+  --connectivity cube26
+```
+
+### Interpretation
+
+Expected v0.1 falsification target:
+
+- If every sampled trajectory reaches low openness within the observed horizon, then irreversible growth admits grammar and nucleation but not durable form without closed future.
+- If some states retain high openness while preserving component lineage, those become the next high-priority second-order diagnostic targets.
+
+The first result is not a failure. It would justify `iota-rig-v0.2.0` as a scientific law change rather than an engineering preference.
+
+### v0.2 Boundary
+
+The proposed v0.2 law is specified separately in:
+
+- `docs/IOTA_RIG_V0_2_LAW_SPEC.md`
+
+The central v0.2 requirements are:
+
+- exact integer amplitude ledger;
+- exhaustion deactivation;
+- new metrics for `total_A`, `active_A`, `latent_A`, `depleted_cells`, and `ledger_error`;
+- Finding 018 golden replay compatibility when the v0.1 law path is selected.
+
+### Artifacts
+
+- `src/continuation.py`
+- `src/openness_timeline.py`
+- `docs/IOTA_RIG_V0_2_LAW_SPEC.md`

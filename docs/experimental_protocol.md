@@ -40,6 +40,16 @@ Future runner support should add an optional `experiment.parent_id`. When presen
 
 Every experiment records `simulation_version`. A version change is a lineage boundary: it should force a new baseline, require `--force`, or require an explicit golden-equivalence gate before the run is interpreted as part of a controlled sweep.
 
+## Measurement-Only Analyses
+
+Post hoc analysis scripts that consume saved states, replay existing configurations, or launch resampled continuations without registering a new lab experiment are measurement-only artifacts. They may vary analysis settings such as checkpoint cadence, continuation horizon, sample count, and component connectivity without violating the one-parameter experiment guard, but their outputs must be labeled as analysis artifacts rather than new controlled experiments.
+
+`src/openness_timeline.py` is in this category. It measures the outcome entropy of resampled futures from scheduled checkpoints; it does not change the simulation law.
+
+## Model-Class Boundaries
+
+Hard conservation, deactivation, reversibility, recharge, or fossil-state retention are model-class changes. They require a new `simulation_version`, a fresh baseline or explicit parent, and golden replay checks before comparison with v0.1 results.
+
 ## Artifact Retention
 
 The database stores artifact metadata, not PNG bytes. Snapshot PNGs are retained according to the active `artifacts` configuration, while metrics remain in SQLite for every tick.
