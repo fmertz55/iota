@@ -1,0 +1,27 @@
+{
+  "seed": 56,
+  "law": "low",
+  "condition": "protected_vector",
+  "sample_index": 35,
+  "continuation_seed": 76260657,
+  "forced_v": 0,
+  "connectivity": "cube26",
+  "divergence_tick": 408,
+  "target": [
+    42,
+    44,
+    24
+  ],
+  "sample_every": 128,
+  "max_ticks": 4096,
+  "paths": {
+    "component_timeseries": "output/findings/finding_021_second_order_seed56_low_protected_vector_sample35_cube26_component_timeseries.csv",
+    "interval_graph": "output/findings/finding_021_second_order_seed56_low_protected_vector_sample35_cube26_interval_graph.csv",
+    "track_summary": "output/findings/finding_021_second_order_seed56_low_protected_vector_sample35_cube26_track_summary.csv",
+    "summary_json": "output/findings/finding_021_second_order_seed56_low_protected_vector_sample35_cube26_summary.json"
+  },
+  "track_count": 7,
+  "persistent_track_count": 7,
+  "mean_bridge_fraction": 0.18017179026891905,
+  "mean_component_entropy": 1.0691135871840582
+}
