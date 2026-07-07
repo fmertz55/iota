@@ -245,6 +245,7 @@ Development-scale run:
 ```bash
 python src/openness_timeline.py \
   --config config.yaml \
+  --seed 42 \
   --ticks 1024 \
   --checkpoint-every 256 \
   --horizon 512 \
@@ -261,7 +262,7 @@ finding_022_openness_timeline_summary.json
 finding_022_openness_timeline_states/
 ```
 
-The summary also records a top-k component persistence proxy and `complexity_score = component_persistence * openness`. This is a measurement instrument, not a new law; it works against the current `iota-rig-v0.1.1` dynamics.
+Run seed `42` and seed `56` first. The runner is O(t)-first by default. Add `--with-persistence` only after the openness timeline itself is behaving; that second pass records a top-k component persistence proxy and `complexity_score = component_persistence * openness`. This is a measurement instrument, not a new law; it works against the current `iota-rig-v0.1.1` dynamics.
 
 ## Versioned v0.2 Direction
 

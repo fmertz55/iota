@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import math
 from collections.abc import Mapping
+from pathlib import Path
 from typing import Any
 
 import numpy as np
 
-from iota_rig import World
+from iota_rig import World, load_world_state, save_world_state
 
 
 OUTCOME_CLASSES = ("absorber", "high_dominant", "protected")
@@ -26,6 +27,32 @@ def clone_world(world: World, rng_seed: int) -> World:
         wrap=world.wrap,
         rng=np.random.default_rng(rng_seed),
     )
+
+
+def deterministic_continuation_seed(
+    base_seed: int,
+    checkpoint_tick: int,
+    sample_index: int,
+    stream_index: int = 0,
+) -> int:
+    return int(
+        base_seed
+        + int(checkpoint_tick) * 1_000_000
+        + int(stream_index) * 100_000
+        + int(sample_index)
+    )
+
+
+def save_checkpoint(
+    world: World,
+    path: str | Path,
+    metadata: dict[str, Any] | None = None,
+) -> None:
+    save_world_state(world, Path(path), metadata)
+
+
+def load_checkpoint(path: str | Path) -> World:
+    return load_world_state(Path(path))
 
 
 def connectivity_metric(metric: Mapping[str, Any], name: str, connectivity: str) -> float:

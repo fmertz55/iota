@@ -65,7 +65,7 @@ All roadmap items reference the baseline marker above.
 1. Repair component measurement before new second-order claims. Historical LCF values are valid as face-connectivity measurements, but the current `coherence_stats` graph does not match the `cube26` interaction graph used by Findings 017-020. Add explicit `face6`, `face18`, and `cube26` component metrics before interpreting edge-coherent cases.
 2. Recompute key regime classifications under all component graphs. Re-score the seed-42 and seed-56 natural/counterfactual rows, the high-dominant controls `45`, `50`, `61`, representative protected/dust seeds, and the largest Finding 020 protected exceptions.
 3. Separate discovery and comparison protocols. Early stopping is acceptable for cheap classification, but fixed-horizon runs with early stopping disabled are required for time-series comparisons and paper-grade morphology tables.
-4. Run openness timelines before changing the law. Use `src/openness_timeline.py` to estimate `O(t)`, commitment time, and component-persistence-weighted complexity under v0.1 before using the same instrument on v0.2.
+4. Run openness timelines before changing the law. Use `src/openness_timeline.py` to estimate `O(t)` and commitment time under v0.1 before using the same instrument on v0.2. Add component persistence only as a second-pass diagnostic.
 5. Vectorize only behind golden trajectory tests. The current engine uses a pure-Python per-active-site update loop and full component analysis at each metric snapshot. Vectorization should target update candidate generation, contribution accumulation, and component labeling, but it must first pass the Finding 018 equivalence suite.
 6. Add deactivation or decay only as a new controlled law. Current active sites are effectively irreversible. A death/subthreshold rule would change the model class and should be introduced as a versioned experiment, not as a silent fix.
 7. Make within-tick updates order-independent. Multiple sources currently update targets through sequential blending. A scatter/accumulate phase followed by one target update per tick would make the dynamics easier to reason about and vectorize.
@@ -2011,13 +2011,13 @@ The constraint-accumulation rate is estimated between checkpoints:
 -dO/dt
 ```
 
-The provisional complexity score is:
+The second-pass complexity score is:
 
 ```text
 component_persistence(t) * O(t)
 ```
 
-This is not an assertion that v0.1 produces complexity. It is the measurement needed to test whether v0.1 closes its future and whether v0.2 keeps it open longer.
+Do not block the O(t) run on persistence. O(t) alone is the first instrument. Persistence is added only after the openness timeline is stable enough to identify candidate states worth tracking. This is not an assertion that v0.1 produces complexity; it is the measurement needed to test whether v0.1 closes its future and whether v0.2 keeps it open longer.
 
 ### Operational Form
 
@@ -2028,13 +2028,14 @@ The runner:
 3. launches `N` independent continuations from each checkpoint;
 4. classifies each future under an explicit connectivity graph, defaulting to `cube26`;
 5. emits per-continuation rows and per-checkpoint openness summaries;
-6. estimates top-k component persistence along the base trajectory.
+6. optionally estimates top-k component persistence with `--with-persistence`.
 
 Development-scale example:
 
 ```bash
 python src/openness_timeline.py \
   --config config.yaml \
+  --seed 42 \
   --ticks 1024 \
   --checkpoint-every 256 \
   --horizon 512 \
@@ -2044,10 +2045,14 @@ python src/openness_timeline.py \
 
 ### Interpretation
 
-Expected v0.1 falsification target:
+Pre-registered v0.1 hypothesis:
+
+Under v0.1 irreversible growth, `O(t)` declines toward finite commitment across tested seed classes.
+
+Interpretation:
 
 - If every sampled trajectory reaches low openness within the observed horizon, then irreversible growth admits grammar and nucleation but not durable form without closed future.
-- If some states retain high openness while preserving component lineage, those become the next high-priority second-order diagnostic targets.
+- If seed `56` or another case retains openness longer than expected, that is not a failure. It becomes the first priority candidate for `--with-persistence`, second-order diagnostics, and possible complex-protected classification.
 
 The first result is not a failure. It would justify `iota-rig-v0.2.0` as a scientific law change rather than an engineering preference.
 

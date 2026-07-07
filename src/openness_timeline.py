@@ -15,9 +15,11 @@ from continuation import (
     classify_outcome,
     clone_world,
     connectivity_metric,
+    deterministic_continuation_seed,
     entropy_from_counts,
     normalized_outcome_entropy,
     outcome_counts,
+    save_checkpoint,
 )
 from experiment_db import artifact_hash, config_hash
 from iota_rig import (
@@ -25,7 +27,6 @@ from iota_rig import (
     candidate_neighbor_steps,
     init_world,
     load_config,
-    save_world_state,
     step,
 )
 from metrics import collect_metrics
@@ -98,6 +99,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--checkpoint-ticks", type=int, nargs="+", default=None)
     parser.add_argument("--horizon", type=int, default=1024)
     parser.add_argument("--samples", type=int, default=24)
+    parser.add_argument("--seed", type=int, default=None, help="Override init.seed for this analysis run.")
     parser.add_argument("--rng-seed-base", type=int, default=20260707)
     parser.add_argument("--connectivity", choices=["face6", "face18", "cube26"], default="cube26")
     parser.add_argument("--metric-every", type=int, default=256)
@@ -106,6 +108,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--absorber-lcf", type=float, default=0.95)
     parser.add_argument("--high-dominant-lcf", type=float, default=0.90)
     parser.add_argument("--commitment-epsilon", type=float, default=0.05)
+    parser.add_argument(
+        "--with-persistence",
+        action="store_true",
+        help="Also estimate top-k component persistence P(t). O(t) does not require this.",
+    )
     parser.add_argument("--persistence-top-k", type=int, default=5)
     parser.add_argument("--persistence-min-size", type=int, default=1)
     parser.add_argument("--persistence-window", type=int, default=None)
@@ -190,10 +197,6 @@ def persistence_fraction(
         if best_overlap >= min_overlap_fraction:
             surviving += 1
     return float(surviving / len(current_components))
-
-
-def continuation_seed(args: argparse.Namespace, checkpoint_tick: int, sample_index: int) -> int:
-    return int(args.rng_seed_base + checkpoint_tick * 1_000_000 + sample_index)
 
 
 def run_continuation(
@@ -335,7 +338,7 @@ def checkpoint_artifact(
             "checkpoint_state_sha256": "",
             "checkpoint_state_bytes": "",
         }
-    save_world_state(world, path, metadata)
+    save_checkpoint(world, path, metadata)
     return {
         "checkpoint_state_path": path.as_posix(),
         "checkpoint_state_sha256": artifact_hash(path),
@@ -381,6 +384,8 @@ def apply_constraint_rates(summary_rows: list[dict[str, Any]]) -> None:
 def main() -> None:
     args = parse_args()
     cfg = load_config(args.config)
+    if args.seed is not None:
+        cfg.setdefault("init", {})["seed"] = int(args.seed)
     checkpoint_ticks = checkpoint_schedule(args, cfg)
     max_tick = max(checkpoint_ticks)
     output_dir = Path(args.output_dir)
@@ -400,18 +405,19 @@ def main() -> None:
         if tick in checkpoint_set:
             print(f"checkpoint tick={tick} active={int(world.active.sum())}")
             base_metric = collect_metrics(world, tick)
-            top_components_by_tick[tick] = component_sets(
-                world,
-                args.connectivity,
-                top_k=int(args.persistence_top_k),
-                min_size=int(args.persistence_min_size),
-            )
-            all_components_by_tick[tick] = component_sets(
-                world,
-                args.connectivity,
-                top_k=None,
-                min_size=1,
-            )
+            if args.with_persistence:
+                top_components_by_tick[tick] = component_sets(
+                    world,
+                    args.connectivity,
+                    top_k=int(args.persistence_top_k),
+                    min_size=int(args.persistence_min_size),
+                )
+                all_components_by_tick[tick] = component_sets(
+                    world,
+                    args.connectivity,
+                    top_k=None,
+                    min_size=1,
+                )
             state_path = None
             if not args.no_save_checkpoints:
                 state_path = state_dir / f"checkpoint_tick_{tick:06d}.npz"
@@ -428,7 +434,7 @@ def main() -> None:
             )
             checkpoint_rows = []
             for sample_index in range(int(args.samples)):
-                seed = continuation_seed(args, tick, sample_index)
+                seed = deterministic_continuation_seed(args.rng_seed_base, tick, sample_index)
                 row = run_continuation(world, cfg, tick, sample_index, seed, args)
                 raw_rows.append(row)
                 checkpoint_rows.append(row)
@@ -454,6 +460,8 @@ def main() -> None:
                         "samples": args.samples,
                         "horizon": args.horizon,
                         "connectivity": args.connectivity,
+                        "seed_override": args.seed,
+                        "with_persistence": args.with_persistence,
                         "commitment_epsilon": args.commitment_epsilon,
                         "outcome_classes": OUTCOME_CLASSES,
                         "summary_rows": summary_rows,
@@ -466,13 +474,14 @@ def main() -> None:
         if tick < max_tick:
             step(world, cfg)
 
-    apply_persistence(
-        summary_rows,
-        top_components_by_tick,
-        all_components_by_tick,
-        checkpoint_ticks,
-        args,
-    )
+    if args.with_persistence:
+        apply_persistence(
+            summary_rows,
+            top_components_by_tick,
+            all_components_by_tick,
+            checkpoint_ticks,
+            args,
+        )
     apply_constraint_rates(summary_rows)
     first_commitment_tick = next(
         (
@@ -495,6 +504,8 @@ def main() -> None:
                 "samples": args.samples,
                 "horizon": args.horizon,
                 "connectivity": args.connectivity,
+                "seed_override": args.seed,
+                "with_persistence": args.with_persistence,
                 "commitment_epsilon": args.commitment_epsilon,
                 "first_commitment_tick": first_commitment_tick,
                 "outcome_classes": OUTCOME_CLASSES,
