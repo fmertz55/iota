@@ -243,6 +243,32 @@ def component_hierarchy_stats(component_sizes: list[int], active_count: int) -> 
     }
 
 
+def ledger_stats(world: Any) -> dict[str, float]:
+    active_count = int(world.active.sum())
+    active_A = int(np.sum(world.A[world.active], dtype=np.int64)) if active_count else 0
+    latent_A_array = getattr(world, "latent_A", None)
+    ledger_enabled = bool(getattr(world, "ledger_enabled", False))
+    if latent_A_array is None:
+        latent_A = 0
+        depleted_cells = 0
+    else:
+        inactive = ~world.active
+        latent_A = int(np.sum(latent_A_array[inactive], dtype=np.int64))
+        depleted_cells = int(np.count_nonzero(inactive & (latent_A_array == 0))) if ledger_enabled else 0
+    total_A = active_A + latent_A
+    initial_total_A = int(getattr(world, "initial_total_A", total_A))
+    return {
+        "total_A": float(total_A),
+        "active_A": float(active_A),
+        "latent_A": float(latent_A),
+        "depleted_cells": float(depleted_cells),
+        "ledger_error": float(total_A - initial_total_A) if ledger_enabled else 0.0,
+        "deactivation_events": 0.0,
+        "amplitude_transfers": 0.0,
+        "failed_transfer_gates": 0.0,
+    }
+
+
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
     component_stats = {
@@ -263,6 +289,7 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
         "top2_component_coverage": top2_coverage,
         "component_centroid_distance_1_2": centroid_distance_1_2,
     }
+    metric.update(ledger_stats(world))
     for index in range(20):
         metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
     metric.update(component_hierarchy_stats(component_sizes, active_count))
@@ -363,6 +390,14 @@ def save_run_metrics(metrics: list[dict[str, float]], out: Path) -> None:
         "mean_A",
         "mean_R",
         "max_payload_fraction",
+        "total_A",
+        "active_A",
+        "latent_A",
+        "depleted_cells",
+        "deactivation_events",
+        "amplitude_transfers",
+        "failed_transfer_gates",
+        "ledger_error",
         "vector_continuing_iotas",
         "vector_changed_iotas",
         "vector_persistence_ratio",
@@ -430,6 +465,14 @@ def metrics_summary(
             "final_mean_vector_turn_degrees": 0.0,
             "mean_exchange_turn_degrees": 0.0,
             "mean_secondary_exchange_turn_degrees": 0.0,
+            "final_total_A": 0.0,
+            "final_active_A": 0.0,
+            "final_latent_A": 0.0,
+            "final_depleted_cells": 0.0,
+            "total_deactivation_events": 0.0,
+            "total_amplitude_transfers": 0.0,
+            "total_failed_transfer_gates": 0.0,
+            "max_abs_ledger_error": 0.0,
             "final_top1_component_fraction": 0.0,
             "final_top5_component_coverage": 0.0,
             "final_top20_component_coverage": 0.0,
@@ -493,6 +536,22 @@ def metrics_summary(
         ),
         "mean_secondary_exchange_turn_degrees": float(
             np.mean(secondary_turn_rows) if secondary_turn_rows else 0.0
+        ),
+        "final_total_A": float(metrics[-1].get("total_A", 0.0)),
+        "final_active_A": float(metrics[-1].get("active_A", 0.0)),
+        "final_latent_A": float(metrics[-1].get("latent_A", 0.0)),
+        "final_depleted_cells": float(metrics[-1].get("depleted_cells", 0.0)),
+        "total_deactivation_events": float(
+            sum(int(float(m.get("deactivation_events", 0))) for m in metrics)
+        ),
+        "total_amplitude_transfers": float(
+            sum(int(float(m.get("amplitude_transfers", 0))) for m in metrics)
+        ),
+        "total_failed_transfer_gates": float(
+            sum(int(float(m.get("failed_transfer_gates", 0))) for m in metrics)
+        ),
+        "max_abs_ledger_error": float(
+            max(abs(float(m.get("ledger_error", 0.0))) for m in metrics)
         ),
         "final_top1_component_fraction": float(metrics[-1].get("top1_component_fraction", 0.0)),
         "final_top5_component_coverage": float(metrics[-1].get("top5_component_coverage", 0.0)),

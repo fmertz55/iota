@@ -1975,7 +1975,7 @@ Finding 020 remains a strong correction to the deterministic story: the vector-i
 
 ### Status
 
-Protocol and runner added. No simulation result is claimed yet.
+Development-scale v0.1 single-seed run completed for seeds `42` and `56`.
 
 ### Trigger
 
@@ -2056,6 +2056,33 @@ Interpretation:
 
 The first result is not a failure. It would justify `iota-rig-v0.2.0` as a scientific law change rather than an engineering preference.
 
+### Development-Scale Result
+
+Command family:
+
+```bash
+.venv/bin/python src/openness_timeline.py \
+  --config config.yaml \
+  --prefix finding_022_openness_timeline_seed${seed} \
+  --seed ${seed} \
+  --ticks 1024 \
+  --checkpoint-every 256 \
+  --horizon 512 \
+  --samples 8 \
+  --connectivity cube26
+```
+
+Result:
+
+| Seed | First commitment tick | Checkpoints | Outcome distribution | Openness |
+|---|---:|---:|---|---:|
+| `42` | `0` | `0, 256, 512, 768, 1024` | `8/8 protected` at every checkpoint | `0.0` |
+| `56` | `0` | `0, 256, 512, 768, 1024` | `8/8 protected` at every checkpoint | `0.0` |
+
+Under the current `config.yaml` single-seed v0.1 setup, the sampled futures are closed from the initial checkpoint. Seed `42` reaches a base active count of `13`; seed `56` reaches a base active count of `5`. No checkpoint produced absorber or high-dominant futures under `cube26`.
+
+Interpretation: this run supports the pre-registered negative result for the single-seed v0.1 substrate. It does not justify a persistence pass, because the complexity proxy would be multiplied by `O(t)=0`. The next useful step is the versioned `iota-rig-v0.2.0` conserved-ledger law path.
+
 ### v0.2 Boundary
 
 The proposed v0.2 law is specified separately in:
@@ -2074,3 +2101,11 @@ The central v0.2 requirements are:
 - `src/continuation.py`
 - `src/openness_timeline.py`
 - `docs/IOTA_RIG_V0_2_LAW_SPEC.md`
+- `output/findings/finding_022_openness_timeline_seed42_raw.csv`
+- `output/findings/finding_022_openness_timeline_seed42_summary.csv`
+- `output/findings/finding_022_openness_timeline_seed42_summary.json`
+- `output/findings/finding_022_openness_timeline_seed42_states/`
+- `output/findings/finding_022_openness_timeline_seed56_raw.csv`
+- `output/findings/finding_022_openness_timeline_seed56_summary.csv`
+- `output/findings/finding_022_openness_timeline_seed56_summary.json`
+- `output/findings/finding_022_openness_timeline_seed56_states/`

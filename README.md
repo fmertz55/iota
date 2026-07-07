@@ -274,7 +274,7 @@ The proposed next law family is documented in:
 docs/IOTA_RIG_V0_2_LAW_SPEC.md
 ```
 
-Do not silently add deactivation or hard conservation to existing v0.1 runs. They are version boundaries and should use a new `simulation_version`, a fresh baseline, and golden checks against the Finding 018 replay suite.
+Hard conservation and exhaustion deactivation are implemented as an opt-in v0.2 law path. Do not silently add deactivation or hard conservation to existing v0.1 runs. They are version boundaries and should use a new `simulation_version`, a fresh baseline, and golden checks against the Finding 018 replay suite.
 
 ## First big question
 

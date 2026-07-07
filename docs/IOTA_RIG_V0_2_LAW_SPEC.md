@@ -1,6 +1,6 @@
 # Iota Rig v0.2 Law Spec
 
-Status: design specification, not implemented by the default engine.
+Status: implemented as an opt-in `constants.conservation: hard` law path. The default `config.yaml` remains `iota-rig-v0.1.1`.
 
 ## Purpose
 
@@ -20,6 +20,8 @@ constants:
 ```
 
 These keys should not be added to the default v0.1 config until the engine consumes them and the version boundary is explicit.
+
+Implementation note: the engine now consumes these keys, but v0.2 remains opt-in. A v0.2 run should set `simulation_version: iota-rig-v0.2.0`, `constants.conservation: hard`, and `constants.deactivation: exhaustion` together.
 
 ## State Ledger
 
@@ -109,6 +111,21 @@ ledger_error
 ```
 
 `ledger_error` must be exactly `0` for accepted v0.2 runs.
+
+Implemented metric names:
+
+```text
+total_A
+active_A
+latent_A
+depleted_cells
+deactivation_events
+amplitude_transfers
+failed_transfer_gates
+ledger_error
+```
+
+Run summaries additionally report final ledger values, cumulative transfer/deactivation counts, and `max_abs_ledger_error`.
 
 ## Golden Gate
 

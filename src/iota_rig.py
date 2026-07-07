@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 # R: range 0..7
 # V: vector 0..63
 # P: payload 0..7
+# latent_A: v0.2 inactive-cell conserved budget ledger
 
 CUBE6 = np.array([
     (1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)
@@ -127,6 +128,9 @@ class World:
     R: np.ndarray
     V: np.ndarray
     P: np.ndarray
+    latent_A: np.ndarray
+    initial_total_A: int
+    ledger_enabled: bool
     previous_active: np.ndarray
     previous_V: np.ndarray
     vectors: np.ndarray
@@ -148,6 +152,9 @@ def save_world_state(world: World, path: Path, metadata: dict[str, Any] | None =
         R=world.R,
         V=world.V,
         P=world.P,
+        latent_A=world.latent_A,
+        initial_total_A=np.array(int(world.initial_total_A), dtype=np.int64),
+        ledger_enabled=np.array(bool(world.ledger_enabled)),
         previous_active=world.previous_active,
         previous_V=world.previous_V,
         vectors=world.vectors,
@@ -163,12 +170,27 @@ def load_world_state(path: Path) -> World:
         rng = np.random.default_rng()
         rng_state_json = str(data["rng_state_json"].item())
         rng.bit_generator.state = json.loads(rng_state_json)
+        active = data["active"].astype(bool)
+        latent_A = (
+            data["latent_A"].copy()
+            if "latent_A" in data.files
+            else np.zeros(active.shape, dtype=np.int64)
+        )
+        ledger_enabled = bool(data["ledger_enabled"].item()) if "ledger_enabled" in data.files else False
+        initial_total_A = (
+            int(data["initial_total_A"].item())
+            if "initial_total_A" in data.files
+            else int(np.sum(data["A"][active], dtype=np.int64) + np.sum(latent_A[~active], dtype=np.int64))
+        )
         return World(
-            active=data["active"].astype(bool),
-            A=data["A"].astype(np.uint8),
+            active=active,
+            A=data["A"].copy(),
             R=data["R"].astype(np.uint8),
             V=data["V"].astype(np.uint8),
             P=data["P"].astype(np.uint8),
+            latent_A=latent_A,
+            initial_total_A=initial_total_A,
+            ledger_enabled=ledger_enabled,
             previous_active=data["previous_active"].astype(bool),
             previous_V=data["previous_V"].astype(np.uint8),
             vectors=data["vectors"].astype(np.int16),
@@ -184,12 +206,15 @@ def init_world(cfg: Dict[str, Any]) -> World:
     seed = int(cfg["init"].get("seed", 42))
     rng = np.random.default_rng(seed)
     vectors, vector_behaviors = make_vector_states(cfg, rng)
+    ledger_enabled = str(cfg.get("constants", {}).get("conservation", "soft")) == "hard"
+    amplitude_dtype = np.int64 if ledger_enabled else np.uint8
 
     active = np.zeros((size, size, size), dtype=bool)
-    A = np.zeros((size, size, size), dtype=np.uint8)
+    A = np.zeros((size, size, size), dtype=amplitude_dtype)
     R = np.zeros((size, size, size), dtype=np.uint8)
     V = np.zeros((size, size, size), dtype=np.uint8)
     P = np.zeros((size, size, size), dtype=np.uint8)
+    latent_A = np.zeros((size, size, size), dtype=amplitude_dtype)
 
     n = int(cfg["init"].get("active_iotas", 1))
     mode = cfg["init"].get("mode", "random")
@@ -225,7 +250,7 @@ def init_world(cfg: Dict[str, Any]) -> World:
         for coord, iota in zip(coords, fixed_iotas):
             x, y, z = coord
             active[x, y, z] = True
-            A[x, y, z] = np.uint8(max(0, min(7, int(iota["A"]))))
+            A[x, y, z] = max(0, min(7, int(iota["A"])))
             R[x, y, z] = np.uint8(max(0, min(7, int(iota["R"]))))
             V[x, y, z] = np.uint8(int(iota["V"]) % len(vectors))
             P[x, y, z] = np.uint8(max(0, min(7, int(iota["P"]))))
@@ -237,7 +262,28 @@ def init_world(cfg: Dict[str, Any]) -> World:
             V[x, y, z] = rng.integers(0, len(vectors))
             P[x, y, z] = rng.integers(pr[0], pr[1] + 1)
 
-    return World(active, A, R, V, P, active.copy(), V.copy(), vectors, vector_behaviors, wrap, rng)
+    if ledger_enabled:
+        vacuum_amplitude = max(0, int(cfg.get("constants", {}).get("vacuum_amplitude", 1)))
+        latent_A.fill(vacuum_amplitude)
+        latent_A[active] = 0
+    initial_total_A = int(np.sum(A[active], dtype=np.int64) + np.sum(latent_A[~active], dtype=np.int64))
+
+    return World(
+        active,
+        A,
+        R,
+        V,
+        P,
+        latent_A,
+        initial_total_A,
+        ledger_enabled,
+        active.copy(),
+        V.copy(),
+        vectors,
+        vector_behaviors,
+        wrap,
+        rng,
+    )
 
 
 def vector_step(world: World, v_idx: int, a: int, r: int, p: int) -> tuple[int, int, int, str]:
@@ -365,6 +411,195 @@ def local_candidates(
     return selected
 
 
+def clamp_probability(value: float) -> float:
+    return min(1.0, max(0.0, float(value)))
+
+
+def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
+    kA = float(cfg["constants"].get("amplitude_coupling", 0.125))
+    kR = float(cfg["constants"].get("range_coupling", 0.125))
+    thetaP = float(cfg["constants"].get("payload_takeover", 0.5))
+    mu = float(cfg["constants"].get("mutation_rate", 0.0))
+    decay_mode = cfg["constants"].get("decay_mode", "inverse_square")
+    deactivation = str(cfg["constants"].get("deactivation", "none"))
+    valence = max(1, int(cfg["constants"].get("valence", 1)))
+    bond_probability = clamp_probability(float(cfg["constants"].get("bond_probability", 1.0)))
+    neighbor_mode = str(cfg["constants"].get("neighbor_mode", "cube26"))
+    cross_payload_coupling = float(cfg["constants"].get("cross_payload_coupling", 1.0))
+    same_payload_coupling = float(cfg["constants"].get("same_payload_coupling", 1.0))
+
+    if deactivation not in {"none", "exhaustion"}:
+        raise ValueError(f"Unknown deactivation mode: {deactivation}")
+
+    old_active = world.active.copy()
+    old_V = world.V.copy()
+    next_active = world.active.copy()
+    next_A = world.A.astype(np.int64, copy=True)
+    available_A = world.A.astype(np.int64, copy=True)
+    next_latent_A = world.latent_A.astype(np.int64, copy=True)
+    next_R = world.R.astype(np.float32).copy()
+    next_V = world.V.copy()
+    next_P = world.P.copy()
+
+    coords = np.argwhere(world.active)
+    exchanges = 0
+    secondary_exchanges = 0
+    payload_changes = 0
+    amplitude_transfers = 0
+    failed_transfer_gates = 0
+    exchange_alignments: list[float] = []
+    secondary_exchange_alignments: list[float] = []
+
+    for x, y, z in coords:
+        a = int(world.A[x, y, z])
+        r = int(world.R[x, y, z])
+        if a <= 0 or r == 0:
+            continue
+        v_idx = int(world.V[x, y, z]) % len(world.vectors)
+        p = int(world.P[x, y, z])
+        primary_dx, primary_dy, primary_dz, _ = vector_step(world, v_idx, a, r, p)
+        primary_step = (primary_dx, primary_dy, primary_dz)
+        candidates = local_candidates(
+            world,
+            int(x),
+            int(y),
+            int(z),
+            v_idx,
+            a,
+            r,
+            p,
+            decay_mode,
+            valence,
+            bond_probability,
+            neighbor_mode,
+        )
+
+        for candidate in candidates:
+            if int(available_A[x, y, z]) <= 0:
+                break
+            tx, ty, tz = candidate["target"]
+            target_active = bool(next_active[tx, ty, tz])
+            if target_active:
+                if int(next_A[tx, ty, tz]) >= int(available_A[x, y, z]):
+                    continue
+            elif int(next_latent_A[tx, ty, tz]) <= 0:
+                continue
+
+            influence = float(candidate["influence"])
+            if bool(world.active[tx, ty, tz]):
+                influence *= (
+                    same_payload_coupling
+                    if int(world.P[tx, ty, tz]) == p
+                    else cross_payload_coupling
+                )
+            if influence <= 0:
+                continue
+
+            transfer_probability = clamp_probability(kA * influence)
+            if world.rng.random() >= transfer_probability:
+                failed_transfer_gates += 1
+                continue
+
+            available_A[x, y, z] -= 1
+            next_A[x, y, z] -= 1
+            if target_active:
+                next_A[tx, ty, tz] += 1
+            else:
+                next_A[tx, ty, tz] += int(next_latent_A[tx, ty, tz]) + 1
+                next_latent_A[tx, ty, tz] = 0
+                next_active[tx, ty, tz] = True
+            next_latent_A[tx, ty, tz] = 0
+
+            exchanges += 1
+            amplitude_transfers += 1
+            if int(candidate["order"]) != 0:
+                secondary_exchanges += 1
+            alignment = vector_alignment(primary_step, candidate["step"])
+            exchange_alignments.append(alignment)
+            if int(candidate["order"]) != 0:
+                secondary_exchange_alignments.append(alignment)
+
+            next_R[tx, ty, tz] = (1 - kR * influence) * next_R[tx, ty, tz] + (kR * influence) * r
+
+            if influence >= thetaP:
+                new_p = int(world.P[x, y, z])
+                if mu > 0 and world.rng.random() < mu:
+                    new_p = int((new_p + world.rng.choice([-1, 1])) % 8)
+                if int(next_P[tx, ty, tz]) != new_p:
+                    payload_changes += 1
+                next_P[tx, ty, tz] = new_p
+                next_V[tx, ty, tz] = np.uint8(rotate_vector_state(world, v_idx, new_p))
+            elif world.rng.random() < influence * 0.125:
+                next_V[tx, ty, tz] = np.uint8(v_idx)
+
+    deactivation_events = 0
+    if deactivation == "exhaustion":
+        exhausted = next_active & (next_A <= 0)
+        deactivation_events = int(np.count_nonzero(exhausted))
+        if deactivation_events:
+            next_active[exhausted] = False
+            next_A[exhausted] = 0
+            next_V[exhausted] = 0
+            next_P[exhausted] = 0
+            next_latent_A[exhausted] = 0
+
+    next_A[~next_active] = 0
+    next_latent_A[next_active] = 0
+
+    world.previous_active = old_active
+    world.previous_V = old_V
+    world.active = next_active
+    world.A = next_A
+    world.R = np.clip(np.rint(next_R), 0, 7).astype(np.uint8)
+    world.V = next_V
+    world.P = next_P
+    world.latent_A = next_latent_A
+    world.ledger_enabled = True
+
+    active_count = int(world.active.sum())
+    payload_hist = np.bincount(world.P[world.active], minlength=8) if active_count else np.zeros(8)
+    max_payload_fraction = float(payload_hist.max() / active_count) if active_count else 0.0
+    exchange_turn_degrees = [
+        math.degrees(math.acos(max(-1.0, min(1.0, alignment))))
+        for alignment in exchange_alignments
+    ]
+    secondary_turn_degrees = [
+        math.degrees(math.acos(max(-1.0, min(1.0, alignment))))
+        for alignment in secondary_exchange_alignments
+    ]
+    return {
+        "exchanges": exchanges,
+        "secondary_exchanges": secondary_exchanges,
+        "payload_changes": payload_changes,
+        "amplitude_transfers": amplitude_transfers,
+        "failed_transfer_gates": failed_transfer_gates,
+        "deactivation_events": deactivation_events,
+        "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
+        "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
+        "max_payload_fraction": max_payload_fraction,
+        "mean_exchange_alignment": (
+            float(sum(exchange_alignments) / len(exchange_alignments))
+            if exchange_alignments
+            else 0.0
+        ),
+        "mean_exchange_turn_degrees": (
+            float(sum(exchange_turn_degrees) / len(exchange_turn_degrees))
+            if exchange_turn_degrees
+            else 0.0
+        ),
+        "mean_secondary_exchange_alignment": (
+            float(sum(secondary_exchange_alignments) / len(secondary_exchange_alignments))
+            if secondary_exchange_alignments
+            else 0.0
+        ),
+        "mean_secondary_exchange_turn_degrees": (
+            float(sum(secondary_turn_degrees) / len(secondary_turn_degrees))
+            if secondary_turn_degrees
+            else 0.0
+        ),
+    }
+
+
 def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     size = world.size
     kA = float(cfg["constants"].get("amplitude_coupling", 0.125))
@@ -373,6 +608,8 @@ def step(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     mu = float(cfg["constants"].get("mutation_rate", 0.0))
     decay_mode = cfg["constants"].get("decay_mode", "inverse_square")
     conservation = cfg["constants"].get("conservation", "soft")
+    if conservation == "hard":
+        return _step_hard_transfer(world, cfg)
     valence = max(1, int(cfg["constants"].get("valence", 1)))
     bond_probability = float(cfg["constants"].get("bond_probability", 1.0))
     bond_probability = min(1.0, max(0.0, bond_probability))

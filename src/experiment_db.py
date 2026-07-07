@@ -103,6 +103,14 @@ def open_database(path: Path) -> sqlite3.Connection:
             largest_coherence_cube26 INTEGER,
             coherence_count_cube26 INTEGER,
             coherence_ratio_cube26 REAL,
+            total_A REAL,
+            active_A REAL,
+            latent_A REAL,
+            depleted_cells REAL,
+            deactivation_events REAL,
+            amplitude_transfers REAL,
+            failed_transfer_gates REAL,
+            ledger_error REAL,
             entropy REAL NOT NULL,
             PRIMARY KEY (experiment_id, tick),
             FOREIGN KEY (experiment_id) REFERENCES experiments(experiment_id)
@@ -188,6 +196,21 @@ def open_database(path: Path) -> sqlite3.Connection:
     for column_name, column_type in connectivity_columns.items():
         if column_name not in metric_columns:
             conn.execute(f"ALTER TABLE metrics ADD COLUMN {column_name} {column_type}")
+            metric_columns.add(column_name)
+    ledger_columns = {
+        "total_A": "REAL",
+        "active_A": "REAL",
+        "latent_A": "REAL",
+        "depleted_cells": "REAL",
+        "deactivation_events": "REAL",
+        "amplitude_transfers": "REAL",
+        "failed_transfer_gates": "REAL",
+        "ledger_error": "REAL",
+    }
+    for column_name, column_type in ledger_columns.items():
+        if column_name not in metric_columns:
+            conn.execute(f"ALTER TABLE metrics ADD COLUMN {column_name} {column_type}")
+            metric_columns.add(column_name)
     conn.execute(
         """
         UPDATE metrics
@@ -425,9 +448,17 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             largest_coherence_cube26,
             coherence_count_cube26,
             coherence_ratio_cube26,
+            total_A,
+            active_A,
+            latent_A,
+            depleted_cells,
+            deactivation_events,
+            amplitude_transfers,
+            failed_transfer_gates,
+            ledger_error,
             entropy
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             experiment_id,
@@ -445,6 +476,14 @@ def insert_metric(conn: sqlite3.Connection, experiment_id: int, metric: dict[str
             int(metric.get("largest_coherence_cube26", 0)),
             int(metric.get("coherence_count_cube26", 0)),
             float(metric.get("coherence_ratio_cube26", 0.0)),
+            float(metric.get("total_A", 0.0)),
+            float(metric.get("active_A", 0.0)),
+            float(metric.get("latent_A", 0.0)),
+            float(metric.get("depleted_cells", 0.0)),
+            float(metric.get("deactivation_events", 0.0)),
+            float(metric.get("amplitude_transfers", 0.0)),
+            float(metric.get("failed_transfer_gates", 0.0)),
+            float(metric.get("ledger_error", 0.0)),
             float(metric["entropy"]),
         ),
     )
