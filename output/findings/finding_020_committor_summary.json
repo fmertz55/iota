@@ -68,16 +68,16 @@
   ],
   "last_run_filter": {
     "seeds": [
-      42
+      56
     ],
     "laws": [
-      "low"
+      "high"
     ],
     "conditions": [
-      "protected_vector"
+      "absorber_vector"
     ],
     "sample_indexes": [
-      20
+      31
     ]
   },
   "max_ticks": 4096,
@@ -176,7 +176,7 @@
       "protected_probability": 0.74,
       "mean_active_iotas": 3308.92,
       "mean_coherence_ratio": 0.33857101582883237,
-      "rows_with_final_state": 2,
+      "rows_with_final_state": 3,
       "samples_face6": 50,
       "absorber_count_face6": 9,
       "absorber_probability_face6": 0.18,
@@ -185,22 +185,22 @@
       "protected_count_face6": 37,
       "protected_probability_face6": 0.74,
       "mean_coherence_ratio_face6": 0.33857101582883237,
-      "samples_face18": 2,
-      "absorber_count_face18": 1,
-      "absorber_probability_face18": 0.5,
+      "samples_face18": 3,
+      "absorber_count_face18": 2,
+      "absorber_probability_face18": 0.6666666666666666,
       "high_dominant_count_face18": 1,
-      "high_dominant_probability_face18": 0.5,
+      "high_dominant_probability_face18": 0.3333333333333333,
       "protected_count_face18": 0,
       "protected_probability_face18": 0.0,
-      "mean_coherence_ratio_face18": 0.9491300743957369,
-      "samples_cube26": 2,
-      "absorber_count_cube26": 1,
-      "absorber_probability_cube26": 0.5,
+      "mean_coherence_ratio_face18": 0.949752306344383,
+      "samples_cube26": 3,
+      "absorber_count_cube26": 2,
+      "absorber_probability_cube26": 0.6666666666666666,
       "high_dominant_count_cube26": 1,
-      "high_dominant_probability_cube26": 0.5,
+      "high_dominant_probability_cube26": 0.3333333333333333,
       "protected_count_cube26": 0,
       "protected_probability_cube26": 0.0,
-      "mean_coherence_ratio_cube26": 0.9492147738055048
+      "mean_coherence_ratio_cube26": 0.9498458962764693
     },
     {
       "seed": 42,
@@ -215,7 +215,7 @@
       "protected_probability": 0.86,
       "mean_active_iotas": 2464.38,
       "mean_coherence_ratio": 0.23905597126913658,
-      "rows_with_final_state": 4,
+      "rows_with_final_state": 5,
       "samples_face6": 50,
       "absorber_count_face6": 2,
       "absorber_probability_face6": 0.04,
@@ -224,22 +224,22 @@
       "protected_count_face6": 43,
       "protected_probability_face6": 0.86,
       "mean_coherence_ratio_face6": 0.23905597126913658,
-      "samples_face18": 4,
+      "samples_face18": 5,
       "absorber_count_face18": 2,
-      "absorber_probability_face18": 0.5,
-      "high_dominant_count_face18": 2,
-      "high_dominant_probability_face18": 0.5,
+      "absorber_probability_face18": 0.4,
+      "high_dominant_count_face18": 3,
+      "high_dominant_probability_face18": 0.6,
       "protected_count_face18": 0,
       "protected_probability_face18": 0.0,
-      "mean_coherence_ratio_face18": 0.9530543898918772,
-      "samples_cube26": 4,
+      "mean_coherence_ratio_face18": 0.9488416747822528,
+      "samples_cube26": 5,
       "absorber_count_cube26": 2,
-      "absorber_probability_cube26": 0.5,
-      "high_dominant_count_cube26": 2,
-      "high_dominant_probability_cube26": 0.5,
+      "absorber_probability_cube26": 0.4,
+      "high_dominant_count_cube26": 3,
+      "high_dominant_probability_cube26": 0.6,
       "protected_count_cube26": 0,
       "protected_probability_cube26": 0.0,
-      "mean_coherence_ratio_cube26": 0.9530718030004652
+      "mean_coherence_ratio_cube26": 0.9488556052691234
     },
     {
       "seed": 56,
