@@ -2199,3 +2199,153 @@ Full temporal second-order tracing is expensive for high-activity cases because 
 
 - `output/findings/finding_024_static_component_diagnostics.csv`
 - `output/findings/finding_024_static_component_diagnostics.json`
+
+## Finding 025: Multiprocess Replay Queue and First v0.2 Parameter Search
+
+### Status
+
+Completed. The queue ran under an instrumented `screen` + `caffeinate` supervisor and exited cleanly with code `0`.
+
+### Setup
+
+The queue executed three phases:
+
+1. branch-sensitive golden replay for seeds `42` and `56`;
+2. targeted committor replay for the three highest-activity protected exceptions;
+3. a 128-task v0.2 parameter search over `amplitude_coupling`, `vacuum_amplitude`, `valence`, initial active count, and `bond_probability`.
+
+The long-running queue finished:
+
+```text
+started_at=2026-07-08T09:44:58-04:00
+finished_at=2026-07-08T11:24:51-04:00
+golden=completed exit 0
+committor=completed exit 0
+search=completed exit 0
+```
+
+### Golden Replay Result
+
+The multiprocess golden replay reproduced all expected rows.
+
+| Label | Active | LCF_face6 | Clusters |
+|---|---:|---:|---:|
+| `seed42_low_natural` | `927` | `0.114347` | `93` |
+| `seed42_high_natural` | `15713` | `0.958060` | `143` |
+| `seed42_low_force_high_vector` | `15713` | `0.958060` | `143` |
+| `seed42_high_force_low_vector` | `927` | `0.114347` | `93` |
+| `seed56_low_natural` | `987` | `0.158055` | `85` |
+| `seed56_high_natural` | `26193` | `0.974230` | `123` |
+| `seed56_low_force_high_vector` | `26193` | `0.974230` | `123` |
+| `seed56_high_force_low_vector` | `987` | `0.158055` | `85` |
+
+### Targeted Committor Result
+
+The three targeted high-activity protected exceptions remained protected under `cube26` classification.
+
+| Seed | Law | Condition | Sample | Active | LCF_cube26 | Classification |
+|---:|---|---|---:|---:|---:|---|
+| `42` | `high` | `protected_vector` | `26` | `28327` | `0.634377` | `protected` |
+| `56` | `high` | `protected_vector` | `48` | `21411` | `0.634020` | `protected` |
+| `56` | `low` | `protected_vector` | `35` | `33023` | `0.699876` | `protected` |
+
+### Coarse v0.2 Search Result
+
+The 128-task coarse search completed with `max_abs_ledger_error == 0` for every completed task. The top coarse candidate was:
+
+| Seed | kA | Vacuum | Valence | Initial active | Peak active | Final active | Depleted | Transfers | LCF_cube26 | Ledger error |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `56` | `4.0` | `2` | `4` | `4` | `179` | `179` | `40` | `258` | `0.318436` | `0` |
+
+Across the top rows, the useful basin was not the single-seed default. It concentrated at:
+
+- `bond_probability = 1.0`;
+- higher valence, initially `4`;
+- initial active count `4`;
+- `vacuum_amplitude = 2`;
+- broad tolerance over `amplitude_coupling`.
+
+### Interpretation
+
+The replay queue is now practical and reproducible. The golden replay validates that the optimized multiprocess path preserves the branch-sensitive seed `42/56` replay facts. The targeted committor replay confirms that the largest protected exceptions are not face-connectivity artifacts and remain protected under the same replay machinery.
+
+The first v0.2 search shows that exact conservation and depletion become materially active only after increasing local interaction opportunities and initial nuclei. This moves v0.2 from inert single-seed accounting to ledger-exact depletion-front search.
+
+### Artifacts
+
+- `src/parallel_replay.py`
+- `src/queue_supervisor.py`
+- `src/launch_queue.py`
+- `src/v02_parameter_search.py`
+- `output/findings/parallel_golden_replay.csv`
+- `output/findings/parallel_golden_replay.json`
+- `output/findings/parallel_committor_seed42_56_targets/committor_rows.csv`
+- `output/findings/parallel_committor_seed42_56_targets/committor_summary.csv`
+- `output/findings/parallel_committor_seed42_56_targets/committor_summary.json`
+- `output/findings/parallel_committor_seed42_56_targets/states/`
+- `output/findings/finding_025_v02_parameter_search.csv`
+- `output/findings/finding_025_v02_parameter_search.json`
+- `output/findings/queue_20260708_094458_state.json`
+- `output/findings/queue_20260708_094458_supervisor.log`
+
+## Finding 026: Focused v0.2 Search Finds a Valence-8 Depletion Basin
+
+### Status
+
+Completed. A focused 48-task follow-up search tightened around the Finding 025 basin.
+
+### Setup
+
+The search fixed `bond_probability = 1.0` and initial active count `16`, then crossed:
+
+```text
+seeds = 42, 56
+amplitude_coupling = 2, 3, 4, 5, 6, 8
+vacuum_amplitude = 2, 3
+valence = 6, 8
+ticks = 2048
+stagnation_window = 512
+stop_active_iotas = 1000
+```
+
+The `stop_active_iotas` cap was added after an intentionally broader 432-task refinement began spending cycles on runaway high-valence cases. The cap records scientifically interesting threshold crossings without wasting compute on already-successful growth explosions.
+
+### Result
+
+All 48 focused tasks completed with `max_abs_ledger_error == 0`.
+
+Best full-horizon candidates, not stopped early:
+
+| Seed | kA | Vacuum | Valence | Initial active | Final tick | Final active | Depleted | Transfers | LCF_cube26 | Ledger error |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `56` | `5.0` | `2` | `8` | `16` | `2048` | `933` | `327` | `74604` | `0.123258` | `0` |
+| `56` | `4.0` | `2` | `8` | `16` | `2048` | `961` | `327` | `65164` | `0.119667` | `0` |
+| `56` | `6.0` | `2` | `8` | `16` | `2048` | `938` | `323` | `64649` | `0.121535` | `0` |
+| `56` | `8.0` | `2` | `8` | `16` | `2048` | `898` | `322` | `67507` | `0.122494` | `0` |
+
+Best threshold-crossing candidates, stopped at tick `4` after crossing `1000` active sites:
+
+| Seed | kA | Vacuum | Valence | Initial active | Final active | Depleted | Transfers | LCF_cube26 | Ledger error |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `56` | `5.0` | `3` | `8` | `16` | `2091` | `231` | `3459` | `0.086561` | `0` |
+| `56` | `4.0` | `3` | `8` | `16` | `2086` | `231` | `3392` | `0.084851` | `0` |
+| `56` | `6.0` | `3` | `8` | `16` | `2095` | `227` | `3477` | `0.086396` | `0` |
+| `56` | `8.0` | `3` | `8` | `16` | `2101` | `224` | `3487` | `0.086625` | `0` |
+
+### Interpretation
+
+The focused search identifies a stronger v0.2 basin than Finding 025:
+
+- `valence = 8` dominates `valence = 6` in the focused region.
+- `vacuum_amplitude = 2` gives slower full-horizon depletion fronts with hundreds of depleted cells and tens of thousands of transfers.
+- `vacuum_amplitude = 3` crosses the active threshold almost immediately, so it is a growth-explosion regime rather than a comparable 2048-tick stability result.
+- Seed `56` is stronger than seed `42` in the focused top rows.
+- The ledger invariant remains exact across all focused tasks.
+
+This is the first v0.2 result that looks like a useful search substrate: not open-ended complexity, but ledger-exact growth/depletion dynamics with tunable regimes. The next experiment should compare openness and second-order structure for the two regimes separately: `vacuum=2` as a full-horizon depletion front, and `vacuum=3` as a threshold-crossing burst.
+
+### Artifacts
+
+- `src/v02_parameter_search.py`
+- `output/findings/finding_026_v02_focused_parameter_search.csv`
+- `output/findings/finding_026_v02_focused_parameter_search.json`

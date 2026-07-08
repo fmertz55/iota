@@ -72,6 +72,7 @@ class SearchTask:
     ticks: int
     sample_every: int
     stagnation_window: int
+    stop_active_iotas: int
     amplitude_coupling: float
     vacuum_amplitude: int
     valence: int
@@ -191,6 +192,10 @@ def run_search_task(task_dict: dict[str, Any]) -> dict[str, Any]:
             final_tick = tick
             early_stop_reason = "extinct"
             break
+        if task.stop_active_iotas > 0 and active_count >= task.stop_active_iotas:
+            final_tick = tick
+            early_stop_reason = f"active_iotas >= {task.stop_active_iotas}"
+            break
         if task.stagnation_window > 0 and tick - last_dynamic_tick >= task.stagnation_window:
             final_tick = tick
             early_stop_reason = "stagnant"
@@ -272,6 +277,7 @@ def build_tasks(args: argparse.Namespace) -> list[SearchTask]:
                 ticks=args.ticks,
                 sample_every=args.sample_every,
                 stagnation_window=args.stagnation_window,
+                stop_active_iotas=args.stop_active_iotas,
                 amplitude_coupling=float(k_a),
                 vacuum_amplitude=int(vacuum),
                 valence=int(valence),
@@ -332,6 +338,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ticks", type=int, default=1024)
     parser.add_argument("--sample-every", type=int, default=128)
     parser.add_argument("--stagnation-window", type=int, default=256)
+    parser.add_argument("--stop-active-iotas", type=int, default=0)
     parser.add_argument("--seeds", type=int, nargs="+", default=[42, 56])
     parser.add_argument("--amplitude-couplings", type=float, nargs="+", default=[1.0, 2.0, 4.0, 8.0])
     parser.add_argument("--vacuum-amplitudes", type=int, nargs="+", default=[1, 2])
