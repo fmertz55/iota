@@ -261,6 +261,23 @@ def apply_snapshot_retention(
         mark_artifact_pruned(conn, experiment_id, path, base_dir)
 
 
+def accumulate_step_extras(pending: dict[str, float], extras: dict[str, float]) -> None:
+    count_keys = {
+        "exchanges",
+        "secondary_exchanges",
+        "payload_changes",
+        "deactivation_events",
+        "amplitude_transfers",
+        "failed_transfer_gates",
+    }
+    for key, value in extras.items():
+        numeric_value = float(value)
+        if key in count_keys:
+            pending[key] = float(pending.get(key, 0.0)) + numeric_value
+        else:
+            pending[key] = numeric_value
+
+
 def run_experiment(config_path: str, objective: str | None, notes: str, force: bool) -> None:
     cfg = load_config(config_path)
     base_dir = Path(config_path).resolve().parent
@@ -288,6 +305,7 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
     stop_coherence_ratio = float(stop_coherence_ratio) if stop_coherence_ratio is not None else None
     stop_coherence_min_active = int(cfg["run"].get("stop_coherence_min_active", 1))
     run_metrics: list[dict[str, float]] = []
+    pending_extras: dict[str, float] = {}
     early_stop_reason: str | None = None
     start = time.perf_counter()
 
@@ -307,10 +325,12 @@ def run_experiment(config_path: str, objective: str | None, notes: str, force: b
 
     for tick in range(1, ticks + 1):
         extras = step(world, cfg)
+        accumulate_step_extras(pending_extras, extras)
         should_collect_metric = tick % metric_every == 0 or tick == ticks
         if not should_collect_metric:
             continue
-        metric = collect_metrics(world, tick, extras)
+        metric = collect_metrics(world, tick, pending_extras)
+        pending_extras = {}
         run_metrics.append(metric)
         insert_metric(conn, experiment_id, metric)
         if commit_metrics:

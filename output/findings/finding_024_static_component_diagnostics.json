@@ -1,0 +1,71 @@
+{
+  "targets": [
+    [
+      56,
+      "low",
+      "protected_vector",
+      35
+    ],
+    [
+      42,
+      "high",
+      "protected_vector",
+      26
+    ],
+    [
+      56,
+      "high",
+      "protected_vector",
+      48
+    ]
+  ],
+  "row_count": 45,
+  "csv_path": "output/findings/finding_024_static_component_diagnostics.csv",
+  "top_cube26": [
+    {
+      "seed": 56,
+      "law": "low",
+      "condition": "protected_vector",
+      "sample_index": 35,
+      "active_iotas": 33023,
+      "coherence_ratio_face6": 0.6934560760681949,
+      "coherence_ratio_cube26": 0.6998758441086516,
+      "rank": 1,
+      "size": 23112,
+      "active_fraction": 0.6998758441086516,
+      "payload_entropy": 0.006414180909902604,
+      "vector_entropy": 1.6523228963886913,
+      "bbox_density": 0.010686700994318182
+    },
+    {
+      "seed": 42,
+      "law": "high",
+      "condition": "protected_vector",
+      "sample_index": 26,
+      "active_iotas": 28327,
+      "coherence_ratio_face6": 0.630105553005966,
+      "coherence_ratio_cube26": 0.6343770960567656,
+      "rank": 1,
+      "size": 17970,
+      "active_fraction": 0.6343770960567656,
+      "payload_entropy": 0.008007047425792124,
+      "vector_entropy": 0.9668673763912986,
+      "bbox_density": 0.2658913352272727
+    },
+    {
+      "seed": 56,
+      "law": "high",
+      "condition": "protected_vector",
+      "sample_index": 48,
+      "active_iotas": 21411,
+      "coherence_ratio_face6": 0.6308906636775489,
+      "coherence_ratio_cube26": 0.6340198963149782,
+      "rank": 1,
+      "size": 13575,
+      "active_fraction": 0.6340198963149782,
+      "payload_entropy": 0.00556290751077588,
+      "vector_entropy": 1.054547377175663,
+      "bbox_density": 0.18476426393728224
+    }
+  ]
+}

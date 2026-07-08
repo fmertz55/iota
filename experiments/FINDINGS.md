@@ -2109,3 +2109,93 @@ The central v0.2 requirements are:
 - `output/findings/finding_022_openness_timeline_seed56_summary.csv`
 - `output/findings/finding_022_openness_timeline_seed56_summary.json`
 - `output/findings/finding_022_openness_timeline_seed56_states/`
+
+## Finding 023: v0.2 Single-Seed Baseline Still Closes Immediately
+
+### Status
+
+Development-scale v0.2 baseline and openness comparison completed for seeds `42` and `56`.
+
+### Setup
+
+Versioned law path:
+
+```yaml
+simulation_version: iota-rig-v0.2.0
+constants:
+  conservation: hard
+  deactivation: exhaustion
+  vacuum_amplitude: 1
+```
+
+The default single-seed setup was retained. Baseline runs used `1024` ticks. Openness runs used the same development protocol as Finding 022:
+
+```text
+ticks=1024
+checkpoint_every=256
+horizon=512
+samples=8
+connectivity=cube26
+```
+
+### Baseline Result
+
+| Seed | Final active | LCF_face6 | LCF_cube26 | Total A | Active A | Latent A | Depleted | Ledger error |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `42` | `6` | `0.500` | `1.000` | `262149` | `11` | `262138` | `0` | `0` |
+| `56` | `4` | `0.250` | `1.000` | `262149` | `9` | `262140` | `0` | `0` |
+
+The ledger invariant holds exactly, but the current single-seed v0.2 baseline does not produce depletion, exhaustion, or substantial propagation at this scale.
+
+### Openness Result
+
+| Version | Seed | First commitment tick | Openness values | Base active trajectory |
+|---|---:|---:|---|---|
+| `v0.1` | `42` | `0` | `0, 0, 0, 0, 0` | `1, 13, 13, 13, 13` |
+| `v0.1` | `56` | `0` | `0, 0, 0, 0, 0` | `1, 5, 5, 5, 5` |
+| `v0.2` | `42` | `0` | `0, 0, 0, 0, 0` | `1, 6, 6, 6, 6` |
+| `v0.2` | `56` | `0` | `0, 0, 0, 0, 0` | `1, 2, 2, 4, 4` |
+
+Interpretation: hard conservation alone is not enough. Under the current single-seed parameters, v0.2 makes energy accounting falsifiable but does not yet create durable form without closed future. The next v0.2 work should be a parameter search over transfer probability, vacuum budget, valence, and initial seed count, while keeping `ledger_error == 0`.
+
+### Artifacts
+
+- `experiments_v02/IOTA-000001.md`
+- `experiments_v02/IOTA-000002.md`
+- `output_v02/IOTA-000001/metrics.csv`
+- `output_v02/IOTA-000002/metrics.csv`
+- `output/findings/finding_023_v02_openness_timeline_seed42_raw.csv`
+- `output/findings/finding_023_v02_openness_timeline_seed42_summary.csv`
+- `output/findings/finding_023_v02_openness_timeline_seed42_summary.json`
+- `output/findings/finding_023_v02_openness_timeline_seed42_states/`
+- `output/findings/finding_023_v02_openness_timeline_seed56_raw.csv`
+- `output/findings/finding_023_v02_openness_timeline_seed56_summary.csv`
+- `output/findings/finding_023_v02_openness_timeline_seed56_summary.json`
+- `output/findings/finding_023_v02_openness_timeline_seed56_states/`
+
+## Finding 024: Static Component Diagnostics for Protected Exceptions
+
+### Status
+
+Static final-state component/vector diagnostics completed for the three largest high-activity protected committor exceptions.
+
+### Targets
+
+| Seed | Law | Condition | Sample | Active | LCF_face6 | LCF_cube26 | Top cube26 component |
+|---:|---|---|---:|---:|---:|---:|---:|
+| `56` | `low` | `protected_vector` | `35` | `33023` | `0.693` | `0.700` | `23112` |
+| `42` | `high` | `protected_vector` | `26` | `28327` | `0.630` | `0.634` | `17970` |
+| `56` | `high` | `protected_vector` | `48` | `21411` | `0.631` | `0.634` | `13575` |
+
+### Interpretation
+
+The top protected exceptions remain non-absorbing under cube26. Cube26 increases the largest-component fraction only slightly for these three cases, so they are not merely face6-fragmented artifacts. They are large, partially coherent, non-absorbed states.
+
+Payload entropy inside the top cube26 component is near zero in all three cases, while vector entropy remains nonzero. That suggests payload identity has collapsed locally, but directional-state structure remains heterogeneous. These are still candidates for structural analysis, not evidence of open-ended complexity.
+
+Full temporal second-order tracing is expensive for high-activity cases because it records per-tick event graphs. For broad triage, static final-state diagnostics from saved NPZ artifacts are the practical first pass; temporal lineage should be reserved for the smallest number of high-value candidates.
+
+### Artifacts
+
+- `output/findings/finding_024_static_component_diagnostics.csv`
+- `output/findings/finding_024_static_component_diagnostics.json`

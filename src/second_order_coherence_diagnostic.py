@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from iota_rig import candidate_neighbor_steps, load_config
+from iota_rig import candidate_neighbor_steps, load_config, step
 from payload_coupling_committor_analysis import (
     HIGH_COUPLING,
     HIGH_LABEL,
@@ -312,6 +312,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-overlap-fraction", type=float, default=0.25)
     parser.add_argument("--connectivity", choices=["face6", "face18", "cube26"], default="cube26")
     parser.add_argument("--output-prefix", default="")
+    parser.add_argument(
+        "--component-only",
+        action="store_true",
+        help="Use normal stepping and sample component lineage without expensive per-tick event tracing.",
+    )
     return parser.parse_args()
 
 
@@ -347,8 +352,11 @@ def main() -> None:
     counters: Counter[str] = Counter()
 
     for tick in range(event.divergence_tick + 1, args.max_ticks + 1):
-        events = trace_step(world, cfg, tick)
-        update_interval_counters(counters, events)
+        if args.component_only:
+            step(world, cfg)
+        else:
+            events = trace_step(world, cfg, tick)
+            update_interval_counters(counters, events)
         if tick % args.sample_every != 0 and tick != args.max_ticks:
             continue
 
@@ -412,6 +420,7 @@ def main() -> None:
         "target": event.target,
         "sample_every": args.sample_every,
         "max_ticks": args.max_ticks,
+        "component_only": args.component_only,
         "paths": {key: str(path) for key, path in paths.items()},
         "track_count": len(summary_rows),
         "persistent_track_count": sum(row["observations"] >= 4 for row in summary_rows),
