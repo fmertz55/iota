@@ -27,7 +27,7 @@ COUNT_KEYS = {
     "amplitude_transfers",
     "failed_transfer_gates",
     "secondary_vector_kicks",
-    "depleted_reactivations",
+    "residual_participations",
 }
 
 
@@ -60,7 +60,7 @@ FIELDNAMES = [
     "total_amplitude_transfers",
     "total_failed_transfer_gates",
     "total_secondary_vector_kicks",
-    "total_depleted_reactivations",
+    "total_residual_participations",
     "first_growth_tick",
     "first_deactivation_tick",
     "wall_time_seconds",
@@ -236,7 +236,7 @@ def run_search_task(task_dict: dict[str, Any]) -> dict[str, Any]:
         "total_amplitude_transfers": totals["amplitude_transfers"],
         "total_failed_transfer_gates": totals["failed_transfer_gates"],
         "total_secondary_vector_kicks": totals["secondary_vector_kicks"],
-        "total_depleted_reactivations": totals["depleted_reactivations"],
+        "total_residual_participations": totals["residual_participations"],
         "first_growth_tick": first_growth_tick,
         "first_deactivation_tick": first_deactivation_tick,
         "wall_time_seconds": time.perf_counter() - start,

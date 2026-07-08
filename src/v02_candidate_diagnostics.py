@@ -22,7 +22,7 @@ COUNT_KEYS = {
     "amplitude_transfers",
     "failed_transfer_gates",
     "secondary_vector_kicks",
-    "depleted_reactivations",
+    "residual_participations",
 }
 
 
@@ -37,7 +37,7 @@ METRIC_FIELDNAMES = [
     "amplitude_transfers",
     "failed_transfer_gates",
     "secondary_vector_kicks",
-    "depleted_reactivations",
+    "residual_participations",
     "deactivation_events",
     "largest_coherence_face6",
     "coherence_ratio_face6",

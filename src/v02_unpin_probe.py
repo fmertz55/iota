@@ -27,7 +27,7 @@ COUNT_KEYS = {
     "amplitude_transfers",
     "failed_transfer_gates",
     "secondary_vector_kicks",
-    "depleted_reactivations",
+    "residual_participations",
 }
 
 FIELDNAMES = [
@@ -46,8 +46,8 @@ FIELDNAMES = [
     "secondary_vector_kick_probability",
     "secondary_vector_kick_offset",
     "secondary_vector_kick_preserve_behavior",
-    "depleted_reactivation_probability",
-    "depleted_reactivation_secondary_only",
+    "residual_participation_probability",
+    "residual_participation_secondary_only",
     "peak_active_iotas",
     "final_active_iotas",
     "final_depleted_cells",
@@ -62,7 +62,7 @@ FIELDNAMES = [
     "total_failed_transfer_gates",
     "total_deactivation_events",
     "total_secondary_vector_kicks",
-    "total_depleted_reactivations",
+    "total_residual_participations",
     "tail_rows",
     "tail_mean_active_turnover_fraction",
     "tail_mean_active_interface_turnover_fraction",
@@ -74,7 +74,7 @@ FIELDNAMES = [
     "tail_mean_persistent_interface_V_changed_fraction",
     "tail_mean_amplitude_transfers_per_tick",
     "tail_mean_secondary_vector_kicks_per_tick",
-    "tail_mean_depleted_reactivations_per_tick",
+    "tail_mean_residual_participations_per_tick",
     "wall_time_seconds",
     "unpin_score",
 ]
@@ -98,8 +98,8 @@ class ProbeTask:
     secondary_vector_kick_probability: float
     secondary_vector_kick_offset: int
     secondary_vector_kick_preserve_behavior: bool
-    depleted_reactivation_probability: float
-    depleted_reactivation_secondary_only: bool
+    residual_participation_probability: float
+    residual_participation_secondary_only: bool
 
 
 def stable_float_label(value: float) -> str:
@@ -133,8 +133,8 @@ def ledger_metric(world: Any, tick: int, extras: dict[str, float] | None = None)
 
 def configure_task(task: ProbeTask) -> dict[str, Any]:
     config = copy.deepcopy(load_config(task.config_path))
-    config["simulation_version"] = "iota-rig-v0.2.1-secondary-kick-probe"
-    config.setdefault("experiment", {})["objective"] = "v0.2 secondary kick unpin probe"
+    config["simulation_version"] = "iota-rig-v0.2.1-residual-participation-probe"
+    config.setdefault("experiment", {})["objective"] = "v0.2 residual participation unpin probe"
     config.setdefault("init", {})["seed"] = int(task.seed)
     config["init"]["active_iotas"] = int(task.active_iotas)
     constants = config.setdefault("constants", {})
@@ -151,11 +151,11 @@ def configure_task(task: ProbeTask) -> dict[str, Any]:
     constants["secondary_vector_kick_preserve_behavior"] = bool(
         task.secondary_vector_kick_preserve_behavior
     )
-    constants["depleted_reactivation_probability"] = float(
-        task.depleted_reactivation_probability
+    constants["residual_participation_probability"] = float(
+        task.residual_participation_probability
     )
-    constants["depleted_reactivation_secondary_only"] = bool(
-        task.depleted_reactivation_secondary_only
+    constants["residual_participation_secondary_only"] = bool(
+        task.residual_participation_secondary_only
     )
     config.setdefault("run", {})["ticks"] = int(task.ticks)
     return config
@@ -176,7 +176,7 @@ def score_probe(row: dict[str, Any]) -> float:
     active_turnover = 50.0 * float(row["tail_mean_active_turnover_fraction"])
     vector_change = 25.0 * float(row["tail_mean_persistent_interface_V_changed_fraction"])
     kick_rate_penalty = 0.05 * float(row["tail_mean_secondary_vector_kicks_per_tick"])
-    reactivation_rate_penalty = 0.05 * float(row["tail_mean_depleted_reactivations_per_tick"])
+    residual_rate_penalty = 0.05 * float(row["tail_mean_residual_participations_per_tick"])
     return float(
         interface_turnover
         + active_turnover
@@ -184,7 +184,7 @@ def score_probe(row: dict[str, Any]) -> float:
         + 0.25 * activity
         + 0.25 * depletion
         - kick_rate_penalty
-        - reactivation_rate_penalty
+        - residual_rate_penalty
         - burst_penalty
     )
 
@@ -269,8 +269,8 @@ def run_probe_task(task_dict: dict[str, Any]) -> dict[str, Any]:
         "secondary_vector_kick_probability": task.secondary_vector_kick_probability,
         "secondary_vector_kick_offset": task.secondary_vector_kick_offset,
         "secondary_vector_kick_preserve_behavior": task.secondary_vector_kick_preserve_behavior,
-        "depleted_reactivation_probability": task.depleted_reactivation_probability,
-        "depleted_reactivation_secondary_only": task.depleted_reactivation_secondary_only,
+        "residual_participation_probability": task.residual_participation_probability,
+        "residual_participation_secondary_only": task.residual_participation_secondary_only,
         "peak_active_iotas": peak_active_iotas,
         "final_active_iotas": int(final_metric["active_iotas"]),
         "final_depleted_cells": int(final_metric["depleted_cells"]),
@@ -285,7 +285,7 @@ def run_probe_task(task_dict: dict[str, Any]) -> dict[str, Any]:
         "total_failed_transfer_gates": totals["failed_transfer_gates"],
         "total_deactivation_events": totals["deactivation_events"],
         "total_secondary_vector_kicks": totals["secondary_vector_kicks"],
-        "total_depleted_reactivations": totals["depleted_reactivations"],
+        "total_residual_participations": totals["residual_participations"],
         "tail_rows": len(tail_rows),
         "tail_mean_active_turnover_fraction": mean_metric(tail_rows, "active_turnover_fraction"),
         "tail_mean_active_interface_turnover_fraction": mean_metric(
@@ -321,9 +321,9 @@ def run_probe_task(task_dict: dict[str, Any]) -> dict[str, Any]:
             tail_rows,
             "secondary_vector_kicks_per_tick",
         ),
-        "tail_mean_depleted_reactivations_per_tick": mean_metric(
+        "tail_mean_residual_participations_per_tick": mean_metric(
             tail_rows,
-            "depleted_reactivations_per_tick",
+            "residual_participations_per_tick",
         ),
         "wall_time_seconds": time.perf_counter() - start_time,
     }
@@ -376,7 +376,7 @@ def write_outputs(output_prefix: Path, rows: list[dict[str, Any]], task_count: i
     atomic_write_json(
         output_prefix.with_suffix(".json"),
         {
-            "mode": "v02_secondary_kick_unpin_probe",
+            "mode": "v02_residual_participation_unpin_probe",
             "complete": complete,
             "task_count": task_count,
             "completed_count": len(rows),
@@ -397,7 +397,7 @@ def build_tasks(args: argparse.Namespace) -> list[ProbeTask]:
             args.bond_probabilities,
             args.secondary_vector_kick_probabilities,
             args.secondary_vector_kick_offsets,
-            args.depleted_reactivation_probabilities,
+            args.residual_participation_probabilities,
         ),
         start=1,
     ):
@@ -410,14 +410,14 @@ def build_tasks(args: argparse.Namespace) -> list[ProbeTask]:
             bond_probability,
             kick_probability,
             kick_offset,
-            depleted_reactivation_probability,
+            residual_participation_probability,
         ) = values
         run_id = (
             f"unpin_{index:04d}_s{seed}_ka{stable_float_label(amplitude_coupling)}_"
             f"vac{vacuum_amplitude}_val{valence}_n{active_iotas}_"
             f"bp{stable_float_label(bond_probability)}_"
             f"skp{stable_float_label(kick_probability)}_sko{kick_offset}_"
-            f"drp{stable_float_label(depleted_reactivation_probability)}"
+            f"rpp{stable_float_label(residual_participation_probability)}"
         )
         tasks.append(
             ProbeTask(
@@ -439,9 +439,9 @@ def build_tasks(args: argparse.Namespace) -> list[ProbeTask]:
                 secondary_vector_kick_preserve_behavior=bool(
                     args.secondary_vector_kick_preserve_behavior
                 ),
-                depleted_reactivation_probability=float(depleted_reactivation_probability),
-                depleted_reactivation_secondary_only=bool(
-                    args.depleted_reactivation_secondary_only
+                residual_participation_probability=float(residual_participation_probability),
+                residual_participation_secondary_only=bool(
+                    args.residual_participation_secondary_only
                 ),
             )
         )
@@ -469,7 +469,7 @@ def run_tasks(tasks: list[ProbeTask], args: argparse.Namespace) -> list[dict[str
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Search for v0.2 secondary-kick settings that unpin front geometry.")
+    parser = argparse.ArgumentParser(description="Search for v0.2 residual-participation settings that unpin front geometry.")
     parser.add_argument("--config", default="output/findings/configs/v02_front_seed56_ka5_vac2_val8_n16.yaml")
     parser.add_argument("--jobs", type=int, default=4)
     parser.add_argument("--ticks", type=int, default=768)
@@ -492,13 +492,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--secondary-vector-kick-offsets", type=int, nargs="+", default=[1, 3])
     parser.add_argument("--secondary-vector-kick-preserve-behavior", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument(
+        "--residual-participation-probabilities",
         "--depleted-reactivation-probabilities",
+        dest="residual_participation_probabilities",
         type=float,
         nargs="+",
         default=[0.0],
     )
-    parser.add_argument("--depleted-reactivation-secondary-only", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--output-prefix", default="output/findings/finding_031_v02_secondary_kick_unpin_probe")
+    parser.add_argument(
+        "--residual-participation-secondary-only",
+        "--depleted-reactivation-secondary-only",
+        dest="residual_participation_secondary_only",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+    )
+    parser.add_argument("--output-prefix", default="output/findings/finding_031_v02_residual_participation_unpin_probe")
     parser.add_argument("--flush-every", type=int, default=4)
     parser.add_argument("--top-n", type=int, default=20)
     return parser.parse_args()

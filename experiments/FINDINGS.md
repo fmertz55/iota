@@ -2728,7 +2728,7 @@ The next test should not be more broad committor sampling. It should be a target
 - `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick2000_2048_turnover.csv`
 - `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick2000_2048_turnover_summary.json`
 
-## Finding 031: Depleted-Reactivation Kicks Unpin the v0.2 Scaffold
+## Finding 031: Residual Participation Unpins the v0.2 Scaffold
 
 ### Status
 
@@ -2745,18 +2745,27 @@ what minimal law knob converts pinned scaffold flow into topology-changing turno
 Two candidate perturbations were tested:
 
 1. `secondary_vector_kick_probability`: successful secondary transfers can rotate the target vector state.
-2. `depleted_reactivation_probability`: successful secondary transfer attempts into depleted cells can donate one amplitude unit and reactivate the depleted target.
+2. `residual_participation_probability`: successful secondary handshake attempts into residual/depleted boundary sites can donate one amplitude unit and bring the site back into the active interface.
 
 Both are default-off. Both preserve the hard amplitude ledger.
 
+The initial implementation and artifact filenames used the phrase `depleted_reactivation`. That name is too ontologically strong. The better interpretation is residual participation: the iota was not dead, it was excluded by the previous active-only update rule. The current implementation restores handshake eligibility at the active/depleted boundary. Full universal source-side participation by every residual iota remains a larger next law change.
+
 ### Instrument Change
 
-Added secondary-kick knobs to `src/iota_rig.py`:
+Added default-off secondary-kick and residual-participation knobs to `src/iota_rig.py`:
 
 ```text
 constants.secondary_vector_kick_probability
 constants.secondary_vector_kick_offset
 constants.secondary_vector_kick_preserve_behavior
+constants.residual_participation_probability
+constants.residual_participation_secondary_only
+```
+
+Backward-compatible aliases are accepted:
+
+```text
 constants.depleted_reactivation_probability
 constants.depleted_reactivation_secondary_only
 ```
@@ -2766,7 +2775,7 @@ Added `src/v02_unpin_probe.py` to score candidate settings by post-stabilization
 Updated `src/front_turnover_diagnostic.py` to report:
 
 - `secondary_vector_kicks`;
-- `depleted_reactivations`;
+- `residual_participations`;
 - per-tick rates for both.
 
 ### Setup
@@ -2820,13 +2829,13 @@ vector kicks perturb direction state, but they do not meaningfully unpin topolog
 
 This is the correction to the initial “secondary vector kick” idea. The scaffold is not pinned primarily because vectors lack small perturbations. It is pinned because depleted sites are absorbing walls.
 
-### Positive Result: Depleted Reactivation Is the Lever
+### Positive Result: Residual Participation Is the Lever
 
-At `768` ticks, depleted reactivation produced a monotonic increase in post-stabilization interface turnover without triggering the `2500` active cap.
+At `768` ticks, residual participation produced a monotonic increase in post-stabilization interface turnover without triggering the `2500` active cap.
 
 Selected rows:
 
-| Reactivation probability | Vector kick probability | Final active | Final depleted | Tail active turnover | Tail active-interface turnover | Reactivations / tick | Ledger error |
+| Residual participation probability | Vector kick probability | Final active | Final depleted | Tail active turnover | Tail active-interface turnover | Residual participations / tick | Ledger error |
 |---:|---:|---:|---:|---:|---:|---:|---:|
 | `0.001` | `0.0` | `1004` | `324` | `0.002613` | `0.005330` | `0.133333` | `0` |
 | `0.005` | `0.0` | `1025` | `320` | `0.012776` | `0.021614` | `0.694444` | `0` |
@@ -2836,22 +2845,22 @@ Selected rows:
 | `0.100` | `0.0` | `1020` | `333` | `0.071666` | `0.143184` | `12.113889` | `0` |
 | `0.200` | `0.0` | `1013` | `327` | `0.081862` | `0.169744` | `21.866667` | `0` |
 
-The vector kick was not needed. Adding `secondary_vector_kick_probability = 0.01` did not materially improve the reactivation rows.
+The vector kick was not needed. Adding `secondary_vector_kick_probability = 0.01` did not materially improve the residual-participation rows.
 
 ### 2048-Tick Validation
 
-Reactivation-only candidates remained ledger-exact and did not hit the active cap.
+Residual-participation-only candidates remained ledger-exact and did not hit the active cap.
 
-| Reactivation probability | Final active | Final depleted | Tail active turnover | Tail active-interface turnover | Reactivations / tick | Ledger error | Early stop |
+| Residual participation probability | Final active | Final depleted | Tail active turnover | Tail active-interface turnover | Residual participations / tick | Ledger error | Early stop |
 |---:|---:|---:|---:|---:|---:|---:|---|
 | `0.02` | `1025` | `318` | `0.051767` | `0.103051` | `2.809466` | `0` | none |
 | `0.05` | `1017` | `328` | `0.066824` | `0.138324` | `6.188107` | `0` | none |
 | `0.10` | `1021` | `332` | `0.080618` | `0.166727` | `12.307646` | `0` | none |
 | `0.20` | `1013` | `331` | `0.084552` | `0.181078` | `21.333131` | `0` | none |
 
-The smallest strong setting is `depleted_reactivation_probability = 0.02`: it produces durable nonzero topology turnover through the full `2048`-tick horizon while staying near the original activity scale.
+The smallest strong setting is `residual_participation_probability = 0.02`: it produces durable nonzero topology turnover through the full `2048`-tick horizon while staying near the original activity scale.
 
-Detailed turnover for `depleted_reactivation_probability = 0.02`:
+Detailed turnover for `residual_participation_probability = 0.02`:
 
 | Metric | Value |
 |---|---:|
@@ -2873,7 +2882,7 @@ At tick `2048`, compared with tick `2032`:
 - active turnover fraction is `0.053181`;
 - active-interface turnover fraction is `0.094595`;
 - depleted turnover fraction is `0.161850`;
-- depleted reactivations occur at `2.9375` per tick;
+- residual participations occur at `2.9375` per tick;
 - deactivations also occur at `2.9375` per tick;
 - amplitude transfers occur at `4.375` per tick;
 - ledger error remains `0`.
@@ -2883,25 +2892,27 @@ The tick-level `2000..2048` check confirms that turnover persists late in the ru
 - mean active turnover is `0.024973`;
 - mean active-interface turnover is `0.029381`;
 - final one-tick active-interface turnover is `0.012881`;
-- final one-tick depleted reactivation rate is `3.0` per tick.
+- final one-tick residual participation rate is `3.0` per tick.
 
 ### Interpretation
 
 This is the actionable correction:
 
 ```text
-The missing unpinning mechanism is not directional perturbation by itself. It is reversible access to depleted boundary sites.
+The missing unpinning mechanism is not directional perturbation by itself. It is residual participation at the active/depleted boundary.
 ```
 
-The original vacuum-2 scaffold pinned because depleted cells became permanent topological walls. A secondary-only depleted-reactivation kick reopens those wall sites without creating amplitude and without requiring vacuum-3 ignition. That produces topology-changing turnover while preserving the hard ledger.
+The original vacuum-2 scaffold pinned because the active-only update rule made depleted cells behave like permanent topological walls. Secondary-only residual participation reopens those wall sites to handshake without creating amplitude and without requiring vacuum-3 ignition. That produces topology-changing turnover while preserving the hard ledger.
 
 The safe claim is:
 
 ```text
-v0.2.1 depleted reactivation converts the vacuum-2 pinned scaffold into a ledger-exact turnover scaffold: active/depleted geometry no longer freezes, while activity remains non-explosive through the tested horizon.
+v0.2.1 residual participation converts the vacuum-2 pinned scaffold into a ledger-exact turnover scaffold: active/depleted geometry no longer freezes, while activity remains non-explosive through the tested horizon.
 ```
 
-Do not yet claim open-ended complexity. The next required test is morphology-aware openness on the `depleted_reactivation_probability = 0.02` candidate, followed by component/connectivity diagnostics. The current result only establishes that the previously missing ingredient, topology-changing turnover, can be recovered with a minimal conserved perturbation.
+This is still not the full universal-participation ontology. In this implementation, residual participation is boundary-mediated: an active source can productively handshake with a residual/depleted target. The deeper law repair should preserve residual state on stranded iotas and allow low-capacity source-side participation from non-active sites. That is the next implementation boundary.
+
+Do not yet claim open-ended complexity. The next required test is morphology-aware openness on the `residual_participation_probability = 0.02` candidate, followed by component/connectivity diagnostics. The current result only establishes that the previously missing ingredient, topology-changing turnover, can be recovered with a minimal conserved perturbation.
 
 ### Artifacts
 

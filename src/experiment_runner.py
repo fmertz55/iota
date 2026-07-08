@@ -270,7 +270,7 @@ def accumulate_step_extras(pending: dict[str, float], extras: dict[str, float]) 
         "amplitude_transfers",
         "failed_transfer_gates",
         "secondary_vector_kicks",
-        "depleted_reactivations",
+        "residual_participations",
     }
     for key, value in extras.items():
         numeric_value = float(value)

@@ -447,11 +447,19 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     secondary_vector_kick_preserve_behavior = bool(
         cfg["constants"].get("secondary_vector_kick_preserve_behavior", True)
     )
-    depleted_reactivation_probability = clamp_probability(
-        float(cfg["constants"].get("depleted_reactivation_probability", 0.0))
+    residual_participation_probability = clamp_probability(
+        float(
+            cfg["constants"].get(
+                "residual_participation_probability",
+                cfg["constants"].get("depleted_reactivation_probability", 0.0),
+            )
+        )
     )
-    depleted_reactivation_secondary_only = bool(
-        cfg["constants"].get("depleted_reactivation_secondary_only", True)
+    residual_participation_secondary_only = bool(
+        cfg["constants"].get(
+            "residual_participation_secondary_only",
+            cfg["constants"].get("depleted_reactivation_secondary_only", True),
+        )
     )
 
     if deactivation not in {"none", "exhaustion"}:
@@ -474,7 +482,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     amplitude_transfers = 0
     failed_transfer_gates = 0
     secondary_vector_kicks = 0
-    depleted_reactivations = 0
+    residual_participations = 0
     exchange_alignments: list[float] = []
     secondary_exchange_alignments: list[float] = []
 
@@ -512,9 +520,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                 if int(next_A[tx, ty, tz]) >= int(available_A[x, y, z]):
                     continue
             elif target_depleted and (
-                depleted_reactivation_probability <= 0.0
+                residual_participation_probability <= 0.0
                 or (
-                    depleted_reactivation_secondary_only
+                    residual_participation_secondary_only
                     and int(candidate["order"]) == 0
                 )
             ):
@@ -532,7 +540,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
 
             transfer_probability = clamp_probability(kA * influence)
             if target_depleted:
-                transfer_probability *= depleted_reactivation_probability
+                transfer_probability *= residual_participation_probability
             if world.rng.random() >= transfer_probability:
                 failed_transfer_gates += 1
                 continue
@@ -545,7 +553,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                 next_A[tx, ty, tz] += 1
                 next_latent_A[tx, ty, tz] = 0
                 next_active[tx, ty, tz] = True
-                depleted_reactivations += 1
+                residual_participations += 1
             else:
                 next_A[tx, ty, tz] += int(next_latent_A[tx, ty, tz]) + 1
                 next_latent_A[tx, ty, tz] = 0
@@ -632,7 +640,8 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "failed_transfer_gates": failed_transfer_gates,
         "deactivation_events": deactivation_events,
         "secondary_vector_kicks": secondary_vector_kicks,
-        "depleted_reactivations": depleted_reactivations,
+        "residual_participations": residual_participations,
+        "depleted_reactivations": residual_participations,
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
         "max_payload_fraction": max_payload_fraction,

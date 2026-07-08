@@ -23,6 +23,7 @@ COUNT_KEYS = {
     "amplitude_transfers",
     "failed_transfer_gates",
     "secondary_vector_kicks",
+    "residual_participations",
     "depleted_reactivations",
 }
 
@@ -86,12 +87,12 @@ FIELDNAMES = [
     "failed_transfer_gates",
     "deactivation_events",
     "secondary_vector_kicks",
-    "depleted_reactivations",
+    "residual_participations",
     "amplitude_transfers_per_tick",
     "failed_transfer_gates_per_tick",
     "deactivation_events_per_tick",
     "secondary_vector_kicks_per_tick",
-    "depleted_reactivations_per_tick",
+    "residual_participations_per_tick",
     *[
         f"{prefix}_{suffix}"
         for prefix in MASK_PREFIXES
@@ -138,8 +139,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--secondary-vector-kick-probability", type=float, default=None)
     parser.add_argument("--secondary-vector-kick-offset", type=int, default=None)
     parser.add_argument("--secondary-vector-kick-preserve-behavior", action=argparse.BooleanOptionalAction, default=None)
-    parser.add_argument("--depleted-reactivation-probability", type=float, default=None)
-    parser.add_argument("--depleted-reactivation-secondary-only", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--residual-participation-probability", type=float, default=None)
+    parser.add_argument("--residual-participation-secondary-only", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--depleted-reactivation-probability", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--depleted-reactivation-secondary-only", action=argparse.BooleanOptionalAction, default=None, help=argparse.SUPPRESS)
     parser.add_argument("--stop-active-iotas", type=int, default=0)
     parser.add_argument("--save-final-state", action="store_true")
     return parser.parse_args()
@@ -166,10 +169,20 @@ def apply_overrides(cfg: dict[str, Any], args: argparse.Namespace) -> dict[str, 
         constants["secondary_vector_kick_offset"] = int(args.secondary_vector_kick_offset)
     if args.secondary_vector_kick_preserve_behavior is not None:
         constants["secondary_vector_kick_preserve_behavior"] = bool(args.secondary_vector_kick_preserve_behavior)
-    if args.depleted_reactivation_probability is not None:
-        constants["depleted_reactivation_probability"] = float(args.depleted_reactivation_probability)
-    if args.depleted_reactivation_secondary_only is not None:
-        constants["depleted_reactivation_secondary_only"] = bool(args.depleted_reactivation_secondary_only)
+    residual_participation_probability = (
+        args.residual_participation_probability
+        if args.residual_participation_probability is not None
+        else args.depleted_reactivation_probability
+    )
+    residual_participation_secondary_only = (
+        args.residual_participation_secondary_only
+        if args.residual_participation_secondary_only is not None
+        else args.depleted_reactivation_secondary_only
+    )
+    if residual_participation_probability is not None:
+        constants["residual_participation_probability"] = float(residual_participation_probability)
+    if residual_participation_secondary_only is not None:
+        constants["residual_participation_secondary_only"] = bool(residual_participation_secondary_only)
     return updated
 
 
@@ -352,14 +365,19 @@ def turnover_row(
         "failed_transfer_gates": float(metric.get("failed_transfer_gates", 0.0)),
         "deactivation_events": float(metric.get("deactivation_events", 0.0)),
         "secondary_vector_kicks": float(metric.get("secondary_vector_kicks", 0.0)),
-        "depleted_reactivations": float(metric.get("depleted_reactivations", 0.0)),
+        "residual_participations": float(
+            metric.get(
+                "residual_participations",
+                metric.get("depleted_reactivations", 0.0),
+            )
+        ),
     }
     window = int(row["window_ticks"])
     row["amplitude_transfers_per_tick"] = fraction(row["amplitude_transfers"], window)
     row["failed_transfer_gates_per_tick"] = fraction(row["failed_transfer_gates"], window)
     row["deactivation_events_per_tick"] = fraction(row["deactivation_events"], window)
     row["secondary_vector_kicks_per_tick"] = fraction(row["secondary_vector_kicks"], window)
-    row["depleted_reactivations_per_tick"] = fraction(row["depleted_reactivations"], window)
+    row["residual_participations_per_tick"] = fraction(row["residual_participations"], window)
 
     if previous is None:
         return row
@@ -473,9 +491,9 @@ def aggregate_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
             tail_rows,
             "secondary_vector_kicks_per_tick",
         ),
-        "tail_mean_depleted_reactivations_per_tick_after_full_freeze": mean_for(
+        "tail_mean_residual_participations_per_tick_after_full_freeze": mean_for(
             tail_rows,
-            "depleted_reactivations_per_tick",
+            "residual_participations_per_tick",
         ),
         "tail_mean_persistent_active_changed_fraction_after_full_freeze": mean_for(
             tail_rows,
@@ -571,13 +589,13 @@ def main() -> None:
                 "secondary_vector_kick_preserve_behavior",
                 True,
             ),
-            "depleted_reactivation_probability": cfg.get("constants", {}).get(
-                "depleted_reactivation_probability",
-                0.0,
+            "residual_participation_probability": cfg.get("constants", {}).get(
+                "residual_participation_probability",
+                cfg.get("constants", {}).get("depleted_reactivation_probability", 0.0),
             ),
-            "depleted_reactivation_secondary_only": cfg.get("constants", {}).get(
-                "depleted_reactivation_secondary_only",
-                True,
+            "residual_participation_secondary_only": cfg.get("constants", {}).get(
+                "residual_participation_secondary_only",
+                cfg.get("constants", {}).get("depleted_reactivation_secondary_only", True),
             ),
             "ticks": ticks,
             "connectivity": args.connectivity,
