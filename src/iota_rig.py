@@ -302,6 +302,35 @@ def rotate_vector_state(world: World, v_idx: int, payload: int) -> int:
     return offset_vector_state(world, v_idx, payload, preserve_behavior=True)
 
 
+def history_coupled_rotation_offset(
+    source_v: int,
+    source_p: int,
+    target_v: int,
+    target_a: int,
+    target_r: int,
+    target_p: int,
+    candidate_order: int,
+    target_depleted: bool,
+    influence: float,
+    max_offset: int,
+) -> int:
+    bounded_max = max(1, int(max_offset))
+    source_phase = int(source_v) % 8
+    payload_delta = (int(source_p) - int(target_p)) % 8
+    target_phase = (int(target_v) + int(target_a) + int(target_r) + int(target_p)) % 8
+    influence_phase = max(1, min(7, int(round(float(influence) * 7.0))))
+    residual_phase = 1 if target_depleted else 0
+    order_phase = int(candidate_order) % 8
+    return 1 + (
+        source_phase
+        + payload_delta
+        + target_phase
+        + influence_phase
+        + residual_phase
+        + order_phase
+    ) % bounded_max
+
+
 def offset_vector_state(
     world: World,
     v_idx: int,
@@ -447,6 +476,41 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     secondary_vector_kick_preserve_behavior = bool(
         cfg["constants"].get("secondary_vector_kick_preserve_behavior", True)
     )
+    received_rotation_probability = clamp_probability(
+        float(
+            cfg["constants"].get(
+                "received_rotation_probability",
+                cfg["constants"].get("history_coupled_rotation_probability", 0.0),
+            )
+        )
+    )
+    received_rotation_max_offset = max(
+        1,
+        int(
+            cfg["constants"].get(
+                "received_rotation_max_offset",
+                cfg["constants"].get("history_coupled_rotation_max_offset", 3),
+            )
+        ),
+    )
+    received_rotation_preserve_behavior = bool(
+        cfg["constants"].get(
+            "received_rotation_preserve_behavior",
+            cfg["constants"].get("history_coupled_rotation_preserve_behavior", True),
+        )
+    )
+    received_rotation_residual_multiplier = float(
+        cfg["constants"].get(
+            "received_rotation_residual_multiplier",
+            cfg["constants"].get("history_coupled_rotation_residual_multiplier", 1.0),
+        )
+    )
+    received_rotation_secondary_multiplier = float(
+        cfg["constants"].get(
+            "received_rotation_secondary_multiplier",
+            cfg["constants"].get("history_coupled_rotation_secondary_multiplier", 1.0),
+        )
+    )
     residual_participation_probability = clamp_probability(
         float(
             cfg["constants"].get(
@@ -483,6 +547,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     failed_transfer_gates = 0
     secondary_vector_kicks = 0
     residual_participations = 0
+    rotation_events = 0
+    rotation_events_on_residual_entry = 0
+    rotation_events_on_secondary_exchange = 0
     exchange_alignments: list[float] = []
     secondary_exchange_alignments: list[float] = []
 
@@ -514,6 +581,10 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             if int(available_A[x, y, z]) <= 0:
                 break
             tx, ty, tz = candidate["target"]
+            target_previous_a = int(world.A[tx, ty, tz])
+            target_previous_r = int(world.R[tx, ty, tz])
+            target_previous_v = int(world.V[tx, ty, tz]) % len(world.vectors)
+            target_previous_p = int(world.P[tx, ty, tz])
             target_active = bool(next_active[tx, ty, tz])
             target_depleted = (not target_active) and int(next_latent_A[tx, ty, tz]) <= 0
             if target_active:
@@ -582,6 +653,40 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             elif world.rng.random() < influence * 0.125:
                 next_V[tx, ty, tz] = np.uint8(v_idx)
 
+            if received_rotation_probability > 0.0:
+                rotation_probability = received_rotation_probability
+                if target_depleted:
+                    rotation_probability *= received_rotation_residual_multiplier
+                if int(candidate["order"]) != 0:
+                    rotation_probability *= received_rotation_secondary_multiplier
+                rotation_probability = clamp_probability(rotation_probability)
+                if rotation_probability > 0.0 and world.rng.random() < rotation_probability:
+                    rotation_offset = history_coupled_rotation_offset(
+                        source_v=v_idx,
+                        source_p=p,
+                        target_v=target_previous_v,
+                        target_a=target_previous_a,
+                        target_r=target_previous_r,
+                        target_p=target_previous_p,
+                        candidate_order=int(candidate["order"]),
+                        target_depleted=target_depleted,
+                        influence=influence,
+                        max_offset=received_rotation_max_offset,
+                    )
+                    rotated_v = offset_vector_state(
+                        world,
+                        int(next_V[tx, ty, tz]) % len(world.vectors),
+                        rotation_offset,
+                        preserve_behavior=received_rotation_preserve_behavior,
+                    )
+                    if int(next_V[tx, ty, tz]) != rotated_v:
+                        next_V[tx, ty, tz] = np.uint8(rotated_v)
+                        rotation_events += 1
+                        if target_depleted:
+                            rotation_events_on_residual_entry += 1
+                        if int(candidate["order"]) != 0:
+                            rotation_events_on_secondary_exchange += 1
+
             if (
                 int(candidate["order"]) != 0
                 and secondary_vector_kick_probability > 0.0
@@ -642,6 +747,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "secondary_vector_kicks": secondary_vector_kicks,
         "residual_participations": residual_participations,
         "depleted_reactivations": residual_participations,
+        "rotation_events": rotation_events,
+        "rotation_events_on_residual_entry": rotation_events_on_residual_entry,
+        "rotation_events_on_secondary_exchange": rotation_events_on_secondary_exchange,
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
         "max_payload_fraction": max_payload_fraction,

@@ -24,6 +24,9 @@ COUNT_KEYS = {
     "secondary_vector_kicks",
     "residual_participations",
     "depleted_reactivations",
+    "rotation_events",
+    "rotation_events_on_residual_entry",
+    "rotation_events_on_secondary_exchange",
 }
 
 
@@ -39,6 +42,9 @@ METRIC_FIELDNAMES = [
     "failed_transfer_gates",
     "secondary_vector_kicks",
     "residual_participations",
+    "rotation_events",
+    "rotation_events_on_residual_entry",
+    "rotation_events_on_secondary_exchange",
     "deactivation_events",
     "largest_coherence_face6",
     "coherence_ratio_face6",

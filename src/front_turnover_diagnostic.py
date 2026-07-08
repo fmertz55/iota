@@ -25,6 +25,9 @@ COUNT_KEYS = {
     "secondary_vector_kicks",
     "residual_participations",
     "depleted_reactivations",
+    "rotation_events",
+    "rotation_events_on_residual_entry",
+    "rotation_events_on_secondary_exchange",
 }
 
 MASK_PREFIXES = (
@@ -88,11 +91,17 @@ FIELDNAMES = [
     "deactivation_events",
     "secondary_vector_kicks",
     "residual_participations",
+    "rotation_events",
+    "rotation_events_on_residual_entry",
+    "rotation_events_on_secondary_exchange",
     "amplitude_transfers_per_tick",
     "failed_transfer_gates_per_tick",
     "deactivation_events_per_tick",
     "secondary_vector_kicks_per_tick",
     "residual_participations_per_tick",
+    "rotation_events_per_tick",
+    "rotation_events_on_residual_entry_per_tick",
+    "rotation_events_on_secondary_exchange_per_tick",
     *[
         f"{prefix}_{suffix}"
         for prefix in MASK_PREFIXES
@@ -371,6 +380,13 @@ def turnover_row(
                 metric.get("depleted_reactivations", 0.0),
             )
         ),
+        "rotation_events": float(metric.get("rotation_events", 0.0)),
+        "rotation_events_on_residual_entry": float(
+            metric.get("rotation_events_on_residual_entry", 0.0)
+        ),
+        "rotation_events_on_secondary_exchange": float(
+            metric.get("rotation_events_on_secondary_exchange", 0.0)
+        ),
     }
     window = int(row["window_ticks"])
     row["amplitude_transfers_per_tick"] = fraction(row["amplitude_transfers"], window)
@@ -378,6 +394,15 @@ def turnover_row(
     row["deactivation_events_per_tick"] = fraction(row["deactivation_events"], window)
     row["secondary_vector_kicks_per_tick"] = fraction(row["secondary_vector_kicks"], window)
     row["residual_participations_per_tick"] = fraction(row["residual_participations"], window)
+    row["rotation_events_per_tick"] = fraction(row["rotation_events"], window)
+    row["rotation_events_on_residual_entry_per_tick"] = fraction(
+        row["rotation_events_on_residual_entry"],
+        window,
+    )
+    row["rotation_events_on_secondary_exchange_per_tick"] = fraction(
+        row["rotation_events_on_secondary_exchange"],
+        window,
+    )
 
     if previous is None:
         return row
@@ -495,6 +520,18 @@ def aggregate_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
             tail_rows,
             "residual_participations_per_tick",
         ),
+        "tail_mean_rotation_events_per_tick_after_full_freeze": mean_for(
+            tail_rows,
+            "rotation_events_per_tick",
+        ),
+        "tail_mean_rotation_events_on_residual_entry_per_tick_after_full_freeze": mean_for(
+            tail_rows,
+            "rotation_events_on_residual_entry_per_tick",
+        ),
+        "tail_mean_rotation_events_on_secondary_exchange_per_tick_after_full_freeze": mean_for(
+            tail_rows,
+            "rotation_events_on_secondary_exchange_per_tick",
+        ),
         "tail_mean_persistent_active_changed_fraction_after_full_freeze": mean_for(
             tail_rows,
             "persistent_active_any_changed_fraction",
@@ -596,6 +633,18 @@ def main() -> None:
             "residual_participation_secondary_only": cfg.get("constants", {}).get(
                 "residual_participation_secondary_only",
                 cfg.get("constants", {}).get("depleted_reactivation_secondary_only", True),
+            ),
+            "received_rotation_probability": cfg.get("constants", {}).get(
+                "received_rotation_probability",
+                cfg.get("constants", {}).get("history_coupled_rotation_probability", 0.0),
+            ),
+            "received_rotation_max_offset": cfg.get("constants", {}).get(
+                "received_rotation_max_offset",
+                cfg.get("constants", {}).get("history_coupled_rotation_max_offset", 3),
+            ),
+            "received_rotation_preserve_behavior": cfg.get("constants", {}).get(
+                "received_rotation_preserve_behavior",
+                cfg.get("constants", {}).get("history_coupled_rotation_preserve_behavior", True),
             ),
             "ticks": ticks,
             "connectivity": args.connectivity,

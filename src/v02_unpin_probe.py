@@ -28,6 +28,9 @@ COUNT_KEYS = {
     "failed_transfer_gates",
     "secondary_vector_kicks",
     "residual_participations",
+    "rotation_events",
+    "rotation_events_on_residual_entry",
+    "rotation_events_on_secondary_exchange",
 }
 
 FIELDNAMES = [
@@ -63,6 +66,9 @@ FIELDNAMES = [
     "total_deactivation_events",
     "total_secondary_vector_kicks",
     "total_residual_participations",
+    "total_rotation_events",
+    "total_rotation_events_on_residual_entry",
+    "total_rotation_events_on_secondary_exchange",
     "tail_rows",
     "tail_mean_active_turnover_fraction",
     "tail_mean_active_interface_turnover_fraction",
@@ -75,6 +81,9 @@ FIELDNAMES = [
     "tail_mean_amplitude_transfers_per_tick",
     "tail_mean_secondary_vector_kicks_per_tick",
     "tail_mean_residual_participations_per_tick",
+    "tail_mean_rotation_events_per_tick",
+    "tail_mean_rotation_events_on_residual_entry_per_tick",
+    "tail_mean_rotation_events_on_secondary_exchange_per_tick",
     "wall_time_seconds",
     "unpin_score",
 ]
@@ -286,6 +295,9 @@ def run_probe_task(task_dict: dict[str, Any]) -> dict[str, Any]:
         "total_deactivation_events": totals["deactivation_events"],
         "total_secondary_vector_kicks": totals["secondary_vector_kicks"],
         "total_residual_participations": totals["residual_participations"],
+        "total_rotation_events": totals["rotation_events"],
+        "total_rotation_events_on_residual_entry": totals["rotation_events_on_residual_entry"],
+        "total_rotation_events_on_secondary_exchange": totals["rotation_events_on_secondary_exchange"],
         "tail_rows": len(tail_rows),
         "tail_mean_active_turnover_fraction": mean_metric(tail_rows, "active_turnover_fraction"),
         "tail_mean_active_interface_turnover_fraction": mean_metric(
@@ -324,6 +336,18 @@ def run_probe_task(task_dict: dict[str, Any]) -> dict[str, Any]:
         "tail_mean_residual_participations_per_tick": mean_metric(
             tail_rows,
             "residual_participations_per_tick",
+        ),
+        "tail_mean_rotation_events_per_tick": mean_metric(
+            tail_rows,
+            "rotation_events_per_tick",
+        ),
+        "tail_mean_rotation_events_on_residual_entry_per_tick": mean_metric(
+            tail_rows,
+            "rotation_events_on_residual_entry_per_tick",
+        ),
+        "tail_mean_rotation_events_on_secondary_exchange_per_tick": mean_metric(
+            tail_rows,
+            "rotation_events_on_secondary_exchange_per_tick",
         ),
         "wall_time_seconds": time.perf_counter() - start_time,
     }

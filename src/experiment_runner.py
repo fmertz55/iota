@@ -272,6 +272,9 @@ def accumulate_step_extras(pending: dict[str, float], extras: dict[str, float]) 
         "secondary_vector_kicks",
         "residual_participations",
         "depleted_reactivations",
+        "rotation_events",
+        "rotation_events_on_residual_entry",
+        "rotation_events_on_secondary_exchange",
     }
     for key, value in extras.items():
         numeric_value = float(value)

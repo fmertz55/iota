@@ -29,6 +29,9 @@ COUNT_KEYS = {
     "secondary_vector_kicks",
     "residual_participations",
     "depleted_reactivations",
+    "rotation_events",
+    "rotation_events_on_residual_entry",
+    "rotation_events_on_secondary_exchange",
 }
 
 
@@ -62,6 +65,9 @@ FIELDNAMES = [
     "total_failed_transfer_gates",
     "total_secondary_vector_kicks",
     "total_residual_participations",
+    "total_rotation_events",
+    "total_rotation_events_on_residual_entry",
+    "total_rotation_events_on_secondary_exchange",
     "first_growth_tick",
     "first_deactivation_tick",
     "wall_time_seconds",
@@ -238,6 +244,9 @@ def run_search_task(task_dict: dict[str, Any]) -> dict[str, Any]:
         "total_failed_transfer_gates": totals["failed_transfer_gates"],
         "total_secondary_vector_kicks": totals["secondary_vector_kicks"],
         "total_residual_participations": totals["residual_participations"],
+        "total_rotation_events": totals["rotation_events"],
+        "total_rotation_events_on_residual_entry": totals["rotation_events_on_residual_entry"],
+        "total_rotation_events_on_secondary_exchange": totals["rotation_events_on_secondary_exchange"],
         "first_growth_tick": first_growth_tick,
         "first_deactivation_tick": first_deactivation_tick,
         "wall_time_seconds": time.perf_counter() - start,

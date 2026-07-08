@@ -3230,3 +3230,230 @@ late-time residual turnover plus nonzero persistent-interface V transition entro
 - `output/findings/finding_033_v021_residual_participation_rotational_recursion_tick2000_2048_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
 - `output/findings/finding_033_v021_residual_participation_rotational_recursion_fullhorizon_seed56_ka5_vac2_val8_n16_rpp0p02_rows.csv`
 - `output/findings/finding_033_v021_residual_participation_rotational_recursion_fullhorizon_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
+
+## Finding 034: History-Coupled Rotation Creates Directional Recursion
+
+### Status
+
+Completed for the v0.3 targeted repair of the `residual_participation_probability = 0.02` candidate.
+
+### Law Change
+
+The v0.3 lever is default-off and only active when configured:
+
+```text
+received_rotation_probability = 1.0
+received_rotation_max_offset = 3
+received_rotation_preserve_behavior = true
+received_rotation_residual_multiplier = 1.0
+received_rotation_secondary_multiplier = 1.0
+secondary_vector_kick_probability = 0.0
+```
+
+On successful received influence, the target vector state is rotated by a bounded offset computed from:
+
+- incoming source `V`;
+- source payload;
+- target previous `A/R/V/P`;
+- candidate order;
+- whether the target was depleted;
+- transfer influence.
+
+This is not the earlier broad secondary kick. Rotation is tied to successful receipt and is deterministic conditional on local interaction state, with the probability knob only controlling whether the received interaction applies the update.
+
+### Setup
+
+Candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+residual_participation_probability = 0.02
+residual_participation_secondary_only = true
+received_rotation_probability = 1.0
+received_rotation_max_offset = 3
+```
+
+Diagnostics:
+
+```text
+front turnover: tick 0 through tick 2048, sampled every 128 ticks
+rotational recursion: tick 0 through tick 2048, sampled every 128 ticks
+late rotational recursion: tick 2000 through tick 2048, sampled every tick
+structure: tick 0 through tick 2048, sampled every 256 ticks
+stop_active_iotas = 5000
+```
+
+The run completed the full `2048`-tick horizon without triggering the `5000` active-cell stop.
+
+### Structural Result
+
+Final tick `2048`:
+
+| Metric | Value |
+|---|---:|
+| Active cells | `1061` |
+| Depleted cells | `468` |
+| Active A | `3099` |
+| Latent A | `521230` |
+| Total A | `524329` |
+| Ledger error | `0` |
+| cube26 active components | `16` |
+| cube26 largest component | `143` |
+| cube26 top-5 coverage | `0.608860` |
+| cube26 active component entropy | `3.571366` |
+| cube26 active/depleted adjacency | `0.959472` |
+| cube26 depleted/active adjacency | `1.000000` |
+| Top active vector entropy | `1.728475` |
+
+Full-horizon event totals from the `128`-tick turnover windows:
+
+| Event | Count |
+|---|---:|
+| Amplitude transfers | `8256` |
+| Failed transfer gates | `281949` |
+| Deactivation events | `4565` |
+| Residual participations | `4097` |
+| Rotation events | `8256` |
+| Rotation events on residual entry | `4097` |
+| Rotation events on secondary exchange | `7421` |
+
+### Coarse Rotational Result
+
+For tick `0` through tick `2048`, sampled every `128` ticks:
+
+| Metric | v0.2.1 residual | v0.3 history rotation |
+|---|---:|---:|
+| Mean active turnover fraction | `0.145804` | `0.122885` |
+| Mean active-interface turnover fraction | `0.240469` | `0.171363` |
+| Mean residual participations per tick | `2.889648` | `2.000488` |
+| Mean rotation events per tick | `0.000000` | `4.031250` |
+| Mean persistent-active `V` changed fraction | `0.062564` | `0.020498` |
+| Mean persistent-interface `V` changed fraction | `0.000083` | `0.022662` |
+| Mean persistent-interface changed-transition entropy | `0.000000` | `3.733349` |
+| Mean active vector entropy | `0.014674` | `1.898864` |
+| Mean active-interface vector entropy | `0.009016` | `1.907597` |
+| Mean new-active vector entropy | `0.001298` | `2.048572` |
+| Mean new-active source-vector match fraction | `0.685340` | `0.150824` |
+| Mean persistent-interface candidate turnover | `0.000127` | `0.004468` |
+| Mean active-interface candidate-target turnover | `0.363375` | `0.544875` |
+
+The final coarse window, tick `1920` to tick `2048`, has:
+
+| Metric | Value |
+|---|---:|
+| Active-interface turnover fraction | `0.078302` |
+| Persistent-interface `V` changed fraction | `0.010235` |
+| Persistent-interface changed-transition entropy | `3.121928` |
+| Persistent-interface candidate turnover | `0.002080` |
+| Active-interface candidate-target turnover | `0.516667` |
+
+### Late-Regime Result
+
+For the stabilized late window, tick `2000` through tick `2048`, sampled every tick:
+
+| Metric | Value |
+|---|---:|
+| Mean active turnover fraction | `0.003017` |
+| Mean active-interface turnover fraction | `0.004587` |
+| Mean residual participations per tick | `1.583333` |
+| Mean deactivation events per tick | `1.604167` |
+| Mean rotation events per tick | `1.875000` |
+| Mean rotation events on residual entry per tick | `1.583333` |
+| Mean rotation events on secondary exchange per tick | `1.833333` |
+| Mean persistent-active `V` changed fraction | `0.000256` |
+| Mean persistent-interface `V` changed fraction | `0.000265` |
+| Max persistent-interface `V` changed fraction | `0.001967` |
+| Mean persistent-interface changed-transition entropy | `0.062500` |
+| Mean active vector entropy | `1.794429` |
+| Mean active-interface vector entropy | `1.796596` |
+| Mean new-active vector entropy | `0.380971` |
+| Mean new-active source-vector match fraction | `0.393750` |
+| Mean persistent-interface candidate turnover | `0.000063` |
+| Mean active-interface candidate-target turnover | `0.053940` |
+
+Final one-tick row, tick `2047` to tick `2048`:
+
+| Metric | Value |
+|---|---:|
+| Active cells | `1061` |
+| Depleted cells | `468` |
+| Active-interface cells | `1018` |
+| Active new / lost cells | `2 / 2` |
+| Active-interface new / lost cells | `2 / 2` |
+| Rotation events | `3` |
+| Rotation events on residual entry | `2` |
+| Rotation events on secondary exchange | `3` |
+| Persistent interface `V` changed fraction | `0.000984` |
+| Persistent interface candidate turnover | `0.000219` |
+| Active candidate-target turnover | `0.100457` |
+
+### Interpretation
+
+Finding 034 passes the first v0.3 acceptance gate:
+
+```text
+late-time residual turnover plus nonzero persistent-interface V transition entropy plus nonzero persistent-interface candidate-neighborhood turnover, without ledger error or explosive active growth.
+```
+
+The important mechanism-level change is not larger active count. Final active count only rises from `1025` to `1061`. The change is directional:
+
+- top active vector entropy rises from `0.0` to `1.728475`;
+- late active/interface vector entropy stays around `1.79`;
+- new active source-vector match falls from `0.958333` late in v0.2.1 to `0.393750` late in v0.3;
+- persistent-interface `V` transitions are no longer exactly zero;
+- persistent-interface candidate neighborhoods now change, even if weakly in the one-tick late window.
+
+The disciplined claim is:
+
+```text
+history-coupled received rotation converts residual re-entry from canalized replacement into weak directional recursion.
+```
+
+This is still not an open-endedness claim. The late one-tick rotational signal is real but small. The strong signal appears over `128`-tick windows, where persistent-interface `V` transition entropy and candidate-neighborhood turnover are clearly nonzero. That means v0.3 has the missing local mechanism, but the next test must determine whether it creates distinct reachable future regimes rather than only richer local cycling.
+
+### Next Test
+
+Do not broaden the global search yet. The next test should be:
+
+```text
+turnover-aware and rotation-aware openness for the v0.3 history-rotation candidate
+```
+
+Classify continuations by:
+
+- persistent-interface `V` changed fraction;
+- persistent-interface changed-transition entropy;
+- persistent-interface candidate turnover;
+- active/interface turnover;
+- residual participation and deactivation balance;
+- rotation events on residual entry;
+- active-interface candidate-target turnover;
+- final active/depleted structure.
+
+That asks whether the new directional recursion creates multiple structured futures, not merely a richer deterministic-looking scaffold.
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/front_turnover_diagnostic.py`
+- `src/rotational_recursion_diagnostic.py`
+- `src/v02_candidate_diagnostics.py`
+- `src/v02_parameter_search.py`
+- `src/v02_unpin_probe.py`
+- `src/experiment_runner.py`
+- `output/findings/configs/v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3.yaml`
+- `output/findings/finding_034_v030_history_rotation_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_turnover.csv`
+- `output/findings/finding_034_v030_history_rotation_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_turnover_summary.json`
+- `output/findings/finding_034_v030_history_rotation_rotational_recursion_fullhorizon_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_rows.csv`
+- `output/findings/finding_034_v030_history_rotation_rotational_recursion_fullhorizon_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.json`
+- `output/findings/finding_034_v030_history_rotation_rotational_recursion_tick2000_2048_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_rows.csv`
+- `output/findings/finding_034_v030_history_rotation_rotational_recursion_tick2000_2048_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.json`
+- `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_metrics.csv`
+- `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_structures.csv`
+- `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3.json`
+- `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3.npz`
