@@ -23,6 +23,7 @@ COUNT_KEYS = {
     "failed_transfer_gates",
     "secondary_vector_kicks",
     "residual_participations",
+    "depleted_reactivations",
 }
 
 

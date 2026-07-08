@@ -2933,3 +2933,134 @@ Do not yet claim open-ended complexity. The next required test is morphology-awa
 - `output/findings/finding_031_v02_depleted_reactivation0p02_turnover_seed56_ka5_vac2_val8_n16_turnover_summary.json`
 - `output/findings/finding_031_v02_depleted_reactivation0p02_tick2000_2048_seed56_ka5_vac2_val8_n16_turnover.csv`
 - `output/findings/finding_031_v02_depleted_reactivation0p02_tick2000_2048_seed56_ka5_vac2_val8_n16_turnover_summary.json`
+
+## Finding 032: Residual Participation Creates Turnover, Not Open Futures
+
+### Status
+
+Completed for the `residual_participation_probability = 0.02` candidate identified in Finding 031.
+
+### Setup
+
+Candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+residual_participation_probability = 0.02
+residual_participation_secondary_only = true
+```
+
+Openness protocol:
+
+```text
+checkpoint_ticks = 0, 256, 512, 1024, 1536, 2048
+horizon = 256
+samples = 8
+connectivity = cube26
+with_morphology = true
+```
+
+### Openness Result
+
+| Checkpoint | Base active | Base depleted | Mean future active | Fate openness | Morph class openness | Morph signature openness | Morph class | Max ledger error |
+|---:|---:|---:|---:|---:|---:|---:|---|---:|
+| `0` | `16` | `0` | `1015.375` | `0.0` | `0.0` | `0.0` | `front_coupled:8` | `0` |
+| `256` | `1016` | `318` | `1021.000` | `0.0` | `0.0` | `0.0` | `front_coupled:8` | `0` |
+| `512` | `1020` | `320` | `1022.750` | `0.0` | `0.0` | `0.0` | `front_coupled:8` | `0` |
+| `1024` | `1023` | `320` | `1023.750` | `0.0` | `0.0` | `0.0` | `front_coupled:8` | `0` |
+| `1536` | `1024` | `319` | `1024.000` | `0.0` | `0.0` | `0.0` | `front_coupled:8` | `0` |
+| `2048` | `1025` | `318` | `1025.000` | `0.0` | `0.0` | `0.0` | `front_coupled:8` | `0` |
+
+All futures remain classified as `protected`, and all morphology samples share the same binned signature:
+
+```text
+front_coupled|1000-1999|128-511|0.8-0.9|0.1-0.2|0.5-0.6|0|0
+```
+
+### Structural Result
+
+Final tick `2048`:
+
+| Metric | Value |
+|---|---:|
+| Active cells | `1025` |
+| Depleted cells | `318` |
+| Total A | `524329` |
+| Active A | `2727` |
+| Latent A | `521602` |
+| Ledger error | `0` |
+| Amplitude transfers | `2392` |
+| Failed transfer gates | `100864` |
+| Deactivation events | `1414` |
+| Residual participations | `1415` |
+
+Final `cube26` structure:
+
+| Mask | Cells | Components | Largest | Top-5 coverage | Top-20 coverage | Size entropy |
+|---|---:|---:|---:|---:|---:|---:|
+| `active` | `1025` | `16` | `131` | `0.587317` | `1.000000` | `3.597774` |
+| `depleted` | `318` | `18` | `36` | `0.500000` | `1.000000` | `3.804556` |
+
+Final adjacency:
+
+- `846 / 1025` active cells are cube26-adjacent to depleted cells (`0.825366`).
+- `318 / 318` depleted cells are cube26-adjacent to active cells.
+- `88 / 131` cells in the top active component are adjacent to depleted cells (`0.671756`).
+- Top active payload entropy is `0.0`.
+- Top active vector entropy is `0.0`.
+
+### Interpretation
+
+Residual participation fixed the specific defect found in Finding 030: the interface no longer pins. Finding 031 showed durable post-stabilization topology turnover.
+
+Finding 032 adds the negative result:
+
+```text
+topology-changing turnover is not sufficient to create morphology-open futures under the current classifier.
+```
+
+The system is now a ledger-exact turnover scaffold, not a pinned scaffold. But the sampled futures still collapse to the same fate class and the same morphology signature. The strongest disciplined claim is:
+
+```text
+Residual participation restores interface turnover while preserving ledger exactness, but it does not yet produce measurable open-endedness or morphology-class diversification.
+```
+
+The current morphology alphabet is also too coarse to see identity turnover directly. It bins aggregate active count, depleted count, adjacency, component coverage, and top-component content. Those bins stay fixed even though Finding 031 showed active/interface cell replacement. The next openness layer should include turnover-aware signatures, not just final aggregate morphology.
+
+### Next Test
+
+Do not broaden parameter search yet. The next targeted test is:
+
+```text
+turnover-aware openness
+```
+
+For each continuation, classify futures by:
+
+- active-interface turnover fraction;
+- depleted turnover fraction;
+- residual participations per tick;
+- deactivation/residual-participation balance;
+- whether turnover persists, decays, or grows across the continuation horizon.
+
+That asks the right question:
+
+```text
+from this state, how many distinct turnover regimes remain reachable?
+```
+
+### Artifacts
+
+- `output/findings/configs/v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02.yaml`
+- `output/findings/finding_032_v021_residual_participation_morphology_openness_seed56_ka5_vac2_val8_n16_rpp0p02_raw.csv`
+- `output/findings/finding_032_v021_residual_participation_morphology_openness_seed56_ka5_vac2_val8_n16_rpp0p02_summary.csv`
+- `output/findings/finding_032_v021_residual_participation_morphology_openness_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
+- `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02_metrics.csv`
+- `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02_structures.csv`
+- `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02.json`
+- `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02.npz`
