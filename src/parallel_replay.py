@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import csv
 import json
 import os
@@ -49,6 +50,13 @@ class BranchTask:
 
 
 @dataclass(frozen=True)
+class BranchGroupTask:
+    seed: int
+    law: str
+    branches: tuple[BranchTask, ...]
+
+
+@dataclass(frozen=True)
 class CommittorTarget:
     seed: int
     law: str
@@ -88,6 +96,27 @@ def branch_config(base_cfg: dict[str, Any], task: BranchTask) -> dict[str, Any]:
     return cfg
 
 
+def clone_world_exact(world: Any) -> Any:
+    rng = np.random.default_rng()
+    rng.bit_generator.state = copy.deepcopy(world.rng.bit_generator.state)
+    return type(world)(
+        active=world.active.copy(),
+        A=world.A.copy(),
+        R=world.R.copy(),
+        V=world.V.copy(),
+        P=world.P.copy(),
+        latent_A=world.latent_A.copy(),
+        initial_total_A=int(world.initial_total_A),
+        ledger_enabled=bool(world.ledger_enabled),
+        previous_active=world.previous_active.copy(),
+        previous_V=world.previous_V.copy(),
+        vectors=world.vectors.copy(),
+        vector_behaviors=tuple(world.vector_behaviors),
+        wrap=world.wrap,
+        rng=rng,
+    )
+
+
 def branch_event(task: BranchTask) -> tuple[int, tuple[int, int, int]]:
     event = SEED_EVENTS[task.seed]
     return event.divergence_tick, event.target
@@ -125,6 +154,42 @@ def run_branch_task(task: BranchTask) -> dict[str, Any]:
     return row
 
 
+def run_branch_group_task(group: BranchGroupTask) -> list[dict[str, Any]]:
+    base_cfg = load_config("config.yaml")
+    cfg = branch_config(base_cfg, group.branches[0])
+    checkpoint = init_world(cfg)
+    event = SEED_EVENTS[group.seed]
+    for tick in range(1, event.divergence_tick + 1):
+        trace_step(checkpoint, cfg, tick)
+
+    rows = []
+    for task in group.branches:
+        world = clone_world_exact(checkpoint)
+        if task.forced_v is not None:
+            world.V[event.target] = np.uint8(task.forced_v)
+        for _tick in range(event.divergence_tick + 1, MAX_TICKS + 1):
+            step(world, cfg)
+        _, _, coupling = LAW_CONFIGS[task.law]
+        metric_row = seed56_metric_row if task.seed == 56 else seed42_metric_row
+        row = metric_row(task.label, coupling, MAX_TICKS, world)
+        row["seed"] = task.seed
+        row["law"] = task.law
+        row["forced_v"] = "" if task.forced_v is None else task.forced_v
+        print(
+            json.dumps(
+                {
+                    "completed": task.label,
+                    "seed": task.seed,
+                    "active_iotas": row["active_iotas"],
+                    "coherence_ratio": row["coherence_ratio"],
+                }
+            ),
+            flush=True,
+        )
+        rows.append(row)
+    return rows
+
+
 def golden_branch_tasks(seeds: list[int]) -> list[BranchTask]:
     tasks: list[BranchTask] = []
     if 42 in seeds:
@@ -146,6 +211,17 @@ def golden_branch_tasks(seeds: list[int]) -> list[BranchTask]:
             ]
         )
     return tasks
+
+
+def golden_group_tasks(seeds: list[int]) -> list[BranchGroupTask]:
+    tasks = golden_branch_tasks(seeds)
+    groups: dict[tuple[int, str], list[BranchTask]] = {}
+    for task in tasks:
+        groups.setdefault((task.seed, task.law), []).append(task)
+    return [
+        BranchGroupTask(seed=seed, law=law, branches=tuple(group))
+        for (seed, law), group in sorted(groups.items())
+    ]
 
 
 def golden_expected() -> dict[str, tuple[int, int, float, int]]:
@@ -182,8 +258,11 @@ def check_golden_rows(rows: list[dict[str, Any]]) -> list[str]:
 def run_golden(args: argparse.Namespace) -> None:
     output_path = Path(args.output)
     tasks = golden_branch_tasks(args.seeds)
-    rows = run_tasks(tasks, args.jobs, run_branch_task)
-    rows.sort(key=lambda row: [task.label for task in tasks].index(str(row["label"])))
+    grouped_tasks = golden_group_tasks(args.seeds)
+    row_groups = run_tasks(grouped_tasks, args.jobs, run_branch_group_task)
+    rows = [row for group in row_groups for row in group]
+    label_order = [task.label for task in tasks]
+    rows.sort(key=lambda row: label_order.index(str(row["label"])))
     failures = check_golden_rows(rows)
     payload = {
         "mode": "golden",
