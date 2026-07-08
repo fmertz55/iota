@@ -116,6 +116,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--connectivity", choices=["face6", "face18", "cube26"], default="cube26")
     parser.add_argument("--metric-every", type=int, default=256)
     parser.add_argument("--early-absorber", action="store_true")
+    parser.add_argument("--stop-active-iotas", type=int, default=0)
     parser.add_argument("--min-active", type=int, default=1000)
     parser.add_argument("--absorber-lcf", type=float, default=0.95)
     parser.add_argument("--high-dominant-lcf", type=float, default=0.90)
@@ -233,6 +234,9 @@ def run_continuation(
             continue
         metric = collect_metrics(world, tick)
         final_tick = tick
+        if int(args.stop_active_iotas) > 0 and int(metric["active_iotas"]) >= int(args.stop_active_iotas):
+            early_stop = True
+            break
         if args.early_absorber:
             outcome = classify_outcome(
                 metric,

@@ -2349,3 +2349,166 @@ This is the first v0.2 result that looks like a useful search substrate: not ope
 - `src/v02_parameter_search.py`
 - `output/findings/finding_026_v02_focused_parameter_search.csv`
 - `output/findings/finding_026_v02_focused_parameter_search.json`
+
+## Finding 027: v0.2 Vacuum-2 Front Is Durable but Classification-Closed
+
+### Status
+
+Completed for the best full-horizon candidate from Finding 026.
+
+### Setup
+
+Candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+ticks = 2048
+```
+
+Openness protocol:
+
+```text
+checkpoint_ticks = 0, 256, 512, 1024, 1536, 2048
+horizon = 256
+samples = 8
+connectivity = cube26
+commitment_epsilon = 0.05
+```
+
+### Openness Result
+
+| Checkpoint | Base active | Base depleted | Mean future active | Mean future LCF_cube26 | Openness | Max ledger error |
+|---:|---:|---:|---:|---:|---:|---:|
+| `0` | `16` | `0` | `950.5` | `0.122447` | `0.0` | `0` |
+| `256` | `931` | `327` | `931.625` | `0.123440` | `0.0` | `0` |
+| `512` | `933` | `327` | `933.0` | `0.123258` | `0.0` | `0` |
+| `1024` | `933` | `327` | `933.0` | `0.123258` | `0.0` | `0` |
+| `1536` | `933` | `327` | `933.0` | `0.123258` | `0.0` | `0` |
+| `2048` | `933` | `327` | `933.0` | `0.123258` | `0.0` | `0` |
+
+All sampled futures classified as `protected`; there were no absorber or high-dominant outcomes. By the current three-class openness metric, the run is committed from tick `0`.
+
+### Component and Depletion Structure
+
+Final tick `2048`, `cube26`:
+
+| Mask | Cells | Components | Largest | Top-5 coverage | Top-20 coverage | Size entropy |
+|---|---:|---:|---:|---:|---:|---:|
+| `active` | `933` | `16` | `115` | `0.568060` | `1.000000` | `3.638004` |
+| `depleted` | `327` | `17` | `36` | `0.510703` | `1.000000` | `3.766586` |
+
+Depletion adjacency at final tick:
+
+- `868 / 933` active cells are cube26-adjacent to depleted cells (`0.930332`).
+- `327 / 327` depleted cells are cube26-adjacent to active cells.
+- `109 / 115` cells in the top active component are cube26-adjacent to depleted cells (`0.947826`).
+- Top active component payload entropy is `0.0`; dominant payload fraction is `1.0`.
+- Top active component vector entropy is low but nonzero at `0.072016`.
+
+### Interpretation
+
+This is not the hoped-for open-ended candidate. It is, however, the first clean v0.2 durable-front substrate worth keeping:
+
+- it completes the horizon;
+- it remains ledger-exact;
+- it leaves a persistent depleted trace;
+- it avoids absorber takeover;
+- it stabilizes into a multi-component active/depleted mosaic.
+
+The negative result is that future classification remains degenerate under the current outcome classes. The structure persists, but the future is not open by the current openness metric. The next scientific question is whether the metric is too coarse for within-class structural variation, or whether the substrate has simply stabilized into protected dust with depleted halos.
+
+### Artifacts
+
+- `output/findings/configs/v02_front_seed56_ka5_vac2_val8_n16.yaml`
+- `output/findings/finding_027_v02_front_openness_seed56_ka5_vac2_val8_n16_raw.csv`
+- `output/findings/finding_027_v02_front_openness_seed56_ka5_vac2_val8_n16_summary.csv`
+- `output/findings/finding_027_v02_front_openness_seed56_ka5_vac2_val8_n16_summary.json`
+- `output/findings/finding_027_v02_front_openness_seed56_ka5_vac2_val8_n16_states/`
+- `output/findings/finding_027_v02_front_seed56_ka5_vac2_val8_n16_metrics.csv`
+- `output/findings/finding_027_v02_front_seed56_ka5_vac2_val8_n16_structures.csv`
+- `output/findings/finding_027_v02_front_seed56_ka5_vac2_val8_n16.json`
+- `output/findings/finding_027_v02_front_seed56_ka5_vac2_val8_n16.npz`
+
+## Finding 028: v0.2 Vacuum-3 Is a Threshold-Crossing Burst Regime
+
+### Status
+
+Completed as a boundary/control comparison for Finding 027.
+
+### Setup
+
+Candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 3
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+stop_active_iotas = 1000
+```
+
+Openness protocol:
+
+```text
+checkpoint_ticks = 0, 1, 2, 3, 4
+horizon = 4
+samples = 8
+connectivity = cube26
+stop_active_iotas = 1000
+```
+
+### Openness Result
+
+| Checkpoint | Base active | Base depleted | Mean future active | Mean future LCF_cube26 | Openness | Max ledger error |
+|---:|---:|---:|---:|---:|---:|---:|
+| `0` | `16` | `0` | `2078.875` | `0.087372` | `0.0` | `0` |
+| `1` | `73` | `16` | `2093.25` | `0.086649` | `0.0` | `0` |
+| `2` | `289` | `67` | `2091.5` | `0.086601` | `0.0` | `0` |
+| `3` | `919` | `139` | `2094.125` | `0.086432` | `0.0` | `0` |
+| `4` | `2091` | `231` | `3895.25` | `0.085296` | `0.0` | `0` |
+
+All sampled futures classified as `protected`, but this should not be read as durable-front closure. The regime is an ignition regime: the system crosses the active threshold in the first few ticks.
+
+### Component and Depletion Structure
+
+Final capped tick `4`, `cube26`:
+
+| Mask | Cells | Components | Largest | Top-5 coverage | Top-20 coverage | Size entropy |
+|---|---:|---:|---:|---:|---:|---:|
+| `active` | `2091` | `16` | `181` | `0.407939` | `1.000000` | `3.921881` |
+| `depleted` | `231` | `28` | `20` | `0.367965` | `0.965368` | `4.262964` |
+
+Compared with the vacuum-2 front, the burst has higher active count, smaller largest-component fraction, and much higher top-component payload/vector entropy:
+
+- top active payload entropy is `0.999449`;
+- top active vector entropy is `1.654705`;
+- dominant payload fraction is only `0.513812`;
+- `1462 / 2091` active cells are cube26-adjacent to depleted cells (`0.699187`).
+
+### Interpretation
+
+Vacuum `3` behaves as a threshold-crossing drive regime rather than a candidate durable-front regime. It is useful for locating the transition boundary, but not yet for open-ended structure claims. The right use of this regime is capped classification and phase-boundary mapping, not full-horizon evolution.
+
+The contrast with vacuum `2` is the core result:
+
+- vacuum `2`: full-horizon, ledger-exact, stable active/depleted mosaic, classification-closed;
+- vacuum `3`: early explosive activation, ledger-exact, high-entropy burst, classification-closed by the coarse outcome metric.
+
+### Artifacts
+
+- `output/findings/configs/v02_burst_seed56_ka5_vac3_val8_n16.yaml`
+- `output/findings/finding_028_v02_burst_openness_seed56_ka5_vac3_val8_n16_raw.csv`
+- `output/findings/finding_028_v02_burst_openness_seed56_ka5_vac3_val8_n16_summary.csv`
+- `output/findings/finding_028_v02_burst_openness_seed56_ka5_vac3_val8_n16_summary.json`
+- `output/findings/finding_028_v02_burst_openness_seed56_ka5_vac3_val8_n16_states/`
+- `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16_metrics.csv`
+- `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16_structures.csv`
+- `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16.json`
+- `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16.npz`
