@@ -1,0 +1,65 @@
+{
+  "run_id": "queue_screen_smoke",
+  "status": "completed",
+  "started_at": "2026-07-08T09:44:42-04:00",
+  "repo": "/Users/douglasclark/iota",
+  "host": "Douglass-MacBook-Air.local",
+  "platform": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "python": "3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "supervisor_pid": 23905,
+  "boot_time": "kern.boottime: { sec = 1783509745, usec = 625610 } Wed Jul  8 07:22:25 2026",
+  "phases": [
+    {
+      "name": "smoke",
+      "command": [
+        ".venv/bin/python",
+        "-c",
+        "import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)"
+      ],
+      "command_text": ".venv/bin/python -c 'import os,time; print('\"'\"'smoke pid'\"'\"', os.getpid(), flush=True); time.sleep(2); print('\"'\"'smoke done'\"'\"', flush=True)'",
+      "phase_log": "output/findings/queue_screen_smoke_smoke.log",
+      "started_at": "2026-07-08T09:44:42-04:00",
+      "status": "completed",
+      "pid": 23915,
+      "process_group": 23915,
+      "last_heartbeat_at": "2026-07-08T09:44:44-04:00",
+      "last_descendant_pids": [
+        23915
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-07-08T09:44:44-04:00"
+    }
+  ],
+  "planned_phases": [
+    {
+      "name": "smoke",
+      "command": [
+        ".venv/bin/python",
+        "-c",
+        "import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)"
+      ]
+    }
+  ],
+  "current_phase": {
+    "name": "smoke",
+    "command": [
+      ".venv/bin/python",
+      "-c",
+      "import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)"
+    ],
+    "command_text": ".venv/bin/python -c 'import os,time; print('\"'\"'smoke pid'\"'\"', os.getpid(), flush=True); time.sleep(2); print('\"'\"'smoke done'\"'\"', flush=True)'",
+    "phase_log": "output/findings/queue_screen_smoke_smoke.log",
+    "started_at": "2026-07-08T09:44:42-04:00",
+    "status": "completed",
+    "pid": 23915,
+    "process_group": 23915,
+    "last_heartbeat_at": "2026-07-08T09:44:44-04:00",
+    "last_descendant_pids": [
+      23915
+    ],
+    "exit_code": 0,
+    "finished_at": "2026-07-08T09:44:44-04:00"
+  },
+  "finished_at": "2026-07-08T09:44:44-04:00",
+  "exit_code": 0
+}

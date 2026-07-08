@@ -1,0 +1,33 @@
+2026-07-08T09:44:23-04:00 preflight start
+2026-07-08T09:44:23-04:00 cwd=/Users/douglasclark/iota
+2026-07-08T09:44:23-04:00 boot_time=kern.boottime: { sec = 1783509745, usec = 625610 } Wed Jul  8 07:22:25 2026
+2026-07-08T09:44:23-04:00 uptime=9:44  up  2:22, 1 user, load averages: 1.77 2.38 2.48
+2026-07-08T09:44:23-04:00 python=Python 3.14.0
+2026-07-08T09:44:23-04:00 git_status=## main...origin/main
+ M output/findings/run_seed42_56_v02_queue.pid
+?? output/findings/queue_supervisor_smoke_state.json
+?? output/findings/queue_supervisor_smoke_supervisor.log
+?? output/findings/run_seed42_56_v02_queue.latest
+?? output/findings/run_seed42_56_v02_queue_20260708_091032.pid
+?? output/findings/run_seed42_56_v02_queue_20260708_091032.sh
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.log
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.pid
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.sh
+?? src/launch_queue.py
+?? src/queue_supervisor.py
+2026-07-08T09:44:23-04:00 process_snapshot=
+23804  1381 23804    00:00   0.8  0.0 Ss   /bin/zsh -c set -e\012pycache_dir=$(mktemp -d)\012PYTHONPYCACHEPREFIX="$pycache_dir" .venv/bin/python -m py_compile src/queue_supervisor.py src/launch_queue.py src/parallel_replay.py src/v02_parameter_search.py\012rm -rf "$pycache_dir"\012PYTHONDONTWRITEBYTECODE=1 .venv/bin/python src/queue_supervisor.py --run-id queue_supervisor_smoke --phases smoke --heartbeat-seconds 1 --poll-seconds 0.25\012printf '\n--- smoke state ---\n'\012cat output/findings/queue_supervisor_smoke_state.json\012printf '\n--- smoke supervisor log ---\n'\012sed -n '1,160p' output/findings/queue_supervisor_smoke_supervisor.log\012printf '\n--- smoke phase log ---\n'\012sed -n '1,80p' output/findings/queue_supervisor_smoke_smoke.log
+23808 23804 23804    00:00   5.0  0.3 S    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/queue_supervisor.py --run-id queue_supervisor_smoke --phases smoke --heartbeat-seconds 1 --poll-seconds 0.25
+2026-07-08T09:44:23-04:00 preflight complete
+2026-07-08T09:44:23-04:00 phase smoke start: .venv/bin/python -c 'import os,time; print('"'"'smoke pid'"'"', os.getpid(), flush=True); time.sleep(2); print('"'"'smoke done'"'"', flush=True)'
+2026-07-08T09:44:23-04:00 phase smoke child_pid=23816
+2026-07-08T09:44:23-04:00 heartbeat phase=smoke child_pid=23816 exit_code=None descendants=[23816]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+23816 23808 23816   00:00   0.0  0.2 Rs   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -c import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)
+2026-07-08T09:44:24-04:00 heartbeat phase=smoke child_pid=23816 exit_code=None descendants=[23816]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+23816 23808 23816   00:01   0.1  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -c import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)
+2026-07-08T09:44:25-04:00 heartbeat phase=smoke child_pid=23816 exit_code=0 descendants=[23816]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+2026-07-08T09:44:25-04:00 phase smoke exit_code=0
+2026-07-08T09:44:25-04:00 supervisor exit_code=0

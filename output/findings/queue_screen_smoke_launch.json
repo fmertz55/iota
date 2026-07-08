@@ -1,0 +1,20 @@
+{
+  "run_id": "queue_screen_smoke",
+  "session_name": "iota_queue_screen_smoke",
+  "repo": "/Users/douglasclark/iota",
+  "screen_command": [
+    "/usr/bin/screen",
+    "-dmS",
+    "iota_queue_screen_smoke",
+    "/bin/zsh",
+    "-lc",
+    "cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_screen_smoke --phases smoke --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 1.0 --poll-seconds 0.25"
+  ],
+  "inner_command": "cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_screen_smoke --phases smoke --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 1.0 --poll-seconds 0.25",
+  "state_path": "/Users/douglasclark/iota/output/findings/queue_screen_smoke_state.json",
+  "supervisor_log": "/Users/douglasclark/iota/output/findings/queue_screen_smoke_supervisor.log",
+  "launched": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

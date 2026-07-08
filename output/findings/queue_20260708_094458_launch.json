@@ -1,0 +1,20 @@
+{
+  "run_id": "queue_20260708_094458",
+  "session_name": "iota_queue_20260708_094458",
+  "repo": "/Users/douglasclark/iota",
+  "screen_command": [
+    "/usr/bin/screen",
+    "-dmS",
+    "iota_queue_20260708_094458",
+    "/bin/zsh",
+    "-lc",
+    "cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_20260708_094458 --phases all --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 60.0 --poll-seconds 5.0"
+  ],
+  "inner_command": "cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_20260708_094458 --phases all --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 60.0 --poll-seconds 5.0",
+  "state_path": "/Users/douglasclark/iota/output/findings/queue_20260708_094458_state.json",
+  "supervisor_log": "/Users/douglasclark/iota/output/findings/queue_20260708_094458_supervisor.log",
+  "launched": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

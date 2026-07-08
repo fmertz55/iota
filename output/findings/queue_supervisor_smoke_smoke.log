@@ -1,0 +1,4 @@
+2026-07-08T09:44:23-04:00 START .venv/bin/python -c 'import os,time; print('"'"'smoke pid'"'"', os.getpid(), flush=True); time.sleep(2); print('"'"'smoke done'"'"', flush=True)'
+smoke pid 23816
+smoke done
+2026-07-08T09:44:25-04:00 EXIT 0

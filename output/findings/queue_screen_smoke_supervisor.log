@@ -1,0 +1,41 @@
+2026-07-08T09:44:42-04:00 preflight start
+2026-07-08T09:44:42-04:00 cwd=/Users/douglasclark/iota
+2026-07-08T09:44:42-04:00 boot_time=kern.boottime: { sec = 1783509745, usec = 625610 } Wed Jul  8 07:22:25 2026
+2026-07-08T09:44:42-04:00 uptime=9:44  up  2:22, 2 users, load averages: 1.96 2.39 2.48
+2026-07-08T09:44:42-04:00 python=Python 3.14.0
+2026-07-08T09:44:42-04:00 git_status=## main...origin/main
+ M output/findings/run_seed42_56_v02_queue.pid
+?? output/findings/queue_screen_smoke_launch.json
+?? output/findings/queue_screen_smoke_state.json
+?? output/findings/queue_screen_smoke_supervisor.log
+?? output/findings/queue_supervisor_smoke_smoke.log
+?? output/findings/queue_supervisor_smoke_state.json
+?? output/findings/queue_supervisor_smoke_supervisor.log
+?? output/findings/run_seed42_56_v02_queue.latest
+?? output/findings/run_seed42_56_v02_queue.latest_run_id
+?? output/findings/run_seed42_56_v02_queue.latest_session
+?? output/findings/run_seed42_56_v02_queue_20260708_091032.pid
+?? output/findings/run_seed42_56_v02_queue_20260708_091032.sh
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.log
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.pid
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.sh
+?? src/launch_queue.py
+?? src/queue_supervisor.py
+2026-07-08T09:44:42-04:00 process_snapshot=
+23902     1 23902    00:00   0.3  0.0 Ss   /usr/bin/SCREEN -dmS iota_queue_screen_smoke /bin/zsh -lc cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_screen_smoke --phases smoke --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 1.0 --poll-seconds 0.25
+23904 23902 23904    00:00   3.0  0.1 Ss+  login -pflq douglasclark /bin/zsh -lc cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_screen_smoke --phases smoke --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 1.0 --poll-seconds 0.25
+23905 23904 23904    00:00  16.8  0.3 S+   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/queue_supervisor.py --run-id queue_screen_smoke --phases smoke --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 1.0 --poll-seconds 0.25
+23907 23905 23904    00:00   1.9  0.0 S+   /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_screen_smoke --phases smoke --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 1.0 --poll-seconds 0.25
+2026-07-08T09:44:42-04:00 preflight complete
+2026-07-08T09:44:42-04:00 phase smoke start: .venv/bin/python -c 'import os,time; print('"'"'smoke pid'"'"', os.getpid(), flush=True); time.sleep(2); print('"'"'smoke done'"'"', flush=True)'
+2026-07-08T09:44:42-04:00 phase smoke child_pid=23915
+2026-07-08T09:44:42-04:00 heartbeat phase=smoke child_pid=23915 exit_code=None descendants=[23915]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+23915 23905 23915   00:00   0.0  0.2 Rs   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -c import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)
+2026-07-08T09:44:43-04:00 heartbeat phase=smoke child_pid=23915 exit_code=None descendants=[23915]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+23915 23905 23915   00:01   0.1  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -c import os,time; print('smoke pid', os.getpid(), flush=True); time.sleep(2); print('smoke done', flush=True)
+2026-07-08T09:44:44-04:00 heartbeat phase=smoke child_pid=23915 exit_code=0 descendants=[23915]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+2026-07-08T09:44:44-04:00 phase smoke exit_code=0
+2026-07-08T09:44:44-04:00 supervisor exit_code=0

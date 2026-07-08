@@ -1,0 +1,78 @@
+2026-07-08T09:44:58-04:00 preflight start
+2026-07-08T09:44:58-04:00 cwd=/Users/douglasclark/iota
+2026-07-08T09:44:58-04:00 boot_time=kern.boottime: { sec = 1783509745, usec = 625610 } Wed Jul  8 07:22:25 2026
+2026-07-08T09:44:58-04:00 uptime=9:44  up  2:23, 2 users, load averages: 1.61 2.28 2.44
+2026-07-08T09:44:58-04:00 python=Python 3.14.0
+2026-07-08T09:44:58-04:00 git_status=## main...origin/main
+ M output/findings/run_seed42_56_v02_queue.pid
+?? output/findings/queue_20260708_094458_launch.json
+?? output/findings/queue_20260708_094458_state.json
+?? output/findings/queue_20260708_094458_supervisor.log
+?? output/findings/queue_screen_smoke_launch.json
+?? output/findings/queue_screen_smoke_smoke.log
+?? output/findings/queue_screen_smoke_state.json
+?? output/findings/queue_screen_smoke_supervisor.log
+?? output/findings/queue_supervisor_smoke_smoke.log
+?? output/findings/queue_supervisor_smoke_state.json
+?? output/findings/queue_supervisor_smoke_supervisor.log
+?? output/findings/run_seed42_56_v02_queue.latest
+?? output/findings/run_seed42_56_v02_queue.latest_run_id
+?? output/findings/run_seed42_56_v02_queue.latest_session
+?? output/findings/run_seed42_56_v02_queue_20260708_091032.pid
+?? output/findings/run_seed42_56_v02_queue_20260708_091032.sh
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.log
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.pid
+?? output/findings/run_seed42_56_v02_queue_20260708_093946.sh
+?? src/launch_queue.py
+?? src/queue_supervisor.py
+2026-07-08T09:44:58-04:00 process_snapshot=
+23994     1 23994    00:00   0.2  0.0 Ss   /usr/bin/SCREEN -dmS iota_queue_20260708_094458 /bin/zsh -lc cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_20260708_094458 --phases all --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 60.0 --poll-seconds 5.0
+23995 23994 23995    00:00   3.4  0.1 Ss+  login -pflq douglasclark /bin/zsh -lc cd /Users/douglasclark/iota && exec /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_20260708_094458 --phases all --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 60.0 --poll-seconds 5.0
+23997 23995 23995    00:00  18.2  0.3 S+   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/queue_supervisor.py --run-id queue_20260708_094458 --phases all --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 60.0 --poll-seconds 5.0
+23999 23997 23995    00:00   1.6  0.0 S+   /usr/bin/caffeinate -dimsu .venv/bin/python src/queue_supervisor.py --run-id queue_20260708_094458 --phases all --golden-jobs 4 --committor-jobs 3 --search-jobs 6 --search-ticks 1024 --stagnation-window 256 --heartbeat-seconds 60.0 --poll-seconds 5.0
+2026-07-08T09:44:58-04:00 preflight complete
+2026-07-08T09:44:58-04:00 phase golden start: .venv/bin/python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+2026-07-08T09:44:58-04:00 phase golden child_pid=24007
+2026-07-08T09:44:58-04:00 heartbeat phase=golden child_pid=24007 exit_code=None descendants=[24007]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+24007 23997 24007   00:00   0.0  0.2 Rs   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+2026-07-08T09:45:58-04:00 heartbeat phase=golden child_pid=24007 exit_code=None descendants=[24007, 24010, 24011, 24012, 24013, 24014]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+24007 23997 24007   01:00   0.0  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+24010 24007 24007   00:59   0.0  0.1 S    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.resource_tracker import main;main(8)
+24011 24007 24007   00:59 100.0  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=17) --multiprocessing-fork
+24012 24007 24007   00:59 100.0  5.5 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=19) --multiprocessing-fork
+24013 24007 24007   00:59 100.0  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=21) --multiprocessing-fork
+24014 24007 24007   00:59  99.4  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=23) --multiprocessing-fork
+2026-07-08T09:46:59-04:00 heartbeat phase=golden child_pid=24007 exit_code=None descendants=[24007, 24010, 24011, 24012, 24013, 24014]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+24007 23997 24007   02:01   0.0  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+24010 24007 24007   02:00   0.0  0.1 S    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.resource_tracker import main;main(8)
+24011 24007 24007   02:00  99.8  5.9 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=17) --multiprocessing-fork
+24012 24007 24007   02:00 100.0  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=19) --multiprocessing-fork
+24013 24007 24007   02:00  99.7  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=21) --multiprocessing-fork
+24014 24007 24007   02:00  99.9  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=23) --multiprocessing-fork
+2026-07-08T09:47:59-04:00 heartbeat phase=golden child_pid=24007 exit_code=None descendants=[24007, 24010, 24011, 24012, 24013, 24014]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+24007 23997 24007   03:01   0.0  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+24010 24007 24007   03:00   0.0  0.1 S    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.resource_tracker import main;main(8)
+24011 24007 24007   03:00 100.0  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=17) --multiprocessing-fork
+24012 24007 24007   03:00  99.5  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=19) --multiprocessing-fork
+24013 24007 24007   03:00 100.0  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=21) --multiprocessing-fork
+24014 24007 24007   03:00 100.0  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=23) --multiprocessing-fork
+2026-07-08T09:48:59-04:00 heartbeat phase=golden child_pid=24007 exit_code=None descendants=[24007, 24010, 24011, 24012, 24013, 24014]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+24007 23997 24007   04:01   0.0  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+24010 24007 24007   04:00   0.0  0.1 S    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.resource_tracker import main;main(8)
+24011 24007 24007   04:00  99.7  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=17) --multiprocessing-fork
+24012 24007 24007   04:00  99.3  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=19) --multiprocessing-fork
+24013 24007 24007   04:00  99.2  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=21) --multiprocessing-fork
+24014 24007 24007   04:00 100.0  5.6 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=23) --multiprocessing-fork
+2026-07-08T09:49:59-04:00 heartbeat phase=golden child_pid=24007 exit_code=None descendants=[24007, 24010, 24011, 24012, 24013, 24014]
+PID  PPID  PGID ELAPSED  %CPU %MEM STAT COMMAND
+24007 23997 24007   05:01   0.0  0.2 Ss   /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json
+24010 24007 24007   05:00   0.0  0.1 S    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.resource_tracker import main;main(8)
+24011 24007 24007   05:00  99.9  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=17) --multiprocessing-fork
+24012 24007 24007   05:00  98.9  5.6 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=19) --multiprocessing-fork
+24013 24007 24007   05:00  99.5  5.7 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=21) --multiprocessing-fork
+24014 24007 24007   05:00  99.1  5.8 R    /opt/homebrew/Cellar/python@3.14/3.14.0_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -B -c from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=9, pipe_handle=23) --multiprocessing-fork
