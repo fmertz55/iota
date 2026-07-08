@@ -2727,3 +2727,198 @@ The next test should not be more broad committor sampling. It should be a target
 - `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick400_448_turnover_summary.json`
 - `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick2000_2048_turnover.csv`
 - `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick2000_2048_turnover_summary.json`
+
+## Finding 031: Depleted-Reactivation Kicks Unpin the v0.2 Scaffold
+
+### Status
+
+Completed as the direct follow-up to Finding 030.
+
+### Objective
+
+Finding 030 showed that the vacuum-2 scaffold is not dead, but its topology pins. The useful next question was not more openness sampling. It was:
+
+```text
+what minimal law knob converts pinned scaffold flow into topology-changing turnover?
+```
+
+Two candidate perturbations were tested:
+
+1. `secondary_vector_kick_probability`: successful secondary transfers can rotate the target vector state.
+2. `depleted_reactivation_probability`: successful secondary transfer attempts into depleted cells can donate one amplitude unit and reactivate the depleted target.
+
+Both are default-off. Both preserve the hard amplitude ledger.
+
+### Instrument Change
+
+Added secondary-kick knobs to `src/iota_rig.py`:
+
+```text
+constants.secondary_vector_kick_probability
+constants.secondary_vector_kick_offset
+constants.secondary_vector_kick_preserve_behavior
+constants.depleted_reactivation_probability
+constants.depleted_reactivation_secondary_only
+```
+
+Added `src/v02_unpin_probe.py` to score candidate settings by post-stabilization active/interface turnover while rejecting ledger errors and burst-like early stops.
+
+Updated `src/front_turnover_diagnostic.py` to report:
+
+- `secondary_vector_kicks`;
+- `depleted_reactivations`;
+- per-tick rates for both.
+
+### Setup
+
+Base candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+connectivity = cube26
+stop_active_iotas = 2500
+```
+
+Probe horizon:
+
+```text
+ticks = 768
+sample_every = 8
+tail_start_tick = 416
+```
+
+Validation horizon:
+
+```text
+ticks = 2048
+sample_every = 16
+tail_start_tick = 416
+```
+
+### Negative Result: Vector Kick Alone Is Not Enough
+
+Secondary vector kicks were tested across mild, strong, and cross-behavior variants.
+
+Best vector-only rows:
+
+| Probe | Kick probability | Offset | Preserve behavior | Final active | Tail active-interface turnover | Tail vector-change fraction | Ledger error |
+|---|---:|---:|---|---:|---:|---:|---:|
+| mild | `0.05` | `3` | true | `974` | `0.000127` | `0.005314` | `0` |
+| strong | `0.10` | `3` | true | `984` | `0.000101` | `0.004785` | `0` |
+| cross-behavior | `0.05` | `7` | false | `983` | `0.000173` | `0.004354` | `0` |
+
+Interpretation:
+
+```text
+vector kicks perturb direction state, but they do not meaningfully unpin topology.
+```
+
+This is the correction to the initial “secondary vector kick” idea. The scaffold is not pinned primarily because vectors lack small perturbations. It is pinned because depleted sites are absorbing walls.
+
+### Positive Result: Depleted Reactivation Is the Lever
+
+At `768` ticks, depleted reactivation produced a monotonic increase in post-stabilization interface turnover without triggering the `2500` active cap.
+
+Selected rows:
+
+| Reactivation probability | Vector kick probability | Final active | Final depleted | Tail active turnover | Tail active-interface turnover | Reactivations / tick | Ledger error |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| `0.001` | `0.0` | `1004` | `324` | `0.002613` | `0.005330` | `0.133333` | `0` |
+| `0.005` | `0.0` | `1025` | `320` | `0.012776` | `0.021614` | `0.694444` | `0` |
+| `0.010` | `0.0` | `1022` | `316` | `0.023337` | `0.040130` | `1.411111` | `0` |
+| `0.020` | `0.0` | `1022` | `314` | `0.039824` | `0.067897` | `2.841667` | `0` |
+| `0.050` | `0.0` | `1017` | `321` | `0.057473` | `0.108449` | `6.188889` | `0` |
+| `0.100` | `0.0` | `1020` | `333` | `0.071666` | `0.143184` | `12.113889` | `0` |
+| `0.200` | `0.0` | `1013` | `327` | `0.081862` | `0.169744` | `21.866667` | `0` |
+
+The vector kick was not needed. Adding `secondary_vector_kick_probability = 0.01` did not materially improve the reactivation rows.
+
+### 2048-Tick Validation
+
+Reactivation-only candidates remained ledger-exact and did not hit the active cap.
+
+| Reactivation probability | Final active | Final depleted | Tail active turnover | Tail active-interface turnover | Reactivations / tick | Ledger error | Early stop |
+|---:|---:|---:|---:|---:|---:|---:|---|
+| `0.02` | `1025` | `318` | `0.051767` | `0.103051` | `2.809466` | `0` | none |
+| `0.05` | `1017` | `328` | `0.066824` | `0.138324` | `6.188107` | `0` | none |
+| `0.10` | `1021` | `332` | `0.080618` | `0.166727` | `12.307646` | `0` | none |
+| `0.20` | `1013` | `331` | `0.084552` | `0.181078` | `21.333131` | `0` | none |
+
+The smallest strong setting is `depleted_reactivation_probability = 0.02`: it produces durable nonzero topology turnover through the full `2048`-tick horizon while staying near the original activity scale.
+
+Detailed turnover for `depleted_reactivation_probability = 0.02`:
+
+| Metric | Value |
+|---|---:|
+| Final active cells | `1025` |
+| Final depleted cells | `318` |
+| Final active-interface cells | `846` |
+| Final depleted-interface cells | `318` |
+| Full-front freeze tick | none |
+| Mean active turnover, 16-tick samples | `0.060864` |
+| Mean active-interface turnover, 16-tick samples | `0.111472` |
+| Cumulative new active cells | `4555` |
+| Cumulative lost active cells | `3546` |
+| Cumulative new active-interface cells | `6799` |
+| Cumulative lost active-interface cells | `5953` |
+| Final ledger error | `0` |
+
+At tick `2048`, compared with tick `2032`:
+
+- active turnover fraction is `0.053181`;
+- active-interface turnover fraction is `0.094595`;
+- depleted turnover fraction is `0.161850`;
+- depleted reactivations occur at `2.9375` per tick;
+- deactivations also occur at `2.9375` per tick;
+- amplitude transfers occur at `4.375` per tick;
+- ledger error remains `0`.
+
+The tick-level `2000..2048` check confirms that turnover persists late in the run:
+
+- mean active turnover is `0.024973`;
+- mean active-interface turnover is `0.029381`;
+- final one-tick active-interface turnover is `0.012881`;
+- final one-tick depleted reactivation rate is `3.0` per tick.
+
+### Interpretation
+
+This is the actionable correction:
+
+```text
+The missing unpinning mechanism is not directional perturbation by itself. It is reversible access to depleted boundary sites.
+```
+
+The original vacuum-2 scaffold pinned because depleted cells became permanent topological walls. A secondary-only depleted-reactivation kick reopens those wall sites without creating amplitude and without requiring vacuum-3 ignition. That produces topology-changing turnover while preserving the hard ledger.
+
+The safe claim is:
+
+```text
+v0.2.1 depleted reactivation converts the vacuum-2 pinned scaffold into a ledger-exact turnover scaffold: active/depleted geometry no longer freezes, while activity remains non-explosive through the tested horizon.
+```
+
+Do not yet claim open-ended complexity. The next required test is morphology-aware openness on the `depleted_reactivation_probability = 0.02` candidate, followed by component/connectivity diagnostics. The current result only establishes that the previously missing ingredient, topology-changing turnover, can be recovered with a minimal conserved perturbation.
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/front_turnover_diagnostic.py`
+- `src/v02_unpin_probe.py`
+- `output/findings/finding_031_v02_secondary_kick_unpin_probe.csv`
+- `output/findings/finding_031_v02_secondary_kick_unpin_probe.json`
+- `output/findings/finding_031_v02_secondary_kick_unpin_probe_strong_preserve.csv`
+- `output/findings/finding_031_v02_secondary_kick_unpin_probe_strong_preserve.json`
+- `output/findings/finding_031_v02_secondary_kick_unpin_probe_cross_behavior.csv`
+- `output/findings/finding_031_v02_secondary_kick_unpin_probe_cross_behavior.json`
+- `output/findings/finding_031_v02_depleted_reactivation_unpin_probe.csv`
+- `output/findings/finding_031_v02_depleted_reactivation_unpin_probe.json`
+- `output/findings/finding_031_v02_depleted_reactivation_unpin_probe_2048.csv`
+- `output/findings/finding_031_v02_depleted_reactivation_unpin_probe_2048.json`
+- `output/findings/finding_031_v02_depleted_reactivation0p02_turnover_seed56_ka5_vac2_val8_n16_turnover.csv`
+- `output/findings/finding_031_v02_depleted_reactivation0p02_turnover_seed56_ka5_vac2_val8_n16_turnover_summary.json`
+- `output/findings/finding_031_v02_depleted_reactivation0p02_tick2000_2048_seed56_ka5_vac2_val8_n16_turnover.csv`
+- `output/findings/finding_031_v02_depleted_reactivation0p02_tick2000_2048_seed56_ka5_vac2_val8_n16_turnover_summary.json`

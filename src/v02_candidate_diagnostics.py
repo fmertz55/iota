@@ -21,6 +21,8 @@ COUNT_KEYS = {
     "deactivation_events",
     "amplitude_transfers",
     "failed_transfer_gates",
+    "secondary_vector_kicks",
+    "depleted_reactivations",
 }
 
 
@@ -34,6 +36,8 @@ METRIC_FIELDNAMES = [
     "ledger_error",
     "amplitude_transfers",
     "failed_transfer_gates",
+    "secondary_vector_kicks",
+    "depleted_reactivations",
     "deactivation_events",
     "largest_coherence_face6",
     "coherence_ratio_face6",
