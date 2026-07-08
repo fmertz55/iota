@@ -1,6 +1,6 @@
 {
   "run_id": "queue_20260708_094458",
-  "status": "running",
+  "status": "completed",
   "started_at": "2026-07-08T09:44:58-04:00",
   "repo": "/Users/douglasclark/iota",
   "host": "Douglass-MacBook-Air.local",
@@ -26,10 +26,10 @@
       "command_text": ".venv/bin/python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json",
       "phase_log": "output/findings/queue_20260708_094458_golden.log",
       "started_at": "2026-07-08T09:44:58-04:00",
-      "status": "running",
+      "status": "completed",
       "pid": 24007,
       "process_group": 24007,
-      "last_heartbeat_at": "2026-07-08T09:49:59-04:00",
+      "last_heartbeat_at": "2026-07-08T10:39:05-04:00",
       "last_descendant_pids": [
         24007,
         24010,
@@ -37,7 +37,71 @@
         24012,
         24013,
         24014
-      ]
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-07-08T10:39:35-04:00"
+    },
+    {
+      "name": "committor",
+      "command": [
+        ".venv/bin/python",
+        "src/parallel_replay.py",
+        "committor",
+        "--jobs",
+        "3",
+        "--targets",
+        "output/findings/targeted_seed42_56_replay_targets.csv",
+        "--output-dir",
+        "output/findings/parallel_committor_seed42_56_targets",
+        "--refresh"
+      ],
+      "command_text": ".venv/bin/python src/parallel_replay.py committor --jobs 3 --targets output/findings/targeted_seed42_56_replay_targets.csv --output-dir output/findings/parallel_committor_seed42_56_targets --refresh",
+      "phase_log": "output/findings/queue_20260708_094458_committor.log",
+      "started_at": "2026-07-08T10:39:35-04:00",
+      "status": "completed",
+      "pid": 35702,
+      "process_group": 35702,
+      "last_heartbeat_at": "2026-07-08T11:23:40-04:00",
+      "last_descendant_pids": [
+        35702,
+        35712,
+        35713,
+        35714,
+        35715
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-07-08T11:24:15-04:00"
+    },
+    {
+      "name": "search",
+      "command": [
+        ".venv/bin/python",
+        "src/v02_parameter_search.py",
+        "--jobs",
+        "6",
+        "--ticks",
+        "1024",
+        "--stagnation-window",
+        "256",
+        "--output-prefix",
+        "output/findings/finding_025_v02_parameter_search",
+        "--flush-every",
+        "8",
+        "--top-n",
+        "20"
+      ],
+      "command_text": ".venv/bin/python src/v02_parameter_search.py --jobs 6 --ticks 1024 --stagnation-window 256 --output-prefix output/findings/finding_025_v02_parameter_search --flush-every 8 --top-n 20",
+      "phase_log": "output/findings/queue_20260708_094458_search.log",
+      "started_at": "2026-07-08T11:24:15-04:00",
+      "status": "completed",
+      "pid": 45549,
+      "process_group": 45549,
+      "last_heartbeat_at": "2026-07-08T11:24:15-04:00",
+      "last_descendant_pids": [
+        45549
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-07-08T11:24:50-04:00"
     }
   ],
   "planned_phases": [
@@ -92,33 +156,36 @@
     }
   ],
   "current_phase": {
-    "name": "golden",
+    "name": "search",
     "command": [
       ".venv/bin/python",
-      "src/parallel_replay.py",
-      "golden",
-      "--seeds",
-      "42",
-      "56",
+      "src/v02_parameter_search.py",
       "--jobs",
-      "4",
-      "--output",
-      "output/findings/parallel_golden_replay.json"
+      "6",
+      "--ticks",
+      "1024",
+      "--stagnation-window",
+      "256",
+      "--output-prefix",
+      "output/findings/finding_025_v02_parameter_search",
+      "--flush-every",
+      "8",
+      "--top-n",
+      "20"
     ],
-    "command_text": ".venv/bin/python src/parallel_replay.py golden --seeds 42 56 --jobs 4 --output output/findings/parallel_golden_replay.json",
-    "phase_log": "output/findings/queue_20260708_094458_golden.log",
-    "started_at": "2026-07-08T09:44:58-04:00",
-    "status": "running",
-    "pid": 24007,
-    "process_group": 24007,
-    "last_heartbeat_at": "2026-07-08T09:49:59-04:00",
+    "command_text": ".venv/bin/python src/v02_parameter_search.py --jobs 6 --ticks 1024 --stagnation-window 256 --output-prefix output/findings/finding_025_v02_parameter_search --flush-every 8 --top-n 20",
+    "phase_log": "output/findings/queue_20260708_094458_search.log",
+    "started_at": "2026-07-08T11:24:15-04:00",
+    "status": "completed",
+    "pid": 45549,
+    "process_group": 45549,
+    "last_heartbeat_at": "2026-07-08T11:24:15-04:00",
     "last_descendant_pids": [
-      24007,
-      24010,
-      24011,
-      24012,
-      24013,
-      24014
-    ]
-  }
+      45549
+    ],
+    "exit_code": 0,
+    "finished_at": "2026-07-08T11:24:50-04:00"
+  },
+  "finished_at": "2026-07-08T11:24:51-04:00",
+  "exit_code": 0
 }
