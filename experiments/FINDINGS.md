@@ -3064,3 +3064,169 @@ from this state, how many distinct turnover regimes remain reachable?
 - `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02_structures.csv`
 - `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02.json`
 - `output/findings/finding_032_v021_residual_participation_seed56_ka5_vac2_val8_n16_rpp0p02.npz`
+
+## Finding 033: Residual Turnover Lacks Rotational Recursion
+
+### Status
+
+Completed for the `residual_participation_probability = 0.02` candidate.
+
+### Setup
+
+Candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+residual_participation_probability = 0.02
+residual_participation_secondary_only = true
+```
+
+Diagnostic:
+
+```text
+rotational recursion
+connectivity = cube26
+late window = tick 2000 through tick 2048, sampled every tick
+coarse horizon = tick 0 through tick 2048, sampled every 128 ticks
+candidate targets = transfer-eligible targets, respecting secondary-only residual participation
+```
+
+The diagnostic measures:
+
+- persistent-cell `V` transition rates and changed-transition entropy;
+- active/interface vector entropy and dominant-vector fraction;
+- new-active vector entropy and source-vector match fraction;
+- transfer-eligible candidate-neighborhood turnover for persistent active/interface cells;
+- aggregate active/interface candidate-target turnover;
+- interface radial/tangential alignment against the depleted boundary.
+
+### Late-Regime Result
+
+For the stabilized late window, tick `2000` through tick `2048`:
+
+| Metric | Value |
+|---|---:|
+| Rows | `48` |
+| Mean active turnover fraction | `0.004700` |
+| Mean active-interface turnover fraction | `0.009159` |
+| Mean residual participations per tick | `2.416667` |
+| Mean deactivation events per tick | `2.416667` |
+| Mean persistent-active `V` changed fraction | `0.000000` |
+| Mean persistent-interface `V` changed fraction | `0.000000` |
+| Max persistent-active `V` changed fraction | `0.000000` |
+| Max persistent-interface `V` changed fraction | `0.000000` |
+| Mean persistent-active changed-transition entropy | `0.000000` |
+| Mean persistent-interface changed-transition entropy | `0.000000` |
+| Mean active vector entropy | `0.011164` |
+| Mean active-interface vector entropy | `0.011618` |
+| Mean new-active vector entropy | `0.000000` |
+| Mean active dominant-vector fraction | `0.999024` |
+| Mean active-interface dominant-vector fraction | `0.998959` |
+| Mean new-active source-vector match fraction | `0.958333` |
+| Mean persistent-active candidate turnover | `0.000026` |
+| Mean persistent-interface candidate turnover | `0.000031` |
+| Mean active candidate-target turnover | `0.018606` |
+| Mean active-interface candidate-target turnover | `0.021732` |
+
+Final one-tick row, tick `2047` to tick `2048`:
+
+| Metric | Value |
+|---|---:|
+| Active cells | `1025` |
+| Depleted cells | `318` |
+| Active-interface cells | `846` |
+| Active new / lost cells | `3 / 3` |
+| Active-interface new / lost cells | `3 / 8` |
+| Persistent active cells | `1022` |
+| Persistent interface cells | `843` |
+| Persistent active `V` changed fraction | `0.000000` |
+| Persistent interface `V` changed fraction | `0.000000` |
+| Persistent active candidate turnover | `0.000000` |
+| Persistent interface candidate turnover | `0.000000` |
+| New-active source-vector match fraction | `1.000000` |
+
+### Coarse Full-Horizon Result
+
+The full horizon confirms that turnover exists, but rotational phase change does not persist.
+
+For tick `0` through tick `2048`, sampled every `128` ticks:
+
+| Metric | Value |
+|---|---:|
+| Rows | `16` |
+| Mean active turnover fraction | `0.145804` |
+| Mean active-interface turnover fraction | `0.240469` |
+| Mean residual participations per tick | `2.889648` |
+| Mean deactivation events per tick | `3.044922` |
+| Mean persistent-active `V` changed fraction | `0.062564` |
+| Mean persistent-interface `V` changed fraction | `0.000083` |
+| Max persistent-interface `V` changed fraction | `0.001330` |
+| Mean persistent-interface changed-transition entropy | `0.000000` |
+| Mean active-interface vector entropy | `0.009016` |
+| Mean active-interface dominant-vector fraction | `0.999193` |
+| Mean persistent-interface candidate turnover | `0.000127` |
+
+The final coarse window, tick `1920` to tick `2048`, still has active-interface turnover fraction `0.183957`, but persistent-interface `V` changed fraction remains `0.000000` and persistent-interface candidate turnover remains only `0.000291`.
+
+### Interpretation
+
+Finding 031 showed that residual participation restores topology-changing turnover. Finding 032 showed that this turnover does not create morphology-open futures. Finding 033 identifies the mechanism-level reason:
+
+```text
+residual participation creates recursive re-entry, but the re-entry is canalized into the same directional channel.
+```
+
+This candidate is therefore not rotational recursion. It is recurrent replacement on a nearly fixed vector field:
+
+- active/interface cells continue to enter and leave;
+- deactivation and residual participation remain balanced late in the run;
+- persistent active/interface sites do not rotate their `V` state;
+- new active sites are almost always re-entering through the source vector channel;
+- persistent-cell candidate neighborhoods are effectively unchanged.
+
+The important separation is:
+
+```text
+residual participation supplies re-entry;
+rotation is still missing.
+```
+
+The aggregate candidate-target sets do move because membership turns over. But the persistent local grammar does not rewrite itself. That is why the system can keep replacing cells without opening a new morphology class.
+
+### Next Test
+
+The next disciplined v0.3 lever is not a broad random kick. It should be a minimal history-coupled rotational update:
+
+```text
+on successful received influence, rotate target V as a bounded function of incoming V, target residual state, payload compatibility, and whether the transfer was secondary/residual-mediated.
+```
+
+The required counters for that test are:
+
+- `rotation_events`;
+- `rotation_events_on_residual_entry`;
+- `rotation_events_on_secondary_exchange`;
+- `persistent_active_v_changed_fraction`;
+- `persistent_interface_v_changed_fraction`;
+- `persistent_active_changed_transition_entropy`;
+- `persistent_interface_changed_transition_entropy`;
+- candidate-neighborhood turnover for persistent active/interface cells.
+
+The acceptance criterion is not simply more activity. The first bar is:
+
+```text
+late-time residual turnover plus nonzero persistent-interface V transition entropy plus nonzero persistent-interface candidate-neighborhood turnover, without ledger error or explosive active growth.
+```
+
+### Artifacts
+
+- `src/rotational_recursion_diagnostic.py`
+- `output/findings/finding_033_v021_residual_participation_rotational_recursion_tick2000_2048_seed56_ka5_vac2_val8_n16_rpp0p02_rows.csv`
+- `output/findings/finding_033_v021_residual_participation_rotational_recursion_tick2000_2048_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
+- `output/findings/finding_033_v021_residual_participation_rotational_recursion_fullhorizon_seed56_ka5_vac2_val8_n16_rpp0p02_rows.csv`
+- `output/findings/finding_033_v021_residual_participation_rotational_recursion_fullhorizon_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
