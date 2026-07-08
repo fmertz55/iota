@@ -2512,3 +2512,218 @@ The contrast with vacuum `2` is the core result:
 - `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16_structures.csv`
 - `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16.json`
 - `output/findings/finding_028_v02_burst_seed56_ka5_vac3_val8_n16.npz`
+
+## Finding 029: Morphology-Aware Openness Separates Fate Closure from Structural Variation
+
+### Status
+
+Completed. The openness instrument now reports both the original fate alphabet and a morphology-aware alphabet.
+
+### Instrument Change
+
+The original fate classifier is unchanged:
+
+```text
+absorber
+high_dominant
+protected
+```
+
+The morphology layer adds:
+
+- a coarse `morphology_class`, such as `front_coupled` or `burst`;
+- a binned `morphology_signature` over active count, depleted count, active/depleted adjacency, LCF, top-5 coverage, top-component payload entropy, and top-component vector entropy;
+- sample-normalized entropy for both morphology class and morphology signature.
+
+This keeps the old result honest while testing whether within-class structure remains variable.
+
+### Vacuum-2 Front Result
+
+Same candidate as Finding 027:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+```
+
+| Checkpoint | Fate openness | Morph class | Morph class openness | Morph signature openness | Effective signatures |
+|---:|---:|---|---:|---:|---:|
+| `0` | `0.0` | `front_coupled:8` | `0.0` | `0.432932` | `2.460233` |
+| `256` | `0.0` | `front_coupled:8` | `0.0` | `0.0` | `1.0` |
+| `512` | `0.0` | `front_coupled:8` | `0.0` | `0.0` | `1.0` |
+| `1024` | `0.0` | `front_coupled:8` | `0.0` | `0.0` | `1.0` |
+| `1536` | `0.0` | `front_coupled:8` | `0.0` | `0.0` | `1.0` |
+| `2048` | `0.0` | `front_coupled:8` | `0.0` | `0.0` | `1.0` |
+
+Interpretation: the initial state has multiple reachable front signatures, but by tick `256` the morphology signature has also closed. The durable front exists, but the sampled future collapses into the same morphology bin after early transients.
+
+### Vacuum-3 Burst Control
+
+Same candidate as Finding 028:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 3
+valence = 8
+initial_active_iotas = 16
+stop_active_iotas = 1000
+```
+
+| Checkpoint | Fate openness | Morph class | Morph class openness | Morph signature openness | Effective signatures |
+|---:|---:|---|---:|---:|---:|
+| `0` | `0.0` | `burst:8` | `0.0` | `0.520426` | `2.951152` |
+| `1` | `0.0` | `burst:8` | `0.0` | `0.468546` | `2.649351` |
+| `2` | `0.0` | `burst:8` | `0.0` | `0.318145` | `1.937819` |
+| `3` | `0.0` | `burst:8` | `0.0` | `0.432932` | `2.460233` |
+| `4` | `0.0` | `burst:8` | `0.0` | `0.333333` | `2.0` |
+
+Interpretation: vacuum `3` remains fate-closed and morphology-class-closed, but it retains within-burst signature variability across the sampled early checkpoints. That supports treating it as a transition/ignition regime, not as a durable-front candidate.
+
+### Interpretation
+
+The disciplined conclusion is narrower and stronger:
+
+```text
+The form changed before the fate metric did.
+```
+
+v0.2 has not produced open-endedness under the original committor fate classifier. It has produced a ledger-exact active/depleted front class. The morphology-aware layer shows that the front candidate has early within-class variation, but that variation closes by tick `256` under the current bins and continuation horizon.
+
+For claims:
+
+- do claim `durable active/depleted front morphology`;
+- do claim `ledger-exact structural regime distinct from absorber, protected dust, and burst`;
+- do not claim `durable form without closed future`;
+- do not claim `open-ended complexity`.
+
+The next useful test is front turnover, not more broad fate sampling: track whether active/depleted interface cells are replaced over time despite stable aggregate morphology.
+
+### Artifacts
+
+- `src/openness_timeline.py`
+- `src/v02_candidate_diagnostics.py`
+- `output/findings/finding_029_v02_front_morphology_openness_seed56_ka5_vac2_val8_n16_raw.csv`
+- `output/findings/finding_029_v02_front_morphology_openness_seed56_ka5_vac2_val8_n16_summary.csv`
+- `output/findings/finding_029_v02_front_morphology_openness_seed56_ka5_vac2_val8_n16_summary.json`
+- `output/findings/finding_029_v02_burst_morphology_openness_seed56_ka5_vac3_val8_n16_raw.csv`
+- `output/findings/finding_029_v02_burst_morphology_openness_seed56_ka5_vac3_val8_n16_summary.csv`
+- `output/findings/finding_029_v02_burst_morphology_openness_seed56_ka5_vac3_val8_n16_summary.json`
+
+## Finding 030: v0.2 Front Geometry Pins While Amplitude Continues Cycling
+
+### Status
+
+Completed as the turnover check requested after Finding 029.
+
+### Instrument Change
+
+Added `src/front_turnover_diagnostic.py` to measure turnover directly rather than inferring it from aggregate morphology. The diagnostic samples:
+
+- active/depleted mask retention and Jaccard turnover;
+- active-interface and depleted-interface retention;
+- active/depleted interface union turnover;
+- content changes on persistent active cells and persistent active-interface cells;
+- per-window transfer, failed-gate, and deactivation rates.
+
+This separates three cases that looked similar under aggregate morphology:
+
+```text
+moving front
+pinned front with internal cycling
+frozen static residue
+```
+
+### Setup
+
+Candidate:
+
+```text
+seed = 56
+amplitude_coupling = 5.0
+vacuum_amplitude = 2
+valence = 8
+initial_active_iotas = 16
+bond_probability = 1.0
+connectivity = cube26
+```
+
+Runs:
+
+```text
+full horizon turnover: ticks 0..2048, sample_every = 16
+mid-horizon tick check: ticks 400..448, sample_every = 1
+late-horizon tick check: ticks 2000..2048, sample_every = 1
+```
+
+### Full-Horizon Geometry Result
+
+At 16-tick resolution:
+
+| Metric | Value |
+|---|---:|
+| Final active cells | `933` |
+| Final depleted cells | `327` |
+| Final active-interface cells | `868` |
+| Final depleted-interface cells | `327` |
+| Depleted mask freeze tick | `32` |
+| Active-interface freeze tick | `336` |
+| Interface-union freeze tick | `336` |
+| Active mask freeze tick | `416` |
+| Full-front freeze tick | `416` |
+| Final ledger error | `0` |
+
+This is not a migrating/replacing front after stabilization. The geometry becomes pinned.
+
+### Tick-Level Cycling Result
+
+The 16-tick samples alias the internal cycle, so tick-level checks were required. In both `400..448` and `2000..2048`, after the geometry is pinned:
+
+| Metric | Mid horizon | Late horizon |
+|---|---:|---:|
+| Active turnover fraction | `0.0` | `0.0` |
+| Active-interface turnover fraction | `0.0` | `0.0` |
+| Mean amplitude transfers / tick | `35.5` | `35.5` |
+| Mean persistent-active changed fraction / tick | `0.059798` | `0.059977` |
+| Mean persistent-interface changed fraction / tick | `0.064276` | `0.064468` |
+
+At the final sampled tick:
+
+- active Jaccard is `1.0`;
+- active-interface Jaccard is `1.0`;
+- amplitude transfers are `35` per tick;
+- `56 / 933` persistent active cells change amplitude per tick (`0.060021`);
+- `56 / 868` persistent active-interface cells change amplitude per tick (`0.064516`);
+- there are no `R`, `V`, or `P` changes in the final tick-level window.
+
+### Interpretation
+
+The vacuum-2 candidate is not a moving durable front. It is a pinned active/depleted interface with ongoing internal amplitude circulation.
+
+The disciplined claim is:
+
+```text
+v0.2 seed56 vacuum=2 produces a ledger-exact pinned front: morphology and cell identity close after stabilization, while amplitude continues cycling on a stable active/depleted scaffold.
+```
+
+This improves the interpretation from Finding 029:
+
+- not open-ended under fate openness;
+- not open-ended under morphology signature openness after tick `256`;
+- not front-turnover open after stabilization;
+- still not static residue, because amplitude transfer persists at roughly `35.5` transfers per tick.
+
+The next test should not be more broad committor sampling. It should be a targeted search for the nearby regime where active/depleted geometry does not pin: vary vacuum, valence, and coupling around the vacuum-2 front while selecting for nonzero post-stabilization interface turnover without vacuum-3 ignition.
+
+### Artifacts
+
+- `src/front_turnover_diagnostic.py`
+- `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_turnover.csv`
+- `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_turnover_summary.json`
+- `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick400_448_turnover.csv`
+- `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick400_448_turnover_summary.json`
+- `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick2000_2048_turnover.csv`
+- `output/findings/finding_030_v02_front_turnover_seed56_ka5_vac2_val8_n16_tick2000_2048_turnover_summary.json`

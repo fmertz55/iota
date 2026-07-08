@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import os
 from collections import Counter, deque
 from pathlib import Path
@@ -30,6 +31,7 @@ from iota_rig import (
     step,
 )
 from metrics import collect_metrics
+from v02_candidate_diagnostics import structure_rows
 
 
 DEFAULT_PREFIX = "finding_022_openness_timeline"
@@ -63,6 +65,19 @@ RAW_FIELDNAMES = [
     "classification_face18",
     "classification_cube26",
     "classification",
+    "morphology_class",
+    "morphology_signature",
+    "morphology_active_bin",
+    "morphology_depleted_bin",
+    "morphology_adjacency_bin",
+    "morphology_lcf_bin",
+    "morphology_top5_bin",
+    "morphology_payload_entropy_bin",
+    "morphology_vector_entropy_bin",
+    "morphology_active_depleted_adjacency",
+    "morphology_top5_coverage",
+    "morphology_payload_entropy",
+    "morphology_vector_entropy",
 ]
 SUMMARY_FIELDNAMES = [
     "checkpoint_tick",
@@ -74,6 +89,14 @@ SUMMARY_FIELDNAMES = [
     "outcome_entropy",
     "openness",
     "effective_classes",
+    "morphology_class_counts",
+    "morphology_class_entropy",
+    "morphology_class_openness",
+    "morphology_effective_classes",
+    "morphology_signature_counts",
+    "morphology_signature_entropy",
+    "morphology_signature_openness",
+    "morphology_effective_signatures",
     "constraint_accumulation_rate",
     "committed",
     "base_active_iotas",
@@ -122,6 +145,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--high-dominant-lcf", type=float, default=0.90)
     parser.add_argument("--commitment-epsilon", type=float, default=0.05)
     parser.add_argument(
+        "--with-morphology",
+        action="store_true",
+        help="Also classify futures by morphology bins instead of only fate labels.",
+    )
+    parser.add_argument("--morphology-connectivity", choices=["face6", "face18", "cube26"], default=None)
+    parser.add_argument("--morphology-front-min-active", type=int, default=100)
+    parser.add_argument("--morphology-front-min-depleted", type=int, default=50)
+    parser.add_argument("--morphology-front-adjacency", type=float, default=0.5)
+    parser.add_argument("--morphology-burst-active", type=int, default=1000)
+    parser.add_argument("--morphology-burst-window", type=int, default=8)
+    parser.add_argument(
         "--with-persistence",
         action="store_true",
         help="Also estimate top-k component persistence P(t). O(t) does not require this.",
@@ -132,6 +166,135 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--persistence-overlap", type=float, default=0.5)
     parser.add_argument("--no-save-checkpoints", action="store_true")
     return parser.parse_args()
+
+
+def count_bin(value: float) -> str:
+    numeric = int(float(value))
+    if numeric <= 0:
+        return "0"
+    if numeric < 32:
+        return "1-31"
+    if numeric < 128:
+        return "32-127"
+    if numeric < 512:
+        return "128-511"
+    if numeric < 1000:
+        return "512-999"
+    if numeric < 2000:
+        return "1000-1999"
+    if numeric < 4000:
+        return "2000-3999"
+    return "4000+"
+
+
+def fraction_bin(value: float) -> str:
+    numeric = max(0.0, min(1.0, float(value)))
+    lower = math.floor(numeric * 10.0) / 10.0
+    upper = min(1.0, lower + 0.1)
+    if numeric >= 1.0:
+        return "1.0"
+    return f"{lower:.1f}-{upper:.1f}"
+
+
+def entropy_bin(value: float) -> str:
+    numeric = max(0.0, float(value))
+    if numeric == 0.0:
+        return "0"
+    if numeric < 0.25:
+        return "0-0.25"
+    if numeric < 0.75:
+        return "0.25-0.75"
+    if numeric < 1.5:
+        return "0.75-1.5"
+    if numeric < 3.0:
+        return "1.5-3.0"
+    return "3.0+"
+
+
+def generic_counts(rows: list[dict[str, Any]], key: str) -> Counter[str]:
+    return Counter(str(row.get(key, "")) for row in rows if str(row.get(key, "")))
+
+
+def normalized_sample_entropy(counts: Counter[str], samples: int) -> float:
+    if samples <= 1:
+        return 0.0
+    entropy = entropy_from_counts(counts)
+    return float(entropy / math.log(samples))
+
+
+def counts_text(counts: Counter[str]) -> str:
+    return ";".join(f"{key}:{counts[key]}" for key in sorted(counts))
+
+
+def active_structure_for(world: World, tick: int, connectivity: str) -> dict[str, Any]:
+    for row in structure_rows(world, tick):
+        if row["connectivity"] == connectivity and row["mask"] == "active":
+            return row
+    return {}
+
+
+def classify_morphology(
+    metric: dict[str, Any],
+    structure: dict[str, Any],
+    final_offset: int,
+    args: argparse.Namespace,
+) -> dict[str, Any]:
+    connectivity = args.morphology_connectivity or args.connectivity
+    active = int(metric["active_iotas"])
+    depleted = int(float(metric.get("depleted_cells", 0.0)))
+    lcf = connectivity_metric(metric, "coherence_ratio", connectivity)
+    adjacency = float(structure.get("active_adjacent_to_depleted_fraction", 0.0) or 0.0)
+    top5 = float(structure.get("top5_coverage", 0.0) or 0.0)
+    payload_entropy = float(structure.get("top_active_payload_entropy", 0.0) or 0.0)
+    vector_entropy = float(structure.get("top_active_vector_entropy", 0.0) or 0.0)
+
+    if active <= 0:
+        morphology_class = "extinct"
+    elif active >= int(args.morphology_burst_active) and final_offset <= int(args.morphology_burst_window):
+        morphology_class = "burst"
+    elif (
+        active >= int(args.morphology_front_min_active)
+        and depleted >= int(args.morphology_front_min_depleted)
+        and adjacency >= float(args.morphology_front_adjacency)
+    ):
+        morphology_class = "front_coupled"
+    elif active >= int(args.morphology_front_min_active) and depleted >= int(args.morphology_front_min_depleted):
+        morphology_class = "depleted_mosaic"
+    elif active >= int(args.morphology_front_min_active):
+        morphology_class = "protected_mosaic"
+    else:
+        morphology_class = "dust_protected"
+
+    bins = {
+        "morphology_active_bin": count_bin(active),
+        "morphology_depleted_bin": count_bin(depleted),
+        "morphology_adjacency_bin": fraction_bin(adjacency),
+        "morphology_lcf_bin": fraction_bin(lcf),
+        "morphology_top5_bin": fraction_bin(top5),
+        "morphology_payload_entropy_bin": entropy_bin(payload_entropy),
+        "morphology_vector_entropy_bin": entropy_bin(vector_entropy),
+    }
+    signature = "|".join(
+        [
+            morphology_class,
+            bins["morphology_active_bin"],
+            bins["morphology_depleted_bin"],
+            bins["morphology_adjacency_bin"],
+            bins["morphology_lcf_bin"],
+            bins["morphology_top5_bin"],
+            bins["morphology_payload_entropy_bin"],
+            bins["morphology_vector_entropy_bin"],
+        ]
+    )
+    return {
+        "morphology_class": morphology_class,
+        "morphology_signature": signature,
+        **bins,
+        "morphology_active_depleted_adjacency": adjacency,
+        "morphology_top5_coverage": top5,
+        "morphology_payload_entropy": payload_entropy,
+        "morphology_vector_entropy": vector_entropy,
+    }
 
 
 def checkpoint_schedule(args: argparse.Namespace, cfg: dict[str, Any]) -> list[int]:
@@ -259,6 +422,25 @@ def run_continuation(
         )
         for connectivity in ("face6", "face18", "cube26")
     }
+    morphology = {
+        "morphology_class": "",
+        "morphology_signature": "",
+        "morphology_active_bin": "",
+        "morphology_depleted_bin": "",
+        "morphology_adjacency_bin": "",
+        "morphology_lcf_bin": "",
+        "morphology_top5_bin": "",
+        "morphology_payload_entropy_bin": "",
+        "morphology_vector_entropy_bin": "",
+        "morphology_active_depleted_adjacency": "",
+        "morphology_top5_coverage": "",
+        "morphology_payload_entropy": "",
+        "morphology_vector_entropy": "",
+    }
+    if args.with_morphology:
+        morphology_connectivity = args.morphology_connectivity or args.connectivity
+        structure = active_structure_for(world, final_tick, morphology_connectivity)
+        morphology = classify_morphology(metric, structure, final_tick - checkpoint_tick, args)
     return {
         "checkpoint_tick": checkpoint_tick,
         "sample_index": sample_index,
@@ -289,6 +471,7 @@ def run_continuation(
         "classification_face18": classification_by_connectivity["face18"],
         "classification_cube26": classification_by_connectivity["cube26"],
         "classification": classification_by_connectivity[args.connectivity],
+        **morphology,
     }
 
 
@@ -313,6 +496,10 @@ def summarize_checkpoint(
     counts = outcome_counts(rows, "classification")
     entropy = entropy_from_counts(counts)
     openness = normalized_outcome_entropy(counts)
+    morphology_class_counts = generic_counts(rows, "morphology_class")
+    morphology_signature_counts = generic_counts(rows, "morphology_signature")
+    morphology_class_entropy = entropy_from_counts(morphology_class_counts)
+    morphology_signature_entropy = entropy_from_counts(morphology_signature_counts)
     active_values = np.array([float(row["active_iotas"]) for row in rows], dtype=np.float64)
     lcf_key = f"coherence_ratio_{args.connectivity}"
     lcf_values = np.array([float(row[lcf_key]) for row in rows], dtype=np.float64)
@@ -328,6 +515,14 @@ def summarize_checkpoint(
         "outcome_entropy": entropy,
         "openness": openness,
         "effective_classes": float(np.exp(entropy)) if rows else 0.0,
+        "morphology_class_counts": counts_text(morphology_class_counts),
+        "morphology_class_entropy": morphology_class_entropy,
+        "morphology_class_openness": normalized_sample_entropy(morphology_class_counts, len(rows)),
+        "morphology_effective_classes": float(np.exp(morphology_class_entropy)) if rows else 0.0,
+        "morphology_signature_counts": counts_text(morphology_signature_counts),
+        "morphology_signature_entropy": morphology_signature_entropy,
+        "morphology_signature_openness": normalized_sample_entropy(morphology_signature_counts, len(rows)),
+        "morphology_effective_signatures": float(np.exp(morphology_signature_entropy)) if rows else 0.0,
         "constraint_accumulation_rate": "",
         "committed": openness < float(args.commitment_epsilon),
         "base_active_iotas": int(base_metric["active_iotas"]),
@@ -492,6 +687,8 @@ def main() -> None:
                         "connectivity": args.connectivity,
                         "seed_override": args.seed,
                         "with_persistence": args.with_persistence,
+                        "with_morphology": args.with_morphology,
+                        "morphology_connectivity": args.morphology_connectivity or args.connectivity,
                         "commitment_epsilon": args.commitment_epsilon,
                         "outcome_classes": OUTCOME_CLASSES,
                         "summary_rows": summary_rows,
@@ -536,6 +733,8 @@ def main() -> None:
                 "connectivity": args.connectivity,
                 "seed_override": args.seed,
                 "with_persistence": args.with_persistence,
+                "with_morphology": args.with_morphology,
+                "morphology_connectivity": args.morphology_connectivity or args.connectivity,
                 "commitment_epsilon": args.commitment_epsilon,
                 "first_commitment_tick": first_commitment_tick,
                 "outcome_classes": OUTCOME_CLASSES,
