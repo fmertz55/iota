@@ -1,0 +1,5 @@
+checkpoint_tick,phase,family,size,samples,mean_rotation_events_per_tick,mean_persistent_interface_v_changed_fraction,mean_persistent_interface_changed_transition_entropy,mean_persistent_interface_candidate_turnover,mean_active_interface_turnover_fraction,mean_active_interface_candidate_target_turnover,mean_active_delta,mean_depleted_delta,mean_component_count_delta,mean_largest_component_delta,mean_component_entropy_delta,mean_final_active_iotas,mean_final_depleted_cells,transition_count,transition_families,top_transitions
+1536,phase1,0,8,0;1;2;3;4;5;6;7,0.0,0.0,0.0,0.0001819052293365233,0.10229415413755927,0.19595638518453062,0.0,0.375,0.0,0.0,0.0,1024.0,319.375,0,0,
+1536,phase2,0,8,0;1;2;3;4;5;6;7,0.0,0.0,0.0,0.0001554432405028094,0.10114497022356855,0.19232930746675303,0.0,1.125,0.0,0.0,0.0,1024.0,320.5,0,0,
+2048,phase1,0,8,0;1;2;3;4;5;6;7,0.0,0.0,0.0,0.0001847972739723383,0.10049815605764803,0.19687862312561355,0.0,0.5,0.0,0.0,0.0,1025.0,318.5,0,0,
+2048,phase2,0,8,0;1;2;3;4;5;6;7,0.0,0.0,0.0,0.00015638182443840788,0.10280174605546843,0.19575359652618385,0.0,0.625,0.0,0.0,0.0,1025.0,319.125,0,0,

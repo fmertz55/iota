@@ -3611,3 +3611,330 @@ nonzero rotation-aware class or mechanism-signature openness among bounded, ledg
 - `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_001024.npz`
 - `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_001536.npz`
 - `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_002048.npz`
+
+## Finding 036: Directional Branching Is Real but Not Yet Persistent Lineage Diversification
+
+### Status
+
+Completed for mature v0.3 checkpoints, with the v0.2.1 residual-participation candidate as control.
+
+### Protocol
+
+Branch-lineage protocol:
+
+```text
+checkpoint_ticks = 1536, 2048
+horizon = 512
+phase_length = 256
+samples = 8
+sample_every = 16
+connectivity = cube26
+stop_active_iotas = 5000
+cluster_distance_threshold = 0.55
+```
+
+For each continuation:
+
+1. Split the `512`-tick continuation into two `256`-tick phases.
+2. Build persistent-interface `V -> V` transition matrices for each phase.
+3. Cluster phase matrices by Jensen-Shannon distance.
+4. Track phase-1 family to phase-2 family transitions.
+5. Compare rotation events, interface turnover, candidate-neighborhood turnover, and component deltas by family.
+
+### v0.3 Result
+
+All v0.3 lineages were bounded, ledger-exact, and non-runaway.
+
+| Checkpoint | Combined families | Phase-1 families | Phase-2 families | Same-family fraction | Lineage table | Phase matrix distance | Phase-1 rotations/tick | Phase-2 rotations/tick |
+|---:|---:|---:|---:|---:|---|---:|---:|---:|
+| `1536` | `3` | `1` | `3` | `0.75` | `0->0:6; 0->1:1; 0->2:1` | `0.588655` | `1.637695` | `1.667480` |
+| `2048` | `3` | `1` | `3` | `0.75` | `0->0:6; 0->1:1; 0->2:1` | `0.600318` | `1.649902` | `1.604492` |
+
+Mechanism metrics:
+
+| Checkpoint | Phase | Interface `V` change | Transition entropy | Candidate turnover | Interface turnover | Candidate-target turnover |
+|---:|---|---:|---:|---:|---:|---:|
+| `1536` | phase 1 | `0.004801` | `2.004995` | `0.001082` | `0.037666` | `0.316142` |
+| `1536` | phase 2 | `0.004649` | `1.914247` | `0.000956` | `0.037822` | `0.350595` |
+| `2048` | phase 1 | `0.004718` | `1.888604` | `0.000971` | `0.038147` | `0.347575` |
+| `2048` | phase 2 | `0.004462` | `1.916288` | `0.000911` | `0.037246` | `0.356645` |
+
+Component-level result:
+
+```text
+phase1_mean_component_count_delta = 0
+phase2_mean_component_count_delta = 0
+phase1_mean_largest_component_delta = 0
+phase2_mean_largest_component_delta = 0
+```
+
+So the branch-lineage signal is directional, not yet morphological.
+
+### Family Details
+
+At checkpoint `1536`, phase 1 is one shared transition family:
+
+```text
+family 0, size 8
+transition_count = 612
+transition_families = 96
+top transitions = 2>3:50; 1>2:49; 1>3:41; 2>4:30; 3>5:30
+```
+
+Phase 2 splits into three families:
+
+```text
+family 0, size 6, transition_count = 436, transition_families = 96
+family 1, size 1, transition_count = 78, transition_families = 40
+family 2, size 1, transition_count = 82, transition_families = 44
+```
+
+At checkpoint `2048`, the same pattern repeats:
+
+```text
+phase 1: family 0, size 8
+phase 2: family 0, size 6; family 1, size 1; family 2, size 1
+```
+
+This is a real split, but it is weak:
+
+```text
+mean_within_family_distance = 0.568091 at tick 1536, 0.574920 at tick 2048
+mean_between_family_distance = 0.607178 at tick 1536, 0.631310 at tick 2048
+```
+
+The between-family distance is larger than the within-family distance, but not by enough to claim robust separated lineages.
+
+### v0.2.1 Control
+
+The control remains a single zero-transition family.
+
+| Checkpoint | Combined families | Phase-1 families | Phase-2 families | Same-family fraction | Lineage table | Phase matrix distance | Phase-1 rotations/tick | Phase-2 rotations/tick |
+|---:|---:|---:|---:|---:|---|---:|---:|---:|
+| `1536` | `1` | `1` | `1` | `1.0` | `0->0:8` | `0.000000` | `0.000000` | `0.000000` |
+| `2048` | `1` | `1` | `1` | `1.0` | `0->0:8` | `0.000000` | `0.000000` | `0.000000` |
+
+Control mechanism metrics:
+
+| Checkpoint | Phase | Interface `V` change | Transition entropy | Candidate turnover | Interface turnover | Candidate-target turnover |
+|---:|---|---:|---:|---:|---:|---:|
+| `1536` | phase 1 | `0.000000` | `0.000000` | `0.000182` | `0.102294` | `0.195956` |
+| `1536` | phase 2 | `0.000000` | `0.000000` | `0.000155` | `0.101145` | `0.192329` |
+| `2048` | phase 1 | `0.000000` | `0.000000` | `0.000185` | `0.100498` | `0.196879` |
+| `2048` | phase 2 | `0.000000` | `0.000000` | `0.000156` | `0.102802` | `0.195754` |
+
+This confirms the lineage diagnostic is not inventing directional families from active/interface turnover alone. v0.2.1 has comparable or higher interface turnover, but zero transition matrices and one stable family.
+
+### Interpretation
+
+Finding 036 narrows Finding 035:
+
+```text
+v0.3 creates measurable directional branch splitting, but not yet persistent lineage diversification.
+```
+
+The important positive result is:
+
+```text
+v0.3 produces nonzero persistent-interface transition matrices that split into multiple second-phase directional families; v0.2.1 remains a single zero-transition family under the same protocol.
+```
+
+The important negative result is:
+
+```text
+the family split is late, weak, and not yet coupled to component-level morphological divergence.
+```
+
+The current best claim is therefore:
+
+```text
+v0.3 establishes incipient directional lineage splitting inside a bounded ledger-exact scaffold, but the split has not yet become persistent, strongly separated, or morphologically expressed.
+```
+
+### Next Test
+
+The next gate should test whether the phase-2 split persists if the horizon is extended:
+
+```text
+checkpoint_ticks = 1536, 2048
+horizon = 1024
+phase_length = 256
+samples = 8
+```
+
+Acceptance criterion:
+
+```text
+phase-2 families remain distinct into phases 3 and 4, or produce measurable divergence in component birth/death, interface turnover, candidate-target turnover, or active/depleted structure.
+```
+
+If they collapse back into one family, the correct interpretation is:
+
+```text
+v0.3 creates transient directional branchlets, not persistent lineages.
+```
+
+### Artifacts
+
+- `src/rotation_branch_lineage.py`
+- `output/findings/finding_036_v030_history_rotation_branch_lineage_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_lineages.csv`
+- `output/findings/finding_036_v030_history_rotation_branch_lineage_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_families.csv`
+- `output/findings/finding_036_v030_history_rotation_branch_lineage_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.csv`
+- `output/findings/finding_036_v030_history_rotation_branch_lineage_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.json`
+- `output/findings/finding_036_v021_residual_participation_branch_lineage_control_seed56_ka5_vac2_val8_n16_rpp0p02_lineages.csv`
+- `output/findings/finding_036_v021_residual_participation_branch_lineage_control_seed56_ka5_vac2_val8_n16_rpp0p02_families.csv`
+- `output/findings/finding_036_v021_residual_participation_branch_lineage_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.csv`
+- `output/findings/finding_036_v021_residual_participation_branch_lineage_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
+
+## Finding 037: Directional Branchlets Recur but Collapse or Merge by Phase 4
+
+### Status
+
+Completed for mature v0.3 checkpoints, with the v0.2.1 residual-participation candidate as control.
+
+### Protocol
+
+Four-phase lineage persistence protocol:
+
+```text
+checkpoint_ticks = 1536, 2048
+horizon = 1024
+phase_length = 256
+phase_count = 4
+samples = 8
+sample_every = 16
+connectivity = cube26
+stop_active_iotas = 5000
+cluster_distance_threshold = 0.55
+```
+
+This directly tests the Finding 036 acceptance gate:
+
+```text
+Do phase-2 daughter families remain distinct into phases 3 and 4, or do they collapse back into the dominant family?
+```
+
+### v0.3 Result
+
+All v0.3 continuations remained bounded, ledger-exact, and non-runaway.
+
+| Checkpoint | Combined families | Full path table | Stable full path | Phase-2 persists to end | Mean adjacent distance | Within-family distance | Between-family distance |
+|---:|---:|---|---:|---:|---:|---:|---:|
+| `1536` | `4` | `0->0->0->0:5; 0->0->1->0:1; 0->0->2->0:1; 0->3->0->0:1` | `0.625` | `0.625` | `0.601354` | `0.579265` | `0.629364` |
+| `2048` | `4` | `0->0->0->0:6; 0->1->0->2:1; 0->3->0->0:1` | `0.750` | `0.750` | `0.608114` | `0.585099` | `0.641744` |
+
+Phase-family counts:
+
+| Checkpoint | Phase 1 | Phase 2 | Phase 3 | Phase 4 |
+|---:|---|---|---|---|
+| `1536` | `0:8` | `0:7; 3:1` | `0:6; 1:1; 2:1` | `0:8` |
+| `2048` | `0:8` | `0:6; 1:1; 3:1` | `0:8` | `0:7; 2:1` |
+
+Mechanism metrics remain nonzero across all four phases:
+
+| Checkpoint | Phase | Rotations/tick | Interface `V` change | Transition entropy | Candidate turnover | Interface turnover | Candidate-target turnover |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| `1536` | `1` | `1.637695` | `0.004801` | `2.004995` | `0.001082` | `0.037666` | `0.316142` |
+| `1536` | `2` | `1.667480` | `0.004649` | `1.914247` | `0.000956` | `0.037822` | `0.350595` |
+| `1536` | `3` | `1.635742` | `0.004458` | `1.819193` | `0.000956` | `0.036489` | `0.357578` |
+| `1536` | `4` | `1.540527` | `0.004124` | `1.740759` | `0.000817` | `0.035719` | `0.355501` |
+| `2048` | `1` | `1.649902` | `0.004718` | `1.888604` | `0.000971` | `0.038147` | `0.347575` |
+| `2048` | `2` | `1.604492` | `0.004462` | `1.916288` | `0.000911` | `0.037246` | `0.356645` |
+| `2048` | `3` | `1.572754` | `0.004155` | `1.737671` | `0.000887` | `0.034668` | `0.362558` |
+| `2048` | `4` | `1.522461` | `0.003921` | `1.689348` | `0.000792` | `0.035531` | `0.378959` |
+
+Component-level deltas are still zero:
+
+```text
+phase1_mean_component_count_delta = 0
+phase2_mean_component_count_delta = 0
+phase3_mean_component_count_delta = 0
+phase4_mean_component_count_delta = 0
+
+phase1_mean_largest_component_delta = 0
+phase2_mean_largest_component_delta = 0
+phase3_mean_largest_component_delta = 0
+phase4_mean_largest_component_delta = 0
+```
+
+### v0.2.1 Control
+
+The control remains a single zero-transition lineage through all four phases.
+
+| Checkpoint | Combined families | Full path table | Stable full path | Mean adjacent distance | Rotations/tick | Interface `V` change | Transition entropy |
+|---:|---:|---|---:|---:|---:|---:|---:|
+| `1536` | `1` | `0->0->0->0:8` | `1.000` | `0.000000` | `0.000000` | `0.000000` | `0.000000` |
+| `2048` | `1` | `0->0->0->0:8` | `1.000` | `0.000000` | `0.000000` | `0.000000` | `0.000000` |
+
+The control still has active/interface turnover around `0.10`, but no directional transitions. This confirms again that the v0.3 family changes are not caused by interface turnover alone.
+
+### Interpretation
+
+Finding 037 does not pass the persistent-lineage gate.
+
+The positive result:
+
+```text
+v0.3 directional branchlets recur over a 1024-tick continuation, and transition entropy remains nonzero in every phase.
+```
+
+The negative result:
+
+```text
+the minority daughter families are not stable across phases 3 and 4; they usually merge back into the dominant family or appear as transient later branchlets.
+```
+
+The precise claim is:
+
+```text
+v0.3 creates recurrent transient directional branchlets inside a bounded ledger-exact scaffold, but not persistent lineage differentiation.
+```
+
+This is still a meaningful rung above Finding 036. The branch split is not a one-window artifact; the system continues generating daughter transition families. But it has not yet crossed into durable lineage separation or morphology-level differentiation.
+
+### Current Ladder
+
+| Level | Status |
+|---|---|
+| Fate openness | closed |
+| Morphology openness | closed/weak |
+| Rotation-aware openness | positive |
+| Branch-lineage splitting | positive |
+| Recurrent directional branchlets | positive |
+| Persistent lineage diversification | not yet |
+| Component/morphology divergence | not yet |
+
+### Next Test
+
+The next lever should try to make daughter families persist without increasing active growth:
+
+```text
+rotation memory / inertia
+```
+
+Candidate knobs:
+
+- preserve rotated `V` for a short refractory window;
+- make rotation offset depend on prior target `V` age or repeated received history;
+- slightly increase candidate-neighborhood effect only when a non-dominant transition family appears;
+- lower rotation probability but increase persistence of successful rotations.
+
+Acceptance criterion:
+
+```text
+minority daughter families persist across at least two later phases, or predict nonzero component/interface structural divergence, while remaining bounded and ledger-exact.
+```
+
+### Artifacts
+
+- `src/rotation_lineage_persistence.py`
+- `output/findings/finding_037_v030_history_rotation_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_phases.csv`
+- `output/findings/finding_037_v030_history_rotation_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_lineages.csv`
+- `output/findings/finding_037_v030_history_rotation_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_families.csv`
+- `output/findings/finding_037_v030_history_rotation_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.csv`
+- `output/findings/finding_037_v030_history_rotation_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.json`
+- `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_phases.csv`
+- `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_lineages.csv`
+- `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_families.csv`
+- `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.csv`
+- `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
