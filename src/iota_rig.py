@@ -495,6 +495,156 @@ def secondary_bias_gate_mask(world: World, neighbor_mode: str) -> np.ndarray:
     )
 
 
+def angular_momentum_residual_score(
+    world: World,
+    old_L: np.ndarray,
+    x: int,
+    y: int,
+    z: int,
+    v_idx: int,
+    a: int,
+    r: int,
+    p: int,
+    candidate: dict[str, Any],
+    angular_momentum_cap: float,
+    preserve_behavior: bool,
+    score_mode: str,
+) -> float:
+    if angular_momentum_cap <= 0.0:
+        return 0.0
+
+    def alignment_score(
+        l_value: float,
+        local_v: int,
+        local_a: int,
+        local_r: int,
+        local_p: int,
+    ) -> float:
+        if abs(l_value) <= 1e-6:
+            return 0.0
+        bias_offset = 1 if l_value > 0.0 else -1
+        bias_v = offset_vector_state(
+            world,
+            local_v,
+            bias_offset,
+            preserve_behavior=preserve_behavior,
+        )
+        bias_dx, bias_dy, bias_dz, _ = vector_step(
+            world,
+            bias_v,
+            local_a,
+            local_r,
+            local_p,
+        )
+        return min(1.0, abs(l_value) / angular_momentum_cap) * vector_alignment(
+            (bias_dx, bias_dy, bias_dz),
+            candidate["step"],
+        )
+
+    tx, ty, tz = candidate["target"]
+    source_l = float(old_L[x, y, z])
+    target_l = float(old_L[tx, ty, tz])
+    if score_mode == "source_L_alignment":
+        return alignment_score(source_l, v_idx, a, r, p)
+    if score_mode == "target_L_alignment":
+        target_v = int(world.V[tx, ty, tz]) % len(world.vectors)
+        target_a = int(world.A[tx, ty, tz])
+        target_r = int(world.R[tx, ty, tz])
+        target_p = int(world.P[tx, ty, tz])
+        return alignment_score(target_l, target_v, target_a, target_r, target_p)
+    if score_mode == "source_target_L_contrast":
+        contrast = clamp_signed(
+            (source_l - target_l) / angular_momentum_cap,
+            1.0,
+        )
+        primary_dx, primary_dy, primary_dz, _ = vector_step(world, v_idx, a, r, p)
+        return float(contrast) * vector_alignment(
+            (primary_dx, primary_dy, primary_dz),
+            candidate["step"],
+        )
+    raise ValueError(f"Unknown angular_momentum_residual_bias_score_mode: {score_mode}")
+
+
+def apply_angular_momentum_residual_bias(
+    world: World,
+    old_L: np.ndarray,
+    candidates: list[dict[str, Any]],
+    x: int,
+    y: int,
+    z: int,
+    v_idx: int,
+    a: int,
+    r: int,
+    p: int,
+    next_active: np.ndarray,
+    next_latent_A: np.ndarray,
+    kA: float,
+    residual_participation_probability: float,
+    residual_participation_secondary_only: bool,
+    angular_momentum_cap: float,
+    strength: float,
+    preserve_behavior: bool,
+    mean_preserving: bool,
+    score_mode: str,
+) -> dict[str, float]:
+    entries: list[tuple[dict[str, Any], float, float]] = []
+    for candidate in candidates:
+        tx, ty, tz = candidate["target"]
+        target_depleted = (not bool(next_active[tx, ty, tz])) and int(next_latent_A[tx, ty, tz]) <= 0
+        if not target_depleted:
+            continue
+        if residual_participation_probability <= 0.0:
+            continue
+        if residual_participation_secondary_only and int(candidate["order"]) == 0:
+            continue
+        influence = float(candidate["influence"])
+        if influence <= 0.0:
+            continue
+        base_probability = clamp_probability(kA * influence) * residual_participation_probability
+        if base_probability <= 0.0:
+            continue
+        score = angular_momentum_residual_score(
+            world,
+            old_L,
+            x,
+            y,
+            z,
+            v_idx,
+            a,
+            r,
+            p,
+            candidate,
+            angular_momentum_cap,
+            preserve_behavior,
+            score_mode,
+        )
+        raw_multiplier = max(0.0, 1.0 + float(strength) * score)
+        entries.append((candidate, base_probability, raw_multiplier))
+
+    base_sum = sum(base_probability for _, base_probability, _ in entries)
+    raw_biased_sum = sum(
+        base_probability * raw_multiplier
+        for _, base_probability, raw_multiplier in entries
+    )
+    normalizer = raw_biased_sum / base_sum if mean_preserving and base_sum > 0.0 else 1.0
+    force_unbiased = False
+    if normalizer <= 1e-12:
+        normalizer = 1.0
+        force_unbiased = True
+
+    biased_sum = 0.0
+    for candidate, base_probability, raw_multiplier in entries:
+        multiplier = 1.0 if force_unbiased else raw_multiplier / normalizer
+        candidate["residual_bias_multiplier"] = multiplier
+        biased_sum += base_probability * multiplier
+
+    return {
+        "eligible_candidates": float(len(entries)),
+        "base_probability_sum": float(base_sum),
+        "biased_probability_sum": float(biased_sum),
+    }
+
+
 def local_candidates(
     world: World,
     x: int,
@@ -687,6 +837,47 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         and angular_momentum_secondary_bias_enabled
         and angular_momentum_secondary_bias_strength > 0.0
     )
+    angular_momentum_residual_bias_enabled = bool(
+        cfg["constants"].get("angular_momentum_residual_bias_enabled", False)
+    )
+    angular_momentum_residual_bias_strength = max(
+        0.0,
+        float(cfg["constants"].get("angular_momentum_residual_bias_strength", 0.0)),
+    )
+    angular_momentum_residual_bias_gate = str(
+        cfg["constants"].get("angular_momentum_residual_bias_gate", "depleted_interface")
+    )
+    if angular_momentum_residual_bias_gate not in {"depleted_interface"}:
+        raise ValueError(
+            "Unknown angular_momentum_residual_bias_gate: "
+            f"{angular_momentum_residual_bias_gate}"
+        )
+    angular_momentum_residual_bias_mean_preserving = bool(
+        cfg["constants"].get("angular_momentum_residual_bias_mean_preserving", True)
+    )
+    angular_momentum_residual_bias_preserve_behavior = bool(
+        cfg["constants"].get("angular_momentum_residual_bias_preserve_behavior", True)
+    )
+    angular_momentum_residual_bias_score_mode = str(
+        cfg["constants"].get(
+            "angular_momentum_residual_bias_score_mode",
+            "source_L_alignment",
+        )
+    )
+    if angular_momentum_residual_bias_score_mode not in {
+        "source_L_alignment",
+        "target_L_alignment",
+        "source_target_L_contrast",
+    }:
+        raise ValueError(
+            "Unknown angular_momentum_residual_bias_score_mode: "
+            f"{angular_momentum_residual_bias_score_mode}"
+        )
+    angular_momentum_residual_bias_enabled = (
+        angular_momentum_enabled
+        and angular_momentum_residual_bias_enabled
+        and angular_momentum_residual_bias_strength > 0.0
+    )
     residual_participation_probability = clamp_probability(
         float(
             cfg["constants"].get(
@@ -738,6 +929,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     angular_momentum_observed_turn_abs_sum = 0.0
     angular_momentum_secondary_bias_sources = 0
     angular_momentum_secondary_bias_selected_candidates = 0
+    angular_momentum_residual_bias_eligible_candidates = 0.0
+    angular_momentum_residual_bias_base_probability_sum = 0.0
+    angular_momentum_residual_bias_biased_probability_sum = 0.0
     exchange_alignments: list[float] = []
     secondary_exchange_alignments: list[float] = []
     gated_secondary_bias_mask = (
@@ -809,6 +1003,38 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             for candidate in candidates
             if int(candidate["order"]) != 0 and abs(float(candidate.get("secondary_bias_score", 0.0))) > 0.0
         )
+        if angular_momentum_residual_bias_enabled:
+            residual_bias_metric = apply_angular_momentum_residual_bias(
+                world,
+                old_L,
+                candidates,
+                int(x),
+                int(y),
+                int(z),
+                v_idx,
+                a,
+                r,
+                p,
+                next_active,
+                next_latent_A,
+                kA,
+                residual_participation_probability,
+                residual_participation_secondary_only,
+                angular_momentum_cap,
+                angular_momentum_residual_bias_strength,
+                angular_momentum_residual_bias_preserve_behavior,
+                angular_momentum_residual_bias_mean_preserving,
+                angular_momentum_residual_bias_score_mode,
+            )
+            angular_momentum_residual_bias_eligible_candidates += residual_bias_metric[
+                "eligible_candidates"
+            ]
+            angular_momentum_residual_bias_base_probability_sum += residual_bias_metric[
+                "base_probability_sum"
+            ]
+            angular_momentum_residual_bias_biased_probability_sum += residual_bias_metric[
+                "biased_probability_sum"
+            ]
 
         for candidate in candidates:
             if int(available_A[x, y, z]) <= 0:
@@ -845,6 +1071,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             transfer_probability = clamp_probability(kA * influence)
             if target_depleted:
                 transfer_probability *= residual_participation_probability
+                if angular_momentum_residual_bias_enabled:
+                    transfer_probability *= float(candidate.get("residual_bias_multiplier", 1.0))
+                    transfer_probability = clamp_probability(transfer_probability)
             if world.rng.random() >= transfer_probability:
                 failed_transfer_gates += 1
                 continue
@@ -1021,6 +1250,13 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "angular_momentum_observed_turn_abs_sum": angular_momentum_observed_turn_abs_sum,
         "angular_momentum_secondary_bias_sources": angular_momentum_secondary_bias_sources,
         "angular_momentum_secondary_bias_selected_candidates": angular_momentum_secondary_bias_selected_candidates,
+        "angular_momentum_residual_bias_eligible_candidates": angular_momentum_residual_bias_eligible_candidates,
+        "angular_momentum_residual_bias_base_probability_sum": angular_momentum_residual_bias_base_probability_sum,
+        "angular_momentum_residual_bias_biased_probability_sum": angular_momentum_residual_bias_biased_probability_sum,
+        "angular_momentum_residual_bias_probability_delta": (
+            angular_momentum_residual_bias_biased_probability_sum
+            - angular_momentum_residual_bias_base_probability_sum
+        ),
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
         "max_payload_fraction": max_payload_fraction,

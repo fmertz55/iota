@@ -34,6 +34,10 @@ COUNT_KEYS = {
     "angular_momentum_observed_turn_abs_sum",
     "angular_momentum_secondary_bias_sources",
     "angular_momentum_secondary_bias_selected_candidates",
+    "angular_momentum_residual_bias_eligible_candidates",
+    "angular_momentum_residual_bias_base_probability_sum",
+    "angular_momentum_residual_bias_biased_probability_sum",
+    "angular_momentum_residual_bias_probability_delta",
 }
 
 MASK_PREFIXES = (
@@ -106,6 +110,10 @@ FIELDNAMES = [
     "angular_momentum_observed_turn_abs_sum",
     "angular_momentum_secondary_bias_sources",
     "angular_momentum_secondary_bias_selected_candidates",
+    "angular_momentum_residual_bias_eligible_candidates",
+    "angular_momentum_residual_bias_base_probability_sum",
+    "angular_momentum_residual_bias_biased_probability_sum",
+    "angular_momentum_residual_bias_probability_delta",
     "angular_momentum_nonzero_cells",
     "angular_momentum_mean_abs_active",
     "angular_momentum_mean_signed_active",
@@ -122,6 +130,10 @@ FIELDNAMES = [
     "angular_momentum_biased_rotation_events_per_tick",
     "angular_momentum_secondary_bias_sources_per_tick",
     "angular_momentum_secondary_bias_selected_candidates_per_tick",
+    "angular_momentum_residual_bias_eligible_candidates_per_tick",
+    "angular_momentum_residual_bias_base_probability_sum_per_tick",
+    "angular_momentum_residual_bias_biased_probability_sum_per_tick",
+    "angular_momentum_residual_bias_probability_delta_per_tick",
     *[
         f"{prefix}_{suffix}"
         for prefix in MASK_PREFIXES
@@ -421,6 +433,18 @@ def turnover_row(
         "angular_momentum_secondary_bias_selected_candidates": float(
             metric.get("angular_momentum_secondary_bias_selected_candidates", 0.0)
         ),
+        "angular_momentum_residual_bias_eligible_candidates": float(
+            metric.get("angular_momentum_residual_bias_eligible_candidates", 0.0)
+        ),
+        "angular_momentum_residual_bias_base_probability_sum": float(
+            metric.get("angular_momentum_residual_bias_base_probability_sum", 0.0)
+        ),
+        "angular_momentum_residual_bias_biased_probability_sum": float(
+            metric.get("angular_momentum_residual_bias_biased_probability_sum", 0.0)
+        ),
+        "angular_momentum_residual_bias_probability_delta": float(
+            metric.get("angular_momentum_residual_bias_probability_delta", 0.0)
+        ),
         "angular_momentum_nonzero_cells": float(metric.get("angular_momentum_nonzero_cells", 0.0)),
         "angular_momentum_mean_abs_active": float(metric.get("angular_momentum_mean_abs_active", 0.0)),
         "angular_momentum_mean_signed_active": float(
@@ -454,6 +478,22 @@ def turnover_row(
     )
     row["angular_momentum_secondary_bias_selected_candidates_per_tick"] = fraction(
         row["angular_momentum_secondary_bias_selected_candidates"],
+        window,
+    )
+    row["angular_momentum_residual_bias_eligible_candidates_per_tick"] = fraction(
+        row["angular_momentum_residual_bias_eligible_candidates"],
+        window,
+    )
+    row["angular_momentum_residual_bias_base_probability_sum_per_tick"] = fraction(
+        row["angular_momentum_residual_bias_base_probability_sum"],
+        window,
+    )
+    row["angular_momentum_residual_bias_biased_probability_sum_per_tick"] = fraction(
+        row["angular_momentum_residual_bias_biased_probability_sum"],
+        window,
+    )
+    row["angular_momentum_residual_bias_probability_delta_per_tick"] = fraction(
+        row["angular_momentum_residual_bias_probability_delta"],
         window,
     )
 

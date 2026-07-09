@@ -4344,3 +4344,318 @@ That asks whether angular memory can change which depleted boundary sites re-ent
 - `output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
 - `output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
 - `output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
+
+## Finding 042: Fixed-Mean Residual Recruitment Restores Turnover but Not Morphogenesis
+
+Findings 040 and 041 showed that angular momentum should not be coupled to secondary candidate ordering. Finding 042 moves the coupling to the stranded-site re-entry gate:
+
+```text
+fixed-mean angular-momentum-biased residual recruitment
+```
+
+The physics-facing interpretation is:
+
+```text
+angular-momentum-coupled interfacial nucleation
+```
+
+The design principle is explicit symmetry breaking at fixed mean activation. Angular momentum is not added as energy. It redistributes residual re-entry probability among eligible active/depleted interface candidates while preserving the same expected residual participation rate.
+
+Tested knob:
+
+```yaml
+angular_momentum_residual_bias_enabled: true
+angular_momentum_residual_bias_strength: 1.0
+angular_momentum_residual_bias_gate: depleted_interface
+angular_momentum_residual_bias_mean_preserving: true
+angular_momentum_residual_bias_preserve_behavior: true
+```
+
+The v0.3.4 config starts from the v0.3.1 angular-memory baseline. It does not enable global or event-gated secondary candidate ordering bias.
+
+### Mechanism
+
+For each active source's selected depleted-interface residual candidates, the baseline residual participation probability remains:
+
+```text
+base_event_probability = transfer_probability * residual_participation_probability
+```
+
+The source angular momentum creates a signed local multiplier from alignment between the candidate step and the source's `L`-biased exchange direction. The multipliers are renormalized by the probability-weighted mean across that source's eligible residual candidates:
+
+```text
+weighted mean biased probability = weighted mean base probability
+```
+
+This preserves expected residual recruitment under the actual local candidate influences.
+
+### Fixed-Mean Audit
+
+A full 2048-tick front-turnover audit confirms exact expected-probability preservation to floating precision:
+
+| Quantity | Value |
+|---|---:|
+| Base residual probability sum | `3740.364285714283` |
+| Biased residual probability sum | `3740.364285714283` |
+| Probability delta | `0.000000000000e+00` |
+| Mean residual participations/tick | `1.786133` |
+| Mean active-interface turnover | `0.056318` |
+
+The law therefore changes where residual participation happens, not the expected amount.
+
+### Openness Gate
+
+The boundedness/ledger gate passed:
+
+```text
+bounded_nonrunaway_count = 8 at both checkpoints
+ledger_exact_count = 8 at both checkpoints
+runaway_count = 0 at both checkpoints
+```
+
+The late-window interface turnover recovered relative to candidate-ordering bias:
+
+| Checkpoint | Late rotations/tick | Late active-interface turnover |
+|---:|---:|---:|
+| `1536` | `1.599826` | `0.033518` |
+| `2048` | `1.147569` | `0.024748` |
+
+### Lineage Result
+
+Compared with v0.3.2/v0.3.3, v0.3.4 restores rotation rate, transition entropy, and phase-4 interface turnover close to v0.3.1 levels. It no longer over-partitions every phase into singleton directional families.
+
+| Variant | Checkpoint | Combined families | Adjacent distance | Phase-4 rotations/tick | Phase-4 transition entropy | Phase-4 interface turnover |
+|---|---:|---:|---:|---:|---:|---:|
+| v0.3.1 `L` | `1536` | `20` | `0.698204` | `1.090820` | `0.510703` | `0.025388` |
+| v0.3.1 `L` | `2048` | `29` | `0.727426` | `0.933594` | `0.327589` | `0.020332` |
+| v0.3.2 global ordering | `1536` | `32` | `0.786545` | `0.617676` | `0.126328` | `0.012663` |
+| v0.3.2 global ordering | `2048` | `31` | `0.862250` | `0.363770` | `0.043633` | `0.007599` |
+| v0.3.3 event-gated ordering | `1536` | `28` | `0.897186` | `0.334473` | `0.028008` | `0.007480` |
+| v0.3.3 event-gated ordering | `2048` | `29` | `0.924075` | `0.313965` | `0.015625` | `0.006402` |
+| v0.3.4 fixed-mean recruitment | `1536` | `22` | `0.667037` | `1.142578` | `0.912894` | `0.024840` |
+| v0.3.4 fixed-mean recruitment | `2048` | `29` | `0.697571` | `0.924805` | `0.487094` | `0.021181` |
+
+This is the important positive mechanism result: putting `L` at the residual recruitment gate avoids the candidate-ordering canalization failure.
+
+### Morphology Result
+
+The morphology result is still not a pass. v0.3.4 recovers much of v0.3.1's active/interface spatial divergence and beats v0.3.2/v0.3.3 by a wide margin, but it does not exceed the v0.3.1 angular-memory baseline or the signed/no-memory control.
+
+| Variant | Mean transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Component-count delta | Active/depleted adjacency |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| signed/no-memory control | `0.598069` | `0.051434` | `0.091308` | `0.080074` | `0.026525` | `0.000000` | `0.977735` |
+| v0.3.1 `L` | `0.707355` | `0.048056` | `0.077674` | `0.071024` | `0.024380` | `0.031250` | `0.984773` |
+| v0.3.2 global ordering | `0.826521` | `0.027289` | `0.040029` | `0.033884` | `0.010555` | `0.062500` | `0.996127` |
+| v0.3.3 event-gated ordering | `0.903949` | `0.022345` | `0.029163` | `0.027105` | `0.009316` | `0.053571` | `0.997477` |
+| v0.3.4 fixed-mean recruitment | `0.671077` | `0.043893` | `0.074544` | `0.063453` | `0.019984` | `0.000000` | `0.985688` |
+
+### Interpretation
+
+The precise claim:
+
+```text
+Fixed-mean angular-momentum-biased residual recruitment is the right coupling site
+mechanistically: it preserves expected activation and restores interface turnover,
+rotation entropy, and spatial divergence relative to candidate-ordering bias.
+However, at strength 1.0 it does not yet create morphology beyond the v0.3.1
+angular-memory baseline or signed/no-memory control.
+```
+
+This is not an open-ended morphology result, but it is an informative narrowing:
+
+```text
+Candidate ordering is wrong because it canalizes the scaffold.
+Residual recruitment is better because it breaks interface symmetry without adding fuel.
+The remaining failure is effect size or score geometry, not coupling site.
+```
+
+The next principled test is a small strength/score sweep at fixed mean activation:
+
+```text
+v0.3.4b:
+  strength in {0.5, 1.0, 2.0}
+  score modes:
+    source_L_alignment
+    target_L_alignment
+    source_target_L_contrast
+
+Acceptance:
+  residual probability sum remains fixed
+  phase-4 turnover does not collapse
+  active/interface spatial divergence exceeds v0.3.1 and signed/no-memory control
+```
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/front_turnover_diagnostic.py`
+- `output/findings/configs/v034_fixed_mean_residual_recruitment_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0.yaml`
+- `output/findings/finding_042_v034_fixed_mean_residual_recruitment_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0_turnover.csv`
+- `output/findings/finding_042_v034_fixed_mean_residual_recruitment_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0_turnover_summary.json`
+- `output/findings/finding_042_v034_fixed_mean_residual_recruitment_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0_summary.csv`
+- `output/findings/finding_042_v034_fixed_mean_residual_recruitment_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0_summary.csv`
+- `output/findings/finding_042_v034_fixed_mean_residual_recruitment_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0_summary.csv`
+
+## Finding 043: Source-Target Contrast Breaks Interface Symmetry at Fixed Mean
+
+Finding 042 established that residual recruitment is the correct coupling site, but the initial `source_L_alignment` score at strength `1.0` did not exceed the v0.3.1/control morphology gate. Finding 043 runs the planned fixed-mean score/strength sweep:
+
+```text
+score_modes = source_L_alignment, target_L_alignment, source_target_L_contrast
+strengths = 0.5, 1.0, 2.0
+```
+
+All variants preserve the same residual-recruitment design:
+
+```yaml
+angular_momentum_residual_bias_enabled: true
+angular_momentum_residual_bias_gate: depleted_interface
+angular_momentum_residual_bias_mean_preserving: true
+```
+
+The new score modes are:
+
+```text
+source_L_alignment:
+  candidate aligns with the source cell's L-biased exchange direction
+
+target_L_alignment:
+  candidate aligns with the depleted target cell's retained L-biased direction
+
+source_target_L_contrast:
+  candidate is biased by the signed source-minus-target L contrast along the source exchange direction
+```
+
+### Protocol
+
+For each of 9 variants:
+
+```text
+checkpoint_ticks = 1536, 2048
+horizon = 1024 for lineage/morphology
+phase_length = 256
+phase_count = 4
+samples = 8
+connectivity = cube26
+cluster_distance_threshold = 0.55
+```
+
+The best variant by interface-union spatial divergence was:
+
+```text
+source_target_L_contrast, strength = 2.0
+```
+
+### Fixed-Mean Audit
+
+A full 2048-tick front-turnover audit for the winning variant confirms expected probability preservation:
+
+| Quantity | Value |
+|---|---:|
+| Base residual probability sum | `3920.499999999997` |
+| Biased residual probability sum | `3920.499999999996` |
+| Probability delta | `-4.547473508865e-13` |
+| Mean residual participations/tick | `1.870605` |
+| Mean active-interface turnover | `0.060657` |
+| Mean interface-union turnover | `0.021693` |
+
+This is still fixed-mean activation. The result comes from redistributing where re-entry happens.
+
+### Sweep Result
+
+Aggregate morphology distances across both checkpoints and all four phases:
+
+| Rank | Score mode | Strength | Transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Active/depleted adjacency |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 | `source_target_L_contrast` | `2.0` | `0.598748` | `0.047655` | `0.084874` | `0.079331` | `0.027994` | `0.973621` |
+| 2 | `source_target_L_contrast` | `0.5` | `0.637177` | `0.053477` | `0.087661` | `0.080064` | `0.027734` | `0.980900` |
+| 3 | `target_L_alignment` | `1.0` | `0.647973` | `0.049770` | `0.082746` | `0.074972` | `0.025598` | `0.979401` |
+| 4 | `source_L_alignment` | `0.5` | `0.660213` | `0.050091` | `0.082474` | `0.074149` | `0.025107` | `0.982902` |
+| 5 | `target_L_alignment` | `2.0` | `0.661155` | `0.048087` | `0.081076` | `0.071749` | `0.023764` | `0.983891` |
+| 6 | `source_target_L_contrast` | `1.0` | `0.690963` | `0.043303` | `0.072000` | `0.066169` | `0.022738` | `0.982604` |
+| 7 | `source_L_alignment` | `2.0` | `0.696848` | `0.045226` | `0.074888` | `0.063883` | `0.020164` | `0.987482` |
+| 8 | `source_L_alignment` | `1.0` | `0.671077` | `0.043893` | `0.074544` | `0.063453` | `0.019984` | `0.985688` |
+| 9 | `target_L_alignment` | `0.5` | `0.723361` | `0.041423` | `0.067850` | `0.059627` | `0.019429` | `0.988057` |
+
+The contrast score at strength `2.0` is the first tested law to beat both v0.3.1 and the signed/no-memory control on interface-union divergence.
+
+Comparison to baselines:
+
+| Variant | Transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Active/depleted adjacency |
+|---|---:|---:|---:|---:|---:|---:|
+| signed/no-memory control | `0.598069` | `0.051434` | `0.091308` | `0.080074` | `0.026525` | `0.977735` |
+| v0.3.1 `L` | `0.707355` | `0.048056` | `0.077674` | `0.071024` | `0.024380` | `0.984773` |
+| v0.3.4b contrast `2.0` | `0.598748` | `0.047655` | `0.084874` | `0.079331` | `0.027994` | `0.973621` |
+
+This is not a broad morphology win. Active-set distance is slightly below v0.3.1 and below the signed/no-memory control. Active-interface distance is above v0.3.1 and essentially tied with the control. Depleted and interface-union distances improve over v0.3.1, and interface-union distance improves over both baselines.
+
+### Lineage and Turnover
+
+The winning variant remains bounded and ledger-exact at both checkpoints:
+
+```text
+bounded_nonrunaway_count = 8
+ledger_exact_count = 8
+```
+
+Lineage/turnover for the winner:
+
+| Checkpoint | Combined families | Adjacent distance | Phase-4 rotations/tick | Phase-4 transition entropy | Phase-4 interface turnover |
+|---:|---:|---:|---:|---:|---:|
+| `1536` | `4` | `0.568057` | `1.349609` | `1.406804` | `0.030567` |
+| `2048` | `6` | `0.617701` | `1.254395` | `1.298922` | `0.029274` |
+
+This is qualitatively different from v0.3.2/v0.3.3. The law no longer maximizes directional family count. Instead, it preserves rich transition entropy and high interface turnover while increasing interface-union spatial divergence.
+
+### Interpretation
+
+The precise claim:
+
+```text
+Source-target L contrast at fixed mean residual participation produces the first
+bounded, ledger-exact interface-symmetry-breaking result: it improves interface-union
+spatial divergence beyond both the angular-memory and signed/no-memory baselines
+without adding expected activation.
+```
+
+The important distinction:
+
+```text
+Candidate ordering changed the transition alphabet but froze the floor.
+Fixed-mean source-target residual contrast changes which floor tiles re-enter.
+```
+
+This is still not component-level open-ended morphology:
+
+```text
+component-count delta remains 0.0
+largest-component delta remains 0.0
+active-set distance does not exceed both baselines
+```
+
+But it is the first clean evidence that retained angular memory can do boundary work under a fixed activation budget.
+
+### Next Gate
+
+The next step should validate robustness before adding any new mechanism:
+
+```text
+v0.3.5 seed robustness:
+  law = fixed-mean source_target_L_contrast
+  strength = 2.0
+  seeds = multiple seed56-like protected-front seeds
+  acceptance = interface-union distance above v0.3.1/control on most seeds
+```
+
+Only after seed robustness should the project test component-level mechanisms.
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/front_turnover_diagnostic.py`
+- `output/findings/configs/v034b_fixed_mean_residual_recruitment_*`
+- `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_*_rotation_aware_openness_summary.csv`
+- `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_*_lineage_persistence_summary.csv`
+- `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_*_lineage_conditioned_morphology_summary.csv`
+- `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_turnover.csv`
+- `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_turnover_summary.json`
