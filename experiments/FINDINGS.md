@@ -3457,3 +3457,157 @@ That asks whether the new directional recursion creates multiple structured futu
 - `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_structures.csv`
 - `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3.json`
 - `output/findings/finding_034_v030_history_rotation_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3.npz`
+
+## Finding 035: Rotation-Aware Openness Detects Bounded Directional Plurality
+
+### Status
+
+Completed for the v0.3 history-rotation candidate, with the v0.2.1 residual-participation candidate as control.
+
+### Protocol
+
+Rotation-aware openness protocol:
+
+```text
+checkpoint_ticks = 0, 512, 1024, 1536, 2048
+horizon = 256
+samples = 8
+connectivity = cube26
+rotation_sample_every = 16
+late_window = 128
+stop_active_iotas = 5000
+workers = 8
+```
+
+The classifier records the old fate label, but classifies rotation-aware futures separately using:
+
+- late rotation events per tick;
+- late persistent-interface `V` changed fraction;
+- late persistent-interface changed-transition entropy;
+- late persistent-interface candidate-neighborhood turnover;
+- late active-interface turnover;
+- late active-interface candidate-target turnover;
+- vector distribution distance from checkpoint;
+- new active vector-state count;
+- ledger exactness and non-runaway status.
+
+Rotation-aware classes:
+
+```text
+rotation_dead
+canalized_rotation
+directional_drift
+rotational_branching
+rotational_ignition
+rotational_collapse
+ledger_violation
+```
+
+### v0.3 Result
+
+All v0.3 continuations were bounded, ledger-exact, and non-runaway. The old fate classifier remained closed:
+
+```text
+protected:8 at every checkpoint
+```
+
+Rotation-aware result:
+
+| Checkpoint | Bounded | Rotation classes | Class openness | Signature openness | Late rotations/tick | Interface `V` change | Transition entropy | Interface candidate turnover |
+|---:|---:|---|---:|---:|---:|---:|---:|---:|
+| `0` | `8/8` | `rotational_branching:8` | `0.000000` | `0.181188` | `4.421875` | `0.017565` | `3.659313` | `0.003876` |
+| `512` | `8/8` | `rotational_branching:8` | `0.000000` | `0.750000` | `3.019965` | `0.010477` | `2.978736` | `0.002254` |
+| `1024` | `8/8` | `rotational_branching:8` | `0.000000` | `0.916667` | `2.184028` | `0.006687` | `2.425145` | `0.001394` |
+| `1536` | `8/8` | `directional_drift:5; rotational_branching:3` | `0.318145` | `0.916667` | `1.676215` | `0.004660` | `1.959884` | `0.001088` |
+| `2048` | `8/8` | `directional_drift:7; rotational_branching:1` | `0.181188` | `0.801880` | `1.676215` | `0.004556` | `1.868088` | `0.000934` |
+
+The mature checkpoints are the key result. At ticks `1536` and `2048`, independent continuations split between `directional_drift` and `rotational_branching` while every sample remains:
+
+```text
+ledger-exact
+bounded below the 5000 active-cell stop
+old-classifier protected
+structurally active/depleted
+```
+
+This is the first positive openness result under a classifier that measures the new mechanism rather than only the old terminal fate.
+
+### v0.2.1 Control
+
+The v0.2.1 residual-participation control remains rotation-dead in the mature regime:
+
+| Checkpoint | Bounded | Rotation classes | Class openness | Late rotations/tick | Interface `V` change | Transition entropy | Interface candidate turnover |
+|---:|---:|---|---:|---:|---:|---:|---:|
+| `1024` | `8/8` | `rotation_dead:8` | `0.000000` | `0.000000` | `0.000000` | `0.000000` | `0.000166` |
+| `1536` | `8/8` | `rotation_dead:8` | `0.000000` | `0.000000` | `0.000000` | `0.000000` | `0.000160` |
+| `2048` | `8/8` | `rotation_dead:8` | `0.000000` | `0.000000` | `0.000000` | `0.000000` | `0.000152` |
+
+The control has nonzero rotation-signature entropy because residual turnover still creates small variations in non-rotational bins. That is the caveat:
+
+```text
+signature openness alone is not sufficient.
+```
+
+The mechanistic discriminator is the combination of nonzero late rotation events, nonzero persistent-interface `V` transition entropy, and nonzero candidate-neighborhood turnover. v0.3 has all three; mature v0.2.1 has none of the first two and only negligible candidate-neighborhood change.
+
+### Interpretation
+
+Finding 035 changes the claim again:
+
+```text
+v0.3 does not yet establish open-ended complexity, but it does establish bounded rotation-aware future plurality.
+```
+
+The old outcome alphabet still says every v0.3 future is `protected`. That is true but incomplete. Under the rotation-aware alphabet, futures from mature checkpoints branch into distinct directional regimes while remaining ledger-exact and non-runaway.
+
+The strongest disciplined formulation is:
+
+```text
+History-coupled rotation creates bounded directional plurality: independent continuations from the same mature scaffold remain old-classifier closed, but diverge into distinct rotation-aware futures with persistent interface vector change and nonzero transition entropy.
+```
+
+This is not a claim of open-ended complexity because the horizon is still short, the sample count is small, and the futures remain within a bounded active/depleted scaffold. It is a claim that the future is no longer directionally singular under the mechanism-aware classifier.
+
+### Next Test
+
+The next gate should not be a broad parameter sweep. It should be a targeted robustness check:
+
+```text
+rotation-aware openness sensitivity over received_rotation_probability and received_rotation_max_offset
+```
+
+Minimal grid:
+
+```text
+received_rotation_probability = 0.25, 0.5, 1.0
+received_rotation_max_offset = 1, 2, 3
+checkpoint_ticks = 1024, 1536, 2048
+horizon = 256
+samples = 8
+```
+
+Acceptance criterion:
+
+```text
+nonzero rotation-aware class or mechanism-signature openness among bounded, ledger-exact, non-runaway futures, with mature v0.2.1 remaining rotation-dead under the same classifier.
+```
+
+### Artifacts
+
+- `src/rotation_aware_openness.py`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_raw.csv`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.csv`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_summary.json`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_states/checkpoint_tick_000000.npz`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_states/checkpoint_tick_000512.npz`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_states/checkpoint_tick_001024.npz`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_states/checkpoint_tick_001536.npz`
+- `output/findings/finding_035_v030_history_rotation_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_states/checkpoint_tick_002048.npz`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_raw.csv`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.csv`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_000000.npz`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_000512.npz`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_001024.npz`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_001536.npz`
+- `output/findings/finding_035_v021_residual_participation_rotation_aware_openness_control_seed56_ka5_vac2_val8_n16_rpp0p02_states/checkpoint_tick_002048.npz`
