@@ -104,6 +104,115 @@ def candidate_neighbor_steps(mode: str) -> np.ndarray:
     raise ValueError(f"Unknown neighbor mode: {mode}")
 
 
+def active_neighbor_coords(
+    world: World,
+    target: tuple[int, int, int],
+    connectivity: str,
+) -> list[tuple[int, int, int]]:
+    size = world.size
+    tx, ty, tz = target
+    coords: list[tuple[int, int, int]] = []
+    for raw_delta in candidate_neighbor_steps(connectivity):
+        dx, dy, dz = (int(value) for value in raw_delta)
+        nx, ny, nz = tx + dx, ty + dy, tz + dz
+        if world.wrap:
+            nx %= size
+            ny %= size
+            nz %= size
+        elif not (0 <= nx < size and 0 <= ny < size and 0 <= nz < size):
+            continue
+        if bool(world.active[nx, ny, nz]):
+            coords.append((nx, ny, nz))
+    return coords
+
+
+def local_component_count(
+    coords: list[tuple[int, int, int]],
+    connectivity: str,
+    size: int,
+    wrap: bool,
+) -> int:
+    remaining = set(coords)
+    if not remaining:
+        return 0
+    neighbors = tuple(
+        (int(dx), int(dy), int(dz))
+        for dx, dy, dz in candidate_neighbor_steps(connectivity)
+    )
+    count = 0
+    while remaining:
+        count += 1
+        stack = [remaining.pop()]
+        while stack:
+            x, y, z = stack.pop()
+            for dx, dy, dz in neighbors:
+                nx, ny, nz = x + dx, y + dy, z + dz
+                if wrap:
+                    nx %= size
+                    ny %= size
+                    nz %= size
+                elif not (0 <= nx < size and 0 <= ny < size and 0 <= nz < size):
+                    continue
+                neighbor = (nx, ny, nz)
+                if neighbor in remaining:
+                    remaining.remove(neighbor)
+                    stack.append(neighbor)
+    return count
+
+
+def classify_residual_target_geometry(
+    world: World,
+    target: tuple[int, int, int],
+) -> dict[str, Any]:
+    face6_coords = active_neighbor_coords(world, target, "face6")
+    face18_coords = active_neighbor_coords(world, target, "face18")
+    cube26_coords = active_neighbor_coords(world, target, "cube26")
+    face6_count = len(face6_coords)
+    face18_count = len(face18_coords)
+    cube26_count = len(cube26_coords)
+    face6_components = local_component_count(face6_coords, "face6", world.size, world.wrap)
+    cube26_components = local_component_count(cube26_coords, "cube26", world.size, world.wrap)
+
+    is_component_bridge_cube26 = cube26_components >= 2
+    is_local_bridge_face6 = face6_components >= 2
+    is_tip_seed = cube26_count <= 2
+    is_flat_front = face6_count == 1 and cube26_count >= 9
+    is_concave_fill = face6_count >= 4 or cube26_count >= 18
+
+    if is_component_bridge_cube26:
+        class_name = "component_bridge_cube26"
+    elif is_local_bridge_face6:
+        class_name = "local_bridge_face6"
+    elif is_concave_fill:
+        class_name = "concave_fill"
+    elif is_tip_seed:
+        class_name = "tip_seed"
+    elif face6_count == 0:
+        class_name = "diagonal_shear"
+    elif is_flat_front:
+        class_name = "flat_front"
+    elif face6_count == 1:
+        class_name = "edge_extension"
+    elif face6_count in {2, 3}:
+        class_name = "ridge_or_corner_fill"
+    else:
+        class_name = "interface_fill"
+
+    return {
+        "class": class_name,
+        "face6_neighbors": face6_count,
+        "face18_neighbors": face18_count,
+        "cube26_neighbors": cube26_count,
+        "face6_components": face6_components,
+        "cube26_components": cube26_components,
+        "is_component_bridge_cube26": is_component_bridge_cube26,
+        "is_local_bridge_face6": is_local_bridge_face6,
+        "is_tip_seed": is_tip_seed,
+        "is_flat_front": is_flat_front,
+        "is_concave_fill": is_concave_fill,
+    }
+
+
 def make_vector_states(cfg: Dict[str, Any], rng: np.random.Generator) -> tuple[np.ndarray, tuple[str, ...]]:
     mode = cfg["vectors"].get("mode", "cube26")
     count = int(cfg["vectors"].get("vector_count", 64))
@@ -509,6 +618,7 @@ def angular_momentum_residual_score(
     angular_momentum_cap: float,
     preserve_behavior: bool,
     score_mode: str,
+    geometry_weights: dict[str, float] | None = None,
 ) -> float:
     if angular_momentum_cap <= 0.0:
         return 0.0
@@ -562,6 +672,20 @@ def angular_momentum_residual_score(
             (primary_dx, primary_dy, primary_dz),
             candidate["step"],
         )
+    if score_mode == "source_target_L_contrast_component_bridge":
+        contrast = clamp_signed(
+            (source_l - target_l) / angular_momentum_cap,
+            1.0,
+        )
+        primary_dx, primary_dy, primary_dz, _ = vector_step(world, v_idx, a, r, p)
+        contrast_score = float(contrast) * vector_alignment(
+            (primary_dx, primary_dy, primary_dz),
+            candidate["step"],
+        )
+        weights = geometry_weights or {}
+        geometry = classify_residual_target_geometry(world, tuple(int(value) for value in candidate["target"]))
+        geometry_score = float(weights.get(str(geometry["class"]), 0.0))
+        return clamp_signed(contrast_score + geometry_score, 1.0)
     raise ValueError(f"Unknown angular_momentum_residual_bias_score_mode: {score_mode}")
 
 
@@ -586,6 +710,7 @@ def apply_angular_momentum_residual_bias(
     preserve_behavior: bool,
     mean_preserving: bool,
     score_mode: str,
+    geometry_weights: dict[str, float] | None = None,
 ) -> dict[str, float]:
     entries: list[tuple[dict[str, Any], float, float]] = []
     for candidate in candidates:
@@ -617,6 +742,7 @@ def apply_angular_momentum_residual_bias(
             angular_momentum_cap,
             preserve_behavior,
             score_mode,
+            geometry_weights,
         )
         raw_multiplier = max(0.0, 1.0 + float(strength) * score)
         entries.append((candidate, base_probability, raw_multiplier))
@@ -868,11 +994,40 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "source_L_alignment",
         "target_L_alignment",
         "source_target_L_contrast",
+        "source_target_L_contrast_component_bridge",
     }:
         raise ValueError(
             "Unknown angular_momentum_residual_bias_score_mode: "
             f"{angular_momentum_residual_bias_score_mode}"
         )
+    raw_residual_geometry_weights = cfg["constants"].get(
+        "angular_momentum_residual_geometry_weights",
+        {},
+    )
+    if raw_residual_geometry_weights is None:
+        raw_residual_geometry_weights = {}
+    if not isinstance(raw_residual_geometry_weights, dict):
+        raise ValueError("angular_momentum_residual_geometry_weights must be a mapping")
+    residual_geometry_classes = (
+        "component_bridge_cube26",
+        "local_bridge_face6",
+        "flat_front",
+        "edge_extension",
+        "tip_seed",
+        "diagonal_shear",
+        "concave_fill",
+        "ridge_or_corner_fill",
+        "interface_fill",
+    )
+    angular_momentum_residual_geometry_weights = {
+        class_name: float(
+            cfg["constants"].get(
+                f"angular_momentum_residual_geometry_{class_name}_weight",
+                raw_residual_geometry_weights.get(class_name, 0.0),
+            )
+        )
+        for class_name in residual_geometry_classes
+    }
     angular_momentum_residual_bias_enabled = (
         angular_momentum_enabled
         and angular_momentum_residual_bias_enabled
@@ -1025,6 +1180,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                 angular_momentum_residual_bias_preserve_behavior,
                 angular_momentum_residual_bias_mean_preserving,
                 angular_momentum_residual_bias_score_mode,
+                angular_momentum_residual_geometry_weights,
             )
             angular_momentum_residual_bias_eligible_candidates += residual_bias_metric[
                 "eligible_candidates"

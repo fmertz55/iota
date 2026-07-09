@@ -4816,3 +4816,147 @@ fixed residual probability sum within floating precision
 - `output/findings/finding_044_v035_*_lineage_conditioned_morphology_summary.csv`
 - `output/findings/finding_044_v035_contrast2_seed*_front_turnover_turnover.csv`
 - `output/findings/finding_044_v035_contrast2_seed*_front_turnover_turnover_summary.json`
+
+## Finding 045: Residual Geometry Audit Identifies the Component-Level Lever
+
+Finding 044 established that v0.3.5 source-target contrast is seed-robust at the interface level, but not yet component-level. Finding 045 audits the residual-recruitment opportunities directly before adding a v0.3.6 mechanism.
+
+The audit classifies each eligible depleted re-entry candidate by local active-neighbor geometry:
+
+```text
+component_bridge_cube26: activating the site locally connects multiple cube26 active-neighbor groups
+local_bridge_face6: activating the site locally connects multiple face6 active-neighbor groups
+flat_front: face-adjacent surface continuation with high cube26 support
+edge_extension: face-adjacent lower-support extension
+tip_seed: very low-support protrusion seed
+diagonal_shear: diagonal-only active support
+concave_fill: high-support fill-in site
+```
+
+The diagnostic preserves the simulation RNG stream by restoring RNG state after candidate enumeration, so the audit does not perturb the run it measures.
+
+### Protocol
+
+Audit target:
+
+```text
+baseline: v0.3.5 contrast 2.0
+seeds: 42, 43, 44, 45, 46, 56
+ticks: 2048
+sample interval: 16
+residual score mode: source_target_L_contrast
+fixed mean: yes
+```
+
+### Geometry Opportunity
+
+The current residual-recruitment opportunity distribution is not sparse. Across the six v0.3.5 contrast seeds:
+
+```text
+mean eligible candidates/tick:       99.118863
+mean unique targets/tick:            69.509044
+mean cube26 bridge targets/tick:      6.892765
+mean face6 bridge targets/tick:      52.077519
+mean flat-front targets/tick:         7.666667
+mean tip-seed targets/tick:           0.012920
+```
+
+There are enough local bridge/neck opportunities to test component-level boundary work. The issue is not absence of candidate sites.
+
+### Current Contrast Selection by Geometry
+
+Class summary across all sampled ticks and seeds:
+
+| Class | Base share | Biased share | Selection lift | Eligible candidates | Unique target observations | Mean score |
+|---|---:|---:|---:|---:|---:|---:|
+| `local_bridge_face6` | `0.808766` | `0.819628` | `1.013430` | `62047` | `40308` | `-0.005346` |
+| `component_bridge_cube26` | `0.083627` | `0.078142` | `0.934422` | `6399` | `5335` | `-0.043113` |
+| `flat_front` | `0.078673` | `0.075800` | `0.963477` | `6038` | `5934` | `-0.033748` |
+| `edge_extension` | `0.028415` | `0.025844` | `0.909515` | `2166` | `2156` | `-0.055162` |
+| `diagonal_shear` | `0.000369` | `0.000462` | `1.252205` | `56` | `56` | `0.180237` |
+| `tip_seed` | `0.000132` | `0.000108` | `0.818888` | `10` | `10` | `-0.100840` |
+| `concave_fill` | `0.000020` | `0.000017` | `0.878570` | `2` | `1` | `-0.131258` |
+
+The key result is narrow but actionable:
+
+```text
+v0.3.5 slightly amplifies face6-local bridge recruitment, but suppresses the rarer
+cube26 component-bridge class that is the most plausible local route to component
+morphology.
+```
+
+The component bridge class is large enough to matter:
+
+```text
+component_bridge_cube26 base probability share:   8.362656%
+component_bridge_cube26 biased probability share: 7.814247%
+component_bridge_cube26 selection lift:           0.934422
+component_bridge_cube26 target observations:      5335
+```
+
+This explains the Finding 044 caveat: v0.3.5 moves the interface, but its current contrast law does not preferentially select the sites most likely to change cube26 component morphology.
+
+### Fixed-Mean Check
+
+The audit independently reproduces fixed-mean conservation:
+
+```text
+total base probability sum:   1085.1985714285693
+total biased probability sum: 1085.1985714285709
+total probability delta:      1.859735e-12
+max row probability delta:    1.243450e-14
+final ledger error:           0.0 for all seeds
+```
+
+### Interpretation
+
+The precise claim:
+
+```text
+The next component-level lever is not more angular momentum or more residual
+participation. It is geometry-conditioned residual re-entry: keep the v0.3.5
+source-target contrast law, but add a fixed-mean local bridge/neck preference that
+specifically stops suppressing cube26 component-bridge candidates.
+```
+
+This is still an audit, not a mechanism result. It identifies where v0.3.6 should intervene.
+
+### Next Gate
+
+v0.3.6 should test a fixed-mean component-bridge residual score:
+
+```text
+base score:
+  source_target_L_contrast
+
+geometry score:
+  positive for component_bridge_cube26
+  optional secondary positive for local_bridge_face6
+  neutral or negative for flat_front / edge_extension churn
+
+normalization:
+  preserve the per-event residual recruitment probability sum
+```
+
+Pass criteria:
+
+```text
+interface-union distance remains above both baselines on most seeds
+active-set distance beats both baselines on a majority of seeds
+component-count, largest-component, or component-entropy deltas move above numerical dust
+bounded_nonrunaway_count = 8/8
+ledger_exact_count = 8/8
+fixed residual probability sum within floating precision
+```
+
+### Artifacts
+
+- `src/residual_recruitment_geometry_audit.py`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_classes.csv`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_class_summary.csv`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_ticks.csv`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_targets.csv`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_summary.json`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed_ensemble_class_summary.csv`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed_ensemble_seed_summary.csv`
+- `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed_ensemble_summary.json`
