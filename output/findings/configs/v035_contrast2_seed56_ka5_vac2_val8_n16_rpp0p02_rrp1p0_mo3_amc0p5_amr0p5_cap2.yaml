@@ -1,0 +1,87 @@
+simulation_version: iota-rig-v0.3.5-contrast2-seed-robustness
+experiment:
+  objective: v035_contrast2_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2
+lab:
+  database: data/iota_lab.db
+  experiments_dir: experiments
+artifacts:
+  keep_initial: true
+  keep_final: true
+  keep_every_n_snapshots: 4
+  delete_unregistered: false
+grid:
+  size: 64
+  wrap: true
+init:
+  seed: 56
+  active_iotas: 16
+  total_iotas: auto
+  initial_density: auto
+  mode: random
+  amplitude_range:
+  - 1
+  - 7
+  range_range:
+  - 7
+  - 7
+  payload_range:
+  - 0
+  - 7
+vectors:
+  mode: cube26
+  vector_count: 64
+  behavior_bands:
+    move:
+    - 0
+    - 25
+    reflect:
+    - 26
+    - 51
+    diffuse:
+    - 52
+    - 63
+constants:
+  amplitude_coupling: 5.0
+  range_coupling: 1.0
+  payload_takeover: 0.5
+  mutation_rate: 0.0
+  decay_mode: inverse_square
+  conservation: hard
+  valence: 8
+  bond_probability: 1.0
+  neighbor_mode: cube26
+  same_payload_coupling: 1.0
+  cross_payload_coupling: 1.0
+  deactivation: exhaustion
+  vacuum_amplitude: 2
+  residual_participation_probability: 0.02
+  residual_participation_secondary_only: true
+  received_rotation_probability: 1.0
+  received_rotation_max_offset: 3
+  received_rotation_preserve_behavior: true
+  received_rotation_residual_multiplier: 1.0
+  received_rotation_secondary_multiplier: 1.0
+  angular_momentum_enabled: true
+  angular_momentum_decay: 0.9
+  angular_momentum_coupling: 0.5
+  angular_momentum_retention: 0.5
+  angular_momentum_cap: 2.0
+  angular_momentum_residual_bias_enabled: true
+  angular_momentum_residual_bias_strength: 2.0
+  angular_momentum_residual_bias_gate: depleted_interface
+  angular_momentum_residual_bias_mean_preserving: true
+  angular_momentum_residual_bias_preserve_behavior: true
+  secondary_vector_kick_probability: 0.0
+  angular_momentum_residual_bias_score_mode: source_target_L_contrast
+run:
+  ticks: 2048
+  snapshot_every: 256
+  stop_active_iotas: null
+  stop_coherence_ratio: null
+  stop_coherence_min_active: 1000
+  output_dir: output_v02_candidates
+  metric_every: 256
+visualization:
+  max_points: 20000
+  slice_axis: z
+  slice_index: 32

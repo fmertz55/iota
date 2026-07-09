@@ -1,0 +1,67 @@
+{
+  "active_beats_both_count": 3,
+  "aggregate_by_variant": [
+    {
+      "active_depleted_adjacency": 0.9787450354745257,
+      "active_distance": 0.038006593979551105,
+      "active_interface_distance": 0.06179337740121094,
+      "component_count_abs_delta": 0.0,
+      "component_entropy_abs_delta": 5.494237946092527e-05,
+      "depleted_distance": 0.06512872367528552,
+      "interface_union_distance": 0.02192556419049462,
+      "largest_component_abs_delta": 0.0,
+      "phase4_active_interface_turnover": 0.02344637106261603,
+      "phase4_family_count": 5.666666666666667,
+      "safety_ok_count": 6,
+      "seed_count": 6,
+      "transition_distance": 0.6836198150599415,
+      "variant": "contrast2"
+    },
+    {
+      "active_depleted_adjacency": 0.9871645065918622,
+      "active_distance": 0.035978351070991864,
+      "active_interface_distance": 0.053058276676452513,
+      "component_count_abs_delta": 0.015625,
+      "component_entropy_abs_delta": 0.00014866151152325793,
+      "depleted_distance": 0.05827018186766972,
+      "interface_union_distance": 0.01788010749116483,
+      "largest_component_abs_delta": 0.015625,
+      "phase4_active_interface_turnover": 0.01825773500630628,
+      "phase4_family_count": 7.666666666666667,
+      "safety_ok_count": 6,
+      "seed_count": 6,
+      "transition_distance": 0.7480061402874693,
+      "variant": "v031_angular_memory"
+    },
+    {
+      "active_depleted_adjacency": 0.9858105266993984,
+      "active_distance": 0.03666857976367969,
+      "active_interface_distance": 0.05516041783178982,
+      "component_count_abs_delta": 0.0,
+      "component_entropy_abs_delta": 0.0,
+      "depleted_distance": 0.05955889772771156,
+      "interface_union_distance": 0.018949360672092987,
+      "largest_component_abs_delta": 0.0,
+      "phase4_active_interface_turnover": 0.018929698601368245,
+      "phase4_family_count": 6.666666666666667,
+      "safety_ok_count": 6,
+      "seed_count": 6,
+      "transition_distance": 0.7423977924667318,
+      "variant": "signed_control"
+    }
+  ],
+  "component_nonzero_seed_count": 1,
+  "contrast_safety_ok_count": 6,
+  "fixed_mean_ok_count": 6,
+  "interface_beats_both_count": 6,
+  "max_abs_fixed_mean_probability_delta": 3.9968028886505635e-15,
+  "max_abs_fixed_mean_probability_delta_sum": 2.6423307986078726e-14,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    56
+  ]
+}

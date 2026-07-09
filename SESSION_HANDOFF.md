@@ -39,11 +39,12 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+7624f30 Findings 042-043: fixed-mean residual recruitment
+5979f42 Finding 041: event-gated candidate bias
+360dec6 Created SESSION_HANDOFF.md
 18a8351 Findings 039/040: lineage-conditioned morphology and secondary-bias test
 bd6f71d Finding 038: vector-coupled angular momentum
 fa7872d Finding 037: four-phase lineage persistence
-7664344 Finding 035: rotation-aware openness
-da5e245 Finding 034: history-coupled received rotation
 ```
 
 ## Current Scientific Ladder
@@ -60,6 +61,7 @@ da5e245 Finding 034: history-coupled received rotation
 | Finding 041 | event-gated candidate bias further canalizes the interface |
 | Finding 042 | fixed-mean residual recruitment restores turnover but not morphology |
 | Finding 043 | source-target contrast breaks interface symmetry at fixed mean |
+| Finding 044 | source-target contrast is seed-robust at fixed mean |
 
 ## Core Interpretation
 
@@ -67,15 +69,13 @@ Current paper-safe claim:
 
 ```text
 Retained angular momentum coupled to the information-exchange vector creates bounded,
-ledger-exact, non-merging directional lineages. However, those lineages do not yet
-produce meaningful active/depleted morphology divergence. Candidate-ordering bias is
-now a tested negative lever: both global and event-gated versions increase directional
+ledger-exact, non-merging directional lineages. Candidate-ordering bias is now a
+tested negative lever: both global and event-gated versions increase directional
 separation while suppressing interface turnover and spatial divergence. Fixed-mean
-residual recruitment is the better coupling site: it restores turnover and spatial
-divergence relative to candidate ordering, without adding expected activation, but it
-does not yet beat v0.3.1 or the signed/no-memory control. A v0.3.4b score sweep found
-the first narrow fixed-mean interface-symmetry-breaking result: source-target `L`
-contrast at strength `2.0` beats both baselines on interface-union divergence.
+residual recruitment is the better coupling site. The source-target `L` contrast law
+at strength `2.0` is now seed-robust: it beats both the v0.3.1 angular-memory baseline
+and signed/no-memory control on interface-union divergence in 6/6 tested seeds while
+preserving expected residual participation to floating precision.
 ```
 
 Current negative result:
@@ -90,7 +90,8 @@ participation exactly and restores interface turnover, but still does not produc
 above-baseline morphology.
 Source-target fixed-mean residual contrast at strength 2.0 improves interface-union
 spatial divergence above both v0.3.1 and signed/no-memory control, without increasing
-expected activation. It is not yet component-level morphology.
+expected activation. v0.3.5 confirms this is seed-robust at the interface level. It is
+not yet component-level morphology.
 ```
 
 The system now has:
@@ -99,12 +100,12 @@ The system now has:
 rotation with memory
 directional lineage persistence
 bounded ledger-exact dynamics
+fixed-mean seed-robust interface symmetry breaking
 ```
 
 It does not yet have:
 
 ```text
-morphogenetic consequence
 component-level divergence
 open-ended complexity
 ```
@@ -131,6 +132,10 @@ Finding 037: Directional Branchlets Recur but Collapse or Merge by Phase 4
 Finding 038: Vector-Coupled Angular Momentum Produces Non-Merging Directional Lineages
 Finding 039: Directional Lineages Are Not Yet Morphogenetic
 Finding 040: Secondary Candidate Bias Maximizes Directional Separation but Suppresses Morphology
+Finding 041: Event-Gated Candidate Bias Further Canalizes the Interface
+Finding 042: Fixed-Mean Residual Recruitment Restores Turnover
+Finding 043: Source-Target Contrast Breaks Interface Symmetry at Fixed Mean
+Finding 044: Source-Target Contrast Is Seed-Robust at Fixed Mean
 ```
 
 ## Key Configs
@@ -144,6 +149,9 @@ output/findings/configs/v032_vector_angular_momentum_secondary_bias_seed56_ka5_v
 output/findings/configs/v033_vector_angular_momentum_event_gated_bias_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10.yaml
 output/findings/configs/v034_fixed_mean_residual_recruitment_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb1p0.yaml
 output/findings/configs/v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml
+output/findings/configs/v035_contrast2_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml
+output/findings/configs/v035_v031_angular_memory_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml
+output/findings/configs/v035_signed_control_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2.yaml
 ```
 
 ## Key Artifacts
@@ -198,6 +206,20 @@ output/findings/finding_043_v034b_fixed_mean_residual_recruitment_*_lineage_pers
 output/findings/finding_043_v034b_fixed_mean_residual_recruitment_*_lineage_conditioned_morphology_summary.csv
 output/findings/finding_043_v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_turnover.csv
 output/findings/finding_043_v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_turnover_summary.json
+```
+
+Finding 044:
+
+```text
+output/findings/finding_044_v035_seed_robustness_pass_table.csv
+output/findings/finding_044_v035_seed_robustness_aggregate_by_variant.csv
+output/findings/finding_044_v035_seed_robustness_fixed_mean_audit.csv
+output/findings/finding_044_v035_seed_robustness_summary.json
+output/findings/finding_044_v035_*_rotation_aware_openness_summary.csv
+output/findings/finding_044_v035_*_lineage_persistence_summary.csv
+output/findings/finding_044_v035_*_lineage_conditioned_morphology_summary.csv
+output/findings/finding_044_v035_contrast2_seed*_front_turnover_turnover.csv
+output/findings/finding_044_v035_contrast2_seed*_front_turnover_turnover_summary.json
 ```
 
 ## Important Numbers
@@ -307,25 +329,55 @@ winner phase-4 interface turnover:
   checkpoint 2048: 0.029274
 ```
 
+Finding 044:
+
+```text
+v0.3.5 robustness seeds:
+  42, 43, 44, 45, 46, 56
+
+fixed-mean audit:
+  fixed_mean_ok_count:                  6/6
+  contrast_safety_ok_count:             6/6
+  max_abs_probability_delta:            3.996803e-15
+  max_abs_summed_probability_delta:     2.642331e-14
+
+seed pass counts:
+  interface-union beats both baselines: 6/6
+  active distance beats both baselines: 3/6
+  component nonzero seeds:              1/6
+
+aggregate morphology:
+  contrast interface-union distance:    0.021926
+  v0.3.1 interface-union distance:      0.017880
+  signed interface-union distance:      0.018949
+  contrast active distance:             0.038007
+  v0.3.1 active distance:               0.035978
+  signed active distance:               0.036669
+  contrast phase-4 interface turnover:  0.023446
+```
+
 ## Next Hypothesis
 
 Do not continue secondary candidate ordering bias.
 
-Keep the coupling at the local residual recruitment event. The next principled test
-is not a new mechanism; it is seed robustness for the winning fixed-mean contrast law.
+Keep the coupling at the local residual recruitment event. v0.3.5 has already passed
+the seed-robustness gate for the fixed-mean source-target contrast law. The next
+principled test is component-level boundary work at fixed mean, using v0.3.5
+contrast `2.0` as the baseline.
 
-Candidate v0.3.5 rule:
+Candidate v0.3.6 direction:
 
 ```text
-seed robustness for fixed-mean source-target residual contrast
+component-sensitive fixed-mean residual recruitment
 
-law:
+baseline law:
   angular_momentum_residual_bias_score_mode = source_target_L_contrast
   angular_momentum_residual_bias_strength = 2.0
 
-run across multiple seed56-like protected-front seeds.
-Keep the global mean residual participation probability at 0.02.
-Keep valence, amplitude, range, payload, and conservation unchanged.
+possible extension:
+  add local interface geometry / tangency / curvature information to where stranded
+  iotas re-enter, while renormalizing the residual recruitment probabilities back to
+  the same expected mean.
 ```
 
 Why:
@@ -339,6 +391,7 @@ without adding expected activation, but the current source-L alignment score doe
 beat baseline morphology.
 v0.3.4b proves source-target L contrast can beat both baselines on interface-union
 divergence at fixed mean activation.
+v0.3.5 proves that contrast result is seed-robust at the interface level.
 ```
 
 ## Acceptance Gate
@@ -354,13 +407,15 @@ nonzero component/interface metric separation
 no burst, absorber, or active runaway
 ```
 
-For the immediate v0.3.5 robustness gate, require:
+For the immediate component-level gate, require:
 
 ```text
 fixed residual probability sum within floating precision
 bounded_nonrunaway_count = samples
 ledger_exact_count = samples
 interface-union distance above v0.3.1/control on most tested seeds
+active-set distance above v0.3.1/control on a majority of tested seeds
+component-count, largest-component, or component-entropy deltas above numerical dust
 phase-4 interface turnover not collapsed
 ```
 
@@ -377,10 +432,10 @@ signed/no-memory control if needed
 ## Suggested New Thread Prompt
 
 ```text
-Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-043.
-Continue from the v0.3.4b narrow positive result: fixed-mean source-target L
-contrast at residual recruitment improves interface-union divergence beyond both
-v0.3.1 and signed/no-memory control without adding expected activation.
-Next goal: run seed robustness for the contrast strength 2.0 law before adding any
-new mechanism.
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-044.
+Continue from Finding 044: fixed-mean source-target L contrast at residual recruitment
+is seed-robust, beating both v0.3.1 and signed/no-memory controls on interface-union
+divergence in 6/6 tested seeds without adding expected activation.
+Next goal: test component-level boundary work at fixed mean, using v0.3.5 contrast
+2.0 as the baseline.
 ```

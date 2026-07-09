@@ -4659,3 +4659,160 @@ Only after seed robustness should the project test component-level mechanisms.
 - `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_*_lineage_conditioned_morphology_summary.csv`
 - `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_turnover.csv`
 - `output/findings/finding_043_v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_front_turnover_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_turnover_summary.json`
+
+## Finding 044: Source-Target Contrast Is Seed-Robust at Fixed Mean
+
+Finding 043 showed a narrow positive result on seed `56`: source-target angular-momentum contrast at residual re-entry increased interface-union divergence beyond both the v0.3.1 angular-memory baseline and the signed/no-memory control, while preserving the expected residual recruitment budget.
+
+Finding 044 tests whether that result is seed-specific.
+
+### Protocol
+
+v0.3.5 keeps the same law:
+
+```yaml
+angular_momentum_residual_bias_enabled: true
+angular_momentum_residual_bias_strength: 2.0
+angular_momentum_residual_bias_gate: depleted_interface
+angular_momentum_residual_bias_mean_preserving: true
+angular_momentum_residual_bias_preserve_behavior: true
+angular_momentum_residual_bias_score_mode: source_target_L_contrast
+```
+
+Test matrix:
+
+```text
+seeds: 42, 43, 44, 45, 46, 56
+checkpoints: 1536, 2048
+samples/checkpoint: 8
+horizon: 1024
+phase length: 256
+baselines per seed:
+  signed/no-memory control
+  v0.3.1 angular memory
+```
+
+The pass gate was intentionally modest:
+
+```text
+interface-union distance beats both main baselines in a majority of seeds
+bounded_nonrunaway_count = 8/8
+ledger_exact_count = 8/8
+fixed residual-recruitment mean conserved to floating precision
+phase-4 interface turnover does not collapse
+```
+
+### Fixed-Mean Audit
+
+The fixed-mean audit passed on every contrast seed:
+
+| Seed | Base probability sum | Biased probability sum | Summed delta | Max row delta | Final ledger error |
+|---:|---:|---:|---:|---:|---:|
+| `42` | `3263.132857` | `3263.132857` | `-2.642331e-14` | `2.220446e-15` | `0.0` |
+| `43` | `2181.701429` | `2181.701429` | `-1.704192e-14` | `2.220446e-15` | `0.0` |
+| `44` | `2986.007143` | `2986.007143` | `-7.438494e-15` | `3.996803e-15` | `0.0` |
+| `45` | `1337.225000` | `1337.225000` | `-1.573741e-14` | `1.332268e-15` | `0.0` |
+| `46` | `3734.068571` | `3734.068571` | `-1.543210e-14` | `2.664535e-15` | `0.0` |
+| `56` | `3920.500000` | `3920.500000` | `-3.330669e-15` | `1.776357e-15` | `0.0` |
+
+Across the six tested seeds:
+
+```text
+fixed_mean_ok_count = 6/6
+contrast_safety_ok_count = 6/6
+max_abs_probability_delta = 3.996803e-15
+max_abs_summed_probability_delta = 2.642331e-14
+```
+
+### Seed Robustness
+
+Interface-union divergence beat both baselines on every tested seed:
+
+| Seed | Contrast interface-union | v0.3.1 interface-union | Signed interface-union | Beats both? | Contrast active distance | Active beats both? | Phase-4 interface turnover |
+|---:|---:|---:|---:|---|---:|---|---:|
+| `42` | `0.023097` | `0.019906` | `0.018371` | yes | `0.043932` | yes | `0.025857` |
+| `43` | `0.015844` | `0.012556` | `0.014801` | yes | `0.028338` | yes | `0.013378` |
+| `44` | `0.030661` | `0.021671` | `0.021941` | yes | `0.051424` | yes | `0.031655` |
+| `45` | `0.013536` | `0.011910` | `0.011821` | yes | `0.022234` | no | `0.017299` |
+| `46` | `0.020421` | `0.016858` | `0.020237` | yes | `0.034456` | no | `0.022569` |
+| `56` | `0.027994` | `0.024380` | `0.026525` | yes | `0.047655` | no | `0.029920` |
+
+Counts:
+
+```text
+interface_union_beats_both = 6/6
+active_distance_beats_both = 3/6
+component_nonzero_seed_count = 1/6
+```
+
+The component signal remains weak. Component-count and largest-component deltas remain `0.0` for the contrast variant; the only nonzero component measure is a small component-entropy delta on seed `44`.
+
+### Aggregate Comparison
+
+Mean across all six seeds, two checkpoints, and four phases:
+
+| Variant | Transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Phase-4 interface turnover | Safety OK |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.5 contrast `2.0` | `0.683620` | `0.038007` | `0.065129` | `0.061793` | `0.021926` | `0.023446` | `6/6` |
+| v0.3.1 angular memory | `0.748006` | `0.035978` | `0.058270` | `0.053058` | `0.017880` | `0.018258` | `6/6` |
+| signed/no-memory control | `0.742398` | `0.036669` | `0.059559` | `0.055160` | `0.018949` | `0.018930` | `6/6` |
+
+This is a stronger result than Finding 043. The seed-robust contrast law does not maximize transition distance; both baselines have higher average transition distance. Instead, the contrast law converts directional memory into interface-level spatial divergence under a fixed residual activation budget.
+
+### Interpretation
+
+The precise claim:
+
+```text
+Source-target angular-momentum contrast at the residual re-entry gate is a
+seed-robust fixed-mean interface-symmetry-breaking law. It beats both the
+v0.3.1 angular-memory baseline and signed/no-memory control on interface-union
+divergence in 6/6 tested seeds, while all continuations remain bounded,
+ledger-exact, and mean-preserving to floating precision.
+```
+
+The caveat:
+
+```text
+This is still interface-level, not component-level, morphology. Active-set distance
+beats both baselines in only half of seeds, and component-count/largest-component
+deltas do not move for the contrast variant.
+```
+
+The important narrowing:
+
+```text
+Candidate ordering changes the transition alphabet but suppresses boundary motion.
+Fixed-mean residual contrast changes where the active/depleted boundary re-enters.
+That effect is now seed-robust.
+```
+
+### Next Gate
+
+Do not tune strength blindly. The next step should keep v0.3.5 contrast `2.0` as the seed-robust baseline and test component-level boundary work at fixed mean.
+
+The next pass gate should require:
+
+```text
+interface-union distance remains above both baselines on most seeds
+active-set distance beats both baselines on a majority of seeds
+component-count, largest-component, or component-entropy deltas move above numerical dust
+bounded_nonrunaway_count = 8/8
+ledger_exact_count = 8/8
+fixed residual probability sum within floating precision
+```
+
+### Artifacts
+
+- `output/findings/configs/v035_contrast2_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml`
+- `output/findings/configs/v035_v031_angular_memory_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml`
+- `output/findings/configs/v035_signed_control_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2.yaml`
+- `output/findings/finding_044_v035_seed_robustness_pass_table.csv`
+- `output/findings/finding_044_v035_seed_robustness_aggregate_by_variant.csv`
+- `output/findings/finding_044_v035_seed_robustness_fixed_mean_audit.csv`
+- `output/findings/finding_044_v035_seed_robustness_summary.json`
+- `output/findings/finding_044_v035_*_rotation_aware_openness_summary.csv`
+- `output/findings/finding_044_v035_*_lineage_persistence_summary.csv`
+- `output/findings/finding_044_v035_*_lineage_conditioned_morphology_summary.csv`
+- `output/findings/finding_044_v035_contrast2_seed*_front_turnover_turnover.csv`
+- `output/findings/finding_044_v035_contrast2_seed*_front_turnover_turnover_summary.json`
