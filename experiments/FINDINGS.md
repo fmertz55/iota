@@ -3938,3 +3938,166 @@ minority daughter families persist across at least two later phases, or predict 
 - `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_families.csv`
 - `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.csv`
 - `output/findings/finding_037_v021_residual_participation_lineage_persistence_control_seed56_ka5_vac2_val8_n16_rpp0p02_summary.json`
+
+## Finding 038: Vector-Coupled Angular Momentum Produces Non-Merging Directional Lineages
+
+v0.3.1 adds a narrow angular-momentum state:
+
+```text
+L = retained signed turn memory of the information-exchange vector
+```
+
+The implementation is deliberately limited:
+
+```text
+V remains the information-exchange vector.
+Received exchange creates a signed rotation offset.
+Prior L biases only the next V rotation.
+Observed V rotation updates L.
+L does not alter A, R, P, valence, secondary valence, or ledger totals.
+```
+
+The tested law:
+
+```yaml
+angular_momentum_enabled: true
+angular_momentum_decay: 0.90
+angular_momentum_coupling: 0.50
+angular_momentum_retention: 0.50
+angular_momentum_cap: 2.0
+```
+
+Matched control:
+
+```yaml
+angular_momentum_enabled: true
+angular_momentum_coupling: 0.0
+angular_momentum_retention: 0.0
+angular_momentum_cap: 2.0
+```
+
+The control keeps signed received exchange and the same cap, but removes retained angular memory and future-turn bias. This separates the signed-turn repair from the angular-momentum hypothesis.
+
+### Protocol
+
+Both v0.3.1 and the signed-exchange/no-memory control were tested at mature checkpoints:
+
+```text
+seed = 56
+kA = 5
+vacuum = 2
+valence = 8
+n = 16
+residual_participation_probability = 0.02
+received_rotation_probability = 1.0
+checkpoint_ticks = 1536, 2048
+horizon = 1024
+phase_length = 256
+phase_count = 4
+samples = 8
+sample_every = 16
+workers = 8
+stop_active_iotas = 5000
+cluster_distance_threshold = 0.55
+```
+
+All runs remained bounded, ledger-exact, and non-runaway.
+
+### Rotation-Aware Openness
+
+Both variants remain in the old protected fate class, but both produce bounded directional-drift signatures.
+
+| Variant | Checkpoint | Base active | Base depleted | Rotation class | Signature openness | Effective signatures | Late rotations/tick | Late transition entropy |
+|---|---:|---:|---:|---|---:|---:|---:|---:|
+| v0.3.1 `L` | `1536` | `1059` | `473` | `directional_drift:8` | `0.916667` | `6.727171` | `1.551215` | `1.367908` |
+| v0.3.1 `L` | `2048` | `1059` | `481` | `directional_drift:8` | `1.000000` | `8.000000` | `1.229167` | `0.766036` |
+| signed/no-memory | `1536` | `1059` | `470` | `directional_drift:8` | `1.000000` | `8.000000` | `1.796007` | `1.855424` |
+| signed/no-memory | `2048` | `1059` | `474` | `directional_drift:8` | `1.000000` | `8.000000` | `1.660590` | `1.499795` |
+
+This means signed exchange alone is enough to produce bounded directional signature plurality. The important test is therefore not signature openness, but whether branch families keep merging back.
+
+### Four-Phase Lineage Persistence
+
+v0.3.1 with angular memory no longer shows collapse back to a dominant phase-4 family.
+
+| Variant | Checkpoint | Combined families | Full path table | Stable full path | Phase-2 persists to end | Mean adjacent distance |
+|---|---:|---:|---|---:|---:|---:|
+| v0.3.1 `L` | `1536` | `20` | `0->1->2->3:1; 11->12->13->14:1; 4->4->15->16:1; 4->4->18->19:1; 4->4->4->17:1; 4->4->5->6:1; 4->4->9->10:1; 4->7->4->8:1` | `0.000` | `0.000` | `0.698204` |
+| v0.3.1 `L` | `2048` | `29` | `0->1->2->3:1; 1->19->20->21:1; 1->22->23->24:1; 12->13->14->15:1; 12->16->17->18:1; 25->26->27->28:1; 4->5->6->7:1; 8->9->10->11:1` | `0.000` | `0.000` | `0.727426` |
+| signed/no-memory | `1536` | `4` | `0->0->0->0:6; 0->0->1->2:1; 0->0->3->0:1` | `0.750` | `0.750` | `0.594665` |
+| signed/no-memory | `2048` | `5` | `0->0->0->0:5; 0->0->0->1:1; 0->0->3->4:1; 0->2->0->0:1` | `0.625` | `0.625` | `0.615100` |
+
+The `phase2_persists_to_end` field is no longer the right success measure for v0.3.1, because the daughter families do not remain static labels. They keep drifting. The relevant positive result is:
+
+```text
+v0.3.1 continuations do not merge back into a common directional family; by phase 4 all samples are separated at both checkpoints.
+```
+
+Phase-family counts make this explicit:
+
+| Variant | Checkpoint | Phase 1 | Phase 2 | Phase 3 | Phase 4 |
+|---|---:|---|---|---|---|
+| v0.3.1 `L` | `1536` | `0:1; 4:6; 11:1` | `1:1; 4:5; 7:1; 12:1` | `2:1; 4:2; 5:1; 9:1; 13:1; 15:1; 18:1` | `3:1; 6:1; 8:1; 10:1; 14:1; 16:1; 17:1; 19:1` |
+| v0.3.1 `L` | `2048` | `0:1; 1:2; 4:1; 8:1; 12:2; 25:1` | `1:1; 5:1; 9:1; 13:1; 16:1; 19:1; 22:1; 26:1` | `2:1; 6:1; 10:1; 14:1; 17:1; 20:1; 23:1; 27:1` | `3:1; 7:1; 11:1; 15:1; 18:1; 21:1; 24:1; 28:1` |
+| signed/no-memory | `1536` | `0:8` | `0:8` | `0:6; 1:1; 3:1` | `0:7; 2:1` |
+| signed/no-memory | `2048` | `0:8` | `0:7; 2:1` | `0:7; 3:1` | `0:6; 1:1; 4:1` |
+
+The control reproduces the old canalization pattern: most continuations remain in or return to family `0`. The angular-memory variant converts that into continued directional separation.
+
+### Mechanism Metrics
+
+The angular-memory effect is small in raw event rate but consequential in lineage space.
+
+| Checkpoint | Phase | Rotations/tick | Biased `L` rotations/tick | Mean `|L|` active | Interface `V` change | Transition entropy | Component count delta | Largest component delta |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `1536` | `1` | `1.648438` | `0.005859` | `0.008498` | `0.003354` | `1.527336` | `0.000` | `0.000` |
+| `1536` | `2` | `1.445312` | `0.005371` | `0.007251` | `0.002438` | `1.117396` | `0.000` | `0.000` |
+| `1536` | `3` | `1.244629` | `0.003418` | `0.006316` | `0.001806` | `0.700238` | `0.000` | `0.000` |
+| `1536` | `4` | `1.090820` | `0.001953` | `0.005552` | `0.001358` | `0.510703` | `0.000` | `0.000` |
+| `2048` | `1` | `1.316895` | `0.003418` | `0.006633` | `0.002032` | `0.850798` | `0.000` | `0.000` |
+| `2048` | `2` | `1.152344` | `0.002441` | `0.006066` | `0.002037` | `0.903382` | `0.000` | `0.000` |
+| `2048` | `3` | `1.041504` | `0.001953` | `0.005265` | `0.001301` | `0.547799` | `0.000` | `0.000` |
+| `2048` | `4` | `0.933594` | `0.002441` | `0.004754` | `0.001039` | `0.327589` | `0.125` | `-0.125` |
+
+The signed/no-memory control has `0.0` biased rotations/tick and `0.0` mean active `|L|` in every phase.
+
+### Interpretation
+
+Finding 038 passes the non-merging directional-lineage gate, but not the morphology-divergence gate.
+
+The paper-safe claim:
+
+```text
+Vector-coupled angular momentum converts transient branchlets into continuing directional lineage separation. The effect remains bounded and ledger-exact, and it does not yet produce meaningful component-level morphology divergence.
+```
+
+The key distinction:
+
+```text
+signed exchange creates bounded directional plurality;
+retained angular momentum prevents those plural directions from merging back into one dominant transition family.
+```
+
+This is not yet open-ended complexity. The coarse fate class remains protected, active count remains bounded at `1059`, and component deltas are essentially zero. But the earlier failure mode changed:
+
+```text
+Finding 037 failed because daughter families collapsed or merged.
+Finding 038 no longer collapses; it drifts through separated directional histories.
+```
+
+The new next gate is structural consequence:
+
+```text
+Do separated directional lineages eventually produce distinguishable interface/component morphology, or are they purely directional histories over a fixed scaffold?
+```
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/rotation_lineage_persistence.py`
+- `output/findings/configs/v031_vector_angular_momentum_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml`
+- `output/findings/configs/v031_signed_exchange_control_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2.yaml`
+- `output/findings/finding_038_v031_vector_angular_momentum_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_summary.csv`
+- `output/findings/finding_038_v031_vector_angular_momentum_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_summary.csv`
+- `output/findings/finding_038_v031_signed_exchange_control_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2_summary.csv`
+- `output/findings/finding_038_v031_signed_exchange_control_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2_summary.csv`

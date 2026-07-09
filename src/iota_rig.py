@@ -137,6 +137,13 @@ class World:
     vector_behaviors: tuple[str, ...]
     wrap: bool
     rng: np.random.Generator
+    angular_L: np.ndarray | None = None
+
+    def __post_init__(self) -> None:
+        if self.angular_L is None:
+            self.angular_L = np.zeros(self.active.shape, dtype=np.float32)
+        else:
+            self.angular_L = self.angular_L.astype(np.float32, copy=False)
 
     @property
     def size(self) -> int:
@@ -153,6 +160,7 @@ def save_world_state(world: World, path: Path, metadata: dict[str, Any] | None =
         V=world.V,
         P=world.P,
         latent_A=world.latent_A,
+        angular_L=world.angular_L,
         initial_total_A=np.array(int(world.initial_total_A), dtype=np.int64),
         ledger_enabled=np.array(bool(world.ledger_enabled)),
         previous_active=world.previous_active,
@@ -176,6 +184,11 @@ def load_world_state(path: Path) -> World:
             if "latent_A" in data.files
             else np.zeros(active.shape, dtype=np.int64)
         )
+        angular_L = (
+            data["angular_L"].astype(np.float32)
+            if "angular_L" in data.files
+            else np.zeros(active.shape, dtype=np.float32)
+        )
         ledger_enabled = bool(data["ledger_enabled"].item()) if "ledger_enabled" in data.files else False
         initial_total_A = (
             int(data["initial_total_A"].item())
@@ -189,6 +202,7 @@ def load_world_state(path: Path) -> World:
             V=data["V"].astype(np.uint8),
             P=data["P"].astype(np.uint8),
             latent_A=latent_A,
+            angular_L=angular_L,
             initial_total_A=initial_total_A,
             ledger_enabled=ledger_enabled,
             previous_active=data["previous_active"].astype(bool),
@@ -329,6 +343,57 @@ def history_coupled_rotation_offset(
         + residual_phase
         + order_phase
     ) % bounded_max
+
+
+def history_coupled_signed_rotation_offset(
+    source_v: int,
+    source_p: int,
+    target_v: int,
+    target_a: int,
+    target_r: int,
+    target_p: int,
+    candidate_order: int,
+    target_depleted: bool,
+    influence: float,
+    max_offset: int,
+) -> int:
+    magnitude = history_coupled_rotation_offset(
+        source_v=source_v,
+        source_p=source_p,
+        target_v=target_v,
+        target_a=target_a,
+        target_r=target_r,
+        target_p=target_p,
+        candidate_order=candidate_order,
+        target_depleted=target_depleted,
+        influence=influence,
+        max_offset=max_offset,
+    )
+    influence_phase = max(1, min(7, int(round(float(influence) * 7.0))))
+    turn_parity = (
+        int(source_v)
+        - int(target_v)
+        + int(source_p)
+        - int(target_p)
+        + int(target_a)
+        - int(target_r)
+        + int(candidate_order)
+        + influence_phase
+        + (1 if target_depleted else 0)
+    ) % 2
+    return int(magnitude if turn_parity == 0 else -magnitude)
+
+
+def signed_round_offset(value: float) -> int:
+    if value == 0.0:
+        return 0
+    return int(math.copysign(math.floor(abs(float(value)) + 0.5), float(value)))
+
+
+def clamp_signed(value: float, cap: float) -> float:
+    if cap <= 0:
+        return 0.0
+    return max(-float(cap), min(float(cap), float(value)))
 
 
 def offset_vector_state(
@@ -511,6 +576,12 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             cfg["constants"].get("history_coupled_rotation_secondary_multiplier", 1.0),
         )
     )
+    angular_momentum_enabled = bool(cfg["constants"].get("angular_momentum_enabled", False))
+    angular_momentum_decay = max(0.0, min(1.0, float(cfg["constants"].get("angular_momentum_decay", 1.0))))
+    angular_momentum_coupling = float(cfg["constants"].get("angular_momentum_coupling", 0.0))
+    angular_momentum_retention = float(cfg["constants"].get("angular_momentum_retention", 1.0))
+    angular_momentum_cap = max(0.0, float(cfg["constants"].get("angular_momentum_cap", received_rotation_max_offset)))
+    angular_momentum_enabled = angular_momentum_enabled and angular_momentum_cap > 0.0
     residual_participation_probability = clamp_probability(
         float(
             cfg["constants"].get(
@@ -538,6 +609,12 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     next_R = world.R.astype(np.float32).copy()
     next_V = world.V.copy()
     next_P = world.P.copy()
+    old_L = (
+        world.angular_L.astype(np.float32, copy=True)
+        if world.angular_L is not None
+        else np.zeros(world.active.shape, dtype=np.float32)
+    )
+    next_L = old_L * angular_momentum_decay if angular_momentum_enabled else old_L.copy()
 
     coords = np.argwhere(world.active)
     exchanges = 0
@@ -550,6 +627,10 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     rotation_events = 0
     rotation_events_on_residual_entry = 0
     rotation_events_on_secondary_exchange = 0
+    angular_momentum_updates = 0
+    angular_momentum_biased_rotation_events = 0
+    angular_momentum_bias_abs_sum = 0.0
+    angular_momentum_observed_turn_abs_sum = 0.0
     exchange_alignments: list[float] = []
     secondary_exchange_alignments: list[float] = []
 
@@ -673,6 +754,30 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                         influence=influence,
                         max_offset=received_rotation_max_offset,
                     )
+                    if angular_momentum_enabled:
+                        exchange_rotation_offset = history_coupled_signed_rotation_offset(
+                            source_v=v_idx,
+                            source_p=p,
+                            target_v=target_previous_v,
+                            target_a=target_previous_a,
+                            target_r=target_previous_r,
+                            target_p=target_previous_p,
+                            candidate_order=int(candidate["order"]),
+                            target_depleted=target_depleted,
+                            influence=influence,
+                            max_offset=received_rotation_max_offset,
+                        )
+                        turn_bias = float(old_L[tx, ty, tz]) * angular_momentum_coupling
+                        angular_momentum_bias_abs_sum += abs(turn_bias)
+                        unbiased_turn = clamp_signed(float(exchange_rotation_offset), angular_momentum_cap)
+                        unbiased_rotation_offset = signed_round_offset(unbiased_turn)
+                        total_turn = clamp_signed(
+                            float(exchange_rotation_offset) + turn_bias,
+                            angular_momentum_cap,
+                        )
+                        rotation_offset = signed_round_offset(total_turn)
+                        if rotation_offset != unbiased_rotation_offset:
+                            angular_momentum_biased_rotation_events += 1
                     rotated_v = offset_vector_state(
                         world,
                         int(next_V[tx, ty, tz]) % len(world.vectors),
@@ -682,6 +787,13 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                     if int(next_V[tx, ty, tz]) != rotated_v:
                         next_V[tx, ty, tz] = np.uint8(rotated_v)
                         rotation_events += 1
+                        if angular_momentum_enabled:
+                            next_L[tx, ty, tz] = clamp_signed(
+                                float(next_L[tx, ty, tz]) + angular_momentum_retention * float(rotation_offset),
+                                angular_momentum_cap,
+                            )
+                            angular_momentum_updates += 1
+                            angular_momentum_observed_turn_abs_sum += abs(float(rotation_offset))
                         if target_depleted:
                             rotation_events_on_residual_entry += 1
                         if int(candidate["order"]) != 0:
@@ -724,6 +836,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     world.V = next_V
     world.P = next_P
     world.latent_A = next_latent_A
+    world.angular_L = np.clip(next_L, -angular_momentum_cap, angular_momentum_cap).astype(np.float32)
     world.ledger_enabled = True
 
     active_count = int(world.active.sum())
@@ -750,6 +863,10 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "rotation_events": rotation_events,
         "rotation_events_on_residual_entry": rotation_events_on_residual_entry,
         "rotation_events_on_secondary_exchange": rotation_events_on_secondary_exchange,
+        "angular_momentum_updates": angular_momentum_updates,
+        "angular_momentum_biased_rotation_events": angular_momentum_biased_rotation_events,
+        "angular_momentum_bias_abs_sum": angular_momentum_bias_abs_sum,
+        "angular_momentum_observed_turn_abs_sum": angular_momentum_observed_turn_abs_sum,
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
         "max_payload_fraction": max_payload_fraction,

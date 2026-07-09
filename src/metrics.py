@@ -280,6 +280,31 @@ def ledger_stats(world: Any) -> dict[str, float]:
     }
 
 
+def angular_momentum_stats(world: Any) -> dict[str, float]:
+    angular_L = getattr(world, "angular_L", None)
+    if angular_L is None:
+        return {
+            "angular_momentum_nonzero_cells": 0.0,
+            "angular_momentum_mean_abs_active": 0.0,
+            "angular_momentum_mean_signed_active": 0.0,
+            "angular_momentum_max_abs": 0.0,
+        }
+    abs_L = np.abs(angular_L)
+    active = getattr(world, "active", None)
+    if active is None:
+        active_abs_L = np.array([], dtype=np.float32)
+        active_L = np.array([], dtype=np.float32)
+    else:
+        active_abs_L = abs_L[active]
+        active_L = angular_L[active]
+    return {
+        "angular_momentum_nonzero_cells": float(np.count_nonzero(abs_L > 1e-6)),
+        "angular_momentum_mean_abs_active": float(active_abs_L.mean()) if active_abs_L.size else 0.0,
+        "angular_momentum_mean_signed_active": float(active_L.mean()) if active_L.size else 0.0,
+        "angular_momentum_max_abs": float(abs_L.max()) if abs_L.size else 0.0,
+    }
+
+
 def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = None) -> dict[str, float]:
     active_count = int(world.active.sum())
     component_stats = {
@@ -301,6 +326,7 @@ def collect_metrics(world: Any, tick: int, extras: dict[str, float] | None = Non
         "component_centroid_distance_1_2": centroid_distance_1_2,
     }
     metric.update(ledger_stats(world))
+    metric.update(angular_momentum_stats(world))
     for index in range(20):
         metric[f"component_size_{index + 1}"] = int(component_sizes[index]) if index < len(component_sizes) else 0
     metric.update(component_hierarchy_stats(component_sizes, active_count))

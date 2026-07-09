@@ -44,6 +44,10 @@ PHASE_BASE_FIELDNAMES = [
     "transition_families",
     "top_transitions",
     "rotation_events_per_tick",
+    "angular_momentum_updates_per_tick",
+    "angular_momentum_biased_rotation_events_per_tick",
+    "angular_momentum_mean_abs_active",
+    "angular_momentum_max_abs",
     "residual_participations_per_tick",
     "deactivation_events_per_tick",
     "persistent_interface_v_changed_fraction",
@@ -67,6 +71,10 @@ FAMILY_FIELDNAMES = [
     "size",
     "samples",
     "mean_rotation_events_per_tick",
+    "mean_angular_momentum_updates_per_tick",
+    "mean_angular_momentum_biased_rotation_events_per_tick",
+    "mean_angular_momentum_mean_abs_active",
+    "mean_angular_momentum_max_abs",
     "mean_persistent_interface_v_changed_fraction",
     "mean_persistent_interface_changed_transition_entropy",
     "mean_persistent_interface_candidate_turnover",
@@ -142,6 +150,12 @@ def dynamic_lineage_fieldnames(phase_count: int) -> list[str]:
     fields.extend(f"phase{phase}_family" for phase in range(1, phase_count + 1))
     fields.extend(f"phase{phase}_transition_count" for phase in range(1, phase_count + 1))
     fields.extend(f"phase{phase}_rotation_events_per_tick" for phase in range(1, phase_count + 1))
+    fields.extend(f"phase{phase}_angular_momentum_updates_per_tick" for phase in range(1, phase_count + 1))
+    fields.extend(
+        f"phase{phase}_angular_momentum_biased_rotation_events_per_tick"
+        for phase in range(1, phase_count + 1)
+    )
+    fields.extend(f"phase{phase}_angular_momentum_mean_abs_active" for phase in range(1, phase_count + 1))
     fields.extend(f"phase{phase}_persistent_interface_v_changed_fraction" for phase in range(1, phase_count + 1))
     fields.extend(f"phase{phase}_transition_entropy" for phase in range(1, phase_count + 1))
     fields.extend(f"phase{phase}_candidate_turnover" for phase in range(1, phase_count + 1))
@@ -159,6 +173,9 @@ def dynamic_summary_fieldnames(phase_count: int) -> list[str]:
                 f"phase{phase}_family_count",
                 f"phase{phase}_family_table",
                 f"phase{phase}_mean_rotation_events_per_tick",
+                f"phase{phase}_mean_angular_momentum_updates_per_tick",
+                f"phase{phase}_mean_angular_momentum_biased_rotation_events_per_tick",
+                f"phase{phase}_mean_angular_momentum_mean_abs_active",
                 f"phase{phase}_mean_persistent_interface_v_changed_fraction",
                 f"phase{phase}_mean_transition_entropy",
                 f"phase{phase}_mean_candidate_turnover",
@@ -333,6 +350,22 @@ def assign_families(
                     "size": len(members),
                     "samples": ";".join(str(member["sample_index"]) for member in members),
                     "mean_rotation_events_per_tick": mean_for(phase_metrics, "rotation_events_per_tick"),
+                    "mean_angular_momentum_updates_per_tick": mean_for(
+                        phase_metrics,
+                        "angular_momentum_updates_per_tick",
+                    ),
+                    "mean_angular_momentum_biased_rotation_events_per_tick": mean_for(
+                        phase_metrics,
+                        "angular_momentum_biased_rotation_events_per_tick",
+                    ),
+                    "mean_angular_momentum_mean_abs_active": mean_for(
+                        phase_metrics,
+                        "angular_momentum_mean_abs_active",
+                    ),
+                    "mean_angular_momentum_max_abs": mean_for(
+                        phase_metrics,
+                        "angular_momentum_max_abs",
+                    ),
                     "mean_persistent_interface_v_changed_fraction": mean_for(
                         phase_metrics,
                         "persistent_interface_v_changed_fraction",
@@ -398,6 +431,15 @@ def lineage_output_row(row: dict[str, Any], phase_count: int) -> dict[str, Any]:
         output[f"phase{phase}_family"] = row["families"][phase_index]
         output[f"phase{phase}_transition_count"] = metrics["transition_count"]
         output[f"phase{phase}_rotation_events_per_tick"] = metrics["rotation_events_per_tick"]
+        output[f"phase{phase}_angular_momentum_updates_per_tick"] = metrics[
+            "angular_momentum_updates_per_tick"
+        ]
+        output[f"phase{phase}_angular_momentum_biased_rotation_events_per_tick"] = metrics[
+            "angular_momentum_biased_rotation_events_per_tick"
+        ]
+        output[f"phase{phase}_angular_momentum_mean_abs_active"] = metrics[
+            "angular_momentum_mean_abs_active"
+        ]
         output[f"phase{phase}_persistent_interface_v_changed_fraction"] = metrics[
             "persistent_interface_v_changed_fraction"
         ]
@@ -473,6 +515,18 @@ def summarize(rows: list[dict[str, Any]], phase_count: int) -> list[dict[str, An
             output[f"phase{phase}_mean_rotation_events_per_tick"] = mean_for(
                 phase_metrics,
                 "rotation_events_per_tick",
+            )
+            output[f"phase{phase}_mean_angular_momentum_updates_per_tick"] = mean_for(
+                phase_metrics,
+                "angular_momentum_updates_per_tick",
+            )
+            output[f"phase{phase}_mean_angular_momentum_biased_rotation_events_per_tick"] = mean_for(
+                phase_metrics,
+                "angular_momentum_biased_rotation_events_per_tick",
+            )
+            output[f"phase{phase}_mean_angular_momentum_mean_abs_active"] = mean_for(
+                phase_metrics,
+                "angular_momentum_mean_abs_active",
             )
             output[f"phase{phase}_mean_persistent_interface_v_changed_fraction"] = mean_for(
                 phase_metrics,

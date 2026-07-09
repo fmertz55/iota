@@ -28,6 +28,10 @@ COUNT_KEYS = {
     "rotation_events",
     "rotation_events_on_residual_entry",
     "rotation_events_on_secondary_exchange",
+    "angular_momentum_updates",
+    "angular_momentum_biased_rotation_events",
+    "angular_momentum_bias_abs_sum",
+    "angular_momentum_observed_turn_abs_sum",
 }
 
 MASK_PREFIXES = (
@@ -94,6 +98,14 @@ FIELDNAMES = [
     "rotation_events",
     "rotation_events_on_residual_entry",
     "rotation_events_on_secondary_exchange",
+    "angular_momentum_updates",
+    "angular_momentum_biased_rotation_events",
+    "angular_momentum_bias_abs_sum",
+    "angular_momentum_observed_turn_abs_sum",
+    "angular_momentum_nonzero_cells",
+    "angular_momentum_mean_abs_active",
+    "angular_momentum_mean_signed_active",
+    "angular_momentum_max_abs",
     "amplitude_transfers_per_tick",
     "failed_transfer_gates_per_tick",
     "deactivation_events_per_tick",
@@ -102,6 +114,8 @@ FIELDNAMES = [
     "rotation_events_per_tick",
     "rotation_events_on_residual_entry_per_tick",
     "rotation_events_on_secondary_exchange_per_tick",
+    "angular_momentum_updates_per_tick",
+    "angular_momentum_biased_rotation_events_per_tick",
     *[
         f"{prefix}_{suffix}"
         for prefix in MASK_PREFIXES
@@ -387,6 +401,20 @@ def turnover_row(
         "rotation_events_on_secondary_exchange": float(
             metric.get("rotation_events_on_secondary_exchange", 0.0)
         ),
+        "angular_momentum_updates": float(metric.get("angular_momentum_updates", 0.0)),
+        "angular_momentum_biased_rotation_events": float(
+            metric.get("angular_momentum_biased_rotation_events", 0.0)
+        ),
+        "angular_momentum_bias_abs_sum": float(metric.get("angular_momentum_bias_abs_sum", 0.0)),
+        "angular_momentum_observed_turn_abs_sum": float(
+            metric.get("angular_momentum_observed_turn_abs_sum", 0.0)
+        ),
+        "angular_momentum_nonzero_cells": float(metric.get("angular_momentum_nonzero_cells", 0.0)),
+        "angular_momentum_mean_abs_active": float(metric.get("angular_momentum_mean_abs_active", 0.0)),
+        "angular_momentum_mean_signed_active": float(
+            metric.get("angular_momentum_mean_signed_active", 0.0)
+        ),
+        "angular_momentum_max_abs": float(metric.get("angular_momentum_max_abs", 0.0)),
     }
     window = int(row["window_ticks"])
     row["amplitude_transfers_per_tick"] = fraction(row["amplitude_transfers"], window)
@@ -401,6 +429,11 @@ def turnover_row(
     )
     row["rotation_events_on_secondary_exchange_per_tick"] = fraction(
         row["rotation_events_on_secondary_exchange"],
+        window,
+    )
+    row["angular_momentum_updates_per_tick"] = fraction(row["angular_momentum_updates"], window)
+    row["angular_momentum_biased_rotation_events_per_tick"] = fraction(
+        row["angular_momentum_biased_rotation_events"],
         window,
     )
 

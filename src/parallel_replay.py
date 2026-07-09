@@ -106,6 +106,7 @@ def clone_world_exact(world: Any) -> Any:
         V=world.V.copy(),
         P=world.P.copy(),
         latent_A=world.latent_A.copy(),
+        angular_L=world.angular_L.copy() if getattr(world, "angular_L", None) is not None else None,
         initial_total_A=int(world.initial_total_A),
         ledger_enabled=bool(world.ledger_enabled),
         previous_active=world.previous_active.copy(),

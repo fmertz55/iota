@@ -43,12 +43,22 @@ FIELDNAMES = [
     "rotation_events",
     "rotation_events_on_residual_entry",
     "rotation_events_on_secondary_exchange",
+    "angular_momentum_updates",
+    "angular_momentum_biased_rotation_events",
+    "angular_momentum_bias_abs_sum",
+    "angular_momentum_observed_turn_abs_sum",
+    "angular_momentum_nonzero_cells",
+    "angular_momentum_mean_abs_active",
+    "angular_momentum_mean_signed_active",
+    "angular_momentum_max_abs",
     "amplitude_transfers_per_tick",
     "deactivation_events_per_tick",
     "residual_participations_per_tick",
     "rotation_events_per_tick",
     "rotation_events_on_residual_entry_per_tick",
     "rotation_events_on_secondary_exchange_per_tick",
+    "angular_momentum_updates_per_tick",
+    "angular_momentum_biased_rotation_events_per_tick",
     "active_new_cells",
     "active_lost_cells",
     "active_turnover_fraction",
@@ -100,6 +110,10 @@ SUMMARY_KEYS = [
     "mean_rotation_events_per_tick",
     "mean_rotation_events_on_residual_entry_per_tick",
     "mean_rotation_events_on_secondary_exchange_per_tick",
+    "mean_angular_momentum_updates_per_tick",
+    "mean_angular_momentum_biased_rotation_events_per_tick",
+    "mean_angular_momentum_mean_abs_active",
+    "max_angular_momentum_max_abs",
     "mean_persistent_active_v_changed_fraction",
     "mean_persistent_interface_v_changed_fraction",
     "max_persistent_active_v_changed_fraction",
@@ -451,6 +465,20 @@ def metric_from_world(world: Any, extras: dict[str, float]) -> dict[str, float]:
     }
     for key in COUNT_KEYS:
         metric[key] = float(extras.get(key, 0.0))
+    angular_L = getattr(world, "angular_L", None)
+    if angular_L is not None:
+        abs_L = np.abs(angular_L)
+        active_abs_L = abs_L[active]
+        active_L = angular_L[active]
+        metric["angular_momentum_nonzero_cells"] = float(np.count_nonzero(abs_L > 1e-6))
+        metric["angular_momentum_mean_abs_active"] = float(active_abs_L.mean()) if active_abs_L.size else 0.0
+        metric["angular_momentum_mean_signed_active"] = float(active_L.mean()) if active_L.size else 0.0
+        metric["angular_momentum_max_abs"] = float(abs_L.max()) if abs_L.size else 0.0
+    else:
+        metric["angular_momentum_nonzero_cells"] = 0.0
+        metric["angular_momentum_mean_abs_active"] = 0.0
+        metric["angular_momentum_mean_signed_active"] = 0.0
+        metric["angular_momentum_max_abs"] = 0.0
     return metric
 
 
@@ -508,6 +536,18 @@ def row_for_snapshots(
         "rotation_events": float(metric.get("rotation_events", 0.0)),
         "rotation_events_on_residual_entry": float(metric.get("rotation_events_on_residual_entry", 0.0)),
         "rotation_events_on_secondary_exchange": float(metric.get("rotation_events_on_secondary_exchange", 0.0)),
+        "angular_momentum_updates": float(metric.get("angular_momentum_updates", 0.0)),
+        "angular_momentum_biased_rotation_events": float(
+            metric.get("angular_momentum_biased_rotation_events", 0.0)
+        ),
+        "angular_momentum_bias_abs_sum": float(metric.get("angular_momentum_bias_abs_sum", 0.0)),
+        "angular_momentum_observed_turn_abs_sum": float(
+            metric.get("angular_momentum_observed_turn_abs_sum", 0.0)
+        ),
+        "angular_momentum_nonzero_cells": float(metric.get("angular_momentum_nonzero_cells", 0.0)),
+        "angular_momentum_mean_abs_active": float(metric.get("angular_momentum_mean_abs_active", 0.0)),
+        "angular_momentum_mean_signed_active": float(metric.get("angular_momentum_mean_signed_active", 0.0)),
+        "angular_momentum_max_abs": float(metric.get("angular_momentum_max_abs", 0.0)),
         "amplitude_transfers_per_tick": fraction(metric.get("amplitude_transfers", 0.0), window_ticks),
         "deactivation_events_per_tick": fraction(metric.get("deactivation_events", 0.0), window_ticks),
         "residual_participations_per_tick": fraction(
@@ -521,6 +561,11 @@ def row_for_snapshots(
         ),
         "rotation_events_on_secondary_exchange_per_tick": fraction(
             metric.get("rotation_events_on_secondary_exchange", 0.0),
+            window_ticks,
+        ),
+        "angular_momentum_updates_per_tick": fraction(metric.get("angular_momentum_updates", 0.0), window_ticks),
+        "angular_momentum_biased_rotation_events_per_tick": fraction(
+            metric.get("angular_momentum_biased_rotation_events", 0.0),
             window_ticks,
         ),
         "active_new_cells": active_delta["active_new_cells"],
@@ -604,6 +649,13 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
             rows,
             "rotation_events_on_secondary_exchange_per_tick",
         ),
+        "mean_angular_momentum_updates_per_tick": mean_for(rows, "angular_momentum_updates_per_tick"),
+        "mean_angular_momentum_biased_rotation_events_per_tick": mean_for(
+            rows,
+            "angular_momentum_biased_rotation_events_per_tick",
+        ),
+        "mean_angular_momentum_mean_abs_active": mean_for(rows, "angular_momentum_mean_abs_active"),
+        "max_angular_momentum_max_abs": max_for(rows, "angular_momentum_max_abs"),
         "mean_persistent_active_v_changed_fraction": mean_for(rows, "persistent_active_v_changed_fraction"),
         "mean_persistent_interface_v_changed_fraction": mean_for(rows, "persistent_interface_v_changed_fraction"),
         "max_persistent_active_v_changed_fraction": max_for(rows, "persistent_active_v_changed_fraction"),
