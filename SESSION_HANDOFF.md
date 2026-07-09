@@ -57,6 +57,7 @@ da5e245 Finding 034: history-coupled received rotation
 | Finding 038 | persistent non-merging directional lineage separation |
 | Finding 039 | directional lineages are not yet morphogenetic |
 | Finding 040 | secondary candidate bias over-separates direction but suppresses morphology |
+| Finding 041 | event-gated candidate bias further canalizes the interface |
 
 ## Core Interpretation
 
@@ -65,7 +66,9 @@ Current paper-safe claim:
 ```text
 Retained angular momentum coupled to the information-exchange vector creates bounded,
 ledger-exact, non-merging directional lineages. However, those lineages do not yet
-produce meaningful active/depleted morphology divergence.
+produce meaningful active/depleted morphology divergence. Candidate-ordering bias is
+now a tested negative lever: both global and event-gated versions increase directional
+separation while suppressing interface turnover and spatial divergence.
 ```
 
 Current negative result:
@@ -73,6 +76,8 @@ Current negative result:
 ```text
 Adding capacity-neutral secondary candidate ordering bias at strength 0.10 maximizes
 directional family separation but reduces interface turnover and spatial divergence.
+Event-gating that same ordering bias to interface/recruitment opportunities suppresses
+morphology even more.
 ```
 
 The system now has:
@@ -123,6 +128,7 @@ These may require restoring `output` into the sparse checkout:
 output/findings/configs/v031_vector_angular_momentum_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml
 output/findings/configs/v031_signed_exchange_control_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2.yaml
 output/findings/configs/v032_vector_angular_momentum_secondary_bias_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10.yaml
+output/findings/configs/v033_vector_angular_momentum_event_gated_bias_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10.yaml
 ```
 
 ## Key Artifacts
@@ -149,6 +155,14 @@ Finding 040:
 output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv
 output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv
 output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv
+```
+
+Finding 041:
+
+```text
+output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv
+output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv
+output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv
 ```
 
 ## Important Numbers
@@ -188,23 +202,41 @@ v0.3.2 phase-4 interface turnover:
   checkpoint 2048: 0.007599
 ```
 
-## Next Hypothesis
-
-Do not increase global secondary bias.
-
-The next principled test should make angular momentum affect real interface recruitment only when local structural opportunity exists.
-
-Candidate v0.3.3 rule:
+Finding 041:
 
 ```text
-event-gated L bias
+v0.3.3 event-gated combined families:
+  checkpoint 1536: 28
+  checkpoint 2048: 29
 
-Apply angular-momentum secondary ordering bias only when the candidate target is:
-  - depleted and adjacent to active interface, or
-  - newly recruitable boundary site, or
-  - part of an active/depleted interface turnover event.
+v0.3.3 phase-4 interface turnover:
+  checkpoint 1536: 0.007480
+  checkpoint 2048: 0.006402
 
-Keep valence, amplitude, range, payload, and conservation unchanged.
+v0.3.3 aggregate morphology:
+  mean transition distance:       0.903949
+  active spatial distance:        0.022345
+  depleted spatial distance:      0.029163
+  interface-union distance:       0.009316
+  active/depleted adjacency:      0.997477
+```
+
+## Next Hypothesis
+
+Do not continue secondary candidate ordering bias.
+
+The next principled test should couple angular momentum to the local recruitment event itself while preserving the ledger and fixed global mean residual participation.
+
+Candidate v0.3.4 rule:
+
+```text
+event-local residual participation modulation
+
+At active/depleted interface candidates only, let source/target L slightly modulate
+residual participation probability.
+
+Keep the global mean residual participation probability at 0.02. Keep valence,
+amplitude, range, payload, and conservation unchanged.
 ```
 
 Why:
@@ -212,7 +244,9 @@ Why:
 ```text
 v0.3.1 has directional memory without structural consequence.
 v0.3.2 proves global secondary bias over-partitions direction and suppresses motion.
-Event-gating asks whether L can bias morphology only at the actual interface frontier.
+v0.3.3 proves event-gated candidate ordering suppresses motion even more.
+Residual modulation asks whether L can affect which depleted boundary sites re-enter,
+without reordering all secondary handshakes.
 ```
 
 ## Acceptance Gate
@@ -241,9 +275,11 @@ signed/no-memory control if needed
 ## Suggested New Thread Prompt
 
 ```text
-Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-040.
-Continue from the v0.3.2 negative result: global angular-momentum secondary
-candidate bias over-partitions directional histories but suppresses morphogenesis.
-Next goal: implement and test event-gated angular-momentum coupling to interface
-recruitment, preserving bounded ledger-exact dynamics.
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-041.
+Continue from the v0.3.3 negative result: both global and event-gated
+angular-momentum secondary candidate ordering bias over-partition directional
+histories while suppressing morphogenesis.
+Next goal: implement and test event-local residual participation modulation,
+preserving bounded ledger-exact dynamics and fixed global mean residual
+participation probability.
 ```

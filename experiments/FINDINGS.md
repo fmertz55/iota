@@ -4246,3 +4246,101 @@ That would ask whether angular momentum can bias real interface recruitment with
 - `output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
 - `output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
 - `output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
+
+## Finding 041: Event-Gated Candidate Bias Further Canalizes the Interface
+
+Finding 040 showed that global angular-momentum secondary candidate ordering bias over-partitions directional histories while suppressing morphology. Finding 041 tests whether applying the same ordering bias only at local interface opportunity sites avoids that failure mode.
+
+Tested knob:
+
+```yaml
+angular_momentum_secondary_bias_enabled: true
+angular_momentum_secondary_bias_strength: 0.10
+angular_momentum_secondary_bias_preserve_behavior: true
+angular_momentum_secondary_bias_gate: interface_recruitment
+```
+
+The gate preserves the v0.3.2 law unless explicitly enabled. With `interface_recruitment`, the secondary ordering bias is only scored for secondary candidates whose target is in the current active/depleted interface, an inactive recruitable boundary site, or the recent active-state turnover neighborhood.
+
+### Protocol
+
+```text
+checkpoint_ticks = 1536, 2048
+horizon = 1024 for lineage/morphology
+phase_length = 256
+phase_count = 4
+samples = 8
+connectivity = cube26
+cluster_distance_threshold = 0.55
+```
+
+The openness gate remained clean:
+
+```text
+bounded_nonrunaway_count = 8 at both checkpoints
+ledger_exact_count = 8 at both checkpoints
+runaway_count = 0 at both checkpoints
+```
+
+### Lineage Result
+
+Event-gating does not recover morphology. It makes directional path separation strong, but with still lower late rotation entropy and lower interface turnover than the global secondary-bias law.
+
+| Variant | Checkpoint | Combined families | Phase-1 families | Phase-4 families | Adjacent distance | Phase-4 rotations/tick | Phase-4 transition entropy | Phase-4 interface turnover |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.1 `L` | `1536` | `20` | `3` | `8` | `0.698204` | `1.090820` | `0.510703` | `0.025388` |
+| v0.3.1 `L` | `2048` | `29` | `6` | `8` | `0.727426` | `0.933594` | `0.327589` | `0.020332` |
+| v0.3.2 global bias | `1536` | `32` | `8` | `8` | `0.786545` | `0.617676` | `0.126328` | `0.012663` |
+| v0.3.2 global bias | `2048` | `31` | `8` | `8` | `0.862250` | `0.363770` | `0.043633` | `0.007599` |
+| v0.3.3 event-gated bias | `1536` | `28` | `8` | `8` | `0.897186` | `0.334473` | `0.028008` | `0.007480` |
+| v0.3.3 event-gated bias | `2048` | `29` | `8` | `7` | `0.924075` | `0.313965` | `0.015625` | `0.006402` |
+
+The event gate increases adjacent phase distance beyond v0.3.2, but the mechanism metrics move in the wrong direction: phase-4 rotation rate, transition entropy, and active-interface turnover all fall.
+
+### Morphology Result
+
+Aggregate morphology distances across both checkpoints and four phases:
+
+| Variant | Mean transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Component-count delta | Active/depleted adjacency |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.1 `L` | `0.707355` | `0.048056` | `0.077674` | `0.071024` | `0.024380` | `0.031250` | `0.984773` |
+| v0.3.2 global bias | `0.826521` | `0.027289` | `0.040029` | `0.033884` | `0.010555` | `0.062500` | `0.996127` |
+| v0.3.3 event-gated bias | `0.903949` | `0.022345` | `0.029163` | `0.027105` | `0.009316` | `0.053571` | `0.997477` |
+
+This is a second negative result for candidate ordering as a morphogenetic coupling. Event-gating raises directional transition distance again, but active/depleted and interface-union spatial divergence drop below both v0.3.1 and v0.3.2.
+
+### Interpretation
+
+The precise claim:
+
+```text
+Event-gating angular-momentum secondary candidate ordering does not produce structural consequence. It further canalizes the interface: directional histories separate more strongly while spatial divergence, transition entropy, and interface turnover shrink.
+```
+
+This sharpens the failure mode:
+
+```text
+v0.3.1: retained L creates persistent directional histories without morphology.
+v0.3.2: global L ordering bias over-separates direction and suppresses morphology.
+v0.3.3: event-gated L ordering bias suppresses morphology even more.
+```
+
+The next lever should stop changing secondary candidate ordering. A more principled test is to couple `L` to the local recruitment event itself while preserving the ledger:
+
+```text
+event-local residual participation modulation
+
+At active/depleted interface candidates only, let the sign/magnitude of source or target L
+slightly modulate residual participation probability, with a fixed global mean probability
+and unchanged valence, payload, range, and conservation.
+```
+
+That asks whether angular memory can change which depleted boundary sites re-enter the active scaffold, without globally reordering all secondary handshakes.
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `output/findings/configs/v033_vector_angular_momentum_event_gated_bias_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10.yaml`
+- `output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
+- `output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
+- `output/findings/finding_041_v033_vector_angular_momentum_event_gated_bias_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`

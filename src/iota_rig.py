@@ -437,6 +437,64 @@ def vector_alignment(first: tuple[int, int, int], second: tuple[int, int, int]) 
     return max(-1.0, min(1.0, dot / (first_norm * second_norm)))
 
 
+def _shifted_mask(mask: np.ndarray, delta: tuple[int, int, int], wrap: bool) -> np.ndarray:
+    if wrap:
+        return np.roll(mask, shift=tuple(-value for value in delta), axis=(0, 1, 2))
+
+    size = int(mask.shape[0])
+    output = np.zeros_like(mask, dtype=bool)
+    source_slices: list[slice] = []
+    target_slices: list[slice] = []
+    for offset in delta:
+        if offset > 0:
+            source_slices.append(slice(0, size - offset))
+            target_slices.append(slice(offset, size))
+        elif offset < 0:
+            source_slices.append(slice(-offset, size))
+            target_slices.append(slice(0, size + offset))
+        else:
+            source_slices.append(slice(None))
+            target_slices.append(slice(None))
+    output[tuple(source_slices)] = mask[tuple(target_slices)]
+    return output
+
+
+def _adjacent_to_mask(mask: np.ndarray, neighbor_mode: str, wrap: bool) -> np.ndarray:
+    adjacent = np.zeros_like(mask, dtype=bool)
+    for raw_delta in candidate_neighbor_steps(neighbor_mode):
+        delta = tuple(int(value) for value in raw_delta)
+        adjacent |= _shifted_mask(mask, delta, wrap)
+    return adjacent
+
+
+def secondary_bias_gate_mask(world: World, neighbor_mode: str) -> np.ndarray:
+    depleted = (~world.active) & (world.latent_A == 0)
+    active_interface = world.active & _adjacent_to_mask(depleted, neighbor_mode, world.wrap)
+    depleted_interface = depleted & _adjacent_to_mask(world.active, neighbor_mode, world.wrap)
+    recruitable_boundary = (
+        (~world.active)
+        & (world.latent_A > 0)
+        & _adjacent_to_mask(world.active, neighbor_mode, world.wrap)
+    )
+    previous_active = (
+        world.previous_active
+        if world.previous_active.shape == world.active.shape
+        else world.active
+    )
+    active_turnover = previous_active != world.active
+    turnover_neighborhood = active_turnover | _adjacent_to_mask(
+        active_turnover,
+        neighbor_mode,
+        world.wrap,
+    )
+    return (
+        active_interface
+        | depleted_interface
+        | recruitable_boundary
+        | turnover_neighborhood
+    )
+
+
 def local_candidates(
     world: World,
     x: int,
@@ -452,6 +510,7 @@ def local_candidates(
     neighbor_mode: str = "cube26",
     secondary_bias_step: tuple[int, int, int] | None = None,
     secondary_bias_strength: float = 0.0,
+    secondary_bias_gate: np.ndarray | None = None,
 ) -> list[dict[str, Any]]:
     if valence <= 0:
         return []
@@ -495,7 +554,16 @@ def local_candidates(
         if influence <= 0:
             continue
         secondary_bias_score = 0.0
-        if secondary_bias_step is not None and order != 0 and secondary_bias_strength != 0.0:
+        secondary_bias_allowed = (
+            secondary_bias_gate is None
+            or bool(secondary_bias_gate[tx, ty, tz])
+        )
+        if (
+            secondary_bias_allowed
+            and secondary_bias_step is not None
+            and order != 0
+            and secondary_bias_strength != 0.0
+        ):
             secondary_bias_score = float(secondary_bias_strength) * vector_alignment(
                 secondary_bias_step,
                 (int(dx), int(dy), int(dz)),
@@ -606,6 +674,14 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     angular_momentum_secondary_bias_preserve_behavior = bool(
         cfg["constants"].get("angular_momentum_secondary_bias_preserve_behavior", True)
     )
+    angular_momentum_secondary_bias_gate = str(
+        cfg["constants"].get("angular_momentum_secondary_bias_gate", "none")
+    )
+    if angular_momentum_secondary_bias_gate not in {"none", "interface_recruitment"}:
+        raise ValueError(
+            "Unknown angular_momentum_secondary_bias_gate: "
+            f"{angular_momentum_secondary_bias_gate}"
+        )
     angular_momentum_secondary_bias_enabled = (
         angular_momentum_enabled
         and angular_momentum_secondary_bias_enabled
@@ -664,6 +740,14 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     angular_momentum_secondary_bias_selected_candidates = 0
     exchange_alignments: list[float] = []
     secondary_exchange_alignments: list[float] = []
+    gated_secondary_bias_mask = (
+        secondary_bias_gate_mask(world, neighbor_mode)
+        if (
+            angular_momentum_secondary_bias_enabled
+            and angular_momentum_secondary_bias_gate == "interface_recruitment"
+        )
+        else None
+    )
 
     for x, y, z in coords:
         a = int(world.A[x, y, z])
@@ -718,6 +802,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             neighbor_mode,
             secondary_bias_step=secondary_bias_step,
             secondary_bias_strength=secondary_bias_strength,
+            secondary_bias_gate=gated_secondary_bias_mask,
         )
         angular_momentum_secondary_bias_selected_candidates += sum(
             1
