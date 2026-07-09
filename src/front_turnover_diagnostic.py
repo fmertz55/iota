@@ -32,6 +32,8 @@ COUNT_KEYS = {
     "angular_momentum_biased_rotation_events",
     "angular_momentum_bias_abs_sum",
     "angular_momentum_observed_turn_abs_sum",
+    "angular_momentum_secondary_bias_sources",
+    "angular_momentum_secondary_bias_selected_candidates",
 }
 
 MASK_PREFIXES = (
@@ -102,6 +104,8 @@ FIELDNAMES = [
     "angular_momentum_biased_rotation_events",
     "angular_momentum_bias_abs_sum",
     "angular_momentum_observed_turn_abs_sum",
+    "angular_momentum_secondary_bias_sources",
+    "angular_momentum_secondary_bias_selected_candidates",
     "angular_momentum_nonzero_cells",
     "angular_momentum_mean_abs_active",
     "angular_momentum_mean_signed_active",
@@ -116,6 +120,8 @@ FIELDNAMES = [
     "rotation_events_on_secondary_exchange_per_tick",
     "angular_momentum_updates_per_tick",
     "angular_momentum_biased_rotation_events_per_tick",
+    "angular_momentum_secondary_bias_sources_per_tick",
+    "angular_momentum_secondary_bias_selected_candidates_per_tick",
     *[
         f"{prefix}_{suffix}"
         for prefix in MASK_PREFIXES
@@ -409,6 +415,12 @@ def turnover_row(
         "angular_momentum_observed_turn_abs_sum": float(
             metric.get("angular_momentum_observed_turn_abs_sum", 0.0)
         ),
+        "angular_momentum_secondary_bias_sources": float(
+            metric.get("angular_momentum_secondary_bias_sources", 0.0)
+        ),
+        "angular_momentum_secondary_bias_selected_candidates": float(
+            metric.get("angular_momentum_secondary_bias_selected_candidates", 0.0)
+        ),
         "angular_momentum_nonzero_cells": float(metric.get("angular_momentum_nonzero_cells", 0.0)),
         "angular_momentum_mean_abs_active": float(metric.get("angular_momentum_mean_abs_active", 0.0)),
         "angular_momentum_mean_signed_active": float(
@@ -434,6 +446,14 @@ def turnover_row(
     row["angular_momentum_updates_per_tick"] = fraction(row["angular_momentum_updates"], window)
     row["angular_momentum_biased_rotation_events_per_tick"] = fraction(
         row["angular_momentum_biased_rotation_events"],
+        window,
+    )
+    row["angular_momentum_secondary_bias_sources_per_tick"] = fraction(
+        row["angular_momentum_secondary_bias_sources"],
+        window,
+    )
+    row["angular_momentum_secondary_bias_selected_candidates_per_tick"] = fraction(
+        row["angular_momentum_secondary_bias_selected_candidates"],
         window,
     )
 

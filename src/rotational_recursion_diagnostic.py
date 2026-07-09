@@ -47,6 +47,8 @@ FIELDNAMES = [
     "angular_momentum_biased_rotation_events",
     "angular_momentum_bias_abs_sum",
     "angular_momentum_observed_turn_abs_sum",
+    "angular_momentum_secondary_bias_sources",
+    "angular_momentum_secondary_bias_selected_candidates",
     "angular_momentum_nonzero_cells",
     "angular_momentum_mean_abs_active",
     "angular_momentum_mean_signed_active",
@@ -59,6 +61,8 @@ FIELDNAMES = [
     "rotation_events_on_secondary_exchange_per_tick",
     "angular_momentum_updates_per_tick",
     "angular_momentum_biased_rotation_events_per_tick",
+    "angular_momentum_secondary_bias_sources_per_tick",
+    "angular_momentum_secondary_bias_selected_candidates_per_tick",
     "active_new_cells",
     "active_lost_cells",
     "active_turnover_fraction",
@@ -112,6 +116,8 @@ SUMMARY_KEYS = [
     "mean_rotation_events_on_secondary_exchange_per_tick",
     "mean_angular_momentum_updates_per_tick",
     "mean_angular_momentum_biased_rotation_events_per_tick",
+    "mean_angular_momentum_secondary_bias_sources_per_tick",
+    "mean_angular_momentum_secondary_bias_selected_candidates_per_tick",
     "mean_angular_momentum_mean_abs_active",
     "max_angular_momentum_max_abs",
     "mean_persistent_active_v_changed_fraction",
@@ -544,6 +550,12 @@ def row_for_snapshots(
         "angular_momentum_observed_turn_abs_sum": float(
             metric.get("angular_momentum_observed_turn_abs_sum", 0.0)
         ),
+        "angular_momentum_secondary_bias_sources": float(
+            metric.get("angular_momentum_secondary_bias_sources", 0.0)
+        ),
+        "angular_momentum_secondary_bias_selected_candidates": float(
+            metric.get("angular_momentum_secondary_bias_selected_candidates", 0.0)
+        ),
         "angular_momentum_nonzero_cells": float(metric.get("angular_momentum_nonzero_cells", 0.0)),
         "angular_momentum_mean_abs_active": float(metric.get("angular_momentum_mean_abs_active", 0.0)),
         "angular_momentum_mean_signed_active": float(metric.get("angular_momentum_mean_signed_active", 0.0)),
@@ -566,6 +578,14 @@ def row_for_snapshots(
         "angular_momentum_updates_per_tick": fraction(metric.get("angular_momentum_updates", 0.0), window_ticks),
         "angular_momentum_biased_rotation_events_per_tick": fraction(
             metric.get("angular_momentum_biased_rotation_events", 0.0),
+            window_ticks,
+        ),
+        "angular_momentum_secondary_bias_sources_per_tick": fraction(
+            metric.get("angular_momentum_secondary_bias_sources", 0.0),
+            window_ticks,
+        ),
+        "angular_momentum_secondary_bias_selected_candidates_per_tick": fraction(
+            metric.get("angular_momentum_secondary_bias_selected_candidates", 0.0),
             window_ticks,
         ),
         "active_new_cells": active_delta["active_new_cells"],
@@ -653,6 +673,14 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "mean_angular_momentum_biased_rotation_events_per_tick": mean_for(
             rows,
             "angular_momentum_biased_rotation_events_per_tick",
+        ),
+        "mean_angular_momentum_secondary_bias_sources_per_tick": mean_for(
+            rows,
+            "angular_momentum_secondary_bias_sources_per_tick",
+        ),
+        "mean_angular_momentum_secondary_bias_selected_candidates_per_tick": mean_for(
+            rows,
+            "angular_momentum_secondary_bias_selected_candidates_per_tick",
         ),
         "mean_angular_momentum_mean_abs_active": mean_for(rows, "angular_momentum_mean_abs_active"),
         "max_angular_momentum_max_abs": max_for(rows, "angular_momentum_max_abs"),

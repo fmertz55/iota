@@ -450,6 +450,8 @@ def local_candidates(
     valence: int,
     bond_probability: float,
     neighbor_mode: str = "cube26",
+    secondary_bias_step: tuple[int, int, int] | None = None,
+    secondary_bias_strength: float = 0.0,
 ) -> list[dict[str, Any]]:
     if valence <= 0:
         return []
@@ -492,6 +494,12 @@ def local_candidates(
             influence *= 0.5
         if influence <= 0:
             continue
+        secondary_bias_score = 0.0
+        if secondary_bias_step is not None and order != 0 and secondary_bias_strength != 0.0:
+            secondary_bias_score = float(secondary_bias_strength) * vector_alignment(
+                secondary_bias_step,
+                (int(dx), int(dy), int(dz)),
+            )
         candidates.append(
             {
                 "target": target,
@@ -499,10 +507,16 @@ def local_candidates(
                 "behavior": behavior,
                 "influence": influence,
                 "order": order,
+                "secondary_bias_score": secondary_bias_score,
             }
         )
 
-    candidates.sort(key=lambda row: (-float(row["influence"]), int(row["order"])))
+    candidates.sort(
+        key=lambda row: (
+            -float(row["influence"]) - float(row.get("secondary_bias_score", 0.0)),
+            int(row["order"]),
+        )
+    )
 
     selected = []
     primary_candidates = [candidate for candidate in candidates if int(candidate["order"]) == 0]
@@ -582,6 +596,21 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     angular_momentum_retention = float(cfg["constants"].get("angular_momentum_retention", 1.0))
     angular_momentum_cap = max(0.0, float(cfg["constants"].get("angular_momentum_cap", received_rotation_max_offset)))
     angular_momentum_enabled = angular_momentum_enabled and angular_momentum_cap > 0.0
+    angular_momentum_secondary_bias_enabled = bool(
+        cfg["constants"].get("angular_momentum_secondary_bias_enabled", False)
+    )
+    angular_momentum_secondary_bias_strength = max(
+        0.0,
+        float(cfg["constants"].get("angular_momentum_secondary_bias_strength", 0.0)),
+    )
+    angular_momentum_secondary_bias_preserve_behavior = bool(
+        cfg["constants"].get("angular_momentum_secondary_bias_preserve_behavior", True)
+    )
+    angular_momentum_secondary_bias_enabled = (
+        angular_momentum_enabled
+        and angular_momentum_secondary_bias_enabled
+        and angular_momentum_secondary_bias_strength > 0.0
+    )
     residual_participation_probability = clamp_probability(
         float(
             cfg["constants"].get(
@@ -631,6 +660,8 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
     angular_momentum_biased_rotation_events = 0
     angular_momentum_bias_abs_sum = 0.0
     angular_momentum_observed_turn_abs_sum = 0.0
+    angular_momentum_secondary_bias_sources = 0
+    angular_momentum_secondary_bias_selected_candidates = 0
     exchange_alignments: list[float] = []
     secondary_exchange_alignments: list[float] = []
 
@@ -643,6 +674,35 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         p = int(world.P[x, y, z])
         primary_dx, primary_dy, primary_dz, _ = vector_step(world, v_idx, a, r, p)
         primary_step = (primary_dx, primary_dy, primary_dz)
+        secondary_bias_step = None
+        secondary_bias_strength = 0.0
+        if angular_momentum_secondary_bias_enabled:
+            source_l = float(old_L[x, y, z])
+            if abs(source_l) > 1e-6:
+                bias_offset = 1 if source_l > 0.0 else -1
+                bias_v = offset_vector_state(
+                    world,
+                    v_idx,
+                    bias_offset,
+                    preserve_behavior=angular_momentum_secondary_bias_preserve_behavior,
+                )
+                secondary_bias_dx, secondary_bias_dy, secondary_bias_dz, _ = vector_step(
+                    world,
+                    bias_v,
+                    a,
+                    r,
+                    p,
+                )
+                secondary_bias_step = (
+                    secondary_bias_dx,
+                    secondary_bias_dy,
+                    secondary_bias_dz,
+                )
+                secondary_bias_strength = angular_momentum_secondary_bias_strength * min(
+                    1.0,
+                    abs(source_l) / angular_momentum_cap,
+                )
+                angular_momentum_secondary_bias_sources += 1
         candidates = local_candidates(
             world,
             int(x),
@@ -656,6 +716,13 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             valence,
             bond_probability,
             neighbor_mode,
+            secondary_bias_step=secondary_bias_step,
+            secondary_bias_strength=secondary_bias_strength,
+        )
+        angular_momentum_secondary_bias_selected_candidates += sum(
+            1
+            for candidate in candidates
+            if int(candidate["order"]) != 0 and abs(float(candidate.get("secondary_bias_score", 0.0))) > 0.0
         )
 
         for candidate in candidates:
@@ -867,6 +934,8 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "angular_momentum_biased_rotation_events": angular_momentum_biased_rotation_events,
         "angular_momentum_bias_abs_sum": angular_momentum_bias_abs_sum,
         "angular_momentum_observed_turn_abs_sum": angular_momentum_observed_turn_abs_sum,
+        "angular_momentum_secondary_bias_sources": angular_momentum_secondary_bias_sources,
+        "angular_momentum_secondary_bias_selected_candidates": angular_momentum_secondary_bias_selected_candidates,
         "mean_A": float(world.A[world.active].mean()) if active_count else 0.0,
         "mean_R": float(world.R[world.active].mean()) if active_count else 0.0,
         "max_payload_fraction": max_payload_fraction,

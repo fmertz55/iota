@@ -4101,3 +4101,148 @@ Do separated directional lineages eventually produce distinguishable interface/c
 - `output/findings/finding_038_v031_vector_angular_momentum_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_summary.csv`
 - `output/findings/finding_038_v031_signed_exchange_control_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2_summary.csv`
 - `output/findings/finding_038_v031_signed_exchange_control_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2_summary.csv`
+
+## Finding 039: Directional Lineages Are Not Yet Morphogenetic
+
+Finding 038 showed that v0.3.1 angular momentum creates non-merging directional lineages. Finding 039 tests whether those directional lineages predict active/depleted geometry.
+
+### Protocol
+
+A new lineage-conditioned morphology diagnostic reruns the same continuation seeds and clusters directional families exactly as the lineage-persistence gate does. It then compares pairwise geometry by phase family and full lineage path.
+
+```text
+checkpoint_ticks = 1536, 2048
+horizon = 1024
+phase_length = 256
+phase_count = 4
+samples = 8
+connectivity = cube26
+cluster_distance_threshold = 0.55
+```
+
+Measured per pair:
+
+```text
+active Jaccard distance
+depleted Jaccard distance
+active-interface Jaccard distance
+interface-union Jaccard distance
+largest-component difference
+component-count difference
+component-entropy difference
+transition-matrix distance
+```
+
+### Aggregate Result
+
+| Variant | Mean transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Largest-component delta | Component-count delta |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.1 angular memory | `0.707355` | `0.048056` | `0.077674` | `0.071024` | `0.024380` | `0.031250` | `0.031250` |
+| signed/no-memory control | `0.598069` | `0.051434` | `0.091308` | `0.080074` | `0.026525` | `0.000000` | `0.000000` |
+
+The result is negative for morphogenesis.
+
+v0.3.1 has stronger directional separation, but its active/depleted spatial divergence is not larger than the signed/no-memory control. In fact, the control has slightly larger mean active, depleted, active-interface, and interface-union Jaccard distances.
+
+### Phase-4 Result
+
+| Variant | Checkpoint | Phase families | Active distance | Depleted distance | Interface-union distance | Component-count delta | Transition/active correlation |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.1 angular memory | `1536` | `8` | `0.051256` | `0.071714` | `0.027538` | `0.000` | `-0.297988` |
+| v0.3.1 angular memory | `2048` | `8` | `0.043283` | `0.061587` | `0.022483` | `0.250` | `-0.018523` |
+| signed/no-memory control | `1536` | `2` | `0.055855` | `0.087229` | `0.032253` | `0.000` | `-0.048578` |
+| signed/no-memory control | `2048` | `3` | `0.047790` | `0.079606` | `0.026826` | `0.000` | `-0.095875` |
+
+The phase-4 directional families are distinct in transition space, but this does not translate into larger spatial distances. Correlations between transition distance and active/interface geometry are weak or negative.
+
+### Interpretation
+
+The precise claim is:
+
+```text
+v0.3.1 produces persistent directional lineage separation, but those lineages are not yet morphogenetic. The active/depleted scaffold undergoes small site-level differences, but directional family identity does not predict distinct component or interface geometry.
+```
+
+This closes the Finding 038 caveat. The system has directional memory, but not yet directional memory with structural consequence.
+
+### Artifacts
+
+- `src/lineage_conditioned_morphology.py`
+- `output/findings/finding_039_v031_vector_angular_momentum_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_summary.csv`
+- `output/findings/finding_039_v031_signed_exchange_control_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2_summary.csv`
+
+## Finding 040: Secondary Candidate Bias Maximizes Directional Separation but Suppresses Morphology
+
+Finding 040 tests one capacity-neutral morphogenetic coupling:
+
+```text
+retained angular momentum biases secondary candidate ordering
+```
+
+This does not change valence count, amplitude, range, payload, conservation, or transfer capacity. It only changes which secondary candidates are preferred when source `L` is nonzero.
+
+Tested knob:
+
+```yaml
+angular_momentum_secondary_bias_enabled: true
+angular_momentum_secondary_bias_strength: 0.10
+angular_momentum_secondary_bias_preserve_behavior: true
+```
+
+### Lineage Result
+
+All runs remained bounded, ledger-exact, and non-runaway.
+
+| Variant | Checkpoint | Combined families | Phase-1 families | Phase-4 families | Adjacent distance | Phase-4 rotations/tick | Phase-4 transition entropy | Phase-4 interface turnover |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.1 angular memory | `1536` | `20` | `3` | `8` | `0.698204` | `1.090820` | `0.510703` | `0.025388` |
+| v0.3.1 angular memory | `2048` | `29` | `6` | `8` | `0.727426` | `0.933594` | `0.327589` | `0.020332` |
+| v0.3.2 secondary bias | `1536` | `32` | `8` | `8` | `0.786545` | `0.617676` | `0.126328` | `0.012663` |
+| v0.3.2 secondary bias | `2048` | `31` | `8` | `8` | `0.862250` | `0.363770` | `0.043633` | `0.007599` |
+
+The secondary-bias law maximizes directional family separation. Most phases become all-singleton families.
+
+But this is not a complexity win: rotation rate, transition entropy, and interface turnover all drop sharply.
+
+### Morphology Result
+
+| Variant | Mean transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Active/depleted adjacency | Largest cube26 component | Cube26 components |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.1 angular memory | `0.707355` | `0.048056` | `0.077674` | `0.071024` | `0.024380` | `0.984773` | `140.984375` | `17.015625` |
+| v0.3.2 secondary bias | `0.826521` | `0.027289` | `0.040029` | `0.033884` | `0.010555` | `0.996127` | `137.000000` | `16.031250` |
+
+The secondary-bias law increases directional separation but reduces spatial divergence. It also raises active/depleted adjacency toward near-total interface coupling and shifts the scaffold to a slightly smaller/lower-count component structure.
+
+### Interpretation
+
+The precise claim is:
+
+```text
+Coupling angular momentum to secondary candidate ordering does not produce morphogenesis. It over-partitions directional histories while suppressing interface turnover and reducing active/depleted spatial divergence.
+```
+
+This is an important negative result. It shows that simply letting `L` choose secondary handshakes is too canalizing at `strength = 0.10` under this regime.
+
+The failure mode is now sharper:
+
+```text
+v0.3.1: directional memory without structural consequence.
+v0.3.2 secondary bias: stronger directional separation with less structural motion.
+```
+
+The next lever should not be stronger secondary bias. The next principled test should either lower/condition the bias or make it event-gated:
+
+```text
+only apply secondary ordering bias when local interface turnover is present, or when a candidate would recruit a new/depleted boundary site.
+```
+
+That would ask whether angular momentum can bias real interface recruitment without globally freezing the scaffold.
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/lineage_conditioned_morphology.py`
+- `output/findings/configs/v032_vector_angular_momentum_secondary_bias_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10.yaml`
+- `output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_rotation_aware_openness_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
+- `output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_lineage_persistence_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
+- `output/findings/finding_040_v032_vector_angular_momentum_secondary_bias_lineage_conditioned_morphology_seed56_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amsb0p10_summary.csv`
