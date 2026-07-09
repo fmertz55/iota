@@ -39,6 +39,8 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+d7f07f0 Finding 045: residual geometry audit
+9132bd2 Finding 044: seed-robust fixed-mean contrast
 7624f30 Findings 042-043: fixed-mean residual recruitment
 5979f42 Finding 041: event-gated candidate bias
 360dec6 Created SESSION_HANDOFF.md
@@ -63,6 +65,7 @@ fa7872d Finding 037: four-phase lineage persistence
 | Finding 043 | source-target contrast breaks interface symmetry at fixed mean |
 | Finding 044 | source-target contrast is seed-robust at fixed mean |
 | Finding 045 | residual geometry audit identifies the component-level lever |
+| Finding 046 | component-bridge bias improves interface divergence but not robust component morphology |
 
 ## Core Interpretation
 
@@ -77,8 +80,10 @@ residual recruitment is the better coupling site. The source-target `L` contrast
 at strength `2.0` is now seed-robust: it beats both the v0.3.1 angular-memory baseline
 and signed/no-memory control on interface-union divergence in 6/6 tested seeds while
 preserving expected residual participation to floating precision. The residual geometry
-audit shows why component morphology has not moved yet: the current contrast law
-slightly suppresses the rarer cube26 component-bridge candidates.
+audit showed why component morphology had not moved: v0.3.5 slightly suppressed rarer
+cube26 component-bridge candidates. v0.3.6 successfully reverses that class-level
+suppression at fixed mean and improves aggregate interface-union divergence, but it
+does not yet produce robust component-level morphology.
 ```
 
 Current negative result:
@@ -95,6 +100,9 @@ Source-target fixed-mean residual contrast at strength 2.0 improves interface-un
 spatial divergence above both v0.3.1 and signed/no-memory control, without increasing
 expected activation. v0.3.5 confirms this is seed-robust at the interface level. It is
 not yet component-level morphology.
+v0.3.6 component-bridge geometry bias improves the aggregate interface result and
+produces one nonzero component seed, but active-set improvement remains 3/6 seeds and
+component-level movement remains 1/6 seeds.
 ```
 
 The system now has:
@@ -105,12 +113,13 @@ directional lineage persistence
 bounded ledger-exact dynamics
 fixed-mean seed-robust interface symmetry breaking
 geometry audit for residual re-entry opportunities
+fixed-mean component-bridge selection control
 ```
 
 It does not yet have:
 
 ```text
-component-level divergence
+robust component-level divergence
 open-ended complexity
 ```
 
@@ -126,6 +135,7 @@ src/rotation_lineage_persistence.py
 src/lineage_conditioned_morphology.py
 src/rotational_recursion_diagnostic.py
 src/front_turnover_diagnostic.py
+src/residual_recruitment_geometry_audit.py
 ```
 
 Findings:
@@ -141,6 +151,7 @@ Finding 042: Fixed-Mean Residual Recruitment Restores Turnover
 Finding 043: Source-Target Contrast Breaks Interface Symmetry at Fixed Mean
 Finding 044: Source-Target Contrast Is Seed-Robust at Fixed Mean
 Finding 045: Residual Geometry Audit Identifies the Component-Level Lever
+Finding 046: Component-Bridge Bias Improves Interface Divergence but Not Robust Component Morphology
 ```
 
 ## Key Configs
@@ -157,6 +168,7 @@ output/findings/configs/v034b_fixed_mean_residual_recruitment_contrast_amrb2p0_s
 output/findings/configs/v035_contrast2_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml
 output/findings/configs/v035_v031_angular_memory_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2.yaml
 output/findings/configs/v035_signed_control_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0_amr0_cap2.yaml
+output/findings/configs/v036_component_bridge_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb2p0_cb0p25_lb0p05_ffn0p05_een0p05.yaml
 ```
 
 ## Key Artifacts
@@ -237,6 +249,21 @@ output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_cl
 output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_classes.csv
 output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_ticks.csv
 output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed*_targets.csv
+```
+
+Finding 046:
+
+```text
+output/findings/finding_046_v036_component_bridge_pass_table.csv
+output/findings/finding_046_v036_component_bridge_aggregate_by_variant.csv
+output/findings/finding_046_v036_component_bridge_fixed_mean_audit.csv
+output/findings/finding_046_v036_component_bridge_geometry_class_summary.csv
+output/findings/finding_046_v036_component_bridge_summary.json
+output/findings/finding_046_v036_component_bridge_seed*_rotation_aware_openness_summary.csv
+output/findings/finding_046_v036_component_bridge_seed*_lineage_persistence_summary.csv
+output/findings/finding_046_v036_component_bridge_seed*_lineage_conditioned_morphology_summary.csv
+output/findings/finding_046_v036_component_bridge_seed*_front_turnover_turnover_summary.json
+output/findings/finding_046_v036_component_bridge_seed*_residual_geometry_audit_summary.json
 ```
 
 ## Important Numbers
@@ -399,29 +426,83 @@ interpretation:
   candidates, which are the most plausible local route to component morphology.
 ```
 
+Finding 046:
+
+```text
+v0.3.6 component-bridge test:
+  seeds:                                  42, 43, 44, 45, 46, 56
+  score mode:                             source_target_L_contrast_component_bridge
+  residual bias strength:                 2.0
+  component_bridge_cube26 weight:          0.25
+  local_bridge_face6 weight:               0.05
+  flat_front / edge_extension weights:    -0.05
+
+fixed-mean / safety:
+  fixed_mean_ok_count:                    6/6
+  safety_ok_count:                        6/6
+  max_abs_summed_probability_delta:       4.805045e-13
+  max_abs_row_probability_delta:          1.421085e-14
+
+geometry selection:
+  component_bridge_cube26 base share:     0.082043
+  component_bridge_cube26 biased share:   0.095296
+  component_bridge_cube26 lift:           1.161532
+  local_bridge_face6 lift:                1.003440
+  flat_front lift:                        0.869412
+  edge_extension lift:                    0.796561
+
+seed pass counts:
+  interface-union beats both baselines:   6/6
+  interface-union beats v0.3.5 contrast:  4/6
+  active distance beats both baselines:   3/6
+  active distance beats v0.3.5 contrast:  3/6
+  component nonzero seeds:                1/6
+
+aggregate morphology:
+  component-bridge interface-union:       0.023103
+  v0.3.5 contrast interface-union:        0.021926
+  v0.3.1 interface-union:                 0.017880
+  signed interface-union:                 0.018949
+  component-bridge active distance:       0.038195
+  component-bridge component-count delta: 0.005208
+  component-bridge largest-comp delta:    0.005208
+  component-bridge phase-4 turnover:      0.024020
+
+interpretation:
+  v0.3.6 is a partial positive. It proves component-bridge candidates can be
+  preferentially selected at fixed mean and improves interface divergence, but
+  component-level morphology remains seed-specific rather than robust.
+```
+
 ## Next Hypothesis
 
 Do not continue secondary candidate ordering bias.
 
-Keep the coupling at the local residual recruitment event. v0.3.5 has already passed
-the seed-robustness gate for the fixed-mean source-target contrast law. The next
-principled test is component-bridge boundary work at fixed mean, using v0.3.5
-contrast `2.0` as the baseline and Finding 045's geometry classes as the target.
+Keep the coupling at the local residual recruitment event. v0.3.6 shows that
+component-bridge geometry can be selected at fixed mean, but bridge quantity alone
+does not robustly produce component morphology. The next principled test is bridge
+quality: which residual bridge re-entry events actually change component count or
+largest-component structure?
 
-Candidate v0.3.6 direction:
+Candidate v0.3.7 direction:
 
 ```text
-component-bridge fixed-mean residual recruitment
+component-bridge quality audit / targeted sweep
 
 baseline law:
-  angular_momentum_residual_bias_score_mode = source_target_L_contrast
+  angular_momentum_residual_bias_score_mode = source_target_L_contrast_component_bridge
   angular_momentum_residual_bias_strength = 2.0
 
-possible extension:
-  add positive local geometry weight for component_bridge_cube26 candidates.
-  optionally add weaker positive weight for local_bridge_face6 candidates.
-  keep flat_front / edge_extension neutral or slightly negative.
-  renormalize residual recruitment probabilities back to the same expected mean.
+recommended sweep:
+  component_bridge_cube26 weight = 0.25, 0.50, 0.75
+  with and without local_bridge_face6 = 0.05
+  keep or strengthen flat_front / edge_extension penalties
+
+required diagnostic:
+  realized residual re-entry events by geometry class.
+  post-entry component-count and largest-component changes.
+  seed 46 responder versus non-responding seeds.
+  fixed-mean renormalization unchanged.
 ```
 
 Why:
@@ -438,6 +519,8 @@ divergence at fixed mean activation.
 v0.3.5 proves that contrast result is seed-robust at the interface level.
 Finding 045 proves there are enough local bridge/neck opportunities and that current
 contrast slightly suppresses the cube26 component-bridge class.
+Finding 046 proves component bridges can be selected at fixed mean and improve
+interface-union divergence, but robust component-level morphology still fails.
 ```
 
 ## Acceptance Gate
@@ -461,7 +544,7 @@ bounded_nonrunaway_count = samples
 ledger_exact_count = samples
 interface-union distance above v0.3.1/control on most tested seeds
 active-set distance above v0.3.1/control on a majority of tested seeds
-component-count, largest-component, or component-entropy deltas above numerical dust
+component-count, largest-component, or component-entropy deltas above numerical dust in a majority of seeds
 phase-4 interface turnover not collapsed
 ```
 
@@ -478,10 +561,12 @@ signed/no-memory control if needed
 ## Suggested New Thread Prompt
 
 ```text
-Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-045.
-Continue from Finding 045: v0.3.5 fixed-mean source-target L contrast is seed-robust
-at the interface level, but the residual geometry audit shows it slightly suppresses
-cube26 component-bridge candidates.
-Next goal: implement v0.3.6 component-bridge fixed-mean residual recruitment, using
-v0.3.5 contrast 2.0 as the baseline and preserving mean activation exactly.
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-046.
+Continue from Finding 046: v0.3.6 component-bridge fixed-mean residual recruitment
+successfully amplifies cube26 bridge candidate selection and improves aggregate
+interface-union divergence, but component-level morphology is still seed-specific
+and only nonzero in 1/6 seeds.
+Next goal: run v0.3.7 component-bridge quality audit / targeted sweep. Separate
+bridge quantity from bridge quality by measuring realized residual re-entry events
+by geometry class and post-entry component-count / largest-component changes.
 ```

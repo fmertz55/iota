@@ -4960,3 +4960,222 @@ fixed residual probability sum within floating precision
 - `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed_ensemble_class_summary.csv`
 - `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed_ensemble_seed_summary.csv`
 - `output/findings/finding_045_v036_residual_geometry_audit_v035_contrast2_seed_ensemble_summary.json`
+
+## Finding 046: Component-Bridge Bias Improves Interface Divergence but Not Robust Component Morphology
+
+Finding 045 identified the missing local lever: v0.3.5 source-target contrast slightly suppressed the `component_bridge_cube26` residual-recruitment class even though that class is the most plausible route to component-level morphology.
+
+Finding 046 implements the direct v0.3.6 test: keep fixed-mean residual recruitment, keep the v0.3.5 source-target contrast law, and add a local geometry preference for component bridges.
+
+### Mechanism
+
+v0.3.6 adds one residual score mode:
+
+```text
+angular_momentum_residual_bias_score_mode = source_target_L_contrast_component_bridge
+```
+
+The score is:
+
+```text
+source_target_L_contrast + local_geometry_weight
+```
+
+with fixed-mean per-event renormalization preserved exactly.
+
+The tested weights were intentionally conservative:
+
+```yaml
+component_bridge_cube26: 0.25
+local_bridge_face6: 0.05
+flat_front: -0.05
+edge_extension: -0.05
+tip_seed: 0.0
+diagonal_shear: 0.0
+concave_fill: 0.0
+ridge_or_corner_fill: 0.0
+interface_fill: 0.0
+```
+
+### Protocol
+
+Test matrix:
+
+```text
+variant: v0.3.6 component_bridge
+seeds: 42, 43, 44, 45, 46, 56
+checkpoints: 1536, 2048
+samples/checkpoint: 8
+openness horizon: 256
+morphology horizon: 1024
+phase length: 256
+baseline comparisons:
+  v0.3.5 contrast 2.0
+  v0.3.1 angular memory
+  signed/no-memory control
+```
+
+### Fixed-Mean Audit
+
+The fixed-mean audit passed on every seed:
+
+| Seed | Base probability sum | Biased probability sum | Summed delta | Max row delta | Final ledger error |
+|---:|---:|---:|---:|---:|---:|
+| `42` | `189.551429` | `189.551429` | `3.512746e-13` | `8.881784e-15` | `0.0` |
+| `43` | `139.397143` | `139.397143` | `1.917355e-13` | `6.661338e-15` | `0.0` |
+| `44` | `182.570000` | `182.570000` | `3.175238e-13` | `7.105427e-15` | `0.0` |
+| `45` | `88.910000` | `88.910000` | `5.834222e-14` | `4.440892e-15` | `0.0` |
+| `46` | `244.368571` | `244.368571` | `4.805045e-13` | `1.421085e-14` | `0.0` |
+| `56` | `239.005714` | `239.005714` | `4.729550e-13` | `1.154632e-14` | `0.0` |
+
+Across the six tested seeds:
+
+```text
+fixed_mean_ok_count = 6/6
+safety_ok_count = 6/6
+max_abs_summed_probability_delta = 4.805045e-13
+max_abs_row_probability_delta = 1.421085e-14
+```
+
+### Geometry Selection
+
+The mechanism did what it was designed to do. It reversed the v0.3.5 suppression of component bridges:
+
+| Class | Base share | Biased share | Selection lift | Eligible candidates | Unique target observations |
+|---|---:|---:|---:|---:|---:|
+| `local_bridge_face6` | `0.811189` | `0.813979` | `1.003440` | `62215` | `40274` |
+| `component_bridge_cube26` | `0.082043` | `0.095296` | `1.161532` | `6298` | `5289` |
+| `flat_front` | `0.075624` | `0.065748` | `0.869412` | `5802` | `5693` |
+| `edge_extension` | `0.030195` | `0.024052` | `0.796561` | `2294` | `2287` |
+
+The important class-level result:
+
+```text
+component_bridge_cube26 selection lift moved from 0.934422 in v0.3.5 to 1.161532
+in v0.3.6, while the residual recruitment budget remained fixed to floating precision.
+```
+
+So the mechanism successfully biases bridge-like residual re-entry without adding expected activation.
+
+### Morphology Gate
+
+Per-seed summary:
+
+| Seed | Interface-union | Beats v0.3.5 contrast? | Beats both baselines? | Active distance | Active beats both baselines? | Component nonzero? | Phase-4 interface turnover |
+|---:|---:|---|---|---:|---|---|---:|
+| `42` | `0.024825` | yes | yes | `0.039552` | no | no | `0.023614` |
+| `43` | `0.015373` | no | yes | `0.024845` | no | no | `0.013271` |
+| `44` | `0.029815` | no | yes | `0.050657` | yes | no | `0.029584` |
+| `45` | `0.015463` | yes | yes | `0.025263` | yes | no | `0.019232` |
+| `46` | `0.023164` | yes | yes | `0.040196` | yes | yes | `0.025233` |
+| `56` | `0.029975` | yes | yes | `0.048657` | no | no | `0.033185` |
+
+Counts:
+
+```text
+interface_union_beats_both_baselines = 6/6
+interface_union_beats_v0.3.5_contrast = 4/6
+active_distance_beats_both_baselines = 3/6
+active_distance_beats_v0.3.5_contrast = 3/6
+component_nonzero_seed_count = 1/6
+```
+
+### Aggregate Comparison
+
+Mean across all six seeds, two checkpoints, and four phases:
+
+| Variant | Transition distance | Active distance | Depleted distance | Active-interface distance | Interface-union distance | Component count delta | Largest component delta | Phase-4 interface turnover | Safety OK |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| v0.3.6 component bridge | `0.685436` | `0.038195` | `0.065213` | `0.063479` | `0.023103` | `0.005208` | `0.005208` | `0.024020` | `6/6` |
+| v0.3.5 contrast `2.0` | `0.683620` | `0.038007` | `0.065129` | `0.061793` | `0.021926` | `0.000000` | `0.000000` | `0.023446` | `6/6` |
+| v0.3.1 angular memory | `0.748006` | `0.035978` | `0.058270` | `0.053058` | `0.017880` | `0.015625` | `0.015625` | `0.018258` | `6/6` |
+| signed/no-memory control | `0.742398` | `0.036669` | `0.059559` | `0.055160` | `0.018949` | `0.000000` | `0.000000` | `0.018930` | `6/6` |
+
+v0.3.6 improves the interface-level metrics over v0.3.5 contrast on average:
+
+```text
+interface-union distance:      0.021926 -> 0.023103
+active-interface distance:     0.061793 -> 0.063479
+phase-4 interface turnover:    0.023446 -> 0.024020
+```
+
+But the component-level signal remains weak:
+
+```text
+component-count/largest-component nonzero movement appears in only seed 46.
+active-set distance clears both baselines in only 3/6 seeds.
+```
+
+### Interpretation
+
+The precise claim:
+
+```text
+Component-bridge residual bias is a valid fixed-mean interface lever: it successfully
+amplifies cube26 component-bridge recruitment and improves seed-aggregate
+interface-union divergence without violating boundedness, ledger exactness, or
+fixed-mean residual recruitment.
+```
+
+The caveat:
+
+```text
+This is not yet a robust component-morphology result. v0.3.6 produces one nonzero
+component seed and modest aggregate component deltas, but component-level morphology
+does not clear the majority-seed gate.
+```
+
+The narrowing:
+
+```text
+The project now knows that the bridge class can be selected at fixed mean, but simply
+lifting all cube26 bridge candidates by a conservative amount mostly strengthens the
+interface effect. The remaining problem is not access to bridge opportunities; it is
+which bridge opportunities are causally component-changing rather than interface-churn.
+```
+
+### Next Gate
+
+Do not treat v0.3.6 as solved component morphology. The next step should separate bridge quality from bridge quantity.
+
+Recommended v0.3.7 direction:
+
+```text
+component-bridge quality audit / targeted sweep
+
+compare:
+  component_bridge_cube26 weight = 0.25, 0.50, 0.75
+  with and without local_bridge_face6 = 0.05
+  flat_front / edge_extension penalties held fixed or strengthened
+
+diagnose:
+  realized residual re-entry events by geometry class
+  post-entry component-count and largest-component changes
+  seed 46 versus non-responding seeds
+```
+
+Pass gate remains:
+
+```text
+interface-union distance above both baselines on most seeds
+active-set distance above both baselines on a majority of seeds
+component-count, largest-component, or component-entropy deltas above numerical dust in a majority of seeds
+bounded_nonrunaway_count = 8/8
+ledger_exact_count = 8/8
+fixed residual probability sum within floating precision
+```
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `output/findings/configs/v036_component_bridge_seed*_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb2p0_cb0p25_lb0p05_ffn0p05_een0p05.yaml`
+- `output/findings/finding_046_v036_component_bridge_pass_table.csv`
+- `output/findings/finding_046_v036_component_bridge_aggregate_by_variant.csv`
+- `output/findings/finding_046_v036_component_bridge_fixed_mean_audit.csv`
+- `output/findings/finding_046_v036_component_bridge_geometry_class_summary.csv`
+- `output/findings/finding_046_v036_component_bridge_summary.json`
+- `output/findings/finding_046_v036_component_bridge_seed*_rotation_aware_openness_summary.csv`
+- `output/findings/finding_046_v036_component_bridge_seed*_lineage_persistence_summary.csv`
+- `output/findings/finding_046_v036_component_bridge_seed*_lineage_conditioned_morphology_summary.csv`
+- `output/findings/finding_046_v036_component_bridge_seed*_front_turnover_turnover_summary.json`
+- `output/findings/finding_046_v036_component_bridge_seed*_residual_geometry_audit_summary.json`
