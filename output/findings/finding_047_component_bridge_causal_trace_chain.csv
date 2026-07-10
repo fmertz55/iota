@@ -1,0 +1,5 @@
+sequence,event_type,offset,tick,source,target,role,geometry,global_neighbor_components,global_neighbor_component_sizes,component_count_delta,largest_delta,L_contrast,residual_bias_multiplier,residual_score,target_active_after_16,target_active_at_end
+1,residual_recruitment,499,2547,"(12,3,38)","(13,3,38)",latest activation of future articulation bridge,local_bridge_face6,1,139,0,1,-0.00895808998029679,0.9909978582599589,0.04366567382845288,0,0
+2,residual_recruitment,512,2560,"(13,3,38)","(12,2,38)",creates singleton territory immediately before source articulation deactivation,local_bridge_face6,1,139,0,1,0.14271989581175148,1.2287318616365612,0.16653030696065635,0,0
+3,articulation_deactivation,512,2560,"(13,3,38)",,source bridge exhausts and splits singleton from main component,cube26_articulation_removal,2,138;1,1,-2,,,,,
+4,residual_recruitment,515,2563,"(12,2,38)","(13,2,38)",global bridge recruitment that removes transient split,component_bridge_cube26,2,138;1,-1,2,0.4114226037636399,1.3358564361552707,0.012465048966365716,0,0
