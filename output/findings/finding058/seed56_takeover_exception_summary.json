@@ -1,0 +1,47 @@
+{
+  "snapshot_csv": "output/findings/finding058/seed56_takeover_exception_snapshots.csv",
+  "summary_by_variant": {
+    "takeover_only_vector_phase": {
+      "checkpoint_component_count": 19,
+      "checkpoint_largest_component": 139,
+      "checkpoint_tick": 2048,
+      "continuation_seed": 2068260714,
+      "first_signal_offset": 94,
+      "init_seed": 56,
+      "ledger_exact_all_snapshots": 1,
+      "max_component_count_window": 20,
+      "max_component_delta_transition": 1,
+      "max_gained_bridge_if_removed_count": 0,
+      "max_lost_bridge_if_restored_count": 1,
+      "min_component_count_window": 19,
+      "min_component_delta_transition": -1,
+      "payload_zero_all_snapshots": 1,
+      "sample_index": 6,
+      "signal_offsets": "94;95;96;97;98;99;100;101;102;103",
+      "vanish_offset": 104,
+      "variant": "takeover_only_vector_phase"
+    },
+    "takeover_rotation_vector_phase": {
+      "checkpoint_component_count": 21,
+      "checkpoint_largest_component": 145,
+      "checkpoint_tick": 2048,
+      "continuation_seed": 2068260714,
+      "first_signal_offset": "",
+      "init_seed": 56,
+      "ledger_exact_all_snapshots": 1,
+      "max_component_count_window": 21,
+      "max_component_delta_transition": 0,
+      "max_gained_bridge_if_removed_count": 1,
+      "max_lost_bridge_if_restored_count": 0,
+      "min_component_count_window": 21,
+      "min_component_delta_transition": 0,
+      "payload_zero_all_snapshots": 1,
+      "sample_index": 6,
+      "signal_offsets": "",
+      "vanish_offset": "",
+      "variant": "takeover_rotation_vector_phase"
+    }
+  },
+  "summary_csv": "output/findings/finding058/seed56_takeover_exception_summary.csv",
+  "transition_csv": "output/findings/finding058/seed56_takeover_exception_transitions.csv"
+}

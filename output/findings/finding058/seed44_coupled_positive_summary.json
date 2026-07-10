@@ -1,0 +1,47 @@
+{
+  "snapshot_csv": "output/findings/finding058/seed44_coupled_positive_snapshots.csv",
+  "summary_by_variant": {
+    "takeover_only_vector_phase": {
+      "checkpoint_component_count": 17,
+      "checkpoint_largest_component": 137,
+      "checkpoint_tick": 2048,
+      "continuation_seed": 2068260714,
+      "first_signal_offset": "",
+      "init_seed": 44,
+      "ledger_exact_all_snapshots": 1,
+      "max_component_count_window": 17,
+      "max_component_delta_transition": 0,
+      "max_gained_bridge_if_removed_count": 0,
+      "max_lost_bridge_if_restored_count": 0,
+      "min_component_count_window": 17,
+      "min_component_delta_transition": 0,
+      "payload_zero_all_snapshots": 1,
+      "sample_index": 6,
+      "signal_offsets": "",
+      "vanish_offset": "",
+      "variant": "takeover_only_vector_phase"
+    },
+    "takeover_rotation_vector_phase": {
+      "checkpoint_component_count": 15,
+      "checkpoint_largest_component": 149,
+      "checkpoint_tick": 2048,
+      "continuation_seed": 2068260714,
+      "first_signal_offset": 444,
+      "init_seed": 44,
+      "ledger_exact_all_snapshots": 1,
+      "max_component_count_window": 16,
+      "max_component_delta_transition": 1,
+      "max_gained_bridge_if_removed_count": 0,
+      "max_lost_bridge_if_restored_count": 2,
+      "min_component_count_window": 15,
+      "min_component_delta_transition": -1,
+      "payload_zero_all_snapshots": 1,
+      "sample_index": 6,
+      "signal_offsets": "444;445;446;447",
+      "vanish_offset": 448,
+      "variant": "takeover_rotation_vector_phase"
+    }
+  },
+  "summary_csv": "output/findings/finding058/seed44_coupled_positive_summary.csv",
+  "transition_csv": "output/findings/finding058/seed44_coupled_positive_transitions.csv"
+}

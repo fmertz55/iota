@@ -7019,3 +7019,189 @@ still define the cleaner component-birth class.
 - `output/findings/finding057/phase_free_seed_robustness_aggregate.csv`
 - `output/findings/finding057/phase_free_seed_robustness_events.csv`
 - `output/findings/finding057/phase_free_seed_robustness_signals.csv`
+
+---
+
+## Finding 058 — Bridge-loss events split into single-articulation and multi-cell relocation subclasses
+
+### Question
+
+Finding 057 showed that no-stored-phase bridge-loss/rebridge events replicate
+across seeds, but not exclusively under the coupled takeover+rotation law:
+seed56 produced a takeover-only event. Finding 058 asked whether the seed56
+exception is the same mechanism as the coupled-law positives.
+
+The trace compared:
+
+```text
+seed44 takeover_rotation_vector_phase, offsets 440..449
+seed46 takeover_rotation_vector_phase, offsets 128..145
+seed56 takeover_only_vector_phase, offsets 90..105
+```
+
+Each run also compared the opposite takeover/coupled variant in the same window.
+
+### Result Summary
+
+| Seed | Variant | Signal offsets | Vanish | Split transition | Rebridge transition | Max lost bridge count | Payload zero | Ledger exact |
+|---:|---|---:|---:|---|---|---:|---:|---:|
+| `44` | `takeover_rotation_vector_phase` | `444;445;446;447` | `448` | `443 -> 444` | `447 -> 448` | `2` | `1` | `1` |
+| `46` | `takeover_rotation_vector_phase` | `134;135;136;137;138;139;140` | `141` | `133 -> 134` | `140 -> 141` | `1` | `1` | `1` |
+| `56` | `takeover_only_vector_phase` | `94;95;96;97;98;99;100;101;102;103` | `104` | `93 -> 94` | `103 -> 104` | `1` | `1` | `1` |
+
+Window controls:
+
+```text
+seed44 takeover_only_vector_phase: no signal
+seed46 takeover_only_vector_phase: no signal
+seed56 takeover_rotation_vector_phase: no signal
+```
+
+So seed56 is a real takeover-only exception, not a trace-window artifact.
+
+### Subclass A — Single-Articulation Bridge Loss
+
+Seed46 coupled law:
+
+```text
+offset 133 -> 134
+component count: 15 -> 16
+gained cells:    (16,26,24)
+lost cells:      (16,27,24)
+lost bridge:     (16,27,24)
+articulation before loss: yes
+```
+
+The same cell is both:
+
+```text
+an articulation before loss,
+and a bridge whose restoration merges the split components.
+```
+
+This is the cleanest causal form:
+
+```text
+single articulation loss -> temporary split -> paired rebridge.
+```
+
+### Subclass B — Multi-Cell Bridge-Loss Relocation
+
+Seed44 coupled law:
+
+```text
+offset 443 -> 444
+component count: 15 -> 16
+gained cells:    (52,25,45), (63,37,31), (63,39,31)
+lost cells:      (52,26,44), (63,38,31), (63,40,31)
+lost bridges:    (63,38,31), (63,40,31)
+articulation before loss: no under single-cell removal
+```
+
+Seed56 takeover-only exception:
+
+```text
+offset 93 -> 94
+component count: 19 -> 20
+gained cells:    (15,5,5), (23,61,35)
+lost cells:      (14,5,5), (22,61,35)
+lost bridge:     (14,5,5)
+articulation before loss: no under single-cell removal
+```
+
+Both are bridge-loss events because restoring the lost bridge cell after the
+split merges components. But neither is a single-cell articulation before loss.
+The split depends on the simultaneous active-set relocation.
+
+This is a distinct subclass:
+
+```text
+multi-cell relocation removes bridge support -> temporary split -> multi-cell rebridge.
+```
+
+### Seed56 Coupled-Law Suppression
+
+Seed56 is especially informative because the coupled law does not produce the
+takeover-only signal in the same window. Instead it shows a non-splitting bridge
+swap:
+
+```text
+seed56 takeover_rotation_vector_phase, offset 92 -> 93
+component count: 21 -> 21
+gained bridge-if-removed: (45,22,56)
+lost articulation-before: (45,22,55)
+component delta: 0
+```
+
+So adding received-rotation vector phase can suppress or reroute a takeover-only
+bridge-loss split. The coupled law is not a monotonic "more bridge events" knob.
+It changes which local topology transitions are realized.
+
+### Interpretation
+
+Finding 058 resolves the seed56 caveat:
+
+```text
+seed56 is the same broad bridge-loss/rebridge morphology,
+but not the same single-articulation subclass as seed46.
+```
+
+The current taxonomy is:
+
+```text
+Class A: single-articulation bridge loss
+  observed: seed46 coupled law
+  cleanest causal mechanism
+
+Class B: multi-cell bridge-loss relocation
+  observed: seed44 coupled law, seed56 takeover-only law
+  bridge loss is real, but causal support is distributed across simultaneous
+  gained/lost cells
+```
+
+This strengthens the overall no-payload/no-stored-phase result while narrowing
+the precise claim:
+
+```text
+Local orientation-derived action constraints can produce lawful temporary
+component separation and rebridge without payload or stored phase.
+```
+
+But:
+
+```text
+the clean single-articulation event is not yet seed-robust;
+the broader bridge-loss/rebridge class is seed-replicated.
+```
+
+### Next Gate
+
+The next gate should track these subclasses separately:
+
+```text
+Finding 059:
+  run a larger seed/sample matrix for takeover_rotation_vector_phase and
+  takeover_only_vector_phase
+  classify signals as:
+    A. single-articulation bridge loss
+    B. multi-cell bridge-loss relocation
+    C. non-bridge component signal
+  measure incidence, duration, rebridge delay, and safety
+```
+
+Pass condition:
+
+```text
+Class A or B appears above control frequency while World.P/action_phase remain
+absent and ledger exactness holds.
+```
+
+### Artifacts
+
+- `src/phase_free_signal_trace.py`
+- `output/findings/finding058/seed44_coupled_positive_summary.csv`
+- `output/findings/finding058/seed44_coupled_positive_transitions.csv`
+- `output/findings/finding058/seed46_coupled_positive_summary.csv`
+- `output/findings/finding058/seed46_coupled_positive_transitions.csv`
+- `output/findings/finding058/seed56_takeover_exception_summary.csv`
+- `output/findings/finding058/seed56_takeover_exception_transitions.csv`

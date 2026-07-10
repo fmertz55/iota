@@ -1723,3 +1723,138 @@ output/findings/finding057/phase_free_seed_robustness_aggregate.csv
 output/findings/finding057/phase_free_seed_robustness_events.csv
 output/findings/finding057/phase_free_seed_robustness_signals.csv
 ```
+
+## Finding 058 Update
+
+Finding 058 traced the seed56 takeover-only exception against the coupled-law
+positives.
+
+Compared windows:
+
+```text
+seed44 takeover_rotation_vector_phase: offsets 440..449
+seed46 takeover_rotation_vector_phase: offsets 128..145
+seed56 takeover_only_vector_phase:     offsets 90..105
+```
+
+Window controls:
+
+```text
+seed44 takeover_only_vector_phase:        no signal
+seed46 takeover_only_vector_phase:        no signal
+seed56 takeover_rotation_vector_phase:    no signal
+```
+
+Result:
+
+```text
+seed56 is a real takeover-only exception, not a trace-window artifact.
+```
+
+Subclass A: single-articulation bridge loss
+
+```text
+Observed in seed46 takeover_rotation_vector_phase.
+
+offset 133 -> 134
+component count: 15 -> 16
+gained cell:     (16,26,24)
+lost cell:       (16,27,24)
+lost bridge:     (16,27,24)
+articulation before loss: yes
+rebridge:        offset 141
+```
+
+This is the cleanest causal form:
+
+```text
+single articulation loss -> temporary split -> paired rebridge
+```
+
+Subclass B: multi-cell bridge-loss relocation
+
+```text
+Observed in seed44 takeover_rotation_vector_phase and seed56 takeover_only_vector_phase.
+```
+
+Seed44 coupled:
+
+```text
+offset 443 -> 444
+component count: 15 -> 16
+gained cells:    (52,25,45), (63,37,31), (63,39,31)
+lost cells:      (52,26,44), (63,38,31), (63,40,31)
+lost bridges:    (63,38,31), (63,40,31)
+articulation before loss: no under single-cell removal
+rebridge:        offset 448
+```
+
+Seed56 takeover-only:
+
+```text
+offset 93 -> 94
+component count: 19 -> 20
+gained cells:    (15,5,5), (23,61,35)
+lost cells:      (14,5,5), (22,61,35)
+lost bridge:     (14,5,5)
+articulation before loss: no under single-cell removal
+rebridge:        offset 104
+```
+
+Subclass B causal form:
+
+```text
+multi-cell relocation removes bridge support -> temporary split -> multi-cell rebridge
+```
+
+Seed56 coupled-law suppression:
+
+```text
+seed56 takeover_rotation_vector_phase does not split in the traced window.
+It shows a non-splitting bridge swap at offset 92 -> 93:
+  component count: 21 -> 21
+  gained bridge-if-removed: (45,22,56)
+  lost articulation-before: (45,22,55)
+```
+
+Interpretation:
+
+```text
+The broad no-stored-phase bridge-loss/rebridge morphology is seed-replicated.
+The clean single-articulation subclass is not yet seed-robust.
+The seed56 takeover-only exception belongs to the multi-cell relocation subclass,
+not the seed46 single-articulation subclass.
+```
+
+Refined claim:
+
+```text
+Local orientation-derived action constraints can produce lawful temporary
+component separation and rebridge without payload or stored phase.
+```
+
+Next gate:
+
+```text
+Finding 059 should run a larger seed/sample matrix for:
+  takeover_rotation_vector_phase
+  takeover_only_vector_phase
+
+Classify every component signal as:
+  A. single-articulation bridge loss
+  B. multi-cell bridge-loss relocation
+  C. non-bridge component signal
+
+Measure incidence, duration, rebridge delay, and safety.
+```
+
+Artifacts:
+
+```text
+output/findings/finding058/seed44_coupled_positive_summary.csv
+output/findings/finding058/seed44_coupled_positive_transitions.csv
+output/findings/finding058/seed46_coupled_positive_summary.csv
+output/findings/finding058/seed46_coupled_positive_transitions.csv
+output/findings/finding058/seed56_takeover_exception_summary.csv
+output/findings/finding058/seed56_takeover_exception_transitions.csv
+```

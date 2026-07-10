@@ -62,6 +62,8 @@ TRANSITION_FIELDNAMES = [
     "lost_count",
     "gained_coords",
     "lost_coords",
+    "lost_articulation_before_count",
+    "lost_articulation_before_coords",
     "gained_bridge_if_removed_count",
     "gained_isolated_if_removed_count",
     "lost_bridge_if_restored_count",
@@ -211,9 +213,16 @@ def trace_variant(args: argparse.Namespace, cfg: dict[str, Any], variant: str) -
             if test_count < after_count:
                 gained_isolated.add(coord)
 
+        lost_articulation_before: set[tuple[int, int, int]] = set()
         lost_bridge: set[tuple[int, int, int]] = set()
         lost_isolated: set[tuple[int, int, int]] = set()
         for coord in lost:
+            before_without = before.copy()
+            before_without[coord] = False
+            _, _, before_without_count, _ = component_snapshot(before_without, wrap)
+            if before_without_count > before_count:
+                lost_articulation_before.add(coord)
+
             test_active = after.copy()
             test_active[coord] = True
             _, _, test_count, _ = component_snapshot(test_active, wrap)
@@ -244,6 +253,8 @@ def trace_variant(args: argparse.Namespace, cfg: dict[str, Any], variant: str) -
                 "lost_count": len(lost),
                 "gained_coords": coords_text(gained, int(args.coord_limit)),
                 "lost_coords": coords_text(lost, int(args.coord_limit)),
+                "lost_articulation_before_count": len(lost_articulation_before),
+                "lost_articulation_before_coords": coords_text(lost_articulation_before, int(args.coord_limit)),
                 "gained_bridge_if_removed_count": len(gained_bridge),
                 "gained_isolated_if_removed_count": len(gained_isolated),
                 "lost_bridge_if_restored_count": len(lost_bridge),

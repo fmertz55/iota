@@ -1,0 +1,3 @@
+variant,init_seed,checkpoint_tick,sample_index,continuation_seed,signal_offsets,first_signal_offset,vanish_offset,checkpoint_component_count,checkpoint_largest_component,min_component_count_window,max_component_count_window,max_component_delta_transition,min_component_delta_transition,max_gained_bridge_if_removed_count,max_lost_bridge_if_restored_count,payload_zero_all_snapshots,ledger_exact_all_snapshots
+takeover_only_vector_phase,56,2048,6,2068260714,94;95;96;97;98;99;100;101;102;103,94,104,19,139,19,20,1,-1,0,1,1,1
+takeover_rotation_vector_phase,56,2048,6,2068260714,,,,21,145,21,21,0,0,1,0,1,1
