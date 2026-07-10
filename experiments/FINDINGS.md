@@ -5574,3 +5574,117 @@ boundedness, ledger exactness, and fixed-mean audit remain 6 / 6
 - `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_events.csv`
 - `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_deactivations.csv`
 - `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_timeline.csv`
+
+---
+
+## Finding 049 — Seed-46 erase-and-replay isolates the component-bridge causal channel
+
+### Question
+
+Finding 047 showed the first v0.3.6 component signal in seed46/sample6 was not
+caused by bridge quantity alone. The decisive chain was:
+
+```text
+offset 499:
+  residual recruitment (12,3,38) -> (13,3,38)
+  reactivates the future articulation source
+
+offset 512:
+  residual recruitment (13,3,38) -> (12,2,38)
+  then source (13,3,38) exhausts as a cube26 articulation
+  component count rises by +1 for three ticks
+
+offset 515:
+  residual recruitment (12,2,38) -> (13,2,38)
+  global bridge closes the split
+```
+
+The new test asked whether the offset-499 kick matters because of inherited
+angular/vector memory, or because it places active state at the exact geometric
+channel that later permits articulation turnover.
+
+### Method
+
+A deterministic erase-and-replay runner was added for the same checkpoint,
+sample, continuation seed, RNG stream, and 1024-tick horizon:
+
+```text
+natural:
+  unchanged v0.3.6 replay
+
+erase_pivotal_transfer:
+  after offset 499, restore source and target to their pre-kick state
+  ledger remains exact by restoring the transferred amplitude to the source
+
+erase_pivotal_L:
+  preserve activation/A/R/V/P, but restore the target angular_L to pre-kick
+
+erase_pivotal_memory:
+  preserve activation and amplitude, but restore target R/V/P/angular_L
+
+transplant_pivotal_state:
+  move the post-kick target state from (13,3,38) to matched nearby depleted site
+  (12,3,37), preserving source exhaustion and ledger exactness
+```
+
+### Result
+
+All variants remained ledger exact with final ledger error `0.0`.
+
+| Variant | Component signal | Split at 512 | Rebridge at 515 | Pivotal target active 499/511/512 | Residual events | Deactivations | Articulation deactivations |
+|---|---:|---:|---:|---|---:|---:|---:|
+| `natural` | `512;513;514` | `1` | `1` | `1/1/0` | `1010` | `1021` | `1` |
+| `erase_pivotal_transfer` | none | `0` | `0` | `0/0/0` | `998` | `1010` | `0` |
+| `erase_pivotal_L` | `512;513;514` | `1` | `1` | `1/1/0` | `1010` | `1021` | `1` |
+| `erase_pivotal_memory` | `512;513;514` | `1` | `1` | `1/1/0` | `969` | `980` | `1` |
+| `transplant_pivotal_state` | none | `0` | `0` | `0/0/0` | `963` | `975` | `0` |
+
+The exact split event also survives angular-memory erasure:
+
+| Variant | Offset-512 causal event | `L_contrast` | Multiplier | Component effect |
+|---|---|---:|---:|---|
+| `natural` | `(13,3,38) -> (12,2,38)` | `0.142720` | `1.228732` | split appears after source deactivation |
+| `erase_pivotal_L` | `(13,3,38) -> (12,2,38)` | `0.001452` | `1.040684` | split still appears |
+| `erase_pivotal_memory` | `(13,3,38) -> (12,2,38)` | `0.001452` | `1.040952` | split still appears |
+
+### Interpretation
+
+The offset-499 kick is necessary, but not because its inherited `angular_L` or
+target vector state is necessary.
+
+The necessary property is the exact active-state placement and timing:
+
+```text
+the pivotal site must be active at (13,3,38) through offset 511,
+then spend its last amplitude into (12,2,38) at offset 512,
+then disappear as a cube26 articulation point.
+```
+
+Moving the same post-kick consequence to a nearby matched depleted site removes
+the component signal. Deleting the transfer removes the component signal.
+Erasing angular/vector memory while preserving active placement does not.
+
+This makes the causal channel sharper:
+
+```text
+component morphology begins when a residual recruitment creates a future
+articulation source at the exact interface location where a later compatible
+kick can spend it into bridge territory.
+```
+
+So the next mechanism should not be post-split protection or more bridge
+quantity. The next diagnostic should identify pre-articulation causal channels:
+newly reactivated cells that become future articulation sources, remain active
+long enough to kick into compatible bridge territory, and then exhaust in a way
+that creates nontrivial component separation.
+
+### Artifacts
+
+- `src/component_bridge_erase_replay.py`
+- `output/findings/finding_049_seed46_erase_replay_summary.csv`
+- `output/findings/finding_049_seed46_erase_replay_summary.json`
+- `output/findings/finding_049_seed46_erase_replay_interventions.csv`
+- `output/findings/finding_049_seed46_erase_replay_windows.csv`
+- `output/findings/finding_049_seed46_erase_replay_events.csv`
+- `output/findings/finding_049_seed46_erase_replay_deactivations.csv`
+- `output/findings/finding_049_seed46_erase_replay_timeline.csv`

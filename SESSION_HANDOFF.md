@@ -713,3 +713,67 @@ residual participation, but identify events that allow controlled articulation
 turnover and component signal persistence rather than blanket articulation suppression
 or more component-bridge quantity.
 ```
+
+## Finding 049 Update
+
+Finding 049 supersedes the immediate "design v0.3.8 score" next step with an
+erase-and-replay causal-channel result on the v0.3.6 seed46/sample6 responder.
+
+Interventions used the same checkpoint, continuation seed, RNG stream, and
+1024-tick horizon:
+
+```text
+natural:
+  component signal at offsets 512, 513, 514
+
+erase_pivotal_transfer:
+  after offset 499, restore (12,3,38) and (13,3,38) to pre-kick state
+  component signal disappears
+
+erase_pivotal_L:
+  preserve active/A/R/V/P at (13,3,38), restore only target angular_L
+  component signal survives
+
+erase_pivotal_memory:
+  preserve active/A at (13,3,38), restore R/V/P/angular_L
+  component signal survives
+
+transplant_pivotal_state:
+  move post-kick state from (13,3,38) to nearby depleted (12,3,37)
+  component signal disappears
+```
+
+All variants remained ledger exact with final ledger error `0.0`.
+
+Result:
+
+```text
+The offset-499 kick is necessary, but its inherited angular/vector memory is not.
+The necessary property is exact active-state placement and timing: (13,3,38)
+must remain active through offset 511, kick into (12,2,38) at offset 512, then
+deactivate as a cube26 articulation point.
+```
+
+The next step should be a pre-articulation causal-channel diagnostic, not a new
+law yet:
+
+```text
+identify newly reactivated cells that become future articulation sources,
+remain active long enough to perform a compatible downstream kick,
+and then exhaust in a way that creates component separation.
+```
+
+Updated thread prompt:
+
+```text
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-049.
+Continue from Finding 049: the v0.3.6 seed46/sample6 erase-and-replay test shows
+that the offset-499 residual recruitment is necessary for the first component
+split, but not because of inherited angular_L/R/V/P memory. Erasing the transfer
+or transplanting the post-kick state removes the split; preserving active
+placement while erasing angular/vector memory leaves the split intact. Next goal:
+build a pre-articulation causal-channel diagnostic for residual recruits that
+become future articulation sources, remain active until a compatible downstream
+kick, and exhaust into component separation. Do not add a v0.3.8 mechanism until
+that event class is characterized.
+```
