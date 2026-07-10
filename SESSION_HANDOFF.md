@@ -1596,3 +1596,130 @@ output/findings/finding056/phase_free_signal_trace_seed46_summary.json
 output/findings/finding056/phase_free_signal_trace_seed46_snapshots.csv
 output/findings/finding056/phase_free_signal_trace_seed46_transitions.csv
 ```
+
+## Finding 057 Update
+
+Finding 057 tested seed robustness of the no-stored-phase bridge-loss/rebridge
+event class.
+
+Setup:
+
+```text
+seeds:      42,43,44,45,46,56
+checkpoint: 2048
+horizon:    600
+sample:     6
+World.P:    zero for all replacement variants
+action_phase: absent
+```
+
+Variants:
+
+```text
+zero_phase
+vector_step_only_vector_phase
+takeover_only_vector_phase
+rotation_only_vector_phase
+takeover_rotation_vector_phase
+```
+
+Aggregate:
+
+```text
+zero_phase:
+  component signal cases = 0 / 6
+  bridge-loss/rebridge passes = 0 / 6
+
+vector_step_only_vector_phase:
+  component signal cases = 0 / 6
+  bridge-loss/rebridge passes = 0 / 6
+
+rotation_only_vector_phase:
+  component signal cases = 0 / 6
+  bridge-loss/rebridge passes = 0 / 6
+
+takeover_only_vector_phase:
+  component signal cases = 1 / 6
+  bridge-loss/rebridge passes = 1 / 6
+
+takeover_rotation_vector_phase:
+  component signal cases = 2 / 6
+  bridge-loss/rebridge passes = 2 / 6
+```
+
+All cases:
+
+```text
+payload zero: 30 / 30
+ledger exact: 30 / 30
+```
+
+Positive event cases:
+
+```text
+seed44 takeover_rotation_vector_phase:
+  signal offsets: 444,445,446,447
+  duration/rebridge delay: 4
+  bridge-loss coords: (63,38,31), (63,40,31)
+  single-cell articulation before loss: no
+
+seed46 takeover_rotation_vector_phase:
+  signal offsets: 134,135,136,137,138,139,140
+  duration/rebridge delay: 7
+  bridge-loss coord: (16,27,24)
+  single-cell articulation before loss: yes
+
+seed56 takeover_only_vector_phase:
+  signal offsets: 94,95,96,97,98,99,100,101,102,103
+  duration/rebridge delay: 10
+  bridge-loss coord: (14,5,5)
+  single-cell articulation before loss: no
+```
+
+Interpretation:
+
+```text
+Finding 057 is partial positive.
+
+The no-stored-phase bridge-loss/rebridge event class replicates across seeds
+under takeover_rotation_vector_phase (2/6), but it is not exclusive to the
+coupled law because takeover_only_vector_phase also passes once (seed56).
+```
+
+Refined claim:
+
+```text
+Coupled takeover+rotation vector phase enriches the event class relative to
+zero phase, vector-step-only, and rotation-only controls, but takeover-only can
+also produce the same causal morphology in at least one seed.
+```
+
+Mechanistic implication:
+
+```text
+The minimal sufficient ingredient may be orientation-derived takeover state
+placing active cells on bridge/articulation paths. Received rotation may increase
+incidence, but it is not strictly necessary in every seed.
+```
+
+Next gate:
+
+```text
+Finding 058 should trace and compare:
+  seed56 takeover_only_vector_phase around offsets 90..105
+  seed44 takeover_rotation_vector_phase around offsets 440..449
+  seed46 takeover_rotation_vector_phase around offsets 128..145
+
+Goal:
+  decide whether seed56 is the same bridge-loss mechanism or a distinct subclass.
+```
+
+Artifacts:
+
+```text
+output/findings/finding057/phase_free_seed_robustness_summary.csv
+output/findings/finding057/phase_free_seed_robustness_summary.json
+output/findings/finding057/phase_free_seed_robustness_aggregate.csv
+output/findings/finding057/phase_free_seed_robustness_events.csv
+output/findings/finding057/phase_free_seed_robustness_signals.csv
+```

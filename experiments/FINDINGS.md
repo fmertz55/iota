@@ -6835,3 +6835,187 @@ under the coupled law, while controls remain mostly silent and safety holds.
 - `output/findings/finding056/phase_free_signal_trace_seed46_summary.json`
 - `output/findings/finding056/phase_free_signal_trace_seed46_snapshots.csv`
 - `output/findings/finding056/phase_free_signal_trace_seed46_transitions.csv`
+
+---
+
+## Finding 057 — No-stored-phase bridge-loss events are seed-replicated but not exclusive to the coupled law
+
+### Question
+
+Finding 056 identified a real bridge-loss split/rebridge event in seed46 under
+`takeover_rotation_vector_phase`. Finding 057 asked whether this causal
+morphology is seed-robust and enriched relative to single-path controls.
+
+The tested event class was:
+
+```text
+local orientation-derived action constraint
+-> bridge/articulation loss
+-> component separation
+-> rebridge
+```
+
+The pass condition was deliberately not same coordinate or same offset. The
+event only needed the same causal morphology, with `World.P=0`, no stored
+`action_phase`, and exact ledger.
+
+### Method
+
+The robustness audit ran:
+
+```text
+seeds:       42, 43, 44, 45, 46, 56
+checkpoint:  2048
+horizon:     600
+sample:      6
+continuation seed base: 20260708
+```
+
+Variants:
+
+```text
+zero_phase
+vector_step_only_vector_phase
+takeover_only_vector_phase
+rotation_only_vector_phase
+takeover_rotation_vector_phase
+```
+
+For each seed/variant the audit measured:
+
+```text
+component-signal incidence
+signal intervals and duration
+bridge-loss events
+lost-cell articulation before loss
+rebridge transitions and delay
+payload-zero audit
+ledger exactness
+event coordinates
+```
+
+### Aggregate Result
+
+All cases remained payload-free and ledger-exact:
+
+| Variant | Cases | Component signal cases | Bridge-loss/rebridge passes | Bridge-loss events | Rebridge transitions | Payload zero | Ledger exact |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `zero_phase` | `6` | `0` | `0` | `0` | `0` | `6` | `6` |
+| `vector_step_only_vector_phase` | `6` | `0` | `0` | `0` | `0` | `6` | `6` |
+| `rotation_only_vector_phase` | `6` | `0` | `0` | `0` | `0` | `6` | `6` |
+| `takeover_only_vector_phase` | `6` | `1` | `1` | `1` | `1` | `6` | `6` |
+| `takeover_rotation_vector_phase` | `6` | `2` | `2` | `2` | `2` | `6` | `6` |
+
+The coupled law therefore replicates the event class in multiple seeds, but it
+does not have exclusive ownership: `takeover_only_vector_phase` produces one
+bridge-loss/rebridge event in seed56.
+
+### Positive Event Cases
+
+| Seed | Variant | Signal offsets | Duration | Rebridge delay | Bridge-loss coords | Articulation before loss |
+|---:|---|---:|---:|---:|---|---:|
+| `44` | `takeover_rotation_vector_phase` | `444;445;446;447` | `4` | `4` | `(63,38,31);(63,40,31)` | `0` |
+| `46` | `takeover_rotation_vector_phase` | `134;135;136;137;138;139;140` | `7` | `7` | `(16,27,24)` | `1` |
+| `56` | `takeover_only_vector_phase` | `94;95;96;97;98;99;100;101;102;103` | `10` | `10` | `(14,5,5)` | `0` |
+
+The seed46 result is the cleanest single-cell articulation case:
+
+```text
+lost bridge cell:      (16,27,24)
+articulation before:   yes
+restoring after loss:  merges components
+signal duration:       7 offsets
+```
+
+Seed44 under the coupled law is a two-cell bridge-loss case:
+
+```text
+lost bridge cells:     (63,38,31), (63,40,31)
+articulation before:   no under single-cell removal
+restoring after loss:  merges components
+signal duration:       4 offsets
+```
+
+Seed56 under the takeover-only control is a real control caveat:
+
+```text
+lost bridge cell:      (14,5,5)
+variant:               takeover_only_vector_phase
+signal duration:       10 offsets
+```
+
+### Interpretation
+
+Finding 057 is a partial positive:
+
+```text
+The no-stored-phase bridge-loss/rebridge event class is seed-replicated.
+```
+
+But the stronger claim fails:
+
+```text
+The event class is not unique to the coupled takeover+rotation law.
+```
+
+The refined claim is:
+
+```text
+Coupled takeover+rotation vector phase enriches the event class relative to
+zero phase, vector-step-only, and rotation-only controls, but takeover-only can
+also produce the same morphology in at least one seed.
+```
+
+This matters scientifically. It suggests that the irreducible ingredient may
+not be "takeover plus rotation coupling" as such. The more basic ingredient may
+be:
+
+```text
+orientation-derived takeover state can place active cells on knife-edge
+articulation paths; received rotation increases incidence but is not strictly
+necessary in every seed.
+```
+
+The current evidence supports:
+
+```text
+no payload,
+no stored phase,
+local orientation-derived action constraint,
+bridge-loss component separation,
+lawful rebridge.
+```
+
+It does not yet support:
+
+```text
+the coupled law is uniquely responsible for the event class.
+```
+
+### Next Gate
+
+The next gate should isolate the seed56 takeover-only exception and compare it
+directly to the coupled-law positives:
+
+```text
+Finding 058:
+  trace seed56 takeover_only_vector_phase around offsets 90..105
+  trace seed44 takeover_rotation_vector_phase around offsets 440..449
+  compare both to seed46 takeover_rotation_vector_phase
+  classify whether they share the same bridge-loss mechanism or represent
+  distinct subclasses
+```
+
+If seed56 is mechanistically the same, then takeover-phase orientation is the
+minimal sufficient local constraint. If seed56 differs, the coupled law may
+still define the cleaner component-birth class.
+
+### Artifacts
+
+- `src/phase_free_seed_robustness.py`
+- `src/phase_source_minimization_audit.py`
+- `output/findings/finding057/phase_free_seed_robustness_summary.csv`
+- `output/findings/finding057/phase_free_seed_robustness_summary.json`
+- `output/findings/finding057/phase_free_seed_robustness_aggregate.csv`
+- `output/findings/finding057/phase_free_seed_robustness_events.csv`
+- `output/findings/finding057/phase_free_seed_robustness_signals.csv`

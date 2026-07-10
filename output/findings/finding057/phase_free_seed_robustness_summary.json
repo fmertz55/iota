@@ -1,0 +1,58 @@
+{
+  "aggregate": [
+    {
+      "bridge_loss_events": 0,
+      "cases": 6,
+      "component_signal_cases": 0,
+      "event_class_pass_cases": 0,
+      "ledger_exact_cases": 6,
+      "payload_zero_cases": 6,
+      "rebridge_transitions": 0,
+      "variant": "rotation_only_vector_phase"
+    },
+    {
+      "bridge_loss_events": 1,
+      "cases": 6,
+      "component_signal_cases": 1,
+      "event_class_pass_cases": 1,
+      "ledger_exact_cases": 6,
+      "payload_zero_cases": 6,
+      "rebridge_transitions": 1,
+      "variant": "takeover_only_vector_phase"
+    },
+    {
+      "bridge_loss_events": 2,
+      "cases": 6,
+      "component_signal_cases": 2,
+      "event_class_pass_cases": 2,
+      "ledger_exact_cases": 6,
+      "payload_zero_cases": 6,
+      "rebridge_transitions": 2,
+      "variant": "takeover_rotation_vector_phase"
+    },
+    {
+      "bridge_loss_events": 0,
+      "cases": 6,
+      "component_signal_cases": 0,
+      "event_class_pass_cases": 0,
+      "ledger_exact_cases": 6,
+      "payload_zero_cases": 6,
+      "rebridge_transitions": 0,
+      "variant": "vector_step_only_vector_phase"
+    },
+    {
+      "bridge_loss_events": 0,
+      "cases": 6,
+      "component_signal_cases": 0,
+      "event_class_pass_cases": 0,
+      "ledger_exact_cases": 6,
+      "payload_zero_cases": 6,
+      "rebridge_transitions": 0,
+      "variant": "zero_phase"
+    }
+  ],
+  "aggregate_csv": "output/findings/finding057/phase_free_seed_robustness_aggregate.csv",
+  "event_csv": "output/findings/finding057/phase_free_seed_robustness_events.csv",
+  "signal_csv": "output/findings/finding057/phase_free_seed_robustness_signals.csv",
+  "summary_csv": "output/findings/finding057/phase_free_seed_robustness_summary.csv"
+}

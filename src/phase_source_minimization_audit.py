@@ -27,6 +27,7 @@ VARIANTS = (
     "natural",
     "zero_phase",
     "vector_state_phase",
+    "vector_step_only_vector_phase",
     "vector_step_only_interaction_phase",
     "takeover_only_vector_phase",
     "rotation_only_vector_phase",
@@ -78,7 +79,7 @@ def vector_state_phase(v_idx: int) -> int:
 
 
 def vector_step_phase(v_idx: int, a: int, r: int, variant: str) -> int:
-    if variant == "vector_state_phase":
+    if variant in {"vector_state_phase", "vector_step_only_vector_phase"}:
         return vector_state_phase(v_idx)
     if variant in {"interaction_phase", "vector_step_only_interaction_phase"}:
         return (int(v_idx) + int(a) + int(r)) % 8

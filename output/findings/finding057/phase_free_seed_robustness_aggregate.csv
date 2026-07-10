@@ -1,0 +1,6 @@
+variant,cases,component_signal_cases,event_class_pass_cases,bridge_loss_events,rebridge_transitions,payload_zero_cases,ledger_exact_cases
+rotation_only_vector_phase,6,0,0,0,0,6,6
+takeover_only_vector_phase,6,1,1,1,1,6,6
+takeover_rotation_vector_phase,6,2,2,2,2,6,6
+vector_step_only_vector_phase,6,0,0,0,0,6,6
+zero_phase,6,0,0,0,0,6,6

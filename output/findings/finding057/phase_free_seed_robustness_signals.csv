@@ -1,0 +1,4 @@
+init_seed,variant,checkpoint_tick,sample_index,horizon,continuation_seed,start_offset,end_offset,duration,rebridged,rebridge_offset,rebridge_delay,max_abs_component_delta,start_component_count,end_component_count,start_active,end_active,start_largest,end_largest,start_top_component_sizes,end_top_component_sizes,bridge_loss_at_start,bridge_loss_coords_at_start,articulation_before_loss_at_start,articulation_before_loss_coords_at_start
+44,takeover_rotation_vector_phase,2048,6,600,2068260714,444,447,4,1,448,4,1,16,16,840,840,149,149,149;144;122;114;95;55;46;28,149;144;122;114;95;55;46;28,1,63:38:31;63:40:31,0,
+46,takeover_rotation_vector_phase,2048,6,600,2068260714,134,140,7,1,141,7,1,16,16,1125,1125,135,135,135;130;123;121;106;101;98;79,135;130;123;121;106;101;98;79,1,16:27:24,1,16:27:24
+56,takeover_only_vector_phase,2048,6,600,2068260714,94,103,10,1,104,10,1,20,20,1027,1027,139,139,139;125;122;115;106;85;81;78,139;125;122;115;106;85;81;78,1,14:5:5,0,
