@@ -39,6 +39,7 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+fbc7fc0 Finding 046: component-bridge partial morphology test
 d7f07f0 Finding 045: residual geometry audit
 9132bd2 Finding 044: seed-robust fixed-mean contrast
 7624f30 Findings 042-043: fixed-mean residual recruitment
@@ -66,6 +67,7 @@ fa7872d Finding 037: four-phase lineage persistence
 | Finding 044 | source-target contrast is seed-robust at fixed mean |
 | Finding 045 | residual geometry audit identifies the component-level lever |
 | Finding 046 | component-bridge bias improves interface divergence but not robust component morphology |
+| Finding 047 | first component signal is articulation-source exhaustion |
 
 ## Core Interpretation
 
@@ -83,7 +85,10 @@ preserving expected residual participation to floating precision. The residual g
 audit showed why component morphology had not moved: v0.3.5 slightly suppressed rarer
 cube26 component-bridge candidates. v0.3.6 successfully reverses that class-level
 suppression at fixed mean and improves aggregate interface-union divergence, but it
-does not yet produce robust component-level morphology.
+does not yet produce robust component-level morphology. Finding 047 traces the lone
+component responder and shows the first component signal is not bridge quantity; it is
+residual recruitment from a soon-exhausted articulation source, followed by source
+deactivation that splits off a one-cell cube26 component.
 ```
 
 Current negative result:
@@ -103,6 +108,9 @@ not yet component-level morphology.
 v0.3.6 component-bridge geometry bias improves the aggregate interface result and
 produces one nonzero component seed, but active-set improvement remains 3/6 seeds and
 component-level movement remains 1/6 seeds.
+Finding 047 shows that the lone component signal is transient: the split appears at
+offset 512, vanishes at offset 515, and is caused by articulation-source exhaustion
+rather than a high-contrast bridge event directly moving component count.
 ```
 
 The system now has:
@@ -114,6 +122,7 @@ bounded ledger-exact dynamics
 fixed-mean seed-robust interface symmetry breaking
 geometry audit for residual re-entry opportunities
 fixed-mean component-bridge selection control
+causal component-bridge trace identifying articulation-source exhaustion
 ```
 
 It does not yet have:
@@ -136,6 +145,7 @@ src/lineage_conditioned_morphology.py
 src/rotational_recursion_diagnostic.py
 src/front_turnover_diagnostic.py
 src/residual_recruitment_geometry_audit.py
+src/component_bridge_causal_trace.py
 ```
 
 Findings:
@@ -152,6 +162,7 @@ Finding 043: Source-Target Contrast Breaks Interface Symmetry at Fixed Mean
 Finding 044: Source-Target Contrast Is Seed-Robust at Fixed Mean
 Finding 045: Residual Geometry Audit Identifies the Component-Level Lever
 Finding 046: Component-Bridge Bias Improves Interface Divergence but Not Robust Component Morphology
+Finding 047: The First Component Signal Is an Articulation-Source Exhaustion Event
 ```
 
 ## Key Configs
@@ -264,6 +275,22 @@ output/findings/finding_046_v036_component_bridge_seed*_lineage_persistence_summ
 output/findings/finding_046_v036_component_bridge_seed*_lineage_conditioned_morphology_summary.csv
 output/findings/finding_046_v036_component_bridge_seed*_front_turnover_turnover_summary.json
 output/findings/finding_046_v036_component_bridge_seed*_residual_geometry_audit_summary.json
+```
+
+Finding 047:
+
+```text
+output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_events.csv
+output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_deactivations.csv
+output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_timeline.csv
+output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_summary.json
+output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_events.csv
+output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_deactivations.csv
+output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_timeline.csv
+output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_summary.json
+output/findings/finding_047_component_bridge_causal_trace_comparison.csv
+output/findings/finding_047_component_bridge_causal_trace_comparison.json
+output/findings/finding_047_component_bridge_causal_trace_chain.csv
 ```
 
 ## Important Numbers
@@ -474,35 +501,80 @@ interpretation:
   component-level morphology remains seed-specific rather than robust.
 ```
 
+Finding 047:
+
+```text
+causal trace:
+  responder:        seed 46, checkpoint 2048, sample 6, continuation_seed 2068260714
+  non-responder:    seed 56, checkpoint 2048, sample 6, continuation_seed 2068260714
+
+responder component signal:
+  first_component_change_offset:      512
+  component_signal_offsets:           512, 513, 514
+  component_signal_vanish_offset:     515
+  component_count_checkpoint/final:   16 / 16
+  largest_component_checkpoint/final: 139 / 139
+
+causal event:
+  latest activation of future articulation source:
+    offset 499, residual recruitment (12,3,38) -> (13,3,38)
+  split-producing recruitment:
+    offset 512, residual recruitment (13,3,38) -> (12,2,38)
+    geometry: local_bridge_face6
+    L_contrast: 0.142720
+    residual_bias_multiplier: 1.228732
+  split-producing deactivation:
+    offset 512, cell (13,3,38) deactivates
+    single_removal_component_count_delta: +1
+    single_removal_largest_delta: -2
+    neighbor_component_sizes_after_removal: 138;1
+  re-bridge:
+    offset 515, residual recruitment (12,2,38) -> (13,2,38)
+    geometry: component_bridge_cube26
+    global_neighbor_component_sizes_pre: 138;1
+    component_count_delta_event: -1
+    largest_delta_event: +2
+
+comparison:
+  seed46 residual events:                  1010
+  seed46 local component-bridge events:     109
+  seed46 global bridge events:                1
+  seed46 articulation deactivations:          1
+
+  seed56 residual events:                  1214
+  seed56 local component-bridge events:     154
+  seed56 global bridge events:                0
+  seed56 articulation deactivations:          0
+
+interpretation:
+  The first component signal is not caused by more local component-bridge-class
+  recruitment or high-L contrast alone. Interface divergence becomes component
+  divergence when residual recruitment creates a small appendage through a source
+  that then exhausts as a cube26 articulation point.
+```
+
 ## Next Hypothesis
 
 Do not continue secondary candidate ordering bias.
 
 Keep the coupling at the local residual recruitment event. v0.3.6 shows that
-component-bridge geometry can be selected at fixed mean, but bridge quantity alone
-does not robustly produce component morphology. The next principled test is bridge
-quality: which residual bridge re-entry events actually change component count or
-largest-component structure?
+component-bridge geometry can be selected at fixed mean, but Finding 047 shows that
+bridge quantity alone is the wrong target. The component-changing event class is
+articulation-source turnover: residual recruitment creates a small appendage through
+a source cell that then exhausts and splits cube26 connectivity.
 
-Candidate v0.3.7 direction:
+Immediate v0.3.7 direction:
 
 ```text
-component-bridge quality audit / targeted sweep
+articulation-source bridge audit
 
-baseline law:
-  angular_momentum_residual_bias_score_mode = source_target_L_contrast_component_bridge
-  angular_momentum_residual_bias_strength = 2.0
-
-recommended sweep:
-  component_bridge_cube26 weight = 0.25, 0.50, 0.75
-  with and without local_bridge_face6 = 0.05
-  keep or strengthen flat_front / edge_extension penalties
-
-required diagnostic:
-  realized residual re-entry events by geometry class.
-  post-entry component-count and largest-component changes.
-  seed 46 responder versus non-responding seeds.
-  fixed-mean renormalization unchanged.
+measure across seeds/samples:
+  residual recruitments from low-A / soon-exhausted sources
+  source cells whose removal increases cube26 component count
+  residual events creating singleton or small-component appendages
+  global bridge closures that erase component splits
+  active/depleted adjacency lead time before articulation events
+  fixed-mean renormalization unchanged
 ```
 
 Why:
@@ -521,6 +593,8 @@ Finding 045 proves there are enough local bridge/neck opportunities and that cur
 contrast slightly suppresses the cube26 component-bridge class.
 Finding 046 proves component bridges can be selected at fixed mean and improve
 interface-union divergence, but robust component-level morphology still fails.
+Finding 047 proves the first component signal is articulation-source exhaustion,
+not bridge quantity or high source-target L contrast alone.
 ```
 
 ## Acceptance Gate
@@ -551,6 +625,7 @@ phase-4 interface turnover not collapsed
 Minimum useful diagnostic:
 
 ```text
+component-bridge causal trace / articulation-source audit
 rotation-aware openness
 four-phase lineage persistence
 lineage-conditioned morphology
@@ -561,12 +636,13 @@ signed/no-memory control if needed
 ## Suggested New Thread Prompt
 
 ```text
-Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-046.
-Continue from Finding 046: v0.3.6 component-bridge fixed-mean residual recruitment
-successfully amplifies cube26 bridge candidate selection and improves aggregate
-interface-union divergence, but component-level morphology is still seed-specific
-and only nonzero in 1/6 seeds.
-Next goal: run v0.3.7 component-bridge quality audit / targeted sweep. Separate
-bridge quantity from bridge quality by measuring realized residual re-entry events
-by geometry class and post-entry component-count / largest-component changes.
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-047.
+Continue from Finding 047: the lone v0.3.6 component signal was traced to
+articulation-source exhaustion. A residual event created a small appendage through
+a source cell that later deactivated as a cube26 articulation point, splitting off
+a one-cell component; a later global bridge event erased the split.
+Next goal: run v0.3.7 articulation-source bridge audit across seeds/samples. Measure
+residual recruitments from low-A / soon-exhausted sources, source articulation removals,
+small-component appendage creation, and global re-bridge closures under fixed-mean
+residual participation.
 ```

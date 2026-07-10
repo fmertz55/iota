@@ -5179,3 +5179,236 @@ fixed residual probability sum within floating precision
 - `output/findings/finding_046_v036_component_bridge_seed*_lineage_conditioned_morphology_summary.csv`
 - `output/findings/finding_046_v036_component_bridge_seed*_front_turnover_turnover_summary.json`
 - `output/findings/finding_046_v036_component_bridge_seed*_residual_geometry_audit_summary.json`
+
+## Finding 047: The First Component Signal Is an Articulation-Source Exhaustion Event
+
+Finding 046 produced one nonzero component seed. The next question was causal:
+
+```text
+When component signal appears in the 1/6 seed, what exactly happened?
+```
+
+Finding 047 traces the responder continuation against a matched no-component
+continuation and logs actual hard-transfer residual recruitment events, not just
+candidate opportunities.
+
+### Protocol
+
+Responder:
+
+```text
+config:      v0.3.6 component_bridge seed 46
+checkpoint:  2048
+sample:      6
+continuation_seed: 2068260714
+horizon:     1024
+phase_length: 256
+```
+
+Matched no-component comparison:
+
+```text
+config:      v0.3.6 component_bridge seed 56
+checkpoint:  2048
+sample:      6
+continuation_seed: 2068260714
+horizon:     1024
+phase_length: 256
+```
+
+The tracer records:
+
+```text
+actual residual recruitment events
+source-target L contrast and residual multiplier
+local residual geometry class
+global cube26 neighbor component count
+component-count / largest-component change at the event
+deactivation events and single-cell articulation removals
+active/depleted adjacency before the component signal
+target persistence after 1, 16, 64, 128, 256 ticks and at horizon end
+```
+
+### Phase Alignment
+
+The trace reproduces the Finding 046 component signal.
+
+Seed 46, checkpoint 2048, sample 6:
+
+| Offset | Active | Depleted | Cube26 components | Largest cube26 | Component entropy | Active/depleted adjacency |
+|---:|---:|---:|---:|---:|---:|---:|
+| `0` | `1151` | `520` | `16` | `139` | `3.542022` | `0.966985` |
+| `256` | `1151` | `525` | `16` | `139` | `3.542022` | `0.980017` |
+| `512` | `1151` | `528` | `17` | `138` | `3.549455` | `0.975673` |
+| `768` | `1151` | `529` | `16` | `139` | `3.542022` | `0.973936` |
+| `1024` | `1151` | `531` | `16` | `139` | `3.542022` | `0.986099` |
+
+The component signal is transient:
+
+```text
+first_component_change_offset = 512
+component_signal_offsets = 512, 513, 514
+component_signal_vanish_offset = 515
+```
+
+Seed 56, same checkpoint/sample/continuation stream:
+
+```text
+cube26 components remain 17 throughout offsets 0, 256, 512, 768, 1024.
+largest cube26 remains 141 throughout.
+```
+
+### Causal Chain
+
+The component split is not caused by a high-L bridge recruitment directly changing
+component count.
+
+It is caused by a residual recruitment from a source cell that later becomes a
+cube26 articulation point, followed by exhaustion of that source cell.
+
+Key responder chain:
+
+| Offset | Event | Source | Target | Geometry | L contrast | Multiplier | Component effect |
+|---:|---|---|---|---|---:|---:|---|
+| `499` | residual recruitment | `(12,3,38)` | `(13,3,38)` | `local_bridge_face6` | `-0.008958` | `0.990998` | latest activation of future articulation source |
+| `512` | residual recruitment | `(13,3,38)` | `(12,2,38)` | `local_bridge_face6` | `0.142720` | `1.228732` | creates new active territory, no immediate component-count delta |
+| `512` | deactivation | `(13,3,38)` | — | cube26 articulation removal | — | — | component count `+1`, largest component `-2` |
+| `515` | residual recruitment | `(12,2,38)` | `(13,2,38)` | `component_bridge_cube26` | `0.411423` | `1.335856` | component count `-1`, largest component `+2` |
+
+The exact split event:
+
+```text
+offset 512:
+  cell (13,3,38) deactivates with A=0
+  latest residual activation offset for that cell = 499
+  age since latest residual activation = 13 ticks
+  single_removal_component_count_delta = +1
+  single_removal_largest_delta = -2
+  neighbor_component_sizes_after_removal = 138;1
+```
+
+So the component signal is a one-cell singleton split from the main component by
+the exhaustion of an articulation source.
+
+The exact re-bridge event:
+
+```text
+offset 515:
+  source (12,2,38) recruits target (13,2,38)
+  event_geometry_class = component_bridge_cube26
+  global_neighbor_component_count_pre = 2
+  global_neighbor_component_sizes_pre = 138;1
+  component_count_delta_event = -1
+  largest_delta_event = +2
+```
+
+This closes the transient split and returns cube26 component count to baseline.
+
+### Responder vs Non-Responder
+
+The no-component seed did not lack residual events or bridge-looking local geometry.
+It lacked the global event class that actually moved component count.
+
+| Case | Residual events | Local component-bridge events | High `|L|` contrast events | Global bridge events | Articulation deactivations | Component signal |
+|---|---:|---:|---:|---:|---:|---|
+| seed 46 responder | `1010` | `109` | `40` | `1` | `1` | yes |
+| seed 56 no-component | `1214` | `154` | `42` | `0` | `0` | no |
+
+This is the important negative control. Seed 56 has more residual events, more
+local component-bridge-class events, and a similar count of high-contrast events,
+but no component signal.
+
+### Interpretation
+
+The first component-level signal is not "more component bridges" in the simple
+local-class sense.
+
+It is this event class:
+
+```text
+residual recruitment from a soon-exhausted articulation source, creating a small
+active appendage/singleton, followed by source deactivation that splits the cube26
+component.
+```
+
+The component signal is then erased by the complementary event class:
+
+```text
+global cube26 bridge recruitment between the singleton and the main component.
+```
+
+The source-target angular momentum contrast is present but not the decisive
+feature in the split event:
+
+```text
+split-producing recruitment L_contrast = 0.142720
+split-producing geometry = local_bridge_face6
+split-producing residual_score = 0.166530
+```
+
+The re-bridge event has stronger contrast and the intended bridge geometry:
+
+```text
+re-bridge L_contrast = 0.411423
+re-bridge geometry = component_bridge_cube26
+re-bridge residual_score = 0.012465
+```
+
+The responder boundary had already changed before component count moved:
+
+```text
+active/depleted adjacency at checkpoint = 0.966985
+active/depleted adjacency before signal = 0.976542
+pre-signal adjacency delta = +0.009557
+```
+
+So Finding 047 converts the v0.3.6 partial positive into a sharper mechanism:
+
+```text
+interface divergence becomes component divergence when residual recruitment and
+deactivation combine to remove a cube26 articulation point, not merely when a
+candidate is locally classified as a component bridge.
+```
+
+### Next Gate
+
+Do not increase component-bridge weight yet.
+
+The next diagnostic should test whether this event class is seed-specific or
+available but under-selected:
+
+```text
+articulation-source bridge audit across v0.3.6 seeds/samples
+
+measure:
+  residual recruitments from low-A / soon-exhausted sources
+  source cells whose removal increases cube26 component count
+  residual events that create singleton or small-component appendages
+  global bridge closures that erase component splits
+  active/depleted adjacency lead time before articulation events
+```
+
+Only after that audit should a v0.3.7 scoring law be considered.
+
+Candidate v0.3.7 design principle:
+
+```text
+fixed-mean residual recruitment should bias bridge quality, not bridge quantity:
+prefer events that create persistent nontrivial component separation, or delay
+immediate re-bridging, without increasing total residual participation.
+```
+
+### Artifacts
+
+- `src/component_bridge_causal_trace.py`
+- `output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_events.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_deactivations.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_timeline.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_seed46_sample6_summary.json`
+- `output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_events.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_deactivations.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_timeline.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_seed56_sample6_summary.json`
+- `output/findings/finding_047_component_bridge_causal_trace_comparison.csv`
+- `output/findings/finding_047_component_bridge_causal_trace_comparison.json`
+- `output/findings/finding_047_component_bridge_causal_trace_chain.csv`
