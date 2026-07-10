@@ -864,3 +864,129 @@ while neutral same/cross payload coupling is inert. Next goal: replace early
 payload phase with non-semantic relational/geometry/history phase and test
 whether the same pre-birth articulation channel can be recovered without payload.
 ```
+
+## Finding 051 Update
+
+Finding 051 audited which current payload action paths matter upstream of the
+seed46/sample6 birth channel.
+
+Tool added:
+
+```text
+src/payload_action_phase_audit.py
+```
+
+Variants:
+
+```text
+natural
+no_payload_vector_step
+no_payload_rotation_offset
+no_payload_rotate_takeover
+no_payload_all_action_paths
+clamp_payload_each_tick
+```
+
+Result:
+
+```text
+P acts only early:
+
+tick 0:  nonzero-P iotas = 13, P-sensitive primary actions = 1
+tick 1:  nonzero-P iotas = 46, P-sensitive primary actions = 6
+tick 2:  nonzero-P iotas = 8,  P-sensitive primary actions = 1
+tick 64: nonzero-P iotas = 0,  P-sensitive primary actions = 0
+tick 2048 checkpoint: P = 0 everywhere
+```
+
+Every P action-path ablation diverges from natural at tick 1, before component
+topology differs:
+
+```text
+first non-payload divergence tick: 1
+natural component count / largest at divergence: 15 / 11
+variant component count / largest at divergence: 15 / 11
+```
+
+Checkpoint and birth-channel outcomes:
+
+```text
+natural:
+  signal = 512,513,514
+  checkpoint active/largest = 1151 / 139
+  causal cell at 499/511/512 = 1/1/0
+
+no_payload_vector_step:
+  signal = none
+  checkpoint active/largest = 1151 / 141
+  causal cell at 499/511/512 = 0/0/0
+
+no_payload_rotation_offset:
+  signal = none
+  checkpoint active/largest = 1177 / 139
+  causal cell at 499/511/512 = 0/0/0
+
+no_payload_rotate_takeover:
+  signal = 444,445,888,889
+  checkpoint active/largest = 1165 / 153
+  causal cell at 499/511/512 = 0/0/0
+
+no_payload_all_action_paths:
+  signal = none
+  checkpoint active/largest = 1125 / 145
+
+clamp_payload_each_tick:
+  signal = none
+  checkpoint active/largest = 1125 / 145
+```
+
+`no_payload_all_action_paths` and full `P=0` clamping produce the same
+non-payload final state hash, so there is no hidden semantic payload channel
+beyond the audited action paths.
+
+Interpretation:
+
+```text
+P is a transient action-phase selector.
+It is not semantic compatibility and not persistent memory.
+It selects early legal vector/diffuse actions, rotation offsets, and takeover
+rotations; then it collapses while the geometric consequences persist.
+```
+
+Next implementation target:
+
+```text
+Replace P with an explicit finite action-state variable:
+  selects among legal vector/diffuse actions
+  selects among legal rotation offsets
+  selects takeover rotation phase
+  decays/resets after acting
+  never directly changes energy, occupancy, or admissibility
+```
+
+First success gate:
+
+```text
+recover the seed46 pre-birth articulation channel without semantic payload:
+  (13,3,38) active at offsets 499 and 511
+  (12,2,38) active at offset 512
+  component signal at or near the offset-512 gate
+  ledger exact
+  action state collapsed/reset before birth
+```
+
+Updated thread prompt:
+
+```text
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-051.
+Continue from Finding 051: payload is now identified as a transient action-phase
+selector, not semantic information. In v0.3.6 seed46/sample6, P is nonzero only
+in the first few ticks and gone by tick 64/checkpoint 2048. Removing P from
+vector-step, rotation-offset, or takeover-rotation action paths from init changes
+the checkpoint microstate and destroys the Finding 049 offset-512 birth channel.
+Removing all P action paths is identical to clamping P=0, proving there is no
+hidden payload channel beyond action selection. Next goal: replace P with an
+explicit finite action-state variable that only selects among legal actions,
+resets/decays after acting, and tries to recover the seed46 pre-birth articulation
+channel without semantic payload.
+```

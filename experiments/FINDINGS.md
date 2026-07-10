@@ -5845,3 +5845,167 @@ component channels can be recovered without a payload field.
 - `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_summary.json`
 - `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_pairs.csv`
 - `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_timeline.csv`
+
+---
+
+## Finding 051 — Payload's upstream role is action-phase selection
+
+### Question
+
+Finding 050 showed that payload is not part of the component-birth event at the
+v0.3.6 tick-2048 checkpoint, but that removing `P` from initialization changes
+the checkpoint microstate and removes the later seed46/sample6 component split.
+
+The next question was which current `P` path does the upstream work:
+
+```text
+semantic compatibility?
+diffuse/vector action selection?
+history-coupled rotation offset?
+payload takeover rotation?
+some hidden persistent payload memory?
+```
+
+### Method
+
+A from-init action-path audit was added for v0.3.6 seed46/sample6:
+
+```text
+natural:
+  unchanged run from init through checkpoint 2048 and continuation 1024
+
+no_payload_vector_step:
+  call vector_step with p=0, preserving P state elsewhere
+
+no_payload_rotation_offset:
+  ignore source/target P in history-coupled rotation offsets
+
+no_payload_rotate_takeover:
+  rotate by payload 0 on payload takeover
+
+no_payload_all_action_paths:
+  ignore P in vector_step, rotation offsets, and takeover rotation
+
+clamp_payload_each_tick:
+  set P=0 before and after every tick
+```
+
+The audit tracked:
+
+```text
+nonzero payload iotas
+P-sensitive primary-action count
+first non-payload state divergence from natural
+checkpoint active/component/largest metrics
+causal cell occupancy at offsets 499/511/512/515
+component signal offsets
+```
+
+### Result
+
+Payload acts only early, then disappears:
+
+| Tick | Active iotas | Nonzero `P` iotas | `P`-sensitive primary actions | Payload entropy |
+|---:|---:|---:|---:|---:|
+| `0` | `16` | `13` | `1` | `2.655639` |
+| `1` | `77` | `46` | `6` | `2.469358` |
+| `2` | `227` | `8` | `1` | `0.296006` |
+| `5` | `1046` | `3` | `1` | `0.032900` |
+| `64` | `1144` | `0` | `0` | `-0.0` |
+| `2048` | `1151` | `0` | `0` | `-0.0` |
+
+Every action-path ablation diverges from natural at tick `1`, while the component
+count and largest component are still unchanged. The action-phase difference is
+therefore upstream of later topology:
+
+```text
+first non-payload divergence tick: 1
+stage: precheckpoint
+natural nonzero-P iotas at divergence: 46
+natural P-sensitive primary actions at divergence: 6
+natural component count / largest: 15 / 11
+variant component count / largest: 15 / 11
+```
+
+By checkpoint 2048, `P` is gone everywhere, but its early action choices have
+selected different later microstates:
+
+| Variant | Component signal | Split 512 | Rebridge 515 | Checkpoint active | Checkpoint largest | Causal cell active at 499/511/512 |
+|---|---:|---:|---:|---:|---:|---|
+| `natural` | `512;513;514` | `1` | `1` | `1151` | `139` | `1/1/0` |
+| `no_payload_vector_step` | none | `0` | `0` | `1151` | `141` | `0/0/0` |
+| `no_payload_rotation_offset` | none | `0` | `0` | `1177` | `139` | `0/0/0` |
+| `no_payload_rotate_takeover` | `444;445;888;889` | `0` | `0` | `1165` | `153` | `0/0/0` |
+| `no_payload_all_action_paths` | none | `0` | `0` | `1125` | `145` | `0/0/0` |
+| `clamp_payload_each_tick` | none | `0` | `0` | `1125` | `145` | `0/0/0` |
+
+The all-action-path ablation and full `P=0` clamp are identical outside the
+payload array:
+
+```text
+no_payload_all_action_paths state_hash_without_payload:
+  b6937a72bea4bfab17704b51495b075bd93e328e105ad31ab4bcf17d2077e561
+
+clamp_payload_each_tick state_hash_without_payload:
+  b6937a72bea4bfab17704b51495b075bd93e328e105ad31ab4bcf17d2077e561
+```
+
+### Interpretation
+
+Finding 051 closes the main ambiguity left by Finding 050.
+
+`P` is not acting through semantic compatibility: same/cross payload coupling is
+already neutral. It is also not persistent memory: `P` is zero everywhere by tick
+64 and remains zero at checkpoint 2048.
+
+The causal role of `P` is early action-phase selection:
+
+```text
+P changes early vector/diffuse choices,
+P changes early history-coupled rotation offsets,
+P changes early takeover rotations,
+then P collapses,
+while the geometric consequences persist as the future interaction graph.
+```
+
+The important negative result is that removing any one action path is enough to
+destroy the exact seed46 offset-512 birth channel. Removing the takeover-rotation
+path still permits component signals, but at different offsets (`444;445;888;889`)
+and not through the Finding 049 causal channel.
+
+So the right abstraction is:
+
+```text
+payload is a transient action-phase selector,
+not a message and not irreducible information.
+```
+
+The next implementation should replace `P` with an explicit finite action-state
+variable whose only allowed effects are:
+
+```text
+select among legal vector/diffuse actions
+select among legal rotation offsets
+select takeover rotation phase
+decay/reset after acting
+never alter energy, occupancy, or admissibility directly
+```
+
+The test is not exact global replay. The first success gate is narrower:
+
+```text
+recover the seed46 pre-birth articulation channel without semantic payload:
+  (13,3,38) active at offsets 499 and 511,
+  (12,2,38) active at offset 512,
+  component signal at or near the offset-512 gate,
+  ledger exact,
+  P/action state collapsed or reset before birth.
+```
+
+### Artifacts
+
+- `src/payload_action_phase_audit.py`
+- `output/findings/finding_051_payload_action_phase_seed46_sample6_summary.csv`
+- `output/findings/finding_051_payload_action_phase_seed46_sample6_summary.json`
+- `output/findings/finding_051_payload_action_phase_seed46_sample6_pairs.csv`
+- `output/findings/finding_051_payload_action_phase_seed46_sample6_timeline.csv`

@@ -1,0 +1,6 @@
+variant,reference_variant,same_component_signal,same_first_component_change_offset,same_split_at_512,same_rebridge_at_515,same_checkpoint_active_iotas,same_checkpoint_component_count,same_checkpoint_largest_component,same_final_active_iotas,same_final_component_count,same_final_largest_component,same_final_state_without_payload,first_nonpayload_divergence_tick,first_nonpayload_divergence_stage,first_nonpayload_divergence_offset,natural_nonzero_payload_iotas_at_divergence,natural_p_sensitive_primary_count_at_divergence,natural_component_count_at_divergence,variant_component_count_at_divergence,natural_largest_component_at_divergence,variant_largest_component_at_divergence,component_signal_offsets,reference_component_signal_offsets
+no_payload_vector_step,natural,0,0,0,0,1,1,0,1,1,0,0,1,precheckpoint,-2047,46,6,15,15,11,11,,512;513;514
+no_payload_rotation_offset,natural,0,0,0,0,0,1,1,0,1,1,0,1,precheckpoint,-2047,46,6,15,15,11,11,,512;513;514
+no_payload_rotate_takeover,natural,0,0,0,0,0,1,0,0,1,0,0,1,precheckpoint,-2047,46,6,15,15,11,11,444;445;888;889,512;513;514
+no_payload_all_action_paths,natural,0,0,0,0,0,1,0,0,1,0,0,1,precheckpoint,-2047,46,6,15,15,11,11,,512;513;514
+clamp_payload_each_tick,natural,0,0,0,0,0,1,0,0,1,0,0,1,precheckpoint,-2047,46,6,15,15,11,11,,512;513;514
