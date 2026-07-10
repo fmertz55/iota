@@ -6370,3 +6370,140 @@ recover the same causal class:
 - `output/findings/finding053/action_phase_derivability_collisions.csv`
 - `output/findings/finding053/action_phase_derivability_timeline.csv`
 - `output/findings/finding053/action_phase_derivability_local_collisions.csv`
+
+---
+
+## Finding 054 — Local phase-source rewrites do not preserve the seed46 birth channel
+
+### Question
+
+Finding 053 showed that the current numeric action phase cannot be reconstructed
+from audited local non-payload signatures under the existing law. Finding 054
+tested the next clean option:
+
+```text
+Can stored numeric phase be removed by replacing it with deterministic
+interaction-local phase sources, while preserving the seed46 component-birth
+causal class?
+```
+
+The gate was not exact replay. The gate was mechanism preservation:
+
+```text
+World.P = 0 at rest,
+no stored numeric action_phase,
+ledger exact,
+seed46 pre-birth articulation channel survives,
+component signal appears near the known offset-512 event.
+```
+
+### Method
+
+The audit ran v0.3.6 seed46/sample6 from initialization to checkpoint `2048`,
+then continued for horizon `1024` using the standard deterministic continuation
+seed.
+
+The natural run was compared with three no-stored-phase rewrites:
+
+```text
+zero_phase:
+  World.P clamped to 0
+  vector_step phase = 0
+  takeover rotation phase = 0
+  rotation source/target phase = 0
+
+interaction_phase:
+  World.P clamped to 0
+  vector_step phase = (V + A + R) mod 8
+  takeover rotation phase = V mod 8
+  rotation source phase =
+    source_v + candidate_order + influence_phase + residual_phase mod 8
+  rotation target phase =
+    target_v + target_a + target_r + candidate_order mod 8
+
+rotation_only_interaction_phase:
+  World.P clamped to 0
+  vector_step phase = 0
+  takeover rotation phase = 0
+  rotation phases use the same interaction-derived rule above
+```
+
+All replacement variants therefore remove stored payload/action phase. Any phase
+value used by an action is computed directly from non-payload event properties.
+
+### Seed46 Result
+
+None of the no-stored-phase rewrites preserves the known birth channel:
+
+| Variant | Signal offsets | Split 512 | Rebridge 515 | Checkpoint active | Components | Largest | Payload at checkpoint | Ledger |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `natural` | `512;513;514` | `1` | `1` | `1151` | `16` | `139` | `0` | `1` |
+| `zero_phase` | none | `0` | `0` | `1125` | `16` | `145` | `0` | `1` |
+| `interaction_phase` | none | `0` | `0` | `1125` | `16` | `139` | `0` | `1` |
+| `rotation_only_interaction_phase` | none | `0` | `0` | `1143` | `17` | `137` | `0` | `1` |
+
+The causal-cell gate also fails in every no-stored-phase rewrite:
+
+| Variant | `(13,3,38)` active at 499 | `(13,3,38)` active at 511 | `(12,2,38)` active at 512 | `(13,2,38)` active at 515 |
+|---|---:|---:|---:|---:|
+| `natural` | `1` | `1` | `1` | `1` |
+| `zero_phase` | `0` | `0` | `0` | `0` |
+| `interaction_phase` | `0` | `0` | `0` | `0` |
+| `rotation_only_interaction_phase` | `0` | `0` | `0` | `0` |
+
+The most informative near miss is `interaction_phase`: it matches the natural
+checkpoint component count and largest-component size (`16`, `139`), but still
+loses the causal articulation cells and produces no component signal.
+
+### Interpretation
+
+Finding 054 rules out a simple local deterministic replacement for the existing
+numeric phase, at least for the seed46 birth channel.
+
+This does not restore semantic payload. It says the current law uses an early,
+short-lived phase variable as genuine symmetry-breaking action entropy:
+
+```text
+initial numeric phase
+  -> early action selection
+  -> altered checkpoint geometry
+  -> specific articulation dependency
+  -> component split/rebridge signal
+```
+
+The important refinement is that coarse checkpoint morphology is insufficient.
+`interaction_phase` reaches the same checkpoint component count and largest
+component size as the natural run, but the dependency path is absent. The birth
+channel depends on specific inherited placement/timing constraints, not only on
+coarse component statistics.
+
+The reduction ladder now stands at:
+
+```text
+1. remove semantic payload from World.P                 [passed Finding 052]
+2. derive current numeric phase from local state         [failed Finding 053]
+3. replace current phase with local deterministic source [failed Finding 054]
+```
+
+The next step should be a law search, not another exact-replay attempt:
+
+```text
+Design a genuinely phase-free local interaction law, keep World.P/action_phase
+absent, and search for a new birth channel by causal class:
+  fixed ledger,
+  bounded continuations,
+  transient local action constraint,
+  component split/rebridge or matched bridge dependency,
+  no stored phase/payload variable.
+```
+
+Only after a phase-free law produces its own positive birth channel should the
+minimal coherence seed ladder begin.
+
+### Artifacts
+
+- `src/phase_source_minimization_audit.py`
+- `output/findings/finding054/phase_source_minimization_seed46_summary.csv`
+- `output/findings/finding054/phase_source_minimization_seed46_summary.json`
+- `output/findings/finding054/phase_source_minimization_seed46_pairs.csv`
+- `output/findings/finding054/phase_source_minimization_seed46_timeline.csv`

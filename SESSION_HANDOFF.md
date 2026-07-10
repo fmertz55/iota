@@ -1201,3 +1201,141 @@ output/findings/finding053/action_phase_derivability_collisions.csv
 output/findings/finding053/action_phase_derivability_timeline.csv
 output/findings/finding053/action_phase_derivability_local_collisions.csv
 ```
+
+## Finding 054 Update
+
+Finding 054 tested whether the remaining numeric phase can be removed by
+replacing it with deterministic interaction-local phase sources.
+
+Tool added:
+
+```text
+src/phase_source_minimization_audit.py
+```
+
+Primary test:
+
+```text
+v0.3.6 seed46/sample6
+checkpoint: 2048
+continuation horizon: 1024
+World.P clamped to zero for all replacement variants
+no stored numeric action_phase
+```
+
+Variants:
+
+```text
+natural:
+  reference run; known signal at offsets 512, 513, 514
+
+zero_phase:
+  all action paths receive phase 0
+
+interaction_phase:
+  vector_step phase = (V + A + R) mod 8
+  takeover phase = V mod 8
+  rotation source/target phase derived from source_v, target_v, target A/R,
+  candidate order, influence phase, and target-depleted flag
+
+rotation_only_interaction_phase:
+  vector_step and takeover phase are zero
+  rotation source/target phase uses the interaction-derived rule
+```
+
+Result:
+
+```text
+natural:
+  signal = 512, 513, 514
+  split_at_512 = yes
+  rebridge_at_515 = yes
+  checkpoint active/components/largest = 1151 / 16 / 139
+
+zero_phase:
+  signal = none
+  split_at_512 = no
+  rebridge_at_515 = no
+  checkpoint active/components/largest = 1125 / 16 / 145
+
+interaction_phase:
+  signal = none
+  split_at_512 = no
+  rebridge_at_515 = no
+  checkpoint active/components/largest = 1125 / 16 / 139
+
+rotation_only_interaction_phase:
+  signal = none
+  split_at_512 = no
+  rebridge_at_515 = no
+  checkpoint active/components/largest = 1143 / 17 / 137
+```
+
+Causal cells:
+
+```text
+natural:
+  (13,3,38) active at offsets 499 and 511
+  (12,2,38) active at offset 512
+  (13,2,38) active at offset 515
+
+all no-stored-phase rewrites:
+  all four causal-cell checks = no
+```
+
+Interpretation:
+
+```text
+Finding 054 rules out a simple deterministic local phase-source replacement for
+the existing seed46 birth channel.
+```
+
+This still does not restore semantic payload. The remaining phase behaves like
+short-lived action entropy:
+
+```text
+initial numeric phase -> early action selection -> altered geometry -> inherited
+articulation dependency -> component split/rebridge
+```
+
+Important near miss:
+
+```text
+interaction_phase matches natural checkpoint component count and largest
+component size (16 / 139), but loses the causal articulation path and produces
+no component signal.
+```
+
+Updated reduction status:
+
+```text
+1. remove semantic payload from World.P                 [passed Finding 052]
+2. derive current numeric phase from local state         [failed Finding 053]
+3. replace current phase with local deterministic source [failed Finding 054]
+```
+
+Next recommended gate:
+
+```text
+Stop trying exact replay of the existing phase-bearing law.
+
+Design/search a genuinely phase-free local interaction law with World.P and
+action_phase absent, then search for a new birth channel by causal class:
+  fixed ledger
+  bounded continuations
+  transient local action constraint
+  component split/rebridge or matched bridge dependency
+  no stored phase/payload variable
+
+Only after a phase-free law produces a positive birth channel should the minimal
+coherence seed ladder begin.
+```
+
+Artifacts:
+
+```text
+output/findings/finding054/phase_source_minimization_seed46_summary.csv
+output/findings/finding054/phase_source_minimization_seed46_summary.json
+output/findings/finding054/phase_source_minimization_seed46_pairs.csv
+output/findings/finding054/phase_source_minimization_seed46_timeline.csv
+```
