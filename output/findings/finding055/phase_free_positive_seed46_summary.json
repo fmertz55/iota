@@ -1,0 +1,42 @@
+{
+  "pairs_csv": "output/findings/finding055/phase_free_positive_seed46_pairs.csv",
+  "summary_by_seed_variant": {
+    "46:takeover_rotation_vector_phase": {
+      "checkpoint_active_iotas": 1125,
+      "checkpoint_component_count": 15,
+      "checkpoint_largest_component": 135,
+      "checkpoint_nonzero_payload_iotas": 0,
+      "checkpoint_p_sensitive_primary_count": 0,
+      "checkpoint_p_sensitive_primary_fraction": 0.0,
+      "checkpoint_payload_entropy": -0.0,
+      "checkpoint_payload_unique": 1,
+      "checkpoint_tick": 2048,
+      "component_signal_offsets": "134;135;136;137;138;139;140",
+      "component_signal_vanish_offset": 141,
+      "continuation_seed": 2068260714,
+      "final_active_iotas": 1125,
+      "final_component_count": 15,
+      "final_largest_component": 135,
+      "final_nonzero_payload_iotas": 0,
+      "final_payload_entropy": -0.0,
+      "final_payload_unique": 1,
+      "first_component_change_offset": 134,
+      "init_seed": 46,
+      "ledger_exact": 1,
+      "max_abs_ledger_error": 0.0,
+      "pivotal_target_active_499": "0",
+      "pivotal_target_active_511": "0",
+      "pivotal_target_active_512": "0",
+      "rebridge_at_515": 0,
+      "rebridge_target_active_515": "0",
+      "sample_index": 6,
+      "split_at_512": 0,
+      "split_target_active_512": "0",
+      "split_target_active_515": "0",
+      "state_hash_without_payload": "5a659707db779cf7ade2eb90c6b619320352f46b51bcbf4352b9dbc50c6b798d",
+      "variant": "takeover_rotation_vector_phase"
+    }
+  },
+  "summary_csv": "output/findings/finding055/phase_free_positive_seed46_summary.csv",
+  "timeline_csv": "output/findings/finding055/phase_free_positive_seed46_timeline.csv"
+}

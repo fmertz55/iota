@@ -6507,3 +6507,176 @@ minimal coherence seed ladder begin.
 - `output/findings/finding054/phase_source_minimization_seed46_summary.json`
 - `output/findings/finding054/phase_source_minimization_seed46_pairs.csv`
 - `output/findings/finding054/phase_source_minimization_seed46_timeline.csv`
+
+---
+
+## Finding 055 — Coupled vector-derived takeover and rotation phase gives a no-stored-phase component signal
+
+### Question
+
+Finding 054 showed that simple deterministic interaction-derived replacements
+do not preserve the original seed46 offset-512 birth channel. Finding 055 asked
+a broader search question:
+
+```text
+Can any no-stored-payload/no-stored-action-phase local law produce a component
+split/rebridge signal by causal class, even if it does not replay the original
+seed46 channel?
+```
+
+This is not yet a strict phase-free primitive test. The positive variant below
+still computes a transient phase-like value from vector state. The important
+change is that no phase is stored in `World.P` or in an auxiliary
+`action_phase` array.
+
+### Method
+
+The law-search audit reused v0.3.6 seed46/sample6:
+
+```text
+checkpoint: 2048
+primary search horizon: 600
+boundedness follow-up horizon for the positive variant: 1024
+World.P clamped to zero for all replacement variants
+no stored action_phase
+ledger must remain exact
+```
+
+The isolated variants were:
+
+```text
+zero_phase:
+  all action paths receive phase 0
+
+vector_step_only_interaction_phase:
+  vector_step phase = (V + A + R) mod 8
+  takeover and rotation phase = 0
+
+takeover_only_vector_phase:
+  takeover phase = V mod 8
+  vector_step and rotation phase = 0
+
+rotation_only_vector_phase:
+  rotation source/target phase = source_v mod 8 / target_v mod 8
+  vector_step and takeover phase = 0
+
+takeover_rotation_vector_phase:
+  takeover phase = V mod 8
+  rotation source/target phase = source_v mod 8 / target_v mod 8
+  vector_step phase = 0
+
+interaction_phase:
+  vector_step, takeover, and rotation all receive deterministic
+  interaction-derived phases
+
+rotation_only_interaction_phase:
+  only rotation receives deterministic interaction-derived phases
+```
+
+### Seed46 Search Result
+
+Only the coupled takeover+rotation vector-derived variant produced a component
+signal:
+
+| Variant | Signal offsets | Vanish offset | Checkpoint active | Components | Largest | Payload at checkpoint | Ledger |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `natural` | `512;513;514` | `515` | `1151` | `16` | `139` | `0` | `1` |
+| `zero_phase` | none | none | `1125` | `16` | `145` | `0` | `1` |
+| `vector_step_only_interaction_phase` | none | none | `1121` | `16` | `143` | `0` | `1` |
+| `takeover_only_vector_phase` | none | none | `1185` | `16` | `137` | `0` | `1` |
+| `rotation_only_vector_phase` | none | none | `1175` | `16` | `145` | `0` | `1` |
+| `takeover_rotation_vector_phase` | `134;135;136;137;138;139;140` | `141` | `1125` | `15` | `135` | `0` | `1` |
+| `interaction_phase` | none | none | `1125` | `16` | `139` | `0` | `1` |
+| `rotation_only_interaction_phase` | none | none | `1143` | `17` | `137` | `0` | `1` |
+
+The positive variant was extended to horizon `1024` and remained bounded:
+
+```text
+variant:                       takeover_rotation_vector_phase
+signal offsets:                134;135;136;137;138;139;140
+component signal vanish offset:141
+checkpoint active/components:  1125 / 15
+final active/components:       1125 / 15
+payload at checkpoint/final:   0 / 0
+ledger exact:                  1
+max ledger error:              0.0
+```
+
+During the signal window:
+
+```text
+offset 133: component_count = 15
+offset 134: component_count = 16  (+1 split)
+offset 140: component_count = 16
+offset 141: component_count = 15  (-1 rebridge)
+active_iotas stayed 1125
+largest component stayed 135
+World.P stayed zero
+```
+
+### Interpretation
+
+This is the first positive post-payload result:
+
+```text
+component split/rebridge can occur with no stored payload and no stored
+action_phase.
+```
+
+It is not the original seed46 channel. The original causal-cell checks are all
+absent in the positive variant, and the signal appears at offsets `134..140`
+rather than `512..514`.
+
+The path decomposition is informative:
+
+```text
+takeover-only vector-derived phase: no signal
+rotation-only vector-derived phase: no signal
+takeover + rotation vector-derived phase: signal
+```
+
+So the working hypothesis changes:
+
+```text
+stored phase is not required, but coupled orientation-derived action constraints
+may be required.
+```
+
+In other words, the system does not need a payload-like phase token, but it does
+need a local symmetry breaker that is shared across takeover rotation and
+received rotation. `V mod 8` is currently acting as that local orientation phase.
+
+This keeps the ontology moving in the desired direction:
+
+```text
+information is not carried as payload;
+interaction history and orientation constrain which local actions are available;
+component-level events can arise from those constraints without stored phase.
+```
+
+### Next Gate
+
+The next step is not tuning strength. It is a causal trace of the new signal:
+
+```text
+Finding 056:
+  trace takeover_rotation_vector_phase around offsets 128..145
+  identify active-set changes at split offset 134 and rebridge offset 141
+  compare against zero_phase, takeover_only_vector_phase, and
+  rotation_only_vector_phase
+  determine whether the signal is a true bridge/articulation event
+  verify World.P/action_phase remain absent
+```
+
+Only after the new event class is identified should seed robustness be run.
+
+### Artifacts
+
+- `src/phase_source_minimization_audit.py`
+- `output/findings/finding055/phase_free_law_search_seed46_summary.csv`
+- `output/findings/finding055/phase_free_law_search_seed46_summary.json`
+- `output/findings/finding055/phase_free_law_search_seed46_pairs.csv`
+- `output/findings/finding055/phase_free_law_search_seed46_timeline.csv`
+- `output/findings/finding055/phase_free_positive_seed46_summary.csv`
+- `output/findings/finding055/phase_free_positive_seed46_summary.json`
+- `output/findings/finding055/phase_free_positive_seed46_timeline.csv`

@@ -27,6 +27,10 @@ VARIANTS = (
     "natural",
     "zero_phase",
     "vector_state_phase",
+    "vector_step_only_interaction_phase",
+    "takeover_only_vector_phase",
+    "rotation_only_vector_phase",
+    "takeover_rotation_vector_phase",
     "interaction_phase",
     "rotation_only_interaction_phase",
 )
@@ -76,13 +80,18 @@ def vector_state_phase(v_idx: int) -> int:
 def vector_step_phase(v_idx: int, a: int, r: int, variant: str) -> int:
     if variant == "vector_state_phase":
         return vector_state_phase(v_idx)
-    if variant == "interaction_phase":
+    if variant in {"interaction_phase", "vector_step_only_interaction_phase"}:
         return (int(v_idx) + int(a) + int(r)) % 8
     return 0
 
 
 def takeover_phase(v_idx: int, variant: str) -> int:
-    if variant in {"vector_state_phase", "interaction_phase"}:
+    if variant in {
+        "vector_state_phase",
+        "interaction_phase",
+        "takeover_only_vector_phase",
+        "takeover_rotation_vector_phase",
+    }:
         return vector_state_phase(v_idx)
     return 0
 
@@ -97,7 +106,11 @@ def rotation_phases(
     influence: float,
     variant: str,
 ) -> tuple[int, int]:
-    if variant == "vector_state_phase":
+    if variant in {
+        "vector_state_phase",
+        "rotation_only_vector_phase",
+        "takeover_rotation_vector_phase",
+    }:
         return vector_state_phase(source_v), vector_state_phase(target_v)
     if variant in {"interaction_phase", "rotation_only_interaction_phase"}:
         residual_phase = 1 if target_depleted else 0

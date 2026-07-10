@@ -1339,3 +1339,134 @@ output/findings/finding054/phase_source_minimization_seed46_summary.json
 output/findings/finding054/phase_source_minimization_seed46_pairs.csv
 output/findings/finding054/phase_source_minimization_seed46_timeline.csv
 ```
+
+## Finding 055 Update
+
+Finding 055 broadened the search after Finding 054 failed to preserve the
+original seed46 offset-512 channel.
+
+Question:
+
+```text
+Can a no-stored-payload/no-stored-action-phase local law produce any component
+split/rebridge signal by causal class?
+```
+
+Important caveat:
+
+```text
+The positive variant is no-stored-phase, not strictly phase-free.
+It computes transient phase-like values from vector state (`V mod 8`) but stores
+no phase in World.P and uses no auxiliary action_phase array.
+```
+
+Search setup:
+
+```text
+v0.3.6 seed46/sample6
+checkpoint: 2048
+search horizon: 600
+positive follow-up horizon: 1024
+World.P clamped to zero in all replacement variants
+ledger exactness required
+```
+
+Variants tested:
+
+```text
+zero_phase
+vector_step_only_interaction_phase
+takeover_only_vector_phase
+rotation_only_vector_phase
+takeover_rotation_vector_phase
+interaction_phase
+rotation_only_interaction_phase
+```
+
+Result:
+
+```text
+Only takeover_rotation_vector_phase produced a component signal.
+
+takeover_rotation_vector_phase:
+  takeover phase = V mod 8
+  rotation source/target phase = source_v mod 8 / target_v mod 8
+  vector_step phase = 0
+  World.P = 0 at checkpoint and final
+  no stored action_phase
+```
+
+Positive signal:
+
+```text
+signal offsets:                 134, 135, 136, 137, 138, 139, 140
+component signal vanish offset: 141
+checkpoint active/components:   1125 / 15
+final active/components:        1125 / 15
+payload at checkpoint/final:    0 / 0
+ledger exact:                   yes
+max ledger error:               0.0
+```
+
+Signal-window detail:
+
+```text
+offset 133: component_count = 15
+offset 134: component_count = 16  (+1 split)
+offset 140: component_count = 16
+offset 141: component_count = 15  (-1 rebridge)
+active_iotas stayed 1125
+largest component stayed 135
+World.P stayed zero
+```
+
+Negative controls:
+
+```text
+takeover_only_vector_phase: no signal
+rotation_only_vector_phase: no signal
+zero_phase: no signal
+interaction_phase: no signal
+rotation_only_interaction_phase: no signal
+```
+
+Interpretation:
+
+```text
+Stored phase is not required for a component split/rebridge signal.
+But coupled orientation-derived action constraints appear to matter:
+takeover and received rotation both need the same local vector-derived phase
+source for this positive seed46 signal.
+```
+
+This is not the original Finding 049 channel:
+
+```text
+original channel: offsets 512, 513, 514
+new no-stored-phase signal: offsets 134..140
+original causal-cell checks are absent
+```
+
+Next gate:
+
+```text
+Finding 056 should be a causal trace of takeover_rotation_vector_phase around
+offsets 128..145:
+  identify active-set changes at split offset 134 and rebridge offset 141
+  compare against zero_phase, takeover_only_vector_phase, and
+  rotation_only_vector_phase
+  determine whether the signal is a true bridge/articulation event
+  verify World.P/action_phase remain absent
+```
+
+Artifacts:
+
+```text
+output/findings/finding055/phase_free_law_search_seed46_summary.csv
+output/findings/finding055/phase_free_law_search_seed46_summary.json
+output/findings/finding055/phase_free_law_search_seed46_pairs.csv
+output/findings/finding055/phase_free_law_search_seed46_timeline.csv
+output/findings/finding055/phase_free_positive_seed46_summary.csv
+output/findings/finding055/phase_free_positive_seed46_summary.json
+output/findings/finding055/phase_free_positive_seed46_timeline.csv
+```

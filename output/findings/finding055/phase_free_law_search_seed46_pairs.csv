@@ -1,0 +1,8 @@
+init_seed,variant,reference_variant,same_component_signal,same_first_component_change_offset,same_split_at_512,same_rebridge_at_515,same_checkpoint_active_iotas,same_checkpoint_component_count,same_checkpoint_largest_component,same_final_active_iotas,same_final_component_count,same_final_largest_component,same_final_state_without_payload,first_nonpayload_divergence_tick,first_nonpayload_divergence_stage,first_nonpayload_divergence_offset,natural_nonzero_payload_iotas_at_divergence,natural_p_sensitive_primary_count_at_divergence,natural_component_count_at_divergence,variant_component_count_at_divergence,natural_largest_component_at_divergence,variant_largest_component_at_divergence,component_signal_offsets,reference_component_signal_offsets
+46,zero_phase,natural,0,0,0,0,0,1,0,0,1,0,0,2048,checkpoint,0,0,0,16,16,139,145,,512;513;514
+46,vector_step_only_interaction_phase,natural,0,0,0,0,0,1,0,0,1,0,0,2048,checkpoint,0,0,0,16,16,139,143,,512;513;514
+46,takeover_only_vector_phase,natural,0,0,0,0,0,1,0,0,1,0,0,2048,checkpoint,0,0,0,16,16,139,137,,512;513;514
+46,rotation_only_vector_phase,natural,0,0,0,0,0,1,0,0,1,0,0,2048,checkpoint,0,0,0,16,16,139,145,,512;513;514
+46,takeover_rotation_vector_phase,natural,0,0,0,0,0,0,0,0,0,0,0,2048,checkpoint,0,0,0,16,15,139,135,134;135;136;137;138;139;140,512;513;514
+46,interaction_phase,natural,0,0,0,0,0,1,1,0,1,1,0,2048,checkpoint,0,0,0,16,16,139,139,,512;513;514
+46,rotation_only_interaction_phase,natural,0,0,0,0,0,0,0,0,0,0,0,2048,checkpoint,0,0,0,16,17,139,137,,512;513;514
