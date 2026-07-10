@@ -553,28 +553,89 @@ interpretation:
   that then exhausts as a cube26 articulation point.
 ```
 
+Finding 048:
+
+```text
+test:
+  v0.3.7 support-weighted fixed-mean residual recruitment
+  score mode: source_target_L_contrast_support_weighted
+  seeds: 42, 43, 44, 45, 46, 56
+  checkpoints: 1536 and 2048
+  samples: 8 per checkpoint
+
+safety:
+  bounded + ledger exact seeds:       6 / 6
+  fixed-mean audit seeds:             6 / 6
+  max total probability delta:        5.043743e-13
+  max per-sample probability delta:   1.421085e-14
+
+aggregate:
+  support-weighted interface-union:   0.024344
+  component-bridge interface-union:   0.023103
+  v0.3.5 contrast interface-union:    0.021926
+  v0.3.1 interface-union:             0.017880
+  signed interface-union:             0.018949
+
+  support-weighted active distance:   0.040127
+  component-bridge active distance:   0.038195
+  v0.3.5 contrast active distance:    0.038007
+
+  support-weighted component-count delta: 0.000000
+  support-weighted largest-comp delta:    0.000000
+  support-weighted phase-4 turnover:      0.026020
+
+per-seed:
+  interface beats component_bridge:   4 / 6
+  interface beats contrast2:          6 / 6
+  interface beats v0.3.1 + signed:    6 / 6
+  active beats component_bridge:      4 / 6
+  active beats contrast2:             5 / 6
+  active beats v0.3.1 + signed:       2 / 6
+  nonzero component morphology:       0 / 6
+
+causal repeat:
+  v0.3.6 seed46/sample6 component signal: 512, 513, 514
+  v0.3.7 seed46/sample6 component signal: none
+  v0.3.6 articulation deactivations:      1
+  v0.3.7 articulation deactivations:      0
+```
+
+Interpretation:
+
+```text
+v0.3.7 is a clean negative/partial-positive result.
+
+Support weighting preserves fixed-mean activation, improves interface-union
+divergence, improves aggregate active-set divergence, and preferentially selects
+component-bridge candidates. But it suppresses the articulation-source turnover
+that created the only v0.3.6 component transient, yielding 0 / 6 component
+morphology seeds.
+
+The issue is not support in general. The issue is that blanket articulation/source
+stabilization removes the event class needed for component-level morphology.
+```
+
 ## Next Hypothesis
 
 Do not continue secondary candidate ordering bias.
 
-Keep the coupling at the local residual recruitment event. v0.3.6 shows that
-component-bridge geometry can be selected at fixed mean, but Finding 047 shows that
-bridge quantity alone is the wrong target. The component-changing event class is
-articulation-source turnover: residual recruitment creates a small appendage through
-a source cell that then exhausts and splits cube26 connectivity.
+Do not add more component-bridge quantity.
 
-Immediate v0.3.7 direction:
+Keep the coupling at local residual recruitment, but make the next gate about
+controlled articulation persistence rather than generic bridge support:
 
 ```text
-articulation-source bridge audit
+v0.3.8 articulation-persistence audit / score
 
-measure across seeds/samples:
-  residual recruitments from low-A / soon-exhausted sources
-  source cells whose removal increases cube26 component count
-  residual events creating singleton or small-component appendages
-  global bridge closures that erase component splits
-  active/depleted adjacency lead time before articulation events
-  fixed-mean renormalization unchanged
+measure or bias:
+  source cells that would be articulation points after recruitment
+  recruits that create singleton vs nontrivial component separation
+  source exhaustion risk over the next few ticks
+  bridge closures that erase component splits
+  minimum persistence window for new component signal
+
+constraint:
+  residual participation budget remains fixed mean
 ```
 
 Why:
@@ -584,8 +645,8 @@ v0.3.1 has directional memory without structural consequence.
 v0.3.2 proves global secondary bias over-partitions direction and suppresses motion.
 v0.3.3 proves event-gated candidate ordering suppresses motion even more.
 v0.3.4 proves residual recruitment is the better coupling site: it restores turnover
-without adding expected activation, but the current source-L alignment score does not
-beat baseline morphology.
+without adding expected activation, but source-L alignment does not beat baseline
+morphology.
 v0.3.4b proves source-target L contrast can beat both baselines on interface-union
 divergence at fixed mean activation.
 v0.3.5 proves that contrast result is seed-robust at the interface level.
@@ -595,6 +656,9 @@ Finding 046 proves component bridges can be selected at fixed mean and improve
 interface-union divergence, but robust component-level morphology still fails.
 Finding 047 proves the first component signal is articulation-source exhaustion,
 not bridge quantity or high source-target L contrast alone.
+Finding 048 proves support-weighting improves interface/active divergence but
+removes the articulation-source transient instead of stabilizing it into persistent
+component morphology.
 ```
 
 ## Acceptance Gate
@@ -625,10 +689,12 @@ phase-4 interface turnover not collapsed
 Minimum useful diagnostic:
 
 ```text
-component-bridge causal trace / articulation-source audit
+articulation-persistence audit
+component-bridge causal trace
 rotation-aware openness
 four-phase lineage persistence
 lineage-conditioned morphology
+residual recruitment geometry audit
 v0.3.1 angular-memory control
 signed/no-memory control if needed
 ```
@@ -636,13 +702,14 @@ signed/no-memory control if needed
 ## Suggested New Thread Prompt
 
 ```text
-Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-047.
-Continue from Finding 047: the lone v0.3.6 component signal was traced to
-articulation-source exhaustion. A residual event created a small appendage through
-a source cell that later deactivated as a cube26 articulation point, splitting off
-a one-cell component; a later global bridge event erased the split.
-Next goal: run v0.3.7 articulation-source bridge audit across seeds/samples. Measure
-residual recruitments from low-A / soon-exhausted sources, source articulation removals,
-small-component appendage creation, and global re-bridge closures under fixed-mean
-residual participation.
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-048.
+Continue from Finding 048: v0.3.7 support-weighted fixed-mean residual recruitment
+improved interface-union and aggregate active-set divergence, preserved safety and
+fixed-mean audits at 6/6 seeds, but produced 0/6 component morphology seeds. The
+seed46/sample6 causal repeat removed the v0.3.6 articulation-source component
+transient entirely: articulation deactivations dropped from 1 to 0.
+Next goal: design v0.3.8 articulation-persistence audit/score. Keep fixed-mean
+residual participation, but identify events that allow controlled articulation
+turnover and component signal persistence rather than blanket articulation suppression
+or more component-bridge quantity.
 ```

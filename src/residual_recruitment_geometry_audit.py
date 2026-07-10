@@ -453,6 +453,25 @@ def audit_tick(
         )
         for class_name in geometry_classes
     }
+    support_terms = (
+        "cube26_neighbor_support",
+        "face6_neighbor_support",
+        "multi_component_support",
+        "supported_bridge",
+        "non_articulation_support",
+        "dangling_articulation_risk",
+        "source_neighbor_support",
+        "source_amplitude_support",
+        "source_exhaustion_risk",
+        "source_articulation_risk",
+    )
+    for term in support_terms:
+        geometry_weights[term] = float(
+            constants.get(
+                f"angular_momentum_residual_{term}_weight",
+                raw_geometry_weights.get(term, 0.0),
+            )
+        )
 
     old_L = (
         world.angular_L.astype(np.float32, copy=True)

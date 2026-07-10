@@ -213,6 +213,104 @@ def classify_residual_target_geometry(
     }
 
 
+def residual_target_support_features(
+    world: World,
+    target: tuple[int, int, int],
+) -> dict[str, float]:
+    geometry = classify_residual_target_geometry(world, target)
+    face6_neighbors = float(geometry["face6_neighbors"])
+    cube26_neighbors = float(geometry["cube26_neighbors"])
+    cube26_components = float(geometry["cube26_components"])
+
+    cube26_neighbor_support = max(0.0, min(1.0, (cube26_neighbors - 1.0) / 5.0))
+    face6_neighbor_support = max(0.0, min(1.0, (face6_neighbors - 1.0) / 3.0))
+    multi_component_support = 1.0 if cube26_components >= 2.0 else 0.0
+    supported_bridge = (
+        max(0.0, min(1.0, (cube26_neighbors - cube26_components) / 4.0))
+        if cube26_components >= 2.0
+        else 0.0
+    )
+    non_articulation_support = (
+        max(0.0, min(1.0, (cube26_neighbors - 1.0) / 4.0))
+        if cube26_components <= 1.0
+        else 0.0
+    )
+    dangling_articulation_risk = 0.0
+    if cube26_neighbors <= 2.0:
+        dangling_articulation_risk = 1.0
+    elif cube26_components >= 2.0 and cube26_neighbors <= 3.0:
+        dangling_articulation_risk = 0.5
+
+    return {
+        "cube26_neighbor_support": cube26_neighbor_support,
+        "face6_neighbor_support": face6_neighbor_support,
+        "multi_component_support": multi_component_support,
+        "supported_bridge": supported_bridge,
+        "non_articulation_support": non_articulation_support,
+        "dangling_articulation_risk": dangling_articulation_risk,
+    }
+
+
+def residual_target_support_score(
+    world: World,
+    target: tuple[int, int, int],
+    weights: dict[str, float] | None = None,
+) -> float:
+    feature_weights = weights or {}
+    features = residual_target_support_features(world, target)
+    return float(
+        feature_weights.get("cube26_neighbor_support", 0.0) * features["cube26_neighbor_support"]
+        + feature_weights.get("face6_neighbor_support", 0.0) * features["face6_neighbor_support"]
+        + feature_weights.get("multi_component_support", 0.0) * features["multi_component_support"]
+        + feature_weights.get("supported_bridge", 0.0) * features["supported_bridge"]
+        + feature_weights.get("non_articulation_support", 0.0) * features["non_articulation_support"]
+        - feature_weights.get("dangling_articulation_risk", 0.0) * features["dangling_articulation_risk"]
+    )
+
+
+def residual_source_support_features(
+    world: World,
+    source: tuple[int, int, int],
+    source_a: int,
+) -> dict[str, float]:
+    cube26_coords = active_neighbor_coords(world, source, "cube26")
+    cube26_neighbors = float(len(cube26_coords))
+    cube26_components_after_removal = float(
+        local_component_count(cube26_coords, "cube26", world.size, world.wrap)
+    )
+    source_neighbor_support = max(0.0, min(1.0, (cube26_neighbors - 1.0) / 5.0))
+    source_amplitude_support = max(0.0, min(1.0, (float(source_a) - 1.0) / 4.0))
+    if int(source_a) <= 1:
+        source_exhaustion_risk = 1.0
+    elif int(source_a) == 2:
+        source_exhaustion_risk = 0.5
+    else:
+        source_exhaustion_risk = 0.0
+    source_articulation_risk = 1.0 if cube26_components_after_removal >= 2.0 else 0.0
+    return {
+        "source_neighbor_support": source_neighbor_support,
+        "source_amplitude_support": source_amplitude_support,
+        "source_exhaustion_risk": source_exhaustion_risk,
+        "source_articulation_risk": source_articulation_risk,
+    }
+
+
+def residual_source_support_score(
+    world: World,
+    source: tuple[int, int, int],
+    source_a: int,
+    weights: dict[str, float] | None = None,
+) -> float:
+    feature_weights = weights or {}
+    features = residual_source_support_features(world, source, source_a)
+    return float(
+        feature_weights.get("source_neighbor_support", 0.0) * features["source_neighbor_support"]
+        + feature_weights.get("source_amplitude_support", 0.0) * features["source_amplitude_support"]
+        - feature_weights.get("source_exhaustion_risk", 0.0) * features["source_exhaustion_risk"]
+        - feature_weights.get("source_articulation_risk", 0.0) * features["source_articulation_risk"]
+    )
+
+
 def make_vector_states(cfg: Dict[str, Any], rng: np.random.Generator) -> tuple[np.ndarray, tuple[str, ...]]:
     mode = cfg["vectors"].get("mode", "cube26")
     count = int(cfg["vectors"].get("vector_count", 64))
@@ -686,6 +784,23 @@ def angular_momentum_residual_score(
         geometry = classify_residual_target_geometry(world, tuple(int(value) for value in candidate["target"]))
         geometry_score = float(weights.get(str(geometry["class"]), 0.0))
         return clamp_signed(contrast_score + geometry_score, 1.0)
+    if score_mode == "source_target_L_contrast_support_weighted":
+        contrast = clamp_signed(
+            (source_l - target_l) / angular_momentum_cap,
+            1.0,
+        )
+        primary_dx, primary_dy, primary_dz, _ = vector_step(world, v_idx, a, r, p)
+        contrast_score = float(contrast) * vector_alignment(
+            (primary_dx, primary_dy, primary_dz),
+            candidate["step"],
+        )
+        weights = geometry_weights or {}
+        target = tuple(int(value) for value in candidate["target"])
+        geometry = classify_residual_target_geometry(world, target)
+        geometry_score = float(weights.get(str(geometry["class"]), 0.0))
+        support_score = residual_target_support_score(world, target, weights)
+        support_score += residual_source_support_score(world, (int(x), int(y), int(z)), int(a), weights)
+        return clamp_signed(contrast_score + geometry_score + support_score, 1.0)
     raise ValueError(f"Unknown angular_momentum_residual_bias_score_mode: {score_mode}")
 
 
@@ -995,6 +1110,7 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         "target_L_alignment",
         "source_target_L_contrast",
         "source_target_L_contrast_component_bridge",
+        "source_target_L_contrast_support_weighted",
     }:
         raise ValueError(
             "Unknown angular_momentum_residual_bias_score_mode: "
@@ -1028,6 +1144,25 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
         )
         for class_name in residual_geometry_classes
     }
+    residual_support_terms = (
+        "cube26_neighbor_support",
+        "face6_neighbor_support",
+        "multi_component_support",
+        "supported_bridge",
+        "non_articulation_support",
+        "dangling_articulation_risk",
+        "source_neighbor_support",
+        "source_amplitude_support",
+        "source_exhaustion_risk",
+        "source_articulation_risk",
+    )
+    for term in residual_support_terms:
+        angular_momentum_residual_geometry_weights[term] = float(
+            cfg["constants"].get(
+                f"angular_momentum_residual_{term}_weight",
+                raw_residual_geometry_weights.get(term, 0.0),
+            )
+        )
     angular_momentum_residual_bias_enabled = (
         angular_momentum_enabled
         and angular_momentum_residual_bias_enabled

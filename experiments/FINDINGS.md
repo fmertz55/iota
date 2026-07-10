@@ -5412,3 +5412,165 @@ immediate re-bridging, without increasing total residual participation.
 - `output/findings/finding_047_component_bridge_causal_trace_comparison.csv`
 - `output/findings/finding_047_component_bridge_causal_trace_comparison.json`
 - `output/findings/finding_047_component_bridge_causal_trace_chain.csv`
+
+## Finding 048: Support-weighted recruitment stabilizes interface divergence but erases component transients
+
+### Question
+
+Finding 047 showed that the first v0.3.6 component signal was not caused by
+more local component-bridge candidates. It came from a residual recruitment
+through a source cell that later exhausted as a cube26 articulation point,
+creating a three-tick singleton split before a later bridge closed it.
+
+The v0.3.7 test asked whether fixed-mean residual recruitment could favor more
+structurally supported recruits while preserving the same mean residual
+participation budget:
+
+```text
+v0.3.7 support-weighted fixed-mean residual recruitment
+
+score mode:
+  source_target_L_contrast_support_weighted
+
+support terms:
+  multiple active neighbors
+  multiple distinct source components
+  supported component bridges
+  non-articulation target support
+  source amplitude/support continuity
+  source exhaustion/articulation penalties
+
+seeds:
+  42, 43, 44, 45, 46, 56
+
+checkpoints:
+  1536 and 2048
+
+samples:
+  8 per checkpoint
+```
+
+### Result
+
+The fixed-mean and safety gates pass:
+
+```text
+bounded + ledger exact seeds:       6 / 6
+fixed-mean audit seeds:             6 / 6
+max total probability delta:        5.043743e-13
+max per-sample probability delta:   1.421085e-14
+mean component_bridge selection lift: 1.147569
+mean local_bridge selection lift:     1.003227
+```
+
+Aggregate morphology:
+
+| Variant | Interface-union distance | Active distance | Component-count delta | Largest-comp delta | Phase-4 active-interface turnover |
+|---|---:|---:|---:|---:|---:|
+| `support_weighted` | `0.024344` | `0.040127` | `0.000000` | `0.000000` | `0.026020` |
+| `component_bridge` | `0.023103` | `0.038195` | `0.005208` | `0.005208` | `0.024020` |
+| `contrast2` | `0.021926` | `0.038007` | `0.000000` | `0.000000` | `0.023446` |
+| `v031_angular_memory` | `0.017880` | `0.035978` | `0.015625` | `0.015625` | `0.018258` |
+| `signed_control` | `0.018949` | `0.036669` | `0.000000` | `0.000000` | `0.018930` |
+
+Per-seed gates:
+
+```text
+interface-union beats v0.3.6 component_bridge: 4 / 6
+interface-union beats v0.3.5 contrast2:        6 / 6
+interface-union beats v0.3.1 and signed:       6 / 6
+active distance beats v0.3.6 component_bridge: 4 / 6
+active distance beats v0.3.5 contrast2:        5 / 6
+active distance beats v0.3.1 and signed:       2 / 6
+nonzero component morphology seeds:            0 / 6
+```
+
+### Seed-46 Causal Check
+
+The direct repeat of Finding 047's responder continuation no longer produces a
+component signal:
+
+| Case | Residual events | Local component-bridge events | High `|L|` contrast events | Global bridge events | Articulation deactivations | Component signal |
+|---|---:|---:|---:|---:|---:|---|
+| v0.3.6 seed46/sample6 | `1010` | `109` | `40` | `1` | `1` | `512, 513, 514` |
+| v0.3.7 seed46/sample6 | `802` | `59` | `32` | `0` | `0` | none |
+
+The v0.3.7 trace still creates bridge-class recruitments, but no source
+deactivation removes a cube26 articulation point:
+
+```text
+component_count_checkpoint = 16
+component_count_final = 16
+largest_checkpoint = 141
+largest_final = 141
+articulation_deactivation_count = 0
+ledger_exact = 1
+```
+
+### Interpretation
+
+v0.3.7 is a useful negative/partial-positive result.
+
+It improves fixed-mean interface divergence and aggregate active-set divergence
+relative to v0.3.6/v0.3.5 while preserving boundedness and ledger exactness.
+It also preferentially selects the intended component-bridge class.
+
+But it does not convert interface divergence into component morphology. In the
+critical seed-46 continuation, the support/source-continuity terms removed the
+articulation-source failure mode that generated the v0.3.6 component transient,
+instead of converting it into a persistent component-level structure.
+
+So the missing mechanism is sharper:
+
+```text
+component morphology requires controlled articulation turnover, not blanket
+articulation suppression.
+```
+
+Support is good for interface stability, but the component gate needs a
+persistence-aware articulation mechanism: preserve newly recruited bridges long
+enough to matter, while still allowing selected articulation events to create
+nontrivial component separation.
+
+### Next Gate
+
+The next test should not add more bridge quantity.
+
+The next test should isolate articulation turnover with fixed mean activation:
+
+```text
+v0.3.8 articulation-persistence audit / score
+
+measure or bias:
+  source cells that would be articulation points after recruitment
+  recruits that create singleton vs nontrivial component separation
+  source exhaustion risk over the next few ticks
+  bridge closures that erase component splits
+  minimum persistence window for new component signal
+
+constraint:
+  residual participation budget remains fixed mean
+```
+
+Success now requires:
+
+```text
+interface-union remains above v0.3.5/v0.3.1/signed baselines
+active distance does not regress below v0.3.6 aggregate
+component-count/largest-component/entropy signal appears in multiple seeds
+component signal persists beyond a few ticks
+boundedness, ledger exactness, and fixed-mean audit remain 6 / 6
+```
+
+### Artifacts
+
+- `src/iota_rig.py`
+- `src/residual_recruitment_geometry_audit.py`
+- `src/component_bridge_causal_trace.py`
+- `output/findings/finding_048_v037_support_weighted_pass_table.csv`
+- `output/findings/finding_048_v037_support_weighted_aggregate_by_variant.csv`
+- `output/findings/finding_048_v037_support_weighted_summary.json`
+- `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_summary.json`
+- `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_events.csv`
+- `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_deactivations.csv`
+- `output/findings/finding_048_v037_support_weighted_seed46_sample6_causal_trace_timeline.csv`

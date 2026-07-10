@@ -24,6 +24,8 @@ from iota_rig import (
     load_config,
     local_candidates,
     offset_vector_state,
+    residual_source_support_score,
+    residual_target_support_score,
     secondary_bias_gate_mask,
     signed_round_offset,
     vector_alignment,
@@ -473,7 +475,7 @@ def get_geometry_weights(constants: dict[str, Any]) -> dict[str, float]:
         raw = {}
     if not isinstance(raw, dict):
         raise ValueError("angular_momentum_residual_geometry_weights must be a mapping")
-    return {
+    weights = {
         class_name: float(
             constants.get(
                 f"angular_momentum_residual_geometry_{class_name}_weight",
@@ -482,6 +484,26 @@ def get_geometry_weights(constants: dict[str, Any]) -> dict[str, float]:
         )
         for class_name in GEOMETRY_CLASSES
     }
+    support_terms = (
+        "cube26_neighbor_support",
+        "face6_neighbor_support",
+        "multi_component_support",
+        "supported_bridge",
+        "non_articulation_support",
+        "dangling_articulation_risk",
+        "source_neighbor_support",
+        "source_amplitude_support",
+        "source_exhaustion_risk",
+        "source_articulation_risk",
+    )
+    for term in support_terms:
+        weights[term] = float(
+            constants.get(
+                f"angular_momentum_residual_{term}_weight",
+                raw.get(term, 0.0),
+            )
+        )
+    return weights
 
 
 def residual_score_parts(
@@ -512,7 +534,10 @@ def residual_score_parts(
     scoring_geometry = classify_residual_target_geometry(world, tuple(int(value) for value in candidate["target"]))
     geometry_score = (
         float(geometry_weights.get(str(scoring_geometry["class"]), 0.0))
-        if score_mode == "source_target_L_contrast_component_bridge"
+        if score_mode in {
+            "source_target_L_contrast_component_bridge",
+            "source_target_L_contrast_support_weighted",
+        }
         else 0.0
     )
     residual_score = angular_momentum_residual_score(
@@ -531,13 +556,19 @@ def residual_score_parts(
         score_mode,
         geometry_weights,
     )
+    support_score = (
+        residual_target_support_score(world, tuple(int(value) for value in candidate["target"]), geometry_weights)
+        + residual_source_support_score(world, (int(x), int(y), int(z)), int(a), geometry_weights)
+        if score_mode == "source_target_L_contrast_support_weighted"
+        else 0.0
+    )
     return {
         "source_L": source_l,
         "target_L": target_l,
         "L_contrast": float(l_contrast),
         "primary_alignment": float(primary_alignment),
         "contrast_score": float(contrast_score),
-        "geometry_score": float(geometry_score),
+        "geometry_score": float(geometry_score + support_score),
         "residual_score": float(residual_score),
         "scoring_geometry_class": str(scoring_geometry["class"]),
     }
