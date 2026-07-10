@@ -1,0 +1,7 @@
+seed,ticks_run,first_nonzero_phase_tick,last_nonzero_phase_tick,phase_collapse_tick,max_nonzero_phase_iotas,initial_nonzero_phase_iotas,initial_phase_unique,final_nonzero_phase_iotas,vector_step_events,vector_step_result_collision_signatures,vector_step_phase_collision_signatures,rotate_takeover_events,rotate_takeover_result_collision_signatures,rotate_takeover_phase_collision_signatures,rotation_offset_events,rotation_offset_result_collision_signatures,rotation_offset_phase_collision_signatures,signed_rotation_offset_events,signed_rotation_offset_result_collision_signatures,signed_rotation_offset_phase_collision_signatures,local_cell_signature_records,local_cell_phase_collision_signatures,mode_only_local_derivable,numeric_phase_storage_eliminable
+42,18,0,10,11,32,16,6,0,2,0,0,32,0,0,167,6,6,167,6,6,57,1,0,0
+43,88,0,80,81,34,14,7,0,21,0,0,34,2,2,227,7,12,227,12,12,182,1,0,0
+44,18,0,10,11,21,15,8,0,8,0,0,21,0,0,135,7,8,135,8,8,48,1,0,0
+45,33,0,25,26,17,12,7,0,267,0,0,17,0,0,120,2,3,120,3,3,67,0,0,0
+46,25,0,17,18,46,13,7,0,126,0,0,46,2,2,236,3,11,236,9,11,98,0,0,0
+56,93,0,85,86,35,14,7,0,6,0,0,35,0,0,226,0,3,226,3,3,168,0,0,0

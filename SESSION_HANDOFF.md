@@ -1095,3 +1095,109 @@ the explicit 0..7 phase storage with a finite action-mode state plus locally
 derived phase, then test whether the seed46 pre-birth articulation channel still
 forms.
 ```
+
+## Finding 053 Update
+
+Finding 053 tested whether the numeric `action_phase=0..7` can be removed
+entirely and derived from local non-payload state plus the action path.
+
+Tool added:
+
+```text
+src/action_phase_derivability_audit.py
+```
+
+Method:
+
+```text
+Instrument the three phase-sensitive paths:
+  vector_step
+  rotate_takeover
+  rotation_offset / signed_rotation_offset
+
+For each call, group by non-payload signature and ask whether different phase
+values require different action results.
+```
+
+Six-seed sample-6 result:
+
+```text
+seeds:                              42, 43, 44, 45, 46, 56
+mode-only locally derivable cases:   0 / 6
+numeric-phase eliminable cases:      0 / 6
+vector-step result collision cases:  0 / 6
+takeover result collision cases:     2 / 6
+rotation result collision cases:     5 / 6
+signed-rotation collision cases:     6 / 6
+phase collapse ticks:                42=11, 43=81, 44=11, 45=26, 46=18, 56=86
+```
+
+Seed46 details:
+
+```text
+initial nonzero phase iotas: 13
+max nonzero phase iotas:     46
+phase collapse tick:         18
+vector_step result collisions:        0
+rotate_takeover result collisions:    2
+rotation_offset result collisions:    3
+signed_rotation result collisions:    9
+```
+
+Representative seed46 collision:
+
+```text
+same non-payload rotate_takeover signature:
+  behavior=reflect, v_idx=39
+
+different phase-conditioned outcomes:
+  p=3 -> rotated_v=42
+  p=7 -> rotated_v=46
+```
+
+Interpretation:
+
+```text
+Finding 052 removed semantic payload from the iota state.
+Finding 053 shows the current numeric action phase is still required by the
+current rotation/takeover law and cannot be reconstructed from audited local
+non-payload state.
+```
+
+This is not evidence for semantic payload. It is evidence for short-lived action
+entropy:
+
+```text
+initial phase -> early legal-action selection -> phase collapse -> inherited
+geometric constraint
+```
+
+Updated reduction ladder:
+
+```text
+1. explicit 0..7 transient action_phase side state      [passed Finding 052]
+2. finite action-mode state plus locally derived phase  [failed Finding 053]
+3. no stored action state                               [blocked by 2]
+```
+
+Next recommended gate:
+
+```text
+Do not start the minimal coherence seed ladder yet.
+
+Run a phase-source minimization rewrite:
+  replace phase-dependent rotation/takeover formulas with phase-free local
+  formulas, or derive phase from a deterministic interaction-event property;
+  then test whether the seed46 pre-birth articulation channel survives by
+  causal class rather than exact replay.
+```
+
+Artifacts:
+
+```text
+output/findings/finding053/action_phase_derivability_summary.csv
+output/findings/finding053/action_phase_derivability_paths.csv
+output/findings/finding053/action_phase_derivability_collisions.csv
+output/findings/finding053/action_phase_derivability_timeline.csv
+output/findings/finding053/action_phase_derivability_local_collisions.csv
+```

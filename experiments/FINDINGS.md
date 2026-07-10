@@ -6161,3 +6161,212 @@ seed46 pre-birth articulation channel.
 - `output/findings/finding_052_action_state_equivalence_seedset_sample6_summary.csv`
 - `output/findings/finding_052_action_state_equivalence_seedset_sample6_summary.json`
 - `output/findings/finding_052_action_state_equivalence_seedset_sample6_timeline.csv`
+
+---
+
+## Finding 053 — Numeric action phase is not locally derivable under the current law
+
+### Question
+
+Finding 052 removed payload from the iota state at rest by moving the current
+`P=0..7` value into a transient side-state `action_phase`. Finding 053 asked
+whether the numeric phase itself can be removed:
+
+```text
+Can the required action outcome be derived from the interaction path and local
+non-payload state, using only a finite action mode or no stored phase?
+```
+
+The intended pass gate was exact preservation while both `World.P` and stored
+numeric `action_phase` are absent.
+
+### Method
+
+The derivability audit instrumented the three payload-sensitive action paths
+identified in Finding 051:
+
+```text
+vector_step
+rotate_takeover
+rotation_offset / signed_rotation_offset
+```
+
+For each phase-sensitive call, the audit recorded:
+
+```text
+non-payload signature:
+  action path
+  vector state / behavior
+  source and target non-payload state used by the action formula
+  candidate order, target-depleted flag, influence, max offset
+
+phase key:
+  source_p and target_p, or takeover payload
+
+result:
+  vector step, rotated vector, or rotation offset
+```
+
+The key test was collision-based:
+
+```text
+If the same non-payload signature requires different action results for
+different phase values, a finite action mode plus local derivation cannot exactly
+replace numeric phase under the current law.
+```
+
+The audit used the same six-seed v0.3.6 sample-6 smoke set as Finding 052:
+
+```text
+42, 43, 44, 45, 46, 56
+```
+
+### Six-Seed Result
+
+All six seeds fail the no-numeric-phase derivability gate:
+
+| Seed | Collapse tick | Max nonzero phase iotas | Vector result collisions | Takeover result collisions | Rotation result collisions | Signed rotation result collisions | Numeric phase eliminable |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| `42` | `11` | `32` | `0` | `0` | `6` | `6` | `0` |
+| `43` | `81` | `34` | `0` | `2` | `7` | `12` | `0` |
+| `44` | `11` | `21` | `0` | `0` | `7` | `8` | `0` |
+| `45` | `26` | `17` | `0` | `0` | `2` | `3` | `0` |
+| `46` | `18` | `46` | `0` | `2` | `3` | `9` | `0` |
+| `56` | `86` | `35` | `0` | `0` | `0` | `3` | `0` |
+
+Aggregate:
+
+```text
+mode-only locally derivable cases:     0 / 6
+numeric-phase eliminable cases:        0 / 6
+vector-step result collision cases:    0 / 6
+takeover result collision cases:       2 / 6
+rotation result collision cases:       5 / 6
+signed-rotation result collision cases:6 / 6
+```
+
+The vector-step path is compressible in this audit. The blocker is rotation:
+the current rotation formulas explicitly require phase-like information that is
+not contained in the audited non-payload local signature.
+
+### Seed46 Details
+
+Seed46/sample6 is the known component-birth case. Its phase still collapses
+early:
+
+```text
+initial nonzero phase iotas: 13
+initial phase unique:        7
+max nonzero phase iotas:     46
+last nonzero phase tick:     17
+phase collapse tick:         18
+final nonzero phase iotas:   0
+```
+
+But before collapse, the same non-payload signatures require different
+phase-conditioned outcomes:
+
+```text
+vector_step:
+  events: 126
+  result collision signatures: 0
+
+rotate_takeover:
+  events: 46
+  result collision signatures: 2
+
+rotation_offset:
+  events: 236
+  result collision signatures: 3
+
+signed_rotation_offset:
+  events: 236
+  result collision signatures: 9
+```
+
+Representative seed46 collisions:
+
+```text
+rotate_takeover signature:
+  behavior=reflect, v_idx=39
+
+phase outcomes:
+  p=3 -> rotated_v=42
+  p=7 -> rotated_v=46
+
+rotation_offset signature:
+  source_v=44, target_v=0, target_a=0, target_r=0,
+  candidate_order=0, target_depleted=false,
+  influence=0.214285714286, max_offset=3
+
+phase outcomes:
+  source_p=3,target_p=0 -> offset=1
+  source_p=7,target_p=0 -> offset=3
+```
+
+Those are decisive collisions: the current law cannot reconstruct the exact
+action result from the action mode plus local non-payload signature alone.
+
+### Interpretation
+
+Finding 053 is a negative result, but it sharpens the ontology.
+
+Finding 052 proved:
+
+```text
+payload is not fundamental;
+World.P can be zero at rest while exact dynamics are preserved by transient
+action_phase.
+```
+
+Finding 053 adds:
+
+```text
+the current numeric phase is not yet eliminable by local derivation under the
+existing rotation/takeover formulas.
+```
+
+The remaining phase is not semantic content. It is short-lived action entropy:
+seeded at initialization, inherited or transduced by early interactions, then
+extinguished by ticks `11..86` across the six-seed smoke set. Its consequences
+persist through the geometry, but the numeric carrier itself disappears early.
+
+So the reduction ladder changes:
+
+```text
+1. explicit 0..7 transient action_phase side state      [passed Finding 052]
+2. finite action-mode state plus locally derived phase  [failed Finding 053]
+3. no stored action state                               [blocked by 2]
+```
+
+The next step should not be the minimal coherence seed ladder yet. That ladder
+would still be confounded by this short-lived numeric phase. The next clean move
+is a phase-source minimization test:
+
+```text
+replace current phase-dependent rotation/takeover formulas with phase-free
+local formulas, or derive phase from a deterministic interaction-event property,
+then test whether the seed46 pre-birth articulation channel survives by
+mechanism rather than exact replay.
+```
+
+Exact replay is not the right gate for that rewrite. The gate should be:
+
+```text
+recover the same causal class:
+  early transient action constraint,
+  phase/action state extinguished before birth,
+  seed46-style articulation channel,
+  ledger exactness,
+  component signal or matched bridge dependency,
+  no semantic payload field.
+```
+
+### Artifacts
+
+- `src/action_phase_derivability_audit.py`
+- `output/findings/finding053/action_phase_derivability_summary.csv`
+- `output/findings/finding053/action_phase_derivability_paths.csv`
+- `output/findings/finding053/action_phase_derivability_collisions.csv`
+- `output/findings/finding053/action_phase_derivability_timeline.csv`
+- `output/findings/finding053/action_phase_derivability_local_collisions.csv`

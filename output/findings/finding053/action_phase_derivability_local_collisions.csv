@@ -1,0 +1,4 @@
+seed,tick,signature,phase_keys,records
+42,0,"{""A"":3,""R"":7,""V"":4,""active"":true,""angular_L"":0.0,""behavior"":""move"",""cube26_count"":0,""cube26_mask"":0,""face6_count"":0,""latent_A"":0}",3;7,2
+43,0,"{""A"":5,""R"":7,""V"":7,""active"":true,""angular_L"":0.0,""behavior"":""move"",""cube26_count"":0,""cube26_mask"":0,""face6_count"":0,""latent_A"":0}",4;6,2
+44,0,"{""A"":3,""R"":7,""V"":49,""active"":true,""angular_L"":0.0,""behavior"":""reflect"",""cube26_count"":0,""cube26_mask"":0,""face6_count"":0,""latent_A"":0}",4;5,2
