@@ -1,0 +1,53 @@
+{
+  "aggregate": {
+    "clamp_payload_each_tick": {
+      "cases": 1,
+      "component_signal_cases": 1,
+      "ledger_exact_cases": 1,
+      "payload_unique_final_values": [
+        1
+      ],
+      "rebridge_at_515_cases": 1,
+      "same_component_signal_vs_natural": 1,
+      "same_state_without_payload_vs_natural": 1,
+      "split_at_512_cases": 1
+    },
+    "natural": {
+      "cases": 1,
+      "component_signal_cases": 1,
+      "ledger_exact_cases": 1,
+      "payload_unique_final_values": [
+        1
+      ],
+      "rebridge_at_515_cases": 1,
+      "split_at_512_cases": 1
+    },
+    "neutral_payload_coupling": {
+      "cases": 1,
+      "component_signal_cases": 1,
+      "ledger_exact_cases": 1,
+      "payload_unique_final_values": [
+        1
+      ],
+      "rebridge_at_515_cases": 1,
+      "same_component_signal_vs_natural": 1,
+      "same_state_without_payload_vs_natural": 1,
+      "split_at_512_cases": 1
+    },
+    "uniform_payload_initial": {
+      "cases": 1,
+      "component_signal_cases": 1,
+      "ledger_exact_cases": 1,
+      "payload_unique_final_values": [
+        1
+      ],
+      "rebridge_at_515_cases": 1,
+      "same_component_signal_vs_natural": 1,
+      "same_state_without_payload_vs_natural": 1,
+      "split_at_512_cases": 1
+    }
+  },
+  "pairs_csv": "output/findings/finding_050_payload_ablation_seed46_sample6_pairs.csv",
+  "summary_csv": "output/findings/finding_050_payload_ablation_seed46_sample6_summary.csv",
+  "timeline_csv": "output/findings/finding_050_payload_ablation_seed46_sample6_timeline.csv"
+}

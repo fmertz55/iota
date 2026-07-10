@@ -5688,3 +5688,160 @@ that creates nontrivial component separation.
 - `output/findings/finding_049_seed46_erase_replay_events.csv`
 - `output/findings/finding_049_seed46_erase_replay_deactivations.csv`
 - `output/findings/finding_049_seed46_erase_replay_timeline.csv`
+
+---
+
+## Finding 050 — Payload is not part of the birth event, but can scaffold the pre-birth microstate
+
+### Question
+
+Finding 049 showed that the seed46/sample6 component split survives erasure of
+the pivotal site's `R/V/P/angular_L` memory as long as exact active placement and
+timing remain intact. That suggested a sharper hypothesis:
+
+```text
+complexity arises from constrained interaction history, not semantic payload.
+```
+
+The payload ablation ladder tested three levels:
+
+```text
+neutral_payload_coupling:
+  force same_payload_coupling = cross_payload_coupling = 1.0
+
+uniform_payload_initial:
+  set P = 0 before replay, then let the normal rule run
+
+clamp_payload_each_tick:
+  set P = 0 before and after every tick
+```
+
+The ladder was run in two modes:
+
+```text
+checkpoint mode:
+  start from the saved v0.3.6 checkpoint at tick 2048
+
+init mode:
+  regenerate the tick-2048 checkpoint from the initial condition first,
+  with payload ablation active from tick zero
+```
+
+### Checkpoint-Mode Result
+
+At the saved v0.3.6 tick-2048 checkpoints, payload was already collapsed:
+
+```text
+active payload values: [0]
+all-grid payload values: [0]
+checkpoint payload entropy: -0.0
+```
+
+For the known seed46/sample6 birth trajectory, all payload ablations were
+bit-identical outside the payload array:
+
+| Variant | Component signal | Split at 512 | Rebridge at 515 | Same non-payload state as natural |
+|---|---:|---:|---:|---:|
+| `natural` | `512;513;514` | `1` | `1` | reference |
+| `neutral_payload_coupling` | `512;513;514` | `1` | `1` | `1` |
+| `uniform_payload_initial` | `512;513;514` | `1` | `1` | `1` |
+| `clamp_payload_each_tick` | `512;513;514` | `1` | `1` | `1` |
+
+The six-seed sample-6 checkpoint smoke set also matched exactly:
+
+| Seed | Natural signal | `P=0` clamped signal | Same non-payload state |
+|---:|---|---|---:|
+| `42` | none | none | `1` |
+| `43` | none | none | `1` |
+| `44` | `244;245;246;247;248` | `244;245;246;247;248` | `1` |
+| `45` | none | none | `1` |
+| `46` | `512;513;514` | `512;513;514` | `1` |
+| `56` | none | none | `1` |
+
+Checkpoint-mode aggregate:
+
+```text
+cases:                              6
+component-signal cases natural:      2
+component-signal cases P=0 clamped:  2
+same component signal vs natural:    6 / 6
+same non-payload state vs natural:   6 / 6
+ledger exact:                        6 / 6
+```
+
+### Init-Mode Result
+
+The stronger from-init seed46/sample6 test gives the necessary caveat:
+
+| Variant | Component signal | Split at 512 | Rebridge at 515 | Checkpoint largest | Final active | Same non-payload state |
+|---|---:|---:|---:|---:|---:|---:|
+| `natural` | `512;513;514` | `1` | `1` | `139` | `1151` | reference |
+| `neutral_payload_coupling` | `512;513;514` | `1` | `1` | `139` | `1151` | `1` |
+| `uniform_payload_initial` | none | `0` | `0` | `145` | `1125` | `0` |
+| `clamp_payload_each_tick` | none | `0` | `0` | `145` | `1125` | `0` |
+
+Neutralizing payload compatibility does nothing, because v0.3.6 already used
+`same_payload_coupling = cross_payload_coupling = 1.0`.
+
+Removing payload state from tick zero changes the checkpoint microstate. It does
+not change the component count at checkpoint (`16` in both cases), but it changes
+the largest component (`139 -> 145`), active count by the end of continuation
+(`1151 -> 1125`), and eliminates the future articulation channel:
+
+```text
+(13,3,38) active at offset 499:
+  natural: 1
+  P=0 from init: 0
+
+component signal:
+  natural: 512;513;514
+  P=0 from init: none
+```
+
+### Interpretation
+
+Payload is not part of the birth event itself. By the time the v0.3.6 component
+birth trajectory begins at checkpoint 2048, payload has collapsed to a uniform
+zero field and can be removed without changing any non-payload state or component
+signal.
+
+But payload can scaffold the formation of the pre-birth microstate. Its role is
+not semantic compatibility: neutral payload coupling is exactly inert. The
+remaining upstream role is phase-like: early `P` values can influence vector
+diffusion/rotation history before they collapse, thereby selecting a later
+topological state.
+
+The safe conclusion is:
+
+```text
+Payload is not irreducible information at the birth event.
+It is an upstream symmetry-breaking scaffold for producing some microstates.
+```
+
+This supports the austere hypothesis with a caveat:
+
+```text
+information is carried by interaction constraints at the moment of birth,
+but early payload-like phase variables may help generate those constraints.
+```
+
+The next reduction target should not be payload semantics. It should be replacing
+early payload phase with a non-semantic relational phase or deterministic
+geometry/history phase, then checking whether the same pre-birth microstates and
+component channels can be recovered without a payload field.
+
+### Artifacts
+
+- `src/payload_ablation_replay.py`
+- `output/findings/finding_050_payload_ablation_seed46_sample6_summary.csv`
+- `output/findings/finding_050_payload_ablation_seed46_sample6_summary.json`
+- `output/findings/finding_050_payload_ablation_seed46_sample6_pairs.csv`
+- `output/findings/finding_050_payload_ablation_seed46_sample6_timeline.csv`
+- `output/findings/finding_050_payload_ablation_seedset_sample6_summary.csv`
+- `output/findings/finding_050_payload_ablation_seedset_sample6_summary.json`
+- `output/findings/finding_050_payload_ablation_seedset_sample6_pairs.csv`
+- `output/findings/finding_050_payload_ablation_seedset_sample6_timeline.csv`
+- `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_summary.csv`
+- `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_summary.json`
+- `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_pairs.csv`
+- `output/findings/finding_050_payload_ablation_from_init_seed46_sample6_timeline.csv`

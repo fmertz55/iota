@@ -777,3 +777,90 @@ become future articulation sources, remain active until a compatible downstream
 kick, and exhaust into component separation. Do not add a v0.3.8 mechanism until
 that event class is characterized.
 ```
+
+## Finding 050 Update
+
+Finding 050 tested payload ablation after the Finding 049 result suggested that
+the birth event is carried by placement/timing/topology rather than by internal
+payload content.
+
+Tool added:
+
+```text
+src/payload_ablation_replay.py
+```
+
+Checkpoint-mode result:
+
+```text
+At saved v0.3.6 checkpoint 2048, all tested seeds already have P = 0 everywhere.
+
+Seed46/sample6:
+  natural signal:                 512, 513, 514
+  neutral_payload_coupling:        512, 513, 514
+  uniform_payload_initial:         512, 513, 514
+  clamp_payload_each_tick:         512, 513, 514
+  same non-payload state:          yes for all ablations
+
+Six-seed sample-6 smoke:
+  seeds:                           42, 43, 44, 45, 46, 56
+  same component signal vs natural: 6 / 6
+  same non-payload state:           6 / 6
+  ledger exact:                     6 / 6
+```
+
+This means payload is not part of the component-birth event once the tick-2048
+microstate exists.
+
+Init-mode caveat:
+
+```text
+Regenerating seed46 from tick zero with P clamped to zero changes the checkpoint
+microstate and kills the later component signal.
+
+natural from init:
+  component signal:       512, 513, 514
+  checkpoint largest:     139
+  final active:           1151
+
+neutral_payload_coupling from init:
+  component signal:       512, 513, 514
+  same non-payload state: yes
+
+uniform/clamped P=0 from init:
+  component signal:       none
+  checkpoint largest:     145
+  final active:           1125
+  pivotal cell active at offset 499: no
+```
+
+Interpretation:
+
+```text
+Payload is not irreducible information at the birth event.
+It can be an upstream phase/symmetry-breaking scaffold that helps generate the
+pre-birth microstate. It is not acting through semantic compatibility; same/cross
+payload coupling is already neutral.
+```
+
+Next reduction target:
+
+```text
+replace early payload phase with a non-semantic relational or geometry/history
+phase, then test whether the same pre-birth microstate and articulation channel
+can be recovered without a payload field.
+```
+
+Updated thread prompt:
+
+```text
+Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-050.
+Continue from Finding 050: checkpoint-mode payload ablation proves the v0.3.6
+component-birth event is payload-free once the tick-2048 microstate exists; P is
+already zero everywhere, and clamping P to zero preserves component signals and
+non-payload state across the six-seed sample-6 smoke set. But from-init ablation
+of P in seed46 changes the checkpoint microstate and removes the later split,
+while neutral same/cross payload coupling is inert. Next goal: replace early
+payload phase with non-semantic relational/geometry/history phase and test
+whether the same pre-birth articulation channel can be recovered without payload.
+```
