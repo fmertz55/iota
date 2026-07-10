@@ -6680,3 +6680,158 @@ Only after the new event class is identified should seed robustness be run.
 - `output/findings/finding055/phase_free_positive_seed46_summary.csv`
 - `output/findings/finding055/phase_free_positive_seed46_summary.json`
 - `output/findings/finding055/phase_free_positive_seed46_timeline.csv`
+
+---
+
+## Finding 056 — The no-stored-phase signal is a bridge-loss split with paired rebridge
+
+### Question
+
+Finding 055 produced the first component split/rebridge signal with no stored
+payload and no stored `action_phase`. Finding 056 asked whether that signal is a
+real topology event and which active-set transition causes it.
+
+The trace focused on the positive variant:
+
+```text
+takeover_rotation_vector_phase:
+  takeover phase = V mod 8
+  rotation source/target phase = source_v mod 8 / target_v mod 8
+  vector_step phase = 0
+  World.P = 0 throughout the recorded window
+```
+
+Controls:
+
+```text
+zero_phase
+takeover_only_vector_phase
+rotation_only_vector_phase
+```
+
+### Method
+
+The trace replayed v0.3.6 seed46/sample6 through checkpoint `2048`, cloned the
+standard continuation, and recorded offsets `128..145`.
+
+For each offset and transition it measured:
+
+```text
+active-set gained/lost cells
+cube26 component count and largest component
+payload nonzero count
+ledger error
+whether gained cells act as bridges if removed
+whether lost cells act as bridges if restored
+```
+
+### Result
+
+Only the coupled takeover+rotation variant shows a signal in the traced window:
+
+| Variant | Signal offsets | Min components | Max components | Max transition delta | Payload zero | Ledger exact |
+|---|---:|---:|---:|---:|---:|---:|
+| `zero_phase` | none | `16` | `16` | `0` | `1` | `1` |
+| `takeover_only_vector_phase` | none | `16` | `16` | `0` | `1` | `1` |
+| `rotation_only_vector_phase` | none | `16` | `16` | `0` | `1` | `1` |
+| `takeover_rotation_vector_phase` | `134;135;136;137;138;139;140` | `15` | `16` | `+1/-1` | `1` | `1` |
+
+The split transition is precise:
+
+```text
+offset 133 -> 134
+component count: 15 -> 16
+active count:    1125 -> 1125
+gained cell:     (16,26,24)
+lost cell:       (16,27,24)
+```
+
+The lost cell is a bridge:
+
+```text
+restoring lost cell (16,27,24) to the offset-134 active set reduces component
+count from 16 back to 15.
+```
+
+The gained cell is not itself a bridge or isolated-component artifact under the
+single-cell removal test.
+
+The component-size signature confirms a small split:
+
+```text
+offset 133 top sizes: 135;131;123;121;106;101;98;79
+offset 134 top sizes: 135;130;123;121;106;101;98;79
+offset 141 top sizes: 135;131;123;121;106;101;98;79
+```
+
+So the signal is consistent with one small fragment separating from the
+second-largest component when `(16,27,24)` is lost, then reintegrating at offset
+`141`.
+
+The rebridge transition is not attributable to a single gained bridge cell:
+
+```text
+offset 140 -> 141
+component count: 16 -> 15
+active count:    1125 -> 1125
+gained cells:    (17,29,25), (40,16,20)
+lost cells:      (17,28,25), (40,15,20)
+single-cell bridge tests: no single gained/lost cell explains the merge
+```
+
+This points to a paired relocation or multi-cell topology change rather than a
+single articulation-cell restoration.
+
+### Interpretation
+
+Finding 056 upgrades Finding 055 from "component-count blip" to a real
+topological event:
+
+```text
+the no-stored-phase signal is born when a bridge cell is lost.
+```
+
+The important mechanism is not stored payload and not stored numeric phase. It
+is a coupled orientation-derived action constraint that changes active-set
+placement enough to remove an articulation bridge.
+
+The controls matter:
+
+```text
+takeover-only vector phase: no split
+rotation-only vector phase: no split
+takeover + rotation vector phase: bridge-loss split
+```
+
+That suggests the component event requires coordination between the state
+assigned during takeover and the received-rotation update. One path alone can
+change morphology, but not enough to create the bridge-loss component event in
+this seed/window.
+
+### Next Gate
+
+The next gate is seed robustness for the new event class, not tuning:
+
+```text
+Finding 057:
+  run takeover_rotation_vector_phase on seeds 42, 43, 44, 45, 46, 56
+  checkpoint 2048, horizon at least 600
+  require World.P = 0 and ledger exact
+  measure component signals, bridge-loss splits, and paired rebridges
+  compare against zero_phase and single-path controls
+```
+
+Pass criterion:
+
+```text
+at least a minority of seeds show component split/rebridge or bridge-loss events
+under the coupled law, while controls remain mostly silent and safety holds.
+```
+
+### Artifacts
+
+- `src/phase_free_signal_trace.py`
+- `output/findings/finding056/phase_free_signal_trace_seed46_summary.csv`
+- `output/findings/finding056/phase_free_signal_trace_seed46_summary.json`
+- `output/findings/finding056/phase_free_signal_trace_seed46_snapshots.csv`
+- `output/findings/finding056/phase_free_signal_trace_seed46_transitions.csv`

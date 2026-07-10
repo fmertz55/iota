@@ -1470,3 +1470,129 @@ output/findings/finding055/phase_free_positive_seed46_summary.csv
 output/findings/finding055/phase_free_positive_seed46_summary.json
 output/findings/finding055/phase_free_positive_seed46_timeline.csv
 ```
+
+## Finding 056 Update
+
+Finding 056 traced the new no-stored-phase signal from Finding 055.
+
+Positive variant:
+
+```text
+takeover_rotation_vector_phase
+  takeover phase = V mod 8
+  rotation source/target phase = source_v mod 8 / target_v mod 8
+  vector_step phase = 0
+  World.P = 0 throughout trace window
+```
+
+Controls:
+
+```text
+zero_phase
+takeover_only_vector_phase
+rotation_only_vector_phase
+```
+
+Trace window:
+
+```text
+seed46/sample6
+checkpoint: 2048
+offsets: 128..145
+```
+
+Result summary:
+
+```text
+zero_phase:                    no signal
+takeover_only_vector_phase:    no signal
+rotation_only_vector_phase:    no signal
+takeover_rotation_vector_phase signal: 134,135,136,137,138,139,140
+vanish/rebridge offset:        141
+payload zero all snapshots:    yes
+ledger exact all snapshots:    yes
+```
+
+Split transition:
+
+```text
+offset 133 -> 134
+component count: 15 -> 16
+active count:    1125 -> 1125
+gained cell:     (16,26,24)
+lost cell:       (16,27,24)
+```
+
+Bridge test:
+
+```text
+restoring lost cell (16,27,24) to the offset-134 active set reduces component
+count from 16 back to 15.
+```
+
+Interpretation:
+
+```text
+The no-stored-phase component signal is a real topology event born from loss of
+a bridge/articulation cell.
+```
+
+Component-size signature:
+
+```text
+offset 133 top sizes: 135;131;123;121;106;101;98;79
+offset 134 top sizes: 135;130;123;121;106;101;98;79
+offset 141 top sizes: 135;131;123;121;106;101;98;79
+```
+
+So the signal is consistent with a small fragment separating from the
+second-largest component, then reintegrating.
+
+Rebridge transition:
+
+```text
+offset 140 -> 141
+component count: 16 -> 15
+active count:    1125 -> 1125
+gained cells:    (17,29,25), (40,16,20)
+lost cells:      (17,28,25), (40,15,20)
+single-cell bridge tests: no single gained/lost cell explains the merge
+```
+
+Interpretation of rebridge:
+
+```text
+The rebridge appears to be a paired relocation or multi-cell topology change,
+not a single articulation restoration.
+```
+
+Mechanistic takeaway:
+
+```text
+Stored payload/phase is not required for component split/rebridge.
+The key is coupled orientation-derived action constraint: takeover and received
+rotation must both use the vector-derived phase source. Single-path controls do
+not produce the event.
+```
+
+Next gate:
+
+```text
+Finding 057 should test seed robustness:
+  run takeover_rotation_vector_phase on seeds 42,43,44,45,46,56
+  checkpoint 2048
+  horizon at least 600
+  World.P/action_phase absent
+  ledger exact
+  measure component signals and bridge-loss split events
+  compare against zero_phase, takeover_only_vector_phase, rotation_only_vector_phase
+```
+
+Artifacts:
+
+```text
+output/findings/finding056/phase_free_signal_trace_seed46_summary.csv
+output/findings/finding056/phase_free_signal_trace_seed46_summary.json
+output/findings/finding056/phase_free_signal_trace_seed46_snapshots.csv
+output/findings/finding056/phase_free_signal_trace_seed46_transitions.csv
+```
