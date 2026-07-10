@@ -7205,3 +7205,239 @@ absent and ledger exactness holds.
 - `output/findings/finding058/seed46_coupled_positive_transitions.csv`
 - `output/findings/finding058/seed56_takeover_exception_summary.csv`
 - `output/findings/finding058/seed56_takeover_exception_transitions.csv`
+
+---
+
+## Finding 059 — Orientation-derived laws enrich bridge relocation, but Class B is latent in the baseline
+
+### Question
+
+Findings 057-058 showed that no-stored-phase bridge-loss/rebridge events exist
+and split into subclasses. Finding 059 changed the question from incidence to
+distribution:
+
+```text
+Does the coupled law change the distribution of structural reorganization
+classes?
+```
+
+Operational classes:
+
+```text
+Class A:
+  same single bridge cell is lost and later returns as the bridge path
+
+Class B:
+  a bridge-loss signal rebridges through a changed bridge/path configuration
+
+Non-bridge:
+  component signal without bridge-loss cause
+
+No signal:
+  no component signal within the continuation horizon
+```
+
+The audit also tracked a strict articulation flag. Under this implementation,
+strict single-articulation restoration means:
+
+```text
+same bridge restored AND lost cell was an articulation before loss
+```
+
+### Method
+
+The cached matrix ran each seed/variant to checkpoint once, then reused the
+checkpoint for multiple deterministic continuation samples.
+
+Protocol:
+
+```text
+seeds:       42, 43, 44, 45, 46, 56
+samples:     0..7
+checkpoint:  2048
+horizon:     600
+cases/law:   48
+World.P:     zero for replacement laws
+action_phase: absent
+```
+
+Laws:
+
+```text
+zero_phase
+takeover_only_vector_phase
+takeover_rotation_vector_phase
+```
+
+For bridge-loss signals the audit measured:
+
+```text
+original bridge cells return?
+post-rebridge bridge/path cells
+bridge path Jaccard:
+  J = |B_before ∩ B_after| / |B_before ∪ B_after|
+structural displacement:
+  1 - J
+```
+
+Low `J` with recovered connectivity indicates bridge-path transport rather than
+simple restoration.
+
+### Aggregate Distribution
+
+All cases remained payload-free and ledger-exact:
+
+| Law | Cases | No signal | Class A | Class B | Non-bridge | Signals | Mean duration | Mean J | Mean displacement |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `zero_phase` | `48` | `45` | `0` | `3` | `0` | `5` | `9.8` | `0.000` | `1.000` |
+| `takeover_only_vector_phase` | `48` | `40` | `1` | `7` | `0` | `19` | `6.05` | `0.053` | `0.947` |
+| `takeover_rotation_vector_phase` | `48` | `36` | `2` | `10` | `0` | `15` | `10.13` | `0.156` | `0.844` |
+
+Case probabilities:
+
+```text
+P(no signal):
+  zero_phase                      45/48 = 0.9375
+  takeover_only_vector_phase      40/48 = 0.8333
+  takeover_rotation_vector_phase  36/48 = 0.7500
+
+P(Class B case):
+  zero_phase                       3/48 = 0.0625
+  takeover_only_vector_phase       7/48 = 0.1458
+  takeover_rotation_vector_phase  10/48 = 0.2083
+
+P(Class A case):
+  zero_phase                       0/48 = 0.0000
+  takeover_only_vector_phase       1/48 = 0.0208
+  takeover_rotation_vector_phase   2/48 = 0.0417
+```
+
+Strict single-articulation restoration did not occur:
+
+```text
+strict Class A with articulation-before-loss:
+  zero_phase:                     0
+  takeover_only_vector_phase:     0
+  takeover_rotation_vector_phase: 0
+```
+
+So the observed Class A rows are same-bridge restorations, not the strict
+single-articulation-restoration subclass.
+
+### Class B Transport
+
+Class B dominates every law that produces signals:
+
+```text
+Class B events:
+  zero_phase:                      5
+  takeover_only_vector_phase:     18
+  takeover_rotation_vector_phase: 13
+```
+
+Most Class B events have complete bridge-path displacement:
+
+```text
+Class B events with J = 0:
+  zero_phase:                      5 / 5
+  takeover_only_vector_phase:     18 / 18
+  takeover_rotation_vector_phase: 12 / 13
+```
+
+This means the component relation is restored through different cells in nearly
+every bridge-loss/rebridge event.
+
+The coupled law has fewer signal intervals than takeover-only (`15` vs `19`),
+but more cases with at least one Class B event (`10` vs `7`). That suggests the
+coupled law broadens seed/sample incidence, while takeover-only can produce
+bursty repeated events in susceptible trajectories.
+
+### Seed Structure
+
+The distribution remains seed-structured:
+
+```text
+seeds 42, 43, 45:
+  no signal across all tested laws/samples
+
+seed44:
+  zero_phase:                     Class B in 3/8 samples
+  takeover_only_vector_phase:     no signal
+  takeover_rotation_vector_phase: Class B in 3/8 samples
+
+seed46:
+  zero_phase:                     no signal
+  takeover_only_vector_phase:     Class B in 3/8 samples
+  takeover_rotation_vector_phase: Class B in 3/8 samples
+
+seed56:
+  zero_phase:                     no signal
+  takeover_only_vector_phase:     Class A/B in 5/8 samples
+  takeover_rotation_vector_phase: Class A/B in 6/8 samples
+```
+
+### Interpretation
+
+Finding 059 is a distributional positive with an important caveat.
+
+Supported:
+
+```text
+No-stored-phase local laws can repeatedly preserve component connectivity
+through changes in the cells that instantiate the bridge relation.
+```
+
+Also supported:
+
+```text
+Orientation-derived takeover and takeover+rotation laws increase the probability
+of bridge-reorganization cases relative to zero_phase.
+```
+
+Not supported:
+
+```text
+Class B is unique to the coupled law.
+```
+
+The strongest current statement is:
+
+```text
+Bridge-path relocation is latent in the payload-free dynamics, and
+orientation-derived action constraints increase its incidence.
+```
+
+This is still a meaningful PSA-facing result. In Class B events, the exact
+bridge cells generally do not return, but component connectivity reappears:
+
+```text
+the particular bridge is not the information;
+the invariant connectivity constraint is what survives.
+```
+
+### Next Gate
+
+The next gate should separate seed geometry from law effect:
+
+```text
+Finding 060:
+  analyze why seeds 44, 46, and 56 are susceptible while 42, 43, and 45 are
+  silent.
+  Compare checkpoint component geometry, bridge/articulation inventory, and
+  interface activity before continuation.
+```
+
+The key question:
+
+```text
+Do orientation-derived laws create bridge relocation, or do they activate a
+pre-existing susceptible bridge geometry?
+```
+
+### Artifacts
+
+- `src/phase_free_class_matrix.py`
+- `output/findings/finding059/phase_free_class_matrix_cases.csv`
+- `output/findings/finding059/phase_free_class_matrix_signals.csv`
+- `output/findings/finding059/phase_free_class_matrix_aggregate.csv`
+- `output/findings/finding059/phase_free_class_matrix_summary.json`

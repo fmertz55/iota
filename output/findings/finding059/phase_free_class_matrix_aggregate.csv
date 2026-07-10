@@ -1,0 +1,4 @@
+variant,cases,no_signal_cases,class_a_cases,class_b_cases,non_bridge_signal_cases,bridge_unresolved_cases,signal_intervals,class_a_events,class_b_events,non_bridge_events,bridge_unresolved_events,mean_signal_duration,mean_rebridge_delay,mean_bridge_path_jaccard,mean_structural_displacement,original_bridge_any_return_rate,payload_zero_cases,ledger_exact_cases
+takeover_only_vector_phase,48,40,1,7,0,0,19,1,18,0,0,6.052631578947368,6.052631578947368,0.05263157894736842,0.9473684210526315,0.05263157894736842,48,48
+takeover_rotation_vector_phase,48,36,2,10,0,0,15,2,13,0,0,10.133333333333333,10.133333333333333,0.15555555555555556,0.8444444444444444,0.2,48,48
+zero_phase,48,45,0,3,0,0,5,0,5,0,0,9.8,9.8,0.0,1.0,0.0,48,48

@@ -1858,3 +1858,180 @@ output/findings/finding058/seed46_coupled_positive_transitions.csv
 output/findings/finding058/seed56_takeover_exception_summary.csv
 output/findings/finding058/seed56_takeover_exception_transitions.csv
 ```
+
+## Finding 059 Update
+
+Finding 059 ran the larger seed/sample class-distribution matrix.
+
+Question:
+
+```text
+Does the coupled law change the distribution of structural reorganization
+classes?
+```
+
+Operational classes:
+
+```text
+Class A:
+  same single bridge cell is lost and later returns as the bridge path
+
+Class B:
+  bridge-loss signal rebridges through a changed bridge/path configuration
+
+Non-bridge:
+  component signal without bridge-loss cause
+
+No signal:
+  no component signal within horizon
+```
+
+Strict single-articulation restoration was also tracked separately:
+
+```text
+same bridge restored AND lost bridge was an articulation before loss
+```
+
+Matrix:
+
+```text
+seeds:       42,43,44,45,46,56
+samples:     0..7
+checkpoint:  2048
+horizon:     600
+cases/law:   48
+World.P:     zero
+action_phase: absent
+```
+
+Laws:
+
+```text
+zero_phase
+takeover_only_vector_phase
+takeover_rotation_vector_phase
+```
+
+Aggregate:
+
+```text
+zero_phase:
+  no signal cases:      45 / 48
+  Class A cases:         0 / 48
+  Class B cases:         3 / 48
+  signal intervals:      5
+  mean J:                0.000
+  mean displacement:     1.000
+
+takeover_only_vector_phase:
+  no signal cases:      40 / 48
+  Class A cases:         1 / 48
+  Class B cases:         7 / 48
+  signal intervals:     19
+  mean J:                0.053
+  mean displacement:     0.947
+
+takeover_rotation_vector_phase:
+  no signal cases:      36 / 48
+  Class A cases:         2 / 48
+  Class B cases:        10 / 48
+  signal intervals:     15
+  mean J:                0.156
+  mean displacement:     0.844
+```
+
+Safety:
+
+```text
+payload-zero cases: 144 / 144
+ledger-exact cases: 144 / 144
+```
+
+Strict Class A:
+
+```text
+same bridge restored AND articulation-before-loss:
+  zero_phase:                     0
+  takeover_only_vector_phase:     0
+  takeover_rotation_vector_phase: 0
+```
+
+So observed Class A rows are same-bridge restorations, not strict
+single-articulation-restoration events.
+
+Class B transport:
+
+```text
+Class B events:
+  zero_phase:                      5
+  takeover_only_vector_phase:     18
+  takeover_rotation_vector_phase: 13
+
+Class B events with J = 0:
+  zero_phase:                      5 / 5
+  takeover_only_vector_phase:     18 / 18
+  takeover_rotation_vector_phase: 12 / 13
+```
+
+Interpretation:
+
+```text
+Finding 059 is a distributional positive with a caveat.
+```
+
+Supported:
+
+```text
+No-stored-phase local laws can repeatedly preserve component connectivity
+through changes in the cells that instantiate the bridge relation.
+```
+
+Also supported:
+
+```text
+Orientation-derived takeover and takeover+rotation laws increase the probability
+of bridge-reorganization cases relative to zero_phase.
+```
+
+Not supported:
+
+```text
+Class B is unique to the coupled law.
+```
+
+Strongest current statement:
+
+```text
+Bridge-path relocation is latent in the payload-free dynamics, and
+orientation-derived action constraints increase its incidence.
+```
+
+PSA-facing interpretation:
+
+```text
+The particular bridge is not the information.
+The invariant connectivity constraint is what survives.
+```
+
+Next gate:
+
+```text
+Finding 060 should separate seed geometry from law effect:
+  compare susceptible seeds 44,46,56 against silent seeds 42,43,45
+  inspect checkpoint component geometry
+  measure bridge/articulation inventory
+  measure interface activity before continuation
+
+Question:
+  Do orientation-derived laws create bridge relocation, or do they activate a
+  pre-existing susceptible bridge geometry?
+```
+
+Artifacts:
+
+```text
+output/findings/finding059/phase_free_class_matrix_cases.csv
+output/findings/finding059/phase_free_class_matrix_signals.csv
+output/findings/finding059/phase_free_class_matrix_aggregate.csv
+output/findings/finding059/phase_free_class_matrix_summary.json
+```
