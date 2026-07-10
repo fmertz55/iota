@@ -6009,3 +6009,155 @@ recover the seed46 pre-birth articulation channel without semantic payload:
 - `output/findings/finding_051_payload_action_phase_seed46_sample6_summary.json`
 - `output/findings/finding_051_payload_action_phase_seed46_sample6_pairs.csv`
 - `output/findings/finding_051_payload_action_phase_seed46_sample6_timeline.csv`
+
+---
+
+## Finding 052 — Transient action-phase state exactly replaces payload
+
+### Question
+
+Finding 051 proved that `P` is an early action selector, not a semantic payload
+or persistent message. Finding 052 asked whether the same behavior can be
+reproduced while deleting payload from the iota state and carrying only a
+separate transient action-phase side state.
+
+The test was equivalence, not improvement:
+
+```text
+Can action-phase state reproduce the current payload-generated trajectory exactly
+outside the deleted payload representation?
+```
+
+### Method
+
+A lockstep audit compared two systems from identical v0.3.6 initial conditions:
+
+```text
+legacy:
+  normal P array in the World state
+
+replacement:
+  World.P is held at zero at every recorded tick
+  a separate action_phase array supplies the old P value only during step()
+  after step(), the produced phase is copied back into action_phase
+  World.P is immediately reset to zero
+```
+
+The replacement therefore preserves the current action-selection semantics but
+removes payload as an iota-carried field at rest.
+
+The audit compared every tick from initialization through:
+
+```text
+checkpoint: 2048
+continuation horizon: 1024
+total compared ticks per case: 3073
+```
+
+For each tick it required:
+
+```text
+non-payload state hash equality
+action_phase == legacy P
+replacement World.P == 0
+RNG state equality
+ledger exactness
+component signal equality
+```
+
+### Seed46 Result
+
+The known seed46/sample6 birth trajectory is exactly preserved:
+
+```text
+ticks compared:                 3073
+non-payload equal ticks:         3073 / 3073
+phase equal ticks:               3073 / 3073
+replacement payload-zero ticks:  3073 / 3073
+RNG equal ticks:                 3073 / 3073
+ledger exact:                    1
+phase collapse tick:             18
+checkpoint phase nonzero iotas:  0
+final phase nonzero iotas:       0
+component signal:                512;513;514
+split at 512:                    1
+rebridge at 515:                 1
+```
+
+The Finding 049 channel is preserved:
+
+```text
+(13,3,38) active at offset 499: 1
+(13,3,38) active at offset 511: 1
+(12,2,38) active at offset 512: 1
+(13,2,38) active at offset 515: 1
+```
+
+### Six-Seed Smoke Result
+
+The six-seed sample-6 set used in Finding 050 also passes exact equivalence:
+
+| Seed | Component signal | Ticks exact | Replacement `P=0` ticks | RNG exact | Phase collapse tick |
+|---:|---|---:|---:|---:|---:|
+| `42` | none | `3073/3073` | `3073/3073` | `3073/3073` | `11` |
+| `43` | none | `3073/3073` | `3073/3073` | `3073/3073` | `81` |
+| `44` | `244;245;246;247;248` | `3073/3073` | `3073/3073` | `3073/3073` | `11` |
+| `45` | none | `3073/3073` | `3073/3073` | `3073/3073` | `26` |
+| `46` | `512;513;514` | `3073/3073` | `3073/3073` | `3073/3073` | `18` |
+| `56` | none | `3073/3073` | `3073/3073` | `3073/3073` | `86` |
+
+Aggregate:
+
+```text
+cases:                         6
+exact non-payload cases:        6 / 6
+exact phase cases:              6 / 6
+replacement payload-zero cases: 6 / 6
+RNG exact cases:                6 / 6
+ledger exact cases:             6 / 6
+component-signal cases:         2 / 6
+split-at-512 cases:             1 / 6
+rebridge-at-515 cases:          1 / 6
+```
+
+### Interpretation
+
+This is the semantic-preserving replacement result.
+
+Payload can be removed from the iota state at rest and replaced with an explicit
+transient action-phase variable without changing any tested non-payload dynamics.
+The phase still exists, but it is no longer represented as semantic content
+carried by an iota.
+
+The cleaner ontology is:
+
+```text
+an interaction can leave a transient constraint on the next legal action;
+that constraint is extinguished after action selection.
+```
+
+Finding 052 does not yet prove that action phase is fundamental. It proves that
+payload is not fundamental. The current numeric phase can be factored out of the
+world payload field and treated as an implementation of interaction history.
+
+The next reduction ladder is now well defined:
+
+```text
+1. explicit 0..7 transient action_phase side state
+2. finite action-mode state plus locally derived phase
+3. binary action-enabled state plus locally derived action type
+4. no stored action state: derive action selection directly from the interaction event
+```
+
+The next gate should try to remove the numeric phase storage while preserving the
+seed46 pre-birth articulation channel.
+
+### Artifacts
+
+- `src/action_state_equivalence_audit.py`
+- `output/findings/finding_052_action_state_equivalence_seed46_sample6_summary.csv`
+- `output/findings/finding_052_action_state_equivalence_seed46_sample6_summary.json`
+- `output/findings/finding_052_action_state_equivalence_seed46_sample6_timeline.csv`
+- `output/findings/finding_052_action_state_equivalence_seedset_sample6_summary.csv`
+- `output/findings/finding_052_action_state_equivalence_seedset_sample6_summary.json`
+- `output/findings/finding_052_action_state_equivalence_seedset_sample6_timeline.csv`
