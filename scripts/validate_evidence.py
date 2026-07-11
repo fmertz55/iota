@@ -21,6 +21,7 @@ from evidence_common import (
     load_gc008,
     load_gc009,
     load_gc010,
+    load_gc011,
     load_registry,
     sha256,
     strict_events,
@@ -655,6 +656,75 @@ def main() -> int:
         if expected_replays_path:
             if sha256(ROOT / expected_replays_path) != hash_row["expected_replays_sha256"]:
                 fail("GC-010 Finding 068 reproduction hash changed", errors)
+
+    (
+        gc011_claim,
+        gc011_summary,
+        gc011_assignments,
+        gc011_depths,
+        gc011_sources,
+        gc011_hashes,
+    ) = load_gc011()
+    for name, expected in gc011_claim["expected"].items():
+        if gc011_summary.get(name) != expected:
+            fail(
+                f"GC-011 expected {name}={expected!r}, "
+                f"observed {gc011_summary.get(name)!r}",
+                errors,
+            )
+    if not all(
+        gc011_summary.get(name) is True
+        for name in (
+            "protocol_complete",
+            "all_depth1_shams_exact",
+            "all_risk_sets_nested",
+            "all_selector_hashes_verified",
+            "all_selector_case_joins_verified",
+            "all_safety_checks_passed",
+            "preregistered_nontrivial_support_replication_met",
+        )
+    ):
+        fail("GC-011 aggregate protocol, replication, or safety gate failed", errors)
+    expected_gc011_risk = [79, 56, 41, 34, 25, 21, 18, 12]
+    expected_gc011_cuts = [23, 15, 7, 9, 4, 3, 5, 2]
+    expected_gc011_handoffs = [56, 41, 34, 25, 21, 18, 12, 10]
+    expected_gc011_censored = [0, 0, 0, 0, 0, 0, 1, 0]
+    observed_gc011_stages = [
+        (
+            int(row["depth"]),
+            int(row["risk_set"]),
+            int(row["cuts"]),
+            int(row["handoffs"]),
+            int(row["source_survival_censored"]),
+        )
+        for row in gc011_depths
+    ]
+    expected_gc011_stages = [
+        (depth, risk, cuts, handoffs, censored)
+        for depth, (risk, cuts, handoffs, censored) in enumerate(
+            zip(
+                expected_gc011_risk,
+                expected_gc011_cuts,
+                expected_gc011_handoffs,
+                expected_gc011_censored,
+            ),
+            start=1,
+        )
+    ]
+    if observed_gc011_stages != expected_gc011_stages:
+        fail(f"GC-011 depth recursion changed: {observed_gc011_stages}", errors)
+    gc011_labels = Counter(row["cut_depth_label"] for row in gc011_assignments)
+    expected_gc011_labels = {
+        **{str(depth): count for depth, count in enumerate(expected_gc011_cuts, 1)},
+        ">8": 10,
+        "source-censored@7": 1,
+    }
+    if len(gc011_assignments) != 79 or dict(gc011_labels) != expected_gc011_labels:
+        fail(f"GC-011 assignments changed: {dict(gc011_labels)}", errors)
+    if len(gc011_sources) != 32 or len(gc011_hashes) != 8:
+        fail("GC-011 source or hash table coverage changed", errors)
+    if len({(row["source_id"], row["init_seed"]) for row in gc011_sources}) != 4:
+        fail("GC-011 independent source coverage changed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

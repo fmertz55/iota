@@ -7,10 +7,10 @@ This repository is a live research compendium. The README states the organizing 
 1. Start with the [organizing hypothesis](../README.md#iota-rig).
 2. Read the [current evidence frontier](../README.md#current-evidence-frontier),
    from foundational GC-001 through bounded causal GC-010.
-3. Inspect the [Finding 069 machine-readable synthesis](../output/findings/finding069/sequential_realization_cut_summary.json)
-   and [branch assignments](../output/findings/finding069/sequential_realization_cut_assignments.csv).
-4. Audit the [selector-hash chain](../output/findings/finding069/sequential_realization_cut_selector_hashes.csv)
-   against the staged artifacts in `output/findings/finding069/`.
+3. Inspect the [Finding 070 independent synthesis](../output/findings/finding070/independent_persistence_replication_summary.json)
+   and [branch assignments](../output/findings/finding070/independent_persistence_replication_assignments.csv).
+4. Audit the [selector-hash chain](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
+   against the staged artifacts in `output/findings/finding070/`.
 5. Read the [working paper](../paper/main.tex).
 
 No execution is required for this path.
@@ -60,3 +60,8 @@ Finding 069 additionally exposes its staged provenance directly through the
 and [analysis implementation](../src/sequential_realization_cut.py). Its depth
 is prefix-minimal only for the frozen retained-amplitude event-order policy; it
 is not a graph-theoretic minimum over arbitrary interventions.
+
+The chain is independently replicated in Finding 070; see its
+[selector hashes](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv),
+[depth aggregates](../output/findings/finding070/independent_persistence_replication_depths.csv),
+and [synthesis implementation](../src/summarize_independent_persistence.py).

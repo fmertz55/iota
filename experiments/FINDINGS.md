@@ -8262,3 +8262,63 @@ or necessary-and-sufficient continuation law.
 - [Selector-hash chain](../output/findings/finding069/sequential_realization_cut_selector_hashes.csv)
 - [Per-source outcomes](../output/findings/finding069/sequential_realization_cut_sources.csv)
 - [Depth-8 endpoint summary](../output/findings/finding069/depth008_summary.json)
+
+---
+
+## Finding 070 — Ordered continuation depth replicates across independent geometries
+
+### Question
+
+Does Finding 069's sequential continuation redundancy recur in newly screened
+initialization geometries selected before their continuation outcomes are known?
+
+### Prospective Protocol
+
+A fixed screen covered initialization seeds 73 through 104 with eight samples
+per seed. Before continuation branching, the lexicographically first strict
+eligible source per seed was selected. Four sources qualified (seeds 74, 76,
+81, and 95). Thirty-two factual continuations were then run per source; all 79
+collision-free exactly-one-child positives were frozen before intervention.
+The Finding 069 first-next-child, retained-amplitude veto policy was applied
+through depth eight with one fixed 128-offset endpoint. Every later selector
+manifest was hashed and committed before its veto.
+
+### Result
+
+| Depth | Risk set | New cuts | Handoffs | Source censored |
+|---:|---:|---:|---:|---:|
+| 1 | 79 | 23 | 56 | 0 |
+| 2 | 56 | 15 | 41 | 0 |
+| 3 | 41 | 7 | 34 | 0 |
+| 4 | 34 | 9 | 25 | 0 |
+| 5 | 25 | 4 | 21 | 0 |
+| 6 | 21 | 3 | 18 | 0 |
+| 7 | 18 | 5 | 12 | 1 |
+| 8 | 12 | 2 | 10 | 0 |
+
+All four independent source geometries produced a depth-1 handoff, meeting the
+preregistered replication criterion. In total, 68 cuts were observed; 10
+branches handed off after eight vetoes and one was source-survival censored at
+depth seven. The chain contains 286 committed selector events and 923 override
+executions. Thirty-eight branches reused a target address. All selector hashes,
+joins, nested risk sets, matched shams, payload, conservation, and collision
+checks passed. One depth-seven cut contained a transient child that disappeared
+before original-address death.
+
+### Interpretation and Next Gate
+
+Ordered continuation redundancy is not confined to the Finding 069 source
+states. It recurs across four prospectively selected independent initialization
+geometries under the same frozen policy. The depth remains an adaptive,
+retained-amplitude policy response—not a static lane count, graph-theoretic
+minimum, entropy measure, or substrate-independent topology. Next compare
+selector and scheduler policies and enumerate small intervention subsets.
+
+### Artifacts
+
+- [Machine-readable summary](../output/findings/finding070/independent_persistence_replication_summary.json)
+- [Branch assignments](../output/findings/finding070/independent_persistence_replication_assignments.csv)
+- [Depth aggregates](../output/findings/finding070/independent_persistence_replication_depths.csv)
+- [Per-source outcomes](../output/findings/finding070/independent_persistence_replication_sources.csv)
+- [Selector-hash chain](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
+- [Synthesis implementation](../src/summarize_independent_persistence.py)

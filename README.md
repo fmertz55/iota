@@ -172,6 +172,17 @@ prefix-minimal cut depth under the declared retained-amplitude, ordered
 policy—not a graph-theoretic minimum or a count of simultaneously available
 routes.
 
+Finding 070 repeats that frozen policy on four newly screened initialization
+geometries selected before continuation outcomes. Their 79 committed factual
+unique-child branches produced cut counts `23, 15, 7, 9, 4, 3, 5, 2` at depths
+`1..8`; 10 still handed off beyond depth 8 and one was source-survival censored
+at depth 7. Every geometry produced at least one alternate continuation after
+the first veto, satisfying the preregistered replication gate. The chain
+contains 286 committed selector events and 923 override executions, with exact
+shams, selector joins, payload, conservation, and collision checks. This
+replicates ordered continuation redundancy across independent geometries under
+the declared policy; it does not yet establish a policy-invariant topology.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -204,10 +215,14 @@ routes.
 - [Finding 069 selector-hash chain](output/findings/finding069/sequential_realization_cut_selector_hashes.csv)
 - [Finding 069 sequential replay implementation](src/sequential_realization_cut.py)
 - [Finding 069 synthesis implementation](src/summarize_sequential_cut.py)
+- [Finding 070 independent replication summary](output/findings/finding070/independent_persistence_replication_summary.json)
+- [Finding 070 branch assignments](output/findings/finding070/independent_persistence_replication_assignments.csv)
+- [Finding 070 depth aggregates](output/findings/finding070/independent_persistence_replication_depths.csv)
+- [Finding 070 selector-hash chain](output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
+- [Finding 070 synthesis implementation](src/summarize_independent_persistence.py)
 
-The next gate applies this frozen ordered policy to additional independently
-initialized geometries, then compares selector and scheduling policies or
-exhaustive small intervention subsets before any graph-minimum or
+The next gate compares selector and scheduling policies or exhaustive small
+intervention subsets before any graph-minimum, invariant topology, or
 if-and-only-if law is proposed.
 
 As new experiments land, this section should report the strongest supported

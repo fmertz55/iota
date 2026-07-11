@@ -382,6 +382,91 @@
         "Five source states represent four initialization seeds, and candidate selection plus lexicographic scheduling remain implementation-specific."
       ],
       "next_gate": "Replicate ordered cut depth on newly screened independent initialization geometries, then compare alternative selector and scheduling policies and exhaustive small intervention subsets before claiming a graph-theoretic minimum or a necessary-and-sufficient continuation law."
+    },
+    {
+      "id": "GC-011",
+      "title": "Ordered continuation depth replicates across independent geometries",
+      "status": "supported with bounded causal, policy, and geometric scope",
+      "statement": "A preregistered independent screen selected four previously unused initialization geometries before continuation outcomes. Their 79 frozen natural unique-child continuations were subjected to the Finding 069 retained-amplitude policy through depth eight. Sequential cuts occurred at depths 1 through 8 in 23, 15, 7, 9, 4, 3, 5, and 2 branches; 10 still handed off after eight vetoes and 1 was source-survival censored at depth 7. Every geometry produced a depth-1 alternate continuation, meeting the frozen replication gate. Across 286 committed selector events and 923 override executions, all selector joins and hashes verified, matched shams were exact, payload remained zero, conservation remained exact, and no collisions occurred.",
+      "finding": "Finding 070",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-TEMPORAL-GATE",
+        "DEF-OPPORTUNITY-LIFETIME",
+        "DEF-REALIZATION-REDUNDANCY",
+        "DEF-SEQUENTIAL-CUT-DEPTH",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding070/independent_persistence_replication_summary.json",
+        "output/findings/finding070/independent_persistence_replication_assignments.csv",
+        "output/findings/finding070/independent_persistence_replication_depths.csv",
+        "output/findings/finding070/independent_persistence_replication_sources.csv",
+        "output/findings/finding070/independent_persistence_replication_selector_hashes.csv",
+        "output/findings/finding070/independent_persistence_screen_summary.json",
+        "output/findings/finding070/independent_persistence_screen_source_manifest.csv",
+        "output/findings/finding070/independent_persistence_depth_freeze_summary.json",
+        "output/findings/finding070/independent_persistence_depth_selectors.csv",
+        "output/findings/finding070/depth001_summary.json",
+        "output/findings/finding070/depth001_cases.csv",
+        "output/findings/finding070/depth001_next_selectors.csv",
+        "output/findings/finding070/depth002_summary.json",
+        "output/findings/finding070/depth002_cases.csv",
+        "output/findings/finding070/depth002_next_selectors.csv",
+        "output/findings/finding070/depth003_summary.json",
+        "output/findings/finding070/depth003_cases.csv",
+        "output/findings/finding070/depth003_next_selectors.csv",
+        "output/findings/finding070/depth004_summary.json",
+        "output/findings/finding070/depth004_cases.csv",
+        "output/findings/finding070/depth004_next_selectors.csv",
+        "output/findings/finding070/depth005_summary.json",
+        "output/findings/finding070/depth005_cases.csv",
+        "output/findings/finding070/depth005_next_selectors.csv",
+        "output/findings/finding070/depth006_summary.json",
+        "output/findings/finding070/depth006_cases.csv",
+        "output/findings/finding070/depth006_next_selectors.csv",
+        "output/findings/finding070/depth007_summary.json",
+        "output/findings/finding070/depth007_cases.csv",
+        "output/findings/finding070/depth007_next_selectors.csv",
+        "output/findings/finding070/depth008_summary.json",
+        "output/findings/finding070/depth008_cases.csv",
+        "output/findings/finding070/depth008_next_selectors.csv"
+      ],
+      "analysis": "src/summarize_independent_persistence.py",
+      "supporting_analysis": [
+        "src/independent_persistence_screen.py",
+        "src/independent_persistence_freeze.py",
+        "src/independent_persistence_cut.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-070-preregistration",
+      "expected": {
+        "initial_selectors": 79,
+        "independent_initialization_seeds": 4,
+        "protocol_max_depth": 8,
+        "fixed_followup_offsets": 128,
+        "observed_cut_depth_counts": {"1": 23, "2": 15, "3": 7, "4": 9, "5": 4, "6": 3, "7": 5, "8": 2},
+        "observed_cuts": 68,
+        "right_censored_above_protocol_max": 10,
+        "source_survival_censored": 1,
+        "distinct_selector_events_vetoed": 286,
+        "selector_override_executions": 923,
+        "branches_with_reused_selector_targets": 38,
+        "depth1_handoff_sources": 4,
+        "collision_cases": 0,
+        "transient_child_lineage_losses": 1,
+        "child_bearing_source_censoring": 0
+      },
+      "limitations": [
+        "The cohort is conditional on 79 factual natural unique-child continuations from four selected strict source geometries.",
+        "The measured depth is prefix-minimal along one adaptive retained-amplitude selector policy, not a graph-theoretic cut or a count of simultaneous lanes.",
+        "Successive selectors inhabit different counterfactual histories; suppressing transfer retains source amplitude and changes later opportunities.",
+        "The fixed 128-offset endpoint and depth-eight cap leave ten depth-right-censored branches and one source-survival-censored branch.",
+        "One depth-seven cut included a transient inherited child that disappeared before original-address death.",
+        "Candidate selection and lexicographic scheduling remain implementation-specific."
+      ],
+      "next_gate": "Compare selector and scheduling policies and enumerate small intervention subsets on frozen branches before claiming an invariant topology or graph-theoretic minimum."
     }
   ]
 }
