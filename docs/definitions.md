@@ -118,3 +118,12 @@ A frozen mapping from features available immediately before original-address dea
 - Symbol: none
 
 An ordered event decision whose resolution before source termination changes whether an ancestry-preserving successor is realized; it is identified by a frozen intervention that changes that decision while leaving the pre-intervention state and consumed random draw fixed.
+
+## Opportunity lifetime
+
+- ID: `DEF-OPPORTUNITY-LIFETIME`
+- Kind: causal observable
+- Status: operational
+- Symbol: `\tau_{\mathrm{opp}}`
+
+The ordered event or tick interval during which a specified successor transition remains admissible, ending when that transition is realized or a declared lawful event makes the route unavailable.

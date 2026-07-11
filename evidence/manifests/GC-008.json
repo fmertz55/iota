@@ -1,0 +1,71 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2641,
+      "path": "output/findings/finding067/temporal_gate_replication_summary.json",
+      "sha256": "c531d90c39378de31b3bc6ab84a4f34809f1e668af822bae2b49e7b38e6feb47"
+    },
+    {
+      "bytes": 6240,
+      "path": "output/findings/finding067/temporal_gate_replication_replays.csv",
+      "sha256": "a0645dc86152644d8dea4d32207db6fd4eefbc45d1a2c01b63256dc0b1de87f1"
+    },
+    {
+      "bytes": 10612,
+      "path": "output/findings/finding067/independent_geometry_screen_summary.json",
+      "sha256": "570017a7ebec69e574d03230c4c83c8d2e3860a05b6ad218987e1fa5306d6f31"
+    },
+    {
+      "bytes": 9440,
+      "path": "output/findings/finding067/independent_geometry_screen_source_manifest.csv",
+      "sha256": "15ed649a3db93492e1b2cbe4ea72261c10717cf2cdb6a07f6df6eb25b59d717e"
+    },
+    {
+      "bytes": 5234,
+      "path": "output/findings/finding067/independent_temporal_replication_summary.json",
+      "sha256": "b86b20094f70a49bf492dbb6e40056111245d0bcb97949276e0c5052c4ee1e66"
+    },
+    {
+      "bytes": 2357,
+      "path": "output/findings/finding067/independent_temporal_replication_replays.csv",
+      "sha256": "ace747c446ec03473619f5eb09a88ea5100422b27446b48bbe8ef2d53ae64384"
+    },
+    {
+      "bytes": 854,
+      "path": "output/findings/finding067/independent_temporal_replication_source_aggregate.csv",
+      "sha256": "e84767427710b38f42da27622f93cd5b81c35266455d4f7044266e57ee4d431d"
+    },
+    {
+      "bytes": 23762,
+      "path": "src/temporal_gate_replication.py",
+      "sha256": "e443880f20b25f60610dc6c68eb3f5afa379a70745f5e74fc519da353ec30a0f"
+    },
+    {
+      "bytes": 28281,
+      "path": "src/independent_geometry_screen.py",
+      "sha256": "dee712c8e3ea78712011777c9eda8be82a7e6a6cdb6b818f9f2888bd0151a0f7"
+    },
+    {
+      "bytes": 10523,
+      "path": "src/independent_temporal_replication.py",
+      "sha256": "774ddd8531391f49f0d968402ee009eff5e28b424b58ee9ed3b27f9c176c02c6"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 16600,
+      "path": "evidence/claims.yaml",
+      "sha256": "1611f71dd3c5fb28d724b3fb9f91736242d61ce9a0ec4fa8b7ae0bcb6ef0acd9"
+    },
+    {
+      "bytes": 5598,
+      "path": "evidence/definitions.yaml",
+      "sha256": "12e5da6061256f9fd3955c3164decc1f52e75b5777c67e861f5a6b4457b08cf4"
+    }
+  ],
+  "claim_id": "GC-008",
+  "schema_version": 1
+}

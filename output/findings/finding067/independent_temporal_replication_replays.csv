@@ -1,0 +1,11 @@
+source_id,init_seed,event_start_offset,branch_sample,branch_seed,finding066_outcome_label,natural_label,natural_terminal_offset,selector_event_index,selector_source,selector_target,selector_candidate_order,natural_gate_draw,natural_transfer_probability,natural_gate_passed,forced_gate_passed,sham_exact,override_matches,capacity_retained_after_intervention,later_singleton_candidate_evaluated,preempted_target_available_at_singleton_evaluation,immediate_child_count,route_reopened,postintervention_address_loss_observed,postintervention_terminal_offset,address_loss_delay,eventual_handoff,eventual_death_tick_child_count,lineage_collision,payload_zero_all_offsets,ledger_exact_all_offsets
+f067b-source-001,58,447,26,2026081326,source_exhausted,source_exhausted,470,57,40:41:7,40:40:7,11,0.5566066111826754,0.7142857142857142,1,0,1,1,1,1,0,0,1,1,494,24,0,0,0,1,1
+f067b-source-002,71,188,7,2026091307,gate_failed,gate_failed,200,34,16:13:59,15:13:59,5,0.7966387701520439,0.015370084179716711,0,1,1,1,0,0,0,1,1,1,200,0,1,1,0,1,1
+f067b-source-002,71,188,12,2026091312,target_preempted,target_preempted,195,26,15:12:59,15:13:59,16,0.003788859038339143,0.010683549782966992,1,0,1,1,1,1,1,0,1,1,199,4,1,1,0,1,1
+f067b-source-002,71,188,20,2026091320,gate_failed,gate_failed,201,35,16:13:59,15:13:59,5,0.8964074517677675,0.015328280430449462,0,1,1,1,0,0,0,1,1,1,201,0,1,1,0,1,1
+f067b-source-002,71,188,21,2026091321,gate_failed,gate_failed,200,36,16:13:59,15:13:59,5,0.23479847181697666,0.015370084179716711,0,1,1,1,0,0,0,1,1,1,200,0,1,1,0,1,1
+f067b-source-002,71,188,23,2026091323,gate_failed,gate_failed,199,33,16:13:59,15:13:59,5,0.3855290053537104,0.015416484042116622,0,1,1,1,0,0,0,1,1,1,199,0,1,1,0,1,1
+f067b-source-002,71,188,24,2026091324,gate_failed,gate_failed,198,34,16:13:59,15:13:59,5,0.17732737143314825,0.0154679793240673,0,1,1,1,0,0,0,1,1,1,198,0,1,1,0,1,1
+f067b-source-002,71,188,25,2026091325,gate_failed,gate_failed,198,34,16:13:59,15:13:59,5,0.6941694698227345,0.0154679793240673,0,1,1,1,0,0,0,1,1,1,198,0,1,1,0,1,1
+f067b-source-002,71,188,26,2026091326,gate_failed,gate_failed,197,32,16:13:59,15:13:59,5,0.5406104976642773,0.015525122281273347,0,1,1,1,0,0,0,1,1,1,197,0,1,1,0,1,1
+f067b-source-002,71,188,30,2026091330,gate_failed,gate_failed,196,35,16:13:59,15:13:59,5,0.6256380478015641,0.015588523252476056,0,1,1,1,0,0,0,1,1,1,196,0,1,1,0,1,1

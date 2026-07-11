@@ -220,6 +220,44 @@
         "The 96 branches share three selected source geometries."
       ],
       "next_gate": "Replicate frozen single-gate and event-order interventions across all naturally failed mechanisms, then test whether the temporal rule predicts independent source geometries."
+    },
+    {
+      "id": "GC-008",
+      "title": "Opportunity lifetime causally controls expression continuation",
+      "status": "supported with bounded causal and geometric scope",
+      "statement": "In 192 fresh branches from the original three source states, one-decision interventions rescued all 6 successor-gate deaths immediately and reopened all 30 exhaustion-closed routes, with 28 later handoffs. A complete 128-case screen then froze two new initialization geometries before terminal outcomes: on 64 branches, the same policy rescued 8/8 successor-gate deaths immediately, reopened one exhaustion route without eventual handoff, and reopened one preempted target followed by handoff. Thus route availability is causal, while successor realization remains a distinct condition.",
+      "finding": "Finding 067",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-TEMPORAL-GATE",
+        "DEF-OPPORTUNITY-LIFETIME",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding067/temporal_gate_replication_summary.json",
+        "output/findings/finding067/temporal_gate_replication_replays.csv",
+        "output/findings/finding067/independent_geometry_screen_summary.json",
+        "output/findings/finding067/independent_geometry_screen_source_manifest.csv",
+        "output/findings/finding067/independent_temporal_replication_summary.json",
+        "output/findings/finding067/independent_temporal_replication_replays.csv",
+        "output/findings/finding067/independent_temporal_replication_source_aggregate.csv"
+      ],
+      "analysis": "src/temporal_gate_replication.py",
+      "supporting_analysis": [
+        "src/independent_geometry_screen.py",
+        "src/independent_temporal_replication.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-067-kickoff",
+      "limitations": [
+        "Passing a naturally failed gate is an efficacy intervention, not an estimate of its natural realization probability.",
+        "The original-state ensemble contains conditionally independent RNG branches from three shared geometries.",
+        "The independent primary analysis contains only two initialization geometries; independent exhaustion and preemption cohorts each contain one case and do not meet the preregistered class-level replication threshold.",
+        "The ledger covers selected hard-transfer candidates, while candidate selection and lexicographic source scheduling remain implementation-specific.",
+        "The original gate draw is consumed and trajectories are identical through intervention, but downstream RNG consumption may diverge after the state diverges."
+      ],
+      "next_gate": "Test necessity by prospectively vetoing natural child-producing gates, quantify redundant successor routes, and extend the frozen independent-geometry screen before proposing an if-and-only-if continuation law."
     }
   ]
 }

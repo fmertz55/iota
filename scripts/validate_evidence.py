@@ -15,7 +15,9 @@ from evidence_common import (
     load_gc005,
     load_gc006,
     load_gc007,
+    load_gc008,
     load_registry,
+    sha256,
     strict_events,
 )
 
@@ -42,6 +44,7 @@ def main() -> int:
                 fail(f"{claim['id']} references unknown definition {definition_id}", errors)
         for relative in [
             *claim.get("evidence", []),
+            *claim.get("supporting_analysis", []),
             claim.get("analysis", ""),
             claim.get("instrumentation", ""),
         ]:
@@ -249,6 +252,83 @@ def main() -> int:
         fail("GC-007 causal replay no longer flips handoff", errors)
     if gc007_replay["frozen_intervention"]["natural_gate_passed"]:
         fail("GC-007 frozen intervention was not a naturally failed gate", errors)
+
+    _, gc008_same, gc008_screen, gc008_independent = load_gc008()
+    same_by_label = {row["natural_label"]: row for row in gc008_same["aggregate"]}
+    expected_same = {
+        "gate_failed": (6, 6, 6, 6),
+        "source_exhausted": (30, 30, 3, 28),
+        "target_preempted": (0, 0, 0, 0),
+    }
+    for label, expected in expected_same.items():
+        row = same_by_label[label]
+        observed = (
+            int(row["eligible_replays"]), int(row["route_reopened"]),
+            int(row["immediate_child"]), int(row["eventual_handoff"]),
+        )
+        if observed != expected:
+            fail(f"GC-008 same-state {label} changed: {observed}", errors)
+    if int(gc008_same["natural_branches"]) != 192 or int(gc008_same["eligible_replays"]) != 36:
+        fail("GC-008 same-state cohort size changed", errors)
+    if not all(
+        gc008_same[key]
+        for key in (
+            "all_shams_exact", "all_exactly_one_override", "all_payload_zero",
+            "all_ledger_exact", "all_natural_payload_zero", "all_natural_ledger_exact",
+        )
+    ) or int(gc008_same["collision_replays"]) != 0:
+        fail("GC-008 same-state safety or intervention invariant failed", errors)
+
+    screen_expected = (128, 128, 29, 4, 4, 2)
+    screen_observed = (
+        int(gc008_screen["cases"]), int(gc008_screen["unique_continuation_streams"]),
+        int(gc008_screen["class_b_candidates"]), int(gc008_screen["strict_transport_events"]),
+        int(gc008_screen["singleton_eligible_sources"]), int(gc008_screen["frozen_primary_sources"]),
+    )
+    if screen_observed != screen_expected or not gc008_screen["screen_complete"]:
+        fail(f"GC-008 independent screen changed: {screen_observed}", errors)
+    if not all(
+        gc008_screen[key]
+        for key in (
+            "all_classification_payload_zero", "all_classification_ledgers_exact",
+            "all_transport_payload_zero", "all_transport_ledgers_exact",
+        )
+    ):
+        fail("GC-008 independent screen safety invariant failed", errors)
+
+    if (
+        int(gc008_independent["selected_sources"]) != 2
+        or int(gc008_independent["natural_branches"]) != 64
+        or int(gc008_independent["eligible_replays"]) != 10
+        or gc008_independent["source_manifest_sha256"]
+        != "15ed649a3db93492e1b2cbe4ea72261c10717cf2cdb6a07f6df6eb25b59d717e"
+    ):
+        fail("GC-008 independent causal cohort or frozen manifest changed", errors)
+    frozen_manifest = ROOT / "output/findings/finding067/independent_geometry_screen_source_manifest.csv"
+    if sha256(frozen_manifest) != "15ed649a3db93492e1b2cbe4ea72261c10717cf2cdb6a07f6df6eb25b59d717e":
+        fail("GC-008 frozen source-manifest bytes changed", errors)
+    independent_rows = {
+        (row["source_id"], row["natural_label"]): row
+        for row in gc008_independent["source_aggregate"]
+    }
+    independent_expected = {
+        ("f067b-source-001", "source_exhausted"): (1, 1, 0, 0),
+        ("f067b-source-002", "gate_failed"): (8, 8, 8, 8),
+        ("f067b-source-002", "target_preempted"): (1, 1, 0, 1),
+    }
+    for key, expected in independent_expected.items():
+        row = independent_rows[key]
+        observed = (
+            int(row["eligible_replays"]), int(row["route_reopened"]),
+            int(row["immediate_child"]), int(row["eventual_handoff"]),
+        )
+        if observed != expected:
+            fail(f"GC-008 independent {key} changed: {observed}", errors)
+    if not all(
+        gc008_independent[key]
+        for key in ("all_shams_exact", "all_exactly_one_override", "all_payload_zero", "all_ledger_exact")
+    ) or int(gc008_independent["collision_replays"]) != 0:
+        fail("GC-008 independent safety or intervention invariant failed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

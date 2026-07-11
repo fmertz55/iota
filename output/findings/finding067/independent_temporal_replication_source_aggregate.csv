@@ -1,0 +1,7 @@
+source_id,init_seed,event_start_offset,natural_label,eligible_replays,route_reopened,route_rate,route_ci_low,route_ci_high,immediate_child,immediate_child_rate,immediate_child_ci_low,immediate_child_ci_high,eventual_handoff,eventual_handoff_rate,eventual_handoff_ci_low,eventual_handoff_ci_high,median_address_loss_delay,class_level_replication_eligible
+f067b-source-001,58,447,gate_failed,0,0,,,,0,,,,0,,,,,0
+f067b-source-001,58,447,source_exhausted,1,1,1.0,0.025,1.0,0,0.0,0.0,0.975,0,0.0,0.0,0.975,24,0
+f067b-source-001,58,447,target_preempted,0,0,,,,0,,,,0,,,,,0
+f067b-source-002,71,188,gate_failed,8,8,1.0,0.6305833524471808,1.0,8,1.0,0.6305833524471808,1.0,8,1.0,0.6305833524471808,1.0,0.0,1
+f067b-source-002,71,188,source_exhausted,0,0,,,,0,,,,0,,,,,0
+f067b-source-002,71,188,target_preempted,1,1,1.0,0.025,1.0,0,0.0,0.0,0.975,1,1.0,0.025,1.0,4,0

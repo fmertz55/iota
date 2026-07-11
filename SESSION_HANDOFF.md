@@ -2969,3 +2969,42 @@ source-manifest SHA-256:
 
 No independent terminal or intervention outcome had been inspected when this
 selection was frozen.
+
+## Finding 067 Independent Result
+
+Commit `0e22828` froze the complete independent screen and source-manifest hash
+before any selected-source terminal outcome was evaluated. The unchanged
+protocol then ran 32 rebridge branches from each of the two primary geometries.
+
+Across 64 independent-geometry branches, natural outcomes were 54 immediate
+children, 8 successor-gate deaths, 1 exhaustion death, and 1 preemption death.
+The frozen interventions produced:
+
+```text
+seed 71 successor-gate cohort:
+  8/8 routes reopened
+  8/8 immediate ancestry children
+  8/8 eventual handoffs
+
+seed 58 exhaustion cohort:
+  1/1 route reopened
+  0/1 immediate child
+  0/1 eventual handoff; address death delayed 24 offsets
+
+seed 71 preemption cohort:
+  1/1 target made available
+  0/1 immediate child
+  1/1 eventual handoff; address death delayed 4 offsets
+```
+
+All ten independent replays had exact matched shams and exactly one overridden
+gate; all were collision-free, payload-zero, and ledger-exact. Only the
+successor-gate cohort meets the preregistered minimum of five cases. The two
+singleton cohorts are case-level causal demonstrations, not class-level
+replications.
+
+Finding 067 therefore supports a two-stage mechanism: a successor route must
+remain available, and it must be realized while available. Reopening a route is
+causal but does not guarantee realization, as shown by the independent seed-58
+exhaustion non-rescue. The claim remains about this declared simulator and its
+selected-candidate schedule, not a substrate-independent law of time.

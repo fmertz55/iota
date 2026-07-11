@@ -64,7 +64,9 @@ consequences that would be expected if the organizing hypothesis is useful.
 
 ## Current evidence frontier
 
-The strongest current result is **Golden Claim GC-001: constraint transport**.
+The foundational structural result is **Golden Claim GC-001: constraint
+transport**. The strongest causal result is **GC-008: opportunity lifetime
+controls expression continuation**.
 
 > In three controlled replay events across two seeds, payload-free Iota dynamics
 > restored the same tracked connectivity relation through a causally necessary
@@ -136,7 +138,18 @@ original RNG draw; the branch flips from death to one collision-free inherited
 child. In this bounded case, continuation is causally path-dependent: the
 successor must be realized before the source spends its terminating amplitude.
 
-### Inspect GC-001
+Finding 067 prospectively replicates that intervention. Across 192 fresh
+branches from the original source states, permitting one failed successor gate
+creates a child in `6/6`; vetoing one terminal non-child spend reopens the route
+in `30/30`, followed by `28/30` eventual handoffs. A complete 128-case screen of
+16 unused initialization seeds then freezes two new geometries before terminal
+outcomes. Across 64 branches from them, the same policy creates a child in `8/8`
+successor-gate deaths, reopens one exhaustion route without eventual rescue, and
+reopens one preempted target followed by handoff. Opportunity is therefore
+causal but not sufficient: a lawful successor must also be realized while the
+route remains open.
+
+### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
 - [Aggregate evidence](output/findings/finding060/phase_free_constraint_transport_aggregate.csv)
@@ -155,10 +168,14 @@ successor must be realized before the source spends its terminating amplitude.
 - [Finding 066 ordered-event summary](output/findings/finding066/terminal_candidate_ledger_summary.json)
 - [Finding 066 complete candidate ledger](output/findings/finding066/terminal_candidate_ledger_candidates.csv)
 - [Finding 066 single-gate causal replay](output/findings/finding066/terminal_gate_causal_replay.json)
+- [Finding 067 prospective replication](output/findings/finding067/temporal_gate_replication_summary.json)
+- [Finding 067 independent geometry screen](output/findings/finding067/independent_geometry_screen_summary.json)
+- [Frozen independent source manifest](output/findings/finding067/independent_geometry_screen_source_manifest.csv)
+- [Finding 067 independent causal replication](output/findings/finding067/independent_temporal_replication_summary.json)
 
-The next gate replicates frozen single-event interventions across the remaining
-natural failure mechanisms and then tests the temporal rule on independently
-generated source geometries.
+The next gate tests necessity by vetoing natural child-producing gates, measures
+redundant successor routes, and extends the independent geometry cohort before
+any if-and-only-if continuation law is proposed.
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.
 

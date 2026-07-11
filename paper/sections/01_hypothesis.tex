@@ -33,3 +33,12 @@ When interaction strictly reduces the reachable set, a cardinality measure is
 
 Equation~\ref{eq:information} does not distinguish all set reshapings that
 preserve cardinality. A set- or distribution-sensitive extension remains open.
+
+The experiments also distinguish a state-level possibility from its lifetime
+under ordered resolution. Let $\mathcal{R}^{(k)}$ denote the routes still
+admissible after event position $k$ within a declared update. A route may be
+lawful in $\mathcal{R}^{(k)}$ yet disappear from $\mathcal{R}^{(k+1)}$ when a
+competing lawful event exhausts its source or preempts its target. This notation
+does not assert non-Markovian physics: the complete simulator state, RNG state,
+and scheduler determine the update. It makes the causal question operational:
+must an ancestry-preserving successor be realized before its route closes?
