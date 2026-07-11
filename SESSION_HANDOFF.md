@@ -3730,3 +3730,27 @@ ab28004fa128082da395256a32ddb08800ff62f07d6d80356df46c75a283ad05
 ```
 
 No depth-6 selector had been vetoed when this manifest was frozen.
+
+## Finding 070 Depth-6 Result and Depth-7 Freeze
+
+The depth-6 policy produced 3 new lineage cuts among 21 risk-set branches.
+The other 18 handed off and supplied the committed depth-7 selector cohort.
+
+```text
+cut depth 1: 23
+cut depth 2: 15
+cut depth 3:  7
+cut depth 4:  9
+cut depth 5:  4
+cut depth 6:  3
+surviving beyond depth 6: 18
+```
+
+There were no transient-child losses, source-survival censoring, collisions,
+payload, selector, or ledger errors. Frozen depth-7 selector-manifest SHA-256:
+
+```text
+a6a6e956eabb23c4d2c3f39f1a3ab0170bc91aa71b7a11a705e51bcbff00748b
+```
+
+No depth-7 selector had been vetoed when this manifest was frozen.
