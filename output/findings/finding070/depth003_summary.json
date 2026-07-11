@@ -1,0 +1,44 @@
+{
+  "all_depth1_shams_exact": null,
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "all_selector_identities_exact": true,
+  "all_selectors_matched": true,
+  "cases_csv": "output/findings/finding070/depth003_cases.csv",
+  "child_bearing_source_censoring": 0,
+  "collision_cases": 0,
+  "current_depth_veto_run": true,
+  "depth": 3,
+  "depth1_matched_sham_run": false,
+  "factual_selector_sha256": "01ad7968c7bdd2795c5d7029b481a4420982f3e4c940e99dcf5fd71297bc17e7",
+  "freeze_summary_path": "output/findings/finding070/independent_persistence_depth_freeze_summary.json",
+  "freeze_summary_sha256": "d072f4d772e444701fcf2309192561df72cd192e945e8ca2378a88fe190e1721",
+  "input_branches": 41,
+  "next_depth_veto_run": false,
+  "next_selectors": 34,
+  "next_selectors_csv": "output/findings/finding070/depth003_next_selectors.csv",
+  "next_selectors_sha256": "1c452b3cf4d3eb9012a38760bb910ce86a9e5d0235966035be98eb525193dcc8",
+  "parent_chain_sha256": "4db9fac510034d34ab0f55bae51d4bdadcb5581c411a1e3d072e8ca207450ade",
+  "protocol": "independent replication of nested sequential ancestry vetoes",
+  "selector_chain": [
+    {
+      "path": "output/findings/finding070/independent_persistence_depth_selectors.csv",
+      "sha256": "01ad7968c7bdd2795c5d7029b481a4420982f3e4c940e99dcf5fd71297bc17e7"
+    },
+    {
+      "path": "output/findings/finding070/depth001_next_selectors.csv",
+      "sha256": "256dfe0ad291ce835aab6a239032c7d0089f8755e985779a2bea44d79cd8ed5d"
+    },
+    {
+      "path": "output/findings/finding070/depth002_next_selectors.csv",
+      "sha256": "4942e4441901548eb68a7ddd8cf8dc2b8290f103d475b50bf59f155114e8fb94"
+    }
+  ],
+  "source_manifest_path": "output/findings/finding070/independent_persistence_screen_source_manifest.csv",
+  "source_manifest_sha256": "c2749807dbbd06d8ec6ff52762ca9e1154c5c56be8d037c86e692c66d2114618",
+  "stage_endpoints": {
+    "handoff": 34,
+    "lineage_loss": 7
+  },
+  "transient_child_lineage_losses": 0
+}
