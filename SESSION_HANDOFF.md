@@ -3816,3 +3816,30 @@ remained zero, conservation remained exact, and there were no collisions. One
 depth-7 loss branch contained a transient inherited child, and one depth-7
 branch was source-survival censored; both remain separate from the 10 confirmed
 depth-right-censored handoffs.
+
+## Finding 070 Synthesis
+
+The independent replication met its preregistered nontrivial-support gate. All
+four newly selected initialization geometries produced at least one confirmed
+handoff after the first retained-amplitude veto. Across 79 frozen factual
+unique-child continuations, the observed prefix-minimal ordered cut depths were
+23, 15, 7, 9, 4, 3, 5, and 2 at depths one through eight. Ten branches still
+handed off after eight vetoes and one branch was source-survival censored at
+depth seven. Thus 68 cuts were directly observed, while the remaining 11 cases
+retain their explicit censoring labels.
+
+The complete chain comprised 286 distinct committed selector events and 923
+selector-override executions. Thirty-eight branches revisited at least one
+previously vetoed target address, demonstrating that selector depth is an
+ordered route-policy measurement rather than a count of unique spatial lanes.
+Every selector hash and selector-to-case join verified, every risk set nested
+exactly, and all depth-one matched shams were exact. Payload remained zero,
+conservation remained exact, and no lineage collision occurred.
+
+Finding 070 therefore independently replicates the bounded causal result from
+Finding 069: under the frozen first-next-child, retained-amplitude policy,
+continuation commonly has more than one sequentially realized lawful route.
+It does not establish a substrate-independent topology, equate cut depth with
+entropy, or identify the full reachable set. It measures one intervention- and
+order-dependent section of counterfactual continuation structure in four new
+Iota initialization geometries.
