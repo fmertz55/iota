@@ -3754,3 +3754,32 @@ a6a6e956eabb23c4d2c3f39f1a3ab0170bc91aa71b7a11a705e51bcbff00748b
 ```
 
 No depth-7 selector had been vetoed when this manifest was frozen.
+
+## Finding 070 Depth-7 Result and Depth-8 Freeze
+
+The depth-7 policy partitioned 18 risk-set branches into 5 lineage cuts, 12
+confirmed handoffs, and 1 source-survival censor. One cut branch produced a
+transient inherited child that disappeared before original-address death; it
+remains a cut because no live descendant existed at the endpoint.
+
+```text
+cut depth 1: 23
+cut depth 2: 15
+cut depth 3:  7
+cut depth 4:  9
+cut depth 5:  4
+cut depth 6:  3
+cut depth 7:  5
+source-survival censored through depth 7: 1
+surviving beyond depth 7: 12
+```
+
+There were no collisions, payload, selector, or ledger errors. Only the 12
+confirmed handoffs enter the final depth-8 risk set. Frozen depth-8
+selector-manifest SHA-256:
+
+```text
+e12ffc786b232b9d411c01878df8717a1bed45d0a9c37920deafaacfd0f1424d
+```
+
+No depth-8 selector had been vetoed when this manifest was frozen.
