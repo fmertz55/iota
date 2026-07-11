@@ -2578,3 +2578,108 @@ output/findings/finding064/lineage_continuation_rule_model.json
 output/findings/finding064/lineage_continuation_rule_per_source.csv
 output/findings/finding064/lineage_continuation_rule_summary.json
 ```
+
+## Finding 065 Update
+
+Finding 065 restricted discovery to single-address terminal rows, excluded the
+preexisting-descendant marker, froze a new stump, and evaluated it on 96 fresh
+branch samples 32..63.
+
+Frozen discovery rule:
+
+```text
+cube26_active_neighbors <= 1.5 -> predict death-tick child
+eligible discovery rows: 35
+discovery balanced accuracy: 0.669
+```
+
+Fresh confirmation:
+
+```text
+eligible single-address endpoints: 71
+excluded preexisting descendants: 25
+TP=39 FP=12 TN=8 FN=12
+accuracy:          0.662
+sensitivity:       0.765
+specificity:       0.400
+balanced accuracy: 0.582
+two-sided Fisher:  p=0.240255
+```
+
+The rule did not confirm. No threshold was retuned on confirmation data.
+
+Interpretation:
+
+```text
+Static terminal scalar geometry, as currently measured, is insufficient for a
+general death-tick continuation rule. The missing variable may be the ordered
+candidate-selection and RNG-gated transfer process within the terminal tick.
+```
+
+Next gate:
+
+```text
+instrument every ordered singleton-source candidate on the terminal tick;
+record eligibility, influence, probability, gate draw, activation, and source
+exhaustion;
+determine whether the event process fully accounts for continuation.
+```
+
+Artifacts:
+
+```text
+src/death_tick_child_rule.py
+output/findings/finding065/death_tick_child_rule_confirmation.csv
+output/findings/finding065/death_tick_child_rule_model.json
+output/findings/finding065/death_tick_child_rule_per_source.csv
+output/findings/finding065/death_tick_child_rule_summary.json
+```
+
+## Finding 065 Kickoff
+
+Finding 065 targets the 23 held-out Finding 064 handoffs that were created on
+the address-death tick rather than existing beforehand.
+
+To avoid reusing an inspected held-out set as fresh confirmation:
+
+```text
+discovery rows:
+  Finding 064 branch_sample 0..15 only
+  restrict to singleton_lineage_size == 1 immediately before address death
+
+fresh confirmation branches:
+  branch_sample 32..63 from each of the three strict-rebridge states
+  96 new continuation RNG streams
+  restrict evaluation to singleton_lineage_size == 1 at address death
+
+branch_sample 16..31:
+  not used for Finding 065 selection or confirmation
+```
+
+The preexisting-descendant feature is removed. Candidate features are the
+remaining preregistered Finding 064 features available before the death step.
+
+Frozen learner:
+
+```text
+one numeric feature, one midpoint threshold, both prediction directions;
+maximize balanced accuracy on eligible discovery rows;
+deterministic tie break by feature, threshold, direction;
+freeze once;
+evaluate once on eligible fresh confirmation rows.
+```
+
+Primary confirmation report:
+
+```text
+eligible and excluded endpoint counts;
+confusion matrix;
+sensitivity, specificity, balanced accuracy;
+two-sided Fisher exact association;
+per-source metrics;
+payload-zero, ledger-exact, and lineage-collision safety.
+```
+
+This experiment may reject the current local feature set. A null confirmation
+means these terminal scalar features do not capture a general death-tick child
+rule; it does not negate the prospectively observed lineages.

@@ -1,0 +1,4 @@
+split,init_seed,event_start_offset,rows,positives,negatives,true_positive,false_positive,true_negative,false_negative,accuracy,sensitivity,specificity,balanced_accuracy
+confirmation,46,61,32,16,16,14,10,6,2,0.625,0.875,0.375,0.625
+confirmation,46,420,19,16,3,10,1,2,6,0.631578947368421,0.625,0.6666666666666666,0.6458333333333333
+confirmation,56,106,20,19,1,15,1,0,4,0.75,0.7894736842105263,0.0,0.39473684210526316

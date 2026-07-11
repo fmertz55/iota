@@ -1,0 +1,46 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3271,
+      "path": "output/findings/finding065/death_tick_child_rule_summary.json",
+      "sha256": "e03acfe8ed2e49e8db7062bcf0242bd81be6d18579af0110c573e5d164cb8fd1"
+    },
+    {
+      "bytes": 15066,
+      "path": "output/findings/finding065/death_tick_child_rule_confirmation.csv",
+      "sha256": "64ba3c590bd34a468ad4ef1b13524a9bd97760d7903f5f4e7bba90ebbe6a0e5c"
+    },
+    {
+      "bytes": 1067,
+      "path": "output/findings/finding065/death_tick_child_rule_model.json",
+      "sha256": "d41a7418c1158cbfa645ca448fe5d72601fb1e4ebbbeac93b3adc8d533964362"
+    },
+    {
+      "bytes": 415,
+      "path": "output/findings/finding065/death_tick_child_rule_per_source.csv",
+      "sha256": "444356f2869615b8df40cf5e01b12e6ac3e3f98cf6e4029c89c9eea88a5e8798"
+    },
+    {
+      "bytes": 7263,
+      "path": "src/death_tick_child_rule.py",
+      "sha256": "f625efb56bf60fef8aa8e66f36cfba6e5027ec50e4db5a275cffdff3969652a9"
+    },
+    {
+      "bytes": 69072,
+      "path": "src/iota_rig.py",
+      "sha256": "4be2cf88bf279a1f7f47dfeb058788c9dabace2f491936fa3bf7aca2d9859541"
+    },
+    {
+      "bytes": 11586,
+      "path": "evidence/claims.yaml",
+      "sha256": "ddf3a3b53d4a0fea026833f6a61f7302062e2cf542b946b75275ff46b63a67a8"
+    },
+    {
+      "bytes": 4711,
+      "path": "evidence/definitions.yaml",
+      "sha256": "953393d590f03544020a94f7f4a1a2bb420c037427e15a3da8ff83d06a388b11"
+    }
+  ],
+  "claim_id": "GC-006",
+  "schema_version": 1
+}

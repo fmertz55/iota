@@ -162,6 +162,35 @@
         "Training and test branches share three source geometries."
       ],
       "next_gate": "Restrict to terminal steps with singleton-lineage size one and test whether strictly pre-step local geometry predicts creation of a qualifying child on the death tick."
+    },
+    {
+      "id": "GC-006",
+      "title": "Static terminal geometry does not confirm a death-tick child rule",
+      "status": "negative confirmation",
+      "statement": "After excluding preexisting descendants, a discovery-selected rule predicting handoff from at most one cube-26 active neighbor failed on 71 eligible endpoints from 96 fresh continuation branches: balanced accuracy 0.582 and two-sided Fisher p=0.240.",
+      "finding": "Finding 065",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-CONTINUATION-RULE",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding065/death_tick_child_rule_summary.json",
+        "output/findings/finding065/death_tick_child_rule_confirmation.csv",
+        "output/findings/finding065/death_tick_child_rule_model.json",
+        "output/findings/finding065/death_tick_child_rule_per_source.csv"
+      ],
+      "analysis": "src/death_tick_child_rule.py",
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-065-kickoff",
+      "limitations": [
+        "The negative result applies to the preregistered scalar features and one-threshold learner, not to all possible local rules.",
+        "Features are terminal-aligned and do not encode the ordered candidate-selection and transfer-gate process within the death tick.",
+        "Only three source states are represented, although confirmation uses 96 fresh continuation branches.",
+        "Twenty-five confirmation endpoints with preexisting descendants were excluded by design."
+      ],
+      "next_gate": "Instrument the terminal tick's candidate ordering, eligibility, transfer probabilities, and gate draws; determine whether continuation is fully accounted for by the lawful event process rather than static geometry alone."
     }
   ]
 }

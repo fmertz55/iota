@@ -1,0 +1,41 @@
+{
+  "direction": "le_positive",
+  "discovery_excluded_preexisting_descendant_rows": 13,
+  "discovery_metrics": {
+    "accuracy": 0.7142857142857143,
+    "balanced_accuracy": 0.668560606060606,
+    "false_negative": 5,
+    "false_positive": 5,
+    "negatives": 11,
+    "positives": 24,
+    "rows": 35,
+    "sensitivity": 0.7916666666666666,
+    "specificity": 0.5454545454545454,
+    "true_negative": 6,
+    "true_positive": 19
+  },
+  "discovery_rows": 35,
+  "eligible_features": [
+    "time_from_rebridge",
+    "source_A",
+    "source_R",
+    "source_V",
+    "source_angular_L",
+    "face6_active_neighbors",
+    "face18_active_neighbors",
+    "cube26_active_neighbors",
+    "cube26_depleted_neighbors",
+    "cube26_latent_neighbors",
+    "source_removal_component_delta",
+    "primary_target_active",
+    "primary_target_depleted",
+    "primary_target_latent",
+    "range_active_targets",
+    "range_depleted_targets",
+    "range_latent_targets",
+    "lineage_reachable",
+    "lineage_shortest_path"
+  ],
+  "feature": "cube26_active_neighbors",
+  "threshold": 1.5
+}

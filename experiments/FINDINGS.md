@@ -7905,3 +7905,95 @@ train/test split.
 - `output/findings/finding064/lineage_continuation_rule_model.json`
 - `output/findings/finding064/lineage_continuation_rule_per_source.csv`
 - `output/findings/finding064/lineage_continuation_rule_summary.json`
+
+---
+
+## Finding 065 — Static terminal geometry fails fresh confirmation
+
+### Question
+
+Finding 064 showed that an already-existing descendant is sufficient but misses
+death-tick child creation. Finding 065 removed that marker and asked whether
+strictly pre-step scalar geometry predicts creation of a child on the terminal
+step.
+
+### Discovery and Fresh Confirmation
+
+Discovery used only Finding 064 training rows (`branch_sample 0..15`) with
+`singleton_lineage_size == 1`. The original Finding 064 held-out rows were not
+reused. The frozen rule was then evaluated on new branch samples `32..63` from
+each source state.
+
+Discovery:
+
+```text
+eligible rows: 35
+excluded preexisting descendants: 13
+```
+
+Frozen rule:
+
+```text
+cube26_active_neighbors <= 1.5 -> predict death-tick child
+discovery balanced accuracy: 0.669
+```
+
+Fresh confirmation:
+
+```text
+new branches: 96
+eligible single-address endpoints: 71
+excluded preexisting descendants: 25
+
+TP=39 FP=12 TN=8 FN=12
+accuracy:          0.662
+sensitivity:       0.765
+specificity:       0.400
+balanced accuracy: 0.582
+two-sided Fisher:  p=0.240
+```
+
+Per-source confirmation balanced accuracy:
+
+```text
+seed46 event 61:  0.625
+seed46 event 420: 0.646
+seed56 event 106: 0.395
+```
+
+Safety:
+
+```text
+payload zero: 96 / 96
+ledger exact: 96 / 96
+lineage collisions: 0 / 96
+```
+
+### Interpretation
+
+The discovery-selected low-crowding rule did not confirm. Identical active
+neighbor counts support both successful and failed handoffs, and the fresh
+association is compatible with chance under the declared test.
+
+This negative result applies to the preregistered scalar features and stump
+learner. It does not rule out a local continuation law. The missing information
+may be the ordered within-tick process: which candidates are selected, their
+eligibility and transfer probabilities, and the realized gate draws.
+
+No threshold was retuned on the confirmation rows.
+
+### Next Gate
+
+Instrument the terminal tick at candidate-event resolution. For every singleton
+lineage source, record ordered candidates, eligibility, influence, transfer
+probability, gate draw, target activation, and source exhaustion. Test whether
+these lawful events fully account for child creation before proposing another
+predictive rule.
+
+### Artifacts
+
+- `src/death_tick_child_rule.py`
+- `output/findings/finding065/death_tick_child_rule_confirmation.csv`
+- `output/findings/finding065/death_tick_child_rule_model.json`
+- `output/findings/finding065/death_tick_child_rule_per_source.csv`
+- `output/findings/finding065/death_tick_child_rule_summary.json`

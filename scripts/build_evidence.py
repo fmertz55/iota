@@ -11,6 +11,7 @@ from evidence_common import (
     load_gc003,
     load_gc004,
     load_gc005,
+    load_gc006,
     load_registry,
     sha256,
     strict_events,
@@ -31,6 +32,7 @@ def render_results(
     gc004_summary: dict,
     gc004_aggregate: list[dict[str, str]],
     gc005_summary: dict,
+    gc006_summary: dict,
 ) -> str:
     strict_cases = [
         row for row in gc002_cases if row["finding060_constraint_transport"] == "1"
@@ -71,6 +73,8 @@ def render_results(
             rf"\newcommand{{\GCFiveSensitivity}}{{{float(gc005_summary['held_out_metrics']['sensitivity']):.3f}}}",
             rf"\newcommand{{\GCFiveSpecificity}}{{{float(gc005_summary['held_out_metrics']['specificity']):.3f}}}",
             rf"\newcommand{{\GCFiveBalancedAccuracy}}{{{float(gc005_summary['held_out_metrics']['balanced_accuracy']):.3f}}}",
+            rf"\newcommand{{\GCSixEligibleRows}}{{{gc006_summary['confirmation_eligible_single_address_rows']}}}",
+            rf"\newcommand{{\GCSixBalancedAccuracy}}{{{float(gc006_summary['confirmation_metrics']['balanced_accuracy']):.3f}}}",
             "",
         ]
     )
@@ -179,6 +183,7 @@ def outputs() -> dict[Path, str]:
     _, gc003_summary, gc003_cases = load_gc003()
     _, gc004_summary, gc004_aggregate = load_gc004()
     _, gc005_summary = load_gc005()
+    _, gc006_summary = load_gc006()
     claims_registry = load_registry(ROOT / "evidence" / "claims.yaml")
     definitions = load_registry(ROOT / "evidence" / "definitions.yaml")
     metrics = evidence_metrics(summary, events)
@@ -193,6 +198,7 @@ def outputs() -> dict[Path, str]:
             gc004_summary,
             gc004_aggregate,
             gc005_summary,
+            gc006_summary,
         ),
         GENERATED / "tables" / "gc001_events.tex": render_event_table(events),
         GENERATED / "definitions.tex": render_definitions_tex(definitions),

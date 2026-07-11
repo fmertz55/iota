@@ -120,6 +120,13 @@ greater than `1.5` immediately before address death. It has held-out specificity
 the rule misses most handoffs created on the death tick and is rejected as a
 general continuation law.
 
+Finding 065 removes the preexisting-descendant marker and freezes a new rule on
+single-address discovery rows: predict death-tick child creation when the source
+has at most one active cube-26 neighbor. On 71 eligible endpoints from 96 fresh
+branches, the rule fails confirmation (balanced accuracy `0.582`, Fisher
+`p=0.240`). Static terminal geometry, as currently measured, is therefore
+insufficient for a general continuation rule.
+
 ### Inspect GC-001
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -135,12 +142,13 @@ general continuation law.
 - [Finding 063 comparisons](output/findings/finding063/expression_handoff_comparisons.csv)
 - [Finding 064 frozen model](output/findings/finding064/lineage_continuation_rule_model.json)
 - [Finding 064 held-out evaluation](output/findings/finding064/lineage_continuation_rule_summary.json)
+- [Finding 065 fresh confirmation](output/findings/finding065/death_tick_child_rule_summary.json)
 
-The next gate restricts analysis to terminal steps where singleton-lineage size
-is exactly one and tests whether strictly pre-step local geometry predicts
-creation of a qualifying child on the death tick. As new experiments land, this
-section should report the strongest supported claim at that commit while Git
-history preserves earlier states of the evidence.
+The next gate instruments the ordered candidate, eligibility, probability, and
+gate-draw process within the terminal tick to determine whether continuation is
+fully accounted for by the lawful event sequence rather than static geometry.
+As new experiments land, this section should report the strongest supported
+claim at that commit while Git history preserves earlier states of the evidence.
 
 ## Reviewer paths
 

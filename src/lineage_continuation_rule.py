@@ -302,9 +302,12 @@ def predict(value: float, threshold: float, direction: str) -> int:
     return int(value > threshold)
 
 
-def train_stump(rows: list[dict[str, Any]]) -> dict[str, Any]:
+def train_stump(
+    rows: list[dict[str, Any]],
+    features: tuple[str, ...] = FEATURES,
+) -> dict[str, Any]:
     candidates: list[dict[str, Any]] = []
-    for feature in FEATURES:
+    for feature in features:
         values = sorted({float(row[feature]) for row in rows})
         thresholds = [values[0] - 1e-9, values[-1] + 1e-9]
         thresholds.extend(

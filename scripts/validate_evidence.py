@@ -13,6 +13,7 @@ from evidence_common import (
     load_gc003,
     load_gc004,
     load_gc005,
+    load_gc006,
     load_registry,
     strict_events,
 )
@@ -193,6 +194,39 @@ def main() -> int:
         fail("GC-005 contains lineage collision rows", errors)
     if not gc005_summary["all_payload_zero"] or not gc005_summary["all_ledger_exact"]:
         fail("GC-005 safety invariant failed", errors)
+
+    _, gc006_summary = load_gc006()
+    gc006_model = gc006_summary["model"]
+    if (
+        gc006_model["feature"] != "cube26_active_neighbors"
+        or not math.isclose(float(gc006_model["threshold"]), 1.5)
+        or gc006_model["direction"] != "le_positive"
+    ):
+        fail(f"GC-006 frozen model changed: {gc006_model}", errors)
+    confirmation = gc006_summary["confirmation_metrics"]
+    confirmation_confusion = (
+        int(confirmation["true_positive"]),
+        int(confirmation["false_positive"]),
+        int(confirmation["true_negative"]),
+        int(confirmation["false_negative"]),
+    )
+    if confirmation_confusion != (39, 12, 8, 12):
+        fail(f"GC-006 confirmation confusion changed: {confirmation_confusion}", errors)
+    if int(gc006_summary["confirmation_eligible_single_address_rows"]) != 71:
+        fail("GC-006 eligible confirmation count changed", errors)
+    if int(gc006_summary["confirmation_excluded_preexisting_descendant_rows"]) != 25:
+        fail("GC-006 excluded confirmation count changed", errors)
+    if not math.isclose(
+        float(gc006_summary["confirmation_fisher_exact_two_sided_p"]),
+        0.24025519393948105,
+        rel_tol=0.0,
+        abs_tol=1e-15,
+    ):
+        fail("GC-006 confirmation Fisher result changed", errors)
+    if int(gc006_summary["collision_rows"]) != 0:
+        fail("GC-006 contains lineage collision rows", errors)
+    if not gc006_summary["all_payload_zero"] or not gc006_summary["all_ledger_exact"]:
+        fail("GC-006 safety invariant failed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():
