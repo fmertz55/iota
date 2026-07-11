@@ -44,3 +44,14 @@ seed-46 state, $p=0.00251$ for the first seed-46 versus seed-56 state, and
 $p=1.0$ for the two high-susceptibility states. All 96 original addresses
 deactivated within the declared horizon, no lineage collision occurred, payload
 remained zero, and the ledger remained exact.
+
+\subsection{Held-out compact-rule test}
+
+Finding 064 trained a preregistered decision stump on 48 terminal-aligned
+branches and evaluated it once on 48 held-out branches. The selected rule was
+singleton-lineage size greater than $1.5$ immediately before original-address
+death. Held-out sensitivity was \GCFiveSensitivity{}, specificity was
+\GCFiveSpecificity{}, and balanced accuracy was \GCFiveBalancedAccuracy{}
+($p=0.0210$, two-sided Fisher exact). The marker had no false positives but
+missed 23 of 36 handoffs; it is therefore treated as a sufficient state marker,
+not a general continuation law.

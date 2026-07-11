@@ -1,0 +1,46 @@
+{
+  "artifacts": [
+    {
+      "bytes": 4142,
+      "path": "output/findings/finding064/lineage_continuation_rule_summary.json",
+      "sha256": "24278e723dc5c553eff65d39e2d7cec2bb18c8a7b2eea27278f0334463c29e8c"
+    },
+    {
+      "bytes": 14302,
+      "path": "output/findings/finding064/lineage_continuation_rule_dataset.csv",
+      "sha256": "5a6f72502e3c00da4ed46261f84d398a7f0ed69e872fe2475f4a94394b5f32f1"
+    },
+    {
+      "bytes": 409,
+      "path": "output/findings/finding064/lineage_continuation_rule_model.json",
+      "sha256": "06f86e3d59c78dd99dd13bbb8671008f37e50ef3eeef001c622aae59e12bffac"
+    },
+    {
+      "bytes": 534,
+      "path": "output/findings/finding064/lineage_continuation_rule_per_source.csv",
+      "sha256": "4d62e2fb7d64e89763b2822ff184c57e1c1e5085342eaf27d94c0a2dd24ccecf"
+    },
+    {
+      "bytes": 17334,
+      "path": "src/lineage_continuation_rule.py",
+      "sha256": "8906ce1c45099facfa348b161994d800683358913467a564b3dd391047e9f3b4"
+    },
+    {
+      "bytes": 69072,
+      "path": "src/iota_rig.py",
+      "sha256": "4be2cf88bf279a1f7f47dfeb058788c9dabace2f491936fa3bf7aca2d9859541"
+    },
+    {
+      "bytes": 9722,
+      "path": "evidence/claims.yaml",
+      "sha256": "8281ba62bf82b2b4d951320f4767e673f7878f74930db1129d9169948230d894"
+    },
+    {
+      "bytes": 4711,
+      "path": "evidence/definitions.yaml",
+      "sha256": "953393d590f03544020a94f7f4a1a2bb420c037427e15a3da8ff83d06a388b11"
+    }
+  ],
+  "claim_id": "GC-005",
+  "schema_version": 1
+}

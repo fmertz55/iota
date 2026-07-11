@@ -133,6 +133,35 @@
         "The result measures susceptibility and does not identify necessary and sufficient local conditions."
       ],
       "next_gate": "Compare prospective local state and transfer-opportunity features before death across the 96 successful and failed branches, nominate a compact continuation rule, and test it on held-out branch seeds."
+    },
+    {
+      "id": "GC-005",
+      "title": "Preexisting descendant is a sufficient but insensitive handoff marker",
+      "status": "partial positive; rejected as a general continuation law",
+      "statement": "A preregistered one-feature decision stump trained on 48 terminal-aligned branches selected singleton-lineage size greater than 1.5. On 48 held-out branches it produced 13 true positives, 12 true negatives, no false positives, and 23 false negatives: specificity 1.0, sensitivity 0.361, and balanced accuracy 0.681.",
+      "finding": "Finding 064",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-CONTINUATION-RULE",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding064/lineage_continuation_rule_summary.json",
+        "output/findings/finding064/lineage_continuation_rule_dataset.csv",
+        "output/findings/finding064/lineage_continuation_rule_model.json",
+        "output/findings/finding064/lineage_continuation_rule_per_source.csv"
+      ],
+      "analysis": "src/lineage_continuation_rule.py",
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-064-kickoff",
+      "limitations": [
+        "Features are aligned to the step immediately before observed address death rather than evaluated at arbitrary online ticks.",
+        "Singleton-lineage size greater than one means a child already exists, making the rule a sufficient state marker rather than an explanation of child creation.",
+        "The rule misses 23 of 36 held-out handoffs, including every held-out positive from the first seed-46 source state.",
+        "Training and test branches share three source geometries."
+      ],
+      "next_gate": "Restrict to terminal steps with singleton-lineage size one and test whether strictly pre-step local geometry predicts creation of a qualifying child on the death tick."
     }
   ]
 }

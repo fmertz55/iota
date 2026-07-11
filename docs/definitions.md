@@ -100,3 +100,12 @@ A non-resurrecting lineage propagated only when a successful transfer from a cur
 - Symbol: `p_{\mathrm{handoff}}`
 
 Among continuation branches from a fixed state in which the original singleton address becomes inactive within the declared horizon, the fraction retaining a nonempty, collision-free prospective singleton expression lineage immediately after that first deactivation.
+
+## Candidate lineage-continuation rule
+
+- ID: `DEF-CONTINUATION-RULE`
+- Kind: hypothesis
+- Status: operational candidate
+- Symbol: none
+
+A frozen mapping from features available immediately before original-address deactivation to the presence or absence of a nonempty prospective expression lineage immediately afterward; a predictive marker is not treated as a primitive law unless it is both sufficiently sensitive and independently replicated.

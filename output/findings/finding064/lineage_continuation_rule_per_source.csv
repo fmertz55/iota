@@ -1,0 +1,7 @@
+split,init_seed,event_start_offset,rows,positives,negatives,true_positive,false_positive,true_negative,false_negative,accuracy,sensitivity,specificity,balanced_accuracy
+test,46,61,16,7,9,0,0,9,7,0.5625,0.0,1.0,0.5
+test,46,420,16,14,2,6,0,2,8,0.5,0.42857142857142855,1.0,0.7142857142857143
+test,56,106,16,15,1,7,0,1,8,0.5,0.4666666666666667,1.0,0.7333333333333334
+train,46,61,16,9,7,0,0,7,9,0.4375,0.0,1.0,0.5
+train,46,420,16,15,1,9,0,1,6,0.625,0.6,1.0,0.8
+train,56,106,16,13,3,4,0,3,9,0.4375,0.3076923076923077,1.0,0.6538461538461539

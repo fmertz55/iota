@@ -7821,3 +7821,87 @@ seeds.
 - `output/findings/finding063/expression_handoff_aggregate.csv`
 - `output/findings/finding063/expression_handoff_comparisons.csv`
 - `output/findings/finding063/expression_handoff_summary.json`
+
+---
+
+## Finding 064 — A preexisting child is sufficient but not the continuation law
+
+### Question
+
+Finding 063 established state-conditioned handoff susceptibility. Finding 064
+asked whether a compact prospective terminal-state rule predicts which branches
+continue.
+
+### Preregistered Evaluation
+
+The same 96 branch seeds were divided before feature inspection:
+
+```text
+training: branch samples 0..15 from each source = 48 rows
+held out: branch samples 16..31 from each source = 48 rows
+```
+
+Twenty features were captured immediately before the step that first
+deactivated the original singleton address. Post-step transfers, child targets,
+and later outcomes were excluded. A deterministic one-feature decision stump
+maximized training balanced accuracy and was frozen before held-out evaluation.
+
+### Frozen Rule
+
+```text
+predict handoff when singleton_lineage_size > 1.5
+```
+
+Training balanced accuracy was `0.676`.
+
+### Held-Out Result
+
+```text
+true positive:  13
+false positive:  0
+true negative:  12
+false negative: 23
+
+accuracy:          0.521
+sensitivity:       0.361
+specificity:       1.000
+balanced accuracy: 0.681
+Fisher exact p:    0.0210
+```
+
+Per-source held-out sensitivity:
+
+```text
+seed46 event 61:  0.000
+seed46 event 420: 0.429
+seed56 event 106: 0.467
+```
+
+### Interpretation
+
+Having more than one prospective singleton-lineage address immediately before
+original-address death was sufficient in this sample: all 13 held-out predicted
+positives continued, and no held-out failure had a preexisting descendant.
+
+It is not the law of continuation. The rule detected only 13 of 36 held-out
+handoffs and detected none from the first seed-46 source state. Those missed
+handoffs create their first child on the death tick itself.
+
+The terminal alignment is also a limitation: it conditions on knowing which
+step precedes address death. This is a state marker at the endpoint, not yet an
+online predictor of when continuation will occur.
+
+### Next Gate
+
+Restrict to terminal rows with `singleton_lineage_size == 1`. Remove the
+preexisting-descendant feature and test whether strictly pre-step local geometry
+predicts successful child creation on the death tick. Preserve the existing
+train/test split.
+
+### Artifacts
+
+- `src/lineage_continuation_rule.py`
+- `output/findings/finding064/lineage_continuation_rule_dataset.csv`
+- `output/findings/finding064/lineage_continuation_rule_model.json`
+- `output/findings/finding064/lineage_continuation_rule_per_source.csv`
+- `output/findings/finding064/lineage_continuation_rule_summary.json`

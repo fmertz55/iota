@@ -2470,3 +2470,111 @@ output/findings/finding063/expression_handoff_aggregate.csv
 output/findings/finding063/expression_handoff_comparisons.csv
 output/findings/finding063/expression_handoff_summary.json
 ```
+
+## Finding 064 Kickoff
+
+Finding 064 tests whether a compact prospective local condition predicts
+singleton expression handoff.
+
+Frozen dataset split:
+
+```text
+training: branch_sample 0..15 from each of the three Finding 063 source states
+held out: branch_sample 16..31 from each source state
+training rows: 48
+held-out rows: 48
+```
+
+Every feature is captured from the world state immediately before the step that
+first deactivates the original singleton address. No successful-transfer,
+target-child, post-step, future-connectivity, or outcome field is eligible as a
+predictor.
+
+Preregistered candidate features:
+
+```text
+time from strict rebridge to terminal step;
+singleton expression-lineage size;
+original-address A, R, V, and angular_L;
+face6, face18, and cube26 active-neighbor counts;
+cube26 depleted and latent inactive-neighbor counts;
+whether original-address removal increases component count;
+primary vector target active/depleted/latent status;
+number of cube26 directions within declared range leading to active, depleted,
+or latent targets;
+current predecessor-lineage reachability and shortest-path distance.
+```
+
+Frozen learner:
+
+```text
+enumerate every midpoint threshold for each numeric feature;
+test both <= and > prediction directions;
+select the decision stump with maximum training balanced accuracy;
+break ties by feature name, threshold, then direction;
+freeze that one-feature rule;
+evaluate it once on held-out branch samples 16..31.
+```
+
+Reported held-out metrics:
+
+```text
+accuracy, sensitivity, specificity, balanced accuracy;
+confusion matrix;
+two-sided Fisher exact association between prediction and handoff;
+per-source performance.
+```
+
+This is a compact candidate continuation rule, not an if-and-only-if law. Failure
+to generalize rejects the stump without invalidating expression lineage.
+
+## Finding 064 Update
+
+Finding 064 reproduced the Finding 063 outcomes on the same 96 branch seeds,
+captured 20 strictly pre-step terminal features, trained on branch samples 0..15,
+and evaluated once on held-out samples 16..31.
+
+Frozen training-selected stump:
+
+```text
+singleton_lineage_size > 1.5 -> predict handoff
+training balanced accuracy: 0.676
+```
+
+Held-out result:
+
+```text
+TP=13 FP=0 TN=12 FN=23
+accuracy:          0.521
+sensitivity:       0.361
+specificity:       1.000
+balanced accuracy: 0.681
+two-sided Fisher:  p=0.0210103
+```
+
+Interpretation:
+
+```text
+A preexisting descendant is a sufficient terminal-state marker in this sample,
+but it is not the continuation law. It misses most handoffs created on the death
+tick and every held-out positive from seed46 event61.
+```
+
+Next gate:
+
+```text
+restrict to terminal rows with singleton_lineage_size == 1;
+exclude the preexisting-descendant marker;
+retain the frozen train/test split;
+test whether strictly pre-step local geometry predicts death-tick child creation.
+```
+
+Artifacts:
+
+```text
+src/lineage_continuation_rule.py
+output/findings/finding064/lineage_continuation_rule_dataset.csv
+output/findings/finding064/lineage_continuation_rule_model.json
+output/findings/finding064/lineage_continuation_rule_per_source.csv
+output/findings/finding064/lineage_continuation_rule_summary.json
+```

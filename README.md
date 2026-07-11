@@ -112,6 +112,14 @@ two high-susceptibility states are indistinguishable in this ensemble (`p=1`).
 Thus the natural seed-56 termination is a stochastic branch outcome, not proof
 of an incapable state.
 
+Finding 064 freezes a one-feature rule on 48 training branches and evaluates it
+once on 48 held-out branches. The selected marker is singleton-lineage size
+greater than `1.5` immediately before address death. It has held-out specificity
+`1.000` but sensitivity only `0.361` (balanced accuracy `0.681`, Fisher
+`p=0.021`). A preexisting descendant is therefore a sufficient marker here, but
+the rule misses most handoffs created on the death tick and is rejected as a
+general continuation law.
+
 ### Inspect GC-001
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -125,12 +133,14 @@ of an incapable state.
 - [Finding 062 machine-readable summary](output/findings/finding062/expression_lineage_summary.json)
 - [Finding 063 branch cases](output/findings/finding063/expression_handoff_cases.csv)
 - [Finding 063 comparisons](output/findings/finding063/expression_handoff_comparisons.csv)
+- [Finding 064 frozen model](output/findings/finding064/lineage_continuation_rule_model.json)
+- [Finding 064 held-out evaluation](output/findings/finding064/lineage_continuation_rule_summary.json)
 
-The next gate compares prospective local state and transfer-opportunity features
-before address death across successful and failed branches, nominates a compact
-continuation rule, and tests it on held-out branch seeds. As new experiments
-land, this section should report the strongest supported claim at that commit
-while Git history preserves earlier states of the evidence.
+The next gate restricts analysis to terminal steps where singleton-lineage size
+is exactly one and tests whether strictly pre-step local geometry predicts
+creation of a qualifying child on the death tick. As new experiments land, this
+section should report the strongest supported claim at that commit while Git
+history preserves earlier states of the evidence.
 
 ## Reviewer paths
 

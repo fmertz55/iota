@@ -12,6 +12,7 @@ from evidence_common import (
     load_gc002,
     load_gc003,
     load_gc004,
+    load_gc005,
     load_registry,
     strict_events,
 )
@@ -163,6 +164,35 @@ def main() -> int:
         fail(f"GC-004 Fisher comparisons changed: {observed_p}", errors)
     if not gc004_summary["all_payload_zero"] or not gc004_summary["all_ledger_exact"]:
         fail("GC-004 safety invariant failed", errors)
+
+    _, gc005_summary = load_gc005()
+    gc005_model = gc005_summary["model"]
+    if (
+        gc005_model["feature"] != "singleton_lineage_size"
+        or not math.isclose(float(gc005_model["threshold"]), 1.5)
+        or gc005_model["direction"] != "gt_positive"
+    ):
+        fail(f"GC-005 frozen model changed: {gc005_model}", errors)
+    held = gc005_summary["held_out_metrics"]
+    confusion_values = (
+        int(held["true_positive"]),
+        int(held["false_positive"]),
+        int(held["true_negative"]),
+        int(held["false_negative"]),
+    )
+    if confusion_values != (13, 0, 12, 23):
+        fail(f"GC-005 held-out confusion changed: {confusion_values}", errors)
+    if not math.isclose(
+        float(gc005_summary["held_out_fisher_exact_two_sided_p"]),
+        0.02101034894988829,
+        rel_tol=0.0,
+        abs_tol=1e-15,
+    ):
+        fail("GC-005 held-out Fisher association changed", errors)
+    if int(gc005_summary["collision_rows"]) != 0:
+        fail("GC-005 contains lineage collision rows", errors)
+    if not gc005_summary["all_payload_zero"] or not gc005_summary["all_ledger_exact"]:
+        fail("GC-005 safety invariant failed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():
