@@ -3410,3 +3410,41 @@ payload, or ledger errors. Frozen depth-8 selector-manifest SHA-256:
 ```
 
 No depth-8 selector had been vetoed when this manifest was frozen.
+
+## Finding 069 Final Depth-8 Result
+
+The final preregistered depth-8 policy was applied to all 26 committed risk-set
+branches. It produced 5 additional lineage cuts, 19 confirmed handoffs, and 2
+branches whose original addresses remained active through the fixed endpoint.
+
+```text
+sequential cut depth 1: 42
+sequential cut depth 2: 20
+sequential cut depth 3: 22
+sequential cut depth 4: 17
+sequential cut depth 5: 11
+sequential cut depth 6: 13
+sequential cut depth 7: 13
+sequential cut depth 8:  5
+handoff after eight vetoes (D_seq > 8): 19
+source-survival censored at depth 8:      2
+total:                                  164
+```
+
+The 19 depth-8 handoffs exposed recorded but unvetoed next selectors. Their
+artifact SHA-256 is:
+
+```text
+e547492ccc891edc4f261e6326a2fa7e7676eb307fdad2aadd64134a8b62b9c4
+```
+
+No depth-9 intervention is permitted under the frozen administrative cap.
+The 19 handoffs are therefore right-censored above depth 8; the 2 active-source
+cases remain separately time-censored and are not counted as handoffs.
+
+All eight stages matched every committed selector and full selector identity.
+Payload remained zero, the conservation ledger remained exact, and there were
+no collisions or transient-child lineage losses. Finding 069 therefore supports
+heterogeneous ordered realization cut depth under the frozen retained-amplitude
+veto policy. It does not estimate a graph-theoretic minimum: later opportunities
+are observed in counterfactual histories created by earlier vetoes.
