@@ -1,0 +1,46 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3299,
+      "path": "output/findings/finding063/expression_handoff_summary.json",
+      "sha256": "a30af52cd61fa40a1dc395d1274cfd953ddbec962d157c826caed6f147d93168"
+    },
+    {
+      "bytes": 7656,
+      "path": "output/findings/finding063/expression_handoff_cases.csv",
+      "sha256": "2980ee9fdaf4793b4473592424bb1aabce6910c363b948932ca00d92b4d54cde"
+    },
+    {
+      "bytes": 624,
+      "path": "output/findings/finding063/expression_handoff_aggregate.csv",
+      "sha256": "0981862386918aafe14ff309002331909ab571c8d95691013ee75027aacf5e88"
+    },
+    {
+      "bytes": 409,
+      "path": "output/findings/finding063/expression_handoff_comparisons.csv",
+      "sha256": "8531c78d02d187628070f50c34ee7ef5b8b7df798bfa29d360cddf40f441b9f0"
+    },
+    {
+      "bytes": 20636,
+      "path": "src/expression_handoff_branch_ensemble.py",
+      "sha256": "bf8eeb1d060ceb463c722c825a7f99218a191e642d85a5c4bc9b0a73a0de3a63"
+    },
+    {
+      "bytes": 69072,
+      "path": "src/iota_rig.py",
+      "sha256": "4be2cf88bf279a1f7f47dfeb058788c9dabace2f491936fa3bf7aca2d9859541"
+    },
+    {
+      "bytes": 7780,
+      "path": "evidence/claims.yaml",
+      "sha256": "e54ce3cef54c98e530c609205efb2ba5242d9f63a8c6fed79595152200d9dc44"
+    },
+    {
+      "bytes": 4187,
+      "path": "evidence/definitions.yaml",
+      "sha256": "2c5fbc3e84e0bef4aaa3f70431a51b3f4bf6791a5311ee787d8dc6351be4b3c4"
+    }
+  ],
+  "claim_id": "GC-004",
+  "schema_version": 1
+}

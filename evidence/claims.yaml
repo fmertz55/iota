@@ -104,6 +104,35 @@
         "No second disconnection and causal rebridge occurred under continuous expression identity."
       ],
       "next_gate": "Test seed and continuation robustness of prospective expression transport from the two seed-46 source states and compare against the seed-56 termination mechanism."
+    },
+    {
+      "id": "GC-004",
+      "title": "State-conditioned expression-handoff susceptibility",
+      "status": "supported with bounded scope",
+      "statement": "Across 32 continuation-RNG branches from each strict-rebridge state, singleton expression handoff occurred in 16/32, 29/32, and 28/32 branches. The first seed-46 state had lower susceptibility than the second seed-46 and seed-56 states, while the latter two were indistinguishable in this ensemble.",
+      "finding": "Finding 063",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-HANDOFF-SUSCEPTIBILITY",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding063/expression_handoff_summary.json",
+        "output/findings/finding063/expression_handoff_cases.csv",
+        "output/findings/finding063/expression_handoff_aggregate.csv",
+        "output/findings/finding063/expression_handoff_comparisons.csv"
+      ],
+      "analysis": "src/expression_handoff_branch_ensemble.py",
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-063-kickoff",
+      "limitations": [
+        "The ensemble branches three selected strict-rebridge states rather than independently generated geometries.",
+        "Continuation branches are conditionally independent given a shared source state, not independent initial experiments.",
+        "The 128-offset horizon censored no address deaths but may censor later expression or relation lifetimes.",
+        "The result measures susceptibility and does not identify necessary and sufficient local conditions."
+      ],
+      "next_gate": "Compare prospective local state and transfer-opportunity features before death across the 96 successful and failed branches, nominate a compact continuation rule, and test it on held-out branch seeds."
     }
   ]
 }

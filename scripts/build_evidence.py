@@ -9,6 +9,7 @@ from evidence_common import (
     load_gc001,
     load_gc002,
     load_gc003,
+    load_gc004,
     load_registry,
     sha256,
     strict_events,
@@ -26,6 +27,8 @@ def render_results(
     gc002_cases: list[dict[str, str]],
     gc003_summary: dict,
     gc003_cases: list[dict[str, str]],
+    gc004_summary: dict,
+    gc004_aggregate: list[dict[str, str]],
 ) -> str:
     strict_cases = [
         row for row in gc002_cases if row["finding060_constraint_transport"] == "1"
@@ -39,6 +42,10 @@ def render_results(
     ]
     expression_lifetimes = ", ".join(
         row["expression_relation_lifetime"] for row in gc003_strict
+    )
+    gc004_rates = ", ".join(
+        f"{100.0 * float(row['handoff_rate']):.1f}\\%"
+        for row in gc004_aggregate
     )
     return "\n".join(
         [
@@ -57,6 +64,8 @@ def render_results(
             rf"\newcommand{{\GCThreeLifetimes}}{{{expression_lifetimes}}}",
             rf"\newcommand{{\GCThreeSurvivalCount}}{{{gc003_summary['singleton_expression_survival_cases']}}}",
             rf"\newcommand{{\GCThreeEquivalenceEvents}}{{{gc003_summary['instrumentation_equivalence_event_count']}}}",
+            rf"\newcommand{{\GCFourRates}}{{{gc004_rates}}}",
+            rf"\newcommand{{\GCFourBranches}}{{{gc004_summary['samples_per_source']}}}",
             "",
         ]
     )
@@ -163,6 +172,7 @@ def outputs() -> dict[Path, str]:
     claim, summary, events = load_gc001()
     _, gc002_summary, gc002_cases = load_gc002()
     _, gc003_summary, gc003_cases = load_gc003()
+    _, gc004_summary, gc004_aggregate = load_gc004()
     claims_registry = load_registry(ROOT / "evidence" / "claims.yaml")
     definitions = load_registry(ROOT / "evidence" / "definitions.yaml")
     metrics = evidence_metrics(summary, events)
@@ -174,6 +184,8 @@ def outputs() -> dict[Path, str]:
             gc002_cases,
             gc003_summary,
             gc003_cases,
+            gc004_summary,
+            gc004_aggregate,
         ),
         GENERATED / "tables" / "gc001_events.tex": render_event_table(events),
         GENERATED / "definitions.tex": render_definitions_tex(definitions),

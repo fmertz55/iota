@@ -7741,3 +7741,83 @@ handoff from termination.
 - `output/findings/finding062/expression_lineage_ancestry.csv`
 - `output/findings/finding062/expression_lineage_timeline.csv`
 - `output/findings/finding062/expression_lineage_summary.json`
+
+---
+
+## Finding 063 — Expression handoff is stochastic and state-conditioned
+
+### Question
+
+Finding 062 observed two natural handoffs in seed 46 and one natural termination
+in seed 56. Finding 063 asked whether those outcomes were robust properties of
+the three source states or individual continuation outcomes.
+
+### Preregistered Branch Test
+
+The exact strict-rebridge states were cloned before any qualifying expression
+child:
+
+```text
+seed46 event 61:  offset 65
+seed46 event 420: offset 424
+seed56 event 106: offset 112
+```
+
+Each state launched `32` continuation-RNG branches for `128` offsets. All world
+arrays, laws, configurations, lineage identities, and payload clamps were held
+fixed. A branch was successful only if a collision-free singleton expression
+lineage remained immediately after first deactivation of its original address.
+
+### Result
+
+| Source state | Handoffs | Rate | Wilson 95% interval |
+|---|---:|---:|---:|
+| seed46 event 61 | `16/32` | `0.500` | `[0.336, 0.664]` |
+| seed46 event 420 | `29/32` | `0.906` | `[0.758, 0.968]` |
+| seed56 event 106 | `28/32` | `0.875` | `[0.719, 0.950]` |
+
+Every original singleton address deactivated within the horizon. There were no
+censored endpoints and no lineage collisions.
+
+Two-sided Fisher exact comparisons:
+
+| Comparison | Rate difference | p-value |
+|---|---:|---:|
+| seed46 event 61 − seed46 event 420 | `-0.406` | `0.000752` |
+| seed46 event 61 − seed56 event 106 | `-0.375` | `0.00251` |
+| seed46 event 420 − seed56 event 106 | `0.031` | `1.0` |
+
+Safety:
+
+```text
+payload zero: 96 / 96
+ledger exact: 96 / 96
+```
+
+### Interpretation
+
+The natural seed-56 termination is not evidence that its state cannot propagate
+an expression lineage: `28/32` new continuations hand off successfully. Handoff
+is stochastic from every tested state, but its probability is strongly
+state-conditioned. The first seed-46 state is a lower-susceptibility state;
+the second seed-46 and seed-56 states form a statistically indistinguishable
+high-susceptibility pair in this ensemble.
+
+This does not yet identify a continuation law. Branches share source states and
+therefore measure conditional susceptibility, not population frequency across
+independent geometries.
+
+### Next Gate
+
+Record prospective local features and transfer opportunities during the final
+pre-death window for all branch outcomes. Derive a compact candidate rule on a
+training subset, freeze it, and evaluate handoff prediction on held-out branch
+seeds.
+
+### Artifacts
+
+- `src/expression_handoff_branch_ensemble.py`
+- `output/findings/finding063/expression_handoff_cases.csv`
+- `output/findings/finding063/expression_handoff_aggregate.csv`
+- `output/findings/finding063/expression_handoff_comparisons.csv`
+- `output/findings/finding063/expression_handoff_summary.json`

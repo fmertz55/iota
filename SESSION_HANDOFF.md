@@ -2343,3 +2343,130 @@ output/findings/finding062/expression_lineage_ancestry.csv
 output/findings/finding062/expression_lineage_timeline.csv
 output/findings/finding062/expression_lineage_summary.json
 ```
+
+## Finding 063 Kickoff
+
+Finding 063 branches the exact natural trajectories at strict rebridge, the
+earliest shared point at which predecessor expression identity is established:
+
+```text
+seed46 sample7 event 61 -> 65:   branch state offset 65,  natural loss 74
+seed46 sample7 event 420 -> 424: branch state offset 424, first child 426,
+                                     natural loss 427
+seed56 sample3 event 106 -> 112: branch state offset 112, natural loss 163
+```
+
+Only the continuation RNG changes after the branch state. Model law, world
+arrays, tracked expression lineages, payload clamp, and all configuration values
+remain fixed.
+
+Primary endpoint:
+
+```text
+Among branches in which the original singleton address becomes inactive within
+the declared horizon, what fraction retain a nonempty singleton expression
+lineage immediately after that first deactivation through a successful
+source-to-new-target activation on or before the death step?
+```
+
+Censoring and exclusions:
+
+```text
+address does not deactivate within horizon -> censored, not failure
+lineage collision before endpoint          -> ambiguous, excluded from strict rate
+lineage terminates before address death    -> failure
+same-address reactivation after termination -> never resurrection
+```
+
+Secondary measurements:
+
+```text
+time to first address loss;
+number and coordinates of qualifying children on the death tick;
+source/target action order and depleted status;
+post-loss expression survival and relation lifetime;
+payload-zero and ledger-exact safety.
+```
+
+The seed56 state is the preregistered negative comparator. Finding 063 tests RNG
+robustness of the two seed46 handoff-capable states; it does not yet establish
+robustness across independently generated geometries.
+
+Preregistration correction before execution:
+
+```text
+The second seed46 branch was moved from offset 426 to offset 425 because Finding
+062 ancestry shows its first qualifying child is already active at 426. Branching
+at 426 would hold the handoff fixed rather than test its RNG robustness. No
+Finding 063 branch outcomes had been generated when this correction was made.
+```
+
+Second preregistration correction before execution:
+
+```text
+Following review of the causal question, all three branch states were moved to
+their strict-rebridge offsets: 65, 424, and 112. Rebridge is the earliest point
+at which the same predecessor expression relation is prospectively established
+in every source case. This retains the complete post-transport pre-handoff
+history rather than varying only the final one or two draws. It also prevents
+the second seed46 handoff from being baked into the branch state. No Finding 063
+branch outcomes had been generated when this correction was made.
+```
+
+## Finding 063 Update
+
+Finding 063 launched 32 continuation-RNG branches from each strict-rebridge
+state, before any qualifying expression child activation.
+
+Result:
+
+```text
+seed46 event 61:   16 / 32 handoffs = 0.500
+  Wilson 95%: [0.336, 0.664]
+
+seed46 event 420:  29 / 32 handoffs = 0.906
+  Wilson 95%: [0.758, 0.968]
+
+seed56 event 106:  28 / 32 handoffs = 0.875
+  Wilson 95%: [0.719, 0.950]
+```
+
+Pairwise two-sided Fisher exact tests:
+
+```text
+seed46 event61 vs seed46 event420: p = 0.0007517
+seed46 event61 vs seed56 event106: p = 0.0025144
+seed46 event420 vs seed56 event106: p = 1.0
+```
+
+All 96 original singleton addresses deactivated within horizon 128. There were
+no censored endpoints, no lineage collisions, no payload, and no ledger error.
+
+Interpretation:
+
+```text
+The natural seed56 failure is continuation-contingent, not a state-level
+prohibition. Expression handoff is possible from all three source states, but
+its probability is state-conditioned. The first seed46 state is lower
+susceptibility; the second seed46 and seed56 states are indistinguishable here.
+```
+
+Next gate:
+
+```text
+record prospective pre-death local features for all successful and failed
+branches;
+derive a compact candidate continuation rule on training branch seeds;
+freeze the rule;
+test prediction on held-out branch seeds.
+```
+
+Artifacts:
+
+```text
+src/expression_handoff_branch_ensemble.py
+output/findings/finding063/expression_handoff_cases.csv
+output/findings/finding063/expression_handoff_aggregate.csv
+output/findings/finding063/expression_handoff_comparisons.csv
+output/findings/finding063/expression_handoff_summary.json
+```

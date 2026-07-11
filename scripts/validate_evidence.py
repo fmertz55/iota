@@ -11,6 +11,7 @@ from evidence_common import (
     load_gc001,
     load_gc002,
     load_gc003,
+    load_gc004,
     load_registry,
     strict_events,
 )
@@ -136,6 +137,32 @@ def main() -> int:
         or first_handoff[0]["target_depleted_before"] != "1"
     ):
         fail(f"GC-003 first singleton handoff changed: {first_handoff[0]}", errors)
+
+    _, gc004_summary, gc004_aggregate = load_gc004()
+    gc004_counts = [
+        (int(row["handoff_successes"]), int(row["eligible_address_loss_branches"]))
+        for row in gc004_aggregate
+    ]
+    if gc004_counts != [(16, 32), (29, 32), (28, 32)]:
+        fail(f"GC-004 handoff counts changed: {gc004_counts}", errors)
+    if any(int(row["censored_branches"]) != 0 for row in gc004_aggregate):
+        fail("GC-004 acquired censored address-loss branches", errors)
+    if any(int(row["ambiguous_collision_branches"]) != 0 for row in gc004_aggregate):
+        fail("GC-004 contains ambiguous lineage collisions", errors)
+    comparisons = gc004_summary["comparisons"]
+    expected_p = [
+        0.0007517055787029017,
+        0.002514409181299679,
+        1.0,
+    ]
+    observed_p = [float(row["fisher_exact_two_sided_p"]) for row in comparisons]
+    if any(
+        not math.isclose(observed, expected, rel_tol=0.0, abs_tol=1e-15)
+        for observed, expected in zip(observed_p, expected_p)
+    ):
+        fail(f"GC-004 Fisher comparisons changed: {observed_p}", errors)
+    if not gc004_summary["all_payload_zero"] or not gc004_summary["all_ledger_exact"]:
+        fail("GC-004 safety invariant failed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

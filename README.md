@@ -104,6 +104,14 @@ still alive at the offset-`1024` censoring horizon. The seed-56 strict transport
 does not propagate, and all nine role-bearing failures remain negative. No
 lineage collisions or second strict transports were observed.
 
+Finding 063 branches each strict-rebridge state across 32 new continuation RNG
+streams. Handoff occurs in `16/32`, `29/32`, and `28/32` branches. The first
+seed-46 state has lower susceptibility than the second seed-46 state
+(`p=0.00075`) and the seed-56 state (`p=0.00251`, two-sided Fisher exact); the
+two high-susceptibility states are indistinguishable in this ensemble (`p=1`).
+Thus the natural seed-56 termination is a stochastic branch outcome, not proof
+of an incapable state.
+
 ### Inspect GC-001
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -115,12 +123,14 @@ lineage collisions or second strict transports were observed.
 - [Finding 061 machine-readable summary](output/findings/finding061/predecessor_region_lineage_summary.json)
 - [Finding 062 ancestry evidence](output/findings/finding062/expression_lineage_ancestry.csv)
 - [Finding 062 machine-readable summary](output/findings/finding062/expression_lineage_summary.json)
+- [Finding 063 branch cases](output/findings/finding063/expression_handoff_cases.csv)
+- [Finding 063 comparisons](output/findings/finding063/expression_handoff_comparisons.csv)
 
-The next gate tests seed and continuation robustness of prospective expression
-transport from the two seed-46 source states and compares their ancestry with
-the seed-56 termination. As new experiments land, this section should report the
-strongest supported claim at that commit while Git history preserves earlier
-states of the evidence.
+The next gate compares prospective local state and transfer-opportunity features
+before address death across successful and failed branches, nominates a compact
+continuation rule, and tests it on held-out branch seeds. As new experiments
+land, this section should report the strongest supported claim at that commit
+while Git history preserves earlier states of the evidence.
 
 ## Reviewer paths
 

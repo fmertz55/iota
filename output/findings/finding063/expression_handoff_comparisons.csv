@@ -1,0 +1,4 @@
+left_source,right_source,left_successes,left_trials,right_successes,right_trials,rate_difference_left_minus_right,odds_ratio,fisher_exact_two_sided_p
+seed46_event61,seed46_event420,16,32,29,32,-0.40625,0.10344827586206896,0.0007517055787029017
+seed46_event61,seed56_event106,16,32,28,32,-0.375,0.14285714285714285,0.002514409181299679
+seed46_event420,seed56_event106,29,32,28,32,0.03125,1.380952380952381,1.0

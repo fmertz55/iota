@@ -83,6 +83,14 @@
       "kind": "observable",
       "status": "operational",
       "definition": "A non-resurrecting lineage propagated only when a successful transfer from a current lineage address newly activates its target in that tick; retained active addresses remain members, already-active targets do not inherit identity, and ambiguous dual claims invalidate a strict result."
+    },
+    {
+      "id": "DEF-HANDOFF-SUSCEPTIBILITY",
+      "term": "Expression-handoff susceptibility",
+      "symbol": "p_{\\mathrm{handoff}}",
+      "kind": "observable",
+      "status": "operational",
+      "definition": "Among continuation branches from a fixed state in which the original singleton address becomes inactive within the declared horizon, the fraction retaining a nonempty, collision-free prospective singleton expression lineage immediately after that first deactivation."
     }
   ]
 }

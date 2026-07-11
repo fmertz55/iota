@@ -91,3 +91,12 @@ A conservative lineage that remains alive while at least one original stationary
 - Symbol: none
 
 A non-resurrecting lineage propagated only when a successful transfer from a current lineage address newly activates its target in that tick; retained active addresses remain members, already-active targets do not inherit identity, and ambiguous dual claims invalidate a strict result.
+
+## Expression-handoff susceptibility
+
+- ID: `DEF-HANDOFF-SUSCEPTIBILITY`
+- Kind: observable
+- Status: operational
+- Symbol: `p_{\mathrm{handoff}}`
+
+Among continuation branches from a fixed state in which the original singleton address becomes inactive within the declared horizon, the fraction retaining a nonempty, collision-free prospective singleton expression lineage immediately after that first deactivation.

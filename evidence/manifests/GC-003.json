@@ -31,14 +31,14 @@
       "sha256": "4be2cf88bf279a1f7f47dfeb058788c9dabace2f491936fa3bf7aca2d9859541"
     },
     {
-      "bytes": 5904,
+      "bytes": 7780,
       "path": "evidence/claims.yaml",
-      "sha256": "9575ed236c46e9ae60da40f2a962618f64cc9850989a9ce0a9ca6009623eb6dc"
+      "sha256": "e54ce3cef54c98e530c609205efb2ba5242d9f63a8c6fed79595152200d9dc44"
     },
     {
-      "bytes": 3692,
+      "bytes": 4187,
       "path": "evidence/definitions.yaml",
-      "sha256": "937803c87aa621b0883339601abe3a638af91a8a989b9d8c539277989567631a"
+      "sha256": "2c5fbc3e84e0bef4aaa3f70431a51b3f4bf6791a5311ee787d8dc6351be4b3c4"
     }
   ],
   "claim_id": "GC-003",

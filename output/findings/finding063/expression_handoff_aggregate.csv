@@ -1,0 +1,4 @@
+init_seed,event_start_offset,branch_offset,branches,address_loss_branches,censored_branches,ambiguous_collision_branches,eligible_address_loss_branches,handoff_successes,handoff_failures,handoff_rate,handoff_wilson_low,handoff_wilson_high,mean_time_to_address_loss,mean_postloss_relation_lifetime,payload_zero_branches,ledger_exact_branches
+46,61,65,32,32,0,0,32,16,16,0.5,0.33630882869327483,0.6636911713067252,6.5,33.90625,32,32
+46,420,424,32,32,0,0,32,29,3,0.90625,0.7578184527161212,0.9675984487016337,14.625,76.28125,32,32
+56,106,112,32,32,0,0,32,28,4,0.875,0.7193169451834978,0.9502986561251991,14.8125,69.78125,32,32
