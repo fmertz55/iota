@@ -3559,3 +3559,28 @@ each; otherwise results remain case-level. Nontrivial counterfactual support is
 replicated when a confirmed depth-1 handoff occurs in at least two qualifying
 initialization seeds. The estimand remains prefix-minimal under this frozen
 retained-amplitude policy, not a graph-theoretic minimum or static route count.
+
+## Finding 070 Independent Source Freeze
+
+The complete preregistered screen finished all 256 cases across initialization
+seeds 73..104. It audited 33 Class B candidates and found exactly four strict
+singleton-eligible transports, each from a different initialization seed:
+
+```text
+f070-source-001: seed 74, sample 2, split 446, rebridge 447
+f070-source-002: seed 76, sample 1, split 132, rebridge 135
+f070-source-003: seed 81, sample 6, split 204, rebridge 206
+f070-source-004: seed 95, sample 3, split 248, rebridge 257
+```
+
+All four are retained under the frozen one-source-per-seed rule. There were no
+additional eligible events, so no within-seed choice remained after eligibility.
+All 256 continuation streams were unique; classification and transport replays
+remained payload-zero and ledger-exact. Source-manifest SHA-256:
+
+```text
+c2749807dbbd06d8ec6ff52762ca9e1154c5c56be8d037c86e692c66d2114618
+```
+
+No selected-source factual branch, child-selector, or veto outcome had been run
+when this manifest was frozen.
