@@ -192,6 +192,10 @@ def run_veto(
                 "available_A_before": int(row["available_A_before"]) == int(selector["available_A_before"]),
                 "target_active_at_tick_start": bool(row["target_active_at_tick_start"]) == bool(selector["target_active_at_tick_start"]),
                 "target_active_at_evaluation": bool(row["target_active_at_evaluation"]) == bool(selector["target_active_at_evaluation"]),
+                "target_depleted_at_evaluation": bool(row["target_depleted_at_evaluation"]) == bool(selector["target_depleted_at_evaluation"]),
+                "target_latent_at_evaluation": bool(row["target_latent_at_evaluation"]) == bool(selector["target_latent_at_evaluation"]),
+                "influence": float(row["influence"]) == float(selector["influence"]),
+                "residual_bias_multiplier": float(row["residual_bias_multiplier"]) == float(selector["residual_bias_multiplier"]),
                 "transfer_probability": float(row["transfer_probability"]) == float(selector["transfer_probability"]),
                 "gate_draw": float(row["gate_draw"]) == float(selector["gate_draw"]),
                 "natural_gate_passed": bool(row["natural_gate_passed"]) is True,
@@ -243,7 +247,11 @@ def run_veto(
                     )
 
                 if relative == int(selector["relative"]):
-                    selected_rows = [row for row in candidates if event_matches(relative, row, selector)]
+                    selected_rows = [
+                        row for row in candidates
+                        if event_matches(relative, row, selector)
+                        and row.get("gate_overridden") is True
+                    ]
                     suppressed = (
                         len(selected_rows) == 1
                         and selected_rows[0]["status"] == "gate_failed"
