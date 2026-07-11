@@ -31,7 +31,8 @@ from realization_necessity import (
 
 NEXT_SELECTOR_FIELDS = [
     "depth", "parent_chain_sha256", "focal_lineage_size_before",
-    "source_in_focal_lineage", "unique_inheritance_join", *SELECTOR_FIELDS,
+    "source_in_focal_lineage", "unique_inheritance_join", "selector_offset",
+    *SELECTOR_FIELDS,
 ]
 CASE_FIELDS = [
     "depth", "cohort", "source_id", "init_seed", "event_start_offset",
@@ -164,20 +165,33 @@ def child_selector_from_tick(
     if not matches:
         raise RuntimeError("inherited child lacks a successful candidate ledger row")
     event_index, gate_ordinal, selected = min(matches, key=lambda item: item[0])
+    selected_key = (
+        tuple(selected["source"]), tuple(selected["target"]),
+        int(selected["candidate_order"]),
+    )
+    matching_inherited = [
+        row for row in focal_inherited
+        if (
+            tuple(row["source"]), tuple(row["target"]),
+            int(row["candidate_order"]),
+        ) == selected_key
+    ]
+    if (
+        tuple(selected["source"]) not in lineage_before
+        or len(matching_inherited) != 1
+        or collision
+        or selected.get("natural_gate_passed") is not True
+        or selected.get("target_activated") is not True
+        or bool(selected["target_active_at_evaluation"])
+    ):
+        raise RuntimeError("next selector failed inherited-child integrity checks")
     return {
         "depth": depth,
         "parent_chain_sha256": parent_chain_sha256,
         "focal_lineage_size_before": len(lineage_before),
         "source_in_focal_lineage": int(tuple(selected["source"]) in lineage_before),
-        "unique_inheritance_join": int(
-            sum(
-                key == (
-                    tuple(selected["source"]), tuple(selected["target"]),
-                    int(selected["candidate_order"]),
-                )
-                for key in inherited_keys
-            ) == 1
-        ),
+        "unique_inheritance_join": int(len(matching_inherited) == 1),
+        "selector_offset": terminal_offset,
         "selection_rule_version": "f069-first-next-inherited-child-v1",
         "cohort": source_row["cohort"], "source_id": source_row["source_id"],
         "init_seed": int(source_row["init_seed"]),
@@ -232,8 +246,10 @@ def run_chain(
         (selector["relative"], selector["gate_ordinal"]): selector
         for selector in selectors
     }
+    if len(selector_map) != depth:
+        raise RuntimeError("selector chain contains a duplicate gate identity")
     matched: set[tuple[int, int]] = set()
-    next_selector: dict[str, Any] | None = None
+    first_child_selector: dict[str, Any] | None = None
     depth1_relative = selectors[0]["relative"]
     final_relative = depth1_relative + POST_INTERVENTION_HORIZON
     death: dict[str, Any] | None = None
@@ -294,8 +310,8 @@ def run_chain(
                         next_lineages[index] = set()
                     elif not next_lineages[index]:
                         terminated[index] = True
-                if next_selector is None and len(matched) == depth:
-                    next_selector = child_selector_from_tick(
+                if first_child_selector is None and len(matched) == depth:
+                    first_child_selector = child_selector_from_tick(
                         depth + 1, parent_chain_sha256, source_row, branch_offset,
                         relative, branch_offset + relative + 1, candidates, inherited,
                         lineage_before, singleton_index, payload_zero, exact, collision,
@@ -317,12 +333,13 @@ def run_chain(
         raise RuntimeError(f"matched {len(matched)}/{depth} committed selectors")
     if death is None:
         death = {"observed": False, "terminal_offset": "", "handoff": False}
-    if death["handoff"] and next_selector is None:
+    if death["handoff"] and first_child_selector is None:
         raise RuntimeError("handoff survivor lacks a prospective next child selector")
-    if not death["handoff"]:
-        next_selector = None
+    emitted_selector = first_child_selector if death["handoff"] else None
     previous_target = selectors[-1]["target"]
-    next_target = None if next_selector is None else coord(next_selector["target"])
+    next_target = (
+        None if first_child_selector is None else coord(first_child_selector["target"])
+    )
     natural_terminal = int(source_row["natural_terminal_offset"])
     result = {
         "depth": depth, "cohort": source_row["cohort"],
@@ -332,11 +349,11 @@ def run_chain(
         "branch_seed": int(source_row["branch_seed"]),
         "selectors_expected": depth, "selectors_matched": len(matched),
         "all_selector_identities_exact": 1,
-        "next_child_observed": int(next_selector is not None),
-        "next_child_relative": "" if next_selector is None else int(next_selector["terminal_relative"]),
-        "next_child_offset": "" if next_selector is None else int(next_selector["natural_terminal_offset"]),
+        "next_child_observed": int(first_child_selector is not None),
+        "next_child_relative": "" if first_child_selector is None else int(first_child_selector["terminal_relative"]),
+        "next_child_offset": "" if first_child_selector is None else int(first_child_selector["natural_terminal_offset"]),
         "next_child_target": "" if next_target is None else text_coord(next_target),
-        "next_child_multiplicity": "" if next_selector is None else int(next_selector["natural_child_multiplicity"]),
+        "next_child_multiplicity": "" if first_child_selector is None else int(first_child_selector["natural_child_multiplicity"]),
         "next_child_same_as_previous_target": int(next_target == previous_target) if next_target is not None else "",
         "address_loss_observed": int(death["observed"]),
         "terminal_offset": death["terminal_offset"],
@@ -352,7 +369,7 @@ def run_chain(
         "payload_zero_all_offsets": int(payload_zero),
         "ledger_exact_all_offsets": int(exact),
     }
-    return result, next_selector
+    return result, emitted_selector
 
 
 def main() -> None:
@@ -373,8 +390,19 @@ def main() -> None:
     ).hexdigest()
     maps = [{branch_key(row): row for row in rows} for _, _, rows in manifests]
     for index, (_, _, rows) in enumerate(manifests[1:], start=2):
+        expected_parent = hashlib.sha256(
+            "|".join(item[1] for item in manifests[: index - 1]).encode("ascii")
+        ).hexdigest()
         if any(int(row.get("depth", 0)) != index for row in rows):
             raise RuntimeError(f"selector manifest rank is not contiguous at depth {index}")
+        if any(
+            row.get("selection_rule_version") != "f069-first-next-inherited-child-v1"
+            or row.get("parent_chain_sha256") != expected_parent
+            or int(row.get("source_in_focal_lineage", 0)) != 1
+            or int(row.get("unique_inheritance_join", 0)) != 1
+            for row in rows
+        ):
+            raise RuntimeError(f"selector provenance failed at depth {index}")
     current_keys = set(maps[-1])
     if any(not current_keys <= set(mapping) for mapping in maps[:-1]):
         raise RuntimeError("selector chain is not nested")
@@ -416,7 +444,11 @@ def main() -> None:
             row = expected[branch_key(case)]
             if (
                 int(case["handoff"]) != int(row["eventual_handoff"])
-                or case["next_child_target"] != row["first_alternate_child_target"]
+                or str(case["terminal_offset"]) != str(row["postveto_terminal_offset"])
+                or (
+                    case["next_child_multiplicity"] in {"", 1, "1"}
+                    and case["next_child_target"] != row["first_alternate_child_target"]
+                )
                 or (
                     case["next_child_relative"] != ""
                     and int(case["next_child_relative"]) - int(maps[0][branch_key(case)]["terminal_relative"])
@@ -444,6 +476,15 @@ def main() -> None:
         "input_branches": len(cases),
         "stage_endpoints": dict(sorted(endpoints.items())),
         "next_selectors": len(next_selectors),
+        "transient_child_lineage_losses": sum(
+            int(row["next_child_observed"]) == 1 and row["stage_endpoint"] == "lineage_loss"
+            for row in cases
+        ),
+        "child_bearing_source_censoring": sum(
+            int(row["next_child_observed"]) == 1
+            and row["stage_endpoint"] == "source_survival_censored"
+            for row in cases
+        ),
         "expected_replays": (
             None if args.expected_replays is None else {
                 "path": str(args.expected_replays),
