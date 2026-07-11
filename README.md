@@ -1,5 +1,7 @@
 # Iota Rig
 
+[![Research compendium](https://github.com/fmertz55/iota/actions/workflows/research-compendium.yml/badge.svg)](https://github.com/fmertz55/iota/actions/workflows/research-compendium.yml)
+
 > **Organizing hypothesis**
 >
 > **Information is the change in the reachable caused by interaction.**
