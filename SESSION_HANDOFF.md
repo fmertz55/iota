@@ -3274,3 +3274,24 @@ Frozen depth-2 selector-manifest SHA-256:
 ```
 
 No depth-2 selector had been vetoed when this manifest was frozen.
+
+## Finding 069 Depth-2 Result and Depth-3 Freeze
+
+Vetoing both committed realization events produced 20 new lineage cuts among
+the 122 depth-2 risk-set branches. The other 102 handed off and each exposed
+exactly one first next inherited child. There were no transient-child losses,
+source-survival censoring, collisions, payload, or ledger errors.
+
+```text
+cut depth 1: 42
+cut depth 2: 20
+surviving beyond depth 2: 102
+```
+
+Frozen depth-3 selector-manifest SHA-256:
+
+```text
+3d131049d9a28582e805536893d2ad522cece467e1ed23fc6d258f64cfaa2a2c
+```
+
+No depth-3 selector had been vetoed when this manifest was frozen.
