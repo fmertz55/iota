@@ -3008,3 +3008,130 @@ remain available, and it must be realized while available. Reopening a route is
 causal but does not guarantee realization, as shown by the independent seed-58
 exhaustion non-rescue. The claim remains about this declared simulator and its
 selected-candidate schedule, not a substrate-independent law of time.
+
+## Finding 068 Kickoff
+
+Finding 068 prospectively tests necessity and redundancy of realized
+continuation. The intervention policy below is frozen before inspecting any
+Finding 068 natural or counterfactual outcome.
+
+Fresh cohorts:
+
+```text
+original three strict source states:
+  branch_sample 160..223 inclusive
+  64 branches per source; 192 total
+  branch offsets 65, 424, 112
+  natural terminal horizon 128
+
+two independently initialized Finding 067 source geometries:
+  frozen source manifest SHA-256
+    15ed649a3db93492e1b2cbe4ea72261c10717cf2cdb6a07f6df6eb25b59d717e
+  branch_sample 32..63 inclusive
+  32 branches per source; 64 total
+  branch exactly at rebridge
+  natural terminal horizon 256
+```
+
+Natural intervention eligibility:
+
+```text
+collision-free Finding 066 outcome label activated_child;
+singleton lineage size exactly one immediately before address death;
+no preexisting descendant;
+at least one successful singleton-source transfer that newly activates its
+target on the death tick.
+```
+
+Frozen selector and intervention:
+
+```text
+select the earliest such child-producing candidate in actual terminal-tick
+event order;
+consume its natural RNG draw but force that one gate to fail;
+change no geometry, amplitude, target state, or other gate directly;
+follow for 128 offsets after the intervention tick or until first subsequent
+original-address death, whichever supplies the declared endpoint.
+```
+
+A matched sham traverses the identical override path but returns the natural
+gate result. Exact world/RNG equality through the natural terminal tick and
+exactly one selector match are mandatory.
+
+Primary outcomes:
+
+```text
+targeted child-producing event suppressed;
+alternate ancestry child on the same tick;
+source capacity retained after veto;
+original-address death delay;
+ancestry-preserving handoff at first post-veto address death;
+same-target versus different-target alternate child;
+first alternate-child delay;
+censoring when the original address remains active through follow-up.
+```
+
+Predeclared causal classes:
+
+```text
+alternate-child timing (independent axis):
+  same_tick / delayed / none
+
+fixed-follow-up endpoint (independent axis):
+  handoff_at_first_address_loss
+  lineage_loss_at_first_address_loss
+  source_survival_censored
+```
+
+The experiment tests necessity of the selected realization, not an abstract
+claim that no other lawful realization could exist. Vetoing a successful gate
+retains source amplitude and therefore intentionally exposes redundant routes;
+that exposure is the estimand. Results are reported per source geometry, with
+initialization seed as the independent unit. A minimum of five eligible branches
+permits a within-source conditional rate estimate; replication requires
+directional agreement across independent initialization seeds. Payload-zero, ledger-exact, and
+collision-free safety remain mandatory.
+
+Pre-outcome audit refinement: Finding 068 uses a two-stage prospective freeze.
+First, every scheduled factual branch is run with no veto. All eligible natural
+children are written to a selector manifest containing exact event identity,
+draw, probability, and natural child multiplicity; that manifest is hashed and
+committed. Only then may the counterfactual stage consume it. No branch is
+selected from a veto outcome, and the full scheduled factual matrix is retained.
+
+Eligibility requires an exact inherited-child join: the successful candidate's
+source is in the pre-step singleton lineage, its target is inactive at
+evaluation and newly activated, the terminal lineage is collision-free, and the
+target is therefore claimed by that lineage under the frozen `advance_lineages`
+rule. Natural unique-child and multi-child cases are stratified but both remain
+in the intervention cohort. Alternate-child timing and address-loss endpoint
+are reported orthogonally. RNG identity is asserted only through the selected
+draw; downstream draw counts may diverge lawfully after veto.
+
+## Finding 068 Selector Freeze
+
+The factual-only stage completed all 256 scheduled branches without invoking a
+veto. Natural outcomes were 164 `activated_child`, 38
+`preexisting_descendant`, 40 `source_exhausted`, 11 `gate_failed`, and 3
+`target_preempted`.
+
+All 164 activated-child cases passed the frozen necessity eligibility rule and
+all had natural child multiplicity exactly one. Selector counts by source were:
+
+```text
+original seed 46 / start 61:   33
+original seed 46 / start 420:  39
+original seed 56 / start 106:  36
+independent seed 58 source:    30
+independent seed 71 source:    26
+```
+
+Every inheritance join was verified; there were zero selector collisions,
+payload remained zero, and the ledger remained exact. Frozen selector-manifest
+SHA-256:
+
+```text
+9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0
+```
+
+No veto outcome had been run or inspected when this manifest was frozen.

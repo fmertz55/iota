@@ -1,0 +1,27 @@
+{
+  "all_inheritance_joins_verified": true,
+  "all_selector_ledgers_exact": true,
+  "all_selector_payload_zero": true,
+  "counterfactual_outcomes_run": false,
+  "eligible_selectors": 164,
+  "frozen_independent_manifest_sha256": "15ed649a3db93492e1b2cbe4ea72261c10717cf2cdb6a07f6df6eb25b59d717e",
+  "natural_branches": 256,
+  "natural_candidates_csv": "output/findings/finding068/realization_necessity_natural_candidates.csv",
+  "natural_cases_csv": "output/findings/finding068/realization_necessity_natural_cases.csv",
+  "natural_child_multiplicity": {
+    "1": 164
+  },
+  "natural_outcome_labels": {
+    "activated_child": 164,
+    "gate_failed": 11,
+    "preexisting_descendant": 38,
+    "source_exhausted": 40,
+    "target_preempted": 3
+  },
+  "post_intervention_horizon": 128,
+  "protocol": "factual-only freeze for prospective first-child veto",
+  "scheduled_natural_branches": 256,
+  "selector_collision_rows": 0,
+  "selectors_csv": "output/findings/finding068/realization_necessity_selectors.csv",
+  "selectors_sha256": "9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0"
+}

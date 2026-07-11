@@ -167,10 +167,24 @@ def verify_sham(base: World, event: dict[str, str], cfg: dict[str, Any], branch_
     control = clone_world(base, branch_seed)
     sham = clone_world(base, branch_seed)
     matches = 0
+    gate_ordinals: dict[int, int] = {}
 
     def callback(relative: int, row: dict[str, Any]) -> bool | None:
         nonlocal matches
+        gate_ordinal = gate_ordinals.get(relative, 0)
+        gate_ordinals[relative] = gate_ordinal + 1
         if event_matches(relative, row, selector):
+            if "gate_ordinal" in selector and gate_ordinal != int(selector["gate_ordinal"]):
+                return None
+            if "gate_draw" in selector and float(row["gate_draw"]) != float(selector["gate_draw"]):
+                raise RuntimeError("matched sham selector gate draw changed")
+            if "transfer_probability" in selector and float(row["transfer_probability"]) != float(selector["transfer_probability"]):
+                raise RuntimeError("matched sham selector probability changed")
+            for field in ("available_A_before", "target_active_at_tick_start", "target_active_at_evaluation"):
+                if field in selector and row.get(field) != selector[field]:
+                    raise RuntimeError(f"matched sham selector {field} changed")
+            if "candidate_step" in selector and tuple(row["candidate_step"]) != tuple(selector["candidate_step"]):
+                raise RuntimeError("matched sham selector candidate step changed")
             matches += 1
             return bool(row["natural_gate_passed"])
         return None
