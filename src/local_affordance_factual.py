@@ -94,8 +94,18 @@ def main() -> None:
     configure_reusable()
     feature_schema = validate_feature_freeze(args)
     all_sources = selected_sources(args)
-    allowed = DISCOVERY_SEEDS if args.split == "discovery" else CONFIRMATION_SEEDS
-    sources = [row for row in all_sources if int(row["init_seed"]) in allowed]
+    sources = [
+        row
+        for row in all_sources
+        if (
+            args.split == "discovery"
+            and int(row["init_seed"]) in DISCOVERY_SEEDS
+        )
+        or (
+            args.split == "confirmation"
+            and int(row["init_seed"]) >= min(CONFIRMATION_SEEDS)
+        )
+    ]
     if len(sources) < 6:
         raise RuntimeError(f"Finding 071 {args.split} source support gate failed")
     transports = read_csv(args.transport_csv)

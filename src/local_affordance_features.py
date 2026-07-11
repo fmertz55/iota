@@ -228,7 +228,7 @@ def feature_row(
 ) -> dict[str, Any]:
     seed = int(source["init_seed"])
     split = "discovery" if seed in DISCOVERY_SEEDS else "confirmation"
-    if seed not in DISCOVERY_SEEDS and seed not in CONFIRMATION_SEEDS:
+    if seed not in DISCOVERY_SEEDS and seed < min(CONFIRMATION_SEEDS):
         raise RuntimeError("Finding 071 source escaped the frozen split")
     source_v = int(world.V[singleton_original]) % VECTOR_STATES
     step = vector_step(
