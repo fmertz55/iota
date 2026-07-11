@@ -3893,7 +3893,7 @@ radii 1, 2, and 3, excluding the source itself:
 - active amplitude and range sums;
 - active absolute angular-memory sum;
 - active same-vector-state count;
-- counts by the 26 vector-state identities.
+- counts by all 64 configured vector-state identities.
 
 Cube shells and state histograms make these environmental features invariant to
 translation and coordinate-axis rotations/reflections. They do not encode the
