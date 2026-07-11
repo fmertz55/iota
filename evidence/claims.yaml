@@ -467,6 +467,43 @@
         "Candidate selection and lexicographic scheduling remain implementation-specific."
       ],
       "next_gate": "Compare selector and scheduling policies and enumerate small intervention subsets on frozen branches before claiming an invariant topology or graph-theoretic minimum."
+    },
+    {
+      "id": "GC-012",
+      "title": "Local-affordance confirmation stopped at its prospective source-support gate",
+      "status": "inconclusive before response measurement",
+      "statement": "A preregistered 1,024-case screen over 128 fresh initialization seeds selected 9 discovery geometries but only 3 confirmation geometries, below the frozen minimum of 6 per split. The locality-and-transportability test therefore stopped before any affordance response, veto, model fit, or confirmation outcome was run.",
+      "finding": "Finding 071",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-REALIZATION-REDUNDANCY",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding071/local_affordance_screen_summary.json",
+        "output/findings/finding071/local_affordance_screen_source_manifest.csv",
+        "output/findings/finding071/local_affordance_screen_cases.csv",
+        "output/findings/finding071/local_affordance_screen_transport_events.csv",
+        "output/findings/finding071/local_affordance_screen_seed_aggregate.csv",
+        "output/findings/finding071/local_affordance_screen_config_manifest.csv"
+      ],
+      "analysis": "src/local_affordance_screen.py",
+      "supporting_analysis": [
+        "src/local_affordance_features.py",
+        "src/local_affordance_factual.py",
+        "src/local_affordance_veto.py",
+        "src/local_affordance_model.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-071-preregistration--local-continuation-affordance-field",
+      "limitations": [
+        "The response experiment did not run, so this finding says nothing about predictive locality or transportability.",
+        "The split imbalance is a cohort-yield limitation, not evidence against a local affordance field.",
+        "Only the unchanged strict singleton-transport eligibility class was screened.",
+        "Repartitioning or expanding Finding 071 after observing source yield is prohibited by its preregistration."
+      ],
+      "next_gate": "Preregister a separate source-acquisition experiment that obtains an adequately supported independent confirmation cohort while keeping all 12 Finding 071 source-response outcomes sealed."
     }
   ]
 }

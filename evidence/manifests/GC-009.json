@@ -46,9 +46,9 @@
       "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
     },
     {
-      "bytes": 30289,
+      "bytes": 32607,
       "path": "evidence/claims.yaml",
-      "sha256": "6be72b8a8f7001a9ae3f38228fef0e2d196c8b5b88f472946e2af0481c01ec33"
+      "sha256": "cac1b82cb4e8a181b43af6a8bb79a7374e091d33fa736597e54fb958fcc37513"
     },
     {
       "bytes": 6935,

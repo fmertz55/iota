@@ -183,6 +183,12 @@ shams, selector joins, payload, conservation, and collision checks. This
 replicates ordered continuation redundancy across independent geometries under
 the declared policy; it does not yet establish a policy-invariant topology.
 
+Finding 071 preregistered the next locality-and-transportability test, but its
+fresh 1,024-case screen selected 9 discovery geometries and only 3 confirmation
+geometries against a frozen minimum of 6 per half. The experiment therefore
+stopped before any affordance response, veto, or model was run. This is an
+inconclusive cohort-support result—not evidence for or against a local field.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -220,6 +226,8 @@ the declared policy; it does not yet establish a policy-invariant topology.
 - [Finding 070 depth aggregates](output/findings/finding070/independent_persistence_replication_depths.csv)
 - [Finding 070 selector-hash chain](output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
 - [Finding 070 synthesis implementation](src/summarize_independent_persistence.py)
+- [Finding 071 prospective screen summary](output/findings/finding071/local_affordance_screen_summary.json)
+- [Finding 071 frozen source manifest](output/findings/finding071/local_affordance_screen_source_manifest.csv)
 
 The next gate compares selector and scheduling policies or exhaustive small
 intervention subsets before any graph-minimum, invariant topology, or

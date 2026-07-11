@@ -1,0 +1,76 @@
+{
+  "artifacts": [
+    {
+      "bytes": 64753,
+      "path": "output/findings/finding071/local_affordance_screen_summary.json",
+      "sha256": "4c9426986aa05e44ebda52957e817fb7c5cd3ff41d50b2023229915c32a7971c"
+    },
+    {
+      "bytes": 47523,
+      "path": "output/findings/finding071/local_affordance_screen_source_manifest.csv",
+      "sha256": "4b581df79c68eb71edb2d11e4c2aba9add88a1684f805b9eed8895a81f1e25b3"
+    },
+    {
+      "bytes": 109559,
+      "path": "output/findings/finding071/local_affordance_screen_cases.csv",
+      "sha256": "2b4c3aa8926200e686cd901fe74eab27b63556098fc22151ca6dfc60cec6c765"
+    },
+    {
+      "bytes": 27499,
+      "path": "output/findings/finding071/local_affordance_screen_transport_events.csv",
+      "sha256": "19c2b77650b3366d580f62b5c14109a88afc7c76de93a0752aeea93e822a6603"
+    },
+    {
+      "bytes": 4147,
+      "path": "output/findings/finding071/local_affordance_screen_seed_aggregate.csv",
+      "sha256": "b5a5b5ae87139177f3228f91bc4964596d5c80cfbba307d6210c497ad5fc35b7"
+    },
+    {
+      "bytes": 57053,
+      "path": "output/findings/finding071/local_affordance_screen_config_manifest.csv",
+      "sha256": "d625c0d04c9f429e4a510664987bb58ead80dfd806788f8a142ccef7589ca73f"
+    },
+    {
+      "bytes": 8584,
+      "path": "src/local_affordance_screen.py",
+      "sha256": "a6ea83d85dfcf730110a7f879f44eae562eab7b65d99402d49081fc903705824"
+    },
+    {
+      "bytes": 11876,
+      "path": "src/local_affordance_features.py",
+      "sha256": "e0bebb37eb03d0edb967884101fdf12fbe45684f43906e3e99049dc302064fe7"
+    },
+    {
+      "bytes": 9949,
+      "path": "src/local_affordance_factual.py",
+      "sha256": "18308fcfeb028ad24e4a02f7e9f796a89003219a6fc8244b58d3ef45d33307ee"
+    },
+    {
+      "bytes": 8182,
+      "path": "src/local_affordance_veto.py",
+      "sha256": "bf2abc5c253e10b4367ed8411d8d6b1221a2bfd9888c48f8e3300e94f224c9b5"
+    },
+    {
+      "bytes": 19559,
+      "path": "src/local_affordance_model.py",
+      "sha256": "f8597bbfe8a7b2b55cb015907d2904f91e777f396ff8143251cb5b9ed3e31044"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 32607,
+      "path": "evidence/claims.yaml",
+      "sha256": "cac1b82cb4e8a181b43af6a8bb79a7374e091d33fa736597e54fb958fcc37513"
+    },
+    {
+      "bytes": 6935,
+      "path": "evidence/definitions.yaml",
+      "sha256": "91562de0363ec8fd18acd6b2db7f5af8fd42e828d0234e1bbec9328bebdd65b9"
+    }
+  ],
+  "claim_id": "GC-012",
+  "schema_version": 1
+}
