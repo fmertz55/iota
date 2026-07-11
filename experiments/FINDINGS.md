@@ -7441,3 +7441,127 @@ pre-existing susceptible bridge geometry?
 - `output/findings/finding059/phase_free_class_matrix_signals.csv`
 - `output/findings/finding059/phase_free_class_matrix_aggregate.csv`
 - `output/findings/finding059/phase_free_class_matrix_summary.json`
+
+---
+
+## Finding 060 — Strict constraint transport exists in a takeover-only subclass
+
+### Question
+
+Finding 059 classified a component-count recovery through changed bridge cells
+as Class B. That classification did not prove that the successor bridge carried
+the relational role of a predecessor bridge. Finding 060 tested the stronger
+invariant directly:
+
+```text
+When bridge cells change, does the successor reconnect the same pre-existing
+regions with comparable accessibility?
+```
+
+### Strict Transport Test
+
+All `36` Class B events from Finding 059 were replayed from their exact
+checkpoints and continuation RNG states. An event passed only when:
+
+```text
+1. the original bridge set connected at least two pre-existing regions;
+2. removing that set disconnected those regions before the signal;
+3. the same regions were separated during the signal;
+4. a spatially changed successor path reconnected those same surviving regions;
+5. World.P remained zero and the ledger remained exact.
+```
+
+The audit additionally removed the successor path after rebridge and measured
+whether the restored relation was lost. It compared shortest-path accessibility
+between the predecessor regions before loss and after rebridge.
+
+### Result
+
+The broad Class B label contains several different mechanisms:
+
+| Law | Class B events | Predecessor bridge role-bearing | Strict constraint transport |
+|---|---:|---:|---:|
+| `zero_phase` | `5` | `1` | `0` |
+| `takeover_only_vector_phase` | `18` | `6` | `3` |
+| `takeover_rotation_vector_phase` | `13` | `5` | `0` |
+| **Total** | **36** | **12** | **3** |
+
+Thus only `12/36` apparent bridge relocations began with a bridge that actually
+connected distinct predecessor regions. Of those, `3/12` reconnected the same
+surviving regions through a different bridge path.
+
+The three strict positive events were:
+
+| Seed | Law | Sample | Split → rebridge | Original bridge | Successor bridge |
+|---|---|---:|---:|---|---|
+| `46` | takeover only | `7` | `61 → 65` | `(17,27,24)` | `(16,28,25)` |
+| `46` | takeover only | `7` | `420 → 424` | `(39,16,19)` | `(40,17,20)` |
+| `56` | takeover only | `3` | `106 → 112` | `(14,4,5)` | `(15,5,6)` |
+
+Every strict positive had:
+
+```text
+bridge-path Jaccard:                  0.0
+pre-loss region-pair reachability:   1.0
+reachability after bridge removal:   0.0
+reachability during split:           0.0
+reachability after rebridge:         1.0
+reachability after successor removal:0.0
+pre-loss shortest path:              2
+post-rebridge shortest path:         2
+flow-accessibility ratio:            1.0
+payload zero:                        yes
+ledger exact:                        yes
+```
+
+The retained large-region fractions were `0.9926`, `0.9926`, and `0.9835`.
+The other side of each relation was a surviving one-cell region. The successor
+bridge was therefore not merely coincident with global component-count recovery:
+removing it destroyed the restored relation in all three cases.
+
+### Important Correction to Finding 059
+
+Class B is not sufficient evidence of constraint transport.
+
+In `24/36` Class B events, the alleged predecessor bridge was only bridge-like
+counterfactually in the post-loss state; it had not connected distinct regions
+before loss. In `9/12` genuinely role-bearing predecessor cases, the one-cell
+region disappeared before global component count returned. Component-count
+recovery therefore did not restore the same relation.
+
+The strict supported claim is:
+
+```text
+A payload-free, no-stored-phase takeover law can replace a causally necessary
+bridge with a different causally necessary bridge while preserving the same
+region-pair reachability and path accessibility.
+```
+
+This is the first direct IOTA evidence for constraint transport. It is replicated
+across two seeds, but remains a minimal large-region/singleton relation rather
+than a general multi-region invariant. The coupled takeover-plus-rotation law
+increased broad Class B incidence in Finding 059 but produced no strict transport
+event in this audit.
+
+### Next Gate
+
+Finding 061 should test persistence and iteration of the transported relation:
+
+```text
+assign lineage identities to the two predecessor regions;
+follow their descendants after rebridge;
+measure how long their relation survives;
+test whether the same relation can undergo a second bridge replacement;
+compare the three positives with the nine role-bearing failures.
+```
+
+The decisive next result is not another component-count recovery. It is the
+same region-pair constraint surviving multiple admissible bridge transformations
+or a substantial post-rebridge horizon.
+
+### Artifacts
+
+- `src/phase_free_constraint_transport.py`
+- `output/findings/finding060/phase_free_constraint_transport_events.csv`
+- `output/findings/finding060/phase_free_constraint_transport_aggregate.csv`
+- `output/findings/finding060/phase_free_constraint_transport_summary.json`

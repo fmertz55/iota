@@ -2035,3 +2035,101 @@ output/findings/finding059/phase_free_class_matrix_signals.csv
 output/findings/finding059/phase_free_class_matrix_aggregate.csv
 output/findings/finding059/phase_free_class_matrix_summary.json
 ```
+
+## Finding 060 Update
+
+Finding 060 replaced the planned static susceptibility audit with the stronger
+constraint-transport gate suggested after Finding 059.
+
+Question:
+
+```text
+Does a Class B successor bridge preserve the relational role of its predecessor
+by reconnecting the same pre-existing regions?
+```
+
+Method:
+
+```text
+replayed all 36 Finding 059 Class B events
+required the predecessor bridge set to be role-bearing before loss
+tracked the exact predecessor regions through split and rebridge
+measured pairwise reachability and shortest-path accessibility
+removed the successor bridge to test its causal role
+```
+
+Result:
+
+```text
+                         Class B   role-bearing predecessor   strict transport
+zero_phase                   5               1                       0
+takeover_only               18               6                       3
+takeover+rotation           13               5                       0
+total                       36              12                       3
+```
+
+Strict positives:
+
+```text
+seed46 sample7 offset 61 -> 65:
+  original  (17,27,24)
+  successor (16,28,25)
+
+seed46 sample7 offset 420 -> 424:
+  original  (39,16,19)
+  successor (40,17,20)
+
+seed56 sample3 offset 106 -> 112:
+  original  (14,4,5)
+  successor (15,5,6)
+```
+
+All three strict positives:
+
+```text
+bridge Jaccard:                    0.0
+pre-loss reachability:            1.0
+split reachability:               0.0
+post-rebridge reachability:       1.0
+successor-removed reachability:   0.0
+pre/post shortest path:           2 / 2
+flow-accessibility ratio:         1.0
+World.P:                          zero
+ledger:                           exact
+```
+
+Interpretation:
+
+```text
+Strict constraint transport exists, but broad Class B is not equivalent to it.
+```
+
+`24/36` Class B events lacked a genuinely role-bearing predecessor bridge. In
+`9/12` role-bearing cases, the one-cell side disappeared before count recovery.
+The three strict positives preserve a large-region/singleton relation through
+complete replacement of a causally necessary bridge. The result is replicated
+across two seeds, but is still a minimal relation rather than a general
+multi-region invariant.
+
+The takeover-plus-rotation law produced no strict transport event despite its
+higher broad Class B incidence. The strict positive currently belongs to the
+takeover-only law.
+
+Next gate:
+
+```text
+Finding 061: predecessor-region lineage and iterated transport
+  follow both region descendants after the three strict positives
+  measure post-rebridge relation lifetime
+  test for a second bridge replacement preserving the same relation
+  compare against the nine role-bearing failures
+```
+
+Artifacts:
+
+```text
+src/phase_free_constraint_transport.py
+output/findings/finding060/phase_free_constraint_transport_events.csv
+output/findings/finding060/phase_free_constraint_transport_aggregate.csv
+output/findings/finding060/phase_free_constraint_transport_summary.json
+```

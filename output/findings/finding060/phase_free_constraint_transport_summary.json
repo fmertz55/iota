@@ -1,0 +1,61 @@
+{
+  "aggregate": [
+    {
+      "complete_bridge_displacement_events": 18,
+      "constraint_transport_events": 3,
+      "events": 18,
+      "ledger_exact_events": 18,
+      "mean_flow_accessibility_ratio": "0.16666666666666666",
+      "mean_minimum_region_persistence": "0.8282302872157542",
+      "mean_preloss_shortest_path": "2.0",
+      "mean_rebridge_reachable_pair_fraction": "0.16666666666666666",
+      "mean_rebridge_shortest_path": "2.0",
+      "mean_successor_role_reachability_drop": "0.16666666666666666",
+      "payload_zero_events": 18,
+      "predecessor_bridge_role_critical_events": 6,
+      "same_regions_reconnected_events": 3,
+      "successor_bridge_role_critical_events": 3,
+      "variant": "takeover_only_vector_phase"
+    },
+    {
+      "complete_bridge_displacement_events": 12,
+      "constraint_transport_events": 0,
+      "events": 13,
+      "ledger_exact_events": 13,
+      "mean_flow_accessibility_ratio": "0.0",
+      "mean_minimum_region_persistence": "0.6109098743714129",
+      "mean_preloss_shortest_path": "2.0",
+      "mean_rebridge_reachable_pair_fraction": "0.0",
+      "mean_rebridge_shortest_path": "",
+      "mean_successor_role_reachability_drop": "0.0",
+      "payload_zero_events": 13,
+      "predecessor_bridge_role_critical_events": 5,
+      "same_regions_reconnected_events": 0,
+      "successor_bridge_role_critical_events": 0,
+      "variant": "takeover_rotation_vector_phase"
+    },
+    {
+      "complete_bridge_displacement_events": 5,
+      "constraint_transport_events": 0,
+      "events": 5,
+      "ledger_exact_events": 5,
+      "mean_flow_accessibility_ratio": "0.0",
+      "mean_minimum_region_persistence": "0.7888888888888889",
+      "mean_preloss_shortest_path": "2.0",
+      "mean_rebridge_reachable_pair_fraction": "0.0",
+      "mean_rebridge_shortest_path": "",
+      "mean_successor_role_reachability_drop": "0.0",
+      "payload_zero_events": 5,
+      "predecessor_bridge_role_critical_events": 1,
+      "same_regions_reconnected_events": 0,
+      "successor_bridge_role_critical_events": 0,
+      "variant": "zero_phase"
+    }
+  ],
+  "aggregate_csv": "output/findings/finding060/phase_free_constraint_transport_aggregate.csv",
+  "all_constraint_transport": false,
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "event_csv": "output/findings/finding060/phase_free_constraint_transport_events.csv",
+  "events": 36
+}
