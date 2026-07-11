@@ -3448,3 +3448,44 @@ no collisions or transient-child lineage losses. Finding 069 therefore supports
 heterogeneous ordered realization cut depth under the frozen retained-amplitude
 veto policy. It does not estimate a graph-theoretic minimum: later opportunities
 are observed in counterfactual histories created by earlier vetoes.
+
+## Finding 069 Evidence Integration
+
+Finding 069 is registered as Golden Claim GC-010, with sequential realization
+cut depth defined operationally as `DEF-SEQUENTIAL-CUT-DEPTH`. The validated
+synthesis is generated from all eight committed stage summaries, case tables,
+and selector manifests by:
+
+```text
+src/summarize_sequential_cut.py
+```
+
+Primary reviewer artifacts:
+
+```text
+output/findings/finding069/sequential_realization_cut_summary.json
+output/findings/finding069/sequential_realization_cut_assignments.csv
+output/findings/finding069/sequential_realization_cut_depths.csv
+output/findings/finding069/sequential_realization_cut_sources.csv
+output/findings/finding069/sequential_realization_cut_selector_hashes.csv
+```
+
+The synthesis independently validates full six-field branch identities, exact
+risk-set nesting, all selector and parent-chain hashes, selector-to-parent-case
+joins, strict event order, the fixed 128-offset horizon, and both committed
+Finding 068 base hashes. It accounts for 648 distinct branch-selector identities
+and 2,142 gate-override executions across the nested stage replays. Eighty
+branches revisit at least one earlier selector target; this is temporal route
+reuse, not a static route count. The longest observed selector span is 120
+offsets, the largest inter-selector delay is 71, and the latest classified
+address loss remains inside the horizon at delay 121.
+
+`make verify` regenerates the Finding 069 synthesis before building manuscript
+macros and evidence manifests, then validates 10 claims and 16 definitions. The
+working paper includes a generated depth table and builds successfully as a
+10-page PDF.
+
+The next experimental gate is prospective replication on newly screened
+independent initialization geometries. Only after that should we compare
+alternate selector/scheduler policies or exhaustive small intervention subsets
+toward a graph-theoretic minimum or necessary-and-sufficient continuation law.

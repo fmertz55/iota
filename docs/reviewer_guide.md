@@ -5,9 +5,13 @@ This repository is a live research compendium. The README states the organizing 
 ## Read only
 
 1. Start with the [organizing hypothesis](../README.md#iota-rig).
-2. Inspect [GC-001](../README.md#current-evidence-frontier).
-3. Read the [working paper](../paper/main.tex).
-4. Follow its evidence links to the Finding 060 source artifacts.
+2. Read the [current evidence frontier](../README.md#current-evidence-frontier),
+   from foundational GC-001 through bounded causal GC-010.
+3. Inspect the [Finding 069 machine-readable synthesis](../output/findings/finding069/sequential_realization_cut_summary.json)
+   and [branch assignments](../output/findings/finding069/sequential_realization_cut_assignments.csv).
+4. Audit the [selector-hash chain](../output/findings/finding069/sequential_realization_cut_selector_hashes.csv)
+   against the staged artifacts in `output/findings/finding069/`.
+5. Read the [working paper](../paper/main.tex).
 
 No execution is required for this path.
 
@@ -23,12 +27,13 @@ This regenerates the evidence-facing files and validates that:
 
 - every claim and definition ID is unique;
 - every referenced local artifact exists;
-- the registered GC-001 counts match the source data;
-- every strict event satisfies the registered causal criteria;
+- registered claim counts match their source data;
+- strict events and sequential selector chains satisfy their registered causal
+  and provenance criteria;
 - generated paper values and tables are current;
-- the evidence manifest contains current SHA-256 hashes.
+- evidence manifests contain current SHA-256 hashes.
 
-The verification does not rerun the underlying simulations.
+The verification does not rerun the underlying simulations or interventions.
 
 ## Build the paper
 
@@ -44,4 +49,14 @@ Use the installation and run instructions in the main README. New findings shoul
 
 ## Evidence identity
 
-`evidence/manifests/GC-001.json` records the byte count and SHA-256 digest of every artifact used for GC-001. Git identifies the code and narrative state; the manifest identifies the exact evidence content consumed by the paper build.
+Each file in [`evidence/manifests/`](../evidence/manifests/) records the byte
+count and SHA-256 digest of the artifacts supporting one registered claim. Git
+identifies the code, freeze chronology, and narrative state; the manifests
+identify the exact evidence content consumed by the paper build.
+
+Finding 069 additionally exposes its staged provenance directly through the
+[selector hashes](../output/findings/finding069/sequential_realization_cut_selector_hashes.csv),
+[per-depth aggregates](../output/findings/finding069/sequential_realization_cut_depths.csv),
+and [analysis implementation](../src/sequential_realization_cut.py). Its depth
+is prefix-minimal only for the frozen retained-amplitude event-order policy; it
+is not a graph-theoretic minimum over arbitrary interventions.

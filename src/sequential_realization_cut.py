@@ -74,8 +74,15 @@ def selector_spec(value: str) -> tuple[Path, str]:
     return Path(path), expected
 
 
-def branch_key(row: dict[str, Any]) -> tuple[str, str, int]:
-    return str(row["cohort"]), str(row["source_id"]), int(row["branch_seed"])
+def branch_key(row: dict[str, Any]) -> tuple[str, str, int, int, int, int]:
+    return (
+        str(row["cohort"]),
+        str(row["source_id"]),
+        int(row["init_seed"]),
+        int(row["event_start_offset"]),
+        int(row["branch_sample"]),
+        int(row["branch_seed"]),
+    )
 
 
 def parse_selector(row: dict[str, str]) -> dict[str, Any]:
@@ -388,7 +395,12 @@ def main() -> None:
     parent_chain_sha256 = hashlib.sha256(
         "|".join(item[1] for item in manifests).encode("ascii")
     ).hexdigest()
-    maps = [{branch_key(row): row for row in rows} for _, _, rows in manifests]
+    maps: list[dict[tuple[str, str, int, int, int, int], dict[str, str]]] = []
+    for rank, (_, _, rows) in enumerate(manifests, start=1):
+        keys = [branch_key(row) for row in rows]
+        if len(keys) != len(set(keys)):
+            raise RuntimeError(f"selector manifest contains duplicate branches at depth {rank}")
+        maps.append({key: row for key, row in zip(keys, rows)})
     for index, (_, _, rows) in enumerate(manifests[1:], start=2):
         expected_parent = hashlib.sha256(
             "|".join(item[1] for item in manifests[: index - 1]).encode("ascii")
@@ -439,7 +451,11 @@ def main() -> None:
         expected_replay_hash = "cbba811983592c635a85529ceac467b3fb9d7d27de5fb585d4f56ddaaf728cb1"
         if file_sha256(args.expected_replays) != expected_replay_hash:
             raise RuntimeError("committed Finding 068 replay bytes changed")
-        expected = {branch_key(row): row for row in read_csv(args.expected_replays)}
+        expected_rows = read_csv(args.expected_replays)
+        expected_keys = [branch_key(row) for row in expected_rows]
+        if len(expected_keys) != len(set(expected_keys)):
+            raise RuntimeError("committed Finding 068 replays contain duplicate branches")
+        expected = {key: row for key, row in zip(expected_keys, expected_rows)}
         for case in cases:
             row = expected[branch_key(case)]
             if (

@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import json
 import math
 import sys
+from collections import Counter
 
 from build_evidence import outputs
 from evidence_common import (
@@ -17,6 +20,7 @@ from evidence_common import (
     load_gc007,
     load_gc008,
     load_gc009,
+    load_gc010,
     load_registry,
     sha256,
     strict_events,
@@ -397,6 +401,260 @@ def main() -> int:
         )
     ) or int(gc009_summary["collision_replays"]) != 0:
         fail("GC-009 safety or intervention invariant failed", errors)
+
+    (
+        gc010_claim,
+        gc010_summary,
+        gc010_assignments,
+        gc010_depths,
+        gc010_sources,
+        gc010_hashes,
+    ) = load_gc010()
+    for name, expected in gc010_claim["expected"].items():
+        if gc010_summary.get(name) != expected:
+            fail(
+                f"GC-010 expected {name}={expected!r}, "
+                f"observed {gc010_summary.get(name)!r}",
+                errors,
+            )
+    if not all(
+        gc010_summary.get(name) is True
+        for name in (
+            "protocol_complete",
+            "all_depths_contiguous",
+            "all_risk_sets_nested",
+            "all_selector_chains_verified",
+            "all_selector_hashes_verified",
+            "all_safety_checks_passed",
+        )
+    ) or gc010_summary.get("partial_depth_sequence") is not False:
+        fail("GC-010 aggregate protocol or safety validation failed", errors)
+
+    expected_risk = [164, 122, 102, 80, 63, 52, 39, 26]
+    expected_cuts = [42, 20, 22, 17, 11, 13, 13, 5]
+    expected_handoffs = [122, 102, 80, 63, 52, 39, 26, 19]
+    expected_source_censored = [0, 0, 0, 0, 0, 0, 0, 2]
+    if len(gc010_depths) != 8:
+        fail(f"GC-010 expected eight depth rows, observed {len(gc010_depths)}", errors)
+    else:
+        observed_stage_values = [
+            (
+                int(row["depth"]),
+                int(row["risk_set"]),
+                int(row["cuts"]),
+                int(row["handoffs"]),
+                int(row["source_survival_censored"]),
+                int(row["next_selectors"]),
+            )
+            for row in gc010_depths
+        ]
+        expected_stage_values = [
+            (depth, risk, cuts, handoffs, censored, handoffs)
+            for depth, (risk, cuts, handoffs, censored) in enumerate(
+                zip(
+                    expected_risk,
+                    expected_cuts,
+                    expected_handoffs,
+                    expected_source_censored,
+                ),
+                start=1,
+            )
+        ]
+        if observed_stage_values != expected_stage_values:
+            fail(f"GC-010 depth recursion changed: {observed_stage_values}", errors)
+        for left, right in zip(gc010_depths, gc010_depths[1:]):
+            if int(left["handoffs"]) != int(right["risk_set"]):
+                fail("GC-010 aggregate risk sets are not recursively nested", errors)
+
+    assignment_labels = Counter(row["cut_depth_label"] for row in gc010_assignments)
+    expected_assignment_labels = {
+        **{str(depth): count for depth, count in enumerate(expected_cuts, start=1)},
+        ">8": 19,
+        "source-censored@8": 2,
+    }
+    if len(gc010_assignments) != 164 or dict(assignment_labels) != expected_assignment_labels:
+        fail(f"GC-010 branch assignments changed: {dict(assignment_labels)}", errors)
+    assignment_keys = [
+        (
+            row["cohort"],
+            row["source_id"],
+            int(row["init_seed"]),
+            int(row["event_start_offset"]),
+            int(row["branch_sample"]),
+            int(row["branch_seed"]),
+        )
+        for row in gc010_assignments
+    ]
+    if len(assignment_keys) != len(set(assignment_keys)):
+        fail("GC-010 aggregate contains duplicate branch assignments", errors)
+    if sum(int(row["selectors_vetoed"]) for row in gc010_assignments) != 648:
+        fail("GC-010 distinct selector-event accounting changed", errors)
+    if sum(int(row["depth"]) * int(row["risk_set"]) for row in gc010_depths) != 2142:
+        fail("GC-010 selector override-execution accounting changed", errors)
+    if sum(int(row["repeated_selector_targets"]) > 0 for row in gc010_assignments) != 80:
+        fail("GC-010 aggregate target-reuse accounting changed", errors)
+    if len(gc010_sources) != 40:
+        fail(f"GC-010 expected 40 depth/source rows, observed {len(gc010_sources)}", errors)
+    source_states = {
+        (
+            row["cohort"],
+            row["source_id"],
+            int(row["init_seed"]),
+            int(row["event_start_offset"]),
+        )
+        for row in gc010_sources
+    }
+    if len(source_states) != 5 or len({row[2] for row in source_states}) != 4:
+        fail(f"GC-010 source-state coverage changed: {source_states}", errors)
+
+    def gc010_branch_key(row: dict[str, str]) -> tuple[str, str, int, int, int, int]:
+        return (
+            row["cohort"],
+            row["source_id"],
+            int(row["init_seed"]),
+            int(row["event_start_offset"]),
+            int(row["branch_sample"]),
+            int(row["branch_seed"]),
+        )
+
+    if len(gc010_hashes) != 8:
+        fail(f"GC-010 expected eight hash rows, observed {len(gc010_hashes)}", errors)
+    previous_handoff_keys: set[tuple[str, str, int, int, int, int]] | None = None
+    for expected_depth, hash_row in enumerate(gc010_hashes, start=1):
+        depth = int(hash_row["depth"])
+        if depth != expected_depth:
+            fail(f"GC-010 hash table depth changed at row {expected_depth}", errors)
+            continue
+        summary_path = ROOT / hash_row["summary_path"]
+        cases_path = ROOT / hash_row["cases_path"]
+        current_selector_path = ROOT / hash_row["current_selector_path"]
+        next_selector_path = ROOT / hash_row["next_selector_path"]
+        for path, expected_hash, label in (
+            (summary_path, hash_row["summary_sha256"], "summary"),
+            (cases_path, hash_row["cases_sha256"], "cases"),
+            (
+                current_selector_path,
+                hash_row["current_selector_sha256"],
+                "current selector",
+            ),
+            (
+                next_selector_path,
+                hash_row["next_selector_sha256"],
+                "next selector",
+            ),
+        ):
+            if not path.is_file() or sha256(path) != expected_hash:
+                fail(f"GC-010 depth {depth} {label} hash changed", errors)
+        if not summary_path.is_file() or not cases_path.is_file() or not next_selector_path.is_file():
+            continue
+        stage_summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        with cases_path.open(newline="", encoding="utf-8") as handle:
+            stage_cases = list(csv.DictReader(handle))
+        with next_selector_path.open(newline="", encoding="utf-8") as handle:
+            next_selectors = list(csv.DictReader(handle))
+        case_keys = [gc010_branch_key(row) for row in stage_cases]
+        next_keys = [gc010_branch_key(row) for row in next_selectors]
+        case_by_key = {gc010_branch_key(row): row for row in stage_cases}
+        handoff_keys = {
+            gc010_branch_key(row)
+            for row in stage_cases
+            if row["stage_endpoint"] == "handoff"
+        }
+        if len(case_keys) != len(set(case_keys)) or len(next_keys) != len(set(next_keys)):
+            fail(f"GC-010 depth {depth} contains duplicate branches", errors)
+        if previous_handoff_keys is not None and set(case_keys) != previous_handoff_keys:
+            fail(f"GC-010 depth {depth} risk set differs from prior handoffs", errors)
+        if set(next_keys) != handoff_keys:
+            fail(f"GC-010 depth {depth} next selectors differ from handoffs", errors)
+        previous_handoff_keys = handoff_keys
+        endpoints = Counter(row["stage_endpoint"] for row in stage_cases)
+        if dict(sorted(endpoints.items())) != stage_summary["stage_endpoints"]:
+            fail(f"GC-010 depth {depth} endpoint accounting changed", errors)
+        selector_hashes = [str(item["sha256"]) for item in stage_summary["selector_chain"]]
+        parent_hash = hashlib.sha256("|".join(selector_hashes).encode("ascii")).hexdigest()
+        if (
+            len(selector_hashes) != depth
+            or selector_hashes[-1] != hash_row["current_selector_sha256"]
+            or parent_hash != hash_row["parent_chain_sha256"]
+            or parent_hash != stage_summary["parent_chain_sha256"]
+        ):
+            fail(f"GC-010 depth {depth} selector-chain provenance changed", errors)
+        if depth == 1 and (
+            selector_hashes
+            != ["9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0"]
+            or hash_row["expected_replays_sha256"]
+            != "cbba811983592c635a85529ceac467b3fb9d7d27de5fb585d4f56ddaaf728cb1"
+            or not hash_row["expected_replays_path"]
+        ):
+            fail("GC-010 Finding 068 base provenance changed", errors)
+        for selector in next_selectors:
+            parent_case = case_by_key.get(gc010_branch_key(selector))
+            if parent_case is None:
+                fail(f"GC-010 depth {depth} selector lacks a parent case", errors)
+                break
+            selector_offset = int(selector["selector_offset"])
+            selector_checks = {
+                "depth": int(selector["depth"]) == depth + 1,
+                "selection_rule": selector["selection_rule_version"]
+                == "f069-first-next-inherited-child-v1",
+                "parent_chain": selector["parent_chain_sha256"] == parent_hash,
+                "offset_equation": selector_offset
+                == int(selector["branch_offset"])
+                + int(selector["terminal_relative"])
+                + 1,
+                "case_target": selector["target"] == parent_case["next_child_target"],
+                "case_relative": int(selector["terminal_relative"])
+                == int(parent_case["next_child_relative"]),
+                "case_offset": selector_offset == int(parent_case["next_child_offset"]),
+                "case_multiplicity": int(selector["natural_child_multiplicity"])
+                == int(parent_case["next_child_multiplicity"]),
+            }
+            if not all(selector_checks.values()):
+                fail(
+                    f"GC-010 depth {depth} selector-to-case join changed: "
+                    f"{selector_checks}",
+                    errors,
+                )
+                break
+        if (
+            len(stage_cases) != expected_risk[depth - 1]
+            or len(next_selectors) != expected_handoffs[depth - 1]
+            or int(hash_row["next_selector_rows"]) != len(next_selectors)
+        ):
+            fail(f"GC-010 depth {depth} artifact row counts changed", errors)
+        for row in stage_cases:
+            if (
+                int(row["selectors_expected"]) != depth
+                or int(row["selectors_matched"]) != depth
+                or int(row["all_selector_identities_exact"]) != 1
+                or int(row["lineage_collision"]) != 0
+                or int(row["payload_zero_all_offsets"]) != 1
+                or int(row["ledger_exact_all_offsets"]) != 1
+            ):
+                fail(f"GC-010 depth {depth} branch safety changed", errors)
+                break
+            if (
+                row["address_loss_delay_from_depth1_natural"] != ""
+                and not 0
+                <= int(row["address_loss_delay_from_depth1_natural"])
+                <= 128
+            ):
+                fail(f"GC-010 depth {depth} exceeded the fixed endpoint", errors)
+                break
+        if (
+            stage_summary["current_depth_veto_run"] is not True
+            or stage_summary["next_depth_veto_run"] is not False
+            or stage_summary["all_selectors_matched"] is not True
+            or stage_summary["all_selector_identities_exact"] is not True
+            or stage_summary["all_payload_zero"] is not True
+            or stage_summary["all_ledger_exact"] is not True
+            or int(stage_summary["collision_cases"]) != 0
+        ):
+            fail(f"GC-010 depth {depth} stage safety summary changed", errors)
+        expected_replays_path = hash_row["expected_replays_path"]
+        if expected_replays_path:
+            if sha256(ROOT / expected_replays_path) != hash_row["expected_replays_sha256"]:
+                fail("GC-010 Finding 068 reproduction hash changed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

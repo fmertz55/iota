@@ -65,8 +65,8 @@ consequences that would be expected if the organizing hypothesis is useful.
 ## Current evidence frontier
 
 The foundational structural result is **Golden Claim GC-001: constraint
-transport**. The strongest causal result is **GC-008: opportunity lifetime
-controls expression continuation**.
+transport**. The latest bounded causal result is **GC-010: expression
+continuation has heterogeneous ordered realization cut depth**.
 
 > In three controlled replay events across two seeds, payload-free Iota dynamics
 > restored the same tracked connectivity relation through a causally necessary
@@ -158,6 +158,20 @@ lose the lineage at address death. The first alternative uses a different
 target in `105/122`. Thus a particular realization is frequently redundant,
 but continuation still requires some timely ancestry-preserving realization.
 
+Finding 069 follows those same 164 factual continuations through a staged chain
+of prospectively frozen vetoes. At each depth, the first still-realized inherited
+child is committed before it is suppressed at the next depth; all branches keep
+the original absolute 128-offset follow-up. Observed sequential cut depths
+`1..8` contain `42, 20, 22, 17, 11, 13, 13, 5` branches. The chains contain
+648 distinct branch-selector identities; replaying each complete prefix produces
+2,142 gate-override executions. Nineteen branches still hand off beyond depth 8
+and 2 retain the original address through the horizon. Eighty branches reuse at
+least one previously selected target. Every selector chain matches, payload
+remains zero, conservation is exact, and no collision occurs. This is a
+prefix-minimal cut depth under the declared retained-amplitude, ordered
+policy—not a graph-theoretic minimum or a count of simultaneously available
+routes.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -184,10 +198,18 @@ but continuation still requires some timely ancestry-preserving realization.
 - [Finding 068 factual selector freeze](output/findings/finding068/realization_necessity_freeze_summary.json)
 - [Finding 068 frozen child selectors](output/findings/finding068/realization_necessity_selectors.csv)
 - [Finding 068 necessity replay](output/findings/finding068/realization_necessity_summary.json)
+- [Finding 069 machine-readable synthesis](output/findings/finding069/sequential_realization_cut_summary.json)
+- [Finding 069 branch cut-depth assignments](output/findings/finding069/sequential_realization_cut_assignments.csv)
+- [Finding 069 depth aggregates](output/findings/finding069/sequential_realization_cut_depths.csv)
+- [Finding 069 selector-hash chain](output/findings/finding069/sequential_realization_cut_selector_hashes.csv)
+- [Finding 069 sequential replay implementation](src/sequential_realization_cut.py)
+- [Finding 069 synthesis implementation](src/summarize_sequential_cut.py)
 
-The next gate identifies minimal successor cut sets through frozen sequential
-vetoes, quantifies route redundancy before realization, and extends the
-independent geometry cohort before any if-and-only-if law is proposed.
+The next gate applies this frozen ordered policy to additional independently
+initialized geometries, then compares selector and scheduling policies or
+exhaustive small intervention subsets before any graph-minimum or
+if-and-only-if law is proposed.
+
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.
 

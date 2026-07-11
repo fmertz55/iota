@@ -294,7 +294,94 @@
         "The five source states represent four initialization seeds; branch trials within a source are conditional stochastic replicates.",
         "The ledger and interventions remain specific to selected candidates and the declared lexicographic scheduler."
       ],
-      "next_gate": "Freeze sequential multi-gate interventions to identify minimal successor cut sets, quantify route redundancy before realization, and test those cut sets on additional independent initialization geometries."
+      "next_gate": "Freeze sequential multi-gate interventions to measure ordered realization cut depth, quantify route redundancy before realization, and test the policy on additional independent initialization geometries."
+    },
+    {
+      "id": "GC-010",
+      "title": "Expression continuation has heterogeneous ordered realization cut depth",
+      "status": "supported with bounded causal, policy, and geometric scope",
+      "statement": "Starting from 164 committed natural unique-child continuations, a prospectively staged retained-amplitude policy vetoed the first still-realized ancestry-producing event through an administrative depth of eight under one fixed 128-offset endpoint. Sequential cuts occurred at depths 1 through 8 in 42, 20, 22, 17, 11, 13, 13, and 5 branches; 19 branches still handed off after eight vetoes and 2 retained the original address through the horizon. Each of 648 distinct branch-selector identities matched whenever its committed prefix was replayed, comprising 2,142 total gate-override executions; payload remained zero, conservation remained exact, and no collisions occurred. Continuation robustness therefore has a graded, branch-specific ordered cut depth under this declared policy.",
+      "finding": "Finding 069",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-TEMPORAL-GATE",
+        "DEF-OPPORTUNITY-LIFETIME",
+        "DEF-REALIZATION-REDUNDANCY",
+        "DEF-SEQUENTIAL-CUT-DEPTH",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding069/sequential_realization_cut_summary.json",
+        "output/findings/finding069/sequential_realization_cut_assignments.csv",
+        "output/findings/finding069/sequential_realization_cut_depths.csv",
+        "output/findings/finding069/sequential_realization_cut_sources.csv",
+        "output/findings/finding069/sequential_realization_cut_selector_hashes.csv",
+        "output/findings/finding069/depth001_summary.json",
+        "output/findings/finding069/depth001_cases.csv",
+        "output/findings/finding069/depth001_next_selectors.csv",
+        "output/findings/finding069/depth002_summary.json",
+        "output/findings/finding069/depth002_cases.csv",
+        "output/findings/finding069/depth002_next_selectors.csv",
+        "output/findings/finding069/depth003_summary.json",
+        "output/findings/finding069/depth003_cases.csv",
+        "output/findings/finding069/depth003_next_selectors.csv",
+        "output/findings/finding069/depth004_summary.json",
+        "output/findings/finding069/depth004_cases.csv",
+        "output/findings/finding069/depth004_next_selectors.csv",
+        "output/findings/finding069/depth005_summary.json",
+        "output/findings/finding069/depth005_cases.csv",
+        "output/findings/finding069/depth005_next_selectors.csv",
+        "output/findings/finding069/depth006_summary.json",
+        "output/findings/finding069/depth006_cases.csv",
+        "output/findings/finding069/depth006_next_selectors.csv",
+        "output/findings/finding069/depth007_summary.json",
+        "output/findings/finding069/depth007_cases.csv",
+        "output/findings/finding069/depth007_next_selectors.csv",
+        "output/findings/finding069/depth008_summary.json",
+        "output/findings/finding069/depth008_cases.csv",
+        "output/findings/finding069/depth008_next_selectors.csv"
+      ],
+      "analysis": "src/summarize_sequential_cut.py",
+      "supporting_analysis": [
+        "src/sequential_realization_cut.py",
+        "src/realization_necessity.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-069-kickoff",
+      "expected": {
+        "initial_branches": 164,
+        "protocol_max_depth": 8,
+        "fixed_followup_offsets": 128,
+        "observed_cut_depth_counts": {
+          "1": 42,
+          "2": 20,
+          "3": 22,
+          "4": 17,
+          "5": 11,
+          "6": 13,
+          "7": 13,
+          "8": 5
+        },
+        "observed_cuts": 143,
+        "right_censored_above_protocol_max": 19,
+        "source_survival_censored": 2,
+        "distinct_selector_events_vetoed": 648,
+        "selector_override_executions": 2142,
+        "branches_with_reused_selector_targets": 80,
+        "collision_cases": 0,
+        "transient_child_lineage_losses": 0,
+        "child_bearing_source_censoring": 0
+      },
+      "limitations": [
+        "The cohort is conditional on 164 factual natural continuations and does not estimate cut-depth prevalence across all branches.",
+        "The depth is prefix-minimal along one adaptively frozen retained-amplitude veto chain, not a graph-theoretic minimum over arbitrary intervention subsets.",
+        "Selectors at different depths occur in different counterfactual histories; they are not a static inventory of simultaneously available or independent routes.",
+        "Vetoing a transfer retains source amplitude and can create or extend later realization opportunities.",
+        "The 128-offset endpoint and administrative depth-eight cap produce distinct source-survival and depth-right censoring.",
+        "Five source states represent four initialization seeds, and candidate selection plus lexicographic scheduling remain implementation-specific."
+      ],
+      "next_gate": "Replicate ordered cut depth on newly screened independent initialization geometries, then compare alternative selector and scheduling policies and exhaustive small intervention subsets before claiming a graph-theoretic minimum or a necessary-and-sufficient continuation law."
     }
   ]
 }

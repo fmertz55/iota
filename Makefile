@@ -1,6 +1,9 @@
-.PHONY: evidence validate verify paper clean-paper
+.PHONY: finding069-evidence evidence validate verify paper clean-paper
 
-evidence:
+finding069-evidence:
+	python3 src/summarize_sequential_cut.py --through-depth 8 --quiet
+
+evidence: finding069-evidence
 	python3 scripts/build_evidence.py
 
 validate:

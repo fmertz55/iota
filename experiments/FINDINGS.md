@@ -7997,3 +7997,268 @@ predictive rule.
 - `output/findings/finding065/death_tick_child_rule_model.json`
 - `output/findings/finding065/death_tick_child_rule_per_source.csv`
 - `output/findings/finding065/death_tick_child_rule_summary.json`
+
+---
+
+## Finding 066 — Ordered event resolution causally gates continuation
+
+### Question
+
+Finding 065 rejected a simple static terminal-geometry rule. Finding 066 asked
+whether the ordered candidate-and-gate mechanism accounts for child creation,
+and whether changing one frozen terminal decision can change the lineage
+outcome.
+
+### Ordered Ledger
+
+The observer recorded every selected hard-transfer candidate on 96 fresh
+branches without changing world or RNG state. The equivalence gate covered
+`21,160` observed events. The resulting terminal ledger contained `20,748`
+candidate events and assigned every branch to exactly one outcome:
+
+```text
+activated child:          57
+preexisting descendant:   16
+source exhausted:         19
+gate failed:               3
+target preempted:           1
+total:                     96
+```
+
+There were 73 handoffs, no lineage collisions, no payload, and no conservation
+error.
+
+### Frozen Causal Replay
+
+One naturally failed successor gate was selected and replayed while consuming
+the same RNG draw. Permitting that one gate changed the endpoint from death with
+no child to exactly one collision-free inherited child and handoff. Geometry,
+source amplitude before the decision, and all earlier events were unchanged.
+
+### Interpretation
+
+Static geometry did not determine the result by itself. The same lawful state
+was resolved through an ordered sequence in which a successor had to be
+realized before source exhaustion closed the route. This is a bounded causal
+demonstration in the declared scheduler, not a substrate-independent law of
+time.
+
+### Next Gate
+
+Prospectively replicate gate, exhaustion, and preemption interventions across
+fresh branches and independently initialized source geometries.
+
+### Artifacts
+
+- [Candidate-ledger implementation](../src/terminal_candidate_ledger.py)
+- [Causal-replay implementation](../src/terminal_gate_causal_replay.py)
+- [Ordered-event summary](../output/findings/finding066/terminal_candidate_ledger_summary.json)
+- [Complete candidate ledger](../output/findings/finding066/terminal_candidate_ledger_candidates.csv)
+- [Terminal cases](../output/findings/finding066/terminal_candidate_ledger_cases.csv)
+- [Single-gate replay](../output/findings/finding066/terminal_gate_causal_replay.json)
+
+---
+
+## Finding 067 — Opportunity is causal but not sufficient
+
+### Question
+
+Finding 066 changed one terminal gate in one branch. Finding 067 asked whether
+the mediator replicates prospectively across the original source states and
+source geometries selected from unused initialization seeds.
+
+### Prospective Same-State Replication
+
+The original three source states supplied 192 fresh natural branches. Thirty-six
+branches met a frozen intervention rule:
+
+```text
+failed successor gate:
+  eligible:          6
+  immediate child:   6
+  eventual handoff:  6
+
+source exhaustion:
+  eligible:          30
+  route reopened:    30
+  eventual handoff:  28
+```
+
+Every replay matched its sham and changed exactly one decision. The two
+exhaustion non-rescues separated route availability from later realization.
+
+### Independent-Geometry Screen
+
+A complete `16 seeds x 8 streams` screen retained two source geometries before
+terminal intervention outcomes were inspected. Sixty-four branches from those
+sources produced ten eligible interventions:
+
+```text
+seed 71 successor-gate rescue:  8 / 8
+seed 58 exhaustion route open:  1 / 1; no eventual handoff
+seed 71 preempted target open:   1 / 1; handoff four offsets later
+```
+
+The successor-gate class meets the preregistered replication threshold. The
+single exhaustion and preemption cases are causal demonstrations, not
+class-level replications.
+
+### Interpretation
+
+Keeping or reopening an ancestry-preserving route changes what can happen, but
+does not force the child to be realized. Opportunity and realization are
+separate causal conditions. All replays remained collision-free, payload-free,
+and ledger-exact.
+
+### Next Gate
+
+Reverse the intervention: freeze natural child-producing events before replay,
+then veto them to test branch-level necessity and alternate realization.
+
+### Artifacts
+
+- [Same-state implementation](../src/temporal_gate_replication.py)
+- [Same-state summary](../output/findings/finding067/temporal_gate_replication_summary.json)
+- [Independent screen implementation](../src/independent_geometry_screen.py)
+- [Independent screen summary](../output/findings/finding067/independent_geometry_screen_summary.json)
+- [Frozen source manifest](../output/findings/finding067/independent_geometry_screen_source_manifest.csv)
+- [Independent replay implementation](../src/independent_temporal_replication.py)
+- [Independent replay summary](../output/findings/finding067/independent_temporal_replication_summary.json)
+- [Independent source aggregates](../output/findings/finding067/independent_temporal_replication_source_aggregate.csv)
+
+---
+
+## Finding 068 — A natural child is often replaceable, but realization is not
+
+### Question
+
+Finding 067 showed that reopening a route can rescue continuation. Finding 068
+asked the complementary question: when the unique naturally realized child is
+prevented, does the lineage terminate, reroute, or recreate inheritance later?
+
+### Factual Selector Freeze
+
+All 256 scheduled factual branches were completed before any veto. The screen
+identified 164 collision-free natural continuations with exactly one inherited
+child. All five source states were represented, and the complete selector
+manifest was committed before counterfactual replay.
+
+### Veto Result
+
+Every selected child gate was suppressed exactly once:
+
+```text
+same-tick alternate child:     5
+delayed alternate child:     117
+no alternate child:           42
+
+alternate child -> handoff: 122 / 122
+no alternate -> lineage loss: 42 / 42
+```
+
+The first alternate used a different target in `105/122` branches. There were
+no source-survival censors, collisions, payload violations, or ledger errors.
+
+### Interpretation
+
+The particular factual child was branch-necessary in 42 cases and temporally
+redundant in 122. A natural trajectory displaying one child can therefore hide
+many counterfactual continuations. The result is conditional on factual
+continuation and does not estimate necessity across all possible branches.
+
+### Next Gate
+
+Sequentially freeze and veto the first still-realized ancestry child to measure
+how many ordered realizations must be removed before each branch loses lineage.
+
+### Artifacts
+
+- [Factual-freeze implementation](../src/realization_necessity.py)
+- [Replay implementation](../src/realization_necessity_replay.py)
+- [Factual freeze summary](../output/findings/finding068/realization_necessity_freeze_summary.json)
+- [Committed child selectors](../output/findings/finding068/realization_necessity_selectors.csv)
+- [Veto summary](../output/findings/finding068/realization_necessity_summary.json)
+- [Branch replays](../output/findings/finding068/realization_necessity_replays.csv)
+
+---
+
+## Finding 069 — Continuation has a heterogeneous ordered realization cut depth
+
+### Question
+
+Finding 068 exposed one alternate child in most vetoed branches. Finding 069
+asked how deep that redundancy extends under a fixed, prospectively staged
+policy: repeatedly suppress the first still-realized ancestry-producing event
+until the original address dies without a descendant or the protocol limit is
+reached.
+
+### Staged Protocol
+
+Depth 1 began with the 164 committed Finding 068 selectors. At every later
+depth, all prior vetoes were reproduced, the first next inherited child was
+recorded and hashed, and that selector manifest was committed before its veto.
+Every branch retained the same absolute 128-offset endpoint measured from the
+depth-1 intervention. The administrative maximum was depth 8.
+
+### Result
+
+| Depth | Risk set | New cuts | Handoffs | Source censored |
+|---:|---:|---:|---:|---:|
+| 1 | 164 | 42 | 122 | 0 |
+| 2 | 122 | 20 | 102 | 0 |
+| 3 | 102 | 22 | 80 | 0 |
+| 4 | 80 | 17 | 63 | 0 |
+| 5 | 63 | 11 | 52 | 0 |
+| 6 | 52 | 13 | 39 | 0 |
+| 7 | 39 | 13 | 26 | 0 |
+| 8 | 26 | 5 | 19 | 2 |
+
+The final decomposition is exact:
+
+```text
+observed cut depth 1..8: 42, 20, 22, 17, 11, 13, 13, 5
+observed cuts:           143
+handoff beyond depth 8:   19
+source-survival censored:   2
+initial branches:         164
+
+distinct branch-selectors:   648
+total override executions: 2,142
+branches reusing a target:    80
+```
+
+All depth and risk-set chains are contiguous. Every selector identity and hash
+chain verifies; payload remains zero, conservation is exact, and there are no
+lineage collisions or transient-child lineage losses.
+
+### Interpretation
+
+Continuation robustness is graded rather than binary under this policy. Some
+branches lose lineage after one suppressed realization, while 19 still expose
+an inherited continuation after eight vetoes. Reuse also occurs in event time:
+80 branches return to at least one target already selected earlier in their
+chain.
+
+The measured depth is **prefix-minimal only for the frozen retained-amplitude,
+ordered veto policy**. Each veto preserves source amplitude and can expose or
+create later opportunities; selectors at different depths occupy different
+counterfactual histories. The result is therefore neither a graph-theoretic
+minimum nor a count of successor routes simultaneously present in one state.
+
+### Next Gate
+
+Apply the frozen policy to additional independently initialized geometries.
+Then compare alternate selector or scheduling policies, or exhaustively test
+small intervention subsets, before proposing a scheduler-independent minimum
+or necessary-and-sufficient continuation law.
+
+### Artifacts
+
+- [Sequential replay implementation](../src/sequential_realization_cut.py)
+- [Synthesis implementation](../src/summarize_sequential_cut.py)
+- [Machine-readable summary](../output/findings/finding069/sequential_realization_cut_summary.json)
+- [Branch cut-depth assignments](../output/findings/finding069/sequential_realization_cut_assignments.csv)
+- [Depth aggregates](../output/findings/finding069/sequential_realization_cut_depths.csv)
+- [Selector-hash chain](../output/findings/finding069/sequential_realization_cut_selector_hashes.csv)
+- [Per-source outcomes](../output/findings/finding069/sequential_realization_cut_sources.csv)
+- [Depth-8 endpoint summary](../output/findings/finding069/depth008_summary.json)

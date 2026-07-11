@@ -1,24 +1,19 @@
 \section{Reproducibility and Evidence}
 \label{sec:reproducibility}
 
-The paper is compiled from generated evidence rather than manually copied
-numbers. The canonical claim registry is
-\path{evidence/claims.yaml}; definitions are in
-\path{evidence/definitions.yaml}. Finding 060 source evidence is stored in
-\path{output/findings/finding060/}, and the analysis implementation is
-\path{src/phase_free_constraint_transport.py}. Finding 067 causal replications,
-the complete independent screen, and its frozen source manifest are stored in
-\path{output/findings/finding067/}. Their implementations are
-\path{src/temporal_gate_replication.py},
-\path{src/independent_geometry_screen.py}, and
-\path{src/independent_temporal_replication.py}. Finding 068's committed factual
-selectors, veto ledgers, and replay outcomes are stored in
-\path{output/findings/finding068/}; the two-stage implementations are
-\path{src/realization_necessity.py} and
-\path{src/realization_necessity_replay.py}.
+The paper uses generated rather than manually copied numbers. Canonical claims
+and definitions are in
+\path{evidence/claims.yaml} and \path{evidence/definitions.yaml}. Each
+\path{evidence/manifests/GC-NNN.json} records the exact path, byte count, and
+SHA-256 digest of supporting evidence and code; raw artifacts remain under
+\path{output/findings/}.
 
-Running \texttt{make evidence} regenerates manuscript macros, the event table,
-the human-readable definitions, and a SHA-256 evidence manifest. Running
-\texttt{make validate} checks claim expectations, strict-event invariants,
-referenced paths, and generated-file freshness. Running \texttt{make paper}
-performs both stages and compiles this PDF.
+Finding 069's cases, prospective selector manifests, and aggregate tables are
+in \path{output/findings/finding069/}; its claim manifest identifies both
+implementations. Before reporting cut assignments, the synthesis verifies
+selector and parent-chain hashes, contiguous depths, nested risk sets, event
+identities, and safety invariants.
+
+\texttt{make verify} rebuilds the eight-stage synthesis, regenerates derived
+files, and validates expectations, provenance, paths, and freshness.
+\texttt{make paper} then compiles this PDF.

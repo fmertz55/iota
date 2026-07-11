@@ -1,0 +1,181 @@
+{
+  "artifacts": [
+    {
+      "bytes": 7986,
+      "path": "output/findings/finding069/sequential_realization_cut_summary.json",
+      "sha256": "0670e567c5e575efdd3a09933342738c9ba5a9021ef7c1c5ad4b9b550b8afe1c"
+    },
+    {
+      "bytes": 28338,
+      "path": "output/findings/finding069/sequential_realization_cut_assignments.csv",
+      "sha256": "e33bc1d96b8304d42ffecccf301f392b59e11fbcee89330bc9676fcfb25682ff"
+    },
+    {
+      "bytes": 1376,
+      "path": "output/findings/finding069/sequential_realization_cut_depths.csv",
+      "sha256": "77eb3b146554d99dc1b0ee7d5b1786b96d2c43c6fe0c779c82d169f70ba963fc"
+    },
+    {
+      "bytes": 4217,
+      "path": "output/findings/finding069/sequential_realization_cut_sources.csv",
+      "sha256": "045aaac7aedc8bdebbb6b0c41e3ec41730c84474eee5d293966d0d8b9f4475ce"
+    },
+    {
+      "bytes": 4772,
+      "path": "output/findings/finding069/sequential_realization_cut_selector_hashes.csv",
+      "sha256": "9d0c48a9e6c9a4105037cc2ee5e2ea87ae2f1268d7f9cc55b923b6a882a09fd1"
+    },
+    {
+      "bytes": 1219,
+      "path": "output/findings/finding069/depth001_summary.json",
+      "sha256": "8d0aebaa2364797099ac2d798573f43b851318840e6c26e728c8ac6c667e7c72"
+    },
+    {
+      "bytes": 18943,
+      "path": "output/findings/finding069/depth001_cases.csv",
+      "sha256": "9b7400fa034b6b98fa91109eb6dd0a38133bdd0b95c8cc60aeb16e6471fad350"
+    },
+    {
+      "bytes": 39910,
+      "path": "output/findings/finding069/depth001_next_selectors.csv",
+      "sha256": "37376530450191f0889060a8bc51a2b5de0cc464fa85b42a1c2ced644d517a4b"
+    },
+    {
+      "bytes": 1229,
+      "path": "output/findings/finding069/depth002_summary.json",
+      "sha256": "f73b5d5aaf063597a598fa9b5ea3504366248776903aec432dc497815f56c6fb"
+    },
+    {
+      "bytes": 14384,
+      "path": "output/findings/finding069/depth002_cases.csv",
+      "sha256": "67aa1871dbeb9ea53b77fac1086665e6e229d409f1d5dd155521d259ee0a0384"
+    },
+    {
+      "bytes": 33491,
+      "path": "output/findings/finding069/depth002_next_selectors.csv",
+      "sha256": "3d131049d9a28582e805536893d2ad522cece467e1ed23fc6d258f64cfaa2a2c"
+    },
+    {
+      "bytes": 1395,
+      "path": "output/findings/finding069/depth003_summary.json",
+      "sha256": "013a1bc13cc19f35060743f5d4fe4296e5a9c33d96e2dc47930d1cfd9c9fb692"
+    },
+    {
+      "bytes": 12085,
+      "path": "output/findings/finding069/depth003_cases.csv",
+      "sha256": "25ff4c81a30a1ebdbaf554aa717b3b9aa62f3b6bdc499254ab3054913d5306ce"
+    },
+    {
+      "bytes": 26431,
+      "path": "output/findings/finding069/depth003_next_selectors.csv",
+      "sha256": "508934719eeb66d9105c48e14833bb296b34e35040b9cfb5aac43e0e3c714a0f"
+    },
+    {
+      "bytes": 1562,
+      "path": "output/findings/finding069/depth004_summary.json",
+      "sha256": "1ad542615f884228a6ad8104b1dbffbd0030e80e7a214912cc5ef0032f46b305"
+    },
+    {
+      "bytes": 9596,
+      "path": "output/findings/finding069/depth004_cases.csv",
+      "sha256": "033084902916772012fff98872fc7e5d9ca0e6f4eac42d828f2fe53d4d7a7873"
+    },
+    {
+      "bytes": 20963,
+      "path": "output/findings/finding069/depth004_next_selectors.csv",
+      "sha256": "78ddc60ccb9a7d2823998eaccccd455732d30de4cf69a2e3a9c0f29ee26a364c"
+    },
+    {
+      "bytes": 1730,
+      "path": "output/findings/finding069/depth005_summary.json",
+      "sha256": "d7ac87535683b49dbae12e0adf90ff8bc0c1df4ba0f9b642ef709760987ecffd"
+    },
+    {
+      "bytes": 7675,
+      "path": "output/findings/finding069/depth005_cases.csv",
+      "sha256": "48c32673b4553ab709fb0cac6db99e3ff7beff1bcd62fc57bd450db437c8cfa2"
+    },
+    {
+      "bytes": 17418,
+      "path": "output/findings/finding069/depth005_next_selectors.csv",
+      "sha256": "db63523c994ce4ac12ba7d5af6dfdaa1ba0122e9195773a9f62835e1a4043c9c"
+    },
+    {
+      "bytes": 1898,
+      "path": "output/findings/finding069/depth006_summary.json",
+      "sha256": "502d8aa1e5305beaa3e29cbdbfbf171dc8c730282a0dc166fb0bc3ece0c8f790"
+    },
+    {
+      "bytes": 6381,
+      "path": "output/findings/finding069/depth006_cases.csv",
+      "sha256": "15997c364597ca98ef0ae2a1c6fc230389740065e0b5d124c3fc0f275c88e041"
+    },
+    {
+      "bytes": 13239,
+      "path": "output/findings/finding069/depth006_next_selectors.csv",
+      "sha256": "23b39596337afb467d948401af6eea1c381fc2649d07407e77c75868827ad1c3"
+    },
+    {
+      "bytes": 2066,
+      "path": "output/findings/finding069/depth007_summary.json",
+      "sha256": "3fd35cf320f577f24d1c30b2fa09b7bf0b08fa6042c7ea950d377df8b5dd97aa"
+    },
+    {
+      "bytes": 4870,
+      "path": "output/findings/finding069/depth007_cases.csv",
+      "sha256": "a38909842363d546e8db5ccccd3cd4b5fda82689f3cab68be66de32346d0346f"
+    },
+    {
+      "bytes": 9022,
+      "path": "output/findings/finding069/depth007_next_selectors.csv",
+      "sha256": "68ffdaba1825f300b007dfd962e54f3fbe64d2a95cfc69f5e8115f9f32dd8a98"
+    },
+    {
+      "bytes": 2268,
+      "path": "output/findings/finding069/depth008_summary.json",
+      "sha256": "9fd0837d6ed08dd008fd8307bd56e26e1ab3ab0bcf5e0eccb069bd5a03dd9a25"
+    },
+    {
+      "bytes": 3422,
+      "path": "output/findings/finding069/depth008_cases.csv",
+      "sha256": "e592845e5345f66d27d37b4e6f8ff48b5d10f2472f8c1b1640b2f5bcb9388b25"
+    },
+    {
+      "bytes": 6782,
+      "path": "output/findings/finding069/depth008_next_selectors.csv",
+      "sha256": "e547492ccc891edc4f261e6326a2fa7e7676eb307fdad2aadd64134a8b62b9c4"
+    },
+    {
+      "bytes": 38736,
+      "path": "src/summarize_sequential_cut.py",
+      "sha256": "b022fa63f0bd605522077a54b80b674062cfd7f6c24996adf462ab6b1de3b351"
+    },
+    {
+      "bytes": 25591,
+      "path": "src/sequential_realization_cut.py",
+      "sha256": "cae2f8f5a7b92a2b080128eb97f0986888a776d162b8c9dd93d788a8976c4b6e"
+    },
+    {
+      "bytes": 26556,
+      "path": "src/realization_necessity.py",
+      "sha256": "686155bab3f0a5cc4e9359ea009000fc7c482c8bb203f541de0d0d6ad2254870"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 24677,
+      "path": "evidence/claims.yaml",
+      "sha256": "1bbf2b479fae8aedebd2b5d6865c14275b3c533ae3aad2fb02ee96c9ee7e55db"
+    },
+    {
+      "bytes": 6935,
+      "path": "evidence/definitions.yaml",
+      "sha256": "91562de0363ec8fd18acd6b2db7f5af8fd42e828d0234e1bbec9328bebdd65b9"
+    }
+  ],
+  "claim_id": "GC-010",
+  "schema_version": 1
+}
