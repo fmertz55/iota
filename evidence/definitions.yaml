@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "definitions": [
+    {
+      "id": "DEF-IOTA",
+      "term": "Iota",
+      "symbol": "I_x(t)",
+      "kind": "primitive",
+      "status": "provisional",
+      "definition": "A stationary lattice address together with the local attribute and expression state instantiated at that address.",
+      "latex": "I_x(t) = \\left(x,A_x(t),E_x(t)\\right)"
+    },
+    {
+      "id": "DEF-REACHABLE",
+      "term": "Reachable set",
+      "symbol": "\\mathcal{R}_x(t+1\\mid s_t)",
+      "kind": "derived",
+      "status": "provisional",
+      "definition": "The set of next local states admissible from state s_t under the declared local law.",
+      "latex": "\\mathcal{R}_x(t+1\\mid s_t)=\\{(A',E'):(A',E')\\text{ is admissible under }\\mathcal{L}\\}"
+    },
+    {
+      "id": "DEF-INFORMATION",
+      "term": "Interaction-induced information",
+      "symbol": "\\Delta I_x",
+      "kind": "hypothesis",
+      "status": "organizing hypothesis",
+      "definition": "The change in the reachable caused by interaction. For strict reachable-set reduction, the current cardinality measure is the logarithm of the prior-to-posterior reachable-set size ratio.",
+      "latex": "\\Delta I_x=\\log\\frac{|\\mathcal{R}_x^{\\mathrm{prior}}|}{|\\mathcal{R}_x^{\\mathrm{posterior}}|}"
+    },
+    {
+      "id": "DEF-COHERENCE",
+      "term": "Coherence",
+      "symbol": "",
+      "kind": "observable",
+      "status": "operational",
+      "definition": "A connected active structure measured using the explicitly declared neighborhood connectivity. It is not assumed to be a fundamental physical object."
+    },
+    {
+      "id": "DEF-BRIDGE",
+      "term": "Bridge",
+      "symbol": "B",
+      "kind": "observable",
+      "status": "operational",
+      "definition": "A set of active lattice cells whose removal changes reachability between tracked regions in the audited state."
+    },
+    {
+      "id": "DEF-CONSTRAINT-TRANSPORT",
+      "term": "Strict constraint transport",
+      "symbol": "",
+      "kind": "observable",
+      "status": "operational",
+      "definition": "Loss and restoration of reachability between the same tracked predecessor regions through a causally necessary successor bridge disjoint from the predecessor bridge."
+    },
+    {
+      "id": "DEF-PAYLOAD-FREE",
+      "term": "Payload-free",
+      "symbol": "P=0",
+      "kind": "condition",
+      "status": "operational",
+      "definition": "World.P is zero at every observed offset in the audited continuation."
+    },
+    {
+      "id": "DEF-LEDGER-EXACT",
+      "term": "Ledger exactness",
+      "symbol": "",
+      "kind": "safety condition",
+      "status": "operational",
+      "definition": "The experiment's conservation ledger has zero recorded discrepancy at every audited offset."
+    }
+  ]
+}

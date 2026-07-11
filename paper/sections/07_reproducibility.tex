@@ -1,0 +1,15 @@
+\section{Reproducibility and Evidence}
+\label{sec:reproducibility}
+
+The paper is compiled from generated evidence rather than manually copied
+numbers. The canonical claim registry is
+\path{evidence/claims.yaml}; definitions are in
+\path{evidence/definitions.yaml}. Finding 060 source evidence is stored in
+\path{output/findings/finding060/}, and the analysis implementation is
+\path{src/phase_free_constraint_transport.py}.
+
+Running \texttt{make evidence} regenerates manuscript macros, the event table,
+the human-readable definitions, and a SHA-256 evidence manifest. Running
+\texttt{make validate} checks claim expectations, strict-event invariants,
+referenced paths, and generated-file freshness. Running \texttt{make paper}
+performs both stages and compiles this PDF.

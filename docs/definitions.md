@@ -1,0 +1,75 @@
+# Iota Definitions
+
+This document is generated from `evidence/definitions.yaml`. Do not edit it directly.
+
+## Iota
+
+- ID: `DEF-IOTA`
+- Kind: primitive
+- Status: provisional
+- Symbol: `I_x(t)`
+
+A stationary lattice address together with the local attribute and expression state instantiated at that address.
+
+## Reachable set
+
+- ID: `DEF-REACHABLE`
+- Kind: derived
+- Status: provisional
+- Symbol: `\mathcal{R}_x(t+1\mid s_t)`
+
+The set of next local states admissible from state s_t under the declared local law.
+
+## Interaction-induced information
+
+- ID: `DEF-INFORMATION`
+- Kind: hypothesis
+- Status: organizing hypothesis
+- Symbol: `\Delta I_x`
+
+The change in the reachable caused by interaction. For strict reachable-set reduction, the current cardinality measure is the logarithm of the prior-to-posterior reachable-set size ratio.
+
+## Coherence
+
+- ID: `DEF-COHERENCE`
+- Kind: observable
+- Status: operational
+- Symbol: none
+
+A connected active structure measured using the explicitly declared neighborhood connectivity. It is not assumed to be a fundamental physical object.
+
+## Bridge
+
+- ID: `DEF-BRIDGE`
+- Kind: observable
+- Status: operational
+- Symbol: `B`
+
+A set of active lattice cells whose removal changes reachability between tracked regions in the audited state.
+
+## Strict constraint transport
+
+- ID: `DEF-CONSTRAINT-TRANSPORT`
+- Kind: observable
+- Status: operational
+- Symbol: none
+
+Loss and restoration of reachability between the same tracked predecessor regions through a causally necessary successor bridge disjoint from the predecessor bridge.
+
+## Payload-free
+
+- ID: `DEF-PAYLOAD-FREE`
+- Kind: condition
+- Status: operational
+- Symbol: `P=0`
+
+World.P is zero at every observed offset in the audited continuation.
+
+## Ledger exactness
+
+- ID: `DEF-LEDGER-EXACT`
+- Kind: safety condition
+- Status: operational
+- Symbol: none
+
+The experiment's conservation ledger has zero recorded discrepancy at every audited offset.

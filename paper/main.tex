@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\emergencystretch=1em
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+
+\title{Constraint Transport in a Finite Local Iota System}
+\author{Douglas Clark}
+\date{Working draft}
+
+\input{paper/generated/results.tex}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Information is investigated as an interaction-induced change in reachable
+future states. A finite local lattice system is used to test whether relational
+constraints can persist when the local cells realizing them are replaced. The
+current evidence consists of three strict constraint-transport events across
+two seeds. In each event, tracked regions disconnect after loss of a
+role-bearing bridge and reconnect through a causally necessary, disjoint
+successor bridge under payload-free, no-stored-phase dynamics. These results
+establish a bounded computational observation rather than a claim of physical
+correspondence. The repository exposes the definitions, claim registry, source
+artifacts, analysis, and generated manuscript values required to audit the
+result.
+\end{abstract}
+
+\input{paper/sections/01_hypothesis.tex}
+\input{paper/sections/02_model.tex}
+\input{paper/sections/03_methods.tex}
+\input{paper/sections/04_results.tex}
+\input{paper/sections/05_discussion.tex}
+\input{paper/sections/06_limitations.tex}
+\input{paper/sections/07_reproducibility.tex}
+
+\end{document}

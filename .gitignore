@@ -1,2 +1,8 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+build/
+
 # Generated image artifacts are tracked in data/iota_lab.db by path/hash.
 output/**/*.png

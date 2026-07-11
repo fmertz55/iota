@@ -1,6 +1,125 @@
 # Iota Rig
 
-A minimal octal-first iota universe test rig.
+> **Organizing hypothesis**
+>
+> **Information is the change in the reachable caused by interaction.**
+
+Iota Rig is an open, automation-first experimental program for making that
+hypothesis precise, measurable, and falsifiable. The repository is both the lab
+and the live record of the investigation: definitions, laws, experiments,
+negative results, evidence, and interpretations are intended to evolve together
+without erasing their history.
+
+The hypothesis is not presented as an established law of physics. It is the root
+question from which the experiments are derived:
+
+> Can finite local interactions produce constraints on reachable futures that
+> persist even when the local state that realizes them is replaced?
+
+## From hypothesis to experiment
+
+At permanent lattice address $x$, write an iota provisionally as
+
+$$
+I_x(t) = \left(x, A_x(t), E_x(t)\right),
+$$
+
+where $A_x(t)$ is its attribute state, $E_x(t)$ is its expression state, and
+$N_{26}(x,t)$ is its 26-neighbor local field. A fixed local law $\mathcal{L}$
+defines the generative kernel
+
+$$
+\left(A_x(t+1),E_x(t+1)\right)
+=
+\mathcal{L}\left(A_x(t),E_x(t),N_{26}(x,t)\right).
+$$
+
+For a state $s_t$, define the locally reachable next-state set
+
+$$
+\mathcal{R}_x(t+1\mid s_t)
+=
+\left\{(A',E') : (A',E')\text{ is admissible under }\mathcal{L}\right\}.
+$$
+
+When an interaction strictly reduces that set, its information contribution can
+be measured as
+
+$$
+\Delta I_x
+=
+\log\frac{|\mathcal{R}_x^{\mathrm{prior}}(t+1)|}
+{|\mathcal{R}_x^{\mathrm{posterior}}(t+1)|}.
+$$
+
+This cardinality expression covers reduction of the reachable. Measuring a
+reshaping that preserves cardinality remains an open formal problem and will
+require an additional set- or distribution-sensitive measure.
+
+The transition equation is currently a proposed model kernel, not a claimed
+fundamental equation of nature. The experiments below test observable
+consequences that would be expected if the organizing hypothesis is useful.
+
+## Current evidence frontier
+
+The strongest current result is **Golden Claim GC-001: constraint transport**.
+
+> In three controlled replay events across two seeds, payload-free Iota dynamics
+> restored the same tracked connectivity relation through a causally necessary
+> successor bridge having no cells in common with the predecessor bridge.
+
+Finding 060 replayed all 36 previously identified Class B bridge-relocation
+events. Twelve had a genuinely role-bearing predecessor bridge, and three passed
+the strict transport test. In every strict positive:
+
+- the tracked regions were connected before bridge loss;
+- they were disconnected during the split;
+- a disjoint successor bridge restored their reachability;
+- removing that successor destroyed the restored reachability;
+- pre- and post-event shortest-path length was $2$;
+- payload was zero and the conservation ledger was exact.
+
+This supports a bounded conclusion: in this event class, a relational
+connectivity constraint can survive complete replacement of its local
+realization. It does **not** yet establish general multi-region invariance,
+indefinite persistence, uniqueness to one law, or a correspondence with physical
+particles or the early universe.
+
+### Inspect GC-001
+
+- [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
+- [Aggregate evidence](output/findings/finding060/phase_free_constraint_transport_aggregate.csv)
+- [Machine-readable summary](output/findings/finding060/phase_free_constraint_transport_summary.json)
+- [Analysis implementation](src/phase_free_constraint_transport.py)
+- [Experimental interpretation and next gate](SESSION_HANDOFF.md#finding-060-update)
+
+The next gate follows the descendant regions after the three strict positives,
+measures the lifetime of the restored relation, and tests for a second complete
+bridge replacement. As new experiments land, this section should report the
+strongest supported claim at that commit while Git history preserves earlier
+states of the evidence.
+
+## Reviewer paths
+
+Choose the depth appropriate to your review:
+
+- **Read only:** follow the claim and artifact links above, then read the
+  [working paper](paper/main.tex).
+- **Quick verify:** run `make verify` to regenerate the evidence-facing files
+  and validate their claims against the source artifacts.
+- **Build the paper:** run `make paper`; the PDF is written to
+  `build/paper/main.pdf`.
+- **Run new experiments:** follow the installation and operation instructions
+  below.
+
+The [reviewer guide](docs/reviewer_guide.md) explains what each path checks. The
+canonical registries are [claims](evidence/claims.yaml) and
+[definitions](evidence/definitions.yaml). Generated files are marked as such and
+must not be edited by hand.
+
+## Rig overview
+
+The implementation began as a minimal octal-first iota universe test rig.
 
 Default iota state:
 

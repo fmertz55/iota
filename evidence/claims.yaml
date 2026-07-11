@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "organizing_hypothesis": {
+    "id": "HYP-ROOT",
+    "statement": "Information is the change in the reachable caused by interaction.",
+    "status": "hypothesis",
+    "scope": "Organizing principle for the Iota experimental program; not an established physical law."
+  },
+  "claims": [
+    {
+      "id": "GC-001",
+      "title": "Constraint transport",
+      "status": "supported with bounded scope",
+      "statement": "In three controlled replay events across two seeds, payload-free Iota dynamics restored the same tracked connectivity relation through a causally necessary successor bridge having no cells in common with the predecessor bridge.",
+      "finding": "Finding 060",
+      "definitions": [
+        "DEF-CONSTRAINT-TRANSPORT",
+        "DEF-BRIDGE",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding060/phase_free_constraint_transport_summary.json",
+        "output/findings/finding060/phase_free_constraint_transport_events.csv",
+        "output/findings/finding060/phase_free_constraint_transport_aggregate.csv"
+      ],
+      "analysis": "src/phase_free_constraint_transport.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-060-update",
+      "expected": {
+        "class_b_events": 36,
+        "role_bearing_predecessor_events": 12,
+        "strict_transport_events": 3,
+        "strict_positive_seed_count": 2,
+        "all_payload_zero": true,
+        "all_ledger_exact": true,
+        "strict_bridge_jaccard": 0.0,
+        "strict_preloss_reachability": 1.0,
+        "strict_split_reachability": 0.0,
+        "strict_rebridge_reachability": 1.0,
+        "strict_successor_removed_reachability": 0.0,
+        "strict_preloss_shortest_path": 2.0,
+        "strict_rebridge_shortest_path": 2.0
+      },
+      "limitations": [
+        "Only three of 36 Class B events passed the strict transport criterion.",
+        "The positives cover two seeds and a large-region/singleton relation.",
+        "Indefinite persistence and repeated transport have not been established.",
+        "The result does not establish correspondence with physical particles or the early universe."
+      ],
+      "next_gate": "Track predecessor-region descendants after the strict positives, measure relation lifetime, and test for a second complete bridge replacement."
+    }
+  ]
+}

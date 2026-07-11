@@ -1,0 +1,35 @@
+\section{Organizing Hypothesis}
+\label{sec:hypothesis}
+
+The organizing hypothesis of this research program is:
+
+\begin{quote}
+\textbf{Information is the change in the reachable caused by interaction.}
+\end{quote}
+
+This is a hypothesis to be operationalized and tested, not an established law
+of physics. It motivates a narrower experimental question: can finite local
+interactions produce constraints on reachable futures that persist even when
+the local state realizing those constraints is replaced?
+
+For a state $s_t$, define the locally reachable next-state set as
+
+\begin{equation}
+\mathcal{R}_x(t+1\mid s_t)
+=
+\left\{(A',E'):(A',E')\text{ is admissible under }\mathcal{L}\right\}.
+\label{eq:reachable}
+\end{equation}
+
+When interaction strictly reduces the reachable set, a cardinality measure is
+
+\begin{equation}
+\Delta I_x
+=
+\log\frac{|\mathcal{R}_x^{\mathrm{prior}}(t+1)|}
+{|\mathcal{R}_x^{\mathrm{posterior}}(t+1)|}.
+\label{eq:information}
+\end{equation}
+
+Equation~\ref{eq:information} does not distinguish all set reshapings that
+preserve cardinality. A set- or distribution-sensitive extension remains open.

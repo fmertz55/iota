@@ -1,0 +1,36 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2394,
+      "path": "output/findings/finding060/phase_free_constraint_transport_summary.json",
+      "sha256": "efef3e161e30cfa5cdc93514eeded1cc6c1e8bf89733449b784ddb681cf16b37"
+    },
+    {
+      "bytes": 6920,
+      "path": "output/findings/finding060/phase_free_constraint_transport_events.csv",
+      "sha256": "1227b5d99b46938d8974b77d0b167d6c7c317d7f8de1053197f69fcb61b239b5"
+    },
+    {
+      "bytes": 706,
+      "path": "output/findings/finding060/phase_free_constraint_transport_aggregate.csv",
+      "sha256": "d0af3ac2b04e07e33a96f752554131d2aba5ad0ea991f102b4c024f1b33da518"
+    },
+    {
+      "bytes": 20260,
+      "path": "src/phase_free_constraint_transport.py",
+      "sha256": "f84f27ddf727c0271ad21eba3231dd8b3048534d0a58cfe2499bb3b66b34d62c"
+    },
+    {
+      "bytes": 2379,
+      "path": "evidence/claims.yaml",
+      "sha256": "a3f484ac4ec80b62541bdeba438985c74064b50fa6b1471e9efd48fd64c3ab25"
+    },
+    {
+      "bytes": 2788,
+      "path": "evidence/definitions.yaml",
+      "sha256": "f0980fe9788c9a80a6d5d7f026b9cd658521274f6387b29ab9999ba8d0834284"
+    }
+  ],
+  "claim_id": "GC-001",
+  "schema_version": 1
+}

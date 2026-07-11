@@ -1,0 +1,25 @@
+\section{Constraint-Transport Test}
+\label{sec:methods}
+
+Finding 060 replayed the 36 Class B bridge-relocation events identified by the
+preceding class-matrix experiment. The audit required a role-bearing predecessor
+bridge and tracked the exact predecessor regions through bridge loss and
+reconnection. Pairwise reachability and shortest-path accessibility were
+measured before loss, during the split, and after rebridge. The successor bridge
+was then removed to test whether it was causally necessary.
+
+Let $C_{UV}(t)$ equal one when tracked regions $U_t$ and $V_t$ are mutually
+reachable and zero otherwise. A strict event requires
+
+\begin{equation}
+C_{UV}(t_{\mathrm{pre}})=1,\qquad
+C_{UV}(t_{\mathrm{split}})=0,\qquad
+C_{UV}(t_{\mathrm{post}})=1,
+\end{equation}
+
+together with disjoint predecessor and successor bridges,
+$B_{\mathrm{pre}}\cap B_{\mathrm{post}}=\varnothing$, and loss of restored
+reachability after removing $B_{\mathrm{post}}$.
+
+The analysis code and exact source tables are linked from
+Section~\ref{sec:reproducibility}.
