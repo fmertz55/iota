@@ -3316,3 +3316,25 @@ payload, or ledger errors. Frozen depth-4 selector-manifest SHA-256:
 ```
 
 No depth-4 selector had been vetoed when this manifest was frozen.
+
+## Finding 069 Depth-4 Result and Depth-5 Freeze
+
+The depth-4 policy produced 17 new lineage cuts among 80 risk-set branches.
+The other 63 handed off and supplied the committed depth-5 selector cohort.
+
+```text
+cut depth 1: 42
+cut depth 2: 20
+cut depth 3: 22
+cut depth 4: 17
+surviving beyond depth 4: 63
+```
+
+There were no transient-child losses, source-survival censoring, collisions,
+payload, or ledger errors. Frozen depth-5 selector-manifest SHA-256:
+
+```text
+78ddc60ccb9a7d2823998eaccccd455732d30de4cf69a2e3a9c0f29ee26a364c
+```
+
+No depth-5 selector had been vetoed when this manifest was frozen.
