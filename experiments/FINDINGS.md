@@ -8322,3 +8322,44 @@ selector and scheduler policies and enumerate small intervention subsets.
 - [Per-source outcomes](../output/findings/finding070/independent_persistence_replication_sources.csv)
 - [Selector-hash chain](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
 - [Synthesis implementation](../src/summarize_independent_persistence.py)
+
+---
+
+## Finding 071 — Local-affordance confirmation was stopped by its source-support gate
+
+### Question and Prospective Gate
+
+Finding 071 preregistered a seed-level discovery/confirmation test of whether
+bounded pre-outcome geometry predicts a multidimensional continuation-
+affordance profile. Fresh seeds 105 through 232 were divided before screening
+into equal discovery and confirmation ranges. At least six independently
+initialized eligible source geometries were required in each half before any
+affordance-response branch could run.
+
+### Screen Result
+
+The complete 1,024-case screen produced 159 Class B candidates, 17 strict
+singleton-eligible transports, and 12 selected source seeds. The frozen split
+was imbalanced: nine discovery sources and three confirmation sources. The
+six-per-half support gate therefore failed.
+
+All classification and transport rows remained payload-free and ledger-exact.
+No affordance response, selector veto, model fit, or confirmation outcome was
+run or inspected.
+
+### Interpretation
+
+Finding 071 is inconclusive about a local affordance field. It is not a negative
+predictive result: the predictive experiment never opened. Preserving this stop
+avoids post-screen seed expansion or repartitioning after cohort yield became
+known. A new, separately preregistered acquisition experiment may seek an
+adequately supported confirmation cohort while leaving all response outcomes
+sealed.
+
+### Artifacts
+
+- [Screen summary](../output/findings/finding071/local_affordance_screen_summary.json)
+- [Frozen source manifest](../output/findings/finding071/local_affordance_screen_source_manifest.csv)
+- [Complete case matrix](../output/findings/finding071/local_affordance_screen_cases.csv)
+- [Transport audits](../output/findings/finding071/local_affordance_screen_transport_events.csv)
+- [Frozen screen implementation](../src/local_affordance_screen.py)

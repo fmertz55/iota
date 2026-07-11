@@ -3958,3 +3958,34 @@ The model, feature schema, discovery source hashes, selector hashes, and
 pre-confirmation state are committed before confirmation outcomes. A negative
 or inconclusive result is retained as Finding 071; no alternate learner or
 radius may replace the frozen primary analysis after confirmation.
+
+## Finding 071 Screen Result — Preregistered Support Gate Failed
+
+The complete frozen screen ran all 1,024 seed/sample trajectories from
+initialization seeds 105 through 232 and causally audited all 159 Class B
+candidates. Seventeen candidates were strict singleton-eligible transports.
+Applying the frozen one-source-per-seed rule selected 12 independent source
+geometries:
+
+```text
+discovery seeds 105..168:     9 selected sources
+confirmation seeds 169..232: 3 selected sources
+required per split:           6 selected sources
+source-support gate:          failed
+```
+
+Selected seeds were 107, 109, 116, 118, 132, 143, 149, 153, 156, 183, 195,
+and 203. All 1,024 classification trajectories and all 159 transport audits
+remained payload-free and ledger-exact. The frozen source-manifest SHA-256 is:
+
+```text
+4b581df79c68eb71edb2d11e4c2aba9add88a1684f805b9eed8895a81f1e25b3
+```
+
+Per preregistration, Finding 071 stops here as an inconclusive locality and
+transportability test. No natural affordance-response branch, child selector,
+depth-1 veto, discovery fit, or confirmation evaluation was run. The imbalance
+cannot be repaired by expanding or repartitioning this finding after observing
+the source yield. A subsequent experiment may preregister a new source-
+acquisition design, but it must retain Finding 071's failed gate and keep all
+affordance outcomes sealed.
