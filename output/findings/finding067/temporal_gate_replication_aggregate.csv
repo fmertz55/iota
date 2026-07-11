@@ -1,0 +1,4 @@
+natural_label,eligible_replays,route_reopened,route_rate,route_ci_low,route_ci_high,immediate_child,immediate_child_rate,immediate_child_ci_low,immediate_child_ci_high,eventual_handoff,eventual_handoff_rate,eventual_handoff_ci_low,eventual_handoff_ci_high,median_address_loss_delay,class_level_replication_eligible
+gate_failed,6,6,1.0,0.5407418735600995,1.0,6,1.0,0.5407418735600995,1.0,6,1.0,0.5407418735600995,1.0,0.0,1
+source_exhausted,30,30,1.0,0.8842966917779722,1.0,3,0.1,0.02111713702972256,0.265288450474208,28,0.9333333333333333,0.7792645984770381,0.9918218655393436,5.5,1
+target_preempted,0,0,,,,0,,,,0,,,,,0

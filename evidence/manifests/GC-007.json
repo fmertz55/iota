@@ -21,14 +21,14 @@
       "sha256": "447a9f6e2960c04108bae63fcbc15d171b0e74c8e9d13532ff72aee83409c028"
     },
     {
-      "bytes": 11461,
+      "bytes": 12442,
       "path": "src/terminal_candidate_ledger.py",
-      "sha256": "1ad70a0f1906f5dc7313b3d9b455209242e2696470670da3206d2046fca89a8d"
+      "sha256": "fb15aea75498ac875d2a4281f127a24ab17f31e0d0ce2da60d3ab73bbccba358"
     },
     {
-      "bytes": 73059,
+      "bytes": 73532,
       "path": "src/iota_rig.py",
-      "sha256": "f2fab66b4895f9d2e807d38166ef869b184a471dbd86532a556254d4faae22ef"
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
     },
     {
       "bytes": 13622,

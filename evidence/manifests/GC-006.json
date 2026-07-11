@@ -26,9 +26,9 @@
       "sha256": "f625efb56bf60fef8aa8e66f36cfba6e5027ec50e4db5a275cffdff3969652a9"
     },
     {
-      "bytes": 73059,
+      "bytes": 73532,
       "path": "src/iota_rig.py",
-      "sha256": "f2fab66b4895f9d2e807d38166ef869b184a471dbd86532a556254d4faae22ef"
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
     },
     {
       "bytes": 13622,

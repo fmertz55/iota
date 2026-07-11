@@ -32,6 +32,7 @@ CANDIDATE_FIELDS = [
     "target_active_at_evaluation", "target_depleted_at_evaluation",
     "target_latent_at_evaluation", "influence", "residual_bias_multiplier",
     "transfer_probability", "gate_draw", "target_activated", "status",
+    "natural_gate_passed", "effective_gate_passed", "gate_overridden",
 ]
 
 
@@ -90,7 +91,8 @@ def classify(preexisting: bool, handoff: bool, collision: bool, rows: list[dict[
 def run_case(event: dict[str, str], branch_offset: int, base_world: World,
              base_lineages: list[set[tuple[int, int, int]]], singleton_index: int,
              original: tuple[int, int, int], sample: int, branch_seed: int,
-             horizon: int, cfg: dict[str, Any], gate_override: Any = None) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+             horizon: int, cfg: dict[str, Any], gate_override: Any = None,
+             allow_censored: bool = False) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     world = clone_world(base_world, branch_seed)
     lineages = [set(x) for x in base_lineages]
     terminated = [False, False]
@@ -118,6 +120,8 @@ def run_case(event: dict[str, str], branch_offset: int, base_world: World,
                 iota_rig.HARD_TRANSFER_CANDIDATE_HOOK = None
                 iota_rig.HARD_TRANSFER_GATE_OVERRIDE_HOOK = None
                 clamp_stored_phase(world, event["variant"])
+                payload_zero = payload_zero and int(np.count_nonzero(world.P)) == 0
+                exact = exact and ledger_error(world) == 0.0
                 next_lineages, collided, _, inherited = advance_lineages(lineages, world, transfers)
                 collision |= collided
                 for index in range(2):
@@ -159,6 +163,17 @@ def run_case(event: dict[str, str], branch_offset: int, base_world: World,
         iota_rig.HARD_TRANSFER_TRACE_HOOK = None
         iota_rig.HARD_TRANSFER_CANDIDATE_HOOK = None
         iota_rig.HARD_TRANSFER_GATE_OVERRIDE_HOOK = None
+    if case is None and allow_censored:
+        case = {
+            "init_seed": int(event["init_seed"]), "event_start_offset": int(event["start_offset"]),
+            "branch_offset": branch_offset, "branch_sample": sample, "branch_seed": branch_seed,
+            "terminal_offset": "", "singleton_lineage_size": len(lineages[singleton_index]),
+            "preexisting_descendant": "", "handoff_success": 0, "death_tick_child_count": 0,
+            "candidate_events": 0, "singleton_candidate_events": 0,
+            "outcome_class": "censored", "lineage_collision": csv_bool(collision),
+            "payload_zero_all_offsets": csv_bool(payload_zero),
+            "ledger_exact_all_offsets": csv_bool(exact),
+        }
     if case is None:
         raise RuntimeError(f"terminal address loss not observed for branch {branch_seed}")
     return case, terminal_rows

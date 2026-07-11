@@ -2798,3 +2798,174 @@ show that the simulator's iteration order is substrate-independent.
 Next: replicate frozen one-event interventions across the remaining natural
 failure mechanisms, then test the temporal rule on independently generated
 source geometries.
+
+## Finding 067 Kickoff
+
+Finding 067 is a prospective matched causal-replication study of the three
+natural death labels isolated in Finding 066. The labels are hierarchical, not
+mechanistically exclusive: gate-labeled and preemption-labeled cases may still
+terminate by spending their final amplitude. The intervention semantics
+below are frozen before examining any Finding 067 branch outcome.
+
+Confirmation ensemble:
+
+```text
+source states: the three strict Finding 060 rebridge states
+fresh branch_sample: 96..159 inclusive
+branches per source: 64
+total natural baselines: 192
+branch offsets: 65, 424, 112
+natural horizon: 128 offsets
+post-intervention horizon: 256 offsets
+```
+
+Only collision-free, single-address natural deaths enter a death-class causal
+cohort. Preexisting-descendant and natural-child cases remain negative controls
+for accounting but receive no rescue intervention.
+
+Frozen one-decision interventions:
+
+```text
+gate_failed:
+  permit the first naturally failed singleton-source gate whose target is
+  inactive at evaluation
+
+source_exhausted:
+  veto the successful singleton-source transfer to an already-active target
+  that consumes its last available amplitude immediately before exhaustion
+
+target_preempted:
+  veto the earlier successful activation that changes the singleton's first
+  preempted target from inactive-at-tick-start to active-before-evaluation
+```
+
+Each intervention changes exactly one gate result, consumes the original gate
+draw, and leaves the world identical through that decision. A matched sham uses
+the same override path but returns the natural gate result unchanged. Exact
+baseline/sham equality is mandatory. RNG alignment is claimed only through the
+intervened draw; subsequent random-draw counts may lawfully diverge after state
+divergence.
+
+Outcomes, reported separately by natural death label and causal mediator:
+
+```text
+immediate ancestry-preserving child on the intervention tick;
+route reopened immediately afterward (capacity retained, a previously unreached
+candidate evaluated, or the preempted target remains available);
+delay to original-address death;
+ancestry-preserving handoff at first post-intervention address death;
+collision, payload-zero, and ledger-exact safety;
+paired flip counts and exact binomial intervals.
+```
+
+The gate-failure manipulation is an efficacy test, not an estimate of natural
+gate probability. The exhaustion and preemption manipulations test whether the
+identified closing event is causally necessary in that branch; a still-negative
+outcome is informative because removing one closure need not realize a child.
+No class-level replication claim is permitted for a death class with fewer than
+five eligible fresh branches.
+
+Pre-outcome implementation refinement: the first fresh branch revealed that the
+Finding 066 precedence label `gate_failed` includes failed gates to already
+active targets, which are not successor opportunities. Before producing any
+Finding 067 aggregate, causal-cohort assignment was therefore frozen directly
+from the ledger mechanism:
+
+```text
+target_preempted: an inactive-at-start target is active before singleton review;
+gate_failed: a singleton gate to a target inactive at evaluation naturally fails;
+source_exhausted: a successful non-child transfer spends the final amplitude
+                  before a selected candidate is reached.
+```
+
+The original Finding 066 outcome label is retained in the data, but intervention
+and aggregation use this causal ledger label. This changes no threshold and
+uses no counterfactual outcome.
+
+After these semantics are frozen and evaluated, the same protocol may be
+carried unchanged to a preregistered fresh-initialization geometry screen. New
+geometries must be selected by the strict Finding 060 transport criteria alone,
+without inspecting their Finding 067 intervention outcomes.
+
+Independent-geometry stage, frozen before the screen:
+
+```text
+initialization seeds: 57..72 inclusive (16 never-used seeds)
+law/config: canonical v0.3.6; change only init.seed and objective in memory
+variant: takeover_only_vector_phase
+checkpoint: 2048
+continuation samples: 0..7 for every initialization seed
+continuation RNG: unique stream keyed by initialization seed and sample
+horizon: 600
+screen completion: all 128 cases, regardless of when positives appear
+```
+
+Every Class B event receives the frozen Finding 060 strict-transport audit.
+Temporal-test eligibility additionally requires exactly two reconstructed
+predecessor regions, exactly one singleton predecessor, singleton persistence
+and activity at rebridge, a causally necessary successor, and bridge Jaccard
+zero. All candidates and exclusions remain in the manifest. For the primary
+independent analysis, select at most one eligible event per initialization seed:
+the lexicographically first `(sample_index, start_offset, rebridge_offset)`.
+Selection is frozen and hashed before terminal outcomes are examined.
+
+Each selected source is branched at rebridge, never at a terminal-aligned offset:
+
+```text
+branch samples per independent source: 32 (0..31)
+natural and replay horizon from rebridge: 256
+same causal-label detector and one-decision intervention policy as Finding 067A
+primary unit of generalization: initialization seed/source geometry
+```
+
+Zero qualifying geometries is inconclusive. Results are source-clustered; branch
+replicates are conditional stochastic trials and are not counted as independent
+geometries.
+
+## Finding 067A Result and 067B Source Freeze
+
+The prospective same-state confirmation completed 192 fresh natural branches
+(samples 96..159). The frozen causal-ledger detector yielded 36 eligible
+one-decision replays:
+
+```text
+successor-gate failures: 6
+  route reopened: 6/6
+  immediate ancestry child: 6/6
+  eventual handoff: 6/6
+
+source exhaustion: 30
+  route reopened: 30/30
+  immediate ancestry child: 3/30
+  eventual handoff: 28/30
+  median address-loss delay: 5.5 offsets
+
+target preemption: 0 fresh eligible cases; unreplicated
+```
+
+All matched shams were exact, each intervention matched exactly one frozen gate,
+and all natural and intervention trajectories were collision-free, payload-zero,
+and ledger-exact. The two exhaustion non-rescues still reopened the route but
+later died without handoff, demonstrating that extending opportunity lifetime is
+not identical to realizing a successor.
+
+The independent screen then completed all 128 preregistered cases across
+initialization seeds 57..72. It audited 29 Class B candidates, found four strict
+singleton-eligible transports across two initialization seeds, and froze one
+primary source per seed before terminal outcomes:
+
+```text
+f067b-source-001: seed 58, sample 1, split 447, rebridge 458
+f067b-source-002: seed 71, sample 6, split 188, rebridge 194
+```
+
+The two additional eligible events (seed 58 sample 5; seed 71 sample 7) remain
+in the manifest but are excluded from the primary geometry analysis. Frozen
+source-manifest SHA-256:
+
+```text
+15ed649a3db93492e1b2cbe4ea72261c10717cf2cdb6a07f6df6eb25b59d717e
+```
+
+No independent terminal or intervention outcome had been inspected when this
+selection was frozen.

@@ -1439,6 +1439,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                             "influence": float(influence),
                             "transfer_probability": float(transfer_probability),
                             "gate_draw": gate_draw,
+                            "natural_gate_passed": gate_draw < transfer_probability,
+                            "effective_gate_passed": False,
+                            "gate_overridden": gate_passed != (gate_draw < transfer_probability),
                             "status": "gate_failed",
                         }
                     )
@@ -1478,6 +1481,9 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                         "influence": float(influence),
                         "transfer_probability": float(transfer_probability),
                         "gate_draw": gate_draw,
+                        "natural_gate_passed": gate_draw < transfer_probability,
+                        "effective_gate_passed": True,
+                        "gate_overridden": gate_passed != (gate_draw < transfer_probability),
                         "target_activated": not target_active,
                         "status": "succeeded",
                     }
