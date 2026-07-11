@@ -3489,3 +3489,73 @@ The next experimental gate is prospective replication on newly screened
 independent initialization geometries. Only after that should we compare
 alternate selector/scheduler policies or exhaustive small intervention subsets
 toward a graph-theoretic minimum or necessary-and-sufficient continuation law.
+
+## Finding 070 Preregistration — Independent Persistence-Depth Replication
+
+Finding 070 tests whether the ordered counterfactual persistence depth observed
+in Finding 069 generalizes to newly initialized source geometries. No Finding
+070 branch, selector-veto, or cut-depth outcome may be inspected before the
+complete source screen and its selected-source manifest are committed.
+
+Frozen geometry screen:
+
+```text
+initialization seeds: 73..104 inclusive (32 unused seeds)
+continuation samples: 0..7 for every seed
+complete matrix: 256 cases; no outcome-dependent stopping
+law/config: canonical v0.3.6
+allowed in-memory config changes: init.seed and experiment.objective only
+variant: takeover_only_vector_phase
+checkpoint: 2048
+classification horizon: 600
+continuation stream base: 20260711
+```
+
+Every Class B event receives the unchanged Finding 060 strict-transport audit
+and independent predecessor-region reconstruction. Eligibility is unchanged
+from Finding 067: strict transport, exactly two predecessor regions, exactly one
+singleton predecessor, singleton persistence and activity at rebridge, a
+causally necessary successor bridge, bridge Jaccard zero, and exact
+reconstruction. All candidates and exclusions remain in the source manifest.
+
+For each qualifying initialization seed, select exactly one primary source: the
+lexicographically first `(sample_index, start_offset, rebridge_offset)` eligible
+event. All qualifying seeds are retained. The primary unit of geometry
+generalization is initialization seed, not continuation branch.
+
+After the screen manifest is committed, run exactly 32 factual branches per
+selected source from rebridge using branch samples `0..31`, natural horizon 256,
+and a frozen branch-seed base of `2026071500 + source_index*10000`. A branch
+enters the primary cut-depth cohort only when it naturally produces exactly one
+new ancestry-preserving child from a singleton lineage, with no preexisting
+descendant, collision, payload, or ledger error. Freeze the earliest such child
+in candidate event order and commit the complete selector manifest before any
+veto outcome.
+
+The counterfactual policy is identical to Finding 069:
+
+1. veto the first committed natural child while consuming its recorded draw and
+   retaining source amplitude;
+2. follow to original-address death or the fixed endpoint 128 offsets after the
+   depth-1 natural address-loss tick;
+3. for confirmed handoffs, freeze and commit the earliest next inherited child
+   before applying the next veto;
+4. repeat through depth 8, never resetting the endpoint;
+5. classify first lineage loss as ordered cut depth, depth-8 handoff as
+   right-censored above 8, and continued original-address activity as separate
+   source-survival censoring.
+
+Each depth must reproduce all earlier selectors exactly and match full event
+identity before intervention. A matched sham is required through the factual
+depth-1 selector. Payload, ledger, collision, selector, and provenance failures
+are protocol failures rather than post-treatment exclusions.
+
+Primary reports are the per-depth risk set, new cuts, confirmed handoffs,
+source-survival censoring, cut-depth assignments, selector target reuse, and
+per-initialization-source distributions. Zero selected geometries is
+inconclusive. A geometry-level replication statement requires at least two new
+selected initialization seeds and at least five factual eligible selectors in
+each; otherwise results remain case-level. Nontrivial counterfactual support is
+replicated when a confirmed depth-1 handoff occurs in at least two qualifying
+initialization seeds. The estimand remains prefix-minimal under this frozen
+retained-amplitude policy, not a graph-theoretic minimum or static route count.
