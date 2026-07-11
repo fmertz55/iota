@@ -258,6 +258,43 @@
         "The original gate draw is consumed and trajectories are identical through intervention, but downstream RNG consumption may diverge after the state diverges."
       ],
       "next_gate": "Test necessity by prospectively vetoing natural child-producing gates, quantify redundant successor routes, and extend the frozen independent-geometry screen before proposing an if-and-only-if continuation law."
+    },
+    {
+      "id": "GC-009",
+      "title": "Natural child realization is branch-necessary but frequently redundant",
+      "status": "supported with bounded causal and geometric scope",
+      "statement": "A factual-only stage froze 164 unique-child continuation events across five source states and four initialization seeds before counterfactual replay. Vetoing the committed child gate suppressed it in all 164 branches: 5 produced an alternate child on the same tick, 117 produced one later, and 42 produced none. All 122 branches with an alternate child handed off at first address death; all 42 without one lost the lineage. The first alternate target differed from the vetoed target in 105/122 cases.",
+      "finding": "Finding 068",
+      "definitions": [
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-TEMPORAL-GATE",
+        "DEF-OPPORTUNITY-LIFETIME",
+        "DEF-REALIZATION-REDUNDANCY",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding068/realization_necessity_freeze_summary.json",
+        "output/findings/finding068/realization_necessity_selectors.csv",
+        "output/findings/finding068/realization_necessity_summary.json",
+        "output/findings/finding068/realization_necessity_replays.csv",
+        "output/findings/finding068/realization_necessity_aggregate.csv",
+        "output/findings/finding068/realization_necessity_veto_candidates.csv"
+      ],
+      "analysis": "src/realization_necessity.py",
+      "supporting_analysis": [
+        "src/realization_necessity_replay.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-068-kickoff",
+      "limitations": [
+        "The estimand is robustness conditional on a factual natural continuation, not necessity prevalence across all branches.",
+        "Vetoing a successful child gate retains source amplitude and intentionally exposes alternate routes; it does not hold the post-gate state fixed.",
+        "An inherited child is required by the operational lineage definition, so the exact alternate-child/handoff correspondence is not an independent predictive association.",
+        "The five source states represent four initialization seeds; branch trials within a source are conditional stochastic replicates.",
+        "The ledger and interventions remain specific to selected candidates and the declared lexicographic scheduler."
+      ],
+      "next_gate": "Freeze sequential multi-gate interventions to identify minimal successor cut sets, quantify route redundancy before realization, and test those cut sets on additional independent initialization geometries."
     }
   ]
 }

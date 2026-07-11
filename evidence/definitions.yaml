@@ -115,6 +115,14 @@
       "kind": "causal observable",
       "status": "operational",
       "definition": "The ordered event or tick interval during which a specified successor transition remains admissible, ending when that transition is realized or a declared lawful event makes the route unavailable."
+    },
+    {
+      "id": "DEF-REALIZATION-REDUNDANCY",
+      "term": "Realization redundancy",
+      "symbol": "",
+      "kind": "causal observable",
+      "status": "operational",
+      "definition": "For a factual ancestry-producing event selected before intervention, temporal redundancy occurs when vetoing that event leads to another ancestry-preserving child within the declared follow-up. The selected event is branch-necessary when the address instead dies without inherited continuation; continued source activity at the horizon is censored."
     }
   ]
 }

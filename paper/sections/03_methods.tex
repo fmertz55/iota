@@ -53,3 +53,19 @@ Each selected source was then branched 32 times at rebridge, rather than at a
 later terminal-aligned state, and evaluated with the same intervention policy.
 Initialization seed is the independent geometry unit; branch outcomes are
 conditional stochastic replicates.
+
+\subsection{Reverse necessity and redundancy test}
+
+Finding 068 separated factual selection from intervention. First, all 256 fresh
+factual branches were completed and every collision-free, single-address,
+natural child event was written to a selector manifest. The manifest stored the
+candidate and gate ordinals, source, target, amplitude, target state,
+probability, and random draw and was committed before replay. Every selected
+factual event had exactly one inherited child.
+
+The replay stage accepted only the committed manifest hash. It reproduced an
+exact sham, matched every frozen event field, consumed the natural draw, and
+forced that one successful child gate to fail. Each branch was followed for 128
+offsets after intervention or until first original-address death. Alternate
+child timing (same tick, delayed, or none) and address endpoint (handoff, lineage
+loss, or source-survival censoring) were recorded as independent axes.

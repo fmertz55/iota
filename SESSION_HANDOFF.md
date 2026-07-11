@@ -3135,3 +3135,53 @@ SHA-256:
 ```
 
 No veto outcome had been run or inspected when this manifest was frozen.
+
+## Finding 068 Result
+
+The replay stage consumed only selector manifest
+`9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0`,
+which was committed in `a951f59` before any veto outcome was run.
+
+All 164 selected natural child events were suppressed by exactly one gate veto.
+The response decomposed cleanly:
+
+```text
+alternate ancestry child timing:
+  same tick:   5
+  delayed:   117
+  none:       42
+
+address-loss endpoint:
+  handoff:    122
+  lineage loss: 42
+  source-survival censoring: 0
+```
+
+The two axes matched exactly in this experiment: every one of the 122 branches
+that realized an alternate child handed off, and all 42 branches without an
+alternate child lost the lineage at first address death. The first alternative
+used the originally selected target in 17/122 cases and a different target in
+105/122. Source capacity was retained immediately after veto in 161/164 cases.
+
+Per-source eventual handoff after veto:
+
+```text
+original seed 46 / start 61:   17/33
+original seed 46 / start 420:  31/39
+original seed 56 / start 106:  31/36
+independent seed 58:           23/30
+independent seed 71:           20/26
+```
+
+Thus the one natural child event was branch-necessary in 42/164 cases and
+temporally redundant in 122/164. Redundancy and necessity both occurred in
+every initialization seed represented. This estimates robustness conditional
+on factual continuation; it does not estimate necessity prevalence across all
+branches. The exact alternate-child/handoff correspondence partly follows the
+operational lineage definition and is not treated as an independent predictive
+association.
+
+All shams preserved exact world and RNG state through the selector. Every
+selector identity, original draw, and probability matched; there was exactly
+one override per replay, zero lineage collisions, zero payload, and exact
+conservation.

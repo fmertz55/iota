@@ -1,0 +1,6 @@
+cohort,source_id,init_seed,event_start_offset,natural_branches,eligible_vetoes,targeted_events_suppressed,same_tick_redundancy,delayed_redundancy,no_alternate_child,lineage_loss_at_address_death,source_survival_censored,eventual_handoffs,eventual_handoff_rate,eventual_handoff_ci_low,eventual_handoff_ci_high,median_address_loss_delay,class_level_replication_eligible
+independent_geometries,f067b-source-001,58,447,32,30,30,0,23,7,7,0,23,0.7666666666666667,0.5771634770217805,0.9006621350419802,10.5,1
+independent_geometries,f067b-source-002,71,188,32,26,26,0,20,6,6,0,20,0.7692307692307693,0.5635249030586135,0.9102598891154248,7.5,1
+original_states,original-seed46-start420,46,420,64,39,39,2,29,8,8,0,31,0.7948717948717948,0.6353557593048812,0.9070360727170044,9,1
+original_states,original-seed46-start61,46,61,64,33,33,3,14,16,16,0,17,0.5151515151515151,0.3354444783885558,0.6920365563952677,3,1
+original_states,original-seed56-start106,56,106,64,36,36,0,31,5,5,0,31,0.8611111111111112,0.7050250518893685,0.9533223393969097,9.0,1

@@ -1,0 +1,61 @@
+{
+  "artifacts": [
+    {
+      "bytes": 1096,
+      "path": "output/findings/finding068/realization_necessity_freeze_summary.json",
+      "sha256": "c4535b8ce4f69ebd42ab68aa051919e67bb6d3af96daaf2ff4eb8030dacd3f91"
+    },
+    {
+      "bytes": 39800,
+      "path": "output/findings/finding068/realization_necessity_selectors.csv",
+      "sha256": "9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0"
+    },
+    {
+      "bytes": 4672,
+      "path": "output/findings/finding068/realization_necessity_summary.json",
+      "sha256": "9a73e410e66851b606b82ad9fae85141b0bbec086de2a46010e4670e61e1cd35"
+    },
+    {
+      "bytes": 35769,
+      "path": "output/findings/finding068/realization_necessity_replays.csv",
+      "sha256": "cbba811983592c635a85529ceac467b3fb9d7d27de5fb585d4f56ddaaf728cb1"
+    },
+    {
+      "bytes": 1033,
+      "path": "output/findings/finding068/realization_necessity_aggregate.csv",
+      "sha256": "4efbb2f4e8555ae70eacf318989401955d397cfc828443942af86af57993dcdd"
+    },
+    {
+      "bytes": 6591194,
+      "path": "output/findings/finding068/realization_necessity_veto_candidates.csv",
+      "sha256": "c434b3278c95d5cc976435d86849c48dd6e4809cdf7d827ae47d229f8ffe48b8"
+    },
+    {
+      "bytes": 26556,
+      "path": "src/realization_necessity.py",
+      "sha256": "686155bab3f0a5cc4e9359ea009000fc7c482c8bb203f541de0d0d6ad2254870"
+    },
+    {
+      "bytes": 10840,
+      "path": "src/realization_necessity_replay.py",
+      "sha256": "5dfb6f492e4901a65fb0753a98fd5fe072db3840a2a82ae64a6e048c9dd6dcaf"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 19286,
+      "path": "evidence/claims.yaml",
+      "sha256": "681820c0a061b37f298aab0e2d90489c520615b81f118e54b05f7c50d28b02d2"
+    },
+    {
+      "bytes": 6150,
+      "path": "evidence/definitions.yaml",
+      "sha256": "2d7fc908a041210018773af554073e46d5c9c472be16bd5cf14c970c79f85538"
+    }
+  ],
+  "claim_id": "GC-009",
+  "schema_version": 1
+}

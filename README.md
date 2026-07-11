@@ -149,6 +149,15 @@ reopens one preempted target followed by handoff. Opportunity is therefore
 causal but not sufficient: a lawful successor must also be realized while the
 route remains open.
 
+Finding 068 reverses the intervention and tests realized-child necessity. A
+factual-only stage freezes 164 natural unique-child events across all five
+source states before any veto. Suppressing that committed child produces an
+alternate child on the same tick in `5`, later in `117`, and never in `42`.
+All `122` alternate-child branches hand off; all `42` without an alternative
+lose the lineage at address death. The first alternative uses a different
+target in `105/122`. Thus a particular realization is frequently redundant,
+but continuation still requires some timely ancestry-preserving realization.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -172,10 +181,13 @@ route remains open.
 - [Finding 067 independent geometry screen](output/findings/finding067/independent_geometry_screen_summary.json)
 - [Frozen independent source manifest](output/findings/finding067/independent_geometry_screen_source_manifest.csv)
 - [Finding 067 independent causal replication](output/findings/finding067/independent_temporal_replication_summary.json)
+- [Finding 068 factual selector freeze](output/findings/finding068/realization_necessity_freeze_summary.json)
+- [Finding 068 frozen child selectors](output/findings/finding068/realization_necessity_selectors.csv)
+- [Finding 068 necessity replay](output/findings/finding068/realization_necessity_summary.json)
 
-The next gate tests necessity by vetoing natural child-producing gates, measures
-redundant successor routes, and extends the independent geometry cohort before
-any if-and-only-if continuation law is proposed.
+The next gate identifies minimal successor cut sets through frozen sequential
+vetoes, quantifies route redundancy before realization, and extends the
+independent geometry cohort before any if-and-only-if law is proposed.
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.
 

@@ -16,6 +16,7 @@ from evidence_common import (
     load_gc006,
     load_gc007,
     load_gc008,
+    load_gc009,
     load_registry,
     sha256,
     strict_events,
@@ -329,6 +330,73 @@ def main() -> int:
         for key in ("all_shams_exact", "all_exactly_one_override", "all_payload_zero", "all_ledger_exact")
     ) or int(gc008_independent["collision_replays"]) != 0:
         fail("GC-008 independent safety or intervention invariant failed", errors)
+
+    _, gc009_freeze, gc009_summary, gc009_replays = load_gc009()
+    selector_hash = "9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0"
+    if (
+        gc009_freeze["counterfactual_outcomes_run"] is not False
+        or int(gc009_freeze["natural_branches"]) != 256
+        or int(gc009_freeze["eligible_selectors"]) != 164
+        or gc009_freeze["natural_child_multiplicity"] != {"1": 164}
+        or gc009_freeze["selectors_sha256"] != selector_hash
+    ):
+        fail("GC-009 factual selector freeze changed", errors)
+    selector_path = ROOT / "output/findings/finding068/realization_necessity_selectors.csv"
+    if sha256(selector_path) != selector_hash:
+        fail("GC-009 committed selector-manifest bytes changed", errors)
+    if gc009_summary["selector_manifest_sha256"] != selector_hash:
+        fail("GC-009 replay did not consume frozen selector manifest", errors)
+    if gc009_summary["alternate_child_timing"] != {"delayed": 117, "none": 42, "same_tick": 5}:
+        fail("GC-009 alternate-child timing changed", errors)
+    if gc009_summary["address_endpoints"] != {
+        "handoff_at_first_address_loss": 122,
+        "lineage_loss_at_first_address_loss": 42,
+    }:
+        fail("GC-009 address endpoints changed", errors)
+    if len(gc009_replays) != 164:
+        fail("GC-009 replay count changed", errors)
+    capacity_retained = sum(int(row["source_capacity_retained_after_veto"]) for row in gc009_replays)
+    first_same_target = sum(
+        row["first_alternate_child_target"] != ""
+        and row["first_alternate_child_target"] == row["selector_target"]
+        for row in gc009_replays
+    )
+    timing_endpoint_mismatches = sum(
+        (row["alternate_child_timing"] == "none")
+        != (row["address_endpoint"] == "lineage_loss_at_first_address_loss")
+        for row in gc009_replays
+    )
+    if capacity_retained != 161 or first_same_target != 17 or timing_endpoint_mismatches != 0:
+        fail(
+            "GC-009 mediator details changed: "
+            f"capacity={capacity_retained} same_target={first_same_target} mismatches={timing_endpoint_mismatches}",
+            errors,
+        )
+    expected_sources = {
+        "original-seed46-start61": (33, 17),
+        "original-seed46-start420": (39, 31),
+        "original-seed56-start106": (36, 31),
+        "f067b-source-001": (30, 23),
+        "f067b-source-002": (26, 20),
+    }
+    observed_sources = {
+        source_id: (
+            sum(row["source_id"] == source_id for row in gc009_replays),
+            sum(row["source_id"] == source_id and int(row["eventual_handoff"]) == 1 for row in gc009_replays),
+        )
+        for source_id in expected_sources
+    }
+    if observed_sources != expected_sources:
+        fail(f"GC-009 per-source outcomes changed: {observed_sources}", errors)
+    if not all(
+        gc009_summary[key]
+        for key in (
+            "all_shams_exact", "all_world_and_rng_exact_through_selector",
+            "all_selector_identities_exact", "all_exactly_one_override",
+            "all_payload_zero", "all_ledger_exact",
+        )
+    ) or int(gc009_summary["collision_replays"]) != 0:
+        fail("GC-009 safety or intervention invariant failed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

@@ -99,6 +99,16 @@ def load_gc008() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[s
     return claim, same_state, screen, independent
 
 
+def load_gc009() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, str]]]:
+    claims = load_registry(ROOT / "evidence" / "claims.yaml")
+    claim = next(item for item in claims["claims"] if item["id"] == "GC-009")
+    freeze = json.loads((ROOT / claim["evidence"][0]).read_text(encoding="utf-8"))
+    summary = json.loads((ROOT / claim["evidence"][2]).read_text(encoding="utf-8"))
+    with (ROOT / claim["evidence"][3]).open(newline="", encoding="utf-8") as handle:
+        replays = list(csv.DictReader(handle))
+    return claim, freeze, summary, replays
+
+
 def strict_events(events: list[dict[str, str]]) -> list[dict[str, str]]:
     return [row for row in events if row["constraint_transport"] == "1"]
 
