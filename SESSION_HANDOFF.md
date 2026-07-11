@@ -3948,9 +3948,11 @@ sources and response dimensions. A local-field confirmation requires all of:
 2. local-model error below both the intrinsic-only and discovery-mean baselines;
 3. local-model absolute error below the intrinsic baseline in at least two of
    the six response dimensions;
-4. a one-sided exact permutation p-value at or below 0.05, obtained by permuting
+4. a one-sided permutation p-value at or below 0.05, obtained by permuting
    complete confirmation response vectors across source predictions and using
-   the local-model mean squared error as the statistic.
+   the local-model mean squared error as the statistic. All permutations are
+   enumerated when at most nine confirmation sources qualify; otherwise the
+   identity plus 100,000 permutations from frozen RNG seed `20260719` are used.
 
 The model, feature schema, discovery source hashes, selector hashes, and
 pre-confirmation state are committed before confirmation outcomes. A negative
