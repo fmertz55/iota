@@ -7645,3 +7645,99 @@ past address-lineage termination without retrospectively selecting descendants.
 - `output/findings/finding061/predecessor_region_lineage_cases.csv`
 - `output/findings/finding061/predecessor_region_lineage_timeline.csv`
 - `output/findings/finding061/predecessor_region_lineage_summary.json`
+
+---
+
+## Finding 062 — Singleton expression lineage propagates beyond address death
+
+### Question
+
+Finding 061 showed that every strict-positive address lineage terminates when
+its singleton predecessor address becomes inactive. Finding 062 tested whether
+the expressed relation continues through a prospectively identified child.
+
+### Preregistered Expression-Lineage Rule
+
+```text
+retain lineage addresses that remain active;
+inherit identity only when a successful transfer from a current lineage source
+newly activates its target in that tick;
+do not assign identity to an already-active target;
+invalidate a strict result if two lineages claim the same new target;
+terminate permanently when no retained address or directly activated child
+remains.
+```
+
+The rule uses no later connectivity or outcome information.
+
+### Instrumentation Gate
+
+An optional hard-transfer observer recorded successful source/target events. A
+128-step paired continuation with and without the observer produced exact
+equality of every world array and RNG state while the observer recorded `94`
+successful transfers. The instrumentation therefore passed the non-perturbation
+gate.
+
+### Result
+
+| Seed | Initial event | Address lifetime | Expression lifetime | Beyond address death |
+|---:|---:|---:|---:|---:|
+| `46` | `61 → 65` | `9` | `170` | `161` |
+| `46` | `420 → 424` | `3` | `601` censored | at least `598` |
+| `56` | `106 → 112` | `51` | `51` | `0` |
+
+The first seed-46 handoff at address loss was:
+
+```text
+offset: 74
+source: (17,28,25)
+target: (17,29,25)
+target newly activated: yes
+source active afterward: no
+```
+
+The second seed-46 lineage had already branched before original-address loss and
+continued through repeated prospective activations to the offset-`1024` horizon.
+
+Aggregate:
+
+```text
+singleton expression survives address death: 2 / 3 strict positives
+positive expression lifetime:                0 / 9 role-bearing failures
+lineage collisions:                          0 / 12
+second strict transports:                    0 / 12
+payload zero:                               12 / 12
+ledger exact:                               12 / 12
+```
+
+### Interpretation
+
+The supported statement is:
+
+```text
+In two seed-46 trajectories, the singleton side of a transported relation is
+not tied to its stationary address. Its prospectively traced expression lineage
+continues through lawful source-to-new-target activations while the relation
+remains reachable.
+```
+
+This is not yet seed-robust. The second independent seed terminates without a
+qualifying child, and the two positives share seed 46 and continuation sample 7.
+The surviving lineage is an operational ancestry relation, not evidence for a
+substance moving between cells.
+
+### Next Gate
+
+Branch new continuations from states immediately before the two seed-46 address
+losses and the seed-56 termination. Test whether expression propagation is robust
+to continuation RNG and identify the local condition separating successful
+handoff from termination.
+
+### Artifacts
+
+- `src/expression_lineage_transport.py`
+- `src/iota_rig.py` (default-off measurement hook)
+- `output/findings/finding062/expression_lineage_cases.csv`
+- `output/findings/finding062/expression_lineage_ancestry.csv`
+- `output/findings/finding062/expression_lineage_timeline.csv`
+- `output/findings/finding062/expression_lineage_summary.json`

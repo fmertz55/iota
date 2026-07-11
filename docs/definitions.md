@@ -82,3 +82,12 @@ The experiment's conservation ledger has zero recorded discrepancy at every audi
 - Symbol: none
 
 A conservative lineage that remains alive while at least one original stationary iota address of the predecessor region remains active; later reactivation after complete address loss does not restore the terminated lineage.
+
+## Prospective expression lineage
+
+- ID: `DEF-EXPRESSION-LINEAGE`
+- Kind: observable
+- Status: operational
+- Symbol: none
+
+A non-resurrecting lineage propagated only when a successful transfer from a current lineage address newly activates its target in that tick; retained active addresses remain members, already-active targets do not inherit identity, and ambiguous dual claims invalidate a strict result.

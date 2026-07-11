@@ -95,6 +95,15 @@ lineage becomes inactive, and none undergoes a second continuous strict
 transport through offset `1024`. This is evidence for finite post-transport
 address persistence, not indefinite or iterated persistence.
 
+Finding 062 replaces address identity with a preregistered prospective
+expression lineage: a newly activated target inherits identity only from the
+current lineage source whose successful transfer activates it. Two seed-46
+strict transports continue beyond address death, extending relation lifetime
+from `9` to `170` offsets and from `3` to at least `601` offsets. The latter is
+still alive at the offset-`1024` censoring horizon. The seed-56 strict transport
+does not propagate, and all nine role-bearing failures remain negative. No
+lineage collisions or second strict transports were observed.
+
 ### Inspect GC-001
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -104,12 +113,14 @@ address persistence, not indefinite or iterated persistence.
 - [Experimental interpretation and next gate](SESSION_HANDOFF.md#finding-060-update)
 - [Finding 061 lineage cases](output/findings/finding061/predecessor_region_lineage_cases.csv)
 - [Finding 061 machine-readable summary](output/findings/finding061/predecessor_region_lineage_summary.json)
+- [Finding 062 ancestry evidence](output/findings/finding062/expression_lineage_ancestry.csv)
+- [Finding 062 machine-readable summary](output/findings/finding062/expression_lineage_summary.json)
 
-The next gate preregisters a non-resurrecting expression-lineage matcher using
-local transition ancestry, then tests whether the singleton relation relocates
-when its original address becomes inactive. As new experiments land, this
-section should report the strongest supported claim at that commit while Git
-history preserves earlier states of the evidence.
+The next gate tests seed and continuation robustness of prospective expression
+transport from the two seed-46 source states and compares their ancestry with
+the seed-56 termination. As new experiments land, this section should report the
+strongest supported claim at that commit while Git history preserves earlier
+states of the evidence.
 
 ## Reviewer paths
 

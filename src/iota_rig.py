@@ -12,6 +12,12 @@ import yaml
 import matplotlib.pyplot as plt
 
 
+# Optional measurement-only observer for successful hard-transfer events.
+# The hook must not mutate the supplied event or world state. It is disabled in
+# ordinary simulation and consumes no random draws.
+HARD_TRANSFER_TRACE_HOOK = None
+
+
 # Field layout: four arrays, not one giant object array.
 # active: bool/non-dark marker
 # A: amplitude 0..7
@@ -1386,6 +1392,16 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
 
             exchanges += 1
             amplitude_transfers += 1
+            if HARD_TRANSFER_TRACE_HOOK is not None:
+                HARD_TRANSFER_TRACE_HOOK(
+                    {
+                        "source": (int(x), int(y), int(z)),
+                        "target": (int(tx), int(ty), int(tz)),
+                        "target_activated": not target_active,
+                        "target_depleted": target_depleted,
+                        "candidate_order": int(candidate["order"]),
+                    }
+                )
             if int(candidate["order"]) != 0:
                 secondary_exchanges += 1
             alignment = vector_alignment(primary_step, candidate["step"])

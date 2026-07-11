@@ -1,0 +1,46 @@
+{
+  "artifacts": [
+    {
+      "bytes": 543,
+      "path": "output/findings/finding062/expression_lineage_summary.json",
+      "sha256": "8a1cf6535aa52d691397c06aff15e2ef6593d4d32b8a46b549786dab2532cdcd"
+    },
+    {
+      "bytes": 1665,
+      "path": "output/findings/finding062/expression_lineage_cases.csv",
+      "sha256": "9700889b4070c3028b691dd573f53f1dac9b14e940da0eb6fd40a20114691cc5"
+    },
+    {
+      "bytes": 116190,
+      "path": "output/findings/finding062/expression_lineage_ancestry.csv",
+      "sha256": "19d8bc9b56245dbcf3ee2dc9565081d827bd5e4bf3408d4802048b9ce8a055ca"
+    },
+    {
+      "bytes": 579567,
+      "path": "output/findings/finding062/expression_lineage_timeline.csv",
+      "sha256": "e90c49b34c51a29b30200504b4799b3325370f38cb1a3eba86e7ea16281aa60d"
+    },
+    {
+      "bytes": 22259,
+      "path": "src/expression_lineage_transport.py",
+      "sha256": "05bc3aba4cbbe3cb15feee35529a902949216c77e9f433be63e52b447ab3dc66"
+    },
+    {
+      "bytes": 69072,
+      "path": "src/iota_rig.py",
+      "sha256": "4be2cf88bf279a1f7f47dfeb058788c9dabace2f491936fa3bf7aca2d9859541"
+    },
+    {
+      "bytes": 5904,
+      "path": "evidence/claims.yaml",
+      "sha256": "9575ed236c46e9ae60da40f2a962618f64cc9850989a9ce0a9ca6009623eb6dc"
+    },
+    {
+      "bytes": 3692,
+      "path": "evidence/definitions.yaml",
+      "sha256": "937803c87aa621b0883339601abe3a638af91a8a989b9d8c539277989567631a"
+    }
+  ],
+  "claim_id": "GC-003",
+  "schema_version": 1
+}

@@ -75,6 +75,14 @@
       "kind": "observable",
       "status": "operational",
       "definition": "A conservative lineage that remains alive while at least one original stationary iota address of the predecessor region remains active; later reactivation after complete address loss does not restore the terminated lineage."
+    },
+    {
+      "id": "DEF-EXPRESSION-LINEAGE",
+      "term": "Prospective expression lineage",
+      "symbol": "",
+      "kind": "observable",
+      "status": "operational",
+      "definition": "A non-resurrecting lineage propagated only when a successful transfer from a current lineage address newly activates its target in that tick; retained active addresses remain members, already-active targets do not inherit identity, and ambiguous dual claims invalidate a strict result."
     }
   ]
 }

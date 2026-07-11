@@ -75,6 +75,35 @@
         "The sample contains three strict positives and nine role-bearing failures inherited from Finding 060."
       ],
       "next_gate": "Define and preregister a non-resurrecting expression-lineage matcher, then test whether the singleton relation relocates when its original address becomes inactive."
+    },
+    {
+      "id": "GC-003",
+      "title": "Prospective singleton expression transport",
+      "status": "supported with bounded scope",
+      "statement": "In two of the three strict Finding 060 transports, the singleton expression lineage continued prospectively through successful source-to-new-target activations after its original stationary address became inactive, extending relational lifetime from 9 to 170 offsets and from 3 to at least 601 offsets; all nine role-bearing failures remained negative.",
+      "finding": "Finding 062",
+      "definitions": [
+        "DEF-CONSTRAINT-TRANSPORT",
+        "DEF-EXPRESSION-LINEAGE",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding062/expression_lineage_summary.json",
+        "output/findings/finding062/expression_lineage_cases.csv",
+        "output/findings/finding062/expression_lineage_ancestry.csv",
+        "output/findings/finding062/expression_lineage_timeline.csv"
+      ],
+      "analysis": "src/expression_lineage_transport.py",
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-062-kickoff",
+      "limitations": [
+        "The result contains two positive trajectories from one seed and one negative strict trajectory from a second seed.",
+        "Expression identity branches through successful new activations and is an operational lineage, not a fundamental conserved substance.",
+        "The longer positive remains alive at the offset-1024 censoring horizon, so its terminal lifetime is unknown.",
+        "No second disconnection and causal rebridge occurred under continuous expression identity."
+      ],
+      "next_gate": "Test seed and continuation robustness of prospective expression transport from the two seed-46 source states and compare against the seed-56 termination mechanism."
     }
   ]
 }

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import math
 import sys
 
@@ -9,6 +10,7 @@ from evidence_common import (
     evidence_metrics,
     load_gc001,
     load_gc002,
+    load_gc003,
     load_registry,
     strict_events,
 )
@@ -34,7 +36,13 @@ def main() -> int:
         for definition_id in claim.get("definitions", []):
             if definition_id not in definition_ids:
                 fail(f"{claim['id']} references unknown definition {definition_id}", errors)
-        for relative in [*claim.get("evidence", []), claim.get("analysis", "")]:
+        for relative in [
+            *claim.get("evidence", []),
+            claim.get("analysis", ""),
+            claim.get("instrumentation", ""),
+        ]:
+            if not relative:
+                continue
             if not relative or not (ROOT / relative).is_file():
                 fail(f"{claim['id']} references missing file {relative}", errors)
 
@@ -79,6 +87,55 @@ def main() -> int:
         fail("GC-002 second strict transport count changed", errors)
     if not gc002_summary["all_payload_zero"] or not gc002_summary["all_ledger_exact"]:
         fail("GC-002 safety invariant failed", errors)
+
+    _, gc003_summary, gc003_cases = load_gc003()
+    gc003_strict = [
+        row for row in gc003_cases if row["finding060_constraint_transport"] == "1"
+    ]
+    gc003_failures = [
+        row for row in gc003_cases if row["finding060_constraint_transport"] == "0"
+    ]
+    expression_lifetimes = [
+        int(row["expression_relation_lifetime"]) for row in gc003_strict
+    ]
+    if expression_lifetimes != [170, 601, 51]:
+        fail(f"GC-003 expression lifetimes changed: {expression_lifetimes}", errors)
+    survival = [
+        int(row["singleton_expression_survives_address_loss"]) for row in gc003_strict
+    ]
+    if survival != [1, 1, 0]:
+        fail(f"GC-003 singleton survival pattern changed: {survival}", errors)
+    if any(int(row["expression_relation_lifetime"]) != 0 for row in gc003_failures):
+        fail("GC-003 role-bearing failure acquired positive expression lifetime", errors)
+    if not gc003_summary["instrumentation_equivalence_passed"]:
+        fail("GC-003 instrumentation equivalence gate failed", errors)
+    if int(gc003_summary["lineage_collision_cases"]) != 0:
+        fail("GC-003 contains a lineage collision", errors)
+    if int(gc003_summary["second_strict_transport_cases"]) != 0:
+        fail("GC-003 second strict transport count changed", errors)
+    if not gc003_summary["all_payload_zero"] or not gc003_summary["all_ledger_exact"]:
+        fail("GC-003 safety invariant failed", errors)
+    with (ROOT / "output/findings/finding062/expression_lineage_ancestry.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        gc003_ancestry = list(csv.DictReader(handle))
+    first_handoff = [
+        row
+        for row in gc003_ancestry
+        if row["init_seed"] == "46"
+        and row["start_offset"] == "61"
+        and row["offset"] == "74"
+        and row["lineage_role"] == "singleton"
+    ]
+    if len(first_handoff) != 1:
+        fail(f"GC-003 expected one first singleton handoff, observed {len(first_handoff)}", errors)
+    elif (
+        first_handoff[0]["source"] != "17:28:25"
+        or first_handoff[0]["target"] != "17:29:25"
+        or first_handoff[0]["source_active_after"] != "0"
+        or first_handoff[0]["target_depleted_before"] != "1"
+    ):
+        fail(f"GC-003 first singleton handoff changed: {first_handoff[0]}", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

@@ -11,24 +11,24 @@
       "sha256": "8bbdc3e06fff78a6f9d6187a92ccaa35240af7efb4ae3877188738db4dbb7aa6"
     },
     {
-      "bytes": 508429,
+      "bytes": 542854,
       "path": "output/findings/finding061/predecessor_region_lineage_timeline.csv",
-      "sha256": "2e9f50b3d7428fe8c0f875620886b9c9aa2c164544eba08c5a782c6c62465d9c"
+      "sha256": "6d082012ec1e5d86d582e78dded78bc757e9cb9cd8dcc6511a1a73c661acd603"
     },
     {
-      "bytes": 14352,
+      "bytes": 14426,
       "path": "src/predecessor_region_lineage.py",
-      "sha256": "fc7cef45097100cc6014432a19cc294e49171dce05854f62b2c3fa331f58d443"
+      "sha256": "4c4f7cf992a48ff13e6e077058c0c64086749fc98c7b2cd0a1a75ac5f24d0d43"
     },
     {
-      "bytes": 4014,
+      "bytes": 5904,
       "path": "evidence/claims.yaml",
-      "sha256": "2df94a98ec5dd9b311cc0084b29f6b9da819fb135a821e9ec4d63ad4de21eba9"
+      "sha256": "9575ed236c46e9ae60da40f2a962618f64cc9850989a9ce0a9ca6009623eb6dc"
     },
     {
-      "bytes": 3206,
+      "bytes": 3692,
       "path": "evidence/definitions.yaml",
-      "sha256": "221cb2433c5bf18a211c1bfe7c732386f1eda3ccf81836eddfd09392adeba709"
+      "sha256": "937803c87aa621b0883339601abe3a638af91a8a989b9d8c539277989567631a"
     }
   ],
   "claim_id": "GC-002",

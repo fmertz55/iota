@@ -1,0 +1,13 @@
+init_seed,variant,sample_index,continuation_seed,start_offset,rebridge_offset,horizon,finding060_constraint_transport,relation_reachable_at_rebridge,expression_relation_lifetime,singleton_address_loss_offset,singleton_expression_loss_offset,singleton_expression_survives_address_loss,expression_survival_beyond_address_loss,first_expression_relation_loss_offset,second_rebridge_offset,second_successor_cells,second_successor_role_critical,second_successor_disjoint,second_strict_transport,lineage_collision,payload_zero_all_offsets,ledger_exact_all_offsets
+44,zero_phase,0,2068260708,268,279,1024,0,0,0,279,279,0,0,279,,,0,0,0,0,1,1
+46,takeover_only_vector_phase,3,2068260711,210,226,1024,0,0,0,226,226,0,0,226,,,0,0,0,0,1,1
+46,takeover_only_vector_phase,7,2068260715,61,65,1024,1,1,170,74,235,1,161,235,,,0,0,0,0,1,1
+46,takeover_only_vector_phase,7,2068260715,420,424,1024,1,1,601,427,,1,598,,,,0,0,0,0,1,1
+46,takeover_only_vector_phase,7,2068260715,466,472,1024,0,0,0,472,472,0,0,472,,,0,0,0,0,1,1
+46,takeover_rotation_vector_phase,1,2068260709,174,176,1024,0,0,0,176,176,0,0,176,,,0,0,0,0,1,1
+46,takeover_rotation_vector_phase,6,2068260714,134,141,1024,0,0,0,141,141,0,0,141,,,0,0,0,0,1,1
+56,takeover_only_vector_phase,3,2068260711,106,112,1024,1,1,51,163,163,0,0,163,,,0,0,0,0,1,1
+56,takeover_only_vector_phase,4,2068260712,407,423,1024,0,0,0,423,423,0,0,423,,,0,0,0,0,1,1
+56,takeover_rotation_vector_phase,0,2068260708,503,507,1024,0,0,0,507,507,0,0,507,,,0,0,0,0,1,1
+56,takeover_rotation_vector_phase,3,2068260711,207,210,1024,0,0,0,210,210,0,0,210,,,0,0,0,0,1,1
+56,takeover_rotation_vector_phase,5,2068260713,407,422,1024,0,0,0,422,422,0,0,422,,,0,0,0,0,1,1

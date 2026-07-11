@@ -1,0 +1,14 @@
+{
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "ancestry_csv": "output/findings/finding062/expression_lineage_ancestry.csv",
+  "case_csv": "output/findings/finding062/expression_lineage_cases.csv",
+  "cases": 12,
+  "instrumentation_equivalence_event_count": 94,
+  "instrumentation_equivalence_passed": true,
+  "lineage_collision_cases": 0,
+  "second_strict_transport_cases": 0,
+  "singleton_expression_survival_cases": 2,
+  "strict_input_cases": 3,
+  "timeline_csv": "output/findings/finding062/expression_lineage_timeline.csv"
+}

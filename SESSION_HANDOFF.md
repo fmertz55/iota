@@ -2222,3 +2222,124 @@ output/findings/finding061/predecessor_region_lineage_cases.csv
 output/findings/finding061/predecessor_region_lineage_timeline.csv
 output/findings/finding061/predecessor_region_lineage_summary.json
 ```
+
+## Finding 062 Kickoff
+
+Finding 062 tests whether the singleton predecessor expression continues after
+its original stationary address becomes inactive.
+
+Prospective expression-lineage rule:
+
+```text
+At each tick, a lineage retains its addresses that remain active.
+
+A newly activated target inherits a lineage only when the successful transfer
+that activates it has a source in that lineage at the start of the tick.
+
+An already-active target does not acquire lineage through a later transfer.
+
+If two predecessor lineages claim the same newly activated target in one tick,
+the identity is marked collided and is not eligible for a strict result.
+
+Once a lineage has no retained address and no directly activated child, it
+terminates permanently. Later same-address activation cannot resurrect it.
+```
+
+The matcher is deliberately local and prospective. It uses only successful
+source-to-target activation events available at the tick being classified. It
+does not select a descendant using later connectivity or knowledge of the
+desired outcome.
+
+Instrumentation gate:
+
+```text
+run identical hooked and unhooked continuations;
+require exact equality of all world arrays, counters, and RNG state;
+do not proceed if the measurement hook changes dynamics.
+```
+
+Finding 062 success requires a singleton expression lineage to survive beyond
+the Finding 061 address-lineage termination and preserve or later restore its
+relation to the independently tracked large-region expression lineage. A second
+strict transport additionally requires a surviving pair, a genuine intervening
+disconnection, and causal reconnection through a bridge disjoint from the prior
+bridge.
+
+## Finding 062 Update
+
+Finding 062 passed its instrumentation gate and replayed all 12 role-bearing
+Finding 060 cases through offset 1024.
+
+Instrumentation equivalence:
+
+```text
+paired hooked/unhooked steps: 128
+successful transfers observed: 94
+world arrays equal after every step: yes
+RNG states equal after every step: yes
+```
+
+Strict-positive result:
+
+```text
+seed46 sample7 event 61 -> 65:
+  address relation lifetime:       9
+  expression relation lifetime:  170
+  survival beyond address death: 161
+  expression loss offset:        235
+
+seed46 sample7 event 420 -> 424:
+  address relation lifetime:       3
+  expression relation lifetime:  601 (alive at horizon)
+  survival beyond address death: at least 598
+
+seed56 sample3 event 106 -> 112:
+  address relation lifetime:      51
+  expression relation lifetime:  51
+  survival beyond address death:  0
+```
+
+The first seed46 terminal-address handoff is explicit:
+
+```text
+offset 74: (17,28,25) -> (17,29,25)
+target newly activated by the lineage source
+source inactive after the step
+```
+
+Controls and safety:
+
+```text
+positive expression lifetime among role-bearing failures: 0 / 9
+lineage collisions:                                      0 / 12
+second continuous strict transports:                     0 / 12
+payload zero:                                           12 / 12
+ledger exact:                                           12 / 12
+```
+
+Interpretation:
+
+```text
+Prospective expression transport exists in two seed46 trajectories, but is not
+yet seed-robust. The seed56 strict relation terminates without a qualifying
+child. No iterated disconnection/rebridge was observed.
+```
+
+Next gate:
+
+```text
+branch continuations immediately before the two seed46 address losses and the
+seed56 termination;
+test expression-handoff robustness across continuation RNG;
+identify the local condition separating handoff from termination.
+```
+
+Artifacts:
+
+```text
+src/expression_lineage_transport.py
+output/findings/finding062/expression_lineage_cases.csv
+output/findings/finding062/expression_lineage_ancestry.csv
+output/findings/finding062/expression_lineage_timeline.csv
+output/findings/finding062/expression_lineage_summary.json
+```
