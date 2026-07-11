@@ -1,0 +1,9 @@
+{
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "case_csv": "output/findings/finding061/predecessor_region_lineage_cases.csv",
+  "cases": 12,
+  "second_strict_transport_cases": 0,
+  "strict_input_cases": 3,
+  "timeline_csv": "output/findings/finding061/predecessor_region_lineage_timeline.csv"
+}

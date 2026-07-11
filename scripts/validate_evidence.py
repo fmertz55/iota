@@ -4,7 +4,14 @@ import math
 import sys
 
 from build_evidence import outputs
-from evidence_common import ROOT, evidence_metrics, load_gc001, load_registry, strict_events
+from evidence_common import (
+    ROOT,
+    evidence_metrics,
+    load_gc001,
+    load_gc002,
+    load_registry,
+    strict_events,
+)
 
 
 def fail(message: str, errors: list[str]) -> None:
@@ -55,6 +62,23 @@ def main() -> int:
             expected = float(claim["expected"][expected_name])
             if not math.isclose(observed, expected, rel_tol=0.0, abs_tol=1e-12):
                 fail(f"GC-001 strict event {index} {column}={observed}, expected {expected}", errors)
+
+    _, gc002_summary, gc002_cases = load_gc002()
+    gc002_strict = [
+        row for row in gc002_cases if row["finding060_constraint_transport"] == "1"
+    ]
+    gc002_failures = [
+        row for row in gc002_cases if row["finding060_constraint_transport"] == "0"
+    ]
+    observed_lifetimes = [int(row["continuous_relation_lifetime"]) for row in gc002_strict]
+    if observed_lifetimes != [9, 3, 51]:
+        fail(f"GC-002 strict lifetimes changed: {observed_lifetimes}", errors)
+    if any(int(row["continuous_relation_lifetime"]) != 0 for row in gc002_failures):
+        fail("GC-002 role-bearing failure acquired positive relation lifetime", errors)
+    if int(gc002_summary["second_strict_transport_cases"]) != 0:
+        fail("GC-002 second strict transport count changed", errors)
+    if not gc002_summary["all_payload_zero"] or not gc002_summary["all_ledger_exact"]:
+        fail("GC-002 safety invariant failed", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

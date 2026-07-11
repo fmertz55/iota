@@ -87,6 +87,14 @@ realization. It does **not** yet establish general multi-region invariance,
 indefinite persistence, uniqueness to one law, or a correspondence with physical
 particles or the early universe.
 
+Finding 061 follows the same predecessor addresses beyond rebridge. The three
+strict transports retain the restored relation for `9`, `3`, and `51` recorded
+offsets; all nine role-bearing Finding 060 failures have lifetime `0` at their
+nominal rebridge. Each positive terminates when its one-address predecessor
+lineage becomes inactive, and none undergoes a second continuous strict
+transport through offset `1024`. This is evidence for finite post-transport
+address persistence, not indefinite or iterated persistence.
+
 ### Inspect GC-001
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -94,12 +102,14 @@ particles or the early universe.
 - [Machine-readable summary](output/findings/finding060/phase_free_constraint_transport_summary.json)
 - [Analysis implementation](src/phase_free_constraint_transport.py)
 - [Experimental interpretation and next gate](SESSION_HANDOFF.md#finding-060-update)
+- [Finding 061 lineage cases](output/findings/finding061/predecessor_region_lineage_cases.csv)
+- [Finding 061 machine-readable summary](output/findings/finding061/predecessor_region_lineage_summary.json)
 
-The next gate follows the descendant regions after the three strict positives,
-measures the lifetime of the restored relation, and tests for a second complete
-bridge replacement. As new experiments land, this section should report the
-strongest supported claim at that commit while Git history preserves earlier
-states of the evidence.
+The next gate preregisters a non-resurrecting expression-lineage matcher using
+local transition ancestry, then tests whether the singleton relation relocates
+when its original address becomes inactive. As new experiments land, this
+section should report the strongest supported claim at that commit while Git
+history preserves earlier states of the evidence.
 
 ## Reviewer paths
 

@@ -48,6 +48,33 @@
         "The result does not establish correspondence with physical particles or the early universe."
       ],
       "next_gate": "Track predecessor-region descendants after the strict positives, measure relation lifetime, and test for a second complete bridge replacement."
+    },
+    {
+      "id": "GC-002",
+      "title": "Finite post-transport address persistence",
+      "status": "supported with bounded scope",
+      "statement": "All three strict Finding 060 transports preserved the restored relation beyond rebridge under a conservative predecessor-address lineage for 9, 3, and 51 recorded offsets, while all nine role-bearing failures had zero relation lifetime at nominal rebridge.",
+      "finding": "Finding 061",
+      "definitions": [
+        "DEF-CONSTRAINT-TRANSPORT",
+        "DEF-ADDRESS-LINEAGE",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding061/predecessor_region_lineage_summary.json",
+        "output/findings/finding061/predecessor_region_lineage_cases.csv",
+        "output/findings/finding061/predecessor_region_lineage_timeline.csv"
+      ],
+      "analysis": "src/predecessor_region_lineage.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-061-kickoff",
+      "limitations": [
+        "The lineage definition follows persistent original addresses and does not infer a relocating expression identity.",
+        "Each strict-positive lineage terminates when its singleton predecessor address becomes inactive.",
+        "No second continuous strict transport was observed through offset 1024.",
+        "The sample contains three strict positives and nine role-bearing failures inherited from Finding 060."
+      ],
+      "next_gate": "Define and preregister a non-resurrecting expression-lineage matcher, then test whether the singleton relation relocates when its original address becomes inactive."
     }
   ]
 }

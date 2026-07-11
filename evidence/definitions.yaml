@@ -67,6 +67,14 @@
       "kind": "safety condition",
       "status": "operational",
       "definition": "The experiment's conservation ledger has zero recorded discrepancy at every audited offset."
+    },
+    {
+      "id": "DEF-ADDRESS-LINEAGE",
+      "term": "Predecessor address lineage",
+      "symbol": "",
+      "kind": "observable",
+      "status": "operational",
+      "definition": "A conservative lineage that remains alive while at least one original stationary iota address of the predecessor region remains active; later reactivation after complete address loss does not restore the terminated lineage."
     }
   ]
 }

@@ -73,3 +73,12 @@ World.P is zero at every observed offset in the audited continuation.
 - Symbol: none
 
 The experiment's conservation ledger has zero recorded discrepancy at every audited offset.
+
+## Predecessor address lineage
+
+- ID: `DEF-ADDRESS-LINEAGE`
+- Kind: observable
+- Status: operational
+- Symbol: none
+
+A conservative lineage that remains alive while at least one original stationary iota address of the predecessor region remains active; later reactivation after complete address loss does not restore the terminated lineage.

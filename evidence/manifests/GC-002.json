@@ -1,0 +1,36 @@
+{
+  "artifacts": [
+    {
+      "bytes": 308,
+      "path": "output/findings/finding061/predecessor_region_lineage_summary.json",
+      "sha256": "13f5491c8cce8a145b5f48de07d9221d6c1e77cd4543ab0af37b77835071735f"
+    },
+    {
+      "bytes": 1626,
+      "path": "output/findings/finding061/predecessor_region_lineage_cases.csv",
+      "sha256": "8bbdc3e06fff78a6f9d6187a92ccaa35240af7efb4ae3877188738db4dbb7aa6"
+    },
+    {
+      "bytes": 508429,
+      "path": "output/findings/finding061/predecessor_region_lineage_timeline.csv",
+      "sha256": "2e9f50b3d7428fe8c0f875620886b9c9aa2c164544eba08c5a782c6c62465d9c"
+    },
+    {
+      "bytes": 14352,
+      "path": "src/predecessor_region_lineage.py",
+      "sha256": "fc7cef45097100cc6014432a19cc294e49171dce05854f62b2c3fa331f58d443"
+    },
+    {
+      "bytes": 4014,
+      "path": "evidence/claims.yaml",
+      "sha256": "2df94a98ec5dd9b311cc0084b29f6b9da819fb135a821e9ec4d63ad4de21eba9"
+    },
+    {
+      "bytes": 3206,
+      "path": "evidence/definitions.yaml",
+      "sha256": "221cb2433c5bf18a211c1bfe7c732386f1eda3ccf81836eddfd09392adeba709"
+    }
+  ],
+  "claim_id": "GC-002",
+  "schema_version": 1
+}

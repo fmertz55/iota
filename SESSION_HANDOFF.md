@@ -2133,3 +2133,92 @@ output/findings/finding060/phase_free_constraint_transport_events.csv
 output/findings/finding060/phase_free_constraint_transport_aggregate.csv
 output/findings/finding060/phase_free_constraint_transport_summary.json
 ```
+
+## Finding 061 Kickoff
+
+The repository now has an automation-first research compendium rooted in the
+organizing hypothesis:
+
+```text
+Information is the change in the reachable caused by interaction.
+```
+
+Organizational commits:
+
+```text
+a4c034e  Add automation-first research compendium
+10d3616  Verify research compendium in CI
+de49813  Stop tracking macOS metadata
+```
+
+Finding 061 is mapped onto the three strict Finding 060 positives. The
+experimental target is now:
+
+```text
+track the two predecessor-region lineages beyond rebridge;
+measure the lifetime of the restored relation;
+detect a second causally necessary bridge replacement;
+compare the three strict positives with the nine role-bearing failures.
+```
+
+The first lineage definition should be conservative and explicit. A predecessor
+region remains address-alive while at least one of its original stationary iota
+addresses remains active. A relation remains alive while both address lineages
+remain nonempty and mutually reachable. A second strict transport requires:
+
+```text
+1. both predecessor address lineages survive;
+2. their restored reachability is subsequently lost;
+3. their reachability is restored again;
+4. the new successor is causally necessary for that restoration;
+5. the new successor is disjoint from the prior causal bridge;
+6. World.P remains zero and the conservation ledger remains exact.
+```
+
+This address-lineage test is intentionally stricter than a future relational or
+expression-lineage definition. Failure under this test does not rule out a
+relocating expression lineage; it establishes the lifetime of the strongest
+identity claim available without adding a lineage-matching assumption.
+
+## Finding 061 Update
+
+Finding 061 replayed all 12 role-bearing predecessor cases from Finding 060
+through offset 1024 under the preregistered conservative address-lineage rule.
+
+Result:
+
+```text
+strict Finding 060 transports:
+  seed46 sample7 rebridge 65:  relation lifetime 9,  lineage loss 74
+  seed46 sample7 rebridge 424: relation lifetime 3,  lineage loss 427
+  seed56 sample3 rebridge 112: relation lifetime 51, lineage loss 163
+
+role-bearing Finding 060 failures:
+  positive relation lifetime at nominal rebridge: 0 / 9
+
+second continuous strict transports through offset 1024: 0 / 12
+payload zero: 12 / 12
+ledger exact: 12 / 12
+```
+
+The strict Finding 060 positives therefore separate perfectly from the nine
+role-bearing failures on positive post-rebridge address persistence in this
+sample. Every positive terminates because the singleton predecessor address goes
+inactive. Later same-address reactivation is not counted as lineage survival.
+
+Next gate:
+
+```text
+preregister a non-resurrecting expression-lineage matcher;
+use local transition ancestry to define singleton relocation prospectively;
+test whether relational persistence continues past address-lineage termination.
+```
+
+Artifacts:
+
+```text
+src/predecessor_region_lineage.py
+output/findings/finding061/predecessor_region_lineage_cases.csv
+output/findings/finding061/predecessor_region_lineage_timeline.csv
+output/findings/finding061/predecessor_region_lineage_summary.json
+```

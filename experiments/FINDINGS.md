@@ -7565,3 +7565,83 @@ or a substantial post-rebridge horizon.
 - `output/findings/finding060/phase_free_constraint_transport_events.csv`
 - `output/findings/finding060/phase_free_constraint_transport_aggregate.csv`
 - `output/findings/finding060/phase_free_constraint_transport_summary.json`
+
+---
+
+## Finding 061 — Transported relations persist finitely under strict address lineage
+
+### Question
+
+Finding 060 established three strict constraint-transport events. Finding 061
+asked how long the restored relation survives and whether it can undergo a
+second complete bridge replacement without losing predecessor identity.
+
+### Preregistered Lineage Rule
+
+A predecessor address lineage remains alive while at least one of its original
+stationary iota addresses remains active. Once every address in a predecessor
+region is inactive, that lineage terminates. Later reactivation at the same
+address does not resurrect it.
+
+A second strict transport requires both address lineages to remain continuously
+alive through a later disconnection and causal reconnection by a bridge disjoint
+from the prior causal bridge.
+
+### Matrix
+
+All `12` role-bearing predecessor cases from Finding 060 were replayed through
+offset `1024`:
+
+```text
+strict Finding 060 transports: 3
+role-bearing failures:          9
+payload zero:                  12 / 12
+ledger exact:                  12 / 12
+```
+
+### Result
+
+| Seed | Sample | Initial rebridge | Address-relation lifetime | Lineage loss |
+|---:|---:|---:|---:|---:|
+| `46` | `7` | `65` | `9` offsets | `74` |
+| `46` | `7` | `424` | `3` offsets | `427` |
+| `56` | `3` | `112` | `51` offsets | `163` |
+
+All nine role-bearing failures had relation lifetime `0` at nominal rebridge.
+Thus the strict Finding 060 classification perfectly separates the cases with
+positive post-rebridge address persistence in this inherited sample (`3/3`
+versus `0/9`).
+
+No case produced a second continuous strict transport through offset `1024`.
+In every positive, the terminating event was deactivation of the singleton
+predecessor address, not a later disconnection between two surviving address
+lineages.
+
+### Interpretation
+
+The supported statement is:
+
+```text
+The three strict constraint-transport events preserve their predecessor-address
+relation for a finite post-rebridge interval, and this persistence is absent
+from all nine role-bearing failures.
+```
+
+The address-lineage result is deliberately conservative. It does not test
+whether expression identity relocates when the singleton address becomes
+inactive. Later reactivation of that address was observed but is excluded from
+continuous lineage by preregistration.
+
+### Next Gate
+
+Define a non-resurrecting expression-lineage matcher using local transition
+ancestry rather than address reuse. Predeclare how a singleton expression can
+move to a neighboring stationary iota, then test whether the relation continues
+past address-lineage termination without retrospectively selecting descendants.
+
+### Artifacts
+
+- `src/predecessor_region_lineage.py`
+- `output/findings/finding061/predecessor_region_lineage_cases.csv`
+- `output/findings/finding061/predecessor_region_lineage_timeline.csv`
+- `output/findings/finding061/predecessor_region_lineage_summary.json`
