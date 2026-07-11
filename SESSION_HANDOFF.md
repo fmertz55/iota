@@ -3843,3 +3843,115 @@ It does not establish a substrate-independent topology, equate cut depth with
 entropy, or identify the full reachable set. It measures one intervention- and
 order-dependent section of counterfactual continuation structure in four new
 Iota initialization geometries.
+
+## Finding 071 Preregistration — Local Continuation-Affordance Field
+
+### Question and claim gate
+
+Finding 071 asks whether a bounded, pre-outcome description of local substrate
+geometry predicts a multidimensional continuation-affordance profile on
+completely held-out initialization seeds. The narrow claim is:
+
+> A bounded local substrate geometry induces a reproducible and transportable
+> profile of ancestry-preserving continuation affordance.
+
+This is a locality and transportability test, not yet a constructed-gradient,
+force, or reciprocal-interaction experiment. Passing the gate will license
+"local affordance field" as an operational simulator term. It will not establish
+a physical field, causality of geometry, or substrate-independent behavior.
+
+### Frozen independent screen
+
+- Canonical substrate: unchanged Iota v0.3.6 configuration and
+  `takeover_only_vector_phase` law used in Findings 067B and 070.
+- Fresh initialization seeds: `105..232`, inclusive.
+- Fixed classification samples: `0..7` per seed.
+- Checkpoint, classification horizon, and coordinate limit: 2048, 600, and 64.
+- Only `init.seed` and `experiment.objective` may differ from the canonical
+  configuration; all effective changes are audited in memory.
+- Every seed/sample case is completed before source selection.
+- Eligibility is the unchanged strict, causally necessary, completely displaced
+  bridge transport with exactly one persistent singleton predecessor at
+  rebridge.
+- At most one source is selected per initialization seed: the lexicographically
+  first eligible `(sample, split, rebridge)` event.
+- Discovery seeds are `105..168`; confirmation seeds are `169..232`. This split
+  is fixed by seed before any Finding 071 branch response exists.
+- The experiment proceeds only if each split supplies at least six eligible
+  source geometries. Failure of that support gate is an inconclusive screen;
+  the ranges will not be expanded after response inspection.
+
+### Frozen pre-outcome geometry representation
+
+Each selected source is reconstructed at rebridge before any fresh branch RNG
+is applied. The singleton address is the origin. Source-intrinsic controls are
+its amplitude, range, vector-state identity, angular-memory value, and vector
+step class. Environmental features are cumulative Chebyshev-shell summaries at
+radii 1, 2, and 3, excluding the source itself:
+
+- active, depleted, and latent cell counts;
+- active amplitude and range sums;
+- active absolute angular-memory sum;
+- active same-vector-state count;
+- counts by the 26 vector-state identities.
+
+Cube shells and state histograms make these environmental features invariant to
+translation and coordinate-axis rotations/reflections. They do not encode the
+whole trajectory or any post-branch information. A whole-world summary is
+retained only as a descriptive ceiling and cannot be selected for the local
+field claim.
+
+### Frozen response protocol and chronology
+
+Each source receives 48 fresh natural branches over a 256-offset horizon.
+Discovery response branches are run and committed first. Natural outcomes then
+freeze every collision-free, single-address, exactly-one-child selector before
+any retained-amplitude veto outcome is run. Depth-1 veto responses are committed
+next. Only then is the discovery model frozen. Confirmation natural branches,
+selectors, and vetoes remain unrun until that model commit.
+
+The source-level response vector is:
+
+1. natural handoff fraction at first original-address death;
+2. mean first-address-loss delay divided by 256;
+3. depth-1 alternate-handoff fraction among frozen unique-child selectors;
+4. natural gate-failure fraction;
+5. natural source-exhaustion fraction;
+6. natural target-preemption fraction.
+
+Source-survival censoring, collisions, transient children, payload, and ledger
+status remain separate audit fields. At least 16 observed address losses and at
+least 8 unique-child veto selectors are required per source for model
+eligibility. Sources failing this measurement-support gate remain reported but
+are excluded by the frozen rule rather than post-hoc judgment.
+
+### Frozen learner and confirmation test
+
+All preprocessing is learned from discovery sources only. Constant discovery
+columns are removed; predictors and responses are standardized by discovery
+means and standard deviations. Multi-response ridge regression is fitted for:
+
+- the discovery-mean null;
+- source-intrinsic controls only;
+- intrinsic controls plus environmental summaries through radius 1, 2, or 3.
+
+The radius and ridge penalty in `{0.1, 1, 10, 100}` are selected by
+leave-one-initialization-seed-out discovery error. Ties choose the smaller
+radius, then larger penalty. The frozen model produces one six-dimensional
+prediction per eligible confirmation source.
+
+The primary statistic is mean squared standardized error across confirmation
+sources and response dimensions. A local-field confirmation requires all of:
+
+1. at least six eligible sources in each split;
+2. local-model error below both the intrinsic-only and discovery-mean baselines;
+3. local-model absolute error below the intrinsic baseline in at least two of
+   the six response dimensions;
+4. a one-sided exact permutation p-value at or below 0.05, obtained by permuting
+   complete confirmation response vectors across source predictions and using
+   the local-model mean squared error as the statistic.
+
+The model, feature schema, discovery source hashes, selector hashes, and
+pre-confirmation state are committed before confirmation outcomes. A negative
+or inconclusive result is retained as Finding 071; no alternate learner or
+radius may replace the frozen primary analysis after confirmation.
