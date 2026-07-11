@@ -127,6 +127,15 @@ branches, the rule fails confirmation (balanced accuracy `0.582`, Fisher
 `p=0.240`). Static terminal geometry, as currently measured, is therefore
 insufficient for a general continuation rule.
 
+Finding 066 records the complete ordered hard-transfer candidate ledger on 96
+fresh branches. All terminal outcomes are accounted for: 57 children created on
+the death tick, 16 preexisting-descendant continuations, 19 source-exhaustion
+deaths, 3 transfer-gate deaths, and 1 target-preemption death. A frozen replay
+then permits exactly one naturally failed successor gate, still consuming the
+original RNG draw; the branch flips from death to one collision-free inherited
+child. In this bounded case, continuation is causally path-dependent: the
+successor must be realized before the source spends its terminating amplitude.
+
 ### Inspect GC-001
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -143,10 +152,13 @@ insufficient for a general continuation rule.
 - [Finding 064 frozen model](output/findings/finding064/lineage_continuation_rule_model.json)
 - [Finding 064 held-out evaluation](output/findings/finding064/lineage_continuation_rule_summary.json)
 - [Finding 065 fresh confirmation](output/findings/finding065/death_tick_child_rule_summary.json)
+- [Finding 066 ordered-event summary](output/findings/finding066/terminal_candidate_ledger_summary.json)
+- [Finding 066 complete candidate ledger](output/findings/finding066/terminal_candidate_ledger_candidates.csv)
+- [Finding 066 single-gate causal replay](output/findings/finding066/terminal_gate_causal_replay.json)
 
-The next gate instruments the ordered candidate, eligibility, probability, and
-gate-draw process within the terminal tick to determine whether continuation is
-fully accounted for by the lawful event sequence rather than static geometry.
+The next gate replicates frozen single-event interventions across the remaining
+natural failure mechanisms and then tests the temporal rule on independently
+generated source geometries.
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.
 

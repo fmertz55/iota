@@ -1,0 +1,46 @@
+{
+  "artifacts": [
+    {
+      "bytes": 605,
+      "path": "output/findings/finding066/terminal_candidate_ledger_summary.json",
+      "sha256": "8f677dd39c842ba2ce44ad2fda1cba9023f899132c4e9735874bdf0d23cdf91a"
+    },
+    {
+      "bytes": 6573,
+      "path": "output/findings/finding066/terminal_candidate_ledger_cases.csv",
+      "sha256": "68b291e38b0ba1b54e60fdd3f9ff19d2c54ec8f9acb0ccf06c44abc0881bc2af"
+    },
+    {
+      "bytes": 3029603,
+      "path": "output/findings/finding066/terminal_candidate_ledger_candidates.csv",
+      "sha256": "72c3f9c241665a853438e9a3c918ac4ba0b53eacd09e0efceef500a9ca8d4ba6"
+    },
+    {
+      "bytes": 1510,
+      "path": "output/findings/finding066/terminal_gate_causal_replay.json",
+      "sha256": "447a9f6e2960c04108bae63fcbc15d171b0e74c8e9d13532ff72aee83409c028"
+    },
+    {
+      "bytes": 11461,
+      "path": "src/terminal_candidate_ledger.py",
+      "sha256": "1ad70a0f1906f5dc7313b3d9b455209242e2696470670da3206d2046fca89a8d"
+    },
+    {
+      "bytes": 73059,
+      "path": "src/iota_rig.py",
+      "sha256": "f2fab66b4895f9d2e807d38166ef869b184a471dbd86532a556254d4faae22ef"
+    },
+    {
+      "bytes": 13622,
+      "path": "evidence/claims.yaml",
+      "sha256": "4c41a4574ac90748207f3fa9b865fa1ac78ca57b786606410741cca15d5557bb"
+    },
+    {
+      "bytes": 5181,
+      "path": "evidence/definitions.yaml",
+      "sha256": "bb19f807299f793e9a7e4a72bc72fe99edf49b912dae0533237e95ba34420325"
+    }
+  ],
+  "claim_id": "GC-007",
+  "schema_version": 1
+}

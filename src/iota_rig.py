@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 # The hook must not mutate the supplied event or world state. It is disabled in
 # ordinary simulation and consumes no random draws.
 HARD_TRANSFER_TRACE_HOOK = None
+HARD_TRANSFER_CANDIDATE_HOOK = None
+HARD_TRANSFER_GATE_OVERRIDE_HOOK = None
 
 
 # Field layout: four arrays, not one giant object array.
@@ -1335,6 +1337,17 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
 
         for candidate in candidates:
             if int(available_A[x, y, z]) <= 0:
+                if HARD_TRANSFER_CANDIDATE_HOOK is not None:
+                    HARD_TRANSFER_CANDIDATE_HOOK(
+                        {
+                            "source": (int(x), int(y), int(z)),
+                            "target": tuple(int(value) for value in candidate["target"]),
+                            "candidate_order": int(candidate["order"]),
+                            "candidate_step": tuple(int(value) for value in candidate["step"]),
+                            "available_A_before": int(available_A[x, y, z]),
+                            "status": "source_exhausted",
+                        }
+                    )
                 break
             tx, ty, tz = candidate["target"]
             target_previous_a = int(world.A[tx, ty, tz])
@@ -1343,8 +1356,29 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
             target_previous_p = int(world.P[tx, ty, tz])
             target_active = bool(next_active[tx, ty, tz])
             target_depleted = (not target_active) and int(next_latent_A[tx, ty, tz]) <= 0
+            candidate_event = {
+                "source": (int(x), int(y), int(z)),
+                "target": (int(tx), int(ty), int(tz)),
+                "candidate_order": int(candidate["order"]),
+                "candidate_step": tuple(int(value) for value in candidate["step"]),
+                "available_A_before": int(available_A[x, y, z]),
+                "target_active_at_tick_start": bool(world.active[tx, ty, tz]),
+                "target_active_at_evaluation": target_active,
+                "target_depleted_at_evaluation": target_depleted,
+                "target_latent_at_evaluation": (
+                    (not target_active) and int(next_latent_A[tx, ty, tz]) > 0
+                ),
+                "influence": float(candidate["influence"]),
+                "residual_bias_multiplier": float(
+                    candidate.get("residual_bias_multiplier", 1.0)
+                ),
+            }
             if target_active:
                 if int(next_A[tx, ty, tz]) >= int(available_A[x, y, z]):
+                    if HARD_TRANSFER_CANDIDATE_HOOK is not None:
+                        HARD_TRANSFER_CANDIDATE_HOOK(
+                            {**candidate_event, "status": "target_not_lower_amplitude"}
+                        )
                     continue
             elif target_depleted and (
                 residual_participation_probability <= 0.0
@@ -1353,6 +1387,10 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                     and int(candidate["order"]) == 0
                 )
             ):
+                if HARD_TRANSFER_CANDIDATE_HOOK is not None:
+                    HARD_TRANSFER_CANDIDATE_HOOK(
+                        {**candidate_event, "status": "residual_ineligible"}
+                    )
                 continue
 
             influence = float(candidate["influence"])
@@ -1363,6 +1401,14 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                     else cross_payload_coupling
                 )
             if influence <= 0:
+                if HARD_TRANSFER_CANDIDATE_HOOK is not None:
+                    HARD_TRANSFER_CANDIDATE_HOOK(
+                        {
+                            **candidate_event,
+                            "influence": float(influence),
+                            "status": "nonpositive_influence",
+                        }
+                    )
                 continue
 
             transfer_probability = clamp_probability(kA * influence)
@@ -1371,8 +1417,31 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                 if angular_momentum_residual_bias_enabled:
                     transfer_probability *= float(candidate.get("residual_bias_multiplier", 1.0))
                     transfer_probability = clamp_probability(transfer_probability)
-            if world.rng.random() >= transfer_probability:
+            gate_draw = float(world.rng.random())
+            gate_passed = gate_draw < transfer_probability
+            if HARD_TRANSFER_GATE_OVERRIDE_HOOK is not None:
+                override = HARD_TRANSFER_GATE_OVERRIDE_HOOK(
+                    {
+                        **candidate_event,
+                        "transfer_probability": float(transfer_probability),
+                        "gate_draw": gate_draw,
+                        "natural_gate_passed": gate_passed,
+                    }
+                )
+                if override is not None:
+                    gate_passed = bool(override)
+            if not gate_passed:
                 failed_transfer_gates += 1
+                if HARD_TRANSFER_CANDIDATE_HOOK is not None:
+                    HARD_TRANSFER_CANDIDATE_HOOK(
+                        {
+                            **candidate_event,
+                            "influence": float(influence),
+                            "transfer_probability": float(transfer_probability),
+                            "gate_draw": gate_draw,
+                            "status": "gate_failed",
+                        }
+                    )
                 continue
 
             available_A[x, y, z] -= 1
@@ -1400,6 +1469,17 @@ def _step_hard_transfer(world: World, cfg: Dict[str, Any]) -> Dict[str, float]:
                         "target_activated": not target_active,
                         "target_depleted": target_depleted,
                         "candidate_order": int(candidate["order"]),
+                    }
+                )
+            if HARD_TRANSFER_CANDIDATE_HOOK is not None:
+                HARD_TRANSFER_CANDIDATE_HOOK(
+                    {
+                        **candidate_event,
+                        "influence": float(influence),
+                        "transfer_probability": float(transfer_probability),
+                        "gate_draw": gate_draw,
+                        "target_activated": not target_active,
+                        "status": "succeeded",
                     }
                 )
             if int(candidate["order"]) != 0:

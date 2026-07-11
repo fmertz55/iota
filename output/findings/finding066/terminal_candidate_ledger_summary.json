@@ -1,0 +1,20 @@
+{
+  "all_cases_accounted": true,
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "branches": 96,
+  "candidate_events": 20748,
+  "candidates_csv": "output/findings/finding066/terminal_candidate_ledger_candidates.csv",
+  "cases_csv": "output/findings/finding066/terminal_candidate_ledger_cases.csv",
+  "collision_cases": 0,
+  "equivalence_gate_events_observed": 21160,
+  "equivalence_gate_passed": true,
+  "handoff_successes": 73,
+  "outcome_classes": {
+    "activated_child": 57,
+    "gate_failed": 3,
+    "preexisting_descendant": 16,
+    "source_exhausted": 19,
+    "target_preempted": 1
+  }
+}

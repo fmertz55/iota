@@ -66,3 +66,17 @@ held-out balanced accuracy was \GCSixBalancedAccuracy{} and the association was
 not significant ($p=0.240$, two-sided Fisher exact). The preregistered static
 terminal features therefore did not yield a confirmed general continuation
 rule.
+
+\subsection{Ordered terminal events and a causal continuation gate}
+
+Finding 066 instrumented every selected hard-transfer candidate on the terminal
+tick for 96 fresh branches. The observer passed exact state-and-RNG equivalence
+and recorded 20,748 terminal candidate events. The ordered ledger classified all
+96 outcomes without collisions: 57 death-tick child activations, 16
+preexisting-descendant continuations, 19 source-exhaustion deaths, three
+transfer-gate deaths, and one target-preemption death. In a preregistered replay
+of one gate-failure branch, permitting exactly one failed successor gate while
+still consuming its original random draw changed the outcome from lineage death
+to one collision-free ancestry-preserving child. This supports a bounded causal
+claim: continuation can depend on realizing an eligible successor before the
+source expends its terminating amplitude.

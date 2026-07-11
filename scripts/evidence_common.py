@@ -82,6 +82,14 @@ def load_gc006() -> tuple[dict[str, Any], dict[str, Any]]:
     return claim, summary
 
 
+def load_gc007() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    claims = load_registry(ROOT / "evidence" / "claims.yaml")
+    claim = next(item for item in claims["claims"] if item["id"] == "GC-007")
+    summary = json.loads((ROOT / claim["evidence"][0]).read_text(encoding="utf-8"))
+    replay = json.loads((ROOT / claim["evidence"][3]).read_text(encoding="utf-8"))
+    return claim, summary, replay
+
+
 def strict_events(events: list[dict[str, str]]) -> list[dict[str, str]]:
     return [row for row in events if row["constraint_transport"] == "1"]
 

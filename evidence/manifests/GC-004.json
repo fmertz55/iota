@@ -26,19 +26,19 @@
       "sha256": "bf8eeb1d060ceb463c722c825a7f99218a191e642d85a5c4bc9b0a73a0de3a63"
     },
     {
-      "bytes": 69072,
+      "bytes": 73059,
       "path": "src/iota_rig.py",
-      "sha256": "4be2cf88bf279a1f7f47dfeb058788c9dabace2f491936fa3bf7aca2d9859541"
+      "sha256": "f2fab66b4895f9d2e807d38166ef869b184a471dbd86532a556254d4faae22ef"
     },
     {
-      "bytes": 11586,
+      "bytes": 13622,
       "path": "evidence/claims.yaml",
-      "sha256": "ddf3a3b53d4a0fea026833f6a61f7302062e2cf542b946b75275ff46b63a67a8"
+      "sha256": "4c41a4574ac90748207f3fa9b865fa1ac78ca57b786606410741cca15d5557bb"
     },
     {
-      "bytes": 4711,
+      "bytes": 5181,
       "path": "evidence/definitions.yaml",
-      "sha256": "953393d590f03544020a94f7f4a1a2bb420c037427e15a3da8ff83d06a388b11"
+      "sha256": "bb19f807299f793e9a7e4a72bc72fe99edf49b912dae0533237e95ba34420325"
     }
   ],
   "claim_id": "GC-004",

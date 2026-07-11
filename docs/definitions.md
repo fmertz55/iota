@@ -109,3 +109,12 @@ Among continuation branches from a fixed state in which the original singleton a
 - Symbol: none
 
 A frozen mapping from features available immediately before original-address deactivation to the presence or absence of a nonempty prospective expression lineage immediately afterward; a predictive marker is not treated as a primitive law unless it is both sufficiently sensitive and independently replicated.
+
+## Temporal continuation gate
+
+- ID: `DEF-TEMPORAL-GATE`
+- Kind: causal mechanism
+- Status: operational
+- Symbol: none
+
+An ordered event decision whose resolution before source termination changes whether an ancestry-preserving successor is realized; it is identified by a frozen intervention that changes that decision while leaving the pre-intervention state and consumed random draw fixed.

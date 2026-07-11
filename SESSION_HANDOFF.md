@@ -2635,6 +2635,84 @@ output/findings/finding065/death_tick_child_rule_per_source.csv
 output/findings/finding065/death_tick_child_rule_summary.json
 ```
 
+## Finding 066 Kickoff
+
+Finding 066 tests whether the ordered lawful event process within the terminal
+tick completely accounts for death-tick child creation.
+
+Conceptual caution:
+
+```text
+Different outcomes from similar scalar geometry do not by themselves establish
+non-Markovian history dependence. The complete simulation state includes all
+attribute arrays, angular state, previous-state arrays, and RNG state. Finding
+066 separates observed static geometry from hidden-but-present state, stochastic
+gate realization, and fixed within-tick evaluation order.
+```
+
+Fresh ensemble:
+
+```text
+branch_sample 64..95 from each strict-rebridge state
+96 new continuation RNG streams
+branch offsets 65, 424, and 112
+horizon 128
+```
+
+The candidate observer is default-off and measurement-only. Before scientific
+use it must pass paired hooked/unhooked equality after every step for all world
+arrays and RNG state.
+
+For every candidate considered from the singleton expression source on the step
+that first deactivates its original address, record in actual evaluation order:
+
+```text
+source and target coordinates;
+candidate order and spatial step;
+source available amplitude before evaluation;
+target active/depleted/latent status at evaluation;
+eligibility or rejection reason;
+influence and residual multiplier;
+transfer probability;
+gate draw when evaluated;
+gate pass/fail;
+whether the transfer succeeded;
+whether the target changed inactive -> active;
+whether that activation inherited singleton ancestry;
+source active/amplitude state after the completed tick.
+```
+
+Predeclared outcome classes:
+
+```text
+preexisting_descendant:
+  lineage already has another active address before original-address death
+
+no_eligible_successor:
+  no evaluated candidate could lawfully activate a new target
+
+eligible_not_selected_or_reached:
+  a potential successor existed but source exhaustion/order prevented evaluation
+
+gate_failed:
+  at least one eligible new-target candidate was evaluated and every gate failed
+
+activated_child:
+  a singleton-lineage source passed its gate and newly activated a child
+
+target_preempted:
+  another source activated the target before singleton-source evaluation
+
+ambiguous_collision:
+  more than one predecessor lineage claims the same newly activated target
+```
+
+Finding 066 first asks for complete accounting: every branch must map to exactly
+one declared terminal class with no unexplained outcome. Only after inspecting
+that frozen ledger may a one-event causal replay be specified. The replay must
+change one gate or ordering event and preserve all other state and random draws
+as far as the implementation permits.
+
 ## Finding 065 Kickoff
 
 Finding 065 targets the 23 held-out Finding 064 handoffs that were created on
@@ -2683,3 +2761,40 @@ payload-zero, ledger-exact, and lineage-collision safety.
 This experiment may reject the current local feature set. A null confirmation
 means these terminal scalar features do not capture a general death-tick child
 rule; it does not negate the prospectively observed lineages.
+
+## Finding 066 Update
+
+Finding 066 completed the preregistered ordered terminal-event audit on fresh
+branch samples 64..95 from each of the three strict Finding 060 states.
+
+The default-off candidate observer passed exact world-state and RNG equivalence
+while observing 21,160 events. The terminal dataset contains 96 branches and
+20,748 ordered candidate records. All 96 outcomes map to exactly one declared
+class: 57 `activated_child`, 16 `preexisting_descendant`, 19
+`source_exhausted`, 3 `gate_failed`, and 1 `target_preempted`. There were zero
+lineage collisions; payload remained zero and the conservation ledger remained
+exact in every branch.
+
+After the complete ledger was inspected, one replay target was frozen:
+
+```text
+source state: seed 46, Finding 060 start offset 420
+branch sample/seed: 78 / 2026081178
+terminal offset: 435
+source: (40,17,19)
+successor: (39,17,19)
+candidate order: 5
+natural probability/draw: 0.014745667567410982 / 0.12253392848602684
+intervention: permit this gate while still consuming the natural RNG draw
+```
+
+The baseline died with no descendant. The one-gate intervention created exactly
+one ancestry-preserving child and flipped the branch to collision-free handoff.
+This is bounded causal evidence that continuation in this case depends on an
+eligible successor being realized before the singleton source spends its final
+amplitude on a later candidate. It does not yet establish a universal law or
+show that the simulator's iteration order is substrate-independent.
+
+Next: replicate frozen one-event interventions across the remaining natural
+failure mechanisms, then test the temporal rule on independently generated
+source geometries.

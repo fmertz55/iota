@@ -14,6 +14,7 @@ from evidence_common import (
     load_gc004,
     load_gc005,
     load_gc006,
+    load_gc007,
     load_registry,
     strict_events,
 )
@@ -227,6 +228,27 @@ def main() -> int:
         fail("GC-006 contains lineage collision rows", errors)
     if not gc006_summary["all_payload_zero"] or not gc006_summary["all_ledger_exact"]:
         fail("GC-006 safety invariant failed", errors)
+
+    _, gc007_summary, gc007_replay = load_gc007()
+    expected_classes = {
+        "activated_child": 57,
+        "gate_failed": 3,
+        "preexisting_descendant": 16,
+        "source_exhausted": 19,
+        "target_preempted": 1,
+    }
+    if int(gc007_summary["branches"]) != 96 or gc007_summary["outcome_classes"] != expected_classes:
+        fail(f"GC-007 terminal accounting changed: {gc007_summary['outcome_classes']}", errors)
+    if not gc007_summary["equivalence_gate_passed"] or not gc007_summary["all_cases_accounted"]:
+        fail("GC-007 equivalence or accounting gate failed", errors)
+    if int(gc007_summary["collision_cases"]) != 0:
+        fail("GC-007 contains lineage collision cases", errors)
+    if not gc007_summary["all_payload_zero"] or not gc007_summary["all_ledger_exact"]:
+        fail("GC-007 safety invariant failed", errors)
+    if not gc007_replay["exactly_one_gate_overridden"] or not gc007_replay["handoff_flipped"]:
+        fail("GC-007 causal replay no longer flips handoff", errors)
+    if gc007_replay["frozen_intervention"]["natural_gate_passed"]:
+        fail("GC-007 frozen intervention was not a naturally failed gate", errors)
 
     for path, expected_content in outputs().items():
         if not path.is_file():

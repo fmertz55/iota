@@ -1,0 +1,60 @@
+{
+  "baseline": {
+    "branch_offset": 424,
+    "branch_sample": 78,
+    "branch_seed": 2026081178,
+    "candidate_events": 189,
+    "death_tick_child_count": 0,
+    "event_start_offset": 420,
+    "handoff_success": 0,
+    "init_seed": 46,
+    "ledger_exact_all_offsets": 1,
+    "lineage_collision": 0,
+    "outcome_class": "gate_failed",
+    "payload_zero_all_offsets": 1,
+    "preexisting_descendant": 0,
+    "singleton_candidate_events": 8,
+    "singleton_lineage_size": 1,
+    "terminal_offset": 435
+  },
+  "exactly_one_gate_overridden": true,
+  "frozen_intervention": {
+    "branch_seed": 2026081178,
+    "candidate_order": 5,
+    "forced_gate_passed": true,
+    "natural_gate_draw": 0.12253392848602684,
+    "natural_gate_passed": false,
+    "rng_draw_still_consumed": true,
+    "source": [
+      40,
+      17,
+      19
+    ],
+    "target": [
+      39,
+      17,
+      19
+    ],
+    "terminal_offset": 435,
+    "transfer_probability": 0.014745667567410982
+  },
+  "handoff_flipped": true,
+  "intervention": {
+    "branch_offset": 424,
+    "branch_sample": 78,
+    "branch_seed": 2026081178,
+    "candidate_events": 188,
+    "death_tick_child_count": 1,
+    "event_start_offset": 420,
+    "handoff_success": 1,
+    "init_seed": 46,
+    "ledger_exact_all_offsets": 1,
+    "lineage_collision": 0,
+    "outcome_class": "activated_child",
+    "payload_zero_all_offsets": 1,
+    "preexisting_descendant": 0,
+    "singleton_candidate_events": 3,
+    "singleton_lineage_size": 1,
+    "terminal_offset": 435
+  }
+}
