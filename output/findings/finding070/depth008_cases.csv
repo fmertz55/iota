@@ -1,0 +1,13 @@
+depth,cohort,source_id,init_seed,event_start_offset,branch_sample,branch_seed,selectors_expected,selectors_matched,all_selector_identities_exact,next_child_observed,next_child_relative,next_child_offset,next_child_target,next_child_multiplicity,next_child_same_as_previous_target,address_loss_observed,terminal_offset,address_loss_delay_from_depth1_natural,handoff,stage_endpoint,lineage_collision,payload_zero_all_offsets,ledger_exact_all_offsets
+8,independent_depth_replication,f070-source-001,74,446,9,2026081509,8,8,1,1,68,516,62:13:1,1,0,1,523,64,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-001,74,446,13,2026081513,8,8,1,1,75,523,61:13:0,1,0,1,529,80,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-002,76,132,1,2026091501,8,8,1,1,89,225,60:45:52,1,0,1,225,75,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-002,76,132,27,2026091527,8,8,1,0,,,,,,1,228,85,0,lineage_loss,0,1,1
+8,independent_depth_replication,f070-source-002,76,132,30,2026091530,8,8,1,0,,,,,,1,196,57,0,lineage_loss,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,1,2026101501,8,8,1,1,85,292,27:28:52,1,0,1,292,75,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,10,2026101510,8,8,1,1,88,295,28:28:51,1,0,1,295,67,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,21,2026101521,8,8,1,1,58,265,28:28:53,1,0,1,265,55,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,23,2026101523,8,8,1,1,42,249,27:28:52,1,0,1,249,35,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,25,2026101525,8,8,1,1,82,289,27:27:52,1,0,1,289,71,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,30,2026101530,8,8,1,1,114,321,27:28:52,1,0,1,321,91,1,handoff,0,1,1
+8,independent_depth_replication,f070-source-003,81,204,31,2026101531,8,8,1,1,54,261,28:29:52,1,0,1,261,44,1,handoff,0,1,1

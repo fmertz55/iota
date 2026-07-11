@@ -3783,3 +3783,36 @@ e12ffc786b232b9d411c01878df8717a1bed45d0a9c37920deafaacfd0f1424d
 ```
 
 No depth-8 selector had been vetoed when this manifest was frozen.
+
+## Finding 070 Final Depth-8 Result
+
+The final preregistered depth-8 policy was applied to all 12 committed risk-set
+branches. It produced 2 additional lineage cuts and 10 confirmed handoffs.
+
+```text
+ordered cut depth 1: 23
+ordered cut depth 2: 15
+ordered cut depth 3:  7
+ordered cut depth 4:  9
+ordered cut depth 5:  4
+ordered cut depth 6:  3
+ordered cut depth 7:  5
+ordered cut depth 8:  2
+handoff after eight vetoes (D_seq > 8): 10
+source-survival censored at depth 7:       1
+total factual selector cohort:            79
+```
+
+The 10 depth-8 handoffs exposed recorded but unvetoed next selectors. Their
+artifact SHA-256 is:
+
+```text
+755e049ef27c6022fd8ec660f2b2a0dc4b048d27cbb6b84e3a3dca036e3d4d23
+```
+
+No depth-9 intervention is permitted. All eight stages matched every committed
+selector and full event identity. The depth-1 matched shams were exact; payload
+remained zero, conservation remained exact, and there were no collisions. One
+depth-7 loss branch contained a transient inherited child, and one depth-7
+branch was source-survival censored; both remain separate from the 10 confirmed
+depth-right-censored handoffs.
