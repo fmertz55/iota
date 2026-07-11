@@ -3989,3 +3989,62 @@ cannot be repaired by expanding or repartitioning this finding after observing
 the source yield. A subsequent experiment may preregister a new source-
 acquisition design, but it must retain Finding 071's failed gate and keep all
 affordance outcomes sealed.
+
+## Finding 072 Preregistration — Independent Source Acquisition and Locality Confirmation
+
+Finding 072 is a new experiment, not an expansion or repartition of Finding
+071. Finding 071 remains an inconclusive 9/3 support-gate stop. All 12 of its
+selected sources retain sealed affordance outcomes.
+
+### Fixed acquisition batch
+
+- Fresh initialization seeds: `233..360`, inclusive.
+- Fixed classification samples: `0..7` per seed.
+- Canonical v0.3.6 configuration, `takeover_only_vector_phase`, checkpoint
+  2048, horizon 600, and coordinate limit 64 remain unchanged.
+- Only `init.seed` and `experiment.objective` may change.
+- Eligibility and selection are unchanged: strict causally necessary,
+  completely displaced transport with exactly one persistent singleton
+  predecessor; at most the lexicographically first eligible source per seed.
+- The complete 1,024-case batch is run before selection.
+- All selected seeds `233..360` are assigned to confirmation. Discovery remains
+  exactly the nine frozen Finding 071 discovery sources. The three Finding 071
+  confirmation sources remain confirmation sources.
+- The acquisition gate requires at least three newly selected sources, yielding
+  at least six total confirmation geometries. Failure stops Finding 072 before
+  every affordance response.
+
+The acquisition range will not be extended after its yield is observed. Source
+manifests, transport ledgers, combined cohort membership, and hashes are
+committed before feature extraction or response branching.
+
+### Locality-confirmation protocol
+
+If acquisition passes, Finding 072 executes the already committed Finding 071
+feature, response, veto, and model protocol without changing its primary
+analysis:
+
+- translation-invariant and axis-rotation/reflection-invariant environmental
+  summaries through Chebyshev radii 1, 2, and 3;
+- source-intrinsic controls and a discovery-mean null;
+- 48 natural branches per source, a 256-offset natural horizon, and the frozen
+  depth-1 retained-amplitude veto on unique factual child selectors;
+- at least 16 observed address losses and 8 veto selectors per modeled source;
+- multi-response ridge penalties `{0.1, 1, 10, 100}` selected with radius by
+  leave-one-discovery-seed-out error;
+- the same six-component affordance response vector;
+- the same held-out confirmation requirements: local standardized MSE below
+  both intrinsic and null baselines, improvement in at least two response
+  dimensions, and one-sided permutation `p <= 0.05`.
+
+Discovery natural outcomes and selectors are committed before discovery
+vetoes. The fitted model is committed before any confirmation natural response.
+Confirmation factual selectors are committed before confirmation vetoes. No
+alternate model may replace the frozen primary analysis after confirmation.
+
+### Conditional Finding 073 gate
+
+Finding 073 may begin only if Finding 072 passes every held-out local-field
+confirmation criterion. Its subject will be controlled response to a frozen
+affordance gradient, not another post-hoc classifier. A failure or inconclusive
+Finding 072 stops the field-to-gradient sequence and is registered as such.
