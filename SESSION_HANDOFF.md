@@ -3893,13 +3893,14 @@ radii 1, 2, and 3, excluding the source itself:
 - active amplitude and range sums;
 - active absolute angular-memory sum;
 - active same-vector-state count;
-- counts by all 64 configured vector-state identities.
+- counts by rotation-invariant vector step-length and behavior classes.
 
-Cube shells and state histograms make these environmental features invariant to
-translation and coordinate-axis rotations/reflections. They do not encode the
-whole trajectory or any post-branch information. A whole-world summary is
-retained only as a descriptive ceiling and cannot be selected for the local
-field claim.
+Cube shells, vector-state equality, and step-class counts make the environmental
+features invariant to translation and coordinate-axis rotations/reflections.
+The source-intrinsic control retains exact vector-state identity and is not used
+to claim rotational transportability. No feature encodes the whole trajectory
+or any post-branch information. A whole-world summary is retained only as a
+descriptive ceiling and cannot be selected for the local field claim.
 
 ### Frozen response protocol and chronology
 
