@@ -3246,3 +3246,31 @@ right-censoring and source-survival censoring.
 This experiment characterizes redundancy under a specific retained-amplitude,
 ordered veto policy. It does not prove that the discovered set is the smallest
 possible cut under arbitrary state interventions or schedulers.
+
+## Finding 069 Depth-2 Selector Freeze
+
+The committed depth-1 policy was reproduced across all 164 Finding 068
+selectors and matched the prior replay table exactly: 42 lineage losses and 122
+handoffs. No transient child occurred in a depth-1 loss case, and there was no
+source-survival censoring.
+
+Each of the 122 handoff survivors exposed exactly one first next inherited child.
+Those depth-2 selectors span all five source states:
+
+```text
+original seed 46 / start 61:   17
+original seed 46 / start 420:  31
+original seed 56 / start 106:  31
+independent seed 58:           23
+independent seed 71:           20
+```
+
+Every earlier selector and every new inheritance join matched exactly; payload
+remained zero, the ledger remained exact, and there were zero collisions.
+Frozen depth-2 selector-manifest SHA-256:
+
+```text
+37376530450191f0889060a8bc51a2b5de0cc464fa85b42a1c2ced644d517a4b
+```
+
+No depth-2 selector had been vetoed when this manifest was frozen.

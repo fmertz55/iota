@@ -1,0 +1,33 @@
+{
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "all_selector_identities_exact": true,
+  "all_selectors_matched": true,
+  "cases_csv": "output/findings/finding069/depth001_cases.csv",
+  "child_bearing_source_censoring": 0,
+  "collision_cases": 0,
+  "current_depth_veto_run": true,
+  "depth": 1,
+  "expected_replays": {
+    "path": "output/findings/finding068/realization_necessity_replays.csv",
+    "sha256": "cbba811983592c635a85529ceac467b3fb9d7d27de5fb585d4f56ddaaf728cb1"
+  },
+  "input_branches": 164,
+  "next_depth_veto_run": false,
+  "next_selectors": 122,
+  "next_selectors_csv": "output/findings/finding069/depth001_next_selectors.csv",
+  "next_selectors_sha256": "37376530450191f0889060a8bc51a2b5de0cc464fa85b42a1c2ced644d517a4b",
+  "parent_chain_sha256": "e51d9675face197ee54edcdd31aad5626af7a4fc090c05ecde0023f594234b8e",
+  "protocol": "nested sequential ancestry-realization veto",
+  "selector_chain": [
+    {
+      "path": "output/findings/finding068/realization_necessity_selectors.csv",
+      "sha256": "9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0"
+    }
+  ],
+  "stage_endpoints": {
+    "handoff": 122,
+    "lineage_loss": 42
+  },
+  "transient_child_lineage_losses": 0
+}
