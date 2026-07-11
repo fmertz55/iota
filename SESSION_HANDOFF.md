@@ -3618,3 +3618,29 @@ all passed. Frozen factual selector-manifest SHA-256:
 
 No selector veto or counterfactual endpoint had been run when this manifest was
 frozen.
+
+## Finding 070 Depth-1 Result and Depth-2 Freeze
+
+Vetoing the 79 committed factual child events produced 23 lineage cuts and 56
+confirmed handoffs. Nontrivial counterfactual support replicated independently
+in all four new initialization geometries:
+
+```text
+seed 74: 16 handoffs /  6 cuts
+seed 76: 15 handoffs /  6 cuts
+seed 81: 19 handoffs /  4 cuts
+seed 95:  6 handoffs /  7 cuts
+total:   56 handoffs / 23 cuts
+```
+
+Every matched sham was state/RNG exact through the factual selector. Every
+selector matched once with full identity; payload remained zero, conservation
+remained exact, and there were no collisions, transient-child losses, or source
+censors. The 56 confirmed handoffs each supplied one committed depth-2
+selector. Frozen depth-2 selector-manifest SHA-256:
+
+```text
+256dfe0ad291ce835aab6a239032c7d0089f8755e985779a2bea44d79cd8ed5d
+```
+
+No depth-2 selector had been vetoed when this manifest was frozen.
