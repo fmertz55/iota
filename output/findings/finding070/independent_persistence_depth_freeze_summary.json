@@ -1,0 +1,52 @@
+{
+  "all_inheritance_joins_verified": true,
+  "all_selector_ledgers_exact": true,
+  "all_selector_payload_zero": true,
+  "branch_seed_base": 2026071500,
+  "branches_per_source": 32,
+  "counterfactual_outcomes_run": false,
+  "eligible_selectors": 79,
+  "eligible_selectors_by_source": {
+    "f070-source-001": 22,
+    "f070-source-002": 21,
+    "f070-source-003": 23,
+    "f070-source-004": 13
+  },
+  "geometry_replication_eligible_seed_count": 4,
+  "geometry_replication_eligible_sources": [
+    "f070-source-001",
+    "f070-source-002",
+    "f070-source-003",
+    "f070-source-004"
+  ],
+  "natural_branches": 128,
+  "natural_candidates_csv": "output/findings/finding070/independent_persistence_depth_natural_candidates.csv",
+  "natural_cases_csv": "output/findings/finding070/independent_persistence_depth_natural_cases.csv",
+  "natural_child_multiplicity": {
+    "1": 79
+  },
+  "natural_horizon_from_rebridge": 256,
+  "natural_outcome_labels": {
+    "activated_child": 79,
+    "gate_failed": 18,
+    "source_exhausted": 24,
+    "target_preempted": 7
+  },
+  "post_intervention_horizon": 128,
+  "protocol": "factual-only freeze for independent ordered-depth replication",
+  "scheduled_natural_branches": 128,
+  "screen_summary_path": "output/findings/finding070/independent_persistence_screen_summary.json",
+  "selected_initialization_seeds": [
+    74,
+    76,
+    81,
+    95
+  ],
+  "selected_sources": 4,
+  "selector_collision_rows": 0,
+  "selectors_csv": "output/findings/finding070/independent_persistence_depth_selectors.csv",
+  "selectors_sha256": "01ad7968c7bdd2795c5d7029b481a4420982f3e4c940e99dcf5fd71297bc17e7",
+  "source_manifest_path": "output/findings/finding070/independent_persistence_screen_source_manifest.csv",
+  "source_manifest_sha256": "c2749807dbbd06d8ec6ff52762ca9e1154c5c56be8d037c86e692c66d2114618",
+  "transport_csv_sha256": "f9b48a4df409d97cbad48ab6efccc259120ab4dc7ad1bf27480fa05cd41db887"
+}

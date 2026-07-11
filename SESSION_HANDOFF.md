@@ -3584,3 +3584,37 @@ c2749807dbbd06d8ec6ff52762ca9e1154c5c56be8d037c86e692c66d2114618
 
 No selected-source factual branch, child-selector, or veto outcome had been run
 when this manifest was frozen.
+
+## Finding 070 Factual Selector Freeze
+
+The committed four-source geometry cohort produced 128 complete factual
+branches, 32 per source. Natural terminal outcomes were:
+
+```text
+activated unique child: 79
+successor gate failed:   18
+source exhausted:        24
+target preempted:          7
+total:                   128
+```
+
+All 79 natural child cases produced exactly one inherited child and passed the
+frozen primary selector rule. Eligible selectors by independent geometry:
+
+```text
+f070-source-001 / seed 74: 22
+f070-source-002 / seed 76: 21
+f070-source-003 / seed 81: 23
+f070-source-004 / seed 95: 13
+```
+
+Every source exceeds the preregistered five-selector geometry threshold.
+Inheritance joins, payload, conservation, collision, and branch-identity audits
+all passed. Frozen factual selector-manifest SHA-256:
+
+```text
+01ad7968c7bdd2795c5d7029b481a4420982f3e4c940e99dcf5fd71297bc17e7
+```
+
+No selector veto or counterfactual endpoint had been run when this manifest was
+frozen.
