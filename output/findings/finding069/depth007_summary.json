@@ -1,0 +1,54 @@
+{
+  "all_ledger_exact": true,
+  "all_payload_zero": true,
+  "all_selector_identities_exact": true,
+  "all_selectors_matched": true,
+  "cases_csv": "output/findings/finding069/depth007_cases.csv",
+  "child_bearing_source_censoring": 0,
+  "collision_cases": 0,
+  "current_depth_veto_run": true,
+  "depth": 7,
+  "expected_replays": null,
+  "input_branches": 39,
+  "next_depth_veto_run": false,
+  "next_selectors": 26,
+  "next_selectors_csv": "output/findings/finding069/depth007_next_selectors.csv",
+  "next_selectors_sha256": "68ffdaba1825f300b007dfd962e54f3fbe64d2a95cfc69f5e8115f9f32dd8a98",
+  "parent_chain_sha256": "062573a49ba8bfd10ece149635fc5e81e9cc300029a244b2940500ae095bda22",
+  "protocol": "nested sequential ancestry-realization veto",
+  "selector_chain": [
+    {
+      "path": "output/findings/finding068/realization_necessity_selectors.csv",
+      "sha256": "9e4a70d8d0b829b4a4b288da69b8a740c398b5c161a0e5a26a7605015e8c8cb0"
+    },
+    {
+      "path": "output/findings/finding069/depth001_next_selectors.csv",
+      "sha256": "37376530450191f0889060a8bc51a2b5de0cc464fa85b42a1c2ced644d517a4b"
+    },
+    {
+      "path": "output/findings/finding069/depth002_next_selectors.csv",
+      "sha256": "3d131049d9a28582e805536893d2ad522cece467e1ed23fc6d258f64cfaa2a2c"
+    },
+    {
+      "path": "output/findings/finding069/depth003_next_selectors.csv",
+      "sha256": "508934719eeb66d9105c48e14833bb296b34e35040b9cfb5aac43e0e3c714a0f"
+    },
+    {
+      "path": "output/findings/finding069/depth004_next_selectors.csv",
+      "sha256": "78ddc60ccb9a7d2823998eaccccd455732d30de4cf69a2e3a9c0f29ee26a364c"
+    },
+    {
+      "path": "output/findings/finding069/depth005_next_selectors.csv",
+      "sha256": "db63523c994ce4ac12ba7d5af6dfdaa1ba0122e9195773a9f62835e1a4043c9c"
+    },
+    {
+      "path": "output/findings/finding069/depth006_next_selectors.csv",
+      "sha256": "23b39596337afb467d948401af6eea1c381fc2649d07407e77c75868827ad1c3"
+    }
+  ],
+  "stage_endpoints": {
+    "handoff": 26,
+    "lineage_loss": 13
+  },
+  "transient_child_lineage_losses": 0
+}
