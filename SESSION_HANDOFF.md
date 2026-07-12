@@ -4254,3 +4254,25 @@ The bounded result is registered as GC-014. The next experiment must manipulate
 successor-graph structure directly—bridge topology, signed angular contrast,
 and recruitment order under matched counts and budgets—rather than search for
 a mass, energy, force, particle, or classical-field analogue.
+
+## Finding 075 Protocol-Development Audit — Role Versus Address
+
+The already observed Finding 074 cohort may be used only to qualify a factual
+matching rule; it cannot provide Finding 075 confirmatory evidence. For each
+frozen precursor pre-state, enumerate depleted candidate addresses within
+Chebyshev radius six of the factual target. Hold radial occupancy fixed by exact
+active counts in cube26 shell one and Chebyshev shell two.
+
+The provisional rooted graph-role signature consists of face6 and face18 active
+counts, face6 and cube26 neighbor-component counts, and the sorted induced
+cube26-degree sequence among the target's active cube26 neighbors. A
+role-preserving candidate must match both the radial and complete role
+signatures at a different address. A role-breaking control must match the
+radial signature exactly while differing in the role signature. Candidates are
+ranked by distance from the factual target and then lexicographic coordinate.
+
+This audit reports support yield only. It does not replay a split, inspect a
+counterfactual response, fit a classifier, or permit a causal claim. If support
+is adequate, Finding 075 must use newly initialized channels, freeze its cohort
+and selectors before intervention, and distinguish graph-role preservation from
+literal coordinate preservation under exact payload and conservation controls.
