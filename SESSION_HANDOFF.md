@@ -4524,3 +4524,85 @@ Finding 078 passed all preregistered gates and permits a separately
 preregistered Finding 079 independent confirmation. No Finding 079 acquisition,
 branch assignment, or outcome existed when these artifacts and their selector
 were frozen.
+
+## Finding 079 Preregistration — State-Conditioned Repair Affordance
+
+Finding 079 prospectively tests whether the frozen topology-by-state interaction
+in repair affordance conditions later articulation susceptibility. It uses new
+initialization seeds `553..744`, eight continuation samples per seed, the
+canonical v0.3.6 law, checkpoint tick 2048, a 600-offset factual acquisition
+horizon, the existing 64-offset precursor lookback, and the existing strict
+singleton-transport and pre-articulation definitions. No seed in this range was
+used by Finding 075 or Finding 078.
+
+Acquisition proceeds without counterfactual branch outcomes:
+
+1. acquire all 1,536 scheduled factual continuations;
+2. screen strict transports for an eligible precursor and natural rebridge;
+3. enumerate the existing common-donor preserving and breaking receiver pair
+   without susceptibility outcomes;
+4. construct the exact Finding 078 natural, topology-only, marks-only, and joint
+   states for both receivers;
+5. select one receiver per channel by maximum absolute repair-affordance
+   interaction, then maximum absolute successor-openness interaction, then the
+   preserving receiver on an exact tie;
+6. retain only channels with nonzero selected repair-affordance interaction,
+   exact factorial integrity, and one lexicographically first channel per
+   initialization seed.
+
+At least 20 independent retained channels are required. Otherwise Finding 079
+stops without branch assignment or outcomes. The channel manifest and its hash
+must be committed first.
+
+For each retained channel, freeze 32 branch seeds from base `2,026,079,000`.
+Each common RNG branch runs four variants for 128 offsets:
+
+- `natural`;
+- `topology_only`;
+- `marks_only`;
+- `joint`.
+
+The topology and mark bundles, continuous instruments, radius-two basin, and
+candidate representation are exactly those committed for Finding 078. Natural
+and sham factual controls must reproduce the frozen precursor, split, rebridge,
+and trajectory hash. All selectors, state bundles, active counts, conserved
+amplitude, payload checks, ledgers, RNG assignments, and intervention multisets
+must remain exact.
+
+The primary endpoint is binary articulation within 128 offsets. For each channel
+and branch define the factorial articulation contrast
+
+```text
+D = joint - topology_only - marks_only + natural
+```
+
+Repair affordance is specifically bridge/reclosure accessibility, so the frozen
+directional prediction is inverse: a positive repair-affordance interaction
+predicts a negative articulation interaction and vice versa. For channel `c`,
+the signed primary effect is
+
+```text
+E_c = -sign(repair_interaction_c) * mean_branch(D)
+```
+
+The primary gate passes only if both conditions hold:
+
+1. at least two thirds of informative channels have `E_c > 0`; zero effects are
+   not informative but at least 12 informative channels are required;
+2. an exact one-sided channel-level sign-flip permutation test of the mean
+   signed effect gives `p < 0.05`. Channels, not branches, are the exchangeable
+   units; all `2^n` sign assignments are enumerated when feasible.
+
+The preregistered mechanistic claim, if supported, is limited to: under the
+frozen law, factorial intervention, instrument, receiver selector, branch panel,
+and horizon, the direction of state-conditioned repair-affordance change
+predicts the direction of later articulation-susceptibility interaction across
+independent initialization geometries.
+
+Secondary endpoints are split latency, separation lifetime, first closure
+timing, successor activation, final component count, largest-component size,
+interface union, and active/depleted adjacency. They are descriptive and cannot
+rescue a failed primary gate. Failure stops the dependent route before any
+recruitment-history experiment. Passing permits a separately preregistered
+history-matched intervention; it does not establish a universal law, physical
+field, force, mass, energy, matter, or entropy correspondence.
