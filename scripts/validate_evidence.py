@@ -726,6 +726,104 @@ def main() -> int:
     if len({(row["source_id"], row["init_seed"]) for row in gc011_sources}) != 4:
         fail("GC-011 independent source coverage changed", errors)
 
+    gc014_claim = next(item for item in claims["claims"] if item["id"] == "GC-014")
+    with (ROOT / "output/findings/finding074/pre_articulation_channel_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc014_screen = json.load(handle)
+    with (ROOT / "output/findings/finding074/pre_articulation_channel_replay_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc014_summary = json.load(handle)
+    with (ROOT / "output/findings/finding074/pre_articulation_channel_replay_results.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        gc014_results = list(csv.DictReader(handle))
+    gc014_by_variant = {
+        variant: [row for row in gc014_results if row["variant"] == variant]
+        for variant in {row["variant"] for row in gc014_results}
+    }
+    gc014_natural = {
+        row["channel_id"]: row for row in gc014_by_variant["natural"]
+    }
+    gc014_veto = {
+        row["channel_id"]: row
+        for row in gc014_by_variant["veto_first_rebridge"]
+    }
+    gc014_observed = {
+        "strict_transport_events": int(gc014_screen["strict_transport_events"]),
+        "eligible_channels": int(gc014_screen["eligible_channels"]),
+        "selected_channels": int(gc014_summary["selected_channels"]),
+        "replay_rows": len(gc014_results),
+        "precursor_erasure_suppressed_splits": sum(
+            int(row["natural_split_occurs"]) == 0
+            for row in gc014_by_variant["erase_precursor_gate"]
+        ),
+        "transplant_suppressed_splits": sum(
+            int(row["natural_split_occurs"]) == 0
+            for row in gc014_by_variant["transplant_poststate"]
+        ),
+        "memory_erasure_preserved_splits": sum(
+            int(row["natural_split_occurs"])
+            for row in gc014_by_variant["erase_inherited_memory"]
+        ),
+        "composite_pattern_channels": int(gc014_summary["pattern_channels"]),
+        "composite_required_channels": int(gc014_summary["pattern_required_two_thirds"]),
+        "composite_pattern_seeds": len(gc014_summary["pattern_initialization_seeds"]),
+        "rebridge_veto_lifetime_extensions": sum(
+            int(gc014_veto[channel]["split_lifetime"])
+            > int(gc014_natural[channel]["split_lifetime"])
+            for channel in gc014_natural
+        ),
+        "rebridge_veto_separation_128": sum(
+            int(row["relation_separation_lifetime"]) >= 128
+            for row in gc014_veto.values()
+        ),
+        "all_controls_exact": bool(
+            gc014_summary["natural_factual_exact_all_channels"]
+            and gc014_summary["natural_sham_exact_all_channels"]
+        ),
+        "all_safety_exact": bool(
+            gc014_summary["all_intervention_safety_checks_exact"]
+        ),
+        "primary_gate_supported": bool(
+            gc014_summary["coherence_conditioned_transition_geometry_supported"]
+        ),
+        "durability_gate_supported": bool(
+            gc014_summary["durability_extension_supported"]
+        ),
+    }
+    for name, expected in gc014_claim["expected"].items():
+        if gc014_observed.get(name) != expected:
+            fail(
+                f"GC-014 expected {name}={expected!r}, "
+                f"observed {gc014_observed.get(name)!r}",
+                errors,
+            )
+    for row in gc014_results:
+        expected_interventions = int(row["variant"] not in {"natural", "sham"})
+        expected_rebridge_matches = int(
+            row["variant"] in {"natural", "sham", "veto_first_rebridge"}
+        )
+        if (
+            int(row["precursor_selector_matches"]) != 1
+            or int(row["rebridge_selector_matches"]) != expected_rebridge_matches
+            or int(row["selector_identity_exact"]) != 1
+            or int(row["intervention_count"]) != expected_interventions
+            or int(row["payload_zero"]) != 1
+            or int(row["ledger_exact"]) != 1
+            or row["integrity_failure"]
+        ):
+            fail(f"GC-014 replay integrity changed: {row['channel_id']} {row['variant']}", errors)
+            break
+    if not all(
+        int(row["transplant_prestate_exact"]) == 1
+        for row in gc014_by_variant["transplant_poststate"]
+    ):
+        fail("GC-014 transplant pre-state selection changed", errors)
+    if sha256(ROOT / gc014_summary["results_csv"]) != gc014_summary["results_sha256"]:
+        fail("GC-014 results hash changed", errors)
+
     for path, expected_content in outputs().items():
         if not path.is_file():
             fail(f"generated file missing: {path.relative_to(ROOT)}", errors)

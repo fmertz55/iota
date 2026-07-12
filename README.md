@@ -98,8 +98,8 @@ consequences that would be expected if the organizing hypothesis is useful.
 ## Current evidence frontier
 
 The foundational structural result is **Golden Claim GC-001: constraint
-transport**. The latest bounded causal result is **GC-010: expression
-continuation has heterogeneous ordered realization cut depth**.
+transport**. The latest bounded causal result is **GC-014: exact precursor
+placement controls later articulation in a frozen independent cohort**.
 
 > In three controlled replay events across two seeds, payload-free Iota dynamics
 > restored the same tracked connectivity relation through a causally necessary
@@ -230,6 +230,18 @@ its standardized MSE (`1.2887`) was worse than the discovery-mean null
 The declared local-field representation therefore failed confirmation, and the
 conditional gradient experiment was not opened.
 
+Finding 074 returned to causal successor structure. A factual-only audit of 37
+strict transports identified 35 eligible pre-articulation channels and froze
+one in each of 25 independent initialization seeds before intervention. Erasing
+the precursor activation or moving its exact post-transfer state to a frozen
+nearby depleted address suppressed the recorded later split in `25/25`.
+Preserving activation and amplitude at the exact address while erasing inherited
+`R/V/P/angular_L` preserved the split in `18/25`, exceeding the preregistered
+`17/25` composite threshold; the other seven channels require additional state
+from that bundle. All 150 paired replays were exact, payload-free, and
+ledger-exact. Rebridge veto extended split lifetime in `23/25`, but no channel
+remained separated for 128 offsets, so durable morphogenesis was not supported.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -271,10 +283,16 @@ conditional gradient experiment was not opened.
 - [Finding 071 frozen source manifest](output/findings/finding071/local_affordance_screen_source_manifest.csv)
 - [Finding 072 held-out evaluation](output/findings/finding072/local_affordance_confirmation_evaluation_summary.json)
 - [Finding 072 source-level predictions](output/findings/finding072/local_affordance_confirmation_evaluation_predictions.csv)
+- [Finding 074 factual channel screen](output/findings/finding074/pre_articulation_channel_summary.json)
+- [Finding 074 frozen channel manifest](output/findings/finding074/pre_articulation_channel_manifest.csv)
+- [Finding 074 paired replay summary](output/findings/finding074/pre_articulation_channel_replay_summary.json)
+- [Finding 074 paired replay outcomes](output/findings/finding074/pre_articulation_channel_replay_results.csv)
+- [Finding 074 replay implementation](src/pre_articulation_channel_replay.py)
 
-The next gate compares selector and scheduling policies or exhaustive small
-intervention subsets before any graph-minimum, invariant topology, or
-if-and-only-if law is proposed.
+The next gate directly manipulates bridge topology, signed angular contrast,
+and recruitment order while matching counts and budgets, then measures the
+distribution of ancestry-preserving successors. It does not search for a
+downstream mass, force, energy, or field analogue.
 
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.

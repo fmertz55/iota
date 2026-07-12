@@ -1,0 +1,56 @@
+{
+  "artifacts": [
+    {
+      "bytes": 1760,
+      "path": "output/findings/finding074/pre_articulation_channel_summary.json",
+      "sha256": "8c5df22a3ff71342b2111e8569f53898b4ed58008da1483f82b2932cda429174"
+    },
+    {
+      "bytes": 24344,
+      "path": "output/findings/finding074/pre_articulation_channel_cases.csv",
+      "sha256": "5a218bc7fe7425075fc0ff173bedde28d524604afeab756f952663313784729f"
+    },
+    {
+      "bytes": 17366,
+      "path": "output/findings/finding074/pre_articulation_channel_manifest.csv",
+      "sha256": "1ffcac698b397dc956e0ff0b22398fb8c7a3241f7d65e39cfa46feb77733af5c"
+    },
+    {
+      "bytes": 2061,
+      "path": "output/findings/finding074/pre_articulation_channel_replay_summary.json",
+      "sha256": "9d0f541dbc64f7d92d2f9c9695ef9a1a4e087687bb331338fde83210836e4cb4"
+    },
+    {
+      "bytes": 43691,
+      "path": "output/findings/finding074/pre_articulation_channel_replay_results.csv",
+      "sha256": "7405d1db8f2e6a425d594f9daa82c7280da8d60a4795ed8f270dacc6f9c7a788"
+    },
+    {
+      "bytes": 32493,
+      "path": "src/pre_articulation_channel_replay.py",
+      "sha256": "fa8341ba7a1cfcfd63056ac89cf71cd24885c15e0fd0293340d1e55a24f29f52"
+    },
+    {
+      "bytes": 22745,
+      "path": "src/pre_articulation_channel_screen.py",
+      "sha256": "e4f0bc546ef2b76437176d72fd9a5aec65d45522bbdc1de8ae375f05aed83385"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 39591,
+      "path": "evidence/claims.yaml",
+      "sha256": "f98d5937b4a78411911785d75a7fa9b58daa838de43481546b586afc76a2f7bc"
+    },
+    {
+      "bytes": 8113,
+      "path": "evidence/definitions.yaml",
+      "sha256": "c1514a7c12e83eed3216213bf075f39a457d3e434f97801b6cee243397cddba4"
+    }
+  ],
+  "claim_id": "GC-014",
+  "schema_version": 1
+}

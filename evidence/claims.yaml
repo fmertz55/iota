@@ -533,6 +533,61 @@
         "The result is predictive rather than a causal geometry manipulation."
       ],
       "next_gate": "Do not open the conditional gradient experiment; redesign a richer relational representation only under a new preregistration."
+    },
+    {
+      "id": "GC-014",
+      "title": "Exact precursor placement causally controls later articulation in a frozen independent cohort",
+      "status": "supported with bounded causal, cohort, and scheduler scope; durability extension rejected",
+      "statement": "A factual-only screen of 37 strict transports identified 35 eligible pre-articulation channels and prospectively selected one channel in each of 25 independent initialization seeds. In frozen paired replays, suppressing the precursor activation or moving its exact post-transfer state to a preregistered nearby depleted address suppressed the recorded later component split in 25/25 channels. Preserving activation and amplitude at the exact articulation address while erasing inherited R/V/P/angular memory preserved the split in 18/25 channels, exceeding the preregistered 17/25 composite threshold; the remaining 7/25 show additional state dependence. Natural and sham trajectories were exact, every selector and intervention count matched, payload remained zero, and conservation was exact in all 150 replays. Vetoing the first natural rebridge extended split lifetime in 23/25 channels but none remained separated for 128 offsets, so the preregistered durability extension failed.",
+      "finding": "Finding 074",
+      "definitions": [
+        "DEF-LATENT-COUNTERFACTUAL-STRUCTURE",
+        "DEF-COHERENCE-TRANSITION-GEOMETRY",
+        "DEF-CONSTRAINT-TRANSPORT",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding074/pre_articulation_channel_summary.json",
+        "output/findings/finding074/pre_articulation_channel_cases.csv",
+        "output/findings/finding074/pre_articulation_channel_manifest.csv",
+        "output/findings/finding074/pre_articulation_channel_replay_summary.json",
+        "output/findings/finding074/pre_articulation_channel_replay_results.csv"
+      ],
+      "analysis": "src/pre_articulation_channel_replay.py",
+      "supporting_analysis": [
+        "src/pre_articulation_channel_screen.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-074-preregistration--pre-articulation-transition-geometry",
+      "expected": {
+        "strict_transport_events": 37,
+        "eligible_channels": 35,
+        "selected_channels": 25,
+        "replay_rows": 150,
+        "precursor_erasure_suppressed_splits": 25,
+        "transplant_suppressed_splits": 25,
+        "memory_erasure_preserved_splits": 18,
+        "composite_pattern_channels": 18,
+        "composite_required_channels": 17,
+        "composite_pattern_seeds": 18,
+        "rebridge_veto_lifetime_extensions": 23,
+        "rebridge_veto_separation_128": 0,
+        "all_controls_exact": true,
+        "all_safety_exact": true,
+        "primary_gate_supported": true,
+        "durability_gate_supported": false
+      },
+      "limitations": [
+        "The cohort is conditional on strict singleton constraint transports with a depleted-target activation of the future articulation within the preceding 64 offsets; it does not estimate prevalence across all dynamics.",
+        "The primary endpoint is suppression of the split at its frozen natural offset. It is not a claim that every later topological separation is prevented.",
+        "The inherited-memory intervention erases R, V, P, and angular_L as a bundle and does not identify which state coordinate is necessary in the seven memory-sensitive channels.",
+        "The transplant recipient was selected from its exact pre-step state, but normal update dynamics changed some recipient state fields on the precursor tick before the declared post-state move; the intervention is not an isolated Euclidean coordinate swap.",
+        "All channels use one simulator law, scheduler, checkpoint family, and local transplant ranking policy.",
+        "The durability endpoint failed: no rebridge-veto channel remained separated for 128 offsets.",
+        "The result concerns causal transformation of successor structure and does not establish a physical field, force, mass, energy, or matter analogue."
+      ],
+      "next_gate": "Prospectively manipulate bridge topology, signed angular contrast, and recruitment order while matching state counts and budgets, then measure the resulting distribution of lawful ancestry-preserving successors rather than a downstream physical analogue."
     }
   ]
 }

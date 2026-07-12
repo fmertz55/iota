@@ -8391,3 +8391,66 @@ conditional gradient-response experiment was not opened.
 - [Confirmation profiles](../output/findings/finding072/local_affordance_confirmation_evaluation_profiles.csv)
 - [Frozen discovery model](../output/findings/finding072/local_affordance_discovery_model_model.json)
 - [Pre-outcome features](../output/findings/finding072/local_affordance_features.csv)
+
+---
+
+## Finding 074 — Exact precursor placement causally controls later articulation
+
+### Question and Frozen Cohort
+
+Does Finding 049's exact-placement causal channel recur across independently
+initialized strict transport geometries? A factual-only screen examined all 37
+strict Finding 071/072 transports before counterfactual outcomes. Thirty-five
+channels met the complete pre-articulation criteria; a lexicographic one-per-seed
+rule froze 25 independent channels and their complete precursor, transplant,
+and rebridge selectors before paired replay.
+
+### Primary Result
+
+All 150 paired replays passed natural/sham, selector identity, one-intervention,
+payload, and conservation checks.
+
+```text
+precursor-gate erasure suppresses natural split: 25 / 25
+post-state transplant suppresses natural split: 25 / 25
+memory erasure preserves natural split:           18 / 25
+complete frozen pattern:                          18 / 25
+preregistered two-thirds requirement:             17 / 25
+```
+
+The complete pattern occurs in 18 independent initialization seeds and passes
+the primary gate. The remaining seven channels are not failures of placement
+dependence: erasure and transplantation still suppress their splits, but
+erasing the inherited `R/V/P/angular_L` bundle suppresses them as well. Their
+articulation therefore has additional marked-state dependence.
+
+### Durability Boundary
+
+Vetoing the first frozen natural rebridge extended split lifetime in `23/25`
+channels, with median paired extension `+5` offsets and no negative extensions.
+No vetoed channel remained separated for 128 offsets. The separate durability
+gate therefore fails; the result cannot be relabeled durable morphogenesis.
+
+### Interpretation
+
+In this conditional cohort, the lawful precursor must realize state at the
+correct relational address for the recorded later articulation to occur. That
+is a causal transformation of successor structure. It is not evidence for a
+radial field, force, matter, mass, or energy primitive. The state-sensitive
+minority also rejects a universal placement-only law.
+
+### Next Gate
+
+Prospectively vary bridge topology, signed angular contrast, and recruitment
+order while matching state counts and budgets. Measure changes in the
+distribution of lawful ancestry-preserving successors rather than a downstream
+physical analogue.
+
+### Artifacts
+
+- [Factual screen summary](../output/findings/finding074/pre_articulation_channel_summary.json)
+- [Frozen channel manifest](../output/findings/finding074/pre_articulation_channel_manifest.csv)
+- [Paired replay summary](../output/findings/finding074/pre_articulation_channel_replay_summary.json)
+- [Paired replay outcomes](../output/findings/finding074/pre_articulation_channel_replay_results.csv)
+- [Factual-screen implementation](../src/pre_articulation_channel_screen.py)
+- [Paired-replay implementation](../src/pre_articulation_channel_replay.py)

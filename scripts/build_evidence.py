@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 from pathlib import Path
 
@@ -44,6 +45,9 @@ def render_results(
     gc009_replays: list[dict[str, str]],
     gc010_summary: dict,
     gc011_summary: dict,
+    gc014_screen: dict,
+    gc014_summary: dict,
+    gc014_results: list[dict[str, str]],
 ) -> str:
     strict_cases = [
         row for row in gc002_cases if row["finding060_constraint_transport"] == "1"
@@ -86,6 +90,11 @@ def render_results(
     ]
     gc011_depth_counts = (
         ", ".join(gc011_depth_values[:-1]) + ", and " + gc011_depth_values[-1]
+    )
+    gc014_memory_preserved = sum(
+        int(row["natural_split_occurs"])
+        for row in gc014_results
+        if row["variant"] == "erase_inherited_memory"
     )
     return "\n".join(
         [
@@ -147,6 +156,16 @@ def render_results(
             rf"\newcommand{{\GCElevenOverrideExecutions}}{{{gc011_summary['selector_override_executions']}}}",
             rf"\newcommand{{\GCElevenTargetReuseBranches}}{{{gc011_summary['branches_with_reused_selector_targets']}}}",
             rf"\newcommand{{\GCElevenTransientLosses}}{{{gc011_summary['transient_child_lineage_losses']}}}",
+            rf"\newcommand{{\GCFourteenStrictInputs}}{{{gc014_screen['strict_transport_events']}}}",
+            rf"\newcommand{{\GCFourteenEligible}}{{{gc014_screen['eligible_channels']}}}",
+            rf"\newcommand{{\GCFourteenChannels}}{{{gc014_summary['selected_channels']}}}",
+            rf"\newcommand{{\GCFourteenPattern}}{{{gc014_summary['pattern_channels']}}}",
+            rf"\newcommand{{\GCFourteenRequired}}{{{gc014_summary['pattern_required_two_thirds']}}}",
+            rf"\newcommand{{\GCFourteenMemoryPreserved}}{{{gc014_memory_preserved}}}",
+            rf"\newcommand{{\GCFourteenMemorySensitive}}{{{int(gc014_summary['selected_channels']) - gc014_memory_preserved}}}",
+            rf"\newcommand{{\GCFourteenVetoExtensions}}{{{gc014_summary['vetoes_extending_natural_split_lifetime']}}}",
+            rf"\newcommand{{\GCFourteenVetoes}}{{{gc014_summary['unique_rebridge_vetoes']}}}",
+            rf"\newcommand{{\GCFourteenDurable}}{{{len(gc014_summary['veto_separation_at_least_128_channels'])}}}",
             "",
         ]
     )
@@ -306,6 +325,18 @@ def outputs() -> dict[Path, str]:
     _, _, gc009_summary, gc009_replays = load_gc009()
     _, gc010_summary, _, gc010_depths, _, _ = load_gc010()
     _, gc011_summary, _, gc011_depths, _, _ = load_gc011()
+    with (ROOT / "output/findings/finding074/pre_articulation_channel_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc014_screen = json.load(handle)
+    with (ROOT / "output/findings/finding074/pre_articulation_channel_replay_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc014_summary = json.load(handle)
+    with (ROOT / "output/findings/finding074/pre_articulation_channel_replay_results.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        gc014_results = list(csv.DictReader(handle))
     claims_registry = load_registry(ROOT / "evidence" / "claims.yaml")
     definitions = load_registry(ROOT / "evidence" / "definitions.yaml")
     metrics = evidence_metrics(summary, events)
@@ -328,6 +359,9 @@ def outputs() -> dict[Path, str]:
             gc009_replays,
             gc010_summary,
             gc011_summary,
+            gc014_screen,
+            gc014_summary,
+            gc014_results,
         ),
         GENERATED / "tables" / "gc001_events.tex": render_event_table(events),
         GENERATED / "tables" / "gc010_depths.tex": render_gc010_depth_table(

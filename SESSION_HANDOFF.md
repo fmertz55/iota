@@ -4205,3 +4205,52 @@ result and cannot be relabeled durable morphogenesis.
 All long stages must run through `scripts/run_with_heartbeat.py`; local heartbeat
 state is operational recovery evidence, while scientific barriers are committed
 repository artifacts.
+
+## Finding 074 Final Result — Placement Gate Passed; Durability Gate Failed
+
+The factual screen completed all 37 strict Finding 071/072 transports. It found
+35 eligible channels and selected one channel in each of 25 independent
+initialization seeds, exceeding the frozen six-seed acquisition gate. Every
+factual row was payload-free and ledger-exact. The full manifest and its
+`1ffcac698b397dc956e0ff0b22398fb8c7a3241f7d65e39cfa46feb77733af5c`
+hash were committed at `5ef57cc` before intervention code or outcomes.
+
+An initial full-run attempt exposed an instrumentation error: an earlier death
+of the future articulation address, before its frozen precursor reactivated it,
+was incorrectly treated as the experimental split. The run was stopped after
+two invalid channel diagnostics, produced no scientific artifact, and was not
+interpreted. The detector was bounded to offsets at or after the frozen
+precursor and committed at `f0e49cc`. A one-channel instrumentation replay then
+passed every selector, intervention, payload, ledger, natural, and sham check
+before the complete cohort was reopened.
+
+The completed 150-row paired replay produced:
+
+```text
+erase precursor gate suppresses recorded split: 25 / 25
+transplant exact post-state suppresses split:    25 / 25
+erase inherited memory preserves split:         18 / 25
+complete frozen composite pattern:               18 / 25
+required composite threshold:                    17 / 25
+represented composite-pattern seeds:             18
+```
+
+Natural and sham trajectories reproduced all factual splits and rebridges.
+Every targeted selector matched exactly once, every intervention count was
+exact, all payload checks remained zero, and every conservation ledger was
+exact. The primary coherence-conditioned transition-geometry gate therefore
+passes. Exact relational placement is causal for the recorded articulation in
+this conditional cohort; seven channels additionally require some member of
+the bundled inherited `R/V/P/angular_L` state and prevent a placement-only law.
+
+The first-rebridge veto extended split lifetime in `23/25` channels (median
+paired extension `+5` offsets; no negative extensions), but zero channels
+remained separated for 128 offsets. The separate durability extension fails and
+Finding 074 does not support durable morphogenesis.
+
+Raw outcomes were frozen at commit `b2ef3a6`; the replay-results hash is
+`7405d1db8f2e6a425d594f9daa82c7280da8d60a4795ed8f270dacc6f9c7a788`.
+The bounded result is registered as GC-014. The next experiment must manipulate
+successor-graph structure directly—bridge topology, signed angular contrast,
+and recruitment order under matched counts and budgets—rather than search for
+a mass, energy, force, particle, or classical-field analogue.
