@@ -1,0 +1,26 @@
+{
+  "all_safety_and_repeat_checks_exact": true,
+  "channels": 25,
+  "channels_csv": "output/findings/finding078/factorial_successor_accessibility_channels.csv",
+  "channels_sha256": "960d0a4a1a1649ce9b98388e1af8b063198f57b2dbf935b61d9e045e9dd9c678",
+  "expected_factorial_states": 175,
+  "factorial_states": 175,
+  "finding": "078",
+  "finding075_outcomes_used": false,
+  "finding078_feasibility_passed": true,
+  "finding079_permitted": true,
+  "identifiable_channels": 25,
+  "identifiable_required": 20,
+  "nonzero_interaction_channels": 23,
+  "nonzero_interaction_required": 12,
+  "protocol": "developmental topology-by-state successor-accessibility feasibility",
+  "receiver_selection_counts": {
+    "breaking": 11,
+    "preserving": 14
+  },
+  "source_manifest": "output/findings/finding075/successor_graph_rewire_manifest.csv",
+  "source_manifest_sha256": "b1605fa59101839dbb79d9aca8522fbc8af2e0e65541835e60aea8eb3b5ae41d",
+  "states_csv": "output/findings/finding078/factorial_successor_accessibility_states.csv",
+  "states_sha256": "6705b826d8f2631c8f50d36a9044042deba30aa8b617a0fc5889d5f45236d1cd",
+  "worker_processes": 4
+}

@@ -4489,3 +4489,38 @@ interaction under common RNG. Split latency, rebridge timing, separation
 duration, articulation location, and component imbalance may be frozen secondary
 endpoints but cannot replace a failed primary result. Recruitment history is a
 later hypothesis and is not inferred from Finding 078.
+
+## Finding 078 Frozen Feasibility Result — Factorial Instrument Identifiable
+
+Finding 078 completed all 175 preregistered pre-outcome states. All states were
+payload-free and ledger-exact, preserved active count and conserved amplitude,
+preserved the declared structural and mark multisets, reproduced the joint full
+swap, left the source RNG untouched, and repeated exactly.
+
+```text
+channels:                         25
+factorial states:                175 / 175
+identifiable channels:            25 / 25  (required 20)
+nonzero interaction channels:     23 / 25  (required 12)
+selected preserving receivers:    14
+selected breaking receivers:      11
+```
+
+The outcome-free receiver selector was heterogeneous and therefore did not
+reduce to the failed Finding 075 binary role label. Among selected receivers,
+repair-affordance interaction was nonzero in 22/25 channels and
+successor-openness interaction was nonzero in 12/25. These values establish
+instrument feasibility only. They do not show that either continuous measure
+predicts articulation or that the topology-by-state interaction is causal for a
+later branch endpoint.
+
+The frozen artifacts are:
+
+- `output/findings/finding078/factorial_successor_accessibility_summary.json`
+- `output/findings/finding078/factorial_successor_accessibility_channels.csv`
+- `output/findings/finding078/factorial_successor_accessibility_states.csv`
+
+Finding 078 passed all preregistered gates and permits a separately
+preregistered Finding 079 independent confirmation. No Finding 079 acquisition,
+branch assignment, or outcome existed when these artifacts and their selector
+were frozen.
