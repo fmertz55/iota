@@ -146,6 +146,15 @@ For a factual ancestry-producing event selected before intervention, temporal re
 
 Under a frozen retained-amplitude veto policy and fixed follow-up, the smallest depth d along a branch's prospectively committed selector chain at which vetoing the first d ancestry-producing events causes the original address to deactivate without a live collision-free descendant. Handoff after the administrative maximum is right-censored above that depth; continued original-address activity at the horizon is source-survival censored. The depth is prefix-minimal for this ordered policy, not a graph-theoretic minimum over arbitrary intervention sets.
 
+## Latent counterfactual structure
+
+- ID: `DEF-LATENT-COUNTERFACTUAL-STRUCTURE`
+- Kind: working theoretical construct
+- Status: provisional
+- Symbol: none
+
+The marked relational structure of lawful successor events still realizable from a declared complete state under the declared law, including their conditional order, compatibility, and closure. It is not the single factual trajectory, a scalar field, or a claim that every successor is simultaneously available.
+
 ## Coherence-conditioned transition geometry
 
 - ID: `DEF-COHERENCE-TRANSITION-GEOMETRY`

@@ -4098,6 +4098,23 @@ freeze, and terminal-result barriers still require committed repository
 artifacts; heartbeat files are operational recovery records and remain
 untracked.
 
+## Research-Program Guardrail — Successor Structure Before Physics Analogues
+
+The immediate primitive target is the latent counterfactual structure of lawful
+successor events: which relations are available, which ordered transitions can
+realize them, which routes close, and which successor structure can be inherited.
+The lattice stores state; the marked relational transition graph represents
+possibility; coherence provisionally organizes persistence across succession.
+
+Every proposed test must identify the successor-graph quantity it changes and
+measures. A test aimed primarily at mass, energy, force, attraction, radial
+decay, particle motion, or a classical field is downstream unless its underlying
+counterfactual mechanism has already been demonstrated. Mass- and energy-like
+behavior remain possible coarse-grained outputs to explain, not substrate
+variables to imitate. The current mechanistic target is causal transformation
+of the successor graph by a coherence, under the disciplined working term
+`coherence-conditioned transition geometry`.
+
 ## Finding 074 Preregistration — Pre-Articulation Transition Geometry
 
 Finding 074 tests whether Finding 049's exact-placement causal channel recurs

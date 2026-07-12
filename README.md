@@ -18,6 +18,39 @@ question from which the experiments are derived:
 > Can finite local interactions produce constraints on reachable futures that
 > persist even when the local state that realizes them is replaced?
 
+### Research-program guardrail
+
+The primitive target is the **latent counterfactual structure** of lawful
+successor events, not an early imitation of matter, mass, energy, force, or a
+classical field. The lattice stores state; its marked relational transition
+graph represents which interactions remain possible; coherence is provisionally
+the organization that preserves and transmits part of that successor structure
+across realized transitions.
+
+Every proposed experiment must therefore answer:
+
+> Does this test measure a coherence's causal transformation of possible
+> successor transitions, or only search for the appearance of a downstream
+> physical observable?
+
+Tests aimed primarily at attraction, radial decay, energy flow, particle motion,
+or other familiar observables remain downstream unless their counterfactual
+mechanism has already been demonstrated. The working explanatory order is:
+
+1. persistent sites retain state;
+2. lawful relations permit or exclude exchanges;
+3. the present defines a latent graph of realizable successor events;
+4. coherence preserves selected successor structure across transitions;
+5. inheritance passes a modified set of future affordances onward;
+6. recurrent organizations may yield stable higher-order invariants; and
+7. mass- or energy-like behavior, if it emerges, is a coarse-grained output to
+   explain rather than a primitive variable to imitate.
+
+The immediate research target is **causal transformation of the successor graph
+by a coherence**. “Coherence-conditioned transition geometry” is the working
+term for that target; it does not assert a physical field or correspondence with
+known matter.
+
 ## From hypothesis to experiment
 
 At permanent lattice address $x$, write an iota provisionally as
