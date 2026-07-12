@@ -1,0 +1,13 @@
+{
+  "branch_assignments": 400,
+  "branch_manifest": "output/findings/finding075/successor_graph_branch_manifest.csv",
+  "branch_manifest_sha256": "4bff47df01e32d9313d48ca9b219051641b04af1cd28990140bc9d0b5db9a21b",
+  "branches_per_channel": 16,
+  "causal_outcomes_run": false,
+  "channels": 25,
+  "finding": "075D",
+  "protocol": "frozen common-RNG articulation susceptibility branches",
+  "source_manifest": "output/findings/finding075/successor_graph_rewire_manifest.csv",
+  "source_manifest_sha256": "b1605fa59101839dbb79d9aca8522fbc8af2e0e65541835e60aea8eb3b5ae41d",
+  "variants_per_assignment": 3
+}
