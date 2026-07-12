@@ -4097,3 +4097,94 @@ or conversation compaction interrupts observation. Important preregistration,
 freeze, and terminal-result barriers still require committed repository
 artifacts; heartbeat files are operational recovery records and remain
 untracked.
+
+## Finding 074 Preregistration — Pre-Articulation Transition Geometry
+
+Finding 074 tests whether Finding 049's exact-placement causal channel recurs
+across independent strict transport geometries. It is mechanism-first and does
+not reopen the failed GC-013 representation search.
+
+### Factual channel screen
+
+The frozen factual input is every strict constraint-transport event in the
+combined Finding 071/072 screen (`105..360`, eight classification samples per
+seed). No counterfactual outcome has been run for these channels. Each natural
+event is replayed from its canonical v0.3.6 checkpoint under the recorded
+`takeover_only_vector_phase` law.
+
+A pre-articulation channel is eligible only when all of the following are true:
+
+1. the strict event has exactly one original bridge address;
+2. that address is active immediately before the recorded split and inactive
+   immediately afterward;
+3. removing it alone from the pre-split world increases cube26 component count;
+4. its natural deactivation increases actual cube26 component count;
+5. within the preceding 64 offsets, a successful transfer into a depleted
+   target most recently activated that exact future articulation address;
+6. the future articulation source makes at least one successful outgoing
+   transfer on its death transition;
+7. the recorded successor bridge naturally restores the predecessor relation;
+8. payload remains zero and the conservation ledger remains exact.
+
+Selection is at most one channel per initialization seed: lexicographically
+first by `(sample, split, rebridge, precursor offset, source, target)`. The full
+factual audit is completed before selection. At least six independent seeds are
+required; otherwise Finding 074 stops before intervention. The selected channel
+manifest, complete event identities, natural endpoints, and hashes are
+committed before any paired replay.
+
+### Frozen paired interventions
+
+For every selected channel, replay the same checkpoint, continuation RNG, and
+fixed endpoint through 256 offsets after natural split:
+
+- `natural`: unchanged trajectory;
+- `sham`: observe and exactly match the frozen precursor without changing it;
+- `erase_precursor_gate`: consume the natural gate draw but force the frozen
+  successful precursor transfer to fail, retaining its amplitude at the source;
+- `erase_inherited_memory`: preserve the natural activation and amplitude at the
+  exact articulation address but restore its pre-transfer `R`, `V`, `P`, and
+  angular-memory state;
+- `transplant_poststate`: after the natural precursor step, restore the factual
+  target to its pre-transfer state and move the exact post-transfer state to a
+  preregistered nearby depleted address.
+
+The transplant address is selected before intervention outcomes from Chebyshev
+radius two around the factual target. Candidates must be depleted before the
+precursor, distinct from precursor source/target and recorded bridge cells. Rank
+by absolute difference from the factual target's pre-step face6 count,
+cube26 count, and cube26 neighbor-component count, then distance, then
+lexicographic coordinate. The chosen address and all pre-state matching fields
+are part of the frozen manifest.
+
+A separate `veto_first_rebridge` replay consumes and suppresses the first frozen
+successful activation belonging to the natural successor bridge, when that
+activation has a unique candidate-ledger identity. It tests closure lifetime,
+not precursor necessity.
+
+### Outcomes and gates
+
+Primary outcomes are split occurrence at the natural split offset, first split
+offset if shifted, split lifetime, maximum component-count delta, largest-
+component delta, successor-bridge realization, alternate closure, and
+component/interface divergence at 128 and 256 offsets. Every sham, candidate
+identity, payload check, ledger check, and intervention count must be exact.
+
+The coherence-conditioned transition-geometry pattern is supported only if:
+
+1. at least six independent eligible channels enter intervention;
+2. natural and sham reproduce every factual split and rebridge exactly;
+3. in at least two thirds of channels, precursor erasure suppresses the natural
+   split and transplantation suppresses it while memory erasure preserves it;
+4. the paired pattern occurs in at least four initialization seeds;
+5. no lineage ambiguity, payload, ledger, or multi-intervention failure occurs.
+
+The durability extension is a separate secondary positive: among uniquely
+vetoable rebridges, at least two thirds must extend separation beyond its natural
+lifetime, and at least one independent seed must remain separated for 128
+offsets. Failure of this secondary gate does not negate a precursor-placement
+result and cannot be relabeled durable morphogenesis.
+
+All long stages must run through `scripts/run_with_heartbeat.py`; local heartbeat
+state is operational recovery evidence, while scientific barriers are committed
+repository artifacts.
