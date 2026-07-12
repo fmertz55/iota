@@ -1,0 +1,26 @@
+{
+  "all_ledger_exact": true,
+  "all_matched_shams_exact": true,
+  "all_payload_zero": true,
+  "all_selector_identities_exact": true,
+  "all_selectors_matched": true,
+  "cases_csv": "output/findings/finding072/local_affordance_confirmation_veto_cases.csv",
+  "child_bearing_source_censoring": 0,
+  "collision_cases": 0,
+  "finding": "071D",
+  "freeze_summary_sha256": "ca903a49ca6fd0b930cbee2212e66ae20afbab4e87f9c313912fa2f5657314b0",
+  "input_branches": 651,
+  "next_selectors": 528,
+  "next_selectors_csv": "output/findings/finding072/local_affordance_confirmation_veto_next_selectors.csv",
+  "next_selectors_sha256": "f9c24c6fe3a6e5bb75ca16fb5d87e3f57db7a1252445c86b8a10b21bbb497055",
+  "parent_chain_sha256": "9182914d2787a294b67648d532002e0c5d9fe0ab1d7ce0ac19bca06b15502cab",
+  "protocol": "depth-1 retained-amplitude local affordance veto",
+  "selector_sha256": "1cea30c939664c1207fb3d33bb4ea6fd336ea00ddb22d9cb1ccfeac0c923a87b",
+  "source_manifest_sha256": "fd576f0f4f0b3f0e02b682ed3b0f4e0380a021a03f77639f4e231dea471b39f6",
+  "split": "confirmation",
+  "stage_endpoints": {
+    "handoff": 528,
+    "lineage_loss": 123
+  },
+  "transient_child_lineage_losses": 0
+}
