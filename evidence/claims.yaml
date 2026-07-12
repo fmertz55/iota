@@ -504,6 +504,35 @@
         "Repartitioning or expanding Finding 071 after observing source yield is prohibited by its preregistration."
       ],
       "next_gate": "Preregister a separate source-acquisition experiment that obtains an adequately supported independent confirmation cohort while keeping all 12 Finding 071 source-response outcomes sealed."
+    },
+    {
+      "id": "GC-013",
+      "title": "Bounded shell geometry did not confirm a transportable affordance field",
+      "status": "negative confirmation for the preregistered representation",
+      "statement": "On 17 sealed confirmation geometries, a discovery-selected radius-3 multi-response ridge model narrowly improved over source-intrinsic controls (standardized MSE 1.2887 versus 1.3034) and improved four of six response dimensions, but it was worse than the discovery-mean null (1.2720) and non-significant under the frozen permutation test (p=0.3537). The preregistered local-field confirmation gate failed.",
+      "finding": "Finding 072",
+      "definitions": ["DEF-EXPRESSION-LINEAGE", "DEF-REALIZATION-REDUNDANCY", "DEF-PAYLOAD-FREE", "DEF-LEDGER-EXACT"],
+      "evidence": [
+        "output/findings/finding072/local_affordance_confirmation_evaluation_summary.json",
+        "output/findings/finding072/local_affordance_confirmation_evaluation_predictions.csv",
+        "output/findings/finding072/local_affordance_confirmation_evaluation_profiles.csv",
+        "output/findings/finding072/local_affordance_discovery_model_model.json",
+        "output/findings/finding072/local_affordance_features.csv",
+        "output/findings/finding072/local_affordance_confirmation_veto_summary.json",
+        "output/findings/finding072/local_affordance_confirmation_freeze_summary.json",
+        "output/findings/finding072/local_affordance_combined_summary.json"
+      ],
+      "analysis": "src/local_affordance_model.py",
+      "supporting_analysis": ["src/local_affordance_features.py", "src/local_affordance_factual.py", "src/local_affordance_veto.py", "src/local_affordance_acquisition.py", "src/local_affordance_combine.py"],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-072-preregistration--independent-source-acquisition-and-locality-confirmation",
+      "limitations": [
+        "The negative result applies to cumulative shell histograms through radius three and the frozen ridge learner, not all local relational representations.",
+        "Discovery contained nine independent geometries, limiting model selection stability.",
+        "The response vector is source-aggregated and conditional on strict singleton-transport geometries.",
+        "The result is predictive rather than a causal geometry manipulation."
+      ],
+      "next_gate": "Do not open the conditional gradient experiment; redesign a richer relational representation only under a new preregistration."
     }
   ]
 }

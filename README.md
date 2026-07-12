@@ -189,6 +189,14 @@ geometries against a frozen minimum of 6 per half. The experiment therefore
 stopped before any affordance response, veto, or model was run. This is an
 inconclusive cohort-support result—not evidence for or against a local field.
 
+Finding 072 acquired 14 additional geometries and completed the sealed test on
+9 discovery and 17 confirmation sources. The radius-3 local model narrowly beat
+the intrinsic-only control and improved four of six response dimensions, but
+its standardized MSE (`1.2887`) was worse than the discovery-mean null
+(`1.2720`) and its frozen permutation test was non-significant (`p=0.3537`).
+The declared local-field representation therefore failed confirmation, and the
+conditional gradient experiment was not opened.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -228,6 +236,8 @@ inconclusive cohort-support result—not evidence for or against a local field.
 - [Finding 070 synthesis implementation](src/summarize_independent_persistence.py)
 - [Finding 071 prospective screen summary](output/findings/finding071/local_affordance_screen_summary.json)
 - [Finding 071 frozen source manifest](output/findings/finding071/local_affordance_screen_source_manifest.csv)
+- [Finding 072 held-out evaluation](output/findings/finding072/local_affordance_confirmation_evaluation_summary.json)
+- [Finding 072 source-level predictions](output/findings/finding072/local_affordance_confirmation_evaluation_predictions.csv)
 
 The next gate compares selector and scheduling policies or exhaustive small
 intervention subsets before any graph-minimum, invariant topology, or

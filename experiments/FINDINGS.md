@@ -8363,3 +8363,31 @@ sealed.
 - [Complete case matrix](../output/findings/finding071/local_affordance_screen_cases.csv)
 - [Transport audits](../output/findings/finding071/local_affordance_screen_transport_events.csv)
 - [Frozen screen implementation](../src/local_affordance_screen.py)
+
+---
+
+## Finding 072 — Bounded shell geometry did not confirm a transportable affordance field
+
+Finding 072 prospectively acquired 14 new confirmation geometries and combined
+them with the sealed Finding 071 cohort, yielding 9 discovery and 17
+confirmation sources. All 26 geometries received frozen radius-1/2/3 shell
+features before response branching. Every source passed response support.
+
+Discovery selected radius 3 and ridge penalty 100. On held-out confirmation,
+the local model's standardized MSE was 1.2887 versus 1.3034 for intrinsic-only
+controls and 1.2720 for the discovery-mean null. It improved four of six
+response dimensions but failed to beat the null; the frozen permutation test
+gave `p=0.3537`. The full preregistered confirmation gate therefore failed.
+
+This rejects the declared shell-histogram representation and learner as a
+confirmed local affordance field. It does not reject every possible local
+relational representation. Because the field gate failed, Finding 073's
+conditional gradient-response experiment was not opened.
+
+### Artifacts
+
+- [Held-out summary](../output/findings/finding072/local_affordance_confirmation_evaluation_summary.json)
+- [Predictions](../output/findings/finding072/local_affordance_confirmation_evaluation_predictions.csv)
+- [Confirmation profiles](../output/findings/finding072/local_affordance_confirmation_evaluation_profiles.csv)
+- [Frozen discovery model](../output/findings/finding072/local_affordance_discovery_model_model.json)
+- [Pre-outcome features](../output/findings/finding072/local_affordance_features.csv)

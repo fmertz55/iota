@@ -4048,3 +4048,34 @@ Finding 073 may begin only if Finding 072 passes every held-out local-field
 confirmation criterion. Its subject will be controlled response to a frozen
 affordance gradient, not another post-hoc classifier. A failure or inconclusive
 Finding 072 stops the field-to-gradient sequence and is registered as such.
+
+## Finding 072 Final Result — Local-Field Confirmation Failed
+
+The acquisition batch selected 14 new confirmation geometries. The combined
+cohort contained 9 discovery and 17 confirmation sources. All 26 pre-outcome
+feature rows were frozen before responses. Every source met response support:
+discovery supplied 432 natural branches and 346 unique-child veto selectors;
+confirmation supplied 816 natural branches and 651 selectors. All shams,
+selector identities, payload checks, conservation ledgers, and collision checks
+passed.
+
+Discovery selected cumulative radius 3 with ridge penalty 100. On confirmation:
+
+```text
+local standardized MSE:       1.2887142111
+intrinsic-only MSE:            1.3033842696
+discovery-mean null MSE:       1.2720478754
+dimensions beating intrinsic: 4 / 6
+permutation p:                 0.3536564634
+```
+
+The local model narrowly beat the intrinsic control and improved four response
+dimensions, but it failed two mandatory gates: it did not beat the null and its
+permutation p-value exceeded 0.05. Finding 072 therefore does not confirm that
+the preregistered bounded local representation carries transportable predictive
+information about the multidimensional affordance profile.
+
+This is a negative confirmation for the declared representation and learner,
+not proof that no local field exists. Shell histograms may discard relational
+arrangements that matter. Finding 073 is not opened: no field gradient should
+be constructed from a predictor that failed held-out confirmation.
