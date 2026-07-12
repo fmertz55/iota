@@ -1,0 +1,26 @@
+{
+  "all_ledger_exact": true,
+  "all_matched_shams_exact": true,
+  "all_payload_zero": true,
+  "all_selector_identities_exact": true,
+  "all_selectors_matched": true,
+  "cases_csv": "output/findings/finding072/local_affordance_discovery_veto_cases.csv",
+  "child_bearing_source_censoring": 0,
+  "collision_cases": 0,
+  "finding": "071D",
+  "freeze_summary_sha256": "1fc853ec01868facd6686af40801f7d6571be67b0c8480daed1b43f4fad864f8",
+  "input_branches": 346,
+  "next_selectors": 286,
+  "next_selectors_csv": "output/findings/finding072/local_affordance_discovery_veto_next_selectors.csv",
+  "next_selectors_sha256": "059b77ee40257049ff63c9c50fc5c0cd59188196eeda3c676bc91909573a72e9",
+  "parent_chain_sha256": "60725be67aeee13c58b8d170c56d0b0e4f2b14bf1a91bfacdb310a5b66f3a847",
+  "protocol": "depth-1 retained-amplitude local affordance veto",
+  "selector_sha256": "1e3e3605fca7280413eeaf2fd16c82177a62288d8c425a288315ffab06e95ba3",
+  "source_manifest_sha256": "fd576f0f4f0b3f0e02b682ed3b0f4e0380a021a03f77639f4e231dea471b39f6",
+  "split": "discovery",
+  "stage_endpoints": {
+    "handoff": 286,
+    "lineage_loss": 60
+  },
+  "transient_child_lineage_losses": 0
+}
