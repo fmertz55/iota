@@ -824,6 +824,89 @@ def main() -> int:
     if sha256(ROOT / gc014_summary["results_csv"]) != gc014_summary["results_sha256"]:
         fail("GC-014 results hash changed", errors)
 
+    gc015_claim = next(item for item in claims["claims"] if item["id"] == "GC-015")
+    with (ROOT / "output/findings/finding075/successor_graph_acquisition_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc015_acquisition = json.load(handle)
+    with (ROOT / "output/findings/finding075/successor_graph_channel_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc015_screen = json.load(handle)
+    with (ROOT / "output/findings/finding075/successor_graph_rewire_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc015_rewire = json.load(handle)
+    with (ROOT / "output/findings/finding075/successor_graph_susceptibility_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc015_summary = json.load(handle)
+    with (ROOT / gc015_summary["channels_csv"]).open(newline="", encoding="utf-8") as handle:
+        gc015_channels = list(csv.DictReader(handle))
+    with (ROOT / gc015_summary["branches_csv"]).open(newline="", encoding="utf-8") as handle:
+        gc015_branches = list(csv.DictReader(handle))
+    with (ROOT / gc015_summary["controls_csv"]).open(newline="", encoding="utf-8") as handle:
+        gc015_controls = list(csv.DictReader(handle))
+
+    gc015_observed = {
+        "factual_cases": int(gc015_acquisition["cases"]),
+        "strict_transport_events": int(gc015_acquisition["strict_transport_events"]),
+        "strict_initialization_seeds": int(gc015_screen["strict_initialization_seeds"]),
+        "eligible_precursor_channels": int(gc015_rewire["eligible_precursor_channels"]),
+        "selected_paired_channels": int(gc015_rewire["selected_paired_channels"]),
+        "branch_outcomes": len(gc015_branches),
+        "natural_articulations": sum(int(row["natural_articulations"]) for row in gc015_channels),
+        "preserving_articulations": sum(int(row["preserving_articulations"]) for row in gc015_channels),
+        "breaking_articulations": sum(int(row["breaking_articulations"]) for row in gc015_channels),
+        "preserve_over_break_discordances": int(gc015_summary["preserve_over_break_discordances"]),
+        "break_over_preserve_discordances": int(gc015_summary["break_over_preserve_discordances"]),
+        "one_sided_exact_mcnemar_p": float(gc015_summary["one_sided_exact_mcnemar_p"]),
+        "informative_channels": int(gc015_summary["informative_channels"]),
+        "informative_channels_preserving_higher": int(gc015_summary["informative_channels_preserving_higher"]),
+        "channels_preserving_strictly_closer_to_natural": int(gc015_summary["channels_preserving_strictly_closer_to_natural"]),
+        "all_controls_and_safety_exact": bool(
+            gc015_summary["all_factual_controls_exact"]
+            and gc015_summary["all_branch_safety_exact"]
+            and gc015_summary["all_swap_invariants_exact"]
+        ),
+        "graph_role_hypothesis_supported": bool(gc015_summary["graph_role_hypothesis_supported"]),
+        "finding076_permitted": bool(gc015_summary["finding076_permitted"]),
+    }
+    for name, expected in gc015_claim["expected"].items():
+        observed = gc015_observed.get(name)
+        if isinstance(expected, float):
+            equal = math.isclose(observed, expected, rel_tol=0.0, abs_tol=1e-15)
+        else:
+            equal = observed == expected
+        if not equal:
+            fail(f"GC-015 expected {name}={expected!r}, observed {observed!r}", errors)
+    if len(gc015_channels) != 25 or len(gc015_controls) != 50:
+        fail("GC-015 channel or control row count changed", errors)
+    if any(
+        int(row["payload_zero"]) != 1
+        or int(row["ledger_exact"]) != 1
+        or row["integrity_failure"]
+        for row in gc015_branches
+    ):
+        fail("GC-015 branch integrity changed", errors)
+    if any(
+        int(row["natural_sham_exact"]) != 1
+        or int(row["payload_zero"]) != 1
+        or int(row["ledger_exact"]) != 1
+        or row["integrity_failure"]
+        for row in gc015_controls
+    ):
+        fail("GC-015 factual control integrity changed", errors)
+    for artifact, digest in [
+        (gc015_summary["channel_manifest"], gc015_summary["channel_manifest_sha256"]),
+        (gc015_summary["branch_manifest"], gc015_summary["branch_manifest_sha256"]),
+        (gc015_summary["channels_csv"], gc015_summary["channels_sha256"]),
+        (gc015_summary["branches_csv"], gc015_summary["branches_sha256"]),
+        (gc015_summary["controls_csv"], gc015_summary["controls_sha256"]),
+    ]:
+        if sha256(ROOT / artifact) != digest:
+            fail(f"GC-015 artifact hash changed: {artifact}", errors)
+
     for path, expected_content in outputs().items():
         if not path.is_file():
             fail(f"generated file missing: {path.relative_to(ROOT)}", errors)

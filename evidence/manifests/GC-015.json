@@ -1,0 +1,96 @@
+{
+  "artifacts": [
+    {
+      "bytes": 96008,
+      "path": "output/findings/finding075/successor_graph_acquisition_summary.json",
+      "sha256": "9a4b990ac65e8124da25086f368c692e943d8aecd2e50d04f6bd289dabc8c39d"
+    },
+    {
+      "bytes": 1613,
+      "path": "output/findings/finding075/successor_graph_channel_summary.json",
+      "sha256": "d3ab395583e7e4e5563e0278a7a4e62768e75e972abc0873b983f0dc09adbbab"
+    },
+    {
+      "bytes": 1252,
+      "path": "output/findings/finding075/successor_graph_rewire_summary.json",
+      "sha256": "e998b220de28799e1ed90f992e8b5f026bfe8ab35c2dce3a2697127faeb8f130"
+    },
+    {
+      "bytes": 21149,
+      "path": "output/findings/finding075/successor_graph_rewire_manifest.csv",
+      "sha256": "b1605fa59101839dbb79d9aca8522fbc8af2e0e65541835e60aea8eb3b5ae41d"
+    },
+    {
+      "bytes": 603,
+      "path": "output/findings/finding075/successor_graph_branch_freeze_summary.json",
+      "sha256": "7a9469040bf01a6a6c119ddce0a5e0ee8b79495f5a36292fa49ea3eb2d4df121"
+    },
+    {
+      "bytes": 34833,
+      "path": "output/findings/finding075/successor_graph_branch_manifest.csv",
+      "sha256": "4bff47df01e32d9313d48ca9b219051641b04af1cd28990140bc9d0b5db9a21b"
+    },
+    {
+      "bytes": 1716,
+      "path": "output/findings/finding075/successor_graph_susceptibility_summary.json",
+      "sha256": "a2a85ef9a041a3cd3c843ecf8f9488d571c09fb7438cbd8e352a9b327d065c4d"
+    },
+    {
+      "bytes": 1824,
+      "path": "output/findings/finding075/successor_graph_susceptibility_channels.csv",
+      "sha256": "aaf81b632ad481da5851f9e33a013b0e532a4c02e503a22fe482088fd53e3f7b"
+    },
+    {
+      "bytes": 117480,
+      "path": "output/findings/finding075/successor_graph_susceptibility_branches.csv",
+      "sha256": "248a49e895a8df05f8cb5a235ba044a075e4ecf526399b5073653745102b889b"
+    },
+    {
+      "bytes": 5801,
+      "path": "output/findings/finding075/successor_graph_susceptibility_controls.csv",
+      "sha256": "700189aed5b738a3f90f21de4b90abb9ec33aeaf7e44c962a8eaa60c6091db27"
+    },
+    {
+      "bytes": 27154,
+      "path": "src/successor_graph_susceptibility.py",
+      "sha256": "484f840622b96f6e0fa4a6b263920994c86eec75116c3b5b39c11d92d358292f"
+    },
+    {
+      "bytes": 2273,
+      "path": "src/finding075_source_acquisition.py",
+      "sha256": "c6c5959504e221a97d48f543ca35239c28ad2d70c567a61a0b5b11f90b31f2c3"
+    },
+    {
+      "bytes": 22821,
+      "path": "src/pre_articulation_channel_screen.py",
+      "sha256": "be6463c4086782fa0bc703f48a1af4e8e6e56950f96bcaf75c569c9a8c21e6c5"
+    },
+    {
+      "bytes": 7219,
+      "path": "src/successor_graph_rewire_freeze.py",
+      "sha256": "6eb44d0d56cae1cfa4d5f2671633e64865c65754a0fccffa22b2e03fb97ac953"
+    },
+    {
+      "bytes": 2659,
+      "path": "src/finding075_branch_freeze.py",
+      "sha256": "93c92911f48489c4fbeb6056a58709bc8ca826f8873b39e17d90081f4bc40fa1"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 44610,
+      "path": "evidence/claims.yaml",
+      "sha256": "4703598beaec7191f2a42e0731ac806d558e98967683e1c9ed654c9589f67356"
+    },
+    {
+      "bytes": 8787,
+      "path": "evidence/definitions.yaml",
+      "sha256": "0bf8bbc6f5a6435be4183c1bb6c4ac7de64fb74f7e30a7bfbe4cbd486a0ca4dc"
+    }
+  ],
+  "claim_id": "GC-015",
+  "schema_version": 1
+}

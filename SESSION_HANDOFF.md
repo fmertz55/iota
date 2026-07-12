@@ -4355,3 +4355,52 @@ Failure of any gate stops the sequence before Finding 076. A positive result is
 limited to graph-role-conditioned articulation susceptibility under this law,
 scheduler, signature, swap policy, and 128-offset branch horizon. It is not a
 field, force, mass, energy, or matter claim.
+
+## Finding 075 Final Result — Frozen Rooted Role Signature Failed
+
+The complete new-world acquisition covered all 1,536 scheduled cases from
+seeds `361..552`. It produced 46 strict singleton transports in 29 independent
+initialization seeds. The pre-articulation audit retained 45/46 events, and the
+common-donor selector found 37 paired events and froze one channel in each of
+25 independent seeds. The 400 channel/branch assignments were committed before
+outcomes; each assignment used one common RNG seed for natural,
+role-preserving, and role-breaking variants.
+
+All 50 factual natural/sham controls reproduced their frozen split and rebridge.
+Every precursor selector, target post-state, common donor, receiver, radial
+signature, rooted role signature, state multiset, payload check, and
+conservation ledger was exact. Across 1,200 branch outcomes:
+
+```text
+natural articulations:          20 / 400
+role-preserving articulations:  24 / 400
+role-breaking articulations:    14 / 400
+
+preserve-over-break discordances: 21
+break-over-preserve discordances: 11
+one-sided exact McNemar p:          0.0550921  (required < 0.05)
+
+informative channels:                    11
+informative channels preserve > break:    8  (required 8; passed)
+preserving strictly closer to natural:     5 / 25
+required closer-to-natural channels:      17 / 25
+```
+
+The directional channel gate passed exactly, but the exact paired test missed
+its threshold and the natural-closeness gate failed decisively. The composite
+graph-role hypothesis is therefore rejected as preregistered. The declared
+rooted signature contains a suggestive directional contrast but is not a
+sufficient representation of behaviorally equivalent relational role.
+
+This is a representation-specific negative, not evidence that topology is
+irrelevant. Ten channels were all-zero within the 128-offset horizon, and
+signature-preserving swaps often changed susceptibility away from the natural
+state, showing that the frozen summary discards causally relevant marked or
+larger-context structure.
+
+Finding 076 was permitted only after a positive Finding 075 result. It therefore
+does not open; Finding 077 likewise remains unopened. No memory-coordinate or
+recruitment-order outcome was run. Finding 075 is registered as GC-015. A future
+experiment requires a new preregistration and should construct a richer marked
+successor-event representation from outcome-sealed factual ledgers before
+another causal confirmation cohort.

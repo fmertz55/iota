@@ -98,8 +98,10 @@ consequences that would be expected if the organizing hypothesis is useful.
 ## Current evidence frontier
 
 The foundational structural result is **Golden Claim GC-001: constraint
-transport**. The latest bounded causal result is **GC-014: exact precursor
-placement controls later articulation in a frozen independent cohort**.
+transport**. The latest supported bounded causal result is **GC-014: exact
+precursor placement controls later articulation**. The latest prospective test
+is **GC-015**, a negative confirmation of one frozen rooted graph-role
+representation.
 
 > In three controlled replay events across two seeds, payload-free Iota dynamics
 > restored the same tracked connectivity relation through a causally necessary
@@ -242,6 +244,17 @@ from that bundle. All 150 paired replays were exact, payload-free, and
 ledger-exact. Rebridge veto extended split lifetime in `23/25`, but no channel
 remained separated for 128 offsets, so durable morphogenesis was not supported.
 
+Finding 075 asked whether a declared rooted graph role predicts the distribution
+of reachable articulation futures. A new 1,536-case screen yielded 46 strict
+transports in 29 seeds; factual precursor and common-donor gates froze 25
+independent topology channels before outcomes. Across 16 common RNG branches per
+channel, natural, role-preserving, and role-breaking states produced `20/400`,
+`24/400`, and `14/400` articulations. Discordances favored preservation `21:11`,
+but the frozen exact test gave `p=0.0551`, and only `5/25` preserving rates were
+strictly closer to natural versus a required `17/25`. The composite graph-role
+gate failed. All controls and 1,200 branch outcomes were exact. Findings 076 and
+077 were therefore not opened.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -288,11 +301,18 @@ remained separated for 128 offsets, so durable morphogenesis was not supported.
 - [Finding 074 paired replay summary](output/findings/finding074/pre_articulation_channel_replay_summary.json)
 - [Finding 074 paired replay outcomes](output/findings/finding074/pre_articulation_channel_replay_results.csv)
 - [Finding 074 replay implementation](src/pre_articulation_channel_replay.py)
+- [Finding 075 acquisition summary](output/findings/finding075/successor_graph_acquisition_summary.json)
+- [Finding 075 frozen topology channels](output/findings/finding075/successor_graph_rewire_manifest.csv)
+- [Finding 075 frozen branch assignments](output/findings/finding075/successor_graph_branch_manifest.csv)
+- [Finding 075 susceptibility summary](output/findings/finding075/successor_graph_susceptibility_summary.json)
+- [Finding 075 channel outcomes](output/findings/finding075/successor_graph_susceptibility_channels.csv)
+- [Finding 075 branch outcomes](output/findings/finding075/successor_graph_susceptibility_branches.csv)
 
-The next gate directly manipulates bridge topology, signed angular contrast,
-and recruitment order while matching counts and budgets, then measures the
-distribution of ancestry-preserving successors. It does not search for a
-downstream mass, force, energy, or field analogue.
+The next gate is not the previously planned memory/order sequence. A separate
+preregistration must first define a richer marked successor-event representation
+from outcome-sealed factual ledgers, then test it on another independent causal
+cohort. It must not search for a downstream mass, force, energy, or field
+analogue.
 
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.

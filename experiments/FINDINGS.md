@@ -8454,3 +8454,75 @@ physical analogue.
 - [Paired replay outcomes](../output/findings/finding074/pre_articulation_channel_replay_results.csv)
 - [Factual-screen implementation](../src/pre_articulation_channel_screen.py)
 - [Paired-replay implementation](../src/pre_articulation_channel_replay.py)
+
+---
+
+## Finding 075 — Frozen rooted graph role did not explain articulation susceptibility
+
+### Question
+
+Does a target's declared rooted graph role, rather than its literal local
+arrangement, condition the distribution of reachable articulation futures?
+
+### Prospective Cohort and Intervention
+
+A complete new-world screen covered 1,536 cases from seeds `361..552`, finding
+46 strict transports in 29 seeds. Forty-five events passed the unchanged
+pre-articulation screen. A factual-only common-donor selector then froze 25
+independent channels that supported both:
+
+- a state swap preserving exact shell occupancy and the rooted role signature;
+- a swap moving the same unprotected donor state to a different depleted
+  receiver, preserving shell occupancy but changing the rooted role signature.
+
+The target address and complete target state, donor identity, active count,
+amplitude budget, payload, and state multiset were held fixed. Each channel was
+branched under 16 common RNG seeds for natural, preserving, and breaking states.
+All 400 assignments were committed before outcomes.
+
+### Result
+
+```text
+natural:         20 / 400 articulations
+role preserving: 24 / 400 articulations
+role breaking:   14 / 400 articulations
+
+paired discordances preserving > breaking: 21
+paired discordances breaking > preserving: 11
+one-sided exact McNemar p:              0.0551
+required p:                            <0.05
+
+informative channels preserving higher: 8 / 11  (passed)
+preserving strictly closer to natural:   5 / 25  (required 17; failed)
+```
+
+All 50 factual controls and all 1,200 branch outcomes passed selector, swap,
+target-state, state-multiset, payload, and conservation checks. Ten channels
+were all-zero across all three variants.
+
+### Interpretation and Stop
+
+The frozen rooted role signature carries a suggestive directional contrast but
+does not define a behaviorally sufficient relational equivalence class.
+Signature-preserving swaps often moved articulation susceptibility away from
+the natural state, and the preregistered paired test remained above 0.05. The
+composite Finding 075 hypothesis therefore fails.
+
+This rejects the declared representation and swap policy, not topology in
+general. Causally relevant marked state, larger graph context, or ordered-event
+structure is still missing from the representation.
+
+Finding 076 required a positive Finding 075 result and was not opened. Finding
+077 was likewise not opened; no memory-coordinate or recruitment-order outcome
+was inspected.
+
+### Artifacts
+
+- [Acquisition summary](../output/findings/finding075/successor_graph_acquisition_summary.json)
+- [Pre-articulation summary](../output/findings/finding075/successor_graph_channel_summary.json)
+- [Frozen common-donor manifest](../output/findings/finding075/successor_graph_rewire_manifest.csv)
+- [Frozen branch assignments](../output/findings/finding075/successor_graph_branch_manifest.csv)
+- [Susceptibility summary](../output/findings/finding075/successor_graph_susceptibility_summary.json)
+- [Channel outcomes](../output/findings/finding075/successor_graph_susceptibility_channels.csv)
+- [Branch outcomes](../output/findings/finding075/successor_graph_susceptibility_branches.csv)
+- [Replay implementation](../src/successor_graph_susceptibility.py)

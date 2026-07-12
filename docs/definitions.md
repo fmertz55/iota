@@ -155,6 +155,15 @@ Under a frozen retained-amplitude veto policy and fixed follow-up, the smallest 
 
 The marked relational structure of lawful successor events still realizable from a declared complete state under the declared law, including their conditional order, compatibility, and closure. It is not the single factual trajectory, a scalar field, or a claim that every successor is simultaneously available.
 
+## Frozen rooted graph-role signature
+
+- ID: `DEF-ROOTED-GRAPH-ROLE`
+- Kind: operational representation
+- Status: provisional and representation-specific
+- Symbol: none
+
+For Finding 075, the tuple of face6 and face18 active-neighbor counts, face6 and cube26 neighbor-component counts, and the sorted induced cube26-degree sequence among a target's active cube26 neighbors, conditioned on exact cube26 shell-one and Chebyshev shell-two occupancy. Equality of this signature is a declared matching representation, not graph isomorphism or an established sufficient statistic for successor dynamics.
+
 ## Coherence-conditioned transition geometry
 
 - ID: `DEF-COHERENCE-TRANSITION-GEOMETRY`

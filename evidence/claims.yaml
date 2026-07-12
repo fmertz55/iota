@@ -588,6 +588,72 @@
         "The result concerns causal transformation of successor structure and does not establish a physical field, force, mass, energy, or matter analogue."
       ],
       "next_gate": "Prospectively manipulate bridge topology, signed angular contrast, and recruitment order while matching state counts and budgets, then measure the resulting distribution of lawful ancestry-preserving successors rather than a downstream physical analogue."
+    },
+    {
+      "id": "GC-015",
+      "title": "A frozen rooted graph-role signature did not explain articulation susceptibility",
+      "status": "negative confirmation for the preregistered graph-role representation with a suggestive directional contrast",
+      "statement": "Finding 075 screened 1,536 factual cases from 192 new initialization seeds, identified 46 strict transports in 29 seeds, retained 45 eligible pre-articulation events, and froze 25 independent common-donor topology channels before outcomes. Across 1,200 common-RNG branch replays, natural, role-preserving, and role-breaking states produced 20, 24, and 14 articulation events out of 400 branches each. Paired branch discordances favored role preservation 21 to 11, but the frozen one-sided exact McNemar test was p=0.0551 and failed its p<0.05 gate. Eight of 11 informative channels favored preservation, exactly meeting that directional gate, while only 5/25 channels placed the preserving rate strictly closer to natural than the breaking rate, far below the required 17/25. All 50 factual controls, selectors, target states, swaps, state multisets, payload checks, and conservation ledgers were exact. The composite graph-role hypothesis therefore failed, and Findings 076 and 077 were not opened.",
+      "finding": "Finding 075",
+      "definitions": [
+        "DEF-LATENT-COUNTERFACTUAL-STRUCTURE",
+        "DEF-ROOTED-GRAPH-ROLE",
+        "DEF-COHERENCE-TRANSITION-GEOMETRY",
+        "DEF-CONSTRAINT-TRANSPORT",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding075/successor_graph_acquisition_summary.json",
+        "output/findings/finding075/successor_graph_channel_summary.json",
+        "output/findings/finding075/successor_graph_rewire_summary.json",
+        "output/findings/finding075/successor_graph_rewire_manifest.csv",
+        "output/findings/finding075/successor_graph_branch_freeze_summary.json",
+        "output/findings/finding075/successor_graph_branch_manifest.csv",
+        "output/findings/finding075/successor_graph_susceptibility_summary.json",
+        "output/findings/finding075/successor_graph_susceptibility_channels.csv",
+        "output/findings/finding075/successor_graph_susceptibility_branches.csv",
+        "output/findings/finding075/successor_graph_susceptibility_controls.csv"
+      ],
+      "analysis": "src/successor_graph_susceptibility.py",
+      "supporting_analysis": [
+        "src/finding075_source_acquisition.py",
+        "src/pre_articulation_channel_screen.py",
+        "src/successor_graph_rewire_freeze.py",
+        "src/finding075_branch_freeze.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-075-preregistration--graph-role-conditions-reachable-articulation-futures",
+      "expected": {
+        "factual_cases": 1536,
+        "strict_transport_events": 46,
+        "strict_initialization_seeds": 29,
+        "eligible_precursor_channels": 45,
+        "selected_paired_channels": 25,
+        "branch_outcomes": 1200,
+        "natural_articulations": 20,
+        "preserving_articulations": 24,
+        "breaking_articulations": 14,
+        "preserve_over_break_discordances": 21,
+        "break_over_preserve_discordances": 11,
+        "one_sided_exact_mcnemar_p": 0.055092082591727376,
+        "informative_channels": 11,
+        "informative_channels_preserving_higher": 8,
+        "channels_preserving_strictly_closer_to_natural": 5,
+        "all_controls_and_safety_exact": true,
+        "graph_role_hypothesis_supported": false,
+        "finding076_permitted": false
+      },
+      "limitations": [
+        "The negative result applies to the frozen rooted signature and common-donor swap policy, not all graph representations or relational topology.",
+        "Articulation was sparse: ten of 25 channels produced no articulation under any of the three branch variants within 128 offsets.",
+        "A signature-preserving neighbor swap preserves the declared local invariants but changes exact coordinates and relational context outside the rooted summary.",
+        "Branch RNG was reset immediately after the precursor intervention to estimate conditional susceptibility; these rates are not natural factual frequencies from the original continuation streams.",
+        "The exact McNemar result was close to but above 0.05 and cannot be relabeled positive; the independent natural-closeness gate failed decisively.",
+        "All channels use one simulator law, scheduler, signature, 16-branch panel, and 128-offset horizon.",
+        "No physical field, force, mass, energy, or matter correspondence is tested."
+      ],
+      "next_gate": "Do not open the preregistered memory or recruitment-order sequence. Under a separately preregistered experiment, identify richer marked relational features using outcome-sealed factual ledgers or test a directly enumerable successor-event representation before another causal confirmation cohort."
     }
   ]
 }
