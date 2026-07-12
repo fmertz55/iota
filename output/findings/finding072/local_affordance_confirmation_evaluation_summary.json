@@ -1,0 +1,63 @@
+{
+  "all_input_safety_checks_passed": true,
+  "confirmation_source_ids": [
+    "f071-source-010",
+    "f071-source-011",
+    "f071-source-012",
+    "f072-source-001",
+    "f072-source-002",
+    "f072-source-003",
+    "f072-source-004",
+    "f072-source-005",
+    "f072-source-006",
+    "f072-source-007",
+    "f072-source-008",
+    "f072-source-009",
+    "f072-source-010",
+    "f072-source-011",
+    "f072-source-012",
+    "f072-source-013",
+    "f072-source-014"
+  ],
+  "confirmation_sources": 17,
+  "dimensions_improved_over_intrinsic": 4,
+  "finding": "071F",
+  "frozen_model_path": "output/findings/finding072/local_affordance_discovery_model_model.json",
+  "frozen_model_sha256": "25bc67b231307255a822bcdcd35689a760e362ecc6412f1dddf6bbc631a3514d",
+  "gate_checks": {
+    "beats_intrinsic": true,
+    "beats_null": false,
+    "improves_two_dimensions": true,
+    "permutation_p_at_most_0p05": false,
+    "source_support": true
+  },
+  "intrinsic_standardized_mae_by_response": {
+    "depth1_alternate_handoff_fraction": 0.8040791547946805,
+    "gate_failure_fraction": 1.1652404656987763,
+    "mean_address_loss_delay_fraction": 0.9967225338866276,
+    "natural_handoff_fraction": 0.8328009646996122,
+    "source_exhaustion_fraction": 0.44601852567786743,
+    "target_preemption_fraction": 0.8689329238060653
+  },
+  "intrinsic_standardized_mse": 1.3033842696054918,
+  "local_affordance_field_confirmation_passed": false,
+  "local_standardized_mae_by_response": {
+    "depth1_alternate_handoff_fraction": 0.7743059826993137,
+    "gate_failure_fraction": 1.1306461563261814,
+    "mean_address_loss_delay_fraction": 1.043516417483749,
+    "natural_handoff_fraction": 0.8243051368003164,
+    "source_exhaustion_fraction": 0.4673105482288068,
+    "target_preemption_fraction": 0.856875616357738
+  },
+  "local_standardized_mse": 1.288714211089936,
+  "null_standardized_mse": 1.2720478754023572,
+  "permutation_count": 100001,
+  "permutation_method": "identity_plus_100000_frozen_permutations",
+  "permutation_p_value": 0.35365646343536566,
+  "permutation_seed": 20260719,
+  "predictions_csv": "output/findings/finding072/local_affordance_confirmation_evaluation_predictions.csv",
+  "profiles_csv": "output/findings/finding072/local_affordance_confirmation_evaluation_profiles.csv",
+  "protocol": "held-out local affordance field confirmation",
+  "selected_penalty": 100.0,
+  "selected_radius": 3
+}
