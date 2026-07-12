@@ -1,0 +1,79 @@
+{
+  "affordance_branch_or_veto_outcomes_inspected_for_selection": false,
+  "affordance_responses_run": false,
+  "all_classification_ledgers_exact": true,
+  "all_classification_payload_zero": true,
+  "all_transport_ledgers_exact": true,
+  "all_transport_payload_zero": true,
+  "artifacts": {
+    "case_csv": {
+      "path": "output/findings/finding072/local_affordance_combined_cases.csv",
+      "sha256": "256a94904fa284913f2e1b514f68619f68d25bbf126b463c480ecbf9a83ee473"
+    },
+    "config_manifest_csv": {
+      "path": "output/findings/finding072/local_affordance_combined_config_manifest.csv",
+      "sha256": "39dd52a0e5a4d0b88a2c50ef644d3fe0479c1c2df4f392310e7aed4279c5b9b2"
+    },
+    "seed_aggregate_csv": {
+      "path": "output/findings/finding072/local_affordance_combined_seed_aggregate.csv",
+      "sha256": "65d875a7037bc27e58e6380a286e4d397b74b52c0d9eca5fd0faaf9ae77db708"
+    },
+    "signal_csv": {
+      "path": "output/findings/finding072/local_affordance_combined_signals.csv",
+      "sha256": "00dda81524957064ea66484da903134fc622565245f41a5ed935876e34d65f63"
+    },
+    "source_manifest_csv": {
+      "path": "output/findings/finding072/local_affordance_combined_source_manifest.csv",
+      "sha256": "fd576f0f4f0b3f0e02b682ed3b0f4e0380a021a03f77639f4e231dea471b39f6"
+    },
+    "transport_csv": {
+      "path": "output/findings/finding072/local_affordance_combined_transport_events.csv",
+      "sha256": "7ac445a63143ebc9eb160ad0239dec6bb49eab347ed030e9aba947f042d5f1e9"
+    }
+  },
+  "cases": 2048,
+  "class_b_candidates": 355,
+  "combined_cohort_freeze": true,
+  "confirmation_sources": 17,
+  "discovery_sources": 9,
+  "finding": "072B",
+  "finding071_source_manifest_sha256": "4b581df79c68eb71edb2d11e4c2aba9add88a1684f805b9eed8895a81f1e25b3",
+  "finding072_source_manifest_sha256": "4afcfa3e6be83565e48bf731930fa511d9ad5a1355f5abac04fb565a2ff71542",
+  "frozen_primary_sources": 26,
+  "minimum_sources_per_split": 6,
+  "new_confirmation_sources": 14,
+  "protocol_frozen_before_affordance_responses": true,
+  "screen_complete": true,
+  "selected_initialization_seeds": [
+    107,
+    109,
+    116,
+    118,
+    132,
+    143,
+    149,
+    153,
+    156,
+    183,
+    195,
+    203,
+    239,
+    242,
+    257,
+    263,
+    276,
+    293,
+    295,
+    300,
+    309,
+    323,
+    325,
+    335,
+    345,
+    357
+  ],
+  "signal_intervals": 443,
+  "singleton_eligible_sources": 35,
+  "source_support_gate_met": true,
+  "strict_transport_events": 37
+}
