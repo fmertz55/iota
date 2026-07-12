@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .venv/
 build/
+.run_state/
 
 # Generated image artifacts are tracked in data/iota_lab.db by path/hash.
 output/**/*.png

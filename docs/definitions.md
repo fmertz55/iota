@@ -145,3 +145,12 @@ For a factual ancestry-producing event selected before intervention, temporal re
 - Symbol: `D_{\mathrm{seq}}`
 
 Under a frozen retained-amplitude veto policy and fixed follow-up, the smallest depth d along a branch's prospectively committed selector chain at which vetoing the first d ancestry-producing events causes the original address to deactivate without a live collision-free descendant. Handoff after the administrative maximum is right-censored above that depth; continued original-address activity at the horizon is source-survival censored. The depth is prefix-minimal for this ordered policy, not a graph-theoretic minimum over arbitrary intervention sets.
+
+## Coherence-conditioned transition geometry
+
+- ID: `DEF-COHERENCE-TRANSITION-GEOMETRY`
+- Kind: working theoretical construct
+- Status: provisional; not an established field or physical law
+- Symbol: none
+
+The organized, potentially anisotropic and history-dependent structure of lawful next transitions conditioned on a focal coherence, its marked relational neighborhood, and its recent causal history. The term does not presuppose a scalar, vector, tensor, Euclidean field, force, gravity analogue, or independently confirmed predictive representation.

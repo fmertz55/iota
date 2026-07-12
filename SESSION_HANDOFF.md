@@ -4079,3 +4079,21 @@ This is a negative confirmation for the declared representation and learner,
 not proof that no local field exists. Shell histograms may discard relational
 arrangements that matter. Finding 073 is not opened: no field gradient should
 be constructed from a predictor that failed held-out confirmation.
+
+## Durable Long-Run Convention
+
+The working theoretical term is now **coherence-conditioned transition
+geometry**: the potentially anisotropic and history-dependent structure of
+lawful next transitions conditioned on a coherence and its marked relational
+history. It is provisional and does not imply an established physical field,
+tensor, force, or gravity analogue.
+
+All future commands expected to run longer than an interactive tool window
+should use `scripts/run_with_heartbeat.py`. The wrapper writes an atomically
+updated `.run_state/latest-<name>.json` every 30 seconds by default and preserves
+the full timestamped stdout/stderr log locally. Commentary remains useful, but
+the local state file is the source of truth if an API 400, browser disconnect,
+or conversation compaction interrupts observation. Important preregistration,
+freeze, and terminal-result barriers still require committed repository
+artifacts; heartbeat files are operational recovery records and remain
+untracked.

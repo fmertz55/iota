@@ -319,6 +319,31 @@ pip install -r requirements.txt
 python src/iota_rig.py --config config.yaml --objective "Baseline active_iotas=1"
 ```
 
+### Durable long-running commands
+
+Run experiments expected to outlive an interactive session through the generic
+heartbeat wrapper:
+
+```bash
+python3 scripts/run_with_heartbeat.py \
+  --name finding074-screen \
+  --heartbeat-seconds 30 \
+  -- .venv/bin/python src/example_experiment.py --workers 4
+```
+
+The wrapper streams normal output while durably writing an untracked timestamped
+log and an atomically replaced state record under `.run_state/`. Inspect the
+latest state without depending on chat history:
+
+```bash
+cat .run_state/latest-finding074-screen.json
+tail -f "$(python3 -c 'import json; print(json.load(open(".run_state/latest-finding074-screen.json"))["log_path"])')"
+```
+
+The state records command text, Git commit, PID, timestamps, output counts, and
+the most recent output lines. Do not place credentials or secrets directly in a
+wrapped command because the command is intentionally recorded locally.
+
 If `--objective` is omitted, the runner uses `experiment.objective` from `config.yaml`.
 
 The SQLite database lives at:
