@@ -106,6 +106,7 @@ def parse_args() -> argparse.Namespace:
         "--canonical-config", type=Path, default=DEFAULT_CANONICAL_CONFIG
     )
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--finding-label", default="074A")
     return parser.parse_args()
 
 
@@ -532,7 +533,7 @@ def main() -> None:
     write_csv(cases_path, CASE_FIELDS, rows)
     write_csv(manifest_path, CASE_FIELDS, selected)
     summary = {
-        "finding": "074A",
+        "finding": str(args.finding_label),
         "protocol": "factual pre-articulation channel screen",
         "screen_complete": True,
         "counterfactual_outcomes_run": False,

@@ -4296,3 +4296,62 @@ requires the preserving and breaking variants to move the same donor state,
 prioritizes donors outside the frozen precursor source and recorded bridge
 cells, and then ranks lexicographically. No downstream split or counterfactual
 response is observed during feasibility selection.
+
+## Finding 075 Preregistration — Graph Role Conditions Reachable Articulation Futures
+
+Finding 075 uses initialization seeds `361..552`, eight classification samples
+per seed, and the unchanged v0.3.6 law. These worlds are new to every Finding
+074/075 outcome. The complete strict-transport screen runs first, followed by
+the unchanged pre-articulation factual screen and the frozen common-donor
+rewire selector. Selection is at most one paired channel per initialization
+seed, lexicographically first under the existing channel ordering. At least 12
+independent paired channels are required; otherwise Finding 075 stops without
+intervention.
+
+For each selected channel, the natural precursor step must reproduce its exact
+frozen selector and target post-state. The complete state of one unprotected
+active cube26 donor is then swapped with one depleted cube26 receiver:
+
+- `natural`: no state swap;
+- `sham`: observes all selectors but does not change state;
+- `role_preserving`: the frozen donor/receiver swap leaves the target's radial
+  and rooted graph-role signatures unchanged;
+- `role_breaking`: the same donor state moves to a different frozen depleted
+  receiver, preserving radial occupancy but changing rooted graph role.
+
+The target address and complete transferred target state remain identical.
+Both swaps preserve global active count, amplitude, payload, shell-one and
+shell-two occupancy, and the state multiset exactly. The donor must be the same
+in the preserving and breaking variants and cannot be the precursor source or
+any recorded predecessor/successor bridge cell.
+
+Immediately after the precursor state is established, each of `natural`,
+`role_preserving`, and `role_breaking` is cloned into 16 common continuation RNG
+branches. Branch seeds are deterministic from the frozen channel index and
+branch index and are committed before outcomes. Each branch runs for 128
+offsets. Its primary endpoint is whether the frozen articulation address
+undergoes an active-to-inactive transition that increases cube26 component
+count. First articulation offset, separation lifetime, successor realization,
+component count, largest component, interface metrics, payload, and ledger are
+also recorded. The original factual continuation is replayed separately with a
+matched sham and must reproduce the recorded split and rebridge exactly.
+
+The graph-role hypothesis is supported only if:
+
+1. at least 12 independent paired channels enter intervention;
+2. every factual natural/sham, selector, swap, target-state, state-multiset,
+   payload, and ledger check is exact;
+3. across paired branch outcomes, discordances favor articulation after the
+   role-preserving swap over the role-breaking swap under a frozen one-sided
+   exact McNemar/binomial test at `p < 0.05`;
+4. at least eight channels are branch-informative, and at least two thirds of
+   informative channels have a higher articulation rate under role preservation
+   than role breaking; and
+5. in at least two thirds of all selected channels, the role-preserving
+   articulation rate is strictly closer to the natural rate than the
+   role-breaking rate.
+
+Failure of any gate stops the sequence before Finding 076. A positive result is
+limited to graph-role-conditioned articulation susceptibility under this law,
+scheduler, signature, swap policy, and 128-offset branch horizon. It is not a
+field, force, mass, energy, or matter claim.
