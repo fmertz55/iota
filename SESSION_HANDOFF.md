@@ -4292,6 +4292,7 @@ depleted cube26 position. Both positions remain in radial shell one, so active
 count, amplitude budget, payload, shell-one occupancy, and shell-two occupancy
 are conserved exactly. A role-preserving swap must leave the complete rooted
 role signature unchanged; a role-breaking swap must change it. Donor selection
-prioritizes cells outside the frozen precursor source and recorded bridge cells,
-then ranks lexicographically. No downstream split or counterfactual response is
-observed during feasibility selection.
+requires the preserving and breaking variants to move the same donor state,
+prioritizes donors outside the frozen precursor source and recorded bridge
+cells, and then ranks lexicographically. No downstream split or counterfactual
+response is observed during feasibility selection.

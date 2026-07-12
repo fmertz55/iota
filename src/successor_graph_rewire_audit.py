@@ -52,6 +52,7 @@ FIELDS = [
     "swap_candidates",
     "role_preserving_swaps",
     "role_breaking_swaps",
+    "common_donor_pairs",
     "preserve_donor",
     "preserve_receiver",
     "preserve_moves_protected_cell",
@@ -194,8 +195,22 @@ def audit_channel(
             item[0][2],
         )
     )
-    preserve = preserving[0] if preserving else None
-    disrupt = breaking[0] if breaking else None
+    paired = [
+        (preserve, disrupt)
+        for preserve in preserving
+        for disrupt in breaking
+        if preserve[3] == disrupt[3]
+    ]
+    paired.sort(
+        key=lambda item: (
+            int(item[0][3] in protected),
+            item[0][3],
+            item[0][4],
+            signature_distance(role, item[1][2]),
+            item[1][4],
+        )
+    )
+    preserve, disrupt = paired[0] if paired else (None, None)
     return {
         "channel_id": manifest["channel_id"],
         "init_seed": int(manifest["init_seed"]),
@@ -209,6 +224,7 @@ def audit_channel(
         "swap_candidates": len(swaps),
         "role_preserving_swaps": len(preserving),
         "role_breaking_swaps": len(breaking),
+        "common_donor_pairs": len(paired),
         "preserve_donor": "" if preserve is None else coord_text(preserve[3]),
         "preserve_receiver": "" if preserve is None else coord_text(preserve[4]),
         "preserve_moves_protected_cell": (
@@ -219,7 +235,7 @@ def audit_channel(
         "break_moves_protected_cell": (
             "" if disrupt is None else int(disrupt[3] in protected)
         ),
-        "paired_swap_available": int(preserve is not None and disrupt is not None),
+        "paired_swap_available": int(bool(paired)),
         "target_poststate_exact": int(target_exact),
         "payload_zero": int(payload_zero),
         "ledger_exact": int(exact),
