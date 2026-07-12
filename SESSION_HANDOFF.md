@@ -4276,3 +4276,22 @@ counterfactual response, fit a classifier, or permit a causal claim. If support
 is adequate, Finding 075 must use newly initialized channels, freeze its cohort
 and selectors before intervention, and distinguish graph-role preservation from
 literal coordinate preservation under exact payload and conservation controls.
+
+### Development result and revised intervention
+
+The radius-six audit found zero role-preserving address matches, one
+role-breaking radial match, and zero paired matches across all 25 Finding 074
+channels. Payload remained zero and conservation was exact. A natural
+matched-address design is therefore infeasible under the declared controls and
+must not be rescued by loosening them.
+
+The revised factual-only feasibility audit holds the factual target address and
+exact post-transfer state fixed. Immediately after the natural precursor step,
+it considers swapping the complete state of one active cube26 neighbor with one
+depleted cube26 position. Both positions remain in radial shell one, so active
+count, amplitude budget, payload, shell-one occupancy, and shell-two occupancy
+are conserved exactly. A role-preserving swap must leave the complete rooted
+role signature unchanged; a role-breaking swap must change it. Donor selection
+prioritizes cells outside the frozen precursor source and recorded bridge cells,
+then ranks lexicographically. No downstream split or counterfactual response is
+observed during feasibility selection.
