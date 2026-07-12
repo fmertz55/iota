@@ -1,0 +1,18 @@
+{
+  "all_ledgers_exact": true,
+  "all_payload_zero": true,
+  "cases_csv": "output/findings/finding075/successor_graph_role_development_cases.csv",
+  "cases_sha256": "2a8b7d67383e57a4302cd265a6ec579b2661b695dfb1d45636bd7bc731b9cf03",
+  "channels": 25,
+  "channels_with_paired_matches": 0,
+  "channels_with_radial_match": 1,
+  "channels_with_role_breaking_match": 1,
+  "channels_with_role_preserving_match": 0,
+  "confirmatory_outcomes_run": false,
+  "finding": "075-development",
+  "manifest": "output/findings/finding074/pre_articulation_channel_manifest.csv",
+  "manifest_sha256": "1ffcac698b397dc956e0ff0b22398fb8c7a3241f7d65e39cfa46feb77733af5c",
+  "radius": 6,
+  "source_cohort": "Finding 074 observed development cohort only",
+  "worker_processes": 4
+}
