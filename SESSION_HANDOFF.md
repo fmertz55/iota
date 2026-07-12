@@ -4404,3 +4404,88 @@ recruitment-order outcome was run. Finding 075 is registered as GC-015. A future
 experiment requires a new preregistration and should construct a richer marked
 successor-event representation from outcome-sealed factual ledgers before
 another causal confirmation cohort.
+
+## ICP Approval and Finding 078 Preregistration — Factorial Successor Accessibility
+
+The Finding 075 stop is permanent: the previously conditional Findings 076 and
+077 remain unopened and will not be repurposed. Under the ICP approval, later
+work may proceed only when the frozen result leaves the next preregistered route
+open. A failed gate stops its dependent sequence without threshold movement,
+endpoint substitution, or post-outcome representation tuning.
+
+Finding 078 is a developmental feasibility audit, not a confirmation result. It
+uses the 25 completed Finding 075 common-donor channels only to determine whether
+topological placement and inherited state marks can be manipulated separately
+and whether an engine-native continuous successor-accessibility instrument is
+identifiable. Finding 075 susceptibility outcomes are not inputs to the
+intervention, instrument, channel selection, or Finding 078 gates.
+
+For each frozen post-precursor world, the common active donor is paired in turn
+with the already frozen role-preserving and role-breaking receivers. Each pair
+creates a complete two-factor intervention:
+
+- `natural`: no exchange;
+- `topology_only`: exchange the structural bundle `active`, `A`, and `latent_A`
+  between donor and receiver while leaving address-bound `R`, `V`, `P`, and
+  `angular_L` marks fixed;
+- `marks_only`: exchange `R`, `V`, `P`, and `angular_L` while leaving the
+  structural bundle fixed;
+- `joint`: exchange both bundles; this must equal the previously frozen full
+  donor/receiver state swap exactly.
+
+The representation is computed from the intervention state before any branch
+step, gate draw, realized transfer, or articulation outcome. It enumerates every
+tick-start-eligible hard-transfer candidate whose source or target lies within
+Chebyshev radius two of the frozen future-articulation address. Directed edges
+retain source scheduler rank, relative source and target coordinates, candidate
+order and direction, source amplitude and inherited marks, target
+active/depleted/latent status and inherited marks, influence, residual-bias
+multiplier, transfer probability, and the target's frozen residual geometry
+class. Candidate generation uses the declared simulator law with bond
+probability 1.0; no stochastic gate is sampled.
+
+Two continuous instruments are frozen:
+
+1. `successor_openness`: the sum of transfer probabilities over eligible
+   inactive-target activation edges in the radius-two basin, accompanied by the
+   count of distinct activation targets;
+2. `repair_affordance`: the sum of transfer probabilities over depleted-target
+   secondary edges classified by the existing engine as
+   `component_bridge_cube26` or `local_bridge_face6`, accompanied by distinct
+   repair-target and source counts.
+
+For each receiver and instrument, the factorial interaction is
+
+```text
+joint - topology_only - marks_only + natural
+```
+
+Finding 078 passes feasibility only if all of the following hold:
+
+1. all 175 states (25 channels times natural plus two receivers times three
+   interventions) are payload-free and ledger-exact, preserve global active
+   count and conserved amplitude, preserve the appropriate structural and mark
+   multisets, and reproduce the frozen joint swaps exactly;
+2. all candidate enumeration is RNG-neutral and repeat-exact;
+3. at least 20/25 channels have at least one receiver for which
+   `topology_only` changes the marked edge set while `marks_only` leaves the
+   active mask exact, and `marks_only` changes the marked edge set while
+   `topology_only` leaves the global inherited-mark multiset exact;
+4. at least 12/25 channels have a nonzero factorial interaction in either
+   successor-openness probability mass or repair-affordance probability mass
+   for at least one receiver.
+
+These are identifiability and support gates, not evidence that either instrument
+predicts articulation. If they pass, one receiver per channel is selected
+without outcomes by maximum absolute repair-affordance interaction, then maximum
+absolute successor-openness interaction, then the frozen preserving receiver on
+an exact tie. The complete representation, instrument definitions, selector,
+and Finding 078 artifacts must be committed before any Finding 079 acquisition
+or susceptibility outcome. If any gate fails, Finding 079 does not open.
+
+Finding 079, if permitted, requires newly initialized channels and a separate
+prospective preregistration. Its primary test will be a topology-by-state
+interaction under common RNG. Split latency, rebridge timing, separation
+duration, articulation location, and component imbalance may be frozen secondary
+endpoints but cannot replace a failed primary result. Recruitment history is a
+later hypothesis and is not inferred from Finding 078.
