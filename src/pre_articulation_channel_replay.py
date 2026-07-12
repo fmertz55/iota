@@ -447,7 +447,13 @@ def run_variant(
                         post_point["largest_component"] - pre_point["largest_component"]
                     )
 
-                original_died = pre_active_original and not bool(world.active[original])
+                # The future articulation may have earlier activation/death cycles.
+                # Its frozen precursor defines the start of this causal channel.
+                original_died = (
+                    offset >= precursor["offset"]
+                    and pre_active_original
+                    and not bool(world.active[original])
+                )
                 if original_died and (pre_point is None or post_point is None):
                     raise RuntimeError("missing component point at original-address death")
                 split_now = original_died and (
