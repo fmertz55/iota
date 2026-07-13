@@ -1,0 +1,41 @@
+{
+  "artifacts": [
+    {
+      "bytes": 1132,
+      "path": "output/findings/finding078/factorial_successor_accessibility_summary.json",
+      "sha256": "8a72c899e2840f719fb17609fd7b4a52d6b5310540f5bc5c548819bcb9c061d2"
+    },
+    {
+      "bytes": 2738,
+      "path": "output/findings/finding078/factorial_successor_accessibility_channels.csv",
+      "sha256": "960d0a4a1a1649ce9b98388e1af8b063198f57b2dbf935b61d9e045e9dd9c678"
+    },
+    {
+      "bytes": 33977,
+      "path": "output/findings/finding078/factorial_successor_accessibility_states.csv",
+      "sha256": "6705b826d8f2631c8f50d36a9044042deba30aa8b617a0fc5889d5f45236d1cd"
+    },
+    {
+      "bytes": 23439,
+      "path": "src/factorial_successor_accessibility.py",
+      "sha256": "62166a07573c7b6c8c97307d0fa5d22ef50ad14c11d17a16512d77b5d69385a3"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 51365,
+      "path": "evidence/claims.yaml",
+      "sha256": "356f62fa4963d09b908eb881637de6aedd4d7ca7fdaa21c8920a74aaa8e736fc"
+    },
+    {
+      "bytes": 10591,
+      "path": "evidence/definitions.yaml",
+      "sha256": "f07f9e7f809479b4b3cad584d82ee60227505b26b59ba5cedc919c9155bb0fa9"
+    }
+  ],
+  "claim_id": "GC-016",
+  "schema_version": 1
+}

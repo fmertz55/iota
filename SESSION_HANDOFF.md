@@ -4650,3 +4650,36 @@ common-donor pair and a nonzero selected repair-affordance interaction for
 Finding 079 branches to open. No common-donor result, repair-interaction result,
 branch assignment, or susceptibility outcome existed when this screen was
 frozen.
+
+## Finding 079 Final Stop — Insufficient Independent Common-Donor Support
+
+The exact preregistered support gate required at least 20 independent channels
+after precursor eligibility, frozen-selector-valid common-donor feasibility,
+and nonzero selected repair-affordance interaction.
+
+The earliest irreversible stopping fact occurred when seed `554`, the first
+independent precursor-qualified channel audited, had no valid role-preserving
+common-donor pair. Because only 20 independent precursor channels existed, the
+maximum possible final cohort immediately became 19, below the frozen minimum.
+The feasibility audit nevertheless completed for factual accounting.
+
+The completed common-donor audit found that four independent precursor channels
+(`554`, `585`, `665`, and `688`) lacked a valid pair. Sixteen independent
+channels remained before the nonzero repair-interaction filter.
+
+```text
+preregistered final minimum:                20
+independent precursor-qualified channels:  20
+earliest maximum after seed 554:            19
+independent channels lacking valid pair:     4
+independent common-donor channels:          16
+nonzero repair-interaction filter run:       no
+branch assignments created:                 0
+factorial branch outcomes opened:            0
+```
+
+No outcome, branch response, effect estimate, signed primary effect, permutation
+test, or directional evidence was inspected. Finding 079 stopped before outcome
+measurement. Because the preregistered minimum was not met, the prospective
+state-conditioned repair-affordance hypothesis remains untested rather than
+supported or refuted. The dependent recruitment-history route does not open.

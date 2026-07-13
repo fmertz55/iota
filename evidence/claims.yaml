@@ -654,6 +654,103 @@
         "No physical field, force, mass, energy, or matter correspondence is tested."
       ],
       "next_gate": "Do not open the preregistered memory or recruitment-order sequence. Under a separately preregistered experiment, identify richer marked relational features using outcome-sealed factual ledgers or test a directly enumerable successor-event representation before another causal confirmation cohort."
+    },
+    {
+      "id": "GC-016",
+      "title": "A topology-by-marks successor-accessibility instrument was factorially identifiable",
+      "status": "developmental feasibility result; no downstream outcome confirmation",
+      "statement": "Finding 078 separated structural placement from inherited state marks across 25 completed development channels and enumerated marked pre-gate successor candidates without reading a branch outcome. All 175 states were payload-free, ledger-exact, conserved, RNG-neutral, and repeat-exact. All 25 channels were factorially identifiable versus 20 required, and 23/25 had a nonzero topology-by-marks interaction in successor openness or repair affordance versus 12 required. The outcome-free receiver selector chose 14 formerly preserving and 11 formerly breaking receivers. This establishes instrument feasibility and non-additivity under the frozen intervention; it does not establish that either instrument predicts articulation.",
+      "finding": "Finding 078",
+      "definitions": [
+        "DEF-LATENT-COUNTERFACTUAL-STRUCTURE",
+        "DEF-COHERENCE-TRANSITION-GEOMETRY",
+        "DEF-SUCCESSOR-OPENNESS",
+        "DEF-REPAIR-AFFORDANCE",
+        "DEF-FACTORIAL-INTERACTION",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding078/factorial_successor_accessibility_summary.json",
+        "output/findings/finding078/factorial_successor_accessibility_channels.csv",
+        "output/findings/finding078/factorial_successor_accessibility_states.csv"
+      ],
+      "analysis": "src/factorial_successor_accessibility.py",
+      "supporting_analysis": [],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#icp-approval-and-finding-078-preregistration--factorial-successor-accessibility",
+      "expected": {
+        "channels": 25,
+        "factorial_states": 175,
+        "identifiable_channels": 25,
+        "identifiable_required": 20,
+        "nonzero_interaction_channels": 23,
+        "nonzero_interaction_required": 12,
+        "selected_preserving_receivers": 14,
+        "selected_breaking_receivers": 11,
+        "all_safety_and_repeat_checks_exact": true,
+        "finding078_feasibility_passed": true,
+        "finding079_permitted": true
+      },
+      "limitations": [
+        "Finding 078 uses the completed Finding 075 cohort for development and cannot provide independent outcome confirmation.",
+        "Successor openness and repair affordance are one-step radius-two instruments, not exhaustive reachable sets.",
+        "Nonzero factorial interaction establishes instrument non-additivity only; it does not establish downstream prediction or causation.",
+        "The two receiver candidates inherit the Finding 075 common-donor construction and do not enumerate all possible interventions.",
+        "No physical field, force, mass, energy, matter, or entropy correspondence is tested."
+      ],
+      "next_gate": "Acquire new independent channels and test the frozen direction of repair-affordance interaction prospectively, but only if at least 20 channels survive every pre-outcome support filter."
+    },
+    {
+      "id": "GC-017",
+      "title": "Independent factorial confirmation stopped before outcome measurement",
+      "status": "prospective support failure; state-conditioned repair-affordance hypothesis untested",
+      "statement": "Finding 079 preregistered at least 20 independent channels after precursor eligibility, valid common-donor feasibility, and nonzero selected repair-affordance interaction. The complete 1,536-case acquisition produced 30 strict transports in 22 independent seeds, and the precursor screen retained exactly 20 independent channels. Seed 554, the lexicographically first frozen precursor channel, lacked a valid pair and irreversibly reduced the maximum final cohort to 19. The completed audit found four independent failures (554, 585, 665, and 688), leaving 16 channels before the nonzero repair-interaction filter. Because the support gate failed, that filter was not run, no branch manifest was created, and no outcome, branch response, effect estimate, permutation test, or directional evidence was inspected. The prospective hypothesis remains untested rather than supported or refuted.",
+      "finding": "Finding 079",
+      "definitions": [
+        "DEF-REPAIR-AFFORDANCE",
+        "DEF-FACTORIAL-INTERACTION",
+        "DEF-CONSTRAINT-TRANSPORT",
+        "DEF-PAYLOAD-FREE",
+        "DEF-LEDGER-EXACT"
+      ],
+      "evidence": [
+        "output/findings/finding079/factorial_acquisition_summary.json",
+        "output/findings/finding079/factorial_channel_summary.json",
+        "output/findings/finding079/factorial_common_donor_summary.json",
+        "output/findings/finding079/factorial_common_donor_cases.csv",
+        "output/findings/finding079/factorial_common_donor_manifest.csv"
+      ],
+      "analysis": "src/finding079_common_donor_freeze.py",
+      "supporting_analysis": [
+        "src/finding079_source_acquisition.py",
+        "src/pre_articulation_channel_screen.py"
+      ],
+      "instrumentation": "src/iota_rig.py",
+      "protocol_record": "SESSION_HANDOFF.md#finding-079-preregistration--state-conditioned-repair-affordance",
+      "expected": {
+        "factual_cases": 1536,
+        "strict_transport_events": 30,
+        "strict_initialization_seeds": 22,
+        "eligible_precursor_events": 25,
+        "independent_precursor_channels": 20,
+        "required_final_channels": 20,
+        "earliest_maximum_after_seed554": 19,
+        "independent_channels_lacking_pair": 4,
+        "independent_common_donor_channels": 16,
+        "common_donor_support_gate_met": false,
+        "repair_interaction_filter_run": false,
+        "branch_assignments": 0,
+        "factorial_outcomes_opened": 0
+      },
+      "limitations": [
+        "Finding 079 is a support failure before outcome measurement and supplies no evidence for or against the directional repair-affordance hypothesis.",
+        "The minimum cohort was fixed at 20; the completed common-donor cohort contained 16 independent seeds.",
+        "The nonzero repair-interaction filter was not run because the common-donor stage had already failed irreversibly.",
+        "No branch response, effect estimate, permutation test, or directional evidence exists for Finding 079.",
+        "All acquisition and feasibility work uses one simulator law, scheduler, and common-donor construction."
+      ],
+      "next_gate": "Do not open the dependent recruitment-history route. Any future confirmation requires a new preregistration and an acquisition design capable of producing at least 20 independent channels after all frozen support filters."
     }
   ]
 }

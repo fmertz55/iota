@@ -1,0 +1,61 @@
+{
+  "artifacts": [
+    {
+      "bytes": 95891,
+      "path": "output/findings/finding079/factorial_acquisition_summary.json",
+      "sha256": "462322366c3db2da5066a902575202899a3fce8c00b774ae5dd5ac6b9476fded"
+    },
+    {
+      "bytes": 1697,
+      "path": "output/findings/finding079/factorial_channel_summary.json",
+      "sha256": "e3380a4442969c53dbb5b851bba9352f6e5de2fb0946083c26e297fd2d492fa6"
+    },
+    {
+      "bytes": 1186,
+      "path": "output/findings/finding079/factorial_common_donor_summary.json",
+      "sha256": "7a254b2be12bb49cf888aa17418d5b6bf8472e74ed087bc7e745d6d7f0109dc9"
+    },
+    {
+      "bytes": 20784,
+      "path": "output/findings/finding079/factorial_common_donor_cases.csv",
+      "sha256": "a94dd12c56e40771f7d555f389223447e84e02b4b051655df3965bed6bddb5e3"
+    },
+    {
+      "bytes": 14074,
+      "path": "output/findings/finding079/factorial_common_donor_manifest.csv",
+      "sha256": "91d3ba08ea3e308b054f9b8d1215c856951857da50c984efd16c09fe6a96c50b"
+    },
+    {
+      "bytes": 7158,
+      "path": "src/finding079_common_donor_freeze.py",
+      "sha256": "34c964cf9f4c50645549f9aac7d79ae01b873ade5dbf6234bd2e8d14895aad29"
+    },
+    {
+      "bytes": 2270,
+      "path": "src/finding079_source_acquisition.py",
+      "sha256": "1faa79f432cb5540fe5d4dbcf19ea386371bc9f597b74a3b07a2175cf00d8418"
+    },
+    {
+      "bytes": 23023,
+      "path": "src/pre_articulation_channel_screen.py",
+      "sha256": "435e064f9d13c274cab275987e5af44c828c223acdccb874f4f723ae8c355d03"
+    },
+    {
+      "bytes": 73532,
+      "path": "src/iota_rig.py",
+      "sha256": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020"
+    },
+    {
+      "bytes": 51365,
+      "path": "evidence/claims.yaml",
+      "sha256": "356f62fa4963d09b908eb881637de6aedd4d7ca7fdaa21c8920a74aaa8e736fc"
+    },
+    {
+      "bytes": 10591,
+      "path": "evidence/definitions.yaml",
+      "sha256": "f07f9e7f809479b4b3cad584d82ee60227505b26b59ba5cedc919c9155bb0fa9"
+    }
+  ],
+  "claim_id": "GC-017",
+  "schema_version": 1
+}

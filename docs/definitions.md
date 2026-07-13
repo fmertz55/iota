@@ -172,3 +172,30 @@ For Finding 075, the tuple of face6 and face18 active-neighbor counts, face6 and
 - Symbol: none
 
 The organized, potentially anisotropic and history-dependent structure of lawful next transitions conditioned on a focal coherence, its marked relational neighborhood, and its recent causal history. The term does not presuppose a scalar, vector, tensor, Euclidean field, force, gravity analogue, or independently confirmed predictive representation.
+
+## Successor openness
+
+- ID: `DEF-SUCCESSOR-OPENNESS`
+- Kind: developmental causal instrument
+- Status: operational for Finding 078 only
+- Symbol: `O_{\mathrm{succ}}`
+
+For a declared pre-step state and radius-two basin, the sum of frozen transfer probabilities over tick-start-eligible inactive-target activation edges in the marked hard-transfer candidate graph, accompanied by the number of distinct activation targets. It is not an entropy, an exhaustive multi-tick reachable set, or an independently confirmed predictor.
+
+## Repair affordance
+
+- ID: `DEF-REPAIR-AFFORDANCE`
+- Kind: developmental causal instrument
+- Status: operational for Finding 078 only; predictive role untested
+- Symbol: `A_{\mathrm{repair}}`
+
+For a declared pre-step state and radius-two basin, the sum of frozen transfer probabilities over eligible depleted-target secondary edges classified as component_bridge_cube26 or local_bridge_face6, accompanied by distinct target and source counts. It measures one-step bridge/reclosure accessibility under the declared representation, not realized repair or a universal counterfactual quantity.
+
+## Factorial interaction
+
+- ID: `DEF-FACTORIAL-INTERACTION`
+- Kind: operational contrast
+- Status: operational
+- Symbol: `I_{T\times M}`
+
+For natural, topology-only, marks-only, and joint states, the declared instrument contrast joint minus topology-only minus marks-only plus natural. A nonzero value establishes non-additivity of the instrument under those interventions; by itself it does not establish a downstream causal or predictive effect.

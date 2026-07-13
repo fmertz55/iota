@@ -907,6 +907,97 @@ def main() -> int:
         if sha256(ROOT / artifact) != digest:
             fail(f"GC-015 artifact hash changed: {artifact}", errors)
 
+    gc016_claim = next(item for item in claims["claims"] if item["id"] == "GC-016")
+    with (ROOT / "output/findings/finding078/factorial_successor_accessibility_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc016_summary = json.load(handle)
+    with (ROOT / gc016_summary["states_csv"]).open(newline="", encoding="utf-8") as handle:
+        gc016_states = list(csv.DictReader(handle))
+    gc016_observed = {
+        "channels": int(gc016_summary["channels"]),
+        "factorial_states": len(gc016_states),
+        "identifiable_channels": int(gc016_summary["identifiable_channels"]),
+        "identifiable_required": int(gc016_summary["identifiable_required"]),
+        "nonzero_interaction_channels": int(gc016_summary["nonzero_interaction_channels"]),
+        "nonzero_interaction_required": int(gc016_summary["nonzero_interaction_required"]),
+        "selected_preserving_receivers": int(gc016_summary["receiver_selection_counts"]["preserving"]),
+        "selected_breaking_receivers": int(gc016_summary["receiver_selection_counts"]["breaking"]),
+        "all_safety_and_repeat_checks_exact": bool(gc016_summary["all_safety_and_repeat_checks_exact"]),
+        "finding078_feasibility_passed": bool(gc016_summary["finding078_feasibility_passed"]),
+        "finding079_permitted": bool(gc016_summary["finding079_permitted"]),
+    }
+    for name, expected in gc016_claim["expected"].items():
+        if gc016_observed.get(name) != expected:
+            fail(f"GC-016 expected {name}={expected!r}, observed {gc016_observed.get(name)!r}", errors)
+    if any(
+        int(row["payload_zero"]) != 1
+        or int(row["ledger_exact"]) != 1
+        or int(row["rng_neutral"]) != 1
+        or int(row["repeat_exact"]) != 1
+        or row["integrity_failure"]
+        for row in gc016_states
+    ):
+        fail("GC-016 state integrity changed", errors)
+    for artifact, digest in [
+        (gc016_summary["states_csv"], gc016_summary["states_sha256"]),
+        (gc016_summary["channels_csv"], gc016_summary["channels_sha256"]),
+    ]:
+        if sha256(ROOT / artifact) != digest:
+            fail(f"GC-016 artifact hash changed: {artifact}", errors)
+
+    gc017_claim = next(item for item in claims["claims"] if item["id"] == "GC-017")
+    with (ROOT / "output/findings/finding079/factorial_acquisition_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc017_acquisition = json.load(handle)
+    with (ROOT / "output/findings/finding079/factorial_channel_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc017_precursor = json.load(handle)
+    with (ROOT / "output/findings/finding079/factorial_common_donor_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc017_donor = json.load(handle)
+    precursor_seeds = set(int(value) for value in gc017_precursor["selected_initialization_seeds"])
+    donor_seeds = set(int(value) for value in gc017_donor["selected_initialization_seeds"])
+    branch_artifacts = list((ROOT / "output/findings/finding079").glob("*branch*"))
+    outcome_artifacts = list((ROOT / "output/findings/finding079").glob("*outcome*"))
+    gc017_observed = {
+        "factual_cases": int(gc017_acquisition["cases"]),
+        "strict_transport_events": int(gc017_acquisition["strict_transport_events"]),
+        "strict_initialization_seeds": int(gc017_acquisition["confirmation_sources"]),
+        "eligible_precursor_events": int(gc017_precursor["eligible_channels"]),
+        "independent_precursor_channels": int(gc017_precursor["selected_channels"]),
+        "required_final_channels": int(gc017_donor["minimum_independent_channels"]),
+        "earliest_maximum_after_seed554": int(gc017_precursor["selected_channels"]) - 1,
+        "independent_channels_lacking_pair": len(precursor_seeds - donor_seeds),
+        "independent_common_donor_channels": int(gc017_donor["selected_independent_channels"]),
+        "common_donor_support_gate_met": bool(gc017_donor["common_donor_support_gate_met"]),
+        "repair_interaction_filter_run": False,
+        "branch_assignments": len(branch_artifacts),
+        "factorial_outcomes_opened": len(outcome_artifacts),
+    }
+    for name, expected in gc017_claim["expected"].items():
+        if gc017_observed.get(name) != expected:
+            fail(f"GC-017 expected {name}={expected!r}, observed {gc017_observed.get(name)!r}", errors)
+    if precursor_seeds - donor_seeds != {554, 585, 665, 688}:
+        fail(f"GC-017 failed-seed set changed: {sorted(precursor_seeds - donor_seeds)}", errors)
+    if not (
+        gc017_acquisition["all_classification_payload_zero"]
+        and gc017_acquisition["all_classification_ledgers_exact"]
+        and gc017_donor["all_payload_zero"]
+        and gc017_donor["all_ledgers_exact"]
+        and gc017_donor["all_target_poststates_exact"]
+    ):
+        fail("GC-017 acquisition or feasibility integrity changed", errors)
+    for artifact, digest in [
+        (gc017_donor["cases_csv"], gc017_donor["cases_sha256"]),
+        (gc017_donor["manifest_csv"], gc017_donor["manifest_sha256"]),
+    ]:
+        if sha256(ROOT / artifact) != digest:
+            fail(f"GC-017 artifact hash changed: {artifact}", errors)
+
     for path, expected_content in outputs().items():
         if not path.is_file():
             fail(f"generated file missing: {path.relative_to(ROOT)}", errors)

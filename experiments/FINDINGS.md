@@ -8526,3 +8526,60 @@ was inspected.
 - [Channel outcomes](../output/findings/finding075/successor_graph_susceptibility_channels.csv)
 - [Branch outcomes](../output/findings/finding075/successor_graph_susceptibility_branches.csv)
 - [Replay implementation](../src/successor_graph_susceptibility.py)
+
+## Finding 078: Topology × inherited-state successor accessibility is factorially identifiable
+
+Finding 078 was a developmental feasibility audit, not an outcome confirmation.
+On the completed Finding 075 channels it separated structural placement
+(`active`, `A`, `latent_A`) from inherited marks (`R`, `V`, `P`, `angular_L`),
+then enumerated the marked pre-gate successor graph without sampling a gate or
+reading a branch outcome.
+
+All 175 preregistered states were payload-free, ledger-exact, conserved, RNG
+neutral, and repeat-exact. All 25 channels were factorially identifiable versus
+20 required, and 23/25 had a nonzero topology-by-marks interaction in frozen
+successor openness or repair affordance versus 12 required. The outcome-free
+receiver selector chose 14 formerly preserving and 11 formerly breaking
+receivers, so it did not reproduce the failed Finding 075 label.
+
+This establishes instrument feasibility only. It does not show that repair
+affordance predicts articulation.
+
+### Finding 078 artifacts
+
+- [Summary](../output/findings/finding078/factorial_successor_accessibility_summary.json)
+- [Channel interactions](../output/findings/finding078/factorial_successor_accessibility_channels.csv)
+- [Factorial states](../output/findings/finding078/factorial_successor_accessibility_states.csv)
+- [Implementation](../src/factorial_successor_accessibility.py)
+
+## Finding 079: Independent factorial confirmation stopped before outcomes
+
+Finding 079 preregistered a minimum of 20 independent channels surviving all
+three pre-outcome filters: precursor eligibility, frozen-selector-valid
+common-donor feasibility, and nonzero selected repair-affordance interaction.
+
+The complete independent acquisition covered 1,536 continuations from seeds
+553--744 and produced 30 strict transports across 22 independent seeds. The
+precursor screen retained 25 events in exactly 20 independent seeds.
+
+The earliest irreversible stop occurred on the first common-donor audit row:
+seed 554 had no valid role-preserving common-donor pair, reducing the maximum
+possible final cohort to 19. The completed audit found four independent failures
+(seeds 554, 585, 665, and 688), leaving 16 independent common-donor channels
+before the nonzero repair-interaction filter.
+
+Because 16 is below the frozen minimum of 20, the repair-interaction filter was
+not run, no branch manifest was created, and no factorial outcome, response,
+effect estimate, permutation test, or directional evidence was inspected.
+
+Finding 079 is therefore a support failure before outcome measurement. The
+state-conditioned repair-affordance hypothesis remains untested, not refuted.
+
+### Finding 079 artifacts
+
+- [Acquisition summary](../output/findings/finding079/factorial_acquisition_summary.json)
+- [Precursor summary](../output/findings/finding079/factorial_channel_summary.json)
+- [Common-donor summary](../output/findings/finding079/factorial_common_donor_summary.json)
+- [Common-donor audit cases](../output/findings/finding079/factorial_common_donor_cases.csv)
+- [Frozen feasible manifest](../output/findings/finding079/factorial_common_donor_manifest.csv)
+- [Common-donor implementation](../src/finding079_common_donor_freeze.py)

@@ -50,6 +50,10 @@ def render_results(
     gc014_results: list[dict[str, str]],
     gc015_summary: dict,
     gc015_channels: list[dict[str, str]],
+    gc016_summary: dict,
+    gc017_acquisition: dict,
+    gc017_precursor: dict,
+    gc017_donor: dict,
 ) -> str:
     strict_cases = [
         row for row in gc002_cases if row["finding060_constraint_transport"] == "1"
@@ -183,6 +187,19 @@ def render_results(
             rf"\newcommand{{\GCFifteenHigher}}{{{gc015_summary['informative_channels_preserving_higher']}}}",
             rf"\newcommand{{\GCFifteenCloser}}{{{gc015_summary['channels_preserving_strictly_closer_to_natural']}}}",
             rf"\newcommand{{\GCFifteenCloserRequired}}{{{gc015_summary['closer_required_two_thirds']}}}",
+            rf"\newcommand{{\GCSixteenChannels}}{{{gc016_summary['channels']}}}",
+            rf"\newcommand{{\GCSixteenStates}}{{{gc016_summary['factorial_states']}}}",
+            rf"\newcommand{{\GCSixteenIdentifiable}}{{{gc016_summary['identifiable_channels']}}}",
+            rf"\newcommand{{\GCSixteenInteractions}}{{{gc016_summary['nonzero_interaction_channels']}}}",
+            rf"\newcommand{{\GCSixteenPreserving}}{{{gc016_summary['receiver_selection_counts']['preserving']}}}",
+            rf"\newcommand{{\GCSixteenBreaking}}{{{gc016_summary['receiver_selection_counts']['breaking']}}}",
+            rf"\newcommand{{\GCSeventeenCases}}{{{gc017_acquisition['cases']}}}",
+            rf"\newcommand{{\GCSeventeenStrict}}{{{gc017_acquisition['strict_transport_events']}}}",
+            rf"\newcommand{{\GCSeventeenStrictSeeds}}{{{gc017_acquisition['confirmation_sources']}}}",
+            rf"\newcommand{{\GCSeventeenEligible}}{{{gc017_precursor['eligible_channels']}}}",
+            rf"\newcommand{{\GCSeventeenPrecursors}}{{{gc017_precursor['selected_channels']}}}",
+            rf"\newcommand{{\GCSeventeenDonors}}{{{gc017_donor['selected_independent_channels']}}}",
+            rf"\newcommand{{\GCSeventeenRequired}}{{{gc017_donor['minimum_independent_channels']}}}",
             "",
         ]
     )
@@ -362,6 +379,22 @@ def outputs() -> dict[Path, str]:
         newline="", encoding="utf-8"
     ) as handle:
         gc015_channels = list(csv.DictReader(handle))
+    with (ROOT / "output/findings/finding078/factorial_successor_accessibility_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc016_summary = json.load(handle)
+    with (ROOT / "output/findings/finding079/factorial_acquisition_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc017_acquisition = json.load(handle)
+    with (ROOT / "output/findings/finding079/factorial_channel_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc017_precursor = json.load(handle)
+    with (ROOT / "output/findings/finding079/factorial_common_donor_summary.json").open(
+        encoding="utf-8"
+    ) as handle:
+        gc017_donor = json.load(handle)
     claims_registry = load_registry(ROOT / "evidence" / "claims.yaml")
     definitions = load_registry(ROOT / "evidence" / "definitions.yaml")
     metrics = evidence_metrics(summary, events)
@@ -389,6 +422,10 @@ def outputs() -> dict[Path, str]:
             gc014_results,
             gc015_summary,
             gc015_channels,
+            gc016_summary,
+            gc017_acquisition,
+            gc017_precursor,
+            gc017_donor,
         ),
         GENERATED / "tables" / "gc001_events.tex": render_event_table(events),
         GENERATED / "tables" / "gc010_depths.tex": render_gc010_depth_table(

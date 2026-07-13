@@ -100,8 +100,10 @@ consequences that would be expected if the organizing hypothesis is useful.
 The foundational structural result is **Golden Claim GC-001: constraint
 transport**. The latest supported bounded causal result is **GC-014: exact
 precursor placement controls later articulation**. The latest prospective test
-is **GC-015**, a negative confirmation of one frozen rooted graph-role
-representation.
+with an outcome was **GC-015**, a negative confirmation of one frozen rooted
+graph-role representation. **GC-016** establishes feasibility of a marked
+topology-by-state instrument; **GC-017** records that its independent
+confirmation stopped before outcome measurement for insufficient support.
 
 > In three controlled replay events across two seeds, payload-free Iota dynamics
 > restored the same tracked connectivity relation through a causally necessary
@@ -255,6 +257,19 @@ strictly closer to natural versus a required `17/25`. The composite graph-role
 gate failed. All controls and 1,200 branch outcomes were exact. Findings 076 and
 077 were therefore not opened.
 
+Finding 078 separated structural placement from inherited state marks and
+enumerated a pre-gate marked successor graph. All 175 development states were
+exact; `25/25` channels were factorially identifiable and `23/25` showed a
+nonzero instrument interaction. This supports feasibility only, not prediction.
+
+Finding 079 then acquired 1,536 completely new factual continuations. Thirty
+strict transports occurred in 22 independent seeds, and precursor screening
+retained exactly 20 independent channels. The first common-donor audit failure
+(seed 554) irreversibly reduced the maximum cohort below the frozen minimum of
+20. Four independent seeds ultimately lacked a valid pair, leaving 16 before
+the final repair-interaction filter. No branches or outcomes were opened. The
+state-conditioned repair-affordance hypothesis therefore remains untested.
+
 ### Inspect the evidence frontier
 
 - [Event-level evidence](output/findings/finding060/phase_free_constraint_transport_events.csv)
@@ -307,12 +322,17 @@ gate failed. All controls and 1,200 branch outcomes were exact. Findings 076 and
 - [Finding 075 susceptibility summary](output/findings/finding075/successor_graph_susceptibility_summary.json)
 - [Finding 075 channel outcomes](output/findings/finding075/successor_graph_susceptibility_channels.csv)
 - [Finding 075 branch outcomes](output/findings/finding075/successor_graph_susceptibility_branches.csv)
+- [Finding 078 feasibility summary](output/findings/finding078/factorial_successor_accessibility_summary.json)
+- [Finding 078 channel interactions](output/findings/finding078/factorial_successor_accessibility_channels.csv)
+- [Finding 079 acquisition summary](output/findings/finding079/factorial_acquisition_summary.json)
+- [Finding 079 precursor summary](output/findings/finding079/factorial_channel_summary.json)
+- [Finding 079 stopping summary](output/findings/finding079/factorial_common_donor_summary.json)
 
-The next gate is not the previously planned memory/order sequence. A separate
-preregistration must first define a richer marked successor-event representation
-from outcome-sealed factual ledgers, then test it on another independent causal
-cohort. It must not search for a downstream mass, force, energy, or field
-analogue.
+The dependent recruitment-history route is closed. Any future confirmation must
+use a new preregistration and an acquisition design capable of retaining at
+least 20 independent channels after precursor, intervention-feasibility, and
+instrument filters. It must not search for a downstream mass, force, energy, or
+field analogue.
 
 As new experiments land, this section should report the strongest supported
 claim at that commit while Git history preserves earlier states of the evidence.
