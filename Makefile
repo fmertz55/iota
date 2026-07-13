@@ -1,4 +1,4 @@
-.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization verify paper clean-paper
+.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit verify paper clean-paper
 
 finding069-evidence:
 	python3 src/summarize_sequential_cut.py --through-depth 8 --quiet
@@ -22,7 +22,11 @@ validate-minimal-realization:
 		--seal experiments/minimal_realization/MIR-REFERENCE-SEARCH-001/outcome_sealed_manifest.json
 	python3 -m unittest discover -s tests/minimal_realization -p 'test_*.py'
 
-verify: evidence validate validate-minimal-realization
+validate-minimal-realization-exact-orbit:
+	python3 scripts/validate_minimal_realization_exact_orbit.py
+	python3 -m unittest discover -s tests/minimal_realization_orbit -p 'test_*.py'
+
+verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit
 
 paper:
 	python3 scripts/build_paper.py

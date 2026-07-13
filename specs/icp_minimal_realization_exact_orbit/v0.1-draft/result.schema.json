@@ -1,0 +1,366 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schemas/mir-exact-orbit-result-v0.1-draft.json",
+  "title": "MIR Exact-Orbit Result Ledger",
+  "description": "Structural transport schema. Normative cross-field arithmetic, chronology, candidate identity, recurrence, and aggregate checks are enforced by the sealed Python validator and independent replay.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "base_contract_version",
+    "protocol_version",
+    "search_id",
+    "run_id",
+    "detector",
+    "data_class",
+    "endpoint",
+    "canonical_origin",
+    "translation_offsets_evaluated",
+    "reserved_translation_offsets_accessed",
+    "reserved_translation_offsets_evaluated",
+    "parent_H16_crosscheck",
+    "first_new_outcome_layer",
+    "cone_saturation_layer",
+    "max_layers_per_candidate",
+    "recurrence_state",
+    "trace_digest_encoding",
+    "open_seal",
+    "outcome_seal",
+    "base_outcome_seal",
+    "candidate_manifest",
+    "parent_bounded_result",
+    "result_schema",
+    "global_minimality_claimed",
+    "alternative_grammar_excluded",
+    "completion_status",
+    "search_conclusion",
+    "all_dynamic_candidates_resolved",
+    "exact_orbit_winner_candidate_ids",
+    "candidate_results"
+  ],
+  "properties": {
+    "base_contract_version": {"const": "0.2-draft"},
+    "protocol_version": {"const": "0.1-draft"},
+    "search_id": {"const": "MIR-EXACT-ORBIT-001"},
+    "run_id": {"const": "MIR-EXACT-ORBIT-001-DEVELOPMENT"},
+    "detector": {"const": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-EXACT-ORBIT-V0.1"},
+    "data_class": {"const": "development"},
+    "endpoint": {"const": "first_proto_object_or_exact_post_saturation_recurrence"},
+    "canonical_origin": {"const": 0},
+    "translation_offsets_evaluated": {"const": [0]},
+    "reserved_translation_offsets_accessed": {"const": false},
+    "reserved_translation_offsets_evaluated": {"const": []},
+    "parent_H16_crosscheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["last_layer", "dynamic_candidate_count", "all_right_censored_reproduced"],
+      "properties": {
+        "last_layer": {"const": 16},
+        "dynamic_candidate_count": {"const": 15},
+        "all_right_censored_reproduced": {"const": true}
+      }
+    },
+    "first_new_outcome_layer": {"const": 17},
+    "cone_saturation_layer": {"const": 63},
+    "max_layers_per_candidate": {"const": 1000000},
+    "recurrence_state": {"const": ["cone_phase", "seeded_state", "baseline_state"]},
+    "trace_digest_encoding": {"const": "sha256_domain_separated_decimal_length_layer_u64_seeded_u64_baseline_including_layer_0"},
+    "open_seal": {"$ref": "#/$defs/binding"},
+    "outcome_seal": {"$ref": "#/$defs/binding"},
+    "base_outcome_seal": {"$ref": "#/$defs/binding"},
+    "candidate_manifest": {"$ref": "#/$defs/binding"},
+    "parent_bounded_result": {"$ref": "#/$defs/binding"},
+    "result_schema": {"$ref": "#/$defs/binding"},
+    "global_minimality_claimed": {"const": false},
+    "alternative_grammar_excluded": {"const": false},
+    "completion_status": {
+      "enum": ["complete_all_candidate_endpoints_resolved", "incomplete_resource_censored"]
+    },
+    "search_conclusion": {
+      "enum": [
+        "all_dynamic_candidates_recurrence_excluded",
+        "one_or_more_exact_passes",
+        "resource_censored_incomplete"
+      ]
+    },
+    "all_dynamic_candidates_resolved": {"type": "boolean"},
+    "exact_orbit_winner_candidate_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "candidate_results": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {"$ref": "#/$defs/candidate_result"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "state_hex": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "role_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layer", "anchor"],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 1, "maximum": 1000000},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63}
+      }
+    },
+    "successor_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layer", "anchor", "successor_anchor"],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 1, "maximum": 1000000},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "successor_anchor": {"type": "integer", "minimum": 0, "maximum": 63}
+      }
+    },
+    "pass_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer",
+        "anchor",
+        "successor_anchor",
+        "sham_future",
+        "breaking_future",
+        "seeded_state_hex",
+        "baseline_state_hex"
+      ],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 17, "maximum": 1000000},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "successor_anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "sham_future": {"type": "integer", "minimum": 0, "maximum": 1},
+        "breaking_future": {"type": "integer", "minimum": 0, "maximum": 1},
+        "seeded_state_hex": {"$ref": "#/$defs/state_hex"},
+        "baseline_state_hex": {"$ref": "#/$defs/state_hex"}
+      }
+    },
+    "joint_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seeded_state_hex", "baseline_state_hex"],
+      "properties": {
+        "seeded_state_hex": {"$ref": "#/$defs/state_hex"},
+        "baseline_state_hex": {"$ref": "#/$defs/state_hex"}
+      }
+    },
+    "recurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cone_saturation_layer",
+        "checkpoint_layer",
+        "repeat_layer",
+        "period",
+        "checkpoint_state",
+        "repeat_state",
+        "exact_full_state_equality"
+      ],
+      "properties": {
+        "cone_saturation_layer": {"const": 63},
+        "checkpoint_layer": {"type": "integer", "minimum": 63, "maximum": 999999},
+        "repeat_layer": {"type": "integer", "minimum": 64, "maximum": 1000000},
+        "period": {"type": "integer", "minimum": 1, "maximum": 999937},
+        "checkpoint_state": {"$ref": "#/$defs/joint_state"},
+        "repeat_state": {"$ref": "#/$defs/joint_state"},
+        "exact_full_state_equality": {"const": true}
+      }
+    },
+    "candidate_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "candidate_sha256",
+        "normalized_n_p",
+        "atomic_n_l",
+        "production_rows",
+        "parent_H16_status",
+        "evaluation_status",
+        "t_proto_status",
+        "t_proto_exact",
+        "last_evaluated_layer",
+        "first_role",
+        "first_successor",
+        "first_intervention_eligible",
+        "pass_witness",
+        "recurrence",
+        "resource_limit",
+        "trace_sha256",
+        "exclusion_reason"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string", "minLength": 1},
+        "candidate_sha256": {"$ref": "#/$defs/sha256"},
+        "normalized_n_p": {"const": 2},
+        "atomic_n_l": {"type": "integer", "minimum": 0, "maximum": 4},
+        "production_rows": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["00", "01", "10", "11"]}
+        },
+        "parent_H16_status": {
+          "enum": ["analytically_excluded", "right_censored_T_proto_gt_16"]
+        },
+        "evaluation_status": {
+          "enum": [
+            "analytically_excluded",
+            "exact_pass_on_fixed_orbit",
+            "recurrence_excluded_on_fixed_orbit",
+            "resource_censored_before_recurrence"
+          ]
+        },
+        "t_proto_status": {
+          "enum": [
+            "not_applicable",
+            "finite",
+            "infinite_on_fixed_orbit",
+            "right_censored_at_resource_limit"
+          ]
+        },
+        "t_proto_exact": {"type": ["integer", "null"], "minimum": 17, "maximum": 1000000},
+        "last_evaluated_layer": {"type": ["integer", "null"], "minimum": 17, "maximum": 1000000},
+        "first_role": {"oneOf": [{"$ref": "#/$defs/role_witness"}, {"type": "null"}]},
+        "first_successor": {"oneOf": [{"$ref": "#/$defs/successor_witness"}, {"type": "null"}]},
+        "first_intervention_eligible": {"oneOf": [{"$ref": "#/$defs/successor_witness"}, {"type": "null"}]},
+        "pass_witness": {"oneOf": [{"$ref": "#/$defs/pass_witness"}, {"type": "null"}]},
+        "recurrence": {"oneOf": [{"$ref": "#/$defs/recurrence"}, {"type": "null"}]},
+        "resource_limit": {"type": ["integer", "null"], "minimum": 1000000, "maximum": 1000000},
+        "trace_sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "exclusion_reason": {"type": ["string", "null"]}
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "parent_H16_status": {"const": "analytically_excluded"},
+            "evaluation_status": {"const": "analytically_excluded"},
+            "t_proto_status": {"const": "not_applicable"},
+            "t_proto_exact": {"const": null},
+            "last_evaluated_layer": {"const": null},
+            "first_role": {"const": null},
+            "first_successor": {"const": null},
+            "first_intervention_eligible": {"const": null},
+            "pass_witness": {"const": null},
+            "recurrence": {"const": null},
+            "resource_limit": {"const": null},
+            "trace_sha256": {"const": null},
+            "exclusion_reason": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "properties": {
+            "parent_H16_status": {"const": "right_censored_T_proto_gt_16"},
+            "evaluation_status": {"const": "exact_pass_on_fixed_orbit"},
+            "t_proto_status": {"const": "finite"},
+            "t_proto_exact": {"type": "integer", "minimum": 17, "maximum": 1000000},
+            "last_evaluated_layer": {"type": "integer", "minimum": 17, "maximum": 1000000},
+            "first_role": {"$ref": "#/$defs/role_witness"},
+            "first_successor": {"$ref": "#/$defs/successor_witness"},
+            "first_intervention_eligible": {"$ref": "#/$defs/successor_witness"},
+            "pass_witness": {"$ref": "#/$defs/pass_witness"},
+            "recurrence": {"const": null},
+            "resource_limit": {"const": null},
+            "trace_sha256": {"$ref": "#/$defs/sha256"},
+            "exclusion_reason": {"const": null}
+          }
+        },
+        {
+          "properties": {
+            "parent_H16_status": {"const": "right_censored_T_proto_gt_16"},
+            "evaluation_status": {"const": "recurrence_excluded_on_fixed_orbit"},
+            "t_proto_status": {"const": "infinite_on_fixed_orbit"},
+            "t_proto_exact": {"const": null},
+            "last_evaluated_layer": {"type": "integer", "minimum": 64, "maximum": 1000000},
+            "pass_witness": {"const": null},
+            "recurrence": {"$ref": "#/$defs/recurrence"},
+            "resource_limit": {"const": null},
+            "trace_sha256": {"$ref": "#/$defs/sha256"},
+            "exclusion_reason": {"const": null}
+          }
+        },
+        {
+          "properties": {
+            "parent_H16_status": {"const": "right_censored_T_proto_gt_16"},
+            "evaluation_status": {"const": "resource_censored_before_recurrence"},
+            "t_proto_status": {"const": "right_censored_at_resource_limit"},
+            "t_proto_exact": {"const": null},
+            "last_evaluated_layer": {"const": 1000000},
+            "pass_witness": {"const": null},
+            "recurrence": {"const": null},
+            "resource_limit": {"const": 1000000},
+            "trace_sha256": {"$ref": "#/$defs/sha256"},
+            "exclusion_reason": {"const": null}
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"completion_status": {"const": "incomplete_resource_censored"}}},
+      "then": {
+        "properties": {
+          "search_conclusion": {"const": "resource_censored_incomplete"},
+          "all_dynamic_candidates_resolved": {"const": false},
+          "exact_orbit_winner_candidate_ids": {"maxItems": 0},
+          "candidate_results": {
+            "contains": {"properties": {"evaluation_status": {"const": "resource_censored_before_recurrence"}}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"completion_status": {"const": "complete_all_candidate_endpoints_resolved"}}},
+      "then": {
+        "properties": {
+          "all_dynamic_candidates_resolved": {"const": true},
+          "search_conclusion": {"enum": ["all_dynamic_candidates_recurrence_excluded", "one_or_more_exact_passes"]},
+          "candidate_results": {
+            "not": {"contains": {"properties": {"evaluation_status": {"const": "resource_censored_before_recurrence"}}}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"search_conclusion": {"const": "one_or_more_exact_passes"}}},
+      "then": {
+        "properties": {
+          "exact_orbit_winner_candidate_ids": {"minItems": 1},
+          "candidate_results": {
+            "contains": {"properties": {"evaluation_status": {"const": "exact_pass_on_fixed_orbit"}}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"search_conclusion": {"const": "all_dynamic_candidates_recurrence_excluded"}}},
+      "then": {
+        "properties": {
+          "exact_orbit_winner_candidate_ids": {"maxItems": 0},
+          "candidate_results": {
+            "not": {"contains": {"properties": {"evaluation_status": {"enum": ["exact_pass_on_fixed_orbit", "resource_censored_before_recurrence"]}}}}
+          }
+        }
+      }
+    }
+  ]
+}
