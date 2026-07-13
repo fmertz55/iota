@@ -1,0 +1,53 @@
+{
+  "contract_version": "0.1-draft",
+  "candidate_id": "MIR-NULL-P1-L0",
+  "status": "analytically_excluded",
+  "primitive_accounting": {
+    "normalized_n_p": 1,
+    "kind_count": 1,
+    "seed_nonquiescent_instances": 1,
+    "relation_kind_count": 0,
+    "candidate_supplied_bits": 0
+  },
+  "primitives": [
+    {
+      "id": "event",
+      "scope": "dynamic",
+      "alphabet": [0, 1],
+      "description": "One binary informational event degree."
+    }
+  ],
+  "laws": [],
+  "clock": {
+    "tick_unit": "planck_time_provisional",
+    "causal_layers_per_tick": 1,
+    "within_tick_cascade": false,
+    "max_relation_hops_per_tick": 1
+  },
+  "substrate": {
+    "topology": "single registered locus",
+    "boundary": "closed",
+    "scheduler": "synchronous_atomic_layer"
+  },
+  "initial_condition": {
+    "description": "One nonquiescent event at tick zero.",
+    "contains_proto_object": false,
+    "description_bits": 0
+  },
+  "proto_object_detector": {
+    "version": "0.1-draft",
+    "read_only": true,
+    "minimum_persistence_ticks": 1
+  },
+  "maps": {
+    "initialization": "identity on the registered event",
+    "readout": "proto-object detector version 0.1-draft",
+    "intervention": "no admissible internal-role intervention"
+  },
+  "randomness": {
+    "kind": "none",
+    "declared_law": "none"
+  },
+  "data_class": "development",
+  "exclusion_reason": "A zero-law candidate cannot generate a new relational role from a non-proto-object initial condition."
+}

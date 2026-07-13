@@ -5,15 +5,16 @@ Date: 2026-07-13
 ## Current Continuation Status
 
 The authoritative continuation plan is now
-[Scientific Reassessment and Authoritative Path Forward](#scientific-reassessment-and-authoritative-path-forward---2026-07-13)
+[Minimal Informational Realization Program](#minimal-informational-realization-program---authoritative-continuation---2026-07-13)
 at the end of this document. It supersedes every earlier `Next Hypothesis`,
 `Acceptance Gate`, `Suggested New Thread Prompt`, and new-thread start point as
 an instruction for new work. Those sections remain as the chronological record
 of the program.
 
-Finding 080 remains preregistered but is paused. Do not implement it, inspect a
-new outcome outside the preregistered Formal-gate validation, or begin another
-simulator experiment until the authoritative path permits it.
+Finding 080 remains preregistered but is paused. Development work may proceed
+only under the minimal-realization contract. Held-out candidate and
+current-physics role outcomes remain sealed until the contract, candidate,
+detector, comparison rule, and data partition for that test are frozen.
 
 ## Local Checkout State
 
@@ -4803,7 +4804,8 @@ This section is the controlling continuation instruction. It supersedes every
 earlier `Next Hypothesis`, `Acceptance Gate`, `Suggested New Thread Prompt`, and
 Finding 080 new-thread start point as an instruction for new work. Earlier
 sections remain unchanged as historical preregistrations and results. Finding
-080 remains preregistered but is paused until the Formal gate below passes.
+080 remains preregistered but is paused until Gate 0 and the Formal gate below
+pass.
 
 ### Decision
 
@@ -4811,16 +4813,18 @@ Continue the research program as an adversarial, falsifiable test of the
 Information Constraint Principle (ICP), not as a program committed to proving
 ICP or deriving pre-quantum physics. The exact simulator and intervention
 pipeline may support a useful methods contribution even if the broad principle
-fails. New claims must therefore be earned in the order Formal, Artifact,
-Generality.
+fails. New claims must therefore be earned in the order Gate 0, Formal,
+Artifact, Generality.
 
 Do not begin an outcome-generating simulator experiment outside the
-preregistered Formal-gate validation before the Formal gate passes. The Formal
-specification, toy suite, estimator, and pass/fail rule must be frozen before
-that held-out validation is generated or inspected. Do not make a cross-system
-or physical claim before all three gates pass. Mass, energy, force, matter,
-quantum, and pre-physical interpretations remain closed downstream topics unless
-a separate mathematical bridge produces distinctive quantitative predictions.
+preregistered Formal-gate validation before the Formal gate passes. The Gate 0
+operational definition must pass before the Formal-gate implementation begins.
+The Formal toy suite, estimator, and pass/fail rule must then be frozen before
+the held-out validation is generated or inspected. Do not make a cross-system
+or physical claim before the Formal, Artifact, and Generality gates pass. Mass,
+energy, force, matter, quantum, and pre-physical interpretations remain closed
+downstream topics unless a separate mathematical bridge produces distinctive
+quantitative predictions.
 
 ### Assessment Basis
 
@@ -4880,7 +4884,46 @@ including `hartley1928transmission`, `balduzzi2008integrated`,
 `kolchinsky2018semantic`, `bartlett2024causal`, `sowinski2025causal`,
 `varela1974autopoiesis`, `beer2004autopoiesis`, `montevil2015closure`,
 `rupe2018local`, `holme2012temporal`, `witte2026computation`, and
-`hintze2026rethinking`.
+`hintze2026rethinking`. The Gate 0 search added `shannon1948mathematical`,
+`lin1991divergence`, `ay2008information`, `janzing2013quantifying`,
+`buzea2026counterfactual`, `shi2026interventional`, `chen2026minimal`,
+`williams2016spatiotemporal`, and `badiemodiri2020limited`.
+
+### Standing Literature and Terminology Rule
+
+Every new finding and every gate specification must include a documented
+literature search before its claim is finalized. The search is part of the
+scientific method for this program, not an optional writing step. It must be
+designed to discover prior explanations and methods capable of narrowing or
+defeating the proposed claim.
+
+For each finding:
+
+1. before outcome inspection, search the relevant scholarly indexes and primary
+   literature using common field terms for the mechanism, intervention,
+   observable, system class, and statistical quantity;
+2. do not search only for `ICP`, `IOTA`, or project-specific phrases. Map every
+   local term to established vocabulary in information theory, causal
+   inference, stochastic processes, dynamical systems, cellular automata,
+   temporal networks, and complex-systems research as applicable;
+3. record the search date, indexes, exact query strings, date range, inclusion
+   criteria, and the closest relevant results in a committed search log;
+4. read and cite the primary source rather than relying on search snippets,
+   secondary summaries, or terminology coincidence;
+5. state how the new finding differs from the closest prior methods and results,
+   including a `no novelty established` conclusion when warranted;
+6. add relevant sources to the project bibliography before the finding is
+   finalized, and preserve the chronology of whether each source was identified
+   before or after outcome inspection; and
+7. run a post-result follow-up search using the observed result's common
+   descriptive terms, while labeling that search as post-outcome and forbidding
+   it from silently changing a preregistered endpoint or pass rule.
+
+Project-specific terminology may be retained for precision only after its
+relationship to ordinary disciplinary language is stated. Absence of a search
+hit is not evidence of novelty. A priority or novelty claim requires explicit
+comparison with the closest identified work and remains provisional pending
+external review.
 
 ### Missing and Skipped Steps
 
@@ -4949,49 +4992,97 @@ the earlier gate has passed. Every gate requires a dated, committed
 preregistration, frozen code/configuration hashes, declared analysis units,
 multiplicity handling, and explicit pass/fail thresholds before outcomes.
 
-### Formal Gate
+### Gate 0 - Operational Definition
 
-**Formal gate: Define reachable sets, probability measures, interventions, and
-a probability-sensitive ICP quantity that is actually computed.**
+**Gate 0: State ICP in a form that another researcher can implement without
+reference to the IOTA simulator, its detectors, or informal author guidance.**
 
 Status: **not passed**.
 
-The gate requires one frozen mathematical and computational specification with:
+Gate 0 separates semantic agreement about what ICP computes from the later
+question of whether the quantity is mathematically satisfactory, estimable, or
+empirically useful. Experimental success cannot repair an ambiguous target.
 
-1. an endogenous state `S_t`, an explicit observable/coarse-graining `g`, and a
-   horizon `H`;
-2. exogenous variables `U_t` with a declared measure `mu`, such that
-   `S_(t+1) = F_L(S_t, U_t)`;
-3. an explicit statement of whether RNG and scheduler variables are conditioned
-   upon, marginalized, or intervened upon;
-4. a declared intervention family `do(a)` and a scientifically meaningful
-   reference `do(a_0)`, rather than an informal prior/posterior label;
-5. a future distribution
-   `P_(a,H)(y | s) = Pr_mu[g(S_(t+1:t+H)) = y | do(a), S_t = s]` and reachable
-   support `R_(a,H)(s) = supp P_(a,H)(. | s)`;
-6. a probability-sensitive primary quantity. The default candidate is
-   `I_ICP = JSD(P_(a,H) || P_(a_0,H))`, accompanied by the signed entropy change
-   `Delta H = H(P_(a_0,H)) - H(P_(a,H))` to distinguish concentration from
-   expansion. Replacing this pair requires a written invariance and
-   interpretability argument before data;
-7. keyed or counter-based exogenous noise for paired interventions, or an
+The gate requires one dated, versioned, standalone specification that declares:
+
+1. the system class, complete endogenous state `S_t`, transition index, and the
+   boundary between endogenous state and implementation bookkeeping;
+2. the transition map `S_(t+1) = F_L(S_t, U_t)`, including event order and
+   scheduler semantics wherever they affect the transition;
+3. exogenous variables `U_t`, their joint measure `mu`, and the relevant
+   filtration, including an explicit statement of which RNG and scheduler
+   variables are conditioned upon, marginalized, or intervened upon;
+4. an intervention family `do(a)`, a scientifically meaningful reference
+   `do(a_0)`, intervention timing, targets, duration, and invariants;
+5. a future random variable `Y = g(S_(t+1:t+H))`, its horizon `H`, outcome
+   space, graph or relational convention when applicable, and every
+   coarse-graining used to identify outcomes;
+6. the induced distribution
+   `P_(a,H)(y | s) = Pr_mu[Y = y | do(a), S_t = s]`, its reachable support
+   `R_(a,H)(s)`, and the treatment of zero-probability and numerically negligible
+   outcomes;
+7. the primary information quantity, units, logarithm base, estimator target,
+   and companion quantities. The current default is
+   `I_ICP = JSD(P_(a,H) || P_(a_0,H))` with
+   `Delta H = H(P_(a_0,H)) - H(P_(a,H))`; reachable-set cardinality may be a
+   reported support diagnostic but may not silently replace the
+   probability-sensitive primary endpoint;
+8. the predicted observable comparison, including its direction, analysis
+   unit, reference, horizon, minimum effect or equivalence region, and an
+   observation that would count against the prediction; and
+9. canonical serialized input fixtures, expected output schemas, numerical
+   tolerances, and analytic examples sufficient to test semantic agreement.
+
+Gate 0 passes only when two isolated implementations, written from the frozen
+specification and fixtures without importing the IOTA transition or detector
+code, independently construct the same probability spaces, interventions,
+outcome labels, and ICP values within the declared tolerances. Implementers may
+submit written ambiguity reports before freezing their code, but may not resolve
+ambiguity through unrecorded author guidance. The fixtures must include at least
+no interaction, deterministic evolution, strict support reduction,
+equal-support probability reshaping, and common bijective relabeling.
+
+This agreement test is intentionally small and specification-focused. The full
+blinded independent implementation across Artifact-gate experimental conditions
+remains part of the Artifact gate. No held-out IOTA outcome may be generated or
+inspected during Gate 0. Any material change to state, intervention, probability
+construction, information quantity, or predicted observable returns the program
+to Gate 0.
+
+### Formal Gate
+
+**Formal gate: Determine whether the frozen Gate 0 quantity is mathematically
+well-defined, computable, and capable of surviving a preregistered held-out
+validation.**
+
+Status: **not passed**.
+
+The gate consumes the frozen Gate 0 specification and requires:
+
+1. a proof or explicit domain argument that every declared intervention induces
+   a valid probability distribution on the declared outcome space;
+2. a mathematical audit of finiteness, zero-probability behavior, label
+   invariance, coarse-graining sensitivity, and the interpretation of both
+   `I_ICP` and `Delta H`;
+3. keyed or counter-based exogenous noise for paired interventions, or an
    estimator that averages independent continuations, so changed control flow
-   cannot reassign unrelated later random draws silently;
-8. an exact-enumeration or convergence/uncertainty procedure for estimating the
-   distributions;
-9. analytic toy validations covering no interaction, deterministic evolution,
-   strict support reduction, equal-support probability reshaping, and pure
-   relabeling; and
-10. an actual preregistered computation of the quantity on held-out IOTA states,
-    including a declared falsifying outcome.
+   cannot silently reassign unrelated later random draws;
+4. an exact-enumeration or frozen convergence and uncertainty procedure for
+   estimating the distributions;
+5. executable analytic toy validations of every Gate 0 fixture, including exact
+   expected values where feasible;
+6. a frozen estimator, configuration, environment, analysis unit, multiplicity
+   rule, and pass/fail threshold that reproduce from a clean checkout; and
+7. one preregistered computation of the quantity on held-out IOTA states,
+   including a declared falsifying outcome.
 
-The gate passes only when the specification, implementation, toy validations,
-and held-out computation all exist and reproduce from a clean checkout. A
-quantity that is identically zero under the chosen complete-state semantics,
-changes under a common bijective relabeling of outcome labels, or cannot
-distinguish the preregistered interaction from its reference fails the gate.
-Sensitivity to a non-bijective coarse-graining must be measured and reported,
-not confused with label invariance.
+The gate passes only when the mathematical audit, implementation, toy
+validations, and held-out computation all exist and reproduce from a clean
+checkout. A quantity that is identically zero under the chosen complete-state
+semantics, changes under a common bijective relabeling of outcome labels, or
+cannot distinguish the preregistered interaction from its reference fails the
+gate. Sensitivity to a non-bijective coarse-graining must be measured and
+reported, not confused with label invariance.
 
 ### Artifact Gate
 
@@ -5061,9 +5152,13 @@ method, not a general principle.
 ### Decision Rules
 
 ```text
-Formal gate fails:
+Gate 0 fails:
+  suspend new empirical ICP work until the operational definition is repaired;
+  retain the existing directly measured graph/intervention results.
+
+Gate 0 passes, Formal gate fails:
   make no empirical ICP-principle claim; retain only the graph/intervention
-  results that were directly measured.
+  results that were directly measured and report the formal failure.
 
 Formal passes, Artifact fails:
   classify the effect as an engineered or implementation-specific phenomenon.
@@ -5083,10 +5178,200 @@ do not already make.
 
 ### Immediate Next Step
 
-Write and freeze the Formal-gate specification, estimator, analytic toy cases,
-and validation pass/fail rule. Only then generate the preregistered held-out
-Formal-gate computation. Do not implement Finding 080, rerun a larger cohort,
-tune another local representation, or inspect any other new simulator outcome
-first. Finding 080 may be reconsidered only after the probability-sensitive ICP
-quantity is defined and computed; if it no longer tests that quantity, it
-remains an archived preregistration rather than the active path.
+Write and freeze the standalone Gate 0 operational specification, canonical
+fixtures, predicted observable, isolated-implementation agreement rule, and
+Gate 0 literature-search record. Only after Gate 0 passes may the Formal-gate
+mathematical audit, estimator, and validation preregistration be frozen and its
+held-out computation generated. Do not implement Finding 080, rerun a larger
+cohort, tune another local representation, or inspect any other new simulator
+outcome first. Finding 080 may be reconsidered only after the
+probability-sensitive ICP quantity is defined and computed; if it no longer
+tests that quantity, it remains an archived preregistration rather than the
+active path.
+
+## Minimal Informational Realization Program — Authoritative Continuation — 2026-07-13
+
+This section is the controlling continuation instruction. It supersedes
+`Scientific Reassessment and Authoritative Path Forward - 2026-07-13` as a plan
+for new work. That earlier section remains an audit record. Its empirical
+cautions, literature rule, negative results, and reproducibility requirements
+remain in force unless this section changes them explicitly.
+
+The standalone controlling specification is
+[`docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md`](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
+
+### Objective
+
+The project is not searching for new physics. It is searching for the smallest
+closed informational construction whose constraints on reachable futures
+recover declared causal roles of current physics.
+
+Current physics is the target and adversarial benchmark. A deviation counts
+against the construction. A passing result establishes constructive
+informational sufficiency only within the tested domain. It does not establish
+ontological uniqueness.
+
+### Minimum rule
+
+For every admissible candidate `C`, record:
+
+```text
+S(C) = (N_P, N_L, T_proto)
+```
+
+The order is lexicographic:
+
+1. fewer normalized informational primitives wins;
+2. with equal `N_P`, fewer atomic laws wins; and
+3. with equal `N_P` and `N_L`, fewer elementary ticks to a confirmed
+   proto-object wins.
+
+Publish the primitive-accounting components and Pareto frontier in addition to
+the winning order. Do not call a candidate globally minimal until every lower
+admissible shell has been exhausted or excluded by proof. Before then, call it
+the best candidate found under the declared search budget.
+
+### Primitive normalization
+
+One primitive is one binary informational degree of freedom. Compound fields,
+finite alphabets, vectors, relations, exogenous state, candidate-specific
+constants, boundary information, scheduler state, topology entries, and
+nonuniform initialization are expanded or charged in the normalized primitive
+account. Unbounded precision, arbitrary real constants, target lookup tables,
+and initial states containing target futures are inadmissible.
+
+Record primitive kinds, relation kinds, initialized nonquiescent instances,
+candidate-supplied bits, storage, update work, causal radius, and substrate size.
+Packing several degrees into one named object does not reduce `N_P`.
+
+### User-supplied atomic-law grammar
+
+No law is compound. Each law is one hundred percent self-contained. Each law
+expresses exactly one degree of freedom.
+
+An admissible law statement contains none of the standalone tokens:
+
+```text
+and
+but
+or
+```
+
+Each law has one governed degree, one local input signature, one next-state
+effect, one write, and one elementary-tick duration. A branch, exception,
+alternative case, sequential sub-update, helper call, callback, lookup entry,
+dispatcher case, or independently removable effect counts as another law.
+Implementation helpers are recursively inlined before law counting.
+
+No continuant is free. For the current contract, a continuant is an identity or
+carried helper state presumed to persist without a declared successor
+transition. Persistence must be realized through lawful succession. Any carried
+state is a counted primitive governed by its own admissible law.
+
+### Elementary clock
+
+One tick is one synchronous causal layer. Every law reads tick `t`. Every law
+writes tick `t+1`. No within-tick result may feed another result in the same
+tick. Influence crosses at most one declared local relation per tick.
+
+For the current search ledger, `T_proto` is reported only in dimensionless
+elementary causal layers. No Planck-time or other physical-time conversion is
+claimed. Current IOTA ticks contain ordered subevents and cannot enter a speed
+comparison until normalized into elementary causal layers and supplied with an
+independently justified clock map.
+
+### Proto-object rung
+
+The base proto-object is not a particle analogue. It is the first newly formed,
+finite, localized multi-primitive organization that realizes an
+identity-independent relational role, remains identifiable through at least one
+further elementary tick, and causally changes a preregistered reachable-future
+variable under a matched internal-role intervention.
+
+Connectedness or longevity without a demonstrated reachable-future constraint
+does not pass. Carrier replacement is a stronger later rung rather than a base
+requirement.
+
+### Gate order
+
+1. **Minimal Realization Contract:** freeze primitive normalization, atomic-law
+   grammar, tick semantics, proto-object detector, resource budgets, comparison
+   rule, maps, and data partitions.
+2. **Construction Closure:** require complete self-contained dynamics, no
+   oracle, no target lookup, no hidden state, and clean independent
+   reimplementation.
+3. **Proto-Object Recovery:** search the lowest admissible `(N_P, N_L)` shells
+   and compare equal-complexity candidates by confirmed first-passage ticks.
+4. **Current-Physics Role Recovery:** with fixed initialization, readout, and
+   intervention maps, require agreement with preregistered trajectories,
+   reachable supports, intervention responses, symmetries, conservation,
+   composition, scaling, and failure boundaries of a declared current theory.
+5. **Minimality Certification:** exhaust or prove impossible every lower
+   admissible shell.
+
+There is no active novel-physics gate. A theory-discrimination gate may be
+created only if the project later chooses to claim a competing physical theory.
+
+### Diagnostic status of the old Gate 0
+
+The draft JSD/`Delta H` specification no longer defines ICP and no longer blocks
+this program. Preserve its complete-state, probability, intervention, noise,
+invariance, and independent-implementation work as an interventional-divergence
+diagnostic. A nonzero internal intervention effect can show that a declared
+constraint matters. It cannot establish mapped physical-role recovery.
+
+### Data policy
+
+Data may inform development. Every inspected outcome is development data.
+Changing a candidate after inspecting its result creates a new candidate record.
+Changing the grammar or detector creates a new contract version.
+
+Before a confirmatory comparison, freeze and hash the candidates, grammar,
+detector, maps, horizon, stochastic comparison rule, exclusions, stopping rule,
+and held-out partition. Held-out outcomes are single use. Negative results and
+all searched complexity shells remain in the record.
+
+Existing IOTA results are pilot/development evidence for candidate causal roles.
+They cannot be retroactively ranked in the reference grammar's elementary
+causal layers. Finding 080 remains archived and paused unless a later
+role-recovery tier maps it explicitly to the new contract.
+
+### Immediate starting point
+
+The outcome-free restart audit found that the earlier `N_P=1` start left the
+interaction topology uncharged. Within the reference grammar, a connected
+relational role requires one dynamic event channel plus one charged interaction
+relation channel. The classes `N_P=0` and `N_P=1`, plus `N_P=2, N_L=0`, are
+analytically excluded for this grammar. The first open reference shell is:
+
+```text
+N_P = 2
+N_L = 1
+```
+
+Contract `0.2-draft` freezes the four production-row alphabet, two-bit fan-in,
+directed 64-cycle, forward causal cone, exhaustive 16-candidate development
+budget, translation-based closure partition, and deterministic-only rule. It
+also replaces the circular future endpoint `role_realized_at_t_plus_1` with a
+matched-intervention outcome two layers later outside the intervention window.
+The pre-outcome literature search establishes that binary CA rule searches and
+minimal persistent structures are not novel; any possible contribution is the
+specific accounting and outward matched-intervention method.
+
+The reference search is an `H=16`-bounded pilot. A no-pass is right-censored as
+`T_proto > 16`, not assigned infinity. The pilot may rank candidates that pass
+by the frozen horizon, but it cannot use a censored lower-law candidate to claim
+unbounded shell exclusion or global minimality.
+
+One analytic two-layer matched-intervention fixture for the copy-predecessor
+rule is recorded as detector-development data. No full single-seed candidate
+trajectory, `T_proto` result, ranking, or reserved-offset result has been
+generated or inspected. The strict validator, isolated engine and detector,
+canonical enumeration, result schema, development-only runner, commit-gated
+opening path, and positive/negative test suite now pass outcome-free checks.
+The suite also covers the `0.1-draft` nonempty-law crash that its zero-law null
+had hidden. The remaining procedural barrier is to regenerate and verify the
+final content-hash seal, record the outcome-free preregistration commit, create
+and separately commit the development-open manifest, and only then execute the
+fixed `0..47` development allocation. Reserved offsets `48..63` are algebraic
+translation copies, not independent confirmation, and have no runner.

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.invalid/specs/icp-minimal-realization-candidate-v0.2.schema.json",
+  "contract_version": "0.2-draft",
+  "title": "Minimal informational realization reference candidate v0.2",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "grammar_id",
+    "candidate_id",
+    "status",
+    "primitive_accounting",
+    "primitives",
+    "laws",
+    "clock",
+    "substrate",
+    "initial_condition",
+    "proto_object_detector",
+    "maps",
+    "randomness",
+    "data_class"
+  ],
+  "properties": {
+    "contract_version": {"const": "0.2-draft"},
+    "grammar_id": {"const": "MIR-BOOLEAN-PRODUCTION-ROW-V0.2"},
+    "candidate_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]*$"},
+    "status": {"enum": ["development", "frozen", "analytically_excluded"]},
+    "primitive_accounting": {
+      "type": "object",
+      "required": [
+        "normalized_n_p",
+        "dynamic_kind_count",
+        "relation_kind_count",
+        "exogenous_kind_count",
+        "candidate_supplied_bits",
+        "seed_nonquiescent_instances",
+        "dynamic_storage_bits_per_layer",
+        "relation_instances",
+        "site_evaluations_per_layer"
+      ],
+      "properties": {
+        "normalized_n_p": {"const": 2},
+        "dynamic_kind_count": {"const": 1},
+        "relation_kind_count": {"const": 1},
+        "exogenous_kind_count": {"const": 0},
+        "candidate_supplied_bits": {"const": 0},
+        "seed_nonquiescent_instances": {"const": 1},
+        "dynamic_storage_bits_per_layer": {"const": 64},
+        "relation_instances": {"const": 64},
+        "site_evaluations_per_layer": {"const": 64}
+      },
+      "additionalProperties": false
+    },
+    "primitives": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "type": "object",
+          "required": ["id", "scope", "alphabet"],
+          "properties": {
+            "id": {"const": "event"},
+            "scope": {"const": "dynamic"},
+            "alphabet": {"const": [0, 1]}
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["id", "scope", "alphabet"],
+          "properties": {
+            "id": {"const": "predecessor"},
+            "scope": {"const": "relation"},
+            "alphabet": {"const": [0, 1]}
+          },
+          "additionalProperties": false
+        }
+      ],
+      "items": false
+    },
+    "laws": {
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "operator",
+          "signature",
+          "governed_degree",
+          "input_ports",
+          "duration_ticks",
+          "write_count"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^L_(00|01|10|11)$"},
+          "operator": {"const": "emit_one_if_signature"},
+          "signature": {"enum": ["00", "01", "10", "11"]},
+          "governed_degree": {"const": "event"},
+          "input_ports": {"const": ["self", "predecessor"]},
+          "duration_ticks": {"const": 1},
+          "write_count": {"const": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "clock": {
+      "type": "object",
+      "required": ["tick_unit", "causal_layers_per_tick", "within_tick_cascade", "max_relation_hops_per_tick"],
+      "properties": {
+        "tick_unit": {"const": "elementary_causal_layer"},
+        "causal_layers_per_tick": {"const": 1},
+        "within_tick_cascade": {"const": false},
+        "max_relation_hops_per_tick": {"const": 1}
+      },
+      "additionalProperties": false
+    },
+    "substrate": {
+      "type": "object",
+      "required": ["ref", "sha256"],
+      "properties": {
+        "ref": {"const": "topology.json"},
+        "sha256": {"type": "string", "pattern": "^(UNSEALED|[0-9a-f]{64})$"}
+      },
+      "additionalProperties": false
+    },
+    "initial_condition": {
+      "type": "object",
+      "required": ["family", "canonical_origin", "active_count", "description_bits", "contains_proto_object"],
+      "properties": {
+        "family": {"const": "single_active_translation"},
+        "canonical_origin": {"const": 0},
+        "active_count": {"const": 1},
+        "description_bits": {"const": 0},
+        "contains_proto_object": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "proto_object_detector": {
+      "type": "object",
+      "required": ["ref", "version", "sha256"],
+      "properties": {
+        "ref": {"const": "proto_object_detector.json"},
+        "version": {"const": "0.2-draft"},
+        "sha256": {"type": "string", "pattern": "^(UNSEALED|[0-9a-f]{64})$"}
+      },
+      "additionalProperties": false
+    },
+    "maps": {
+      "type": "object",
+      "required": ["initialization", "readout", "intervention"],
+      "properties": {
+        "initialization": {"const": "single_active_translation"},
+        "readout": {"const": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-V0.2"},
+        "intervention": {"const": "matched_dyad_relocation"}
+      },
+      "additionalProperties": false
+    },
+    "randomness": {
+      "type": "object",
+      "required": ["kind", "exogenous_channel_count"],
+      "properties": {
+        "kind": {"const": "none"},
+        "exogenous_channel_count": {"const": 0}
+      },
+      "additionalProperties": false
+    },
+    "data_class": {"const": "development"},
+    "exclusion_reason": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {"laws": {"maxItems": 0}},
+        "required": ["laws"]
+      },
+      "then": {
+        "properties": {
+          "candidate_id": {"const": "MIR-P2-L0-NONE"},
+          "status": {"const": "analytically_excluded"}
+        },
+        "required": ["exclusion_reason"]
+      },
+      "else": {
+        "properties": {"status": {"enum": ["development", "frozen"]}},
+        "not": {"required": ["exclusion_reason"]}
+      }
+    },
+    {
+      "if": {
+        "properties": {"status": {"const": "frozen"}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "substrate": {
+            "properties": {"sha256": {"pattern": "^[0-9a-f]{64}$"}}
+          },
+          "proto_object_detector": {
+            "properties": {"sha256": {"pattern": "^[0-9a-f]{64}$"}}
+          }
+        }
+      }
+    }
+  ]
+}

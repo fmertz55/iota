@@ -1,4 +1,4 @@
-.PHONY: finding069-evidence finding070-evidence evidence validate verify paper clean-paper
+.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization verify paper clean-paper
 
 finding069-evidence:
 	python3 src/summarize_sequential_cut.py --through-depth 8 --quiet
@@ -12,7 +12,17 @@ evidence: finding069-evidence finding070-evidence
 validate:
 	python3 scripts/validate_evidence.py
 
-verify: evidence validate
+validate-minimal-realization:
+	python3 scripts/validate_minimal_realization.py \
+		specs/icp_minimal_realization/v0.1-draft/lower_shell_null.json \
+		specs/icp_minimal_realization/v0.2-draft/lower_shell_null.json
+	python3 -m src.minimal_realization.cli audit \
+		--spec-dir specs/icp_minimal_realization/v0.2-draft
+	python3 -m src.minimal_realization.cli verify-seal \
+		--seal experiments/minimal_realization/MIR-REFERENCE-SEARCH-001/outcome_sealed_manifest.json
+	python3 -m unittest discover -s tests/minimal_realization -p 'test_*.py'
+
+verify: evidence validate validate-minimal-realization
 
 paper:
 	python3 scripts/build_paper.py

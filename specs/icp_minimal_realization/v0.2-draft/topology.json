@@ -1,0 +1,51 @@
+{
+  "contract_version": "0.2-draft",
+  "topology_id": "MIR-DIRECTED-CYCLE-64-V0.2",
+  "status": "design_frozen_outcomes_sealed",
+  "loci": {
+    "count": 64,
+    "labels": "integers 0 through 63",
+    "boundary": "periodic"
+  },
+  "relation_schema": {
+    "id": "predecessor",
+    "alphabet": [0, 1],
+    "directed": true,
+    "definition": "predecessor(i) = (i - 1) mod 64",
+    "edge_orientation": "predecessor(i) to i",
+    "instance_count": 64,
+    "candidate_specific_edge_bits": 0,
+    "temporality": "fixed timeless member of candidate topology G, not carried dynamic state"
+  },
+  "group_action": {
+    "id": "cycle_translation",
+    "definition": "tau_k(i) = (i + k) mod 64",
+    "order": 64
+  },
+  "schedule": {
+    "kind": "synchronous_atomic_layer",
+    "read_layer": "t",
+    "write_layer": "t+1",
+    "within_tick_cascade": false,
+    "maximum_relation_hops_per_tick": 1
+  },
+  "initial_condition_family": {
+    "id": "single_active_translation",
+    "canonical_active_locus": 0,
+    "active_count": 1,
+    "all_other_events": 0,
+    "contains_proto_object": false,
+    "candidate_supplied_bits": 0,
+    "accounting_note": "the common one-event seed is reported as N_P_seed=1; canonical origin choice costs no candidate-specific address bits under cycle translation symmetry"
+  },
+  "resource_envelope": {
+    "dynamic_channel_schemas": 1,
+    "relation_channel_schemas": 1,
+    "dynamic_storage_bits_per_layer": 64,
+    "relation_instances": 64,
+    "site_evaluations_per_layer": 64,
+    "causal_radius": 1,
+    "substrate_size": 64
+  },
+  "scope_statement": "candidate ranking is valid only inside this fixed substrate grammar"
+}

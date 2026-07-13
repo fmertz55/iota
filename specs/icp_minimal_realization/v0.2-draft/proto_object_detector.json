@@ -1,0 +1,67 @@
+{
+  "contract_version": "0.2-draft",
+  "detector_version": "0.2-draft",
+  "detector_id": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-V0.2",
+  "status": "design_frozen_outcomes_sealed",
+  "read_only": true,
+  "candidate_independent": true,
+  "state_encoding": "length-64 binary vector indexed modulo 64",
+  "role": {
+    "id": "isolated_active_dyad",
+    "anchor": "left active locus i in the directed forward orientation",
+    "required_pattern": [
+      {"offset": -1, "value": 0},
+      {"offset": 0, "value": 1},
+      {"offset": 1, "value": 1},
+      {"offset": 2, "value": 0}
+    ],
+    "witness_offsets": [0, 1],
+    "minimum_nonquiescent_instances": 2,
+    "diameter_relation_hops": 1,
+    "identity_independence": "the predicate is invariant under every cycle translation"
+  },
+  "formation": {
+    "initial_state_must_fail": true,
+    "time_order": "ascending from 1 through 16",
+    "qualification": "the first full role, succession, attribution, and outward-effect pass defines formation"
+  },
+  "seed_attribution": {
+    "baseline": "matched_all_zero",
+    "requirement": "both active witness loci equal 0 in the baseline at the same layer"
+  },
+  "succession": {
+    "confirmation_lag_ticks": 1,
+    "eligible_successor_anchor_offsets": [0, 1],
+    "predicate": "isolated_active_dyad",
+    "seed_attribution_required": true,
+    "selection_order": "smallest nonnegative forward anchor offset"
+  },
+  "matched_interventions": {
+    "application_layer": "formation layer t",
+    "window_offsets": [0, 1, 2],
+    "natural_precondition": [1, 1, 0],
+    "external_eligibility_guard": {"offset": 3, "value": 0},
+    "role_preserving_sham": [0, 1, 1],
+    "role_breaking_arm": [1, 0, 1],
+    "hamming_distance_from_natural_each": 2,
+    "active_count_in_window_each": 2,
+    "outside_window": "unchanged, including the quiescent offset +3 guard",
+    "law_topology_schedule": "unchanged",
+    "normal_evolution_ticks_after_application": 2
+  },
+  "reachable_future_variable": {
+    "id": "first_forward_external_event_at_t_plus_2",
+    "locus_offset_from_anchor": 3,
+    "observation_layer": "t+2",
+    "alphabet": [0, 1],
+    "pass_rule": "role-preserving sham and role-breaking arm have different exact values"
+  },
+  "candidate_pass_rule": "the earliest formation time with an attributed dyad, an attributed eligible successor dyad, and a passing outward causal endpoint is T_proto",
+  "tie_breaking": {
+    "formation_time": "earliest",
+    "anchor": "smallest forward distance from the translated seed origin",
+    "successor": "smallest eligible forward offset"
+  },
+  "failure_value": "right_censored_gt_16 unless a separate analytic or exact-cycle proof establishes nonproduction",
+  "stronger_later_tier": "carrier_independent_role_recovery"
+}

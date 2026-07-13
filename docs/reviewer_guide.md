@@ -4,7 +4,8 @@ This repository is a live research compendium. The README states the organizing 
 
 ## Read only
 
-1. Start with the [organizing hypothesis](../README.md#iota-rig).
+1. Start with the [organizing hypothesis](../README.md#iota-rig) and the
+   [minimal informational realization contract](ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
 2. Read the [current evidence frontier](../README.md#current-evidence-frontier),
    from foundational GC-001 through bounded causal GC-010.
 3. Inspect the [Finding 070 independent synthesis](../output/findings/finding070/independent_persistence_replication_summary.json)
@@ -31,7 +32,9 @@ This regenerates the evidence-facing files and validates that:
 - strict events and sequential selector chains satisfy their registered causal
   and provenance criteria;
 - generated paper values and tables are current;
-- evidence manifests contain current SHA-256 hashes.
+- evidence manifests contain current SHA-256 hashes; and
+- registered minimal-realization candidates satisfy the machine-checkable
+  primitive, atomic-law, and clock grammar.
 
 The verification does not rerun the underlying simulations or interventions.
 

@@ -18,6 +18,35 @@ question from which the experiments are derived:
 > Can finite local interactions produce constraints on reachable futures that
 > persist even when the local state that realizes them is replaced?
 
+### Minimal realization objective
+
+The program is not searching for physics that differs from current physics. It
+is searching for the smallest closed informational construction whose reachable
+futures and causal roles agree with a declared domain of current physics.
+
+Candidates are ranked by the frozen tuple
+
+```text
+(normalized informational primitives, atomic laws, elementary ticks to proto-object)
+```
+
+Fewer primitives wins first. With equal primitive count, fewer laws wins. Ticks
+break a tie only when both earlier counts are equal. The current pilot reports
+dimensionless elementary causal layers; it makes no Planck-time or other
+physical-time conversion without a separately recovered clock map.
+
+No law may be compound. A law must be self-contained, govern one degree of
+freedom, and contain no `and`, `but`, or `or` clause. Hidden state, helper logic,
+branches, lookup entries, and assumed continuants are expanded into counted
+primitives or laws.
+
+The controlling grammar, proto-object definition, accounting rules, data policy,
+and physical-role criterion are in the
+[ICP Minimal Informational Realization Contract](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
+Its current `0.2-draft` reference program begins at `N_P=2`: one binary event
+channel plus one charged interaction-relation channel. Candidate outcomes are
+sealed while the outcome-free preregistration is being hash-bound.
+
 ### Research-program guardrail
 
 The primitive target is the **latent counterfactual structure** of lawful

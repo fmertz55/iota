@@ -1,0 +1,494 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.invalid/specs/icp-minimal-realization-development-result-v0.2.schema.json",
+  "contract_version": "0.2-draft",
+  "title": "Minimal informational realization bounded development result v0.2",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "search_id",
+    "run_id",
+    "data_class",
+    "endpoint",
+    "formation_horizon_ticks",
+    "last_required_layer",
+    "translation_offsets",
+    "held_out_accessed",
+    "held_out_offsets_evaluated",
+    "open_seal",
+    "parent_outcome_seal",
+    "candidate_manifest",
+    "result_schema",
+    "nonpass_interpretation",
+    "stopping_rule",
+    "evaluated_shells",
+    "first_passing_shell",
+    "stopping_reason",
+    "bounded_winner_candidate_ids",
+    "candidate_results"
+  ],
+  "properties": {
+    "contract_version": {"const": "0.2-draft"},
+    "search_id": {"const": "MIR-REFERENCE-SEARCH-001"},
+    "run_id": {"const": "MIR-REFERENCE-SEARCH-001-DEVELOPMENT"},
+    "data_class": {"const": "development"},
+    "endpoint": {"const": "formation_by_H16"},
+    "formation_horizon_ticks": {"const": 16},
+    "last_required_layer": {"const": 18},
+    "translation_offsets": {
+      "const": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+    },
+    "held_out_accessed": {"const": false},
+    "held_out_offsets_evaluated": {"const": []},
+    "open_seal": {
+      "allOf": [
+        {"$ref": "#/$defs/file_binding"},
+        {"properties": {"path": {"const": "experiments/minimal_realization/MIR-REFERENCE-SEARCH-001/development_open_manifest.json"}}}
+      ]
+    },
+    "parent_outcome_seal": {"$ref": "#/$defs/file_binding"},
+    "candidate_manifest": {"$ref": "#/$defs/file_binding"},
+    "result_schema": {
+      "allOf": [
+        {"$ref": "#/$defs/file_binding"},
+        {"properties": {"path": {"const": "specs/icp_minimal_realization/v0.2-draft/result.schema.json"}}}
+      ]
+    },
+    "nonpass_interpretation": {"const": "right_censored_T_proto_gt_16"},
+    "stopping_rule": {"const": "shell_complete_first_pass_by_H16"},
+    "evaluated_shells": {
+      "enum": [[1], [1, 2], [1, 2, 3], [1, 2, 3, 4]]
+    },
+    "first_passing_shell": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 4
+    },
+    "stopping_reason": {
+      "enum": [
+        "first_shell_with_pass_by_H16_completed",
+        "all_bounded_shells_completed_without_pass_by_H16"
+      ]
+    },
+    "bounded_winner_candidate_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]*$"}
+    },
+    "candidate_results": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {"$ref": "#/$defs/candidate_result"},
+      "allOf": [
+        {
+          "contains": {"properties": {"atomic_n_l": {"const": 0}}, "required": ["atomic_n_l"]},
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {"properties": {"atomic_n_l": {"const": 1}}, "required": ["atomic_n_l"]},
+          "minContains": 4,
+          "maxContains": 4
+        },
+        {
+          "contains": {"properties": {"atomic_n_l": {"const": 2}}, "required": ["atomic_n_l"]},
+          "minContains": 6,
+          "maxContains": 6
+        },
+        {
+          "contains": {"properties": {"atomic_n_l": {"const": 3}}, "required": ["atomic_n_l"]},
+          "minContains": 4,
+          "maxContains": 4
+        },
+        {
+          "contains": {"properties": {"atomic_n_l": {"const": 4}}, "required": ["atomic_n_l"]},
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {"stopping_reason": {"const": "all_bounded_shells_completed_without_pass_by_H16"}},
+        "required": ["stopping_reason"]
+      },
+      "then": {
+        "properties": {
+          "evaluated_shells": {"const": [1, 2, 3, 4]},
+          "first_passing_shell": {"const": null},
+          "bounded_winner_candidate_ids": {"const": []},
+          "candidate_results": {"$ref": "#/$defs/all_shells_evaluated_without_pass"}
+        }
+      },
+      "else": {
+        "properties": {
+          "first_passing_shell": {"type": "integer", "minimum": 1, "maximum": 4},
+          "bounded_winner_candidate_ids": {"minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"first_passing_shell": {"const": 1}},
+        "required": ["first_passing_shell"]
+      },
+      "then": {
+        "properties": {
+          "evaluated_shells": {"const": [1]},
+          "candidate_results": {"$ref": "#/$defs/first_passing_shell_1_allocation"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"first_passing_shell": {"const": 2}},
+        "required": ["first_passing_shell"]
+      },
+      "then": {
+        "properties": {
+          "evaluated_shells": {"const": [1, 2]},
+          "candidate_results": {"$ref": "#/$defs/first_passing_shell_2_allocation"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"first_passing_shell": {"const": 3}},
+        "required": ["first_passing_shell"]
+      },
+      "then": {
+        "properties": {
+          "evaluated_shells": {"const": [1, 2, 3]},
+          "candidate_results": {"$ref": "#/$defs/first_passing_shell_3_allocation"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"first_passing_shell": {"const": 4}},
+        "required": ["first_passing_shell"]
+      },
+      "then": {
+        "properties": {
+          "evaluated_shells": {"const": [1, 2, 3, 4]},
+          "candidate_results": {"$ref": "#/$defs/first_passing_shell_4_allocation"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "file_binding": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "passed_translation": {
+      "type": "object",
+      "required": [
+        "translation_offset",
+        "status",
+        "t_proto",
+        "anchor",
+        "anchor_offset_from_seed",
+        "successor_anchor",
+        "successor_anchor_offset_from_seed",
+        "sham_future",
+        "breaking_future"
+      ],
+      "properties": {
+        "translation_offset": {"type": "integer", "minimum": 0, "maximum": 47},
+        "status": {"const": "passed_by_H16"},
+        "t_proto": {"type": "integer", "minimum": 1, "maximum": 16},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "anchor_offset_from_seed": {"type": "integer", "minimum": 0, "maximum": 63},
+        "successor_anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "successor_anchor_offset_from_seed": {"type": "integer", "minimum": 0, "maximum": 63},
+        "sham_future": {"enum": [0, 1]},
+        "breaking_future": {"enum": [0, 1]}
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {"properties": {"sham_future": {"const": 0}, "breaking_future": {"const": 1}}},
+        {"properties": {"sham_future": {"const": 1}, "breaking_future": {"const": 0}}}
+      ]
+    },
+    "right_censored_translation": {
+      "type": "object",
+      "required": [
+        "translation_offset",
+        "status",
+        "t_proto",
+        "anchor",
+        "anchor_offset_from_seed",
+        "successor_anchor",
+        "successor_anchor_offset_from_seed",
+        "sham_future",
+        "breaking_future"
+      ],
+      "properties": {
+        "translation_offset": {"type": "integer", "minimum": 0, "maximum": 47},
+        "status": {"const": "right_censored_T_proto_gt_16"},
+        "t_proto": {"const": null},
+        "anchor": {"const": null},
+        "anchor_offset_from_seed": {"const": null},
+        "successor_anchor": {"const": null},
+        "successor_anchor_offset_from_seed": {"const": null},
+        "sham_future": {"const": null},
+        "breaking_future": {"const": null}
+      },
+      "additionalProperties": false
+    },
+    "analytic_status": {
+      "properties": {"evaluation_status": {"const": "analytically_excluded"}}
+    },
+    "right_censored_status": {
+      "properties": {"evaluation_status": {"const": "right_censored_T_proto_gt_16"}}
+    },
+    "evaluated_status": {
+      "properties": {
+        "evaluation_status": {
+          "enum": ["passed_by_H16", "right_censored_T_proto_gt_16"]
+        }
+      }
+    },
+    "not_evaluated_status": {
+      "properties": {
+        "evaluation_status": {"const": "not_evaluated_after_first_passing_shell"}
+      }
+    },
+    "all_shells_evaluated_without_pass": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 0}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/analytic_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"enum": [1, 2, 3, 4]}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/right_censored_status"}
+          }
+        ]
+      }
+    },
+    "first_passing_shell_1_allocation": {
+      "type": "array",
+      "contains": {
+        "properties": {
+          "atomic_n_l": {"const": 1},
+          "evaluation_status": {"const": "passed_by_H16"}
+        },
+        "required": ["atomic_n_l", "evaluation_status"]
+      },
+      "minContains": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 0}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/analytic_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 1}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/evaluated_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"enum": [2, 3, 4]}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/not_evaluated_status"}
+          }
+        ]
+      }
+    },
+    "first_passing_shell_2_allocation": {
+      "type": "array",
+      "contains": {
+        "properties": {
+          "atomic_n_l": {"const": 2},
+          "evaluation_status": {"const": "passed_by_H16"}
+        },
+        "required": ["atomic_n_l", "evaluation_status"]
+      },
+      "minContains": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 0}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/analytic_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 1}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/right_censored_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 2}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/evaluated_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"enum": [3, 4]}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/not_evaluated_status"}
+          }
+        ]
+      }
+    },
+    "first_passing_shell_3_allocation": {
+      "type": "array",
+      "contains": {
+        "properties": {
+          "atomic_n_l": {"const": 3},
+          "evaluation_status": {"const": "passed_by_H16"}
+        },
+        "required": ["atomic_n_l", "evaluation_status"]
+      },
+      "minContains": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 0}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/analytic_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"enum": [1, 2]}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/right_censored_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 3}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/evaluated_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 4}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/not_evaluated_status"}
+          }
+        ]
+      }
+    },
+    "first_passing_shell_4_allocation": {
+      "type": "array",
+      "contains": {
+        "properties": {
+          "atomic_n_l": {"const": 4},
+          "evaluation_status": {"const": "passed_by_H16"}
+        },
+        "required": ["atomic_n_l", "evaluation_status"]
+      },
+      "minContains": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 0}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/analytic_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"enum": [1, 2, 3]}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/right_censored_status"}
+          },
+          {
+            "if": {"properties": {"atomic_n_l": {"const": 4}}, "required": ["atomic_n_l"]},
+            "then": {"$ref": "#/$defs/evaluated_status"}
+          }
+        ]
+      }
+    },
+    "candidate_result": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "candidate_sha256",
+        "normalized_n_p",
+        "atomic_n_l",
+        "evaluation_status",
+        "pass_by_H16",
+        "t_proto",
+        "translation_equivariance_exact",
+        "translations_evaluated",
+        "translations"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]*$"},
+        "candidate_sha256": {"$ref": "#/$defs/sha256"},
+        "normalized_n_p": {"const": 2},
+        "atomic_n_l": {"type": "integer", "minimum": 0, "maximum": 4},
+        "evaluation_status": {
+          "enum": [
+            "passed_by_H16",
+            "right_censored_T_proto_gt_16",
+            "analytically_excluded",
+            "not_evaluated_after_first_passing_shell"
+          ]
+        },
+        "pass_by_H16": {"type": ["boolean", "null"]},
+        "t_proto": {"type": ["integer", "null"], "minimum": 1, "maximum": 16},
+        "translation_equivariance_exact": {"type": ["boolean", "null"]},
+        "translations_evaluated": {"enum": [0, 48]},
+        "translations": {"type": "array", "maxItems": 48},
+        "exclusion_reason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "evaluation_status": {"const": "passed_by_H16"},
+            "pass_by_H16": {"const": true},
+            "t_proto": {"type": "integer", "minimum": 1, "maximum": 16},
+            "translation_equivariance_exact": {"const": true},
+            "translations_evaluated": {"const": 48},
+            "translations": {
+              "type": "array",
+              "minItems": 48,
+              "maxItems": 48,
+              "items": {"$ref": "#/$defs/passed_translation"}
+            }
+          },
+          "not": {"required": ["exclusion_reason"]}
+        },
+        {
+          "properties": {
+            "evaluation_status": {"const": "right_censored_T_proto_gt_16"},
+            "pass_by_H16": {"const": false},
+            "t_proto": {"const": null},
+            "translation_equivariance_exact": {"const": true},
+            "translations_evaluated": {"const": 48},
+            "translations": {
+              "type": "array",
+              "minItems": 48,
+              "maxItems": 48,
+              "items": {"$ref": "#/$defs/right_censored_translation"}
+            }
+          },
+          "not": {"required": ["exclusion_reason"]}
+        },
+        {
+          "properties": {
+            "atomic_n_l": {"const": 0},
+            "evaluation_status": {"const": "analytically_excluded"},
+            "pass_by_H16": {"const": false},
+            "t_proto": {"const": null},
+            "translation_equivariance_exact": {"const": null},
+            "translations_evaluated": {"const": 0},
+            "translations": {"const": []}
+          },
+          "required": ["exclusion_reason"]
+        },
+        {
+          "properties": {
+            "atomic_n_l": {"type": "integer", "minimum": 2, "maximum": 4},
+            "evaluation_status": {"const": "not_evaluated_after_first_passing_shell"},
+            "pass_by_H16": {"const": null},
+            "t_proto": {"const": null},
+            "translation_equivariance_exact": {"const": null},
+            "translations_evaluated": {"const": 0},
+            "translations": {"const": []}
+          },
+          "not": {"required": ["exclusion_reason"]}
+        }
+      ]
+    }
+  }
+}

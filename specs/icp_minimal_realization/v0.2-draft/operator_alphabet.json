@@ -1,0 +1,60 @@
+{
+  "contract_version": "0.2-draft",
+  "grammar_id": "MIR-BOOLEAN-PRODUCTION-ROW-V0.2",
+  "status": "design_frozen_outcomes_sealed",
+  "state_alphabet": [0, 1],
+  "label_semantics": {
+    "0": "quiescent absence of a produced event",
+    "1": "produced event"
+  },
+  "input_ports": [
+    {
+      "id": "self",
+      "source": "event at the governed locus in layer t"
+    },
+    {
+      "id": "predecessor",
+      "source": "event at the unique directed predecessor in layer t"
+    }
+  ],
+  "fan_in": 2,
+  "signatures": ["00", "01", "10", "11"],
+  "operator": {
+    "id": "emit_one_if_signature",
+    "arity": 2,
+    "effect": "emit event value 1 at the governed locus in layer t+1 when the ordered input signature matches",
+    "laws_per_registered_signature": 1
+  },
+  "unmatched_signature_semantics": "fresh output remains quiescent at value 0",
+  "label_invariance": "not claimed; complementing 0 and 1 defines a different grammar because quiescence is privileged",
+  "row_arbitration": "signatures are exact and mutually exclusive",
+  "forbidden_inputs": [
+    "coordinate",
+    "time",
+    "degree",
+    "neighborhood_summary",
+    "detector_output",
+    "future_layer",
+    "additional_port"
+  ],
+  "forbidden_operations": [
+    "implicit_carry",
+    "constant_writer",
+    "helper_call",
+    "lookup",
+    "callback",
+    "branch",
+    "within_tick_cascade"
+  ],
+  "candidate_rule_space": {
+    "definition": "power set of the four registered production signatures",
+    "candidate_count": 16,
+    "shell_sizes_by_n_l": {
+      "0": 1,
+      "1": 4,
+      "2": 6,
+      "3": 4,
+      "4": 1
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.invalid/specs/icp-gate0-results.schema.json",
+  "title": "ICP Gate 0 implementation results",
+  "type": "object",
+  "required": ["spec_version", "implementation", "environment", "results"],
+  "properties": {
+    "spec_version": {"const": "0.1-draft"},
+    "implementation": {"type": "string", "minLength": 1},
+    "environment": {"type": "object"},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["ok", "error"]},
+          "i_icp_bits": {"type": "number", "minimum": 0, "maximum": 1},
+          "delta_h_icp_bits": {"type": "number"},
+          "error": {"enum": ["shape_mismatch", "invalid_probability", "not_normalized", "duplicate_label"]}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

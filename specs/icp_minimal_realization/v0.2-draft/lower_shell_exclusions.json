@@ -1,0 +1,28 @@
+{
+  "contract_version": "0.2-draft",
+  "exclusion_set_id": "MIR-LOWER-SHELLS-V0.2",
+  "status": "outcome_free_analytic_record",
+  "scope": "MIR-BOOLEAN-PRODUCTION-ROW-V0.2 reference grammar only",
+  "candidate_outcomes_inspected": false,
+  "exclusions": [
+    {
+      "id": "MIR-EXCLUDE-NP0",
+      "quantified_shell": {"normalized_n_p": 0, "atomic_n_l": "all"},
+      "conclusion": "excluded",
+      "argument": "No binary degree exists to realize a nonquiescent instance, interaction relation, or reachable-future variable."
+    },
+    {
+      "id": "MIR-EXCLUDE-NP1",
+      "quantified_shell": {"normalized_n_p": 1, "atomic_n_l": "all"},
+      "conclusion": "excluded_within_reference_grammar",
+      "argument": "The reference proto-object requires one dynamic event schema plus one separately charged interaction-relation schema. One schema cannot satisfy both typed roles without bundling."
+    },
+    {
+      "id": "MIR-EXCLUDE-NP2-NL0",
+      "quantified_shell": {"normalized_n_p": 2, "atomic_n_l": 0},
+      "conclusion": "excluded",
+      "argument": "Fresh layer outputs are quiescent unless a registered production row emits an event. With zero laws, layer 1 and every later layer are all zero, so no active dyad can form."
+    }
+  ],
+  "nonclaim": "These exclusions do not prove impossibility under an unenumerated alternative primitive, topology, or law grammar."
+}

@@ -1,0 +1,57 @@
+{
+  "detector_version": "0.1-draft",
+  "status": "development",
+  "read_only": true,
+  "candidate_independent": true,
+  "initial_state_must_fail": true,
+  "minimum_nonquiescent_instances": 2,
+  "minimum_persistence_ticks": 1,
+  "formation_time_credit": "first_qualifying_tick_after_later_confirmation",
+  "criteria": [
+    {
+      "id": "localized",
+      "requirement": "The witness is finite within the registered causal cone."
+    },
+    {
+      "id": "connected",
+      "requirement": "The witness is connected under the candidate's charged interaction relation."
+    },
+    {
+      "id": "new",
+      "requirement": "No qualifying witness exists in the initial condition or immediately before formation."
+    },
+    {
+      "id": "role",
+      "requirement": "The witness realizes a canonical identity-independent internal relation."
+    },
+    {
+      "id": "succession",
+      "requirement": "The canonical role remains realized one elementary tick later through a declared successor relation."
+    },
+    {
+      "id": "causal_constraint",
+      "requirement": "Breaking only the internal role changes the exact support or declared probability of role_realized_at_t_plus_1 relative to sham."
+    }
+  ],
+  "reachable_future_variable": {
+    "id": "role_realized_at_t_plus_1",
+    "alphabet": [0, 1],
+    "natural_requirement": 1,
+    "intervention_comparison": "exact_support_or_probability_difference"
+  },
+  "intervention": {
+    "target": "canonical_internal_role",
+    "preserve": [
+      "primitive_state_multiset",
+      "external_candidate_state",
+      "declared_exogenous_input_law"
+    ],
+    "sham": "serialize_and_restore_the_same_internal_role"
+  },
+  "selection": {
+    "time": "earliest_qualifying_tick",
+    "witness_size": "smallest_qualifying_witness",
+    "remaining_tie": "canonical_serialization"
+  },
+  "stronger_later_tier": "carrier_independent_role_recovery"
+}

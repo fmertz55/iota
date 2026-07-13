@@ -1,0 +1,74 @@
+{
+  "contract_version": "0.2-draft",
+  "search_id": "MIR-REFERENCE-SEARCH-001",
+  "status": "outcomes_sealed",
+  "claim_scope": "best candidate producing a confirmed proto-object by H=16 in the fixed MIR-BOOLEAN-PRODUCTION-ROW-V0.2 grammar and resource envelope",
+  "claim_limits": [
+    "not globally minimal across alternative primitive or topology grammars",
+    "not invariant under complementing event and quiescent labels",
+    "conditional on the fixed one-event seed and 64-locus resource envelope",
+    "H=16 nonpasses are right-censored and do not exclude later formation",
+    "the outward endpoint is an arrangement-sensitive positional effect, not evidence of synergistic or irreducible multi-bit causation",
+    "not evidence of statistical generalization across initial conditions or topologies",
+    "not current-physics role recovery or carrier-independent persistence",
+    "reserved translation offsets 48..63 are algebraically implied by equivariance and cannot provide independent confirmation"
+  ],
+  "detector_development_data_already_inspected": {
+    "fixture": "copy_predecessor_outward_effect",
+    "production_rows": ["01", "11"],
+    "scope": "analytic two-layer matched-intervention fixture only",
+    "excluded_from_confirmation": true,
+    "full_seeded_search_trajectory_inspected": false,
+    "t_proto_result_inspected": false
+  },
+  "objective_order": ["normalized_n_p", "atomic_n_l", "t_proto"],
+  "fixed_normalized_n_p": 2,
+  "completed_lower_classes_ref": "lower_shell_exclusions.json",
+  "next_shell": {
+    "normalized_n_p": 2,
+    "atomic_n_l": 1,
+    "data_class": "development"
+  },
+  "frozen_design_choices": {
+    "atomic_operator_alphabet": "operator_alphabet.json",
+    "allowed_input_fan_in": 2,
+    "charged_topology": "topology.json",
+    "registered_causal_cone": "causal_cone.json",
+    "development_budget": "all 16 deterministic production-row subsets, shell-complete stopping",
+    "held_out_allocation": "partitions.json",
+    "stochastic_speed_rule": "not applicable; randomness is forbidden"
+  },
+  "enumeration": {
+    "signature_order": ["00", "01", "10", "11"],
+    "candidate_order": "increasing law count, then lexicographic ordered signature tuple",
+    "candidate_count_maximum": 16,
+    "shell_sizes_by_n_l": {"0": 1, "1": 4, "2": 6, "3": 4, "4": 1}
+  },
+  "development_run": {
+    "translation_offsets": {"first": 0, "last": 47, "count": 48},
+    "formation_horizon_ticks": 16,
+    "last_required_layer": 18,
+    "seeded_base_site_evaluation_budget_maximum": 884736,
+    "matched_baseline_base_site_evaluation_budget_maximum": 884736,
+    "intervention_evaluation_budget_note": "matched sham and breaking two-layer evaluations are additional to the seeded and baseline base-trajectory budgets",
+    "outcome_arithmetic": "exact deterministic",
+    "eligibility_endpoint": "formation_by_H16",
+    "nonpass_record": "right_censored_T_proto_gt_16",
+    "development_open_manifest_path": "experiments/minimal_realization/MIR-REFERENCE-SEARCH-001/development_open_manifest.json",
+    "result_schema": "result.schema.json",
+    "result_path": "output/minimal_realization/MIR-REFERENCE-SEARCH-001/development_results.json",
+    "translation_pass_aggregation": "all 48 development translations must have exactly translated seeded trajectories, translation-invariant matched baselines, and identical pass status and T_proto with translated anchors; any mismatch is an implementation failure",
+    "stopping_rule": "for the bounded endpoint only, evaluate every candidate in the first shell containing a pass by H=16, then stop; if no bounded shell passes, stop after N_L=4 with all 15 evaluated N_L=1..4 candidates right-censored and N_L=0 retained as analytically excluded"
+  },
+  "held_out_run": {
+    "translation_offsets": {"first": 48, "last": 63, "count": 16},
+    "status": "sealed",
+    "runner_command_available": false
+  },
+  "remaining_open_seal_requirements": [
+    "record_outcome_free_preregistration_commit"
+  ],
+  "opening_rule": "this immutable search plan remains outcomes_sealed; only a separate development_open manifest created after the outcome-free preregistration commit and itself committed may authorize the fixed development run",
+  "existing_iota_data_class": "development_only",
+  "finding_080_status": "archived_paused"
+}

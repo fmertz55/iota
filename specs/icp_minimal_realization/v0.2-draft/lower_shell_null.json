@@ -1,0 +1,52 @@
+{
+  "contract_version": "0.2-draft",
+  "grammar_id": "MIR-BOOLEAN-PRODUCTION-ROW-V0.2",
+  "candidate_id": "MIR-P2-L0-NONE",
+  "status": "analytically_excluded",
+  "primitive_accounting": {
+    "normalized_n_p": 2,
+    "dynamic_kind_count": 1,
+    "relation_kind_count": 1,
+    "exogenous_kind_count": 0,
+    "candidate_supplied_bits": 0,
+    "seed_nonquiescent_instances": 1,
+    "dynamic_storage_bits_per_layer": 64,
+    "relation_instances": 64,
+    "site_evaluations_per_layer": 64
+  },
+  "primitives": [
+    {"id": "event", "scope": "dynamic", "alphabet": [0, 1]},
+    {"id": "predecessor", "scope": "relation", "alphabet": [0, 1]}
+  ],
+  "laws": [],
+  "clock": {
+    "tick_unit": "elementary_causal_layer",
+    "causal_layers_per_tick": 1,
+    "within_tick_cascade": false,
+    "max_relation_hops_per_tick": 1
+  },
+  "substrate": {
+    "ref": "topology.json",
+    "sha256": "UNSEALED"
+  },
+  "initial_condition": {
+    "family": "single_active_translation",
+    "canonical_origin": 0,
+    "active_count": 1,
+    "description_bits": 0,
+    "contains_proto_object": false
+  },
+  "proto_object_detector": {
+    "ref": "proto_object_detector.json",
+    "version": "0.2-draft",
+    "sha256": "UNSEALED"
+  },
+  "maps": {
+    "initialization": "single_active_translation",
+    "readout": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-V0.2",
+    "intervention": "matched_dyad_relocation"
+  },
+  "randomness": {"kind": "none", "exogenous_channel_count": 0},
+  "data_class": "development",
+  "exclusion_reason": "No registered production row can emit a nonquiescent event after layer zero."
+}

@@ -1,0 +1,36 @@
+{
+  "contract_version": "0.1-draft",
+  "search_id": "MIR-SEARCH-001",
+  "status": "grammar_development_no_outcomes",
+  "objective_order": ["normalized_n_p", "atomic_n_l", "t_proto"],
+  "completed_lower_shells": [
+    {
+      "normalized_n_p": 0,
+      "atomic_n_l": 0,
+      "status": "analytically_excluded",
+      "reason": "No informational distinction exists."
+    },
+    {
+      "normalized_n_p": 1,
+      "atomic_n_l": 0,
+      "status": "analytically_excluded",
+      "manifest": "lower_shell_null.json"
+    }
+  ],
+  "next_shell": {
+    "normalized_n_p": 1,
+    "atomic_n_l": 1,
+    "data_class": "development"
+  },
+  "ranked_outcome_blockers": [
+    "freeze_atomic_operator_alphabet",
+    "freeze_allowed_input_fan_in",
+    "freeze_charged_topology",
+    "freeze_registered_causal_cone",
+    "freeze_development_budget",
+    "reserve_held_out_allocation",
+    "freeze_stochastic_speed_reducer_if_randomness_is_admitted"
+  ],
+  "existing_iota_data_class": "development_only",
+  "finding_080_status": "archived_paused"
+}

@@ -1,0 +1,18 @@
+{
+  "contract_version": "0.2-draft",
+  "partition_id": "MIR-C64-TRANSLATION-PARTITION-V0.2",
+  "status": "design_frozen_outcomes_sealed",
+  "analysis_unit": "translation of the single-active initial condition on the fixed directed cycle",
+  "development": {
+    "translation_offsets": {"first": 0, "last": 47, "count": 48},
+    "access": "allowed only after the development run seal passes"
+  },
+  "held_out": {
+    "translation_offsets": {"first": 48, "last": 63, "count": 16},
+    "access": "forbidden in v0.2-draft",
+    "release_condition": "independent implementation, frozen candidate, frozen hashes, and a new confirmatory protocol"
+  },
+  "expected_invariance": "every translation must give the exactly translated trajectory and identical detector result",
+  "interpretation_limit": "the reserved offsets are algebraically implied by exact cycle-translation equivariance; the split is implementation bookkeeping only and cannot provide confirmation or statistical generalization",
+  "future_generality_requirement": "define a population of initial conditions or topologies plus a worst-case or pass-rate estimand before making a generalization claim"
+}

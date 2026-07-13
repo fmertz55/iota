@@ -1,0 +1,107 @@
+{
+  "contract_version": "0.2-draft",
+  "detector_id": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-V0.2",
+  "status": "detector_development_fixtures_no_ranked_search",
+  "data_class": "development",
+  "chronology_note": "the copy-predecessor two-layer intervention response was derived after detector design; it is inspected development data and may not support confirmation",
+  "role_cases": [
+    {
+      "id": "single_event_is_not_a_role",
+      "active_offsets": [0],
+      "baseline_active_offsets": [],
+      "anchor": 0,
+      "expected": false
+    },
+    {
+      "id": "isolated_attributed_dyad",
+      "active_offsets": [0, 1],
+      "baseline_active_offsets": [],
+      "anchor": 0,
+      "expected": true
+    },
+    {
+      "id": "left_boundary_not_quiescent",
+      "active_offsets": [-1, 0, 1],
+      "baseline_active_offsets": [],
+      "anchor": 0,
+      "expected": false
+    },
+    {
+      "id": "right_boundary_not_quiescent",
+      "active_offsets": [0, 1, 2],
+      "baseline_active_offsets": [],
+      "anchor": 0,
+      "expected": false
+    },
+    {
+      "id": "background_unattributed_dyad",
+      "active_offsets": [0, 1],
+      "baseline_active_offsets": [0],
+      "anchor": 0,
+      "expected": false
+    }
+  ],
+  "succession_cases": [
+    {
+      "id": "same_anchor_successor",
+      "formation_anchor": 0,
+      "eligible_next_anchors": [0],
+      "expected_successor_anchor": 0
+    },
+    {
+      "id": "one_hop_successor",
+      "formation_anchor": 0,
+      "eligible_next_anchors": [1],
+      "expected_successor_anchor": 1
+    },
+    {
+      "id": "no_eligible_successor",
+      "formation_anchor": 0,
+      "eligible_next_anchors": [2],
+      "expected_successor_anchor": null
+    }
+  ],
+  "intervention_cases": [
+    {
+      "id": "matched_arm_invariants",
+      "natural_window": [1, 1, 0],
+      "external_guard_offset_3": 0,
+      "role_preserving_sham": [0, 1, 1],
+      "role_breaking_arm": [1, 0, 1],
+      "expected_hamming_distance_each": 2,
+      "expected_active_count_each": 2
+    },
+    {
+      "id": "nonquiescent_external_guard_is_ineligible",
+      "natural_active_offsets": [0, 1, 3],
+      "expected_eligible": false
+    },
+    {
+      "id": "outward_endpoint_differs",
+      "sham_external_future": 1,
+      "breaking_external_future": 0,
+      "expected": true
+    },
+    {
+      "id": "outward_endpoint_equal",
+      "sham_external_future": 1,
+      "breaking_external_future": 1,
+      "expected": false
+    },
+    {
+      "id": "copy_predecessor_outward_effect",
+      "production_rows": ["01", "11"],
+      "natural_active_offsets": [0, 1],
+      "expected_sham_external_future": 1,
+      "expected_breaking_external_future": 0,
+      "expected": true
+    }
+  ],
+  "selection_cases": [
+    {
+      "id": "earliest_time_then_forward_anchor",
+      "qualifying_time_anchor_pairs": [[3, 4], [2, 7], [2, 5]],
+      "expected": [2, 5]
+    }
+  ]
+}

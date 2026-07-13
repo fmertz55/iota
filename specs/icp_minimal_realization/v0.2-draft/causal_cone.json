@@ -1,0 +1,26 @@
+{
+  "contract_version": "0.2-draft",
+  "cone_id": "MIR-FORWARD-CONE-H16-LAG2-V0.2",
+  "status": "design_frozen_outcomes_sealed",
+  "formation_horizon_ticks": 16,
+  "persistence_confirmation_lag_ticks": 1,
+  "causal_endpoint_lag_ticks": 2,
+  "required_layers": {
+    "first": 0,
+    "last": 18,
+    "count": 19
+  },
+  "seed_support": [0],
+  "forward_cone_definition": "locus j is in the layer-t cone when j = d mod 64 for an integer d with 0 <= d <= t",
+  "no_wrap_condition": "the maximum forward distance 18 is less than the 64-locus cycle length",
+  "baseline": {
+    "id": "matched_all_zero",
+    "initial_event_count": 0,
+    "law_and_topology": "identical to the seeded trajectory"
+  },
+  "attribution_rule": "every active witness and successor-witness locus must be 1 in the seeded trajectory and 0 in the matched all-zero trajectory",
+  "formation_times_tested": {
+    "minimum": 1,
+    "maximum": 16
+  }
+}

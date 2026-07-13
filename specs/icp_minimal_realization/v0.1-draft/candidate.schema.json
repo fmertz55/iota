@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.invalid/specs/icp-minimal-realization-candidate.schema.json",
+  "title": "ICP minimal informational realization candidate",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "candidate_id",
+    "status",
+    "primitive_accounting",
+    "primitives",
+    "laws",
+    "clock",
+    "substrate",
+    "initial_condition",
+    "proto_object_detector",
+    "maps",
+    "randomness",
+    "data_class"
+  ],
+  "properties": {
+    "contract_version": {"const": "0.1-draft"},
+    "candidate_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]*$"},
+    "status": {"enum": ["development", "frozen", "analytically_excluded"]},
+    "primitive_accounting": {
+      "type": "object",
+      "required": [
+        "normalized_n_p",
+        "kind_count",
+        "seed_nonquiescent_instances",
+        "relation_kind_count",
+        "candidate_supplied_bits"
+      ],
+      "properties": {
+        "normalized_n_p": {"type": "integer", "minimum": 0},
+        "kind_count": {"type": "integer", "minimum": 0},
+        "seed_nonquiescent_instances": {"type": "integer", "minimum": 0},
+        "relation_kind_count": {"type": "integer", "minimum": 0},
+        "candidate_supplied_bits": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "primitives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "scope", "alphabet", "description"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "scope": {"enum": ["dynamic", "relation", "exogenous"]},
+          "alphabet": {
+            "type": "array",
+            "prefixItems": [{"const": 0}, {"const": 1}],
+            "items": false,
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "description": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "laws": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "statement",
+          "governed_degree",
+          "local_input_signature",
+          "next_state_effect",
+          "duration_ticks",
+          "branch_count",
+          "write_count",
+          "helper_references",
+          "lookup_entries",
+          "uses_continuant",
+          "atomicity_attestation"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^L[1-9][0-9]*$"},
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!.*\\b(?:and|but|or)\\b).+$"
+          },
+          "governed_degree": {"type": "string"},
+          "local_input_signature": {"type": "string", "minLength": 1},
+          "next_state_effect": {"type": "string", "minLength": 1},
+          "duration_ticks": {"const": 1},
+          "branch_count": {"const": 0},
+          "write_count": {"const": 1},
+          "helper_references": {"type": "array", "maxItems": 0},
+          "lookup_entries": {"const": 0},
+          "uses_continuant": {"const": false},
+          "atomicity_attestation": {"const": true}
+        },
+        "additionalProperties": false
+      }
+    },
+    "clock": {
+      "type": "object",
+      "required": [
+        "tick_unit",
+        "causal_layers_per_tick",
+        "within_tick_cascade",
+        "max_relation_hops_per_tick"
+      ],
+      "properties": {
+        "tick_unit": {"const": "planck_time_provisional"},
+        "causal_layers_per_tick": {"const": 1},
+        "within_tick_cascade": {"const": false},
+        "max_relation_hops_per_tick": {"const": 1}
+      },
+      "additionalProperties": false
+    },
+    "substrate": {
+      "type": "object",
+      "required": ["topology", "boundary", "scheduler"],
+      "properties": {
+        "topology": {"type": "string", "minLength": 1},
+        "boundary": {"type": "string", "minLength": 1},
+        "scheduler": {"const": "synchronous_atomic_layer"}
+      },
+      "additionalProperties": false
+    },
+    "initial_condition": {
+      "type": "object",
+      "required": ["description", "contains_proto_object", "description_bits"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "contains_proto_object": {"const": false},
+        "description_bits": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "proto_object_detector": {
+      "type": "object",
+      "required": ["version", "read_only", "minimum_persistence_ticks"],
+      "properties": {
+        "version": {"const": "0.1-draft"},
+        "read_only": {"const": true},
+        "minimum_persistence_ticks": {"const": 1}
+      },
+      "additionalProperties": false
+    },
+    "maps": {
+      "type": "object",
+      "required": ["initialization", "readout", "intervention"],
+      "properties": {
+        "initialization": {"type": "string", "minLength": 1},
+        "readout": {"type": "string", "minLength": 1},
+        "intervention": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "randomness": {
+      "type": "object",
+      "required": ["kind", "declared_law"],
+      "properties": {
+        "kind": {"enum": ["none", "finite_exogenous"]},
+        "declared_law": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "data_class": {"enum": ["development", "held_out"]},
+    "exclusion_reason": {"type": "string"}
+  },
+  "additionalProperties": false
+}
