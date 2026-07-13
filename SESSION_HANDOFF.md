@@ -4683,3 +4683,76 @@ test, or directional evidence was inspected. Finding 079 stopped before outcome
 measurement. Because the preregistered minimum was not met, the prospective
 state-conditioned repair-affordance hypothesis remains untested rather than
 supported or refuted. The dependent recruitment-history route does not open.
+
+## Finding 080 Preregistration — Common-Donor Failure Anatomy
+
+Finding 080 is a factual, outcome-free decomposition of the Finding 079 support
+failure. It does not reopen Finding 079, change the minimum cohort, or inspect a
+branch response. The audit begins from the 20 frozen one-per-seed precursor
+channels in `factorial_channel_manifest.csv`, while the 25 eligible factual
+events in `factorial_channel_cases.csv` are available only to test whether the
+one-per-seed precursor selector discarded a feasible alternative event.
+
+For every frozen precursor channel, enumerate the complete existing intervention
+pool within the declared cube26 neighborhood:
+
+- every active donor not equal to the precursor target;
+- every depleted cube26 receiver;
+- the exact post-swap radial signature and rooted-role signature;
+- whether the donor belongs to the protected precursor/original/successor set;
+- every preserving and breaking receiver associated with each donor;
+- every shared-donor preserving/breaking triplet, rather than only the first
+  triplet chosen by the Finding 079 selector.
+
+The channel receives the first applicable structural failure class:
+
+1. `no_exchange_pool`: no active-donor/depleted-receiver exchange exists;
+2. `role_only_changes_radial`: a receiver preserves rooted role only by changing
+   radial occupancy, with no radial-and-role-preserving receiver;
+3. `no_radial_match`: exchanges exist but none preserve frozen radial occupancy;
+4. `no_role_preserving_receiver`: radial matches exist but none preserve rooted
+   role;
+5. `no_role_breaking_receiver`: role-preserving receivers exist but no breaking
+   receiver exists under the radial constraint;
+6. `no_shared_donor`: preserving and breaking receivers exist, but never for the
+   same donor;
+7. `protected_only`: shared-donor triplets exist only for protected donors;
+8. `valid_common_donor`: at least one unprotected shared-donor triplet exists.
+
+For every `valid_common_donor` triplet, compute the exact Finding 078 natural,
+topology-only, marks-only, and joint pre-gate instruments for both receivers.
+No simulation step or stochastic gate is executed. A triplet is
+`repair_active` when at least one receiver has a nonzero repair-affordance
+factorial interaction. The audit records whether:
+
+- the Finding 079 frozen triplet was repair-active;
+- another valid triplet in the same frozen channel was repair-active when the
+  frozen triplet was not (`donor_selector_miss`);
+- another eligible precursor event in the same initialization seed contained a
+  repair-active triplet when the frozen precursor channel did not
+  (`precursor_selector_miss`);
+- every structurally valid triplet had zero repair interaction
+  (`dynamically_inert_valid_topology`).
+
+All enumerations must be payload-free, ledger-exact, conserved, RNG-neutral,
+repeat-exact, and independent of Finding 075 or Finding 079 susceptibility
+outcomes. The four seed-level common-donor failures recorded by Finding 079
+(`554`, `585`, `665`, `688`) may not be reclassified by relaxing the frozen
+definition; only exhaustive enumeration under that definition or an alternate
+already-eligible precursor event may change the anatomy.
+
+The next route is frozen as follows:
+
+- `selector_limited` if at least three failed frozen precursor channels have a
+  repair-active alternative triplet or alternate eligible precursor event under
+  the existing definition;
+- `intrinsically_rare` if at least three of the four Finding 079 seed-level
+  failures contain no unprotected valid common-donor triplet in any eligible
+  precursor event;
+- `interaction_limited` if at least three structurally valid frozen channels
+  have only zero repair-affordance interactions;
+- `mixed` otherwise.
+
+Finding 081 may perform structure-only intervention redesign appropriate to the
+observed class. No causal cohort acquisition or branch outcome is permitted by
+Finding 080 itself.
