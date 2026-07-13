@@ -4719,11 +4719,17 @@ The channel receives the first applicable structural failure class:
 7. `protected_only`: shared-donor triplets exist only for protected donors;
 8. `valid_common_donor`: at least one unprotected shared-donor triplet exists.
 
-For every `valid_common_donor` triplet, compute the exact Finding 078 natural,
-topology-only, marks-only, and joint pre-gate instruments for both receivers.
-No simulation step or stochastic gate is executed. A triplet is
-`repair_active` when at least one receiver has a nonzero repair-affordance
-factorial interaction. The audit records whether:
+All valid common-donor triplets are enumerated structurally. Repair-interaction
+evaluation then follows a frozen sequential rule: compute the exact Finding 078
+natural, topology-only, marks-only, and joint pre-gate instruments for both
+receivers of the Finding 079 selected triplet first. If that triplet is
+repair-active, no alternative interaction is needed. If it is zero, evaluate
+remaining valid triplets in the same frozen selector order until the first
+repair-active alternative is found or the list is exhausted. This classifies a
+selector miss without recomputing irrelevant alternatives. No simulation step
+or stochastic gate is executed. A triplet is `repair_active` when at least one
+receiver has a nonzero repair-affordance factorial interaction. The audit records
+whether:
 
 - the Finding 079 frozen triplet was repair-active;
 - another valid triplet in the same frozen channel was repair-active when the
@@ -4756,3 +4762,21 @@ The next route is frozen as follows:
 Finding 081 may perform structure-only intervention redesign appropriate to the
 observed class. No causal cohort acquisition or branch outcome is permitted by
 Finding 080 itself.
+
+### Finding 080 New-Thread Start Point
+
+Finding 080 is preregistered but no anatomy code, classification result, repair
+interaction, or branch outcome has been produced. The next implementation must:
+
+1. reconstruct the 20 frozen channels in
+   `output/findings/finding079/factorial_channel_manifest.csv`;
+2. enumerate the complete structural donor/receiver/triplet pool under the
+   frozen Finding 080 taxonomy;
+3. use the 25 eligible events in `factorial_channel_cases.csv` only for the
+   declared alternate-precursor selector-miss test;
+4. compute repair interactions sequentially exactly as preregistered;
+5. classify the route as `selector_limited`, `intrinsically_rare`,
+   `interaction_limited`, or `mixed` before designing Finding 081.
+
+Do not rerun Finding 079 larger, create a branch manifest, or inspect any causal
+outcome from this starting point.
