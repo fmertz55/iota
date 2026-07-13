@@ -107,6 +107,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--finding-label", default="074A")
+    parser.add_argument("--id-prefix", default="f074")
     return parser.parse_args()
 
 
@@ -144,9 +145,9 @@ def config_for_seed(canonical: dict[str, Any], seed: int) -> dict[str, Any]:
     return cfg
 
 
-def candidate_id(event: dict[str, str]) -> str:
+def candidate_id(event: dict[str, str], prefix: str = "f074") -> str:
     return (
-        f"f074-seed{int(event['init_seed']):03d}-"
+        f"{prefix}-seed{int(event['init_seed']):03d}-"
         f"sample{int(event['sample_index']):02d}-"
         f"split{int(event['start_offset']):03d}-"
         f"rebridge{int(event['rebridge_offset']):03d}"
@@ -258,7 +259,7 @@ def selector_fields(prefix: str, row: dict[str, Any] | None) -> dict[str, Any]:
 
 
 def audit_event(
-    event: dict[str, str], checkpoint: World, cfg: dict[str, Any]
+    event: dict[str, str], checkpoint: World, cfg: dict[str, Any], id_prefix: str = "f074"
 ) -> dict[str, Any]:
     split_offset = int(event["start_offset"])
     rebridge_offset = int(event["rebridge_offset"])
@@ -398,7 +399,7 @@ def audit_event(
     failures.extend(name for name, passed in checks.items() if not passed)
     transplant_payload = {} if precursor is None else json.loads(precursor[4])
     row: dict[str, Any] = {
-        "candidate_id": candidate_id(event),
+        "candidate_id": candidate_id(event, id_prefix),
         "selected_channel": 0,
         "channel_index": "",
         "channel_id": "",
@@ -446,8 +447,10 @@ def audit_event(
     return row
 
 
-def run_seed_job(job: tuple[str, int, list[dict[str, str]]]) -> list[dict[str, Any]]:
-    canonical_path, seed, events = job
+def run_seed_job(
+    job: tuple[str, int, list[dict[str, str]], str]
+) -> list[dict[str, Any]]:
+    canonical_path, seed, events, id_prefix = job
     canonical = load_config(canonical_path)
     cfg = config_for_seed(canonical, seed)
     checkpoint = run_to_checkpoint(
@@ -455,10 +458,10 @@ def run_seed_job(job: tuple[str, int, list[dict[str, str]]]) -> list[dict[str, A
     )
     rows: list[dict[str, Any]] = []
     for event in events:
-        row = audit_event(event, checkpoint, cfg)
+        row = audit_event(event, checkpoint, cfg, id_prefix)
         rows.append(row)
         print(
-            f"f074 factual seed={seed} sample={event['sample_index']} "
+            f"{id_prefix} factual seed={seed} sample={event['sample_index']} "
             f"split={event['start_offset']} eligible={row['eligible_channel']} "
             f"failures={row['eligibility_failures']}",
             flush=True,
@@ -487,6 +490,7 @@ def main() -> None:
                     int(row["rebridge_offset"]),
                 ),
             ),
+            str(args.id_prefix),
         )
         for seed, events in sorted(grouped.items())
     ]
@@ -515,7 +519,7 @@ def main() -> None:
     for index, row in enumerate(selected, start=1):
         row["selected_channel"] = 1
         row["channel_index"] = index
-        row["channel_id"] = f"f074-channel-{index:03d}"
+        row["channel_id"] = f"{args.id_prefix}-channel-{index:03d}"
     rows.sort(
         key=lambda row: (
             int(row["init_seed"]),
