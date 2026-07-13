@@ -4626,3 +4626,27 @@ The 22 selected initialization seeds are `554, 555, 566, 574, 579, 583, 585,
 This is factual source support only. The precursor, common-donor, nonzero
 repair-interaction, and independent-channel gates remain unevaluated, and no
 Finding 079 branch assignment or susceptibility outcome exists.
+
+## Finding 079B Frozen Precursor Screen — Support at the Boundary
+
+The outcome-sealed precursor screen evaluated all 30 strict factual events from
+22 independent seeds. Twenty-five events were eligible, and the frozen
+one-per-initialization selector retained exactly 20 independent precursor
+channels.
+
+```text
+strict events:                      30
+strict independent seeds:           22
+eligible precursor events:          25
+independent precursor channels:     20
+required final factorial channels:  20
+payload/ledger failures:              0
+```
+
+Five strict events failed precursor eligibility; two of those also failed the
+reconstructed singleton-bridge conditions. The cohort now has no remaining
+support cushion. Every one of the 20 independent precursor seeds must retain a
+common-donor pair and a nonzero selected repair-affordance interaction for
+Finding 079 branches to open. No common-donor result, repair-interaction result,
+branch assignment, or susceptibility outcome existed when this screen was
+frozen.
