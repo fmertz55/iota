@@ -1,12 +1,27 @@
 # IOTA Session Handoff
 
-Date: 2026-07-09
+Date: 2026-07-13
+
+## Current Continuation Status
+
+The authoritative continuation plan is now
+[Scientific Reassessment and Authoritative Path Forward](#scientific-reassessment-and-authoritative-path-forward---2026-07-13)
+at the end of this document. It supersedes every earlier `Next Hypothesis`,
+`Acceptance Gate`, `Suggested New Thread Prompt`, and new-thread start point as
+an instruction for new work. Those sections remain as the chronological record
+of the program.
+
+Finding 080 remains preregistered but is paused. Do not implement it, inspect a
+new outcome outside the preregistered Formal-gate validation, or begin another
+simulator experiment until the authoritative path permits it.
 
 ## Local Checkout State
 
-This MacBook checkout is intentionally sparse to save disk.
+This MacBook checkout is currently a full checkout; `git sparse-checkout list`
+reports that the worktree is not sparse. The following entries record the prior
+disk-saving layout and the commands available if sparse checkout is restored.
 
-Current sparse checkout includes:
+Prior sparse checkout included:
 
 ```text
 src
@@ -39,18 +54,19 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
-fbc7fc0 Finding 046: component-bridge partial morphology test
-d7f07f0 Finding 045: residual geometry audit
-9132bd2 Finding 044: seed-robust fixed-mean contrast
-7624f30 Findings 042-043: fixed-mean residual recruitment
-5979f42 Finding 041: event-gated candidate bias
-360dec6 Created SESSION_HANDOFF.md
-18a8351 Findings 039/040: lineage-conditioned morphology and secondary-bias test
-bd6f71d Finding 038: vector-coupled angular momentum
-fa7872d Finding 037: four-phase lineage persistence
+6b2b560 Clarify Finding 080 anatomy execution
+c277157 Preregister Finding 080 donor failure anatomy
+1de786b Register Findings 078 and 079 support stop
+5493f9b Implement Finding 079 common-donor freeze
+438813b Freeze Finding 079 precursor screen
+87b0ef2 Parameterize factual channel identifiers
+a40b746 Freeze Finding 079 factual acquisition
+07272d1 Implement Finding 079 source acquisition
+e9b8c87 Preregister Finding 079 independent factorial test
+2b4efc8 Freeze Finding 078 factorial feasibility
 ```
 
-## Current Scientific Ladder
+## Historical Scientific Ladder Through Finding 047
 
 | Version / Finding | Result |
 |---|---|
@@ -69,7 +85,7 @@ fa7872d Finding 037: four-phase lineage persistence
 | Finding 046 | component-bridge bias improves interface divergence but not robust component morphology |
 | Finding 047 | first component signal is articulation-source exhaustion |
 
-## Core Interpretation
+## Historical Core Interpretation Through Finding 047
 
 Current paper-safe claim:
 
@@ -615,7 +631,7 @@ The issue is not support in general. The issue is that blanket articulation/sour
 stabilization removes the event class needed for component-level morphology.
 ```
 
-## Next Hypothesis
+## Historical Next Hypothesis (Superseded)
 
 Do not continue secondary candidate ordering bias.
 
@@ -661,7 +677,7 @@ removes the articulation-source transient instead of stabilizing it into persist
 component morphology.
 ```
 
-## Acceptance Gate
+## Historical Acceptance Gate (Superseded)
 
 A successful next finding should show:
 
@@ -699,7 +715,7 @@ v0.3.1 angular-memory control
 signed/no-memory control if needed
 ```
 
-## Suggested New Thread Prompt
+## Historical New Thread Prompt (Superseded)
 
 ```text
 Read SESSION_HANDOFF.md and experiments/FINDINGS.md Findings 038-048.
@@ -4763,7 +4779,7 @@ Finding 081 may perform structure-only intervention redesign appropriate to the
 observed class. No causal cohort acquisition or branch outcome is permitted by
 Finding 080 itself.
 
-### Finding 080 New-Thread Start Point
+### Historical Finding 080 New-Thread Start Point (Paused)
 
 Finding 080 is preregistered but no anatomy code, classification result, repair
 interaction, or branch outcome has been produced. The next implementation must:
@@ -4780,3 +4796,297 @@ interaction, or branch outcome has been produced. The next implementation must:
 
 Do not rerun Finding 079 larger, create a branch manifest, or inspect any causal
 outcome from this starting point.
+
+## Scientific Reassessment and Authoritative Path Forward - 2026-07-13
+
+This section is the controlling continuation instruction. It supersedes every
+earlier `Next Hypothesis`, `Acceptance Gate`, `Suggested New Thread Prompt`, and
+Finding 080 new-thread start point as an instruction for new work. Earlier
+sections remain unchanged as historical preregistrations and results. Finding
+080 remains preregistered but is paused until the Formal gate below passes.
+
+### Decision
+
+Continue the research program as an adversarial, falsifiable test of the
+Information Constraint Principle (ICP), not as a program committed to proving
+ICP or deriving pre-quantum physics. The exact simulator and intervention
+pipeline may support a useful methods contribution even if the broad principle
+fails. New claims must therefore be earned in the order Formal, Artifact,
+Generality.
+
+Do not begin an outcome-generating simulator experiment outside the
+preregistered Formal-gate validation before the Formal gate passes. The Formal
+specification, toy suite, estimator, and pass/fail rule must be frozen before
+that held-out validation is generated or inspected. Do not make a cross-system
+or physical claim before all three gates pass. Mass, energy, force, matter,
+quantum, and pre-physical interpretations remain closed downstream topics unless
+a separate mathematical bridge produces distinctive quantitative predictions.
+
+### Assessment Basis
+
+The reassessment combined a code, configuration, detector, manuscript, and
+stored-artifact audit with a current primary-literature review. `make verify`
+passes 17 registered claims and 22 definitions, which supports artifact
+integrity. It does not rerun the underlying simulations or constitute an
+independent replication.
+
+The strongest safe empirical statement is:
+
+```text
+Under the frozen, engineered v0.3.6 law and declared scheduler, the evolved
+local state and redundant successor opportunities can re-establish an
+observer-selected connectivity role through a replacement cell and can reroute
+the operational expression lineage after targeted gate vetoes.
+```
+
+This is a real and recurrent simulator behavior. It is not yet evidence that
+information itself was transported, that the behavior is carrier-free, that it
+is unique to this law, or that information is ontologically prior to physics.
+
+### Novelty Assessment
+
+The broad conceptual territory is established rather than new:
+
+- logarithmic cardinality of alternatives is Hartley information;
+- causal prior/posterior repertoires already formalize information by excluded
+  possibilities in discrete dynamical systems;
+- semantic-information work already uses counterfactual scrambling or erasure
+  and changes in future-trajectory distributions;
+- autopoiesis and constraint-closure research already studies persistence of
+  organization through material turnover;
+- coherent-structure and temporal-network research already studies causal
+  organization, reachability, and dynamic reconnection;
+- current cellular-automaton work reconstructs causal ancestry of distributed
+  structures at substantially larger scales.
+
+The closest identified public conceptual overlap is Witte's January 2026 preprint,
+`Computation as Organisation`, which describes persistent relational constraints
+that delimit admissible transitions and information as differences that reshape
+possible transitions. It is an unreviewed preprint and does not establish
+identity of mathematics or experiments, but it requires explicit comparison.
+No inference of copying follows from conceptual proximity or repository dates.
+
+The potentially original contribution is narrower:
+
+```text
+An intervention-based operational diagnostic for relational re-instantiation
+and ordered temporal realization redundancy in a stochastic spatial automaton:
+strict predecessor-bridge loss, disjoint successor-bridge necessity,
+paired-noise gate interventions, and sequential retained-amplitude cuts.
+```
+
+The paper bibliography now records the primary precedents under stable keys,
+including `hartley1928transmission`, `balduzzi2008integrated`,
+`kolchinsky2018semantic`, `bartlett2024causal`, `sowinski2025causal`,
+`varela1974autopoiesis`, `beer2004autopoiesis`, `montevil2015closure`,
+`rupe2018local`, `holme2012temporal`, `witte2026computation`, and
+`hintze2026rethinking`.
+
+### Missing and Skipped Steps
+
+The following gaps block a general ICP claim:
+
+1. No experiment constructs the declared prior and posterior reachable sets or
+   computes `Delta I`. Strict transport tests a graph event, not the proposed
+   reachable-set quantity.
+2. The stochastic semantics are unresolved. Conditional on complete simulator,
+   RNG, and scheduler state, the next state is determined. If RNG is instead
+   marginalized, the exogenous probability measure and filtration must be
+   declared.
+3. The current cardinality ratio is a Hartley support measure. It is sensitive
+   to representation, ignores probability, and misses equal-cardinality
+   reshaping.
+4. The canonical law was deliberately tuned to favor component-bridge targets.
+   The phenomenon has not been required to survive removal or reversal of that
+   preference.
+5. Lexicographic source scheduling, candidate order, and sequential PRNG
+   consumption can affect intervention descendants. Scheduler and noise
+   allocation have not been independently varied.
+6. The strict positives are overwhelmingly a local bridge replacement joining
+   a mostly preserved large component to a singleton. This is a narrow
+   dangling-leaf reconnection motif, not whole-organization replacement.
+7. Removing the successor bridge proves endpoint necessity. It does not show
+   that the predecessor relation causes preferential successor re-instantiation.
+8. `P=0` proves only that the stored `P` channel is unnecessary under the
+   rewritten rule. `A`, `R`, `V`, angular memory, geometry, RNG state, and
+   scheduler history remain possible causal carriers.
+9. Expression lineage is an observer-defined ancestry rule attached to
+   successful activation. Its alternate-child/handoff correspondence is partly
+   definitional rather than an independent prediction.
+10. There is no cross-law, cross-scale, cross-topology, scheduler-invariant, or
+    independent-implementation confirmation.
+11. The canonical law, detectors, and interpretations followed extensive
+    adaptive development. Later preregistration is valuable, but it does not
+    turn the original discovery path into a neutral confirmatory cohort or
+    remove historical researcher degrees of freedom.
+12. There is no thermodynamic, continuum, empirical, quantum, or other physical
+    correspondence. The simulator cannot presently support a pre-physics claim.
+
+### Calibrated Interpretation
+
+These are subjective epistemic probabilities, not p-values or confidence
+intervals:
+
+```text
+~95%  the recorded local reconnection/rerouting behavior recurs in this code
+
+75%   familiar, model-specific causal memory and redundancy under a tuned law
+20%   potentially useful and publishable simulator-level method or case study
+ 4%   portable new information principle across diverse dynamical systems
+ 1%   clue about fundamental, pre-physical, or quantum physics
+```
+
+The best current interpretation is that ICP detects causal organization and
+temporal redundancy in this rig: a selected topological function can be
+re-instantiated through different local cells. It does not yet distinguish a
+new law from known dynamical-system behavior.
+
+### Gate Order
+
+The gates are sequential. A later gate may be designed while an earlier one is
+being documented, but no later-gate outcome may be generated or inspected until
+the earlier gate has passed. Every gate requires a dated, committed
+preregistration, frozen code/configuration hashes, declared analysis units,
+multiplicity handling, and explicit pass/fail thresholds before outcomes.
+
+### Formal Gate
+
+**Formal gate: Define reachable sets, probability measures, interventions, and
+a probability-sensitive ICP quantity that is actually computed.**
+
+Status: **not passed**.
+
+The gate requires one frozen mathematical and computational specification with:
+
+1. an endogenous state `S_t`, an explicit observable/coarse-graining `g`, and a
+   horizon `H`;
+2. exogenous variables `U_t` with a declared measure `mu`, such that
+   `S_(t+1) = F_L(S_t, U_t)`;
+3. an explicit statement of whether RNG and scheduler variables are conditioned
+   upon, marginalized, or intervened upon;
+4. a declared intervention family `do(a)` and a scientifically meaningful
+   reference `do(a_0)`, rather than an informal prior/posterior label;
+5. a future distribution
+   `P_(a,H)(y | s) = Pr_mu[g(S_(t+1:t+H)) = y | do(a), S_t = s]` and reachable
+   support `R_(a,H)(s) = supp P_(a,H)(. | s)`;
+6. a probability-sensitive primary quantity. The default candidate is
+   `I_ICP = JSD(P_(a,H) || P_(a_0,H))`, accompanied by the signed entropy change
+   `Delta H = H(P_(a_0,H)) - H(P_(a,H))` to distinguish concentration from
+   expansion. Replacing this pair requires a written invariance and
+   interpretability argument before data;
+7. keyed or counter-based exogenous noise for paired interventions, or an
+   estimator that averages independent continuations, so changed control flow
+   cannot reassign unrelated later random draws silently;
+8. an exact-enumeration or convergence/uncertainty procedure for estimating the
+   distributions;
+9. analytic toy validations covering no interaction, deterministic evolution,
+   strict support reduction, equal-support probability reshaping, and pure
+   relabeling; and
+10. an actual preregistered computation of the quantity on held-out IOTA states,
+    including a declared falsifying outcome.
+
+The gate passes only when the specification, implementation, toy validations,
+and held-out computation all exist and reproduce from a clean checkout. A
+quantity that is identically zero under the chosen complete-state semantics,
+changes under a common bijective relabeling of outcome labels, or cannot
+distinguish the preregistered interaction from its reference fails the gate.
+Sensitivity to a non-bijective coarse-graining must be measured and reported,
+not confused with label invariance.
+
+### Artifact Gate
+
+**Artifact gate: Require survival under bridge-bias removal, scheduler
+randomization, matched null laws, alternative graph definitions, and independent
+implementation.**
+
+Status: **closed until the Formal gate passes**.
+
+The frozen artifact battery must include:
+
+1. component-bridge and local-bridge weights set to zero;
+2. sign-reversed weights and randomized geometry labels while preserving the
+   relevant aggregate opportunity or activation budget;
+3. forward, reverse, randomized, synchronous where definable, and keyed-noise
+   source schedules;
+4. rotations and translations that test coordinate-order dependence;
+5. matched stochastic local-law and dynamic-graph nulls with comparable density,
+   turnover, degree, and event prevalence;
+6. face6, face18, cube26, marked-event, and temporal-reachability relation
+   definitions, with observer choices frozen before outcomes;
+7. predecessor interventions that alter or erase the earlier relation and test
+   the probability of later re-instantiation, rather than only deleting the
+   successor bridge; and
+8. an implementation by a separate implementer or team, preferably in another
+   language, written only from the frozen mathematical specification without
+   importing the original detector or transition code. Primary outputs from the
+   two implementations remain blinded until both are frozen.
+
+Every control must recompute the frozen Formal-gate `I_ICP` primary endpoint and
+its signed `Delta H` companion. A separately frozen transport endpoint may be
+reported, but graph-event prevalence or a convenient morphology statistic may
+not substitute for the formal endpoint after outcomes. The gate requires a
+preregistered survival criterion at the independent initialization/geometry
+level. Branches sharing a geometry are conditional replicates, not independent
+geometries. A result that disappears when bridge bias is removed, changes with
+coordinate order, matches the null laws, depends on one graph convention, or
+fails independent reimplementation is an engineered-model phenomenon and fails
+the principle-level artifact gate. External replication remains a further
+requirement before a strong general claim.
+
+### Generality Gate
+
+**Generality gate: Preregister predictions and confirm them across held-out
+laws, scales, and system families.**
+
+Status: **closed until the Formal and Artifact gates pass**.
+
+Before any generality outcomes, freeze the predicted direction, minimum effect,
+replication unit, exclusions, stopping rule, and multiplicity correction for:
+
+1. held-out IOTA laws that were not selected for bridge or morphology behavior;
+2. multiple lattice sizes, densities, horizons, boundary conditions, and
+   neighborhood systems;
+3. canonical positive controls such as coherent CA structures or excitable
+   waves and declared negative/null controls;
+4. at least one temporal-network model and at least one local stochastic system
+   outside the IOTA law family; and
+5. independent replication of the same formal quantity without post-outcome
+   retuning of the observable, relation, or intervention.
+
+The gate passes only if the preregistered effect recurs across genuinely distinct
+law and system families and discriminates organized positives from matched
+nulls. Recurrence only within retuned IOTA variants supports a family-specific
+method, not a general principle.
+
+### Decision Rules
+
+```text
+Formal gate fails:
+  make no empirical ICP-principle claim; retain only the graph/intervention
+  results that were directly measured.
+
+Formal passes, Artifact fails:
+  classify the effect as an engineered or implementation-specific phenomenon.
+
+Formal and Artifact pass, Generality fails:
+  pursue and report a bounded simulator-level diagnostic or case study.
+
+All three gates pass:
+  treat a broader information principle as a serious research claim and seek
+  external replication before stronger interpretation.
+```
+
+A physical or pre-quantum program does not open automatically when all three
+gates pass. It additionally requires a separate formal map to physical
+observables and a distinctive quantitative prediction that competing accounts
+do not already make.
+
+### Immediate Next Step
+
+Write and freeze the Formal-gate specification, estimator, analytic toy cases,
+and validation pass/fail rule. Only then generate the preregistered held-out
+Formal-gate computation. Do not implement Finding 080, rerun a larger cohort,
+tune another local representation, or inspect any other new simulator outcome
+first. Finding 080 may be reconsidered only after the probability-sensitive ICP
+quantity is defined and computed; if it no longer tests that quantity, it
+remains an archived preregistration rather than the active path.
