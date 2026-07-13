@@ -7,9 +7,9 @@ This repository is a live research compendium. The README states the organizing 
 1. Start with the [organizing hypothesis](../README.md#iota-rig) and the
    [minimal informational realization contract](ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
 2. Inspect the preregistered minimal-realization
-   [development result](../output/minimal_realization/MIR-REFERENCE-SEARCH-001/development_results.json)
-   and its
-   [post-result literature record](literature/minimal_realization_result_followup_2026-07-13.md).
+   [exact-orbit result](../output/minimal_realization/MIR-EXACT-ORBIT-001/exact_orbit_results.json),
+   [falsification contract](ICP_MINIMAL_INFORMATIONAL_REALIZATION_EXACT_ORBIT_CONTRACT.md),
+   and [post-result interpretation](literature/minimal_realization_exact_orbit_result_followup_2026-07-13.md).
 3. Read the [current evidence frontier](../README.md#current-evidence-frontier),
    from foundational GC-001 through bounded causal GC-010.
 4. Inspect the [Finding 070 independent synthesis](../output/findings/finding070/independent_persistence_replication_summary.json)
@@ -38,20 +38,28 @@ This regenerates the evidence-facing files and validates that:
 - generated paper values and tables are current;
 - evidence manifests contain current SHA-256 hashes; and
 - registered minimal-realization candidates satisfy the machine-checkable
-  primitive, atomic-law, and clock grammar.
+  primitive, atomic-law, and clock grammar; and
+- the exact-orbit result passes an algorithmically independent replay of every
+  detector layer, checkpoint certificate, trace digest, and family aggregate.
 
-The verification does not rerun the underlying simulations or interventions.
+The evidence-compendium checks do not rerun the stochastic IOTA simulations or
+interventions. When the exact-orbit ledger is present, its deterministic finite
+trajectories are replayed because that replay is the registered result verifier.
 
-To independently recompute the complete `MIR-REFERENCE-SEARCH-001`
-development ledger and verify its canonical bytes, run:
+To independently replay the complete `MIR-EXACT-ORBIT-001` ledger and verify
+its canonical bytes, run:
 
 ```bash
-python3 -m src.minimal_realization.cli verify-development-results \
-  --open-seal experiments/minimal_realization/MIR-REFERENCE-SEARCH-001/development_open_manifest.json
+python3 -m src.minimal_realization_orbit.cli verify-exact-orbit-results \
+  --open-seal experiments/minimal_realization/MIR-EXACT-ORBIT-001/exact_orbit_open_manifest.json
 ```
 
-That verifier checks all 15 dynamic candidates over offsets `0..47`; it also
-checks that reserved offsets `48..63` were not accessed.
+That verifier first reproduces all 15 parent `H=16` canonical nulls, then checks
+all 15 exact-orbit outcomes. It uses the shared hash-frozen dynamics and local
+detector primitives but a separate layer-assessment spelling and recurrence
+replay. Reserved offsets `48..63` are not accessed. The original bounded-pilot
+standalone verifier remains reproducible at tag
+`mir-reference-search-001-v0.2-complete`.
 
 ## Build the paper
 

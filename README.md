@@ -44,18 +44,25 @@ The controlling grammar, proto-object definition, accounting rules, data policy,
 and physical-role criterion are in the
 [ICP Minimal Informational Realization Contract](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
 Its current `0.2-draft` reference program begins at `N_P=2`: one binary event
-channel plus one charged interaction-relation channel. Candidate outcomes are
-now recorded for the preregistered development pilot. Across all 15 nonempty
-production-row subsets and 48 declared translations per subset, no candidate
-satisfied the full proto-object detector by `H=16`. The 15 dynamic candidates
-are therefore right-censored at `T_proto > 16`; the zero-law candidate remains
-analytically excluded. There is no bounded winner, and reserved offsets
-`48..63` were not accessed. This is a finite negative result for the frozen
-ring, seed, grammar, detector, and horizon—not an impossibility proof or a
-global minimum claim. See the canonical
-[development result](output/minimal_realization/MIR-REFERENCE-SEARCH-001/development_results.json)
-and the
-[post-result literature record](docs/literature/minimal_realization_result_followup_2026-07-13.md).
+channel plus one charged interaction-relation channel. The bounded pilot found
+no complete proto-object by `H=16`. A separately frozen, outcome-aware
+continuation then followed the same 15 nonempty canonical trajectories until
+first pass or exact post-cone recurrence under the versioned
+`MIR-ISOLATED-DYAD-OUTWARD-EFFECT-EXACT-ORBIT-V0.1` temporal extension.
+
+All 15 nonempty rules recurred exactly without passing; the empty rule remains
+analytically excluded. Recurrence certificates closed by layer 318, so no
+candidate reached the one-million-layer resource ceiling and there is no
+winner. Only two rules ever formed the attributed dyad, both at layer 1, and
+neither ever produced an eligible one-tick successor. Thus no rule in this
+complete frozen production-row family produces the registered exact-orbit
+proto-object from the canonical seed on `C64` at any finite time. This is an
+exact fixed-family falsification—not an exclusion of other `N_P=2` grammars,
+other seeds or topologies, a general object impossibility, or global
+minimality. Only origin `0` was evaluated; reserved offsets `48..63` remain
+untouched. See the [exact-orbit contract](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_EXACT_ORBIT_CONTRACT.md),
+[canonical result](output/minimal_realization/MIR-EXACT-ORBIT-001/exact_orbit_results.json),
+and [post-result interpretation](docs/literature/minimal_realization_exact_orbit_result_followup_2026-07-13.md).
 
 ### Research-program guardrail
 

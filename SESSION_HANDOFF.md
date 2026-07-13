@@ -5401,11 +5401,60 @@ stage. The negative result primarily localizes the bottleneck to endogenous
 role formation and immediate succession; it does not show that the rules lack
 arrangement-sensitive causal capacity when a role is supplied analytically.
 
-The strongest next experiment is a separately frozen exact-orbit continuation
-at canonical offset `0`, with the grammar, C64 topology, seed, baseline, and
-detector unchanged. For each candidate, evolve the joint seeded/baseline state
-until either the detector passes or the complete joint state repeats after the
-forward cone has saturated the cycle. This can replace the arbitrary later
-horizon with either an exact later `T_proto` or a recurrence proof of no pass on
-this fixed finite orbit. It requires no access to offsets `48..63` and still
-cannot establish an alternative-grammar exclusion or global minimality.
+The strongest next experiment was identified as a separately frozen
+exact-orbit continuation at canonical offset `0`, with the grammar, C64
+topology, seed, comparator, and local detector predicates fixed. Because the
+inherited detector formally stopped at `H=16`, formation-time search beyond 16
+required the prospectively versioned temporal extension
+`MIR-ISOLATED-DYAD-OUTWARD-EFFECT-EXACT-ORBIT-V0.1`, including explicit C64
+cone wrap and saturation. That experiment is now complete below.
+
+### Exact fixed-family falsification — 2026-07-13
+
+The completed bounded pilot is archived at commit `4e999bb` and annotated tag
+`mir-reference-search-001-v0.2-complete`. Work continued on branch
+`mir-exact-orbit-001` with the required linear chronology:
+
+- `de6fa89`: outcome-free exact-orbit preregistration and content-hash seal;
+- `a5ffc83`: direct-child open-manifest-only commit; and
+- `e5fb05f`: direct-child canonical-result-only commit.
+
+The committed result SHA-256 is
+`e6d8ab89edd79422f9a6f5803447d52e642c6873f0275272c519fbd4487023cc`
+(16,821 bytes). The semantic validator and algorithmically independent
+full-state replay pass from the result commit. All 15 parent canonical-origin
+nulls through `H=16` were reproduced before any new layer was evaluated.
+
+The empty rule is analytically excluded. Every one of the 15 nonempty rules has
+status `recurrence_excluded_on_fixed_orbit`; there are zero passes, zero
+resource-censored candidates, and zero winners. Registered recurrence periods
+are `1` for 8 rules, `2` for 2 rules, `64` for 4 rules, and `128` for 1 rule.
+Terminal layers are 64 for 6 rules, 65 for 2, 66 for 2, 190 for 4, and 318 for
+1. Across the dynamic family, 1,724 formation layers were evaluated, including
+1,484 previously unseen layers at `t >= 17`.
+
+The failure anatomy is now exact on these fixed finite orbits, not merely
+bounded at 16. Thirteen rules never form the attributed isolated dyad. Only
+`MIR-P2-L2-01-10` and `MIR-P2-L3-01-10-11` form it, both at layer 1 and anchor
+0. Neither ever produces an eligible one-tick successor, so no rule reaches
+the matched-intervention stage. The bottleneck is endogenous role formation
+and immediate succession, not a late failure of the outward endpoint.
+
+The narrow supported statement is: no rule in the complete frozen 16-member
+production-row family produces the registered exact-orbit v0.1 proto-object
+from the canonical one-event seed against the all-zero initial comparator on
+`C64` at any finite time. This does not exclude alternative `N_P=2` grammars,
+other seeds, backgrounds, sizes, or topologies; other object definitions;
+general localized structure; current-physics recovery; or global minimality.
+Only origin `0` was evaluated. Nonzero translations are formal rotation
+corollaries rather than independent data, and reserved offsets `48..63` remain
+untouched.
+
+Do not spend another horizon on this frozen grammar. The next formal work must
+create a new preregistered contract version and make any added expressive
+capacity explicit in primitive/law accounting. The failure boundary favors an
+alternative `N_P=2` grammar aimed at endogenous role succession before moving
+to a higher primitive shell; promising axes include a carefully counted wider
+relation fan-in or explicit relation-state evolution. Any positive should then
+be separated into pre-wrap versus finite-ring behavior and tested across cycle
+sizes before receiving a localized-object interpretation.
