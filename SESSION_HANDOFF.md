@@ -4606,3 +4606,23 @@ rescue a failed primary gate. Failure stops the dependent route before any
 recruitment-history experiment. Passing permits a separately preregistered
 history-matched intervention; it does not establish a universal law, physical
 field, force, mass, energy, matter, or entropy correspondence.
+
+## Finding 079A Frozen Acquisition — Independent Source Support
+
+The complete new-seed factual acquisition finished before any factorial branch
+outcome. All 1,536 scheduled continuations from seeds `553..744` were retained.
+
+```text
+factual cases:                    1,536
+Class-B candidates:                 249
+strict singleton transports:         30
+independent strict seeds:             22
+required downstream channels:         20
+payload/ledger failures:                0
+```
+
+The 22 selected initialization seeds are `554, 555, 566, 574, 579, 583, 585,
+586, 588, 595, 613, 619, 621, 665, 673, 674, 688, 699, 705, 720, 730, 732`.
+This is factual source support only. The precursor, common-donor, nonzero
+repair-interaction, and independent-channel gates remain unevaluated, and no
+Finding 079 branch assignment or susceptibility outcome exists.
