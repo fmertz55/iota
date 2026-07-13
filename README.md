@@ -45,7 +45,17 @@ and physical-role criterion are in the
 [ICP Minimal Informational Realization Contract](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
 Its current `0.2-draft` reference program begins at `N_P=2`: one binary event
 channel plus one charged interaction-relation channel. Candidate outcomes are
-sealed while the outcome-free preregistration is being hash-bound.
+now recorded for the preregistered development pilot. Across all 15 nonempty
+production-row subsets and 48 declared translations per subset, no candidate
+satisfied the full proto-object detector by `H=16`. The 15 dynamic candidates
+are therefore right-censored at `T_proto > 16`; the zero-law candidate remains
+analytically excluded. There is no bounded winner, and reserved offsets
+`48..63` were not accessed. This is a finite negative result for the frozen
+ring, seed, grammar, detector, and horizon—not an impossibility proof or a
+global minimum claim. See the canonical
+[development result](output/minimal_realization/MIR-REFERENCE-SEARCH-001/development_results.json)
+and the
+[post-result literature record](docs/literature/minimal_realization_result_followup_2026-07-13.md).
 
 ### Research-program guardrail
 

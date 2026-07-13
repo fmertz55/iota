@@ -6,13 +6,17 @@ This repository is a live research compendium. The README states the organizing 
 
 1. Start with the [organizing hypothesis](../README.md#iota-rig) and the
    [minimal informational realization contract](ICP_MINIMAL_INFORMATIONAL_REALIZATION_CONTRACT.md).
-2. Read the [current evidence frontier](../README.md#current-evidence-frontier),
+2. Inspect the preregistered minimal-realization
+   [development result](../output/minimal_realization/MIR-REFERENCE-SEARCH-001/development_results.json)
+   and its
+   [post-result literature record](literature/minimal_realization_result_followup_2026-07-13.md).
+3. Read the [current evidence frontier](../README.md#current-evidence-frontier),
    from foundational GC-001 through bounded causal GC-010.
-3. Inspect the [Finding 070 independent synthesis](../output/findings/finding070/independent_persistence_replication_summary.json)
+4. Inspect the [Finding 070 independent synthesis](../output/findings/finding070/independent_persistence_replication_summary.json)
    and [branch assignments](../output/findings/finding070/independent_persistence_replication_assignments.csv).
-4. Audit the [selector-hash chain](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
+5. Audit the [selector-hash chain](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
    against the staged artifacts in `output/findings/finding070/`.
-5. Read the [working paper](../paper/main.tex).
+6. Read the [working paper](../paper/main.tex).
 
 No execution is required for this path.
 
@@ -37,6 +41,17 @@ This regenerates the evidence-facing files and validates that:
   primitive, atomic-law, and clock grammar.
 
 The verification does not rerun the underlying simulations or interventions.
+
+To independently recompute the complete `MIR-REFERENCE-SEARCH-001`
+development ledger and verify its canonical bytes, run:
+
+```bash
+python3 -m src.minimal_realization.cli verify-development-results \
+  --open-seal experiments/minimal_realization/MIR-REFERENCE-SEARCH-001/development_open_manifest.json
+```
+
+That verifier checks all 15 dynamic candidates over offsets `0..47`; it also
+checks that reserved offsets `48..63` were not accessed.
 
 ## Build the paper
 

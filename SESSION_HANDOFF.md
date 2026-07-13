@@ -11,8 +11,11 @@ at the end of this document. It supersedes every earlier `Next Hypothesis`,
 an instruction for new work. Those sections remain as the chronological record
 of the program.
 
-Finding 080 remains preregistered but is paused. Development work may proceed
-only under the minimal-realization contract. Held-out candidate and
+Finding 080 remains preregistered but is paused. The first bounded
+minimal-realization development search is complete: none of the 15 dynamic
+`N_P=2` candidates passed the frozen detector by `H=16`. All nonpasses are
+right-censored, not impossibility results. Development work may proceed only
+under the minimal-realization contract. Reserved translation offsets and
 current-physics role outcomes remain sealed until the contract, candidate,
 detector, comparison rule, and data partition for that test are frozen.
 
@@ -55,6 +58,9 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+83e0f8a Record MIR bounded development result
+f693033 Open MIR development search
+25df5b0 Preregister bounded minimal realization pilot
 6b2b560 Clarify Finding 080 anatomy execution
 c277157 Preregister Finding 080 donor failure anatomy
 1de786b Register Findings 078 and 079 support stop
@@ -5364,14 +5370,42 @@ by the frozen horizon, but it cannot use a censored lower-law candidate to claim
 unbounded shell exclusion or global minimality.
 
 One analytic two-layer matched-intervention fixture for the copy-predecessor
-rule is recorded as detector-development data. No full single-seed candidate
-trajectory, `T_proto` result, ranking, or reserved-offset result has been
-generated or inspected. The strict validator, isolated engine and detector,
-canonical enumeration, result schema, development-only runner, commit-gated
-opening path, and positive/negative test suite now pass outcome-free checks.
-The suite also covers the `0.1-draft` nonempty-law crash that its zero-law null
-had hidden. The remaining procedural barrier is to regenerate and verify the
-final content-hash seal, record the outcome-free preregistration commit, create
-and separately commit the development-open manifest, and only then execute the
-fixed `0..47` development allocation. Reserved offsets `48..63` are algebraic
-translation copies, not independent confirmation, and have no runner.
+rule was recorded as detector-development data before the search. The strict
+validator, isolated engine and detector, canonical enumeration, result schema,
+development-only runner, commit-gated opening path, and positive/negative test
+suite passed outcome-free checks. The suite also covers the `0.1-draft`
+nonempty-law crash that its zero-law null had hidden.
+
+### First bounded development result — 2026-07-13
+
+The outcome-free preregistration was committed at `25df5b0`, the development
+opening marker alone at `f693033`, and the canonical result alone at `83e0f8a`.
+The exact recomputation verifier passes at the recorded result commit.
+
+The zero-law candidate is analytically excluded. All 15 nonempty subsets of the
+four frozen production rows were evaluated over the declared 48 development
+translations, for 720 candidate-translation evaluations. Shell counts were
+`4, 6, 4, 1` for `N_L=1..4`. Every translation-equivalence check was exact.
+No candidate passed by `H=16`, so all 15 dynamic candidates have the registered
+status `right_censored_T_proto_gt_16`; there is no bounded winner. Reserved
+offsets `48..63` were not accessed and cannot act as independent confirmation
+because they are algebraic translation copies.
+
+A post-result, canonical-origin failure anatomy used only the already-open
+development trajectories. Candidate `MIR-P2-L2-01-10` produced nine attributed
+isolated-dyad hits through `H=16`, first at `t=1`, while
+`MIR-P2-L3-01-10-11` produced one at `t=1`. Neither produced an eligible
+one-tick successor. The other 13 dynamic candidates never formed an attributed
+isolated dyad. No candidate therefore reached the matched outward-intervention
+stage. The negative result primarily localizes the bottleneck to endogenous
+role formation and immediate succession; it does not show that the rules lack
+arrangement-sensitive causal capacity when a role is supplied analytically.
+
+The strongest next experiment is a separately frozen exact-orbit continuation
+at canonical offset `0`, with the grammar, C64 topology, seed, baseline, and
+detector unchanged. For each candidate, evolve the joint seeded/baseline state
+until either the detector passes or the complete joint state repeats after the
+forward cone has saturated the cycle. This can replace the arbitrary later
+horizon with either an exact later `T_proto` or a recurrence proof of no pass on
+this fixed finite orbit. It requires no access to offsets `48..63` and still
+cannot establish an alternative-grammar exclusion or global minimality.
