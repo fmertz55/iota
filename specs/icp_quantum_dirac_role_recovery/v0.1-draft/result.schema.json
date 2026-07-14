@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://iota.local/schema/quantum-dirac-result-v0.1-draft",
-  "title": "ICP Quantum-Dirac result ledger",
+  "title": "ICP Quantum-Dirac canonical stage ledger",
   "type": "object",
   "required": [
     "protocol_version",
@@ -9,22 +9,14 @@
     "stage",
     "status",
     "bindings",
+    "numerics",
     "scenario_results",
     "aggregate"
   ],
   "properties": {
-    "protocol_version": {
-      "const": "0.1-draft"
-    },
-    "search_id": {
-      "const": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"
-    },
-    "stage": {
-      "enum": [
-        "development",
-        "confirmation"
-      ]
-    },
+    "protocol_version": {"const": "0.1-draft"},
+    "search_id": {"const": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"},
+    "stage": {"enum": ["development", "confirmation"]},
     "status": {
       "enum": [
         "development_gate_failed_confirmation_unopened",
@@ -34,13 +26,115 @@
       ]
     },
     "bindings": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "open_manifest",
+        "outcome_seal",
+        "result_schema",
+        "candidate_manifest",
+        "scenario_manifest",
+        "state_manifest",
+        "partition_manifest"
+      ],
+      "properties": {
+        "open_manifest": {"$ref": "#/$defs/binding"},
+        "outcome_seal": {"$ref": "#/$defs/binding"},
+        "result_schema": {"$ref": "#/$defs/binding"},
+        "candidate_manifest": {"$ref": "#/$defs/binding"},
+        "scenario_manifest": {"$ref": "#/$defs/binding"},
+        "state_manifest": {"$ref": "#/$defs/binding"},
+        "partition_manifest": {"$ref": "#/$defs/binding"}
+      },
+      "additionalProperties": false
+    },
+    "numerics": {
+      "type": "object",
+      "required": [
+        "primary_backend",
+        "primary_library_version",
+        "primary_precision_bits",
+        "primary_rounding",
+        "independent_backend",
+        "independent_library_version",
+        "independent_decimal_digits",
+        "binary64_registered_dynamics",
+        "target_tail_formula"
+      ],
+      "properties": {
+        "primary_backend": {"const": "python-flint Arb/Acb"},
+        "primary_library_version": {"const": "0.9.0"},
+        "primary_precision_bits": {"const": 256},
+        "primary_rounding": {"const": "outward_ball_enclosures"},
+        "independent_backend": {"const": "mpmath"},
+        "independent_library_version": {"const": "1.3.0"},
+        "independent_decimal_digits": {"const": 110},
+        "binary64_registered_dynamics": {"const": false},
+        "target_tail_formula": {"type": "string"}
+      },
+      "additionalProperties": false
     },
     "scenario_results": {
-      "type": "array"
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/scenario_result"}
     },
     "aggregate": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "scenario_count",
+        "scenario_pass_count",
+        "all_scenarios_complete",
+        "stage_pass",
+        "confirmation_authorized",
+        "development_free_light_holdout_witnesses",
+        "failure_controls",
+        "classification"
+      ],
+      "properties": {
+        "scenario_count": {"type": "integer", "minimum": 2, "maximum": 4},
+        "scenario_pass_count": {"type": "integer", "minimum": 0, "maximum": 4},
+        "all_scenarios_complete": {"const": true},
+        "stage_pass": {"type": "boolean"},
+        "confirmation_authorized": {"type": "boolean"},
+        "development_free_light_holdout_witnesses": {
+          "type": ["object", "null"]
+        },
+        "failure_controls": {"type": "array"},
+        "classification": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "scenario_result": {
+      "type": "object",
+      "required": [
+        "scenario_id",
+        "operator",
+        "witnesses",
+        "maximum_independent_state_disagreement_upper",
+        "symmetry_and_structure",
+        "pass"
+      ],
+      "properties": {
+        "scenario_id": {"type": "string"},
+        "operator": {"type": "object"},
+        "witnesses": {"type": "array", "minItems": 4, "maxItems": 4},
+        "maximum_independent_state_disagreement_upper": {"type": "string"},
+        "symmetry_and_structure": {"type": "object"},
+        "pass": {"type": "boolean"}
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

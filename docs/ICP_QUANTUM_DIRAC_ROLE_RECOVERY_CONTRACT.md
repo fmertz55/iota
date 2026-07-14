@@ -6,7 +6,7 @@ Search ID: `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`
 
 Date: `2026-07-14`
 
-Status: **outcome-free implementation active; production outcome runner absent and disabled; not frozen**
+Status: **outcome-free implementation complete; production present and disabled; not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -34,7 +34,7 @@ It does not support an ontological claim, a derivation of quantum theory from ge
 
 No registered candidate state, trajectory, propagator distance, measurement distribution, intervention response, or failure-control result may be generated or inspected while this document has status `not frozen`.
 
-This draft resolves the conceptual design choices. It is not an outcome seal. The following must still exist, pass outcome-free review, be committed together, and be tagged before a registered outcome can be opened:
+This draft resolves the conceptual design choices. It is not an outcome seal. The following now exist in the outcome-free package and must pass review, be committed together, and be content-sealed before a registered outcome can be opened:
 
 - the complete machine-readable protocol and schemas;
 - canonical candidate, state, scenario, and partition manifests;
@@ -383,10 +383,11 @@ Use the antiunitary
 Theta = sigma_x K,
 ```
 
-where `K` is complex conjugation in the position/directional basis. For a schedule `a`, `a^R` reverses its macrostep order. The target obeys the frozen time-reversal relation exactly. The ordered first-order candidate is not assumed to obey it exactly. Require
+where `K` is complex conjugation in the position/directional basis. For a schedule `a`, `a^R` reverses its macrostep order. The target obeys the frozen time-reversal relation exactly. The ordered first-order candidate is not assumed to obey it exactly. Require, uniformly on the registered input subspace `K_in`,
 
 ```text
-r_TR,N(a) = ||Theta U_C,N[a] Theta^-1 - U_C,N[a^R]^dagger||_2
+r_TR,N(a) = ||(Theta U_C,N[a] Theta^-1
+                - U_C,N[a^R]^dagger) E_N||_2
 r_TR,1024(a) <= 0.10
 r_TR,512(a)  <= 0.60 r_TR,256(a) + 1e-8
 r_TR,1024(a) <= 0.60 r_TR,512(a) + 1e-8.
@@ -467,7 +468,7 @@ The required history is:
 
 The freeze commit must descend from the completed MIR closure and the pre-switch CI provenance repair. Opening code must verify clean worktree, exact parent, annotated tag target, seal hashes, disabled-to-enabled boundary, and sole changed path. Result verification must enforce the same lineage and reject a later worktree.
 
-At this draft stage, no freeze tag, open manifest, result path, production command, or result artifact may exist.
+At this draft stage, no freeze tag, open manifest, or result artifact may exist. The production command exists but remains disabled by the Git provenance gate until the seal is committed and the corresponding stage opening is its required direct child.
 
 ## 19. Result taxonomy
 
@@ -504,9 +505,14 @@ Fourier encoding and measurement maps, a read-only disabled-seal preview, and
 strict guards that cannot issue a registered evaluation permit in the current
 history. All disclosed algebraic and negative guard tests pass.
 
-The package is not freeze-ready. The remaining outcome-free work is the
-complete registered stage runner, state-witness construction, every symmetry
-and observable reducer, result-schema enforcement, independent full-ledger
-replay, atomic writer, and freeze/open/result command provenance. This
-document must remain `not frozen` until that package and its independent audit
-are complete. No registered QCA outcome is authorized by this draft.
+The outcome-free package is now freeze-ready. It includes the complete
+registered stage runner, formula-derived state witnesses, observable and
+symmetry reducers, strict canonical result validation, an algorithmically
+separate clean-checkpoint replay, atomic no-clobber writers, and explicit
+seal/open/run/verify commands. The production command is present but cannot
+obtain a permit in the current history.
+
+No registered lattice or scenario may run until the disabled seal is the sole
+addition in a committed direct child, that commit carries the required
+annotated freeze tag, and the development opening manifest is committed as
+its sole-file direct child.

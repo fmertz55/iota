@@ -135,7 +135,7 @@ def _validate_protocol(protocol: Any) -> None:
         "search_id": SEARCH_ID,
         "status": STATUS,
         "registered_outcome_authorized": False,
-        "production_implementation_present": False,
+        "production_implementation_present": True,
         "run_command_enabled": False,
     }
     for key, value in expected.items():
@@ -235,7 +235,9 @@ def _validate_forbidden_paths(root: Path) -> None:
         )
 
 
-def audit_design(root: Path | None = None) -> dict[str, Any]:
+def audit_design(
+    root: Path | None = None, *, allow_lifecycle_artifacts: bool = False
+) -> dict[str, Any]:
     root = repository_root() if root is None else root.resolve()
     bindings = _require_design_files(root)
     if not (root / CONTRACT_REF).is_file():
@@ -249,7 +251,8 @@ def audit_design(root: Path | None = None) -> dict[str, Any]:
     _validate_candidate(candidate)
     _validate_target(target)
     _validate_scenarios(scenarios, partitions)
-    _validate_forbidden_paths(root)
+    if not allow_lifecycle_artifacts:
+        _validate_forbidden_paths(root)
     return {
         "protocol_version": PROTOCOL_VERSION,
         "search_id": SEARCH_ID,

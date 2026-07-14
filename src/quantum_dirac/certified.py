@@ -121,6 +121,17 @@ def certified_transport(state: acb_mat, *, n_sites: int) -> acb_mat:
     return result
 
 
+def certified_inverse_transport(state: acb_mat, *, n_sites: int) -> acb_mat:
+    result = acb_mat(state.nrows(), state.ncols())
+    for site in range(n_sites):
+        for column in range(state.ncols()):
+            result[2 * ((site - 1) % n_sites), column] = state[2 * site, column]
+            result[2 * ((site + 1) % n_sites) + 1, column] = state[
+                2 * site + 1, column
+            ]
+    return result
+
+
 def certified_fixture_step(
     state: acb_mat,
     *,
@@ -204,6 +215,39 @@ def build_certified_target_hamiltonian(
     return hamiltonian
 
 
+def certified_free_target_step(
+    state: acb_mat,
+    *,
+    cutoff: int,
+    mass: Fraction,
+    duration: Fraction,
+) -> acb_mat:
+    """Apply exact 2x2 free Dirac blocks without a dense exponential."""
+
+    result = acb_mat(state.nrows(), state.ncols())
+    mass_ball = arb_exact(mass)
+    time = arb_exact(duration)
+    for r in range(-cutoff, cutoff + 1):
+        momentum = 2 * arb.pi() * arb(r) / arb(PHYSICAL_LENGTH)
+        omega = (momentum * momentum + mass_ball * mass_ball).sqrt()
+        cosine = (omega * time).cos()
+        factor = acb(0, -(omega * time).sin() / omega)
+        right = mode_index(r, 0, cutoff)
+        left = right + 1
+        for column in range(state.ncols()):
+            r_value = state[right, column]
+            l_value = state[left, column]
+            result[right, column] = (
+                cosine * r_value
+                + factor * (momentum * r_value + mass_ball * l_value)
+            )
+            result[left, column] = (
+                cosine * l_value
+                + factor * (mass_ball * r_value - momentum * l_value)
+            )
+    return result
+
+
 def certified_target_input_basis() -> acb_mat:
     result = acb_mat(
         2 * (2 * TARGET_R_CUTOFF + 1),
@@ -258,13 +302,23 @@ class CertifiedRegisteredEvaluator:
         self.delta = Fraction(PHYSICAL_LENGTH, n_sites)
         self.bits = bits
         self.scenarios = _RegisteredScenarioSet(permit)
+        self._target_propagators: dict[
+            tuple[Fraction, Fraction, Fraction], acb_mat
+        ] = {}
 
-    def candidate_outputs(self, scenario_id: str) -> dict[int, acb_mat]:
+    def _candidate_evolve(
+        self,
+        scenario_id: str,
+        initial: acb_mat,
+        *,
+        every_step: bool = False,
+        reflected_potential: bool = False,
+    ) -> dict[int, acb_mat]:
         validate_registered_permit(self.permit)
         scenario = self.scenarios.get(scenario_id)
         observations = _observation_steps(self.delta)
         with ball_precision(self.bits):
-            current = certified_input_basis(n_sites=self.n_sites)
+            current = _copy_matrix(initial)
             outputs: dict[int, acb_mat] = {}
             for step in range(max(observations)):
                 time = step * self.delta
@@ -272,6 +326,8 @@ class CertifiedRegisteredEvaluator:
                 potential = _potential_parameters(scenario["potential"], time)
                 if potential is not None:
                     amplitude, phase_pi = potential
+                    if reflected_potential:
+                        phase_pi = -phase_pi
                     current = certified_phase_layer(
                         current,
                         n_sites=self.n_sites,
@@ -289,9 +345,75 @@ class CertifiedRegisteredEvaluator:
                 )
                 current = certified_transport(current, n_sites=self.n_sites)
                 layer = step + 1
-                if layer in observations:
+                if every_step or layer in observations:
                     outputs[layer] = _copy_matrix(current)
             return outputs
+
+    def candidate_outputs(self, scenario_id: str) -> dict[int, acb_mat]:
+        return self._candidate_evolve(
+            scenario_id,
+            certified_input_basis(n_sites=self.n_sites),
+        )
+
+    def candidate_state_series(
+        self,
+        scenario_id: str,
+        coefficients: acb_mat,
+    ) -> dict[int, acb_mat]:
+        validate_registered_permit(self.permit)
+        initial = certified_input_basis(n_sites=self.n_sites) * coefficients
+        return self._candidate_evolve(scenario_id, initial, every_step=True)
+
+    def candidate_final_from(
+        self,
+        scenario_id: str,
+        initial: acb_mat,
+        *,
+        reflected_potential: bool = False,
+    ) -> acb_mat:
+        outputs = self._candidate_evolve(
+            scenario_id,
+            initial,
+            reflected_potential=reflected_potential,
+        )
+        return outputs[max(outputs)]
+
+    def candidate_reversed_schedule_adjoint(self, scenario_id: str) -> acb_mat:
+        """Apply U[a^R]^dagger to the registered input basis.
+
+        With the reversed macrostep schedule, the adjoint is obtained by
+        applying each original schedule step's adjoint in chronological order.
+        """
+
+        validate_registered_permit(self.permit)
+        scenario = self.scenarios.get(scenario_id)
+        observations = _observation_steps(self.delta)
+        with ball_precision(self.bits):
+            current = certified_input_basis(n_sites=self.n_sites)
+            for step in range(max(observations)):
+                time = step * self.delta
+                mass = _interval_value(scenario["mass"], time)
+                potential = _potential_parameters(scenario["potential"], time)
+                current = certified_inverse_transport(current, n_sites=self.n_sites)
+                current = certified_mass_layer(
+                    current,
+                    n_sites=self.n_sites,
+                    angle=-(self.delta * mass),
+                )
+                if potential is not None:
+                    amplitude, phase_pi = potential
+                    potentials = _potential_vector(
+                        n_sites=self.n_sites,
+                        amplitude=amplitude,
+                        phase_pi=phase_pi,
+                    )
+                    current = certified_phase_layer(
+                        current,
+                        n_sites=self.n_sites,
+                        delta=self.delta,
+                        potentials=[-value for value in potentials],
+                    )
+            return current
 
     def target_outputs(self, scenario_id: str) -> dict[int, acb_mat]:
         validate_registered_permit(self.permit)
@@ -300,7 +422,6 @@ class CertifiedRegisteredEvaluator:
         with ball_precision(self.bits):
             current = certified_target_input_basis()
             outputs: dict[int, acb_mat] = {}
-            propagators: dict[tuple[Fraction, Fraction, Fraction], acb_mat] = {}
             for step in range(max(observations)):
                 time = step * self.delta
                 mass = _interval_value(scenario["mass"], time)
@@ -311,20 +432,73 @@ class CertifiedRegisteredEvaluator:
                     else potential
                 )
                 key = mass, amplitude, phase_pi
-                propagator = propagators.get(key)
-                if propagator is None:
-                    hamiltonian = build_certified_target_hamiltonian(
+                if amplitude == 0:
+                    current = certified_free_target_step(
+                        current,
                         cutoff=TARGET_R_CUTOFF,
                         mass=mass,
-                        potential_amplitude=amplitude,
-                        potential_phase_pi=phase_pi,
+                        duration=self.delta,
                     )
-                    propagator = (
-                        acb(0, -arb_exact(self.delta)) * hamiltonian
-                    ).exp()
-                    propagators[key] = propagator
-                current = propagator * current
+                else:
+                    propagator = self._target_propagators.get(key)
+                    if propagator is None:
+                        hamiltonian = build_certified_target_hamiltonian(
+                            cutoff=TARGET_R_CUTOFF,
+                            mass=mass,
+                            potential_amplitude=amplitude,
+                            potential_phase_pi=phase_pi,
+                        )
+                        propagator = (
+                            acb(0, -arb_exact(self.delta)) * hamiltonian
+                        ).exp()
+                        self._target_propagators[key] = propagator
+                    current = propagator * current
                 layer = step + 1
                 if layer in observations:
                     outputs[layer] = _copy_matrix(current)
+            return outputs
+
+    def target_state_series(
+        self,
+        scenario_id: str,
+        coefficients: acb_mat,
+    ) -> dict[int, acb_mat]:
+        validate_registered_permit(self.permit)
+        scenario = self.scenarios.get(scenario_id)
+        observations = _observation_steps(self.delta)
+        with ball_precision(self.bits):
+            current = certified_target_input_basis() * coefficients
+            outputs: dict[int, acb_mat] = {}
+            for step in range(max(observations)):
+                time = step * self.delta
+                mass = _interval_value(scenario["mass"], time)
+                potential = _potential_parameters(scenario["potential"], time)
+                amplitude, phase_pi = (
+                    (Fraction(0), Fraction(0))
+                    if potential is None
+                    else potential
+                )
+                key = mass, amplitude, phase_pi
+                if amplitude == 0:
+                    current = certified_free_target_step(
+                        current,
+                        cutoff=TARGET_R_CUTOFF,
+                        mass=mass,
+                        duration=self.delta,
+                    )
+                else:
+                    propagator = self._target_propagators.get(key)
+                    if propagator is None:
+                        hamiltonian = build_certified_target_hamiltonian(
+                            cutoff=TARGET_R_CUTOFF,
+                            mass=mass,
+                            potential_amplitude=amplitude,
+                            potential_phase_pi=phase_pi,
+                        )
+                        propagator = (
+                            acb(0, -arb_exact(self.delta)) * hamiltonian
+                        ).exp()
+                        self._target_propagators[key] = propagator
+                    current = propagator * current
+                outputs[step + 1] = _copy_matrix(current)
             return outputs

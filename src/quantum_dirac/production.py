@@ -57,7 +57,13 @@ class _RegisteredScenarioSet:
         )
         if tuple(record["id"] for record in records) != expected:
             raise QuantumDiracSpecError("stage scenario manifest order mismatch")
-        self.records = {record["id"]: record for record in records}
+        allowed_records = list(records)
+        if permit.stage == "confirmation":
+            development = spec["development"]
+            if tuple(record["id"] for record in development) != DEVELOPMENT_SCENARIOS:
+                raise QuantumDiracSpecError("development scenario order mismatch")
+            allowed_records.append(development[0])
+        self.records = {record["id"]: record for record in allowed_records}
 
     def get(self, scenario_id: str) -> dict[str, Any]:
         validate_registered_permit(self.permit)

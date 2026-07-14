@@ -22,6 +22,7 @@ from .spec import QuantumDiracSpecError, load_json, repository_root, sha256_file
 
 
 _PERMIT_NONCE = object()
+_VERIFICATION_NONCE = object()
 
 
 def _git(root: Path, *arguments: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
@@ -84,8 +85,8 @@ def _require_committed_bytes(root: Path, relative: str, commit: str = "HEAD") ->
 
 def _require_freeze(root: Path) -> str:
     freeze = _require_annotated_freeze(root)
-    if _changes(root, freeze).count(f"A\t{OUTCOME_SEAL_REF}") != 1:
-        raise QuantumDiracSpecError("freeze commit did not introduce exactly one outcome seal")
+    if _changes(root, freeze) != [f"A\t{OUTCOME_SEAL_REF}"]:
+        raise QuantumDiracSpecError("freeze commit must add only the outcome seal")
     _require_committed_bytes(root, OUTCOME_SEAL_REF, freeze)
     seal = load_json(root / OUTCOME_SEAL_REF)
     if seal.get("run_command_enabled") is not False:
@@ -117,6 +118,11 @@ def _require_open_value(root: Path, relative: str, stage: str, freeze: str) -> N
         raise QuantumDiracSpecError("stage opening freeze binding mismatch")
     if value["run_command_enabled"] is not True:
         raise QuantumDiracSpecError("stage opening does not enable its registered run")
+    expected_result = (
+        DEVELOPMENT_RESULT_REF if stage == "development" else CONFIRMATION_RESULT_REF
+    )
+    if value["result_path"] != expected_result:
+        raise QuantumDiracSpecError("stage opening result path mismatch")
     binding = value["outcome_seal"]
     if binding != {
         "path": OUTCOME_SEAL_REF,
@@ -132,6 +138,18 @@ class RegisteredEvaluationPermit:
     freeze_commit: str
     opening_commit: str
     opening_sha256: str
+    _nonce: object
+
+
+@dataclass(frozen=True)
+class RegisteredVerificationPermit:
+    stage: str
+    root: Path
+    freeze_commit: str
+    opening_commit: str
+    result_commit: str
+    opening_sha256: str
+    result_sha256: str
     _nonce: object
 
 
@@ -163,6 +181,16 @@ def issue_registered_permit(
             raise QuantumDiracSpecError("confirmation ancestry lacks development opening")
         if great_grandparent != freeze:
             raise QuantumDiracSpecError("confirmation ancestry is not rooted at freeze")
+        _require_committed_bytes(root, DEVELOPMENT_RESULT_REF, parent)
+        development = load_json(root / DEVELOPMENT_RESULT_REF)
+        if (
+            development.get("stage") != "development"
+            or development.get("status") != "development_passed"
+            or development.get("aggregate", {}).get("stage_pass") is not True
+        ):
+            raise QuantumDiracSpecError(
+                "confirmation cannot open without a verified development pass"
+            )
     else:
         raise QuantumDiracSpecError("stage must be development or confirmation")
     _require_open_value(root, open_ref, stage, freeze)
@@ -192,3 +220,85 @@ def validate_registered_permit(permit: RegisteredEvaluationPermit) -> None:
     )
     if sha256_file(permit.root / open_ref) != permit.opening_sha256:
         raise QuantumDiracSpecError("stage opening bytes changed after permit issuance")
+
+
+def issue_verification_permit(
+    *,
+    stage: str,
+    root: Path | None = None,
+) -> RegisteredVerificationPermit:
+    root = repository_root() if root is None else root.resolve()
+    _require_clean(root)
+    freeze = _require_freeze(root)
+    result_commit = _head(root)
+    opening_commit = _parent(root, result_commit)
+    if stage == "development":
+        open_ref = DEVELOPMENT_OPEN_REF
+        result_ref = DEVELOPMENT_RESULT_REF
+        if _parent(root, opening_commit) != freeze:
+            raise QuantumDiracSpecError("development result lineage is not rooted at freeze")
+    elif stage == "confirmation":
+        open_ref = CONFIRMATION_OPEN_REF
+        result_ref = CONFIRMATION_RESULT_REF
+        development_result = _parent(root, opening_commit)
+        development_open = _parent(root, development_result)
+        if _parent(root, development_open) != freeze:
+            raise QuantumDiracSpecError("confirmation result lineage is not rooted at freeze")
+        if _changes(root, development_open) != [f"A\t{DEVELOPMENT_OPEN_REF}"]:
+            raise QuantumDiracSpecError("confirmation lineage lacks development opening")
+        if _changes(root, development_result) != [f"A\t{DEVELOPMENT_RESULT_REF}"]:
+            raise QuantumDiracSpecError("confirmation lineage lacks development result")
+    else:
+        raise QuantumDiracSpecError("stage must be development or confirmation")
+    if _changes(root, opening_commit) != [f"A\t{open_ref}"]:
+        raise QuantumDiracSpecError("result parent is not the sole-file stage opening")
+    if _changes(root, result_commit) != [f"A\t{result_ref}"]:
+        raise QuantumDiracSpecError("result commit must add only the registered result")
+    _require_open_value(root, open_ref, stage, freeze)
+    _require_committed_bytes(root, result_ref, result_commit)
+    return RegisteredVerificationPermit(
+        stage=stage,
+        root=root,
+        freeze_commit=freeze,
+        opening_commit=opening_commit,
+        result_commit=result_commit,
+        opening_sha256=sha256_file(root / open_ref),
+        result_sha256=sha256_file(root / result_ref),
+        _nonce=_VERIFICATION_NONCE,
+    )
+
+
+def validate_verification_permit(permit: RegisteredVerificationPermit) -> None:
+    if (
+        not isinstance(permit, RegisteredVerificationPermit)
+        or permit._nonce is not _VERIFICATION_NONCE
+    ):
+        raise QuantumDiracSpecError("registered verification permit is invalid")
+    _require_clean(permit.root)
+    if _head(permit.root) != permit.result_commit:
+        raise QuantumDiracSpecError("verification moved away from its result checkpoint")
+    open_ref = (
+        DEVELOPMENT_OPEN_REF
+        if permit.stage == "development"
+        else CONFIRMATION_OPEN_REF
+    )
+    result_ref = (
+        DEVELOPMENT_RESULT_REF
+        if permit.stage == "development"
+        else CONFIRMATION_RESULT_REF
+    )
+    if sha256_file(permit.root / open_ref) != permit.opening_sha256:
+        raise QuantumDiracSpecError("stage opening changed after result commit")
+    if sha256_file(permit.root / result_ref) != permit.result_sha256:
+        raise QuantumDiracSpecError("registered result changed after its commit")
+
+
+def validate_registered_access(
+    permit: RegisteredEvaluationPermit | RegisteredVerificationPermit,
+) -> None:
+    if isinstance(permit, RegisteredEvaluationPermit):
+        validate_registered_permit(permit)
+    elif isinstance(permit, RegisteredVerificationPermit):
+        validate_verification_permit(permit)
+    else:
+        raise QuantumDiracSpecError("registered access permit is invalid")

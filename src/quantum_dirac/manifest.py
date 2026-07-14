@@ -34,7 +34,9 @@ def _binding(path: Path, root: Path) -> dict[str, str]:
 
 def build_manifests(root: Path | None = None) -> dict[str, dict[str, Any]]:
     root = repository_root() if root is None else root.resolve()
-    audit = audit_design(root)
+    # Prospective manifests remain immutable after freezing, so validating them
+    # must continue to work while the separately sealed lifecycle files exist.
+    audit = audit_design(root, allow_lifecycle_artifacts=True)
     spec_dir = root / SPEC_DIR_REF
     candidate = load_json(spec_dir / "candidate.json")
     scenarios = load_json(spec_dir / "scenarios.json")
