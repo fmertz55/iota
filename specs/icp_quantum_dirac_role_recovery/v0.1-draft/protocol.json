@@ -1,0 +1,266 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001",
+  "date": "2026-07-14",
+  "status": "outcome_free_design_active_not_frozen",
+  "human_contract": "docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md",
+  "literature_basis": "literature_basis.md",
+  "registered_outcome_authorized": false,
+  "production_implementation_present": false,
+  "run_command_enabled": false,
+  "question": "can a closed homogeneous nearest-neighbor quantum-information construction recover the frozen operational role of a bounded 1+1D single-particle Dirac sector under fixed E M and Phi",
+  "supported_pass_claim": "declared quantum-information primitives are constructively sufficient to realize the frozen 1+1D Dirac operational role within the registered domain and accuracy",
+  "claim_exclusions": [
+    "ontology",
+    "derivation of quantum theory from generic information",
+    "all-scale continuum equivalence",
+    "multiparticle or interacting QFT",
+    "classical-bit realization",
+    "minimality or necessity"
+  ],
+  "target": {
+    "hamiltonian": "-i sigma_z d_x + m(t) sigma_x + V(x,t) I_2",
+    "units": "hbar=c=1",
+    "boundary": "periodic",
+    "length": "16",
+    "input_modes": "r=-4..4 with two spinor components",
+    "input_dimension": 18,
+    "k_abs_max": "pi/2",
+    "horizon": "2",
+    "observation_times": [
+      "1/2",
+      "1",
+      "3/2",
+      "2"
+    ],
+    "refinements": [
+      {
+        "n_sites": 256,
+        "delta": "1/16",
+        "macrosteps": 32
+      },
+      {
+        "n_sites": 512,
+        "delta": "1/32",
+        "macrosteps": 64
+      },
+      {
+        "n_sites": 1024,
+        "delta": "1/64",
+        "macrosteps": 128
+      }
+    ]
+  },
+  "candidate": {
+    "family": "product_form_partitioned_QCA",
+    "local_modes": [
+      "R",
+      "L"
+    ],
+    "local_hilbert_dimension": 4,
+    "registered_sector": "one global excitation",
+    "logical_step": "U_C[q]=S C_m[q] V[q] with rightmost operation first",
+    "phase": "exp(-i delta V_q(x_j))",
+    "mass_mix": "exp(-i delta m_q sigma_x)",
+    "transport": [
+      "R_j to R_(j+1)",
+      "L_j to L_(j-1)"
+    ],
+    "transport_circuit": [
+      "swap R_j with L_j at every site",
+      "swap L_j with R_(j+1) at every directed edge"
+    ],
+    "free_momentum_block": "exp(-i delta k sigma_z) exp(-i delta m sigma_x)",
+    "order_is_candidate_defining": true
+  },
+  "resource_accounting": {
+    "classical_n_p_applicable": false,
+    "quantum_degree_schemas": 2,
+    "local_hilbert_dimension": 4,
+    "storage": "2N modes with one occupied",
+    "relation_schemas": 1,
+    "relation_instances": "N",
+    "gate_schemas": [
+      "scalar phase",
+      "mass mixer",
+      "on-site swap",
+      "edge swap"
+    ],
+    "free_depth": 3,
+    "active_potential_depth": 4,
+    "free_work": "3N",
+    "active_potential_work": "4N",
+    "parameter_precision_bits": 256,
+    "fitted_sitewise_tables_allowed": false
+  },
+  "maps": {
+    "E": "isometric copy of r=-4..4 Fourier coefficients into identical construction DFT modes",
+    "M": [
+      "Fourier-grid position POVM",
+      "momentum distribution",
+      "total sigma_z current",
+      "local signed current",
+      "norm and fidelity diagnostics"
+    ],
+    "Phi": [
+      "m(t) to delta m_q mass angle",
+      "V(x,t) to delta V(x_j,t_q) local phase",
+      "local target phase probe to matching construction cells"
+    ]
+  },
+  "scenarios": {
+    "development": [
+      {
+        "id": "DEV-FREE-LIGHT",
+        "mass": "1/4",
+        "potential": "0"
+      },
+      {
+        "id": "DEV-FREE-HEAVY",
+        "mass": "1/2",
+        "potential": "0"
+      },
+      {
+        "id": "DEV-QUENCH-UP",
+        "mass": "1/4 to 1/2 at t=1",
+        "potential": "0"
+      },
+      {
+        "id": "DEV-POTENTIAL-EVEN",
+        "mass": "1/4",
+        "potential": "(1/4)cos(2pi x/L) on [1/2,3/2)"
+      }
+    ],
+    "confirmation": [
+      {
+        "id": "HOLDOUT-QUENCH-DOWN",
+        "mass": "1/2 to 1/4 at t=3/4",
+        "potential": "0"
+      },
+      {
+        "id": "HOLDOUT-POTENTIAL-ODD",
+        "mass": "1/2",
+        "potential": "(1/4)cos(2pi x/L+pi/2) on [1/4,5/4)"
+      }
+    ]
+  },
+  "state_witnesses": {
+    "definition": "normalized frozen Gaussian Fourier envelopes times fixed-phase target energy spinors; exact formulas are in the human contract",
+    "development": [
+      "DEV-STATE-POS",
+      "DEV-STATE-NEG",
+      "DEV-STATE-INTERFERENCE",
+      "DEV-STATE-ZITTER"
+    ],
+    "confirmation": [
+      "HOLDOUT-STATE-POS",
+      "HOLDOUT-STATE-NEG",
+      "HOLDOUT-STATE-INTERFERENCE",
+      "HOLDOUT-STATE-ZITTER"
+    ],
+    "confirmation_interpretation": "state holdouts are witnesses because the primary gate is uniform; held-out interventions supply non-algebraically-implied confirmation"
+  },
+  "primary_metric": {
+    "definition": "D_N=U_C,N E_N-J_N U_T,R P_in",
+    "norm": "spectral operator 2-norm",
+    "target_fourier_cutoff": 64,
+    "certified_distance": "upper_bound(norm(D_N))+target_tail+numeric_bound",
+    "target_tail": "2 exp(1/2) (1/2)^61 / 61! for potential scenarios and zero otherwise",
+    "scenario_reducer": "maximum over registered observation times",
+    "tolerance_rationale": "constant-mass product bound T delta |k m| gives pi/32 pi/64 pi/128 at the registered worst case; absolute thresholds are approximately twice these outcome-free bounds",
+    "thresholds": {
+      "256": "0.20",
+      "512": "0.10",
+      "1024": "0.05"
+    },
+    "refinement": [
+      "d_512 <= 0.60 d_256 + 1e-8",
+      "d_1024 <= 0.60 d_512 + 1e-8"
+    ],
+    "near_zero_waiver": "coarse and both finer errors at most 1e-10"
+  },
+  "observable_gates_at_n_1024": {
+    "position_tv_max": "0.05",
+    "momentum_tv_max": "0.05",
+    "total_current_error_max": "0.10",
+    "local_current_l1_max": "0.10",
+    "infidelity_max": "0.0025",
+    "zitter_current_series_sup_error_max": "0.10"
+  },
+  "structure_and_symmetry": {
+    "abstract_unitarity": "exact",
+    "numerical_norm_residual_max": "1e-12",
+    "independent_state_disagreement_max": "1e-11",
+    "causal_support": "exact zero beyond one site per completed macrostep before wrap; massless boundary attainment required",
+    "parity": {
+      "transform": "sigma_x plus x to -x",
+      "abstract_residual": "0",
+      "numerical_residual_max": "1e-12"
+    },
+    "time_reversal": {
+      "transform": "sigma_x K",
+      "finest_residual_max": "0.10",
+      "refinement": "same 0.60 successive bound as primary metric",
+      "claim": "convergent target-role recovery, not exact microscopic invariance"
+    }
+  },
+  "implementation_independence": {
+    "production_candidate": "separate real-space phase mass and swap updates",
+    "production_target": "high-precision spectral generator on r=-64..64",
+    "verifier_candidate": "2x2 momentum blocks and explicit sparse circuit matrices",
+    "verifier_target": "independently rebuilt generators and exponentials",
+    "verifier_norm": "higher-precision Gram-matrix largest eigenvalue",
+    "same_constructor_allowed": false
+  },
+  "pre_freeze_policy": {
+    "allowed": [
+      "N=8 transport and coin algebraic fixtures",
+      "symbolic two-swap transport proof",
+      "N=16 synthetic r=-1..1 encoding fixture",
+      "target-only synthetic tridiagonal generator"
+    ],
+    "rejected": [
+      "registered sizes or scenario combinations",
+      "reversed order",
+      "wrong Fourier sign",
+      "missing swap",
+      "nonunitary coin",
+      "uncharged phase table",
+      "enabled production seal"
+    ]
+  },
+  "failure_controls_after_confirmation_primary": [
+    "HIGH-K: N=256 r=+/-48 m=1/2 T=2",
+    "HIGH-MASS: N=256 r=-4..4 m=8 T=2",
+    "LONG-HORIZON: N=256 r=-4..4 m=1/2 T=16",
+    "FINITE-RING: N=256 massless site basis through 256 macrosteps",
+    "DEPHASED interference and Zitterbewegung witnesses"
+  ],
+  "stopping_rule": {
+    "development": "indivisible four-scenario batch",
+    "on_development_fail": "stop with confirmation unopened",
+    "confirmation": "indivisible two-scenario single-use batch after verified development pass",
+    "partial_result_allowed": false,
+    "interruption": "no scientific result"
+  },
+  "future_provenance": {
+    "freeze_tag": "icp-quantum-dirac-role-recovery-001-v0.1-frozen",
+    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_open_manifest.json",
+    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results.json",
+    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_open_manifest.json",
+    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results.json",
+    "history": "freeze and tag; dev-open-only child; dev-result-only child; conditional holdout-open-only child; holdout-result-only child"
+  },
+  "terminal_classifications": [
+    "development_gate_failed_confirmation_unopened",
+    "development_passed_confirmation_failed",
+    "constructive_sufficiency_passed_frozen_dirac_sector",
+    "execution_incomplete_no_result",
+    "provenance_invalid_no_result"
+  ],
+  "breadth_ideas_not_registered": [
+    "direct symmetry-derived Dirac QCA",
+    "time-symmetric Strang split construction",
+    "reversible classical lattice gas against a hydrodynamic or telegraph target"
+  ]
+}

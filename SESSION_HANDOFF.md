@@ -21,14 +21,17 @@ orbit-recurrence exclusions plus 10 symbolic universal exclusions and
 `combined_no_pass_proved_count=255`. Every remaining future in that frozen
 family is unreachable. Do not spend another horizon on either grammar.
 
-The active continuation is the outcome-free design of
-`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`. The program now prioritizes constructive
+The active continuation is the outcome-free design and implementation of
+`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`. Its conceptual contract draft now exists
+at `docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md`; the machine-readable
+design is under `specs/icp_quantum_dirac_role_recovery/v0.1-draft/`. The draft
+is not frozen, production is absent and disabled, and no registered QCA
+outcome has been generated or inspected. The program prioritizes constructive
 existence before minimality: test whether a closed local quantum-informational
 construction can recover a frozen operational sector of 1+1-dimensional Dirac
 dynamics. No registered QCA outcome may be generated or inspected until the
-quantum primitive grammar, target domain, candidate, maps `E/M/Phi`, metrics,
-tolerances, held-out partition, stopping rule, failure boundaries, verifier,
-and provenance gate are committed and tagged. Classical-shell minimization is
+complete implementation, independent verifier, schemas, fixtures, seal, and
+provenance gate are committed and tagged. Classical-shell minimization is
 paused rather than globally excluded.
 
 ## Local Checkout State
@@ -5930,3 +5933,43 @@ linear outcome provenance. Frame every possible result in ICP constructive-
 sufficiency language; do not claim ontology, generic derivation of quantum
 theory, or minimality.
 ```
+
+## Quantum-Dirac Outcome-Free Draft Started — 2026-07-14
+
+Work continued on local branch `icp-quantum-dirac-role-recovery-001`. No
+registered candidate state, trajectory, distance, distribution, intervention
+response, or failure-control outcome was generated or inspected.
+
+The conceptual design audit is recorded in:
+
+```text
+docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md
+specs/icp_quantum_dirac_role_recovery/v0.1-draft/protocol.json
+specs/icp_quantum_dirac_role_recovery/v0.1-draft/literature_basis.md
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/README.md
+```
+
+The active candidate is the product-form partitioned walk
+`exp(-i delta k sigma_z) exp(-i delta m sigma_x)`, realized as a local phase,
+mass mix, on-site swap, and directed-edge swap. The draft target fixes
+`L=16`, input modes `r=-4..4`, horizon `T=2`, and refinements
+`N=256,512,1024`. Four development scenarios and two single-use held-out
+interventions cover free propagation, mass quenches, and a one-mode scalar
+potential. The primary gate is a certified uniform operator-norm bound over
+the entire 18-dimensional input subspace, supplemented by fixed state,
+interference, Zitterbewegung, conservation, causal-support, parity,
+time-reversal, and failure-boundary checks.
+
+This is still a design artifact, not a preregistration seal. The next work is
+outcome-free schema and implementation construction: canonical manifests,
+real-space candidate engine, spectral target solver, algorithmically
+independent verifier, certified numerical and Fourier-tail bounds, disclosed
+algebraic fixtures, result schemas, disabled content-hash seal, and strict
+linear provenance validators. Do not create the freeze tag, an open manifest,
+or any result until that complete package passes an outcome-free audit.
+
+If the first experiment later passes independently, the noncontrolling breadth
+portfolio is: a symmetry-derived direct Dirac QCA, a time-symmetric Strang
+split circuit, and a separate reversible classical lattice-gas role test.
+These are different construction approaches, not parameter variants, and none
+is presently registered.
