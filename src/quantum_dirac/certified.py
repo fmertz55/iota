@@ -170,7 +170,10 @@ def _potential_vector(
 
 def certified_spectral_norm_upper(matrix: acb_mat) -> arb:
     gram = matrix.conjugate().transpose() * matrix
-    eigenvalues = gram.eig()
+    # Gram matrices commonly have exact or overlapping repeated eigenvalues.
+    # Asking Arb to preserve multiplicities avoids a non-scientific isolation
+    # failure while retaining rigorous eigenvalue enclosures.
+    eigenvalues = gram.eig(multiple=True)
     upper = arb(0)
     for value in eigenvalues:
         upper = upper.max(value.real.upper())

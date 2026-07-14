@@ -28,6 +28,13 @@ def _acb_from_mpmath(value) -> acb:
 
 
 class CertifiedBallFixtureTests(unittest.TestCase):
+    def test_repeated_singular_values_have_a_certified_upper_bound(self) -> None:
+        with ball_precision():
+            identity = acb_mat([[1, 0], [0, 1]])
+            bound = certified_spectral_norm_upper(identity)
+            self.assertTrue(bound >= 1)
+            self.assertTrue(bound.contains(1))
+
     def test_certified_candidate_step_overlaps_independent_reconstruction(self) -> None:
         with ball_precision():
             state_ball = acb_mat(16, 2)

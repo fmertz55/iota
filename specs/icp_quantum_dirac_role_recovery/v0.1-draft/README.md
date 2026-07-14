@@ -10,6 +10,7 @@ implementation complete
 not frozen
 production runner present and disabled by Git provenance
 registered outcomes forbidden
+v0.1 execution incomplete with no result; v0.2 numerical retry pending freeze
 ```
 
 The controlling human-readable draft is

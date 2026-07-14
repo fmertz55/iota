@@ -1,12 +1,12 @@
 # ICP Quantum-Dirac Role-Recovery Contract
 
-Version: `0.1-draft`
+Protocol version: `0.1-draft`; implementation-seal retry: `v0.2`
 
 Search ID: `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`
 
 Date: `2026-07-14`
 
-Status: **outcome-free implementation complete; production present and disabled; not frozen**
+Status: **v0.1 execution incomplete with no result; v0.2 outcome-free repair complete, disabled, and not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -454,7 +454,7 @@ Interruptions, exceptions, worker failures, or unfinished certificates write no 
 The future freeze tag is
 
 ```text
-icp-quantum-dirac-role-recovery-001-v0.1-frozen
+icp-quantum-dirac-role-recovery-001-v0.2-frozen
 ```
 
 The required history is:
@@ -467,6 +467,16 @@ The required history is:
 6. only after independent verification, a documentation commit and completion tag.
 
 The freeze commit must descend from the completed MIR closure and the pre-switch CI provenance repair. Opening code must verify clean worktree, exact parent, annotated tag target, seal hashes, disabled-to-enabled boundary, and sole changed path. Result verification must enforce the same lineage and reject a later worktree.
+
+The first implementation seal, `v0.1`, opened development but wrote no result.
+Its certified Gram eigensolver stopped on repeated eigenvalues before ledger
+serialization. No partial artifact was inspected. Under the registered
+`execution_incomplete_no_result` rule, `v0.1` remains immutable and closed.
+The `v0.2` retry changes only the numerical implementation of the already
+registered spectral-norm enclosure by requesting Arb's multiplicity-preserving
+eigenvalue isolation, plus the corresponding outcome-free regression fixture
+and fresh provenance paths. Scientific definitions, scenarios, partitions,
+states, thresholds, and stopping rules are unchanged.
 
 At this draft stage, no freeze tag, open manifest, or result artifact may exist. The production command exists but remains disabled by the Git provenance gate until the seal is committed and the corresponding stage opening is its required direct child.
 

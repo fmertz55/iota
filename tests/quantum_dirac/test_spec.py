@@ -6,7 +6,7 @@ from pathlib import Path
 
 from src.quantum_dirac.cli import build_parser
 from src.quantum_dirac.manifest import validate_committed_manifests
-from src.quantum_dirac.protocol import REGISTERED_SCENARIOS
+from src.quantum_dirac.protocol import OUTCOME_SEAL_REF, REGISTERED_SCENARIOS
 from src.quantum_dirac.spec import (
     QuantumDiracSpecError,
     audit_design,
@@ -19,10 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 class QuantumDiracSpecTests(unittest.TestCase):
     def test_design_and_prospective_manifests_validate_without_outcomes(self) -> None:
-        seal_path = (
-            ROOT
-            / "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/outcome_seal.json"
-        )
+        seal_path = ROOT / OUTCOME_SEAL_REF
         audit = audit_design(ROOT, allow_lifecycle_artifacts=seal_path.exists())
         self.assertTrue(audit["registered_outcomes_forbidden"])
         manifests = validate_committed_manifests(ROOT)

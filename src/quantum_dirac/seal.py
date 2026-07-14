@@ -9,10 +9,12 @@ from typing import Any
 
 from .manifest import MANIFEST_FILENAMES, validate_committed_manifests
 from .protocol import (
+    CONFIRMATION_OPEN_REF,
     CONFIRMATION_RESULT_REF,
     CONFIRMATION_SCENARIOS,
     CONFIRMATION_STATES,
     CONTRACT_REF,
+    DEVELOPMENT_OPEN_REF,
     DEVELOPMENT_RESULT_REF,
     DEVELOPMENT_SCENARIOS,
     DEVELOPMENT_STATES,
@@ -20,6 +22,7 @@ from .protocol import (
     FREEZE_TAG,
     INDEPENDENT_DPS,
     INDEPENDENT_LIBRARY_VERSION,
+    OUTCOME_SEAL_REF,
     PRECISION_BITS,
     PRIMARY_LIBRARY_VERSION,
     PROTOCOL_VERSION,
@@ -97,11 +100,10 @@ def build_disabled_seal(root: Path | None = None) -> dict[str, Any]:
     root = repository_root() if root is None else root.resolve()
     audit_design(root)
     validate_committed_manifests(root)
-    experiment_dir = root / EXPERIMENT_DIR_REF
     forbidden = (
-        experiment_dir / "outcome_seal.json",
-        experiment_dir / "development_open_manifest.json",
-        experiment_dir / "confirmation_open_manifest.json",
+        root / OUTCOME_SEAL_REF,
+        root / DEVELOPMENT_OPEN_REF,
+        root / CONFIRMATION_OPEN_REF,
         root / DEVELOPMENT_RESULT_REF,
         root / CONFIRMATION_RESULT_REF,
     )
@@ -216,14 +218,14 @@ def preview_disabled_seal(root: Path | None = None) -> dict[str, Any]:
 
 def write_disabled_seal(root: Path | None = None) -> Path:
     root = repository_root() if root is None else root.resolve()
-    path = root / EXPERIMENT_DIR_REF / "outcome_seal.json"
+    path = root / OUTCOME_SEAL_REF
     write_canonical_json_once(path, build_disabled_seal(root))
     return path
 
 
 def verify_outcome_seal(root: Path | None = None) -> dict[str, Any]:
     root = repository_root() if root is None else root.resolve()
-    path = root / EXPERIMENT_DIR_REF / "outcome_seal.json"
+    path = root / OUTCOME_SEAL_REF
     if not path.is_file() or path.is_symlink():
         raise QuantumDiracSealError("registered outcome seal is missing")
     existing = load_canonical_json(path)

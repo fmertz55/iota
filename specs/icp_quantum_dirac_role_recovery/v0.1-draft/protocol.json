@@ -244,11 +244,11 @@
     "interruption": "no scientific result"
   },
   "future_provenance": {
-    "freeze_tag": "icp-quantum-dirac-role-recovery-001-v0.1-frozen",
-    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_open_manifest.json",
-    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results.json",
-    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_open_manifest.json",
-    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results.json",
+    "freeze_tag": "icp-quantum-dirac-role-recovery-001-v0.2-frozen",
+    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_open_manifest_v0.2.json",
+    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results_v0.2.json",
+    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_open_manifest_v0.2.json",
+    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results_v0.2.json",
     "history": "freeze and tag; dev-open-only child; dev-result-only child; conditional holdout-open-only child; holdout-result-only child"
   },
   "terminal_classifications": [

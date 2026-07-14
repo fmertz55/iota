@@ -25,6 +25,7 @@ from .protocol import (
     PHYSICAL_LENGTH,
     REGISTERED_OBSERVATION_TIMES,
     REGISTERED_SIZES,
+    SPEC_DIR_REF,
     TARGET_R_CUTOFF,
 )
 from .spec import QuantumDiracSpecError, load_json
@@ -126,7 +127,7 @@ def _metrics(candidate: mp.matrix, target: mp.matrix, n_sites: int) -> dict[str,
 
 
 def _scenario_record(permit: RegisteredVerificationPermit, scenario_id: str) -> dict[str, Any]:
-    spec = load_json(permit.root / "specs/icp_quantum_dirac_role_recovery/v0.1-draft/scenarios.json")
+    spec = load_json(permit.root / SPEC_DIR_REF / "scenarios.json")
     return next(
         record
         for record in spec["development"] + spec["confirmation"]

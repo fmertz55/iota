@@ -31,7 +31,7 @@
       "const": "outcomes_opened"
     },
     "freeze_tag": {
-      "const": "icp-quantum-dirac-role-recovery-001-v0.1-frozen"
+      "const": "icp-quantum-dirac-role-recovery-001-v0.2-frozen"
     },
     "freeze_commit": {
       "type": "string",
