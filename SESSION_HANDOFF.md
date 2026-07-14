@@ -1,30 +1,35 @@
 # IOTA Session Handoff
 
-Date: 2026-07-13
+Date: 2026-07-14
 
 ## Current Continuation Status
 
 The authoritative continuation plan is now
-[Minimal Informational Realization Program](#minimal-informational-realization-program---authoritative-continuation---2026-07-13)
+[ICP Quantum-Dirac Role Recovery](#icp-quantum-dirac-role-recovery--authoritative-continuation--2026-07-14)
 at the end of this document. It supersedes every earlier `Next Hypothesis`,
 `Acceptance Gate`, `Suggested New Thread Prompt`, and new-thread start point as
 an instruction for new work. Those sections remain as the chronological record
 of the program.
 
-Finding 080 remains preregistered but is paused. The first bounded
-minimal-realization development search is complete: none of the 15 dynamic
-`N_P=2` candidates passed the frozen detector by `H=16`. All nonpasses are
-right-censored in that pilot. Its exact-orbit continuation is also complete:
-all 15 dynamic candidates are recurrence-excluded on the fixed canonical
-`C64` orbit, with failure before one-tick role succession.
+Finding 080 remains preregistered but is paused. Both completed classical
+`N_P=2` minimal-realization paths are closed. The original 15-rule family is
+exactly recurrence-excluded on its fixed canonical `C64` orbit. In the wider
+256-rule centered radius-one family, 59 rules form the registered role and 6
+produce same-or-forward role succession, but none joins succession to the
+registered outward causal discrimination. Exact reconciliation gives 245
+orbit-recurrence exclusions plus 10 symbolic universal exclusions and
+`combined_no_pass_proved_count=255`. Every remaining future in that frozen
+family is unreachable. Do not spend another horizon on either grammar.
 
-The active next test is the outcome-free frozen design
-[`MIR-ROLE-SUCCESSION-001`](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_ROLE_SUCCESSION_CONTRACT.md),
-an alternative `N_P=2` centered-incidence grammar. Its complete candidate
-family, detector, pre-wrap rule, exact recurrence rule, cross-size controls,
-implementation, and provenance gate must be committed and tagged before the
-new outcome is opened. Reserved translation offsets and current-physics role
-outcomes remain sealed.
+The active continuation is the outcome-free design of
+`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`. The program now prioritizes constructive
+existence before minimality: test whether a closed local quantum-informational
+construction can recover a frozen operational sector of 1+1-dimensional Dirac
+dynamics. No registered QCA outcome may be generated or inspected until the
+quantum primitive grammar, target domain, candidate, maps `E/M/Phi`, metrics,
+tolerances, held-out partition, stopping rule, failure boundaries, verifier,
+and provenance gate are committed and tagged. Classical-shell minimization is
+paused rather than globally excluded.
 
 ## Local Checkout State
 
@@ -5661,3 +5666,267 @@ This closes the exploration path, not global `N_P=2` minimality. Any further
 work must prospectively freeze a materially different grammar, seed,
 background, topology, relation dynamics, or object detector and account for
 the added capacity explicitly. No such next search is implied by this result.
+
+## ICP Quantum-Dirac Role Recovery — Authoritative Continuation — 2026-07-14
+
+This section supersedes all earlier continuation instructions. It records a
+program-level decision, not a frozen experimental protocol and not a candidate
+outcome.
+
+### Decision
+
+The immediate objective is now constructive sufficiency before minimization.
+Do not open another blind proto-object grammar merely to obtain a detector pass.
+Instead, choose a declared sector of current physics as the adversarial target
+and ask whether a closed information-only construction recovers its operational
+roles under fixed mappings and interventions.
+
+For this branch, `information-only` means **quantum informational** rather than
+classical Boolean. Quantum state, phase, superposition, entanglement capacity,
+and local unitary transformation are permitted only when explicitly declared
+and charged. This is not a claim that generic information logically entails
+quantum theory. It is a test of whether quantum-information primitives are
+constructively sufficient for a bounded physical role.
+
+If the project later requires a finite-classical-bit-only existence result,
+the preferred separate target is a reversible Boolean lattice gas with a
+frozen hydrodynamic role benchmark. That is not the active continuation.
+
+### Why the target changes here
+
+The exact `N_P=2` closure identified a mechanism boundary rather than a generic
+failure of informational construction. Wider centered fan-in greatly increased
+role formation and enabled succession, but scalar memoryless fresh-output
+dynamics could not preserve an intervention distinction while carrying the
+role forward. Earlier IOTA results likewise indicate that exact placement,
+inherited state, and ordered local realization can be causally important.
+
+A two-component partitioned quantum cellular automaton supplies the missing
+capacities in a scientifically constrained form:
+
+- left- and right-moving internal modes carry directional role state;
+- a local reversible mixing operation preserves phase-sensitive distinctions;
+- conditional local transport supplies bounded-speed succession;
+- interference supplies behavior unavailable to a scalar Boolean event bit;
+- no persistent particle identity or target-trajectory lookup is required.
+
+Published primary work already establishes this as a credible construction
+family rather than an outcome-guided invention:
+
+- Bisio, D'Ariano, and Tosini formulate one-dimensional Dirac QCA comparison as
+  discrimination between unitary channels and derive explicit error bounds:
+  <https://arxiv.org/abs/1212.2839>;
+- Arrighi, Forets, and Nesme prove observational convergence of a Dirac quantum
+  walk under refinement: <https://arxiv.org/abs/1307.3524>;
+- Bisio, D'Ariano, and Tosini exhibit Zitterbewegung and potential scattering:
+  <https://doi.org/10.1103/PhysRevA.88.032301>; and
+- D'Ariano and Perinotti recover Dirac dynamics in the small-wave-vector,
+  small-mass regime from a minimal nontrivial QCA subject to declared quantum
+  constraints: <https://doi.org/10.1103/PhysRevA.90.062106>.
+
+These papers are design evidence. Their reported results are not outcomes of
+the new ICP candidate and cannot replace independent construction and
+verification.
+
+### Frozen claim target
+
+The first target tier should be the single-particle free Dirac theory in one
+space and one time dimension on a finite periodic domain, with a prospectively
+bounded low-momentum, low-mass, finite-horizon operational sector. Position-
+dependent scalar potentials may enter only through separately declared target
+interventions. Multiparticle field theory, interactions, curved spacetime, and
+global continuum equivalence remain outside this first tier.
+
+The intended result statement is:
+
+> Within the frozen target domain, a closed construction containing only
+> declared quantum-information primitives, local relations, and local
+> transformations reproduces the observable distributions, reachable causal
+> futures, intervention responses, symmetries, and conservation behavior of
+> the specified Dirac dynamics.
+
+For target theory `T`, construction `C`, target state `x`, intervention `a`,
+and horizon `H`, the operational gate must have the prospectively frozen form
+
+```text
+d(M_# P_C^H(. | E(x), do(Phi(a))),
+  P_T^H(. | x, do(a))) <= epsilon
+```
+
+for every member of the declared benchmark tier, plus the frozen causal-support
+condition. `d`, `epsilon`, state domain, intervention family, and horizon must
+be fixed before any registered candidate outcome is opened. Exact equality is
+required for finite algebraic fixtures where it is available. Approximate
+continuum recovery requires both a uniform certified bound over the declared
+subspace and the preregistered refinement behavior; visual agreement of chosen
+trajectories is insufficient.
+
+### Candidate declaration
+
+The candidate remains an ICP construction
+
+```text
+C = (P, L, G, X_0, U, E, M, Phi).
+```
+
+The development candidate should be a homogeneous nearest-neighbor partitioned
+QCA with two internal directional components. One local gate layer mixes the
+components; a subsequent local transport layer moves them in opposite
+directions. Gate ordering is part of the causal construction. Do not compress
+multiple causally ordered gate layers into one elementary tick merely to lower
+`T_role`.
+
+The quantum grammar must not reuse the classical `N_P` score without a new
+normalization. It must separately report at least:
+
+- quantum degree schemas and local Hilbert-space dimension;
+- initialized systems and the description cost of `X_0` or `E(x)`;
+- relation schemas, lattice size, boundary conditions, and relation instances;
+- independently removable local unitary/gate schemas and causal gate depth;
+- supplied constants, mass or coin parameters, and their exact description or
+  frozen finite precision;
+- exogenous/intervention channels and parameter information;
+- quantum storage, gate-work, and elapsed elementary-layer budgets; and
+- any measurement postulates or shared evaluation machinery used by `M`.
+
+An arbitrary real or complex parameter may not hide infinite supplied
+information. Prefer exact algebraic parameters for fixtures and explicitly
+bounded representations for numerical tiers. Shared Born-rule evaluation may
+be treated as harness rather than candidate structure only if it is identical
+for target and construction and has no candidate-specific causal effect.
+
+### Maps and benchmark roles
+
+One fixed map triple must serve the whole first tier:
+
+- `E` encodes every allowed target spinor into the QCA state without embedding
+  a future trajectory;
+- `M` decodes the declared position, momentum, current, and measurement
+  distributions; and
+- `Phi` maps every allowed target intervention to a construction intervention
+  without case-specific retuning.
+
+The frozen benchmark should cover:
+
+1. positive- and negative-energy wave-packet propagation;
+2. phase-sensitive interference and a Zitterbewegung fixture;
+3. a mass-quench intervention;
+4. a declared scalar-potential or barrier-scattering intervention;
+5. exact unitarity/norm conservation and the construction causal cone;
+6. parity and time-reversal behavior under frozen transforms;
+7. held-out states and interventions; and
+8. a lattice-refinement ladder with a preregistered convergence rate.
+
+The primary free-evolution certificate should, where feasible, bound the
+operator or channel distance over the entire frozen momentum subspace. Chosen
+wave packets are diagnostics and interpretable witnesses, not substitutes for
+that uniform gate. Potential-dependent cases require an independent target
+solver and a separately specified numerical certification rule.
+
+High momentum, high mass, long horizon, finite-lattice recurrence, and known
+lattice-dispersion behavior must be included as declared failure boundaries or
+negative controls. A candidate is not penalized for a prospectively excluded
+domain, but behavior outside the domain may not be used to enlarge the claim.
+
+### Interpretation boundary
+
+A pass supports only:
+
+```text
+Quantum-information primitives are constructively sufficient to realize the
+frozen Dirac operational role within the declared domain and accuracy.
+```
+
+It does not establish:
+
+- that information is the unique ontology of the universe;
+- that quantum theory follows from generic information alone;
+- exact equivalence to continuum Dirac theory at every scale;
+- interacting or multiparticle quantum field theory;
+- a classical-bit realization; or
+- global or grammar-independent minimality.
+
+After the first independently verified constructive pass, minimization may
+resume by prospectively ablating phase, reversibility, the second directional
+component, gate stages, parameter precision, or other declared capacity. A
+component is necessary only if its removal fails the same frozen role-recovery
+gate. Do not infer necessity merely because it appears in the successful
+construction.
+
+### Outcome and provenance policy
+
+No new registered QCA candidate has been run or inspected in adopting this
+direction. Literature, algebraic toy fixtures, and implementation tests may
+inform outcome-free design, but any inspected candidate trajectory is
+development data and cannot enter the confirmatory partition.
+
+Before opening the first registered outcome, commit and hash:
+
+- the quantum primitive and law grammar;
+- target theory, operational domain, and known exclusions;
+- candidate and complete parameter representation;
+- `E`, `M`, and `Phi`;
+- metrics, tolerances, causal-support rule, and convergence gate;
+- development/held-out partition and stopping rule;
+- target solver, candidate engine, and independent verifier;
+- positive and negative algebraic fixtures;
+- output schema and canonical ordering; and
+- a disabled production seal plus linear open/result provenance rule.
+
+The freeze tag must precede any registered outcome. Partial outcomes must not
+be serialized or inspected. A failed test remains part of the permanent
+record; changing any candidate, map, domain, or gate after inspection creates a
+new version.
+
+### Pre-switch CI provenance repair — 2026-07-14
+
+The research-compendium workflow initially failed the historical
+`MIR-EXACT-ORBIT-001` validator because the default shallow checkout did not
+contain archival commit `4e999bb7ef48cbf10a0a4e15c3e708c3ea1c6f9f` or its
+annotated tag. Fetching full history exposed the validator's second intentional
+guard: it rejects later non-documentation scientific commits when run directly
+from the current worktree.
+
+The provenance check was not weakened. The workflow now fetches complete
+history and tags. `make validate-minimal-realization-exact-orbit` invokes
+`scripts/validate_archived_minimal_realization_exact_orbit.py`, which verifies
+that annotated tag `mir-exact-orbit-001-v0.1-complete` resolves to pinned commit
+`43c0013a0de9b3e157b4c8e710e56b3d0f356126`, creates a clean detached temporary
+worktree at that checkpoint, and runs the unchanged historical validator there.
+Current exact-orbit unit tests still run against the current checkout.
+
+The complete `make verify` chain passes after this repair: 17 evidence claims,
+22 definitions, both lower-shell nulls, the sealed bounded MIR audit, 56 bounded
+MIR tests, independent exact-orbit replay, and 55 current exact-orbit tests.
+This is a CI/provenance repair only; it generated or inspected no new candidate
+outcome.
+
+### Immediate next step
+
+Create an outcome-free draft contract for
+`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`. The first design audit must resolve the
+quantum resource normalization, exact candidate update, elementary gate clock,
+target subspace, metric and tolerance, intervention family, causal-support
+semantics, continuum/refinement certificate, held-out allocation, and known
+failure controls. Do not implement or run the registered candidate until these
+choices are complete enough to freeze.
+
+### Suggested new-thread prompt
+
+```text
+Review SESSION_HANDOFF.md and continue only from “ICP Quantum-Dirac Role
+Recovery — Authoritative Continuation — 2026-07-14.” Preserve unrelated
+worktree changes. Do not generate or inspect any registered QCA outcome.
+
+Design the outcome-free contract for ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001. Use
+primary published science to define a homogeneous nearest-neighbor
+two-component partitioned QCA and a bounded 1+1D single-particle Dirac target.
+Freeze honest quantum primitive/resource accounting, the elementary gate
+clock, one fixed E/M/Phi, the target state and intervention domains, a uniform
+channel/operator-distance gate where feasible, causal-support semantics,
+symmetry and conservation checks, a refinement/convergence certificate,
+held-out allocation, known failure boundaries, independent verification, and
+linear outcome provenance. Frame every possible result in ICP constructive-
+sufficiency language; do not claim ontology, generic derivation of quantum
+theory, or minimality.
+```

@@ -212,8 +212,10 @@ with power one and distance zero. At each later layer it first compares the
 complete `(seeded_state, comparator_state)` pair with the checkpoint, then
 promotes the checkpoint when the current distance equals the current power.
 Replay reconstructs the checkpoint, checkpoint layer, power, distance, and
-checkpoint state that exist after layer `1,000,000`; those values are recorded
-in the result.
+checkpoint state that exist after layer `1,000,000`; the result records the
+boundary seeded and comparator states and exact prefix digest, while the
+production validator and independent replay each reconstruct the unreset
+checkpoint schedule rather than trusting serialized scheduler state.
 
 The first newly eligible formation layer is `1,000,001`. At every later layer
 the frozen order is:
@@ -314,7 +316,7 @@ The result schema makes the static proof checkable without prose: it carries
 the context order, fixed and free loci, successor options,
 matched-arm endpoint values, joint witnesses, and exact classification. For a
 dynamic continuation it carries the parent-prefix match, boundary state, Brent
-boundary state, full trace digest, and pass or recurrence terminal.
+schedule continuity check, full trace digest, and pass or recurrence terminal.
 
 Production and verification independently validate the parent ledger's
 canonical JSON bytes and SHA-256 before interpreting it. Neither accepts a

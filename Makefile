@@ -23,7 +23,7 @@ validate-minimal-realization:
 	python3 -m unittest discover -s tests/minimal_realization -p 'test_*.py'
 
 validate-minimal-realization-exact-orbit:
-	python3 scripts/validate_minimal_realization_exact_orbit.py
+	python3 scripts/validate_archived_minimal_realization_exact_orbit.py
 	python3 -m unittest discover -s tests/minimal_realization_orbit -p 'test_*.py'
 
 verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit

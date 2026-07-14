@@ -19,6 +19,11 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          # Provenance validators compare frozen files with historical commits
+          # and verify the annotated tags that identify those commits.
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Regenerate and validate evidence
         run: make verify
