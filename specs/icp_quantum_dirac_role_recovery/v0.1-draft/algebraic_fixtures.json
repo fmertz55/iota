@@ -1,0 +1,45 @@
+{
+  "fixtures_version": "0.1-draft",
+  "allowed": [
+    {
+      "id": "FIX-N8-MASSLESS-TRANSPORT",
+      "N": 8,
+      "purpose": "two-swap transport equals directional shift"
+    },
+    {
+      "id": "FIX-N8-COIN-ONE-SEVENTH",
+      "N": 8,
+      "coin_angle": "1/7",
+      "purpose": "mass layer equals explicit 2x2 rotation"
+    },
+    {
+      "id": "FIX-N16-FOURIER-ISOMETRY",
+      "N": 16,
+      "input_modes": [
+        -1,
+        0,
+        1
+      ],
+      "purpose": "E is isometric and POVMs normalize"
+    },
+    {
+      "id": "FIX-TARGET-R2-TRIDIAGONAL",
+      "cutoff": 2,
+      "purpose": "independent small target exponential agreement"
+    }
+  ],
+  "forbidden_registered_sizes": [
+    256,
+    512,
+    1024
+  ],
+  "required_rejections": [
+    "reversed_gate_order",
+    "wrong_fourier_sign",
+    "missing_swap_layer",
+    "nonunitary_coin",
+    "uncharged_phase_table",
+    "registered_scenario_before_freeze",
+    "enabled_draft_production"
+  ]
+}

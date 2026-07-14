@@ -1,0 +1,29 @@
+{
+  "partitions_version": "0.1-draft",
+  "development_scenarios": [
+    "DEV-FREE-LIGHT",
+    "DEV-FREE-HEAVY",
+    "DEV-QUENCH-UP",
+    "DEV-POTENTIAL-EVEN"
+  ],
+  "confirmation_scenarios": [
+    "HOLDOUT-QUENCH-DOWN",
+    "HOLDOUT-POTENTIAL-ODD"
+  ],
+  "development_states": [
+    "DEV-STATE-POS",
+    "DEV-STATE-NEG",
+    "DEV-STATE-INTERFERENCE",
+    "DEV-STATE-ZITTER"
+  ],
+  "confirmation_states": [
+    "HOLDOUT-STATE-POS",
+    "HOLDOUT-STATE-NEG",
+    "HOLDOUT-STATE-INTERFERENCE",
+    "HOLDOUT-STATE-ZITTER"
+  ],
+  "development_batch_indivisible": true,
+  "confirmation_batch_indivisible": true,
+  "confirmation_single_use": true,
+  "open_confirmation_only_after_verified_development_pass": true
+}

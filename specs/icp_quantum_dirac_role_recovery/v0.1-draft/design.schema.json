@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/quantum-dirac-design-v0.1-draft",
+  "title": "ICP Quantum-Dirac design artifact",
+  "type": "object",
+  "required": [
+    "search_id"
+  ],
+  "properties": {
+    "search_id": {
+      "const": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"
+    }
+  },
+  "additionalProperties": true
+}

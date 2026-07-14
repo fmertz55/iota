@@ -1,0 +1,106 @@
+{
+  "scenarios_version": "0.1-draft",
+  "development": [
+    {
+      "id": "DEV-FREE-LIGHT",
+      "mass": [
+        [
+          "0",
+          "2",
+          "1/4"
+        ]
+      ],
+      "potential": []
+    },
+    {
+      "id": "DEV-FREE-HEAVY",
+      "mass": [
+        [
+          "0",
+          "2",
+          "1/2"
+        ]
+      ],
+      "potential": []
+    },
+    {
+      "id": "DEV-QUENCH-UP",
+      "mass": [
+        [
+          "0",
+          "1",
+          "1/4"
+        ],
+        [
+          "1",
+          "2",
+          "1/2"
+        ]
+      ],
+      "potential": []
+    },
+    {
+      "id": "DEV-POTENTIAL-EVEN",
+      "mass": [
+        [
+          "0",
+          "2",
+          "1/4"
+        ]
+      ],
+      "potential": [
+        [
+          "1/2",
+          "3/2",
+          "1/4",
+          "0"
+        ]
+      ]
+    }
+  ],
+  "confirmation": [
+    {
+      "id": "HOLDOUT-QUENCH-DOWN",
+      "mass": [
+        [
+          "0",
+          "3/4",
+          "1/2"
+        ],
+        [
+          "3/4",
+          "2",
+          "1/4"
+        ]
+      ],
+      "potential": []
+    },
+    {
+      "id": "HOLDOUT-POTENTIAL-ODD",
+      "mass": [
+        [
+          "0",
+          "2",
+          "1/2"
+        ]
+      ],
+      "potential": [
+        [
+          "1/4",
+          "5/4",
+          "1/4",
+          "pi/2"
+        ]
+      ]
+    }
+  ],
+  "potential_tuple": [
+    "start",
+    "end",
+    "amplitude",
+    "phase"
+  ],
+  "potential_formula": "amplitude cos(2 pi x/L + phase)",
+  "canonical_order": "development then confirmation as serialized",
+  "pre_freeze_evaluation_allowed": false
+}

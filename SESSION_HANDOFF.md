@@ -5973,3 +5973,32 @@ portfolio is: a symmetry-derived direct Dirac QCA, a time-symmetric Strang
 split circuit, and a separate reversible classical lattice-gas role test.
 These are different construction approaches, not parameter variants, and none
 is presently registered.
+
+### Outcome-free implementation progress
+
+The first implementation tranche is complete. It adds canonical candidate,
+target, map, scenario, state, partition, fixture, and schema records; four
+prospective manifests; a product-walk fixture engine; Fourier encoding and
+measurement maps; a small spectral target engine; an independently expressed
+Taylor/momentum verifier; and a read-only disabled-seal preview.
+
+The prospective primary numerical certificate now uses 256-bit Arb/Acb ball
+arithmetic through `python-flint`. A separate `mpmath` path reconstructs the
+candidate circuit, target exponential, and Gram-norm calculation. The public
+fixture engine accepts only the disclosed `N=8` and `N=16` lattices.
+Registered engine classes require a Git-bound evaluation permit. The current
+history cannot issue one because no freeze tag, outcome seal, or stage-opening
+commit exists, and forged permits are rejected.
+
+Twenty-two outcome-free tests pass. They cover transport localization,
+unitarity and norm, independent candidate reconstruction, Fourier isometry,
+Born-map normalization, energy-spinor conventions, target Hermiticity,
+independent target exponentials, certified ball spectral bounds, manifest and
+design audits, CLI surface restrictions, and provenance guards.
+
+The experiment remains not frozen. The complete registered stage runner,
+state-witness and observable reducers, symmetry reducers, result validation,
+full-ledger independent replay, atomic result writer, and final linear
+freeze/open/result commands remain to be implemented and audited. Do not run a
+registered lattice or scenario before those pieces are complete and the
+disabled seal is committed and tagged.

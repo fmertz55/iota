@@ -6,7 +6,7 @@ Search ID: `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`
 
 Date: `2026-07-14`
 
-Status: **outcome-free design active; production absent and disabled; not frozen**
+Status: **outcome-free implementation active; production outcome runner absent and disabled; not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -188,7 +188,7 @@ The classical MIR `N_P` score is inapplicable. This experiment reports the follo
 
 `E(x)` is state payload, not a candidate law, but its nonzero coefficient count and numerical representation must be recorded for every fixture. A target state may not contain a future trajectory.
 
-Masses, times, lengths, amplitudes, phases, and mode indices are supplied as the exact integers and rationals listed in the protocol. Transcendental gate entries are computable values defined by those finite descriptions. The production representation must use 256-bit correctly rounded arithmetic and record the library, version, rounding mode, and a certified error bound. No unrecorded binary64 constant may enter candidate or target dynamics.
+Masses, times, lengths, amplitudes, phases, and mode indices are supplied as the exact integers and rationals listed in the protocol. Transcendental gate entries are computable values defined by those finite descriptions. The prospective primary representation uses 256-bit Arb/Acb outward-rounded ball arithmetic through `python-flint`; the independent replay uses `mpmath` at separately recorded higher precision. Both library versions, working precisions, enclosures, and comparison bounds must be recorded. No unrecorded binary64 constant may enter candidate or target dynamics.
 
 The potential formula and its time window are exogenous intervention information. Its finite description is charged and recorded. Sitewise phase tables may be generated from the formula; they may not be hand supplied or fitted.
 
@@ -497,4 +497,16 @@ Running small parameter variations of the present product walk would measure rob
 
 The conceptual choices required by the handoff are now explicit: quantum resource normalization, exact candidate update, elementary gate clock, target subspace, metric and tolerances, interventions, causal-support semantics, refinement gate, partitions, failure controls, independent verification, and linear provenance.
 
-The next outcome-free work is implementation and schema construction. This document must remain `not frozen` until that work and its independent audit are complete. No registered QCA outcome is authorized by this draft.
+The first outcome-free implementation tranche now includes structured design
+artifacts, canonical prospective manifests, high-precision fixture engines,
+an Arb/Acb certified backend, an algorithmically separate `mpmath` verifier,
+Fourier encoding and measurement maps, a read-only disabled-seal preview, and
+strict guards that cannot issue a registered evaluation permit in the current
+history. All disclosed algebraic and negative guard tests pass.
+
+The package is not freeze-ready. The remaining outcome-free work is the
+complete registered stage runner, state-witness construction, every symmetry
+and observable reducer, result-schema enforcement, independent full-ledger
+replay, atomic writer, and freeze/open/result command provenance. This
+document must remain `not frozen` until that package and its independent audit
+are complete. No registered QCA outcome is authorized by this draft.

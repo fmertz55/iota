@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/quantum-dirac-result-v0.1-draft",
+  "title": "ICP Quantum-Dirac result ledger",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "search_id",
+    "stage",
+    "status",
+    "bindings",
+    "scenario_results",
+    "aggregate"
+  ],
+  "properties": {
+    "protocol_version": {
+      "const": "0.1-draft"
+    },
+    "search_id": {
+      "const": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"
+    },
+    "stage": {
+      "enum": [
+        "development",
+        "confirmation"
+      ]
+    },
+    "status": {
+      "enum": [
+        "development_gate_failed_confirmation_unopened",
+        "development_passed",
+        "development_passed_confirmation_failed",
+        "constructive_sufficiency_passed_frozen_dirac_sector"
+      ]
+    },
+    "bindings": {
+      "type": "object"
+    },
+    "scenario_results": {
+      "type": "array"
+    },
+    "aggregate": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

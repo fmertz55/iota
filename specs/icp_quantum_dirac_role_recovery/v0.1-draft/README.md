@@ -6,9 +6,9 @@ This directory contains the machine-readable outcome-free design for
 Current state:
 
 ```text
-design active
+implementation active
 not frozen
-production absent and disabled
+production outcome runner absent and disabled
 registered outcomes forbidden
 ```
 
@@ -17,6 +17,11 @@ The controlling human-readable draft is
 same choices for schema and implementation work. It is not an outcome seal and
 does not authorize a candidate run.
 
-The next required artifacts are canonical manifests, schemas, two independent
-implementations, algebraic fixtures, a disabled content-hash seal, and strict
-provenance validators.
+The directory now includes the canonical candidate, target, map, scenario,
+state, partition, fixture, and schema records. Prospective manifests live in
+the experiment directory. The implementation has a certified Arb/Acb fixture
+backend and a separately expressed `mpmath` verifier.
+
+The remaining freeze blockers are the complete registered stage runner,
+state-witness and symmetry reducers, full result validation and independent
+ledger replay, atomic writer, and final freeze/open/result command provenance.

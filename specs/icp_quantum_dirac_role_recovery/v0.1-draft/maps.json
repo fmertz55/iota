@@ -1,0 +1,24 @@
+{
+  "maps_version": "0.1-draft",
+  "E": {
+    "id": "QDIR-FOURIER-ISOMETRY-E-001",
+    "rule": "copy r=-4..4 spinor Fourier coefficients into identically labelled normalized N-site DFT modes and zero every other mode"
+  },
+  "M": {
+    "id": "QDIR-BORN-READOUT-M-001",
+    "outputs": [
+      "position_grid_povm",
+      "momentum_distribution",
+      "total_sigma_z_current",
+      "local_signed_current",
+      "norm",
+      "fidelity"
+    ]
+  },
+  "Phi": {
+    "id": "QDIR-LOCAL-CONTROL-PHI-001",
+    "mass": "delta m_q mass-mixer angle",
+    "potential": "delta V(x_j,t_q) local scalar phase",
+    "causal_probe": "same local phase on construction cells intersecting target region"
+  }
+}

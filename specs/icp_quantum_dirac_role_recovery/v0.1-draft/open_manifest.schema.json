@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/quantum-dirac-open-v0.1-draft",
+  "title": "ICP Quantum-Dirac stage opening",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "search_id",
+    "stage",
+    "status",
+    "freeze_tag",
+    "freeze_commit",
+    "outcome_seal",
+    "run_command_enabled",
+    "result_path"
+  ],
+  "properties": {
+    "protocol_version": {
+      "const": "0.1-draft"
+    },
+    "search_id": {
+      "const": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"
+    },
+    "stage": {
+      "enum": [
+        "development",
+        "confirmation"
+      ]
+    },
+    "status": {
+      "const": "outcomes_opened"
+    },
+    "freeze_tag": {
+      "const": "icp-quantum-dirac-role-recovery-001-v0.1-frozen"
+    },
+    "freeze_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "outcome_seal": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "run_command_enabled": {
+      "const": true
+    },
+    "result_path": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

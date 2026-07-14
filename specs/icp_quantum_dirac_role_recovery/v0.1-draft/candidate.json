@@ -1,0 +1,49 @@
+{
+  "candidate_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001",
+  "candidate_id": "QDIR-PRODUCT-WALK-001",
+  "status": "prospective_outcomes_forbidden",
+  "substrate": {
+    "topology": "oriented_periodic_cycle",
+    "sites": [
+      256,
+      512,
+      1024
+    ],
+    "modes_per_site": [
+      "R",
+      "L"
+    ],
+    "local_hilbert_dimension": 4,
+    "sector": "exactly_one_global_excitation"
+  },
+  "gate_order": [
+    "scalar_phase_if_active",
+    "mass_mix",
+    "on_site_swap",
+    "directed_edge_swap"
+  ],
+  "logical_step": "S C_m V",
+  "gates": {
+    "scalar_phase": "exp(-i delta V(x_j,t_q))",
+    "mass_mix": "exp(-i delta m_q sigma_x)",
+    "on_site_swap": "SWAP(R_j,L_j)",
+    "directed_edge_swap": "SWAP(L_j,R_(j+1))"
+  },
+  "transport": {
+    "R": 1,
+    "L": -1
+  },
+  "arithmetic": {
+    "certified_library": "python-flint",
+    "certified_minimum_version": "0.9.0",
+    "independent_library": "mpmath",
+    "independent_minimum_version": "1.3.0",
+    "precision_bits": 256,
+    "rounding_model": "Arb/Acb ball arithmetic with outward enclosures; independent mpmath replay at higher precision",
+    "binary64_registered_dynamics_allowed": false
+  },
+  "parameter_source": "scenarios.json through fixed Phi",
+  "target_lookup_allowed": false,
+  "detector_feedback_allowed": false
+}
