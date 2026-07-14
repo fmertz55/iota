@@ -1,0 +1,77 @@
+{
+  "protocol_version": "0.1-draft",
+  "topology_id": "MIR-ORIENTED-CYCLE-64-TWO-INCIDENCE-V0.1",
+  "status": "outcomes_sealed",
+  "primary_cycle_size": 64,
+  "locus_labels": "integers 0 through 63",
+  "boundary": "periodic",
+  "oriented_edges": "i to (i+1) mod 64",
+  "true_relation_instances": 64,
+  "candidate_specific_edge_bits": 0,
+  "ports": {
+    "predecessor": "source of the unique incoming oriented edge",
+    "self": "governed locus",
+    "successor": "target of the unique outgoing oriented edge"
+  },
+  "schedule": {
+    "kind": "synchronous fresh-output atomic layer",
+    "read_layer": "t",
+    "write_layer": "t+1",
+    "within_tick_cascade": false,
+    "maximum_relation_hops_per_tick": 1
+  },
+  "canonical_seed": {
+    "origin": 0,
+    "active_event_count": 1,
+    "all_other_events": 0,
+    "n_p_seed": 1,
+    "candidate_supplied_address_bits": 0
+  },
+  "comparator": {
+    "initial_state": "all zero",
+    "evolution": "same candidate rule",
+    "invariance_assumed": false
+  },
+  "centered_cone": {
+    "definition": "cycle graph distance from canonical origin is at most layer t",
+    "saturation_layer_primary": 32,
+    "anchor_order": [
+      "0",
+      "+1",
+      "-1",
+      "+2",
+      "-2",
+      "continue by increasing absolute offset with positive first",
+      "+32"
+    ],
+    "signed_offset": {
+      "forward_residue": "d = (anchor - origin) mod N in 0 through N-1",
+      "mapping": "d if d <= floor(N/2), otherwise d-N",
+      "even_antipode": "positive +N/2",
+      "registered_ranges": {
+        "64": [-31, 32],
+        "96": [-47, 48],
+        "128": [-63, 64]
+      }
+    }
+  },
+  "resource_envelope": {
+    "dynamic_channel_schemas": 1,
+    "relation_channel_schemas": 1,
+    "dynamic_storage_bits_per_primary_layer": 64,
+    "relation_instances_primary": 64,
+    "event_reads_per_site_tick": 3,
+    "relation_incidence_reads_per_site_tick": 2,
+    "event_writes_per_site_tick": 1,
+    "site_evaluations_per_primary_layer": 64,
+    "registered_candidate_worker_processes": 4,
+    "parallel_unit": "one complete candidate including triggered controls",
+    "result_collection_order": "canonical candidate manifest order",
+    "partial_result_artifacts": 0,
+    "causal_radius_relation_hops": 1,
+    "exogenous_channels": 0,
+    "persistent_helper_bits": 0
+  },
+  "translation_policy": "canonical origin only; translations are algebraic corollaries",
+  "reflection_policy": "synthetic transition covariance and family-closure audit only; the forward detector is not declared reflection invariant and reflected rules are not replicates"
+}

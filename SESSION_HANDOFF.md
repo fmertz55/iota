@@ -14,10 +14,17 @@ of the program.
 Finding 080 remains preregistered but is paused. The first bounded
 minimal-realization development search is complete: none of the 15 dynamic
 `N_P=2` candidates passed the frozen detector by `H=16`. All nonpasses are
-right-censored, not impossibility results. Development work may proceed only
-under the minimal-realization contract. Reserved translation offsets and
-current-physics role outcomes remain sealed until the contract, candidate,
-detector, comparison rule, and data partition for that test are frozen.
+right-censored in that pilot. Its exact-orbit continuation is also complete:
+all 15 dynamic candidates are recurrence-excluded on the fixed canonical
+`C64` orbit, with failure before one-tick role succession.
+
+The active next test is the outcome-free frozen design
+[`MIR-ROLE-SUCCESSION-001`](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_ROLE_SUCCESSION_CONTRACT.md),
+an alternative `N_P=2` centered-incidence grammar. Its complete candidate
+family, detector, pre-wrap rule, exact recurrence rule, cross-size controls,
+implementation, and provenance gate must be committed and tagged before the
+new outcome is opened. Reserved translation offsets and current-physics role
+outcomes remain sealed.
 
 ## Local Checkout State
 
@@ -5458,3 +5465,81 @@ to a higher primitive shell; promising axes include a carefully counted wider
 relation fan-in or explicit relation-state evolution. Any positive should then
 be separated into pre-wrap versus finite-ring behavior and tested across cycle
 sizes before receiving a localized-object interpretation.
+
+## MIR Role-Succession Falsification Freeze — 2026-07-13
+
+The next test is designed under search ID `MIR-ROLE-SUCCESSION-001`. Its
+controlling standalone specification is
+[`docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_ROLE_SUCCESSION_CONTRACT.md`](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_ROLE_SUCCESSION_CONTRACT.md).
+
+No new grammar outcome was generated or inspected during design. The only
+opened simulator outcome was the already committed `MIR-EXACT-ORBIT-001`
+ledger named above. Pre-freeze tests used disclosed synthetic states only; no
+registered rule was evolved from the canonical one-event seed.
+
+The alternative retains `N_P=2` under relation-schema normalization:
+
+```text
+event                one binary dynamic channel
+oriented_cycle_edge  one binary directed relation channel
+```
+
+The governed event now reads `(predecessor, self, successor)`. Predecessor and
+successor are the incoming and outgoing incidences of the same 64-edge oriented
+relation; no inverse table or second relation state is stored. The added
+capacity is explicit: fan-in `2 -> 3`, relation-incidence reads `1 -> 2`, exact
+signatures `4 -> 8`, and deterministic candidates `16 -> 256`. The rule family
+is the ordinary 256-rule elementary cellular-automaton family expressed as
+atomic production rows. The zero-row rule is analytically excluded; all 255
+nonempty rules are processed with no shell stopping.
+
+The old local role, successor offsets `[0,+1]`, sham `110 -> 011`, break
+`110 -> 101`, two-layer `+3` endpoint, one-event seed, all-zero comparator,
+synchronous clock, and primary `C64` topology remain fixed. Only the causal-cone
+logic is versioned: centered access saturates `C64` at layer 32.
+
+Detector boundary semantics are explicit. Formation requires active loci
+`a,a+1` inside the layer-`t` centered cone; succession requires both active
+successor loci inside the layer-`t+1` cone; intervention eligibility requires
+endpoint `a+3` inside the layer-`t+2` cone. Isolation zeros at `a-1,a+2` are
+not additional cone gates. Serialized anchors use
+`d=(a-origin) mod N`, encoded as `d` when `d <= floor(N/2)` and `d-N`
+otherwise, with the even antipode positive.
+
+The protocol has two separately frozen outcomes:
+
+1. endogenous role succession by the exact pre-wrap horizon `H_pre=29`; and
+2. the full proto-object pass including the outward endpoint.
+
+`H_pre=29` is the largest formation layer satisfying
+`2 * (t + 2) < 64`. A succession without an outward difference moves the
+bottleneck but is not a proto-object. The trace continues after the pre-wrap
+classification until complete pass, exact full seeded/comparator recurrence,
+or the one-million-layer resource ceiling. Resource censoring never supports an
+infinity claim.
+
+Execution and independent replay each use four candidate-level spawned workers.
+All dynamic records are collected in canonical manifest order before the sole
+result file is written; no partial candidate outcome is serialized.
+
+Every primary passer triggers fixed `C96` and `C128` controls before the result
+is serialized. A localized interpretation requires `T_proto <= 29` plus exact
+cross-size witness agreement. That agreement is a finite-support algebraic
+validation, not independent replication. Later passes remain
+`finite_ring_exposed`.
+
+The linear provenance rule is:
+
+1. commit the complete outcome-free contract, specs, implementation, tests,
+   literature log, and newly added hash seal, then place annotated tag
+   `mir-role-succession-001-v0.1-frozen` on that exact seal-introduction commit;
+2. add only the registered open manifest in a direct child; and
+3. add only the canonical result in its direct child.
+
+Independent result replay is accepted only from a clean committed step 3 whose
+parent is the opening commit and whose sole changed path is the registered
+result.
+
+At this freeze point the outcome seal exists with the production command
+disabled. No open manifest and no result may exist. Do not run or inspect the
+new candidate family until the freeze commit and tag are present.

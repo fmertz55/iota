@@ -1,0 +1,115 @@
+{
+  "protocol_version": "0.1-draft",
+  "detector_id": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-CENTERED-V0.1",
+  "status": "outcomes_sealed",
+  "read_only": true,
+  "candidate_independent": true,
+  "inherited_local_predicates": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-EXACT-ORBIT-V0.1",
+  "version_reason": "bidirectional seed cone and layer-32 C64 saturation",
+  "role": {
+    "id": "isolated_active_dyad",
+    "anchor": "left active locus in the oriented forward direction",
+    "required_pattern": [
+      {
+        "offset": -1,
+        "value": 0
+      },
+      {
+        "offset": 0,
+        "value": 1
+      },
+      {
+        "offset": 1,
+        "value": 1
+      },
+      {
+        "offset": 2,
+        "value": 0
+      }
+    ],
+    "active_witness_offsets": [
+      0,
+      1
+    ],
+    "initial_state_must_fail": true
+  },
+  "attribution": {
+    "comparator": "matched all-zero initial state evolved under the same candidate",
+    "requirement": "both active witness loci are zero in comparator at the same layer"
+  },
+  "succession": {
+    "confirmation_lag_ticks": 1,
+    "eligible_anchor_offsets": [
+      0,
+      1
+    ],
+    "selection_order": "listed order",
+    "predicate": "isolated_active_dyad",
+    "attribution_required": true,
+    "predecessor_shift_excluded_reason": "preserve inherited detector and isolate grammar change; the claim remains limited to the forward-oriented detector"
+  },
+  "cone_eligibility": {
+    "formation": "active role loci a and a+1 are both in the centered cone at layer t",
+    "successor": "both active loci at the selected successor anchor are in the centered cone at layer t+1",
+    "intervention_endpoint": "locus a+3 is in the centered cone at layer t+2",
+    "isolation_zero_loci_excluded": [
+      -1,
+      2
+    ]
+  },
+  "matched_interventions": {
+    "application_layer": "formation layer t",
+    "window_offsets": [
+      0,
+      1,
+      2
+    ],
+    "natural": [
+      1,
+      1,
+      0
+    ],
+    "role_preserving_sham": [
+      0,
+      1,
+      1
+    ],
+    "role_breaking": [
+      1,
+      0,
+      1
+    ],
+    "hamming_distance_from_natural_each": 2,
+    "active_count_each": 2,
+    "external_guard": {
+      "offset": 3,
+      "value": 0
+    },
+    "outside_window": "unchanged",
+    "normal_evolution_ticks": 2
+  },
+  "reachable_future": {
+    "locus_offset": 3,
+    "observation_layer": "t+2",
+    "alphabet": [
+      0,
+      1
+    ],
+    "pass_rule": "sham and breaking exact endpoint values differ"
+  },
+  "diagnostic_stages": [
+    "first_role",
+    "first_successor",
+    "first_intervention_eligible",
+    "first_complete_pass"
+  ],
+  "pre_wrap": {
+    "strict_condition": "2 * (t + 2) < 64",
+    "maximum_formation_layer": 29,
+    "all_dynamic_candidates_must_receive_classification": true,
+    "zero_row_classification": null
+  },
+  "candidate_pass_rule": "earliest attributed role with attributed eligible successor and unequal outward endpoints",
+  "t_proto_definition": "first_complete_pass layer",
+  "claim_limit": "a successor without unequal outward endpoints is not a proto-object pass"
+}

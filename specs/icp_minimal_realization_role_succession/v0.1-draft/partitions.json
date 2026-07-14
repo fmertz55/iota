@@ -1,0 +1,57 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "MIR-ROLE-SUCCESSION-001",
+  "status": "outcomes_sealed",
+  "data_class": "development",
+  "primary": {
+    "cycle_size": 64,
+    "origins": [
+      0
+    ],
+    "candidate_rule_numbers": {
+      "first": 0,
+      "last": 255,
+      "count": 256
+    },
+    "dynamic_candidate_count": 255,
+    "shell_stopping": false
+  },
+  "conditional_size_controls": {
+    "trigger": "each primary C64 complete passer",
+    "cycle_sizes": [
+      96,
+      128
+    ],
+    "origin": 0,
+    "signed_anchor_encoding": {
+      "forward_residue": "d = (anchor - origin) mod N",
+      "mapping": "d if d <= floor(N/2), otherwise d-N",
+      "even_antipode": "positive +N/2",
+      "ranges_by_cycle_size": {
+        "64": [-31, 32],
+        "96": [-47, 48],
+        "128": [-63, 64]
+      }
+    },
+    "assessment_horizon": "the candidate's primary C64 first_complete_pass layer",
+    "execution_order": "complete before any primary result serialization",
+    "pre_wrap_required_agreement": [
+      "first passage layer",
+      "signed local anchor",
+      "successor displacement",
+      "sham endpoint",
+      "breaking endpoint"
+    ],
+    "evidential_status": "algebraic finite-support validation, not independent replication"
+  },
+  "translations": {
+    "evaluated": [
+      0
+    ],
+    "nonzero_status": "not evaluated; formal equivariance only"
+  },
+  "held_out_confirmation": {
+    "exists": false,
+    "reason": "the rule family is exhaustive and outcome-motivated; a later initial-condition or topology population requires a separate freeze"
+  }
+}

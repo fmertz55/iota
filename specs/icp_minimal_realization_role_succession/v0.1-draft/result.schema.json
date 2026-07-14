@@ -1,0 +1,1016 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schemas/mir-role-succession-result-v0.1-draft.json",
+  "title": "MIR Role-Succession Result Ledger",
+  "description": "Closed structural transport schema. The sealed Python validator and independent replay are normative for candidate identity, chronology, exact recurrence, pre-wrap staging, cross-size agreement, winner blocking, and aggregates.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "base_contract_version",
+    "protocol_version",
+    "search_id",
+    "run_id",
+    "grammar_id",
+    "detector",
+    "data_class",
+    "endpoint",
+    "primary_cycle_size",
+    "embedding_cycle_sizes",
+    "canonical_origin",
+    "formation_horizon",
+    "causal_endpoint_lag",
+    "cone_saturation_layer",
+    "max_layers_per_candidate",
+    "primitive_capacity",
+    "candidate_allocation",
+    "trace_digest_encoding",
+    "open_manifest",
+    "outcome_seal",
+    "candidate_manifest",
+    "result_schema",
+    "parent_exact_result",
+    "global_minimality_claimed",
+    "alternative_grammar_excluded",
+    "all_nonempty_candidates_processed",
+    "shell_stopping_used",
+    "completion_status",
+    "exact_family_conclusion",
+    "pre_wrap_mechanism_conclusion",
+    "pre_wrap_construction_conclusion",
+    "pre_wrap_stage_counts",
+    "exact_pass_candidate_ids",
+    "localized_candidate_ids",
+    "finite_ring_exposed_candidate_ids",
+    "minimum_law_ranking_status",
+    "minimum_law_winner_candidate_ids",
+    "candidate_results"
+  ],
+  "properties": {
+    "base_contract_version": {
+      "const": "0.2-draft"
+    },
+    "protocol_version": {
+      "const": "0.1-draft"
+    },
+    "search_id": {
+      "const": "MIR-ROLE-SUCCESSION-001"
+    },
+    "run_id": {
+      "const": "MIR-ROLE-SUCCESSION-001-DEVELOPMENT"
+    },
+    "grammar_id": {
+      "const": "MIR-CENTERED-INCIDENCE-PRODUCTION-ROW-V0.1"
+    },
+    "detector": {
+      "const": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-CENTERED-V0.1"
+    },
+    "data_class": {
+      "const": "development_outcome_contingent"
+    },
+    "endpoint": {
+      "const": "first_complete_proto_object_or_exact_post_saturation_recurrence"
+    },
+    "primary_cycle_size": {
+      "const": 64
+    },
+    "embedding_cycle_sizes": {
+      "const": [
+        96,
+        128
+      ]
+    },
+    "canonical_origin": {
+      "const": 0
+    },
+    "formation_horizon": {
+      "const": 29
+    },
+    "causal_endpoint_lag": {
+      "const": 2
+    },
+    "cone_saturation_layer": {
+      "const": 32
+    },
+    "max_layers_per_candidate": {
+      "const": 1000000
+    },
+    "primitive_capacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "normalized_n_p",
+        "input_ports",
+        "relation_incidence_reads_per_site",
+        "local_signature_fan_in",
+        "truth_table_row_capacity",
+        "scheduler",
+        "seed",
+        "comparator",
+        "topology"
+      ],
+      "properties": {
+        "normalized_n_p": {
+          "const": 2
+        },
+        "input_ports": {
+          "const": [
+            "predecessor",
+            "self",
+            "successor"
+          ]
+        },
+        "relation_incidence_reads_per_site": {
+          "const": 2
+        },
+        "local_signature_fan_in": {
+          "const": 3
+        },
+        "truth_table_row_capacity": {
+          "const": 8
+        },
+        "scheduler": {
+          "const": "synchronous_atomic_layer"
+        },
+        "seed": {
+          "const": "one_event_at_origin_0"
+        },
+        "comparator": {
+          "const": "all_zero_evolved_under_same_rule"
+        },
+        "topology": {
+          "const": "oriented_periodic_cycle"
+        }
+      }
+    },
+    "candidate_allocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_count",
+        "dynamic_candidate_count",
+        "shell_sizes",
+        "enumeration_order"
+      ],
+      "properties": {
+        "candidate_count": {
+          "const": 256
+        },
+        "dynamic_candidate_count": {
+          "const": 255
+        },
+        "shell_sizes": {
+          "const": [
+            1,
+            8,
+            28,
+            56,
+            70,
+            56,
+            28,
+            8,
+            1
+          ]
+        },
+        "enumeration_order": {
+          "const": "increasing_N_L_then_lexicographic_signature_tuple"
+        }
+      }
+    },
+    "trace_digest_encoding": {
+      "const": "sha256_domain_separated_decimal_length_layer_fixed_width_seeded_fixed_width_comparator_including_layer_0",
+      "description": "Normative byte layout is frozen in protocol.json trace_and_state_encoding."
+    },
+    "open_manifest": {
+      "$ref": "#/$defs/binding"
+    },
+    "outcome_seal": {
+      "$ref": "#/$defs/binding"
+    },
+    "candidate_manifest": {
+      "$ref": "#/$defs/binding"
+    },
+    "result_schema": {
+      "$ref": "#/$defs/binding"
+    },
+    "parent_exact_result": {
+      "const": {
+        "path": "output/minimal_realization/MIR-EXACT-ORBIT-001/exact_orbit_results.json",
+        "sha256": "e6d8ab89edd79422f9a6f5803447d52e642c6873f0275272c519fbd4487023cc"
+      }
+    },
+    "global_minimality_claimed": {
+      "const": false
+    },
+    "alternative_grammar_excluded": {
+      "const": false
+    },
+    "all_nonempty_candidates_processed": {
+      "const": true
+    },
+    "shell_stopping_used": {
+      "const": false
+    },
+    "completion_status": {
+      "enum": [
+        "complete_all_candidate_endpoints_resolved",
+        "existential_pass_with_resource_censoring",
+        "incomplete_resource_censored"
+      ]
+    },
+    "exact_family_conclusion": {
+      "enum": [
+        "all_dynamic_candidates_recurrence_excluded",
+        "one_or_more_exact_passes",
+        "resource_censored_incomplete"
+      ]
+    },
+    "pre_wrap_mechanism_conclusion": {
+      "enum": [
+        "pre_wrap_succession_repair_falsified",
+        "succession_bottleneck_moved_without_pre_wrap_proto_object",
+        "one_or_more_pre_wrap_successors"
+      ]
+    },
+    "pre_wrap_construction_conclusion": {
+      "enum": [
+        "localized_development_falsification_survived",
+        "no_localized_pre_wrap_construction"
+      ]
+    },
+    "pre_wrap_stage_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "successor",
+        "intervention_eligible",
+        "complete_pass"
+      ],
+      "properties": {
+        "role": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "successor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "intervention_eligible": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "complete_pass": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      }
+    },
+    "exact_pass_candidate_ids": {
+      "$ref": "#/$defs/candidate_id_array"
+    },
+    "localized_candidate_ids": {
+      "$ref": "#/$defs/candidate_id_array"
+    },
+    "finite_ring_exposed_candidate_ids": {
+      "$ref": "#/$defs/candidate_id_array"
+    },
+    "minimum_law_ranking_status": {
+      "enum": [
+        "no_exact_passer",
+        "blocked_by_lower_shell_resource_censoring",
+        "resolved_within_frozen_family"
+      ]
+    },
+    "minimum_law_winner_candidate_ids": {
+      "$ref": "#/$defs/candidate_id_array"
+    },
+    "candidate_results": {
+      "type": "array",
+      "minItems": 256,
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/candidate_result"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "state_hex": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "Unsigned C64 state in fixed-width lowercase hex; locus i is bit i and locus 0 is the least-significant bit."
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "candidate_id_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^MIR-RS-P2-L[0-8]-(NONE|[01]{3}(-[01]{3})*)$"
+      }
+    },
+    "role_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer",
+        "anchor"
+      ],
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "anchor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        }
+      }
+    },
+    "successor_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer",
+        "anchor",
+        "successor_anchor"
+      ],
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "anchor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        },
+        "successor_anchor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        }
+      }
+    },
+    "pass_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer",
+        "anchor",
+        "signed_anchor",
+        "successor_anchor",
+        "successor_displacement",
+        "sham_future",
+        "breaking_future",
+        "seeded_state_hex",
+        "baseline_state_hex"
+      ],
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "anchor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        },
+        "signed_anchor": {
+          "type": "integer",
+          "minimum": -31,
+          "maximum": 32
+        },
+        "successor_anchor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 63
+        },
+        "successor_displacement": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "sham_future": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "breaking_future": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "seeded_state_hex": {
+          "$ref": "#/$defs/state_hex"
+        },
+        "baseline_state_hex": {
+          "$ref": "#/$defs/state_hex"
+        }
+      }
+    },
+    "pre_wrap_classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "formation_horizon",
+        "role_by_H29",
+        "successor_by_H29",
+        "intervention_eligible_by_H29",
+        "pass_by_H29",
+        "first_role",
+        "first_successor",
+        "first_intervention_eligible",
+        "first_complete_pass"
+      ],
+      "properties": {
+        "formation_horizon": {
+          "const": 29
+        },
+        "role_by_H29": {
+          "type": "boolean"
+        },
+        "successor_by_H29": {
+          "type": "boolean"
+        },
+        "intervention_eligible_by_H29": {
+          "type": "boolean"
+        },
+        "pass_by_H29": {
+          "type": "boolean"
+        },
+        "first_role": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/role_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_successor": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/successor_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_intervention_eligible": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/successor_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_complete_pass": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/pass_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "joint_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seeded_state_hex",
+        "baseline_state_hex"
+      ],
+      "properties": {
+        "seeded_state_hex": {
+          "$ref": "#/$defs/state_hex"
+        },
+        "baseline_state_hex": {
+          "$ref": "#/$defs/state_hex"
+        }
+      }
+    },
+    "recurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cone_saturation_layer",
+        "checkpoint_layer",
+        "repeat_layer",
+        "period",
+        "checkpoint_state",
+        "repeat_state",
+        "exact_full_state_equality"
+      ],
+      "properties": {
+        "cone_saturation_layer": {
+          "const": 32
+        },
+        "checkpoint_layer": {
+          "type": "integer",
+          "minimum": 32,
+          "maximum": 999999
+        },
+        "repeat_layer": {
+          "type": "integer",
+          "minimum": 33,
+          "maximum": 1000000
+        },
+        "period": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999968
+        },
+        "checkpoint_state": {
+          "$ref": "#/$defs/joint_state"
+        },
+        "repeat_state": {
+          "$ref": "#/$defs/joint_state"
+        },
+        "exact_full_state_equality": {
+          "const": true
+        }
+      }
+    },
+    "symmetry_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "translation_offsets",
+        "last_audited_layer",
+        "translation_covariance_exact",
+        "reflection_covariance_exact",
+        "reflected_production_rows"
+      ],
+      "properties": {
+        "translation_offsets": {
+          "type": "array",
+          "minItems": 64,
+          "maxItems": 64,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 63
+          }
+        },
+        "last_audited_layer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "translation_covariance_exact": {
+          "const": true
+        },
+        "reflection_covariance_exact": {
+          "const": true
+        },
+        "reflected_production_rows": {
+          "$ref": "#/$defs/production_rows"
+        }
+      }
+    },
+    "size_pass_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer",
+        "signed_anchor",
+        "successor_displacement",
+        "sham_future",
+        "breaking_future"
+      ],
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "signed_anchor": {
+          "type": "integer",
+          "minimum": -63,
+          "maximum": 64
+        },
+        "successor_displacement": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "sham_future": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "breaking_future": {
+          "enum": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    "size_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "cycle_size": {
+                "const": 96
+              }
+            },
+            "required": [
+              "cycle_size"
+            ]
+          },
+          "then": {
+            "properties": {
+              "first_complete_pass": {
+                "oneOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/size_pass_witness"
+                      },
+                      {
+                        "properties": {
+                          "signed_anchor": {
+                            "minimum": -47,
+                            "maximum": 48
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "cycle_size": {
+                "const": 128
+              }
+            },
+            "required": [
+              "cycle_size"
+            ]
+          },
+          "then": {
+            "properties": {
+              "first_complete_pass": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/size_pass_witness"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "required": [
+        "cycle_size",
+        "evaluated_through_layer",
+        "first_complete_pass",
+        "matches_primary_witness",
+        "pre_wrap_agreement_required",
+        "exact_pre_wrap_agreement"
+      ],
+      "properties": {
+        "cycle_size": {
+          "enum": [
+            96,
+            128
+          ]
+        },
+        "evaluated_through_layer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "first_complete_pass": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/size_pass_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "matches_primary_witness": {
+          "type": "boolean"
+        },
+        "pre_wrap_agreement_required": {
+          "type": "boolean"
+        },
+        "exact_pre_wrap_agreement": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "production_rows": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "000",
+          "001",
+          "010",
+          "011",
+          "100",
+          "101",
+          "110",
+          "111"
+        ]
+      }
+    },
+    "candidate_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "atomic_n_l": {
+                "const": 0
+              }
+            },
+            "required": [
+              "atomic_n_l"
+            ]
+          },
+          "then": {
+            "required": [
+              "exclusion_reason"
+            ],
+            "properties": {
+              "evaluation_status": {
+                "const": "analytically_excluded"
+              },
+              "pre_wrap_classification": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "exclusion_reason"
+              ]
+            },
+            "properties": {
+              "evaluation_status": {
+                "enum": [
+                  "exact_pass_on_fixed_orbit",
+                  "recurrence_excluded_on_fixed_orbit",
+                  "resource_censored_before_recurrence"
+                ]
+              },
+              "pre_wrap_classification": {
+                "$ref": "#/$defs/pre_wrap_classification"
+              }
+            }
+          }
+        }
+      ],
+      "required": [
+        "candidate_id",
+        "candidate_sha256",
+        "normalized_n_p",
+        "atomic_n_l",
+        "production_rows",
+        "wolfram_rule_number",
+        "evaluation_status",
+        "bounded_status",
+        "pass_by_H29",
+        "t_proto_exact",
+        "last_assessed_layer",
+        "first_role",
+        "first_successor",
+        "first_intervention_eligible",
+        "first_complete_pass",
+        "pre_wrap_classification",
+        "recurrence",
+        "resource_limit",
+        "trace_sha256",
+        "transition_symmetry_audit",
+        "cross_size_controls",
+        "localized_interpretation"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "pattern": "^MIR-RS-P2-L[0-8]-(NONE|[01]{3}(-[01]{3})*)$"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "normalized_n_p": {
+          "const": 2
+        },
+        "atomic_n_l": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "production_rows": {
+          "$ref": "#/$defs/production_rows"
+        },
+        "wolfram_rule_number": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "evaluation_status": {
+          "enum": [
+            "analytically_excluded",
+            "exact_pass_on_fixed_orbit",
+            "recurrence_excluded_on_fixed_orbit",
+            "resource_censored_before_recurrence"
+          ]
+        },
+        "bounded_status": {
+          "enum": [
+            "not_applicable",
+            "pass_by_H29",
+            "right_censored_T_proto_gt_29"
+          ]
+        },
+        "pass_by_H29": {
+          "type": "boolean"
+        },
+        "t_proto_exact": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "last_assessed_layer": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "first_role": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/role_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_successor": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/successor_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_intervention_eligible": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/successor_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_complete_pass": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/pass_witness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pre_wrap_classification": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/pre_wrap_classification"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recurrence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/recurrence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resource_limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1000000,
+          "maximum": 1000000
+        },
+        "trace_sha256": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transition_symmetry_audit": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/symmetry_audit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cross_size_controls": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/size_control"
+          }
+        },
+        "localized_interpretation": {
+          "type": "boolean"
+        },
+        "exclusion_reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

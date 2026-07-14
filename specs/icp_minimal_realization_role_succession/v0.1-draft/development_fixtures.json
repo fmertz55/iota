@@ -1,0 +1,150 @@
+{
+  "protocol_version": "0.1-draft",
+  "status": "outcomes_sealed_synthetic_development_only",
+  "canonical_seed_trajectories_forbidden": true,
+  "fixtures": [
+    {
+      "id": "copy_predecessor_supplied_dyad_complete_pass",
+      "data_class": "detector_development",
+      "cycle_size": 16,
+      "rows": [
+        "100",
+        "101",
+        "110",
+        "111"
+      ],
+      "origin": 5,
+      "formation_layer": 1,
+      "formation_anchor": 5,
+      "formation_active_loci": [
+        5,
+        6
+      ],
+      "comparator_active_loci": [],
+      "expected_successor_anchor": 6,
+      "expected_sham_endpoint": 1,
+      "expected_breaking_endpoint": 0,
+      "note": "supplied role only; never evaluate this row set from the registered canonical seed before opening"
+    },
+    {
+      "id": "copy_self_supplied_dyad_successor_no_outward_effect",
+      "data_class": "detector_development",
+      "cycle_size": 16,
+      "rows": [
+        "010",
+        "011",
+        "110",
+        "111"
+      ],
+      "origin": 5,
+      "formation_layer": 1,
+      "formation_anchor": 5,
+      "formation_active_loci": [
+        5,
+        6
+      ],
+      "comparator_active_loci": [],
+      "expected_successor_anchor": 5,
+      "expected_sham_endpoint": 0,
+      "expected_breaking_endpoint": 0
+    },
+    {
+      "id": "comparator_attribution_failure",
+      "data_class": "detector_development",
+      "cycle_size": 16,
+      "origin": 5,
+      "formation_layer": 1,
+      "formation_anchor": 5,
+      "formation_active_loci": [
+        5,
+        6
+      ],
+      "comparator_active_loci": [
+        5
+      ],
+      "expected_role_attributed": false
+    },
+    {
+      "id": "successor_comparator_attribution_failure",
+      "data_class": "detector_development",
+      "cycle_size": 16,
+      "rows": [
+        "001",
+        "100",
+        "110"
+      ],
+      "origin": 5,
+      "formation_layer": 1,
+      "formation_anchor": 5,
+      "formation_active_loci": [
+        5,
+        6
+      ],
+      "comparator_active_loci": [
+        7
+      ],
+      "raw_successor_anchor": 6,
+      "expected_first_role_anchor": 5,
+      "expected_first_successor": null,
+      "expected_complete_pass": false
+    },
+    {
+      "id": "ordered_scan_continues_after_guard_failure",
+      "data_class": "detector_development",
+      "cycle_size": 16,
+      "rows": [
+        "100",
+        "101",
+        "110",
+        "111"
+      ],
+      "origin": 0,
+      "formation_layer": 7,
+      "formation_active_loci": [
+        0,
+        1,
+        3,
+        6,
+        7
+      ],
+      "comparator_active_loci": [],
+      "expected_first_role_anchor": 0,
+      "expected_first_successor": [
+        0,
+        1
+      ],
+      "expected_first_intervention_eligible": [
+        6,
+        7
+      ],
+      "expected_complete_pass_anchor": 6,
+      "expected_complete_pass_successor_anchor": 7,
+      "expected_sham_endpoint": 1,
+      "expected_breaking_endpoint": 0
+    },
+    {
+      "id": "primary_cone_strict_pre_wrap_boundary",
+      "data_class": "analytic",
+      "cycle_size": 64,
+      "last_pre_wrap_formation_layer": 29,
+      "last_pre_wrap_endpoint_layer": 31,
+      "cone_saturation_layer": 32
+    },
+    {
+      "id": "candidate_enumeration_shells",
+      "data_class": "analytic",
+      "expected_shell_counts": [
+        1,
+        8,
+        28,
+        56,
+        70,
+        56,
+        28,
+        8,
+        1
+      ],
+      "expected_total": 256
+    }
+  ]
+}

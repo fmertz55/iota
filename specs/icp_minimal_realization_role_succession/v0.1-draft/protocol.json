@@ -1,0 +1,90 @@
+{
+  "protocol_version": "0.1-draft",
+  "base_contract_version": "0.2-draft",
+  "search_id": "MIR-ROLE-SUCCESSION-001",
+  "status": "design_frozen_outcomes_sealed",
+  "data_class": "development_outcome_contingent",
+  "parent_search_id": "MIR-EXACT-ORBIT-001",
+  "parent_result_sha256": "e6d8ab89edd79422f9a6f5803447d52e642c6873f0275272c519fbd4487023cc",
+  "question": "does centered access to both incidences of one charged relation repair endogenous role succession while N_P remains 2",
+  "grammar": "grammar.json",
+  "topology": "topology.json",
+  "detector": "detector.json",
+  "fixtures": "development_fixtures.json",
+  "partitions": "partitions.json",
+  "normalized_n_p": 2,
+  "candidate_count": 256,
+  "dynamic_candidate_count": 255,
+  "candidate_processing": "all candidates with no shell stopping",
+  "primary_cycle_size": 64,
+  "canonical_origin": 0,
+  "pre_wrap_formation_horizon": 29,
+  "cone_saturation_layer": 32,
+  "max_layers_per_dynamic_candidate": 1000000,
+  "registered_worker_processes": 4,
+  "parallel_execution_rule": "candidate-level spawn workers only; collect all 255 dynamic results in canonical manifest order before ledger construction; no partial result artifact",
+  "recurrence_state": [
+    "cone_phase_min_layer_32",
+    "full_seeded_state",
+    "full_comparator_state"
+  ],
+  "recurrence_equality": "exact full state only",
+  "terminal_check_order": [
+    "evaluate complete detector and award any same-layer pass",
+    "test exact post-saturation recurrence",
+    "classify resource ceiling if neither earlier terminal applies"
+  ],
+  "trace_and_state_encoding": {
+    "locus_bit_mapping": "event at locus i is unsigned-state bit i; locus 0 is the least-significant bit",
+    "state_hex_primary": "unsigned C64 state as exactly 16 lowercase hexadecimal digits, most-significant digit first",
+    "trace_hash": "SHA-256",
+    "trace_prefix_ascii_plus_nul": "ASCII IOTA-MIR-ROLE-SUCCESSION-TRACE-V1 followed by byte 0x00",
+    "candidate_domain": "ASCII search_id + NUL + candidate_id + NUL + SHA-256(canonical candidate JSON without LF)",
+    "canonical_candidate_json": "keys sorted; separators comma and colon without spaces; ASCII escapes; finite JSON only",
+    "length_encoding": "unsigned 8-byte big-endian",
+    "layer_encoding": "nonnegative decimal ASCII preceded by its 8-byte big-endian byte length",
+    "state_byte_encoding": "unsigned big-endian in exactly ceil(N/8) bytes",
+    "digest_sequence": "prefix; domain byte length; domain; then for every natural joint state from layer 0 through terminal: layer byte length, layer bytes, seeded bytes, comparator bytes",
+    "excluded_from_trace": "intervention arms and conditional larger-ring controls"
+  },
+  "terminal_statuses": [
+    "analytically_excluded",
+    "exact_pass_on_fixed_orbit",
+    "recurrence_excluded_on_fixed_orbit",
+    "resource_censored_before_recurrence"
+  ],
+  "mechanism_endpoint": "exists candidate with first_successor by H_pre 29",
+  "construction_endpoint": "exists candidate with first_complete_pass by H_pre 29",
+  "fixed_ring_endpoint": "exists candidate with complete pass before recurrence classification, with same-layer detector precedence, or before resource ceiling",
+  "stage_order": [
+    "first_role",
+    "first_successor",
+    "first_intervention_eligible",
+    "first_complete_pass"
+  ],
+  "cross_size_controls": [
+    96,
+    128
+  ],
+  "cross_size_trigger": "every C64 complete passer",
+  "localized_interpretation_rule": "T_proto at most 29 plus exact C96 and C128 local-witness agreement",
+  "multiplicity": "not applicable to exhaustive deterministic existential endpoints",
+  "minimum_law_ranking": "blocked by any unresolved candidate in a lower shell; shell-complete co-winner enumeration required",
+  "run_command_enabled": false,
+  "registered_result_path": "output/minimal_realization/MIR-ROLE-SUCCESSION-001/role_succession_results.json",
+  "registered_open_manifest_path": "experiments/minimal_realization/MIR-ROLE-SUCCESSION-001/role_succession_open_manifest.json",
+  "required_freeze_tag": "mir-role-succession-001-v0.1-frozen",
+  "opening_rule": "first add the complete outcome-free seal in a commit whose parent lacks it, tag that exact seal-introduction commit with annotated mir-role-succession-001-v0.1-frozen, then add only the open manifest in a direct child",
+  "result_write_rule": "atomic exactly-once write after all triggered size controls finish; commit only that path in the direct child of opening before independent verification",
+  "claim_limits": [
+    "not confirmation data",
+    "not global N_P=2 minimality",
+    "not equal resource complexity to the two-input grammar",
+    "not an exclusion of other seeds backgrounds sizes topologies or grammars",
+    "not an infinite-line late-time exclusion",
+    "not a coherent-structure or glider classification",
+    "not carrier independence",
+    "not current-physics role recovery",
+    "not a novelty claim"
+  ]
+}

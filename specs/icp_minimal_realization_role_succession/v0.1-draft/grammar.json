@@ -1,0 +1,108 @@
+{
+  "protocol_version": "0.1-draft",
+  "grammar_id": "MIR-CENTERED-INCIDENCE-PRODUCTION-ROW-V0.1",
+  "status": "outcomes_sealed",
+  "normalized_n_p": 2,
+  "primitive_schemas": [
+    {
+      "id": "event",
+      "kind": "binary_dynamic_channel",
+      "storage_bits_primary_layer": 64
+    },
+    {
+      "id": "oriented_cycle_edge",
+      "kind": "binary_directed_relation_channel",
+      "true_instances_primary": 64,
+      "dynamic": false
+    }
+  ],
+  "relation_incidence_lemma": "predecessor and successor are incoming and outgoing incidences of one oriented relation predicate; no inverse table or second relation is stored",
+  "invalid_n_p2_implementations": [
+    "stored inverse relation",
+    "second adjacency predicate",
+    "mutable port state",
+    "dynamic bond state",
+    "phase state",
+    "scheduler state",
+    "persistent helper state"
+  ],
+  "input_order": [
+    "predecessor",
+    "self",
+    "successor"
+  ],
+  "fan_in": 3,
+  "relation_incidence_reads_per_site_tick": 2,
+  "event_writes_per_site_tick": 1,
+  "signature_order": [
+    "000",
+    "001",
+    "010",
+    "011",
+    "100",
+    "101",
+    "110",
+    "111"
+  ],
+  "atomic_operator": {
+    "statement_template": "EMIT_1_IF_NEIGHBORHOOD(p)",
+    "governed_degree": "event at governed locus in layer t+1",
+    "duration_elementary_ticks": 1,
+    "laws_per_registered_signature": 1
+  },
+  "unmatched_signature_semantics": "fresh output remains 0",
+  "forbidden_operations": [
+    "implicit carry",
+    "alternative branch",
+    "helper call",
+    "lookup table beyond registered rows",
+    "coordinate query",
+    "time query",
+    "within-tick cascade",
+    "detector feedback"
+  ],
+  "candidate_space": {
+    "definition": "power set of the eight exact signatures",
+    "candidate_count": 256,
+    "dynamic_candidate_count": 255,
+    "zero_row_candidate": "analytically_excluded",
+    "enumeration_order": "increasing N_L then lexicographic row tuple",
+    "shell_sizes_by_n_l": {
+      "0": 1,
+      "1": 8,
+      "2": 28,
+      "3": 56,
+      "4": 70,
+      "5": 56,
+      "6": 28,
+      "7": 8,
+      "8": 1
+    },
+    "quotients_forbidden": [
+      "reflection",
+      "complement",
+      "unreachable row",
+      "behavioral equivalence"
+    ]
+  },
+  "wolfram_code": "sum over registered signature abc of 2 raised to the integer value of abc",
+  "added_capacity_relative_to_reference": {
+    "fan_in": [
+      2,
+      3
+    ],
+    "relation_incidence_reads_per_site_tick": [
+      1,
+      2
+    ],
+    "exact_signature_count": [
+      4,
+      8
+    ],
+    "candidate_count": [
+      16,
+      256
+    ]
+  },
+  "global_minimality_claimed": false
+}
