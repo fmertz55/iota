@@ -170,14 +170,26 @@ def _potential_vector(
 
 def certified_spectral_norm_upper(matrix: acb_mat) -> arb:
     gram = matrix.conjugate().transpose() * matrix
-    # Gram matrices commonly have exact or overlapping repeated eigenvalues.
-    # Asking Arb to preserve multiplicities avoids a non-scientific isolation
-    # failure while retaining rigorous eigenvalue enclosures.
-    eigenvalues = gram.eig(multiple=True)
-    upper = arb(0)
-    for value in eigenvalues:
-        upper = upper.max(value.real.upper())
-    return upper.sqrt()
+    # For positive-semidefinite G=M* M, lambda_max(G) is bounded by the
+    # induced infinity norm.  Summing Acb absolute upper bounds preserves a
+    # rigorous enclosure without requiring fragile eigenvalue isolation.
+    maximum_row_sum = arb(0)
+    for row in range(gram.nrows()):
+        row_sum = sum(
+            (gram[row, column].abs_upper() for column in range(gram.ncols())),
+            arb(0),
+        )
+        maximum_row_sum = maximum_row_sum.max(row_sum)
+    return maximum_row_sum.upper().sqrt()
+
+
+def _certified_matrix_exponential(generator: acb_mat) -> acb_mat:
+    try:
+        return generator.exp()
+    except ValueError as exc:
+        raise QuantumDiracSpecError(
+            "certified target matrix exponential failed before serialization"
+        ) from exc
 
 
 def build_certified_target_hamiltonian(
@@ -451,9 +463,9 @@ class CertifiedRegisteredEvaluator:
                             potential_amplitude=amplitude,
                             potential_phase_pi=phase_pi,
                         )
-                        propagator = (
+                        propagator = _certified_matrix_exponential(
                             acb(0, -arb_exact(self.delta)) * hamiltonian
-                        ).exp()
+                        )
                         self._target_propagators[key] = propagator
                     current = propagator * current
                 layer = step + 1
@@ -498,9 +510,9 @@ class CertifiedRegisteredEvaluator:
                             potential_amplitude=amplitude,
                             potential_phase_pi=phase_pi,
                         )
-                        propagator = (
+                        propagator = _certified_matrix_exponential(
                             acb(0, -arb_exact(self.delta)) * hamiltonian
-                        ).exp()
+                        )
                         self._target_propagators[key] = propagator
                     current = propagator * current
                 outputs[step + 1] = _copy_matrix(current)

@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001
 
-Status: **v0.1 execution incomplete with no result; v0.2 repair complete and not frozen**
+Status: **v0.1/v0.2 execution incomplete with no result; v0.3 repair complete and not frozen**
 
 Started: `2026-07-14`
 
@@ -13,9 +13,10 @@ outcome, trajectory, result ledger, or freeze tag. Its contract is
 machine-readable design in
 `specs/icp_quantum_dirac_role_recovery/v0.1-draft/protocol.json`.
 
-The immutable `v0.1` opening ended in `execution_incomplete_no_result` when
-Arb rejected a repeated-eigenvalue Gram problem; it wrote no ledger. The
-outcome-free `v0.2` retry adds multiplicity-preserving isolation and a public
-regression fixture without changing the scientific registration. Registered
-engines require a fresh Git-bound permit. The next legal action is the v0.2
-sole-file disabled-seal freeze commit and annotated tag.
+The immutable `v0.1` and `v0.2` openings ended in
+`execution_incomplete_no_result` when Arb rejected interval Gram eigenvalue
+isolation; neither wrote a ledger. The outcome-free `v0.3` retry uses a
+rigorous induced row-norm bound and public regression fixtures without
+changing the scientific registration. Registered engines require a fresh
+Git-bound permit. The next legal action is the v0.3 sole-file disabled-seal
+freeze commit and annotated tag.

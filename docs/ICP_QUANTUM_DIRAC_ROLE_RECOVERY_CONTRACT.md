@@ -1,12 +1,12 @@
 # ICP Quantum-Dirac Role-Recovery Contract
 
-Protocol version: `0.1-draft`; implementation-seal retry: `v0.2`
+Protocol version: `0.1-draft`; implementation-seal retry: `v0.3`
 
 Search ID: `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`
 
 Date: `2026-07-14`
 
-Status: **v0.1 execution incomplete with no result; v0.2 outcome-free repair complete, disabled, and not frozen**
+Status: **v0.1 and v0.2 execution incomplete with no result; v0.3 outcome-free repair complete, disabled, and not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -454,7 +454,7 @@ Interruptions, exceptions, worker failures, or unfinished certificates write no 
 The future freeze tag is
 
 ```text
-icp-quantum-dirac-role-recovery-001-v0.2-frozen
+icp-quantum-dirac-role-recovery-001-v0.3-frozen
 ```
 
 The required history is:
@@ -472,11 +472,14 @@ The first implementation seal, `v0.1`, opened development but wrote no result.
 Its certified Gram eigensolver stopped on repeated eigenvalues before ledger
 serialization. No partial artifact was inspected. Under the registered
 `execution_incomplete_no_result` rule, `v0.1` remains immutable and closed.
-The `v0.2` retry changes only the numerical implementation of the already
-registered spectral-norm enclosure by requesting Arb's multiplicity-preserving
-eigenvalue isolation, plus the corresponding outcome-free regression fixture
-and fresh provenance paths. Scientific definitions, scenarios, partitions,
-states, thresholds, and stopping rules are unchanged.
+The `v0.2` retry requested Arb's multiplicity-preserving eigenvalue isolation,
+but a second interval Gram problem remained non-isolable and it likewise wrote
+no result. The `v0.3` retry replaces Gram eigendecomposition with the rigorous
+bound `||M||_2 <= sqrt(||M* M||_infinity)`, evaluated by outward-rounded row
+sums. It adds public repeated/overlapping-spectrum regression fixtures,
+context-only infrastructure errors, and fresh provenance paths. Scientific
+definitions, scenarios, partitions, states, thresholds, and stopping rules
+are unchanged.
 
 At this draft stage, no freeze tag, open manifest, or result artifact may exist. The production command exists but remains disabled by the Git provenance gate until the seal is committed and the corresponding stage opening is its required direct child.
 

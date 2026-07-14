@@ -35,6 +35,14 @@ class CertifiedBallFixtureTests(unittest.TestCase):
             self.assertTrue(bound >= 1)
             self.assertTrue(bound.contains(1))
 
+    def test_gram_row_bound_covers_independent_spectral_norm(self) -> None:
+        with ball_precision():
+            matrix = acb_mat([[1, "1/3", 0], [0, 1, "1/5"], ["1/7", 0, 1]])
+            bound = certified_spectral_norm_upper(matrix)
+        independent = mp.matrix([[1, mp.mpf(1) / 3, 0], [0, 1, mp.mpf(1) / 5], [mp.mpf(1) / 7, 0, 1]])
+        _, singular_values, _ = mp.svd(independent)
+        self.assertGreaterEqual(float(bound), float(max(singular_values)))
+
     def test_certified_candidate_step_overlaps_independent_reconstruction(self) -> None:
         with ball_precision():
             state_ball = acb_mat(16, 2)
