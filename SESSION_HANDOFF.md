@@ -5610,3 +5610,54 @@ and, only after every registered future is resolved, a result-only direct child.
 At the time of this note, the continuation protocol is still outcome-disabled:
 do not apply the symbolic certificate to the named ten candidates and do not
 evaluate layer 1,000,001 until the disabled seal is committed and tagged.
+
+### Exact closure result — 2026-07-14
+
+The continuation followed the registered linear history:
+
+- `334a93d`: outcome-free exact-closure preregistration and disabled seal,
+  annotated tag `mir-role-succession-exact-001-v0.1-frozen`;
+- `759ad34`: direct-child open-manifest-only commit; and
+- `cd50d5e`: direct-child result-only commit.
+
+The canonical result is
+`output/minimal_realization/MIR-ROLE-SUCCESSION-EXACT-001/role_succession_exact_results.json`,
+47,569 bytes, SHA-256
+`4f40baad8a203f9b23340f549eef7fa80e81bac67e22d3bf63e736264d99a3e9`.
+Production validation and the separately expressed algebraic-normal-form
+verifier pass from the clean result commit.
+
+All ten selected parent censors have classification
+`symbolically_unreachable`. None entered dynamic continuation, so no state at
+layer `1,000,001` or later was evaluated. Eight candidates select row `000` and
+are excluded by the homogeneous-comparator obstruction: an attributed role
+requires comparator `0^64`, while the next comparator is `1^64`, making every
+next-layer successor unattributable.
+
+The two remaining rules are closed by exhaustive local contexts:
+
+- Wolfram rule 30 has causal endpoint capacity in all eight contexts but no
+  same-or-forward attributed successor context; and
+- Wolfram rule 86 has attributed succession in four contexts but no context in
+  which the sham and breaking arms differ at the outward endpoint.
+
+Both therefore have an empty joint complete-pass context set. These are
+universal necessary-local-condition proofs: a later global pass would have to
+restrict to one enumerated context and is impossible.
+
+Reconciliation with the parent gives 245 orbit-recurrence exclusions plus 10
+symbolic universal exclusions, zero exact passes, zero finite-ring-exposed
+passes, no winner, and `combined_no_pass_proved_count=255`. The exact family
+conclusion is `all_dynamic_candidates_exactly_no_pass`.
+
+The supported mechanism statement is now complete. The wider centered
+radius-one `N_P=2` grammar makes endogenous roles and same-or-forward succession
+substantially more common, but cannot join succession to the registered outward
+causal discrimination. Every remaining future in this frozen 256-rule family
+is unreachable under the complete detector. Do not spend another horizon or
+orbit continuation on it.
+
+This closes the exploration path, not global `N_P=2` minimality. Any further
+work must prospectively freeze a materially different grammar, seed,
+background, topology, relation dynamics, or object detector and account for
+the added capacity explicitly. No such next search is implied by this result.
