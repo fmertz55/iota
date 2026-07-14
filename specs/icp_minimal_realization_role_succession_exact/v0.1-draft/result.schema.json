@@ -1,0 +1,430 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/mir-role-succession-exact-001-result-v0.1.json",
+  "title": "MIR-ROLE-SUCCESSION-EXACT-001 exact-closure result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "search_id",
+    "run_id",
+    "data_class",
+    "parent_result",
+    "parent_recurrence_excluded_count",
+    "parent_resource_censored_count",
+    "parent_exact_pass_count",
+    "primary_cycle_size",
+    "parent_boundary_layer",
+    "dynamic_layer_ceiling",
+    "terminal_check_order",
+    "open_manifest",
+    "outcome_seal",
+    "candidate_manifest",
+    "result_schema",
+    "global_minimality_claimed",
+    "all_remaining_candidates_terminal",
+    "symbolically_unreachable_count",
+    "continued_recurrence_excluded_count",
+    "continued_exact_pass_count",
+    "combined_exact_pass_count",
+    "combined_no_pass_proved_count",
+    "combined_exact_family_conclusion",
+    "exact_pass_candidate_ids",
+    "finite_ring_exposed_candidate_ids",
+    "minimum_law_ranking_status",
+    "minimum_law_winner_candidate_ids",
+    "inherited_pre_wrap_mechanism_conclusion",
+    "inherited_pre_wrap_construction_conclusion",
+    "inherited_pre_wrap_stage_counts",
+    "candidate_results"
+  ],
+  "properties": {
+    "protocol_version": {"const": "0.1-draft"},
+    "search_id": {"const": "MIR-ROLE-SUCCESSION-EXACT-001"},
+    "run_id": {"const": "MIR-ROLE-SUCCESSION-EXACT-001-DEVELOPMENT"},
+    "data_class": {"const": "development_outcome_contingent_exact_closure"},
+    "parent_result": {
+      "allOf": [
+        {"$ref": "#/$defs/binding"},
+        {
+          "properties": {
+            "path": {"const": "output/minimal_realization/MIR-ROLE-SUCCESSION-001/role_succession_results.json"},
+            "sha256": {"const": "1af33377789c117c913c0a5a613f2f102e2a5511f720714a609739c5d362a6f5"}
+          }
+        }
+      ]
+    },
+    "parent_recurrence_excluded_count": {"const": 245},
+    "parent_resource_censored_count": {"const": 10},
+    "parent_exact_pass_count": {"const": 0},
+    "primary_cycle_size": {"const": 64},
+    "parent_boundary_layer": {"const": 1000000},
+    "dynamic_layer_ceiling": {"type": "null"},
+    "terminal_check_order": {
+      "const": [
+        "evaluate complete detector and award any same-layer pass",
+        "test exact post-saturation full joint-state recurrence"
+      ]
+    },
+    "open_manifest": {"$ref": "#/$defs/binding"},
+    "outcome_seal": {"$ref": "#/$defs/binding"},
+    "candidate_manifest": {"$ref": "#/$defs/binding"},
+    "result_schema": {"$ref": "#/$defs/binding"},
+    "global_minimality_claimed": {"const": false},
+    "all_remaining_candidates_terminal": {"const": true},
+    "symbolically_unreachable_count": {"type": "integer", "minimum": 0, "maximum": 10},
+    "continued_recurrence_excluded_count": {"type": "integer", "minimum": 0, "maximum": 10},
+    "continued_exact_pass_count": {"type": "integer", "minimum": 0, "maximum": 10},
+    "combined_exact_pass_count": {"type": "integer", "minimum": 0, "maximum": 10},
+    "combined_no_pass_proved_count": {"type": "integer", "minimum": 245, "maximum": 255},
+    "combined_exact_family_conclusion": {
+      "enum": ["all_dynamic_candidates_exactly_no_pass", "one_or_more_exact_passes"]
+    },
+    "exact_pass_candidate_ids": {"$ref": "#/$defs/candidate_id_array"},
+    "finite_ring_exposed_candidate_ids": {"$ref": "#/$defs/candidate_id_array"},
+    "minimum_law_ranking_status": {
+      "enum": ["no_exact_passer", "resolved_within_frozen_family"]
+    },
+    "minimum_law_winner_candidate_ids": {"$ref": "#/$defs/candidate_id_array"},
+    "inherited_pre_wrap_mechanism_conclusion": {"type": "string", "minLength": 1},
+    "inherited_pre_wrap_construction_conclusion": {"type": "string", "minLength": 1},
+    "inherited_pre_wrap_stage_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "successor", "intervention_eligible", "complete_pass"],
+      "properties": {
+        "role": {"type": "integer", "minimum": 0},
+        "successor": {"type": "integer", "minimum": 0},
+        "intervention_eligible": {"type": "integer", "minimum": 0},
+        "complete_pass": {"type": "integer", "minimum": 0}
+      }
+    },
+    "candidate_results": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {"$ref": "#/$defs/candidate_result"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "state_hex": {"type": "string", "pattern": "^[0-9a-f]{16}$"},
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "candidate_id_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^MIR-RS-P2-L4-"}
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context_id", "bitstring"],
+      "properties": {
+        "context_id": {"type": "integer", "minimum": 0, "maximum": 255},
+        "bitstring": {"type": "string", "pattern": "^[01]{8}$"}
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_id",
+        "bitstring",
+        "bits_by_offset",
+        "raw_seeded_successor_displacements",
+        "attributed_successor_displacements",
+        "raw_seeded_succession_capable",
+        "succession_capable",
+        "sham_endpoint_bit",
+        "breaking_endpoint_bit",
+        "causal_capable",
+        "joint_pass_capable_displacements",
+        "joint_pass_capable"
+      ],
+      "properties": {
+        "context_id": {"type": "integer", "minimum": 0, "maximum": 255},
+        "bitstring": {"type": "string", "pattern": "^[01]{8}$"},
+        "bits_by_offset": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["-2", "-1", "0", "1", "2", "3", "4", "5"],
+          "properties": {
+            "-2": {"enum": [0, 1]}, "-1": {"enum": [0, 1]},
+            "0": {"enum": [0, 1]}, "1": {"enum": [0, 1]},
+            "2": {"enum": [0, 1]}, "3": {"enum": [0, 1]},
+            "4": {"enum": [0, 1]}, "5": {"enum": [0, 1]}
+          }
+        },
+        "raw_seeded_successor_displacements": {"$ref": "#/$defs/displacements"},
+        "attributed_successor_displacements": {"$ref": "#/$defs/displacements"},
+        "raw_seeded_succession_capable": {"type": "boolean"},
+        "succession_capable": {"type": "boolean"},
+        "sham_endpoint_bit": {"enum": [0, 1]},
+        "breaking_endpoint_bit": {"enum": [0, 1]},
+        "causal_capable": {"type": "boolean"},
+        "joint_pass_capable_displacements": {"$ref": "#/$defs/displacements"},
+        "joint_pass_capable": {"type": "boolean"}
+      }
+    },
+    "displacements": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": [0, 1]}
+    },
+    "symbolic_certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "certificate_version", "production_rows", "rule_number",
+        "context_offsets", "fixed_role_offsets", "fixed_role_pattern",
+        "endpoint_guard_offset", "endpoint_guard_value", "successor_displacements",
+        "formation_comparator_bit", "next_comparator_bit", "comparator_obstruction",
+        "proof_route", "proof_statement", "symbolically_unreachable",
+        "context_universe", "raw_seeded_succession_capable_contexts",
+        "succession_capable_contexts", "causal_capable_contexts",
+        "joint_pass_capable_contexts"
+      ],
+      "properties": {
+        "certificate_version": {"const": "MIR-RS-STATIC-LOCAL-IMPOSSIBILITY-V0.1"},
+        "production_rows": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": {"type": "string", "pattern": "^[01]{3}$"}
+        },
+        "rule_number": {"type": "integer", "minimum": 0, "maximum": 255},
+        "context_offsets": {"const": [-2, -1, 0, 1, 2, 3, 4, 5]},
+        "fixed_role_offsets": {"const": [-1, 0, 1, 2]},
+        "fixed_role_pattern": {"const": [0, 1, 1, 0]},
+        "endpoint_guard_offset": {"const": 3},
+        "endpoint_guard_value": {"const": 0},
+        "successor_displacements": {"const": [0, 1]},
+        "formation_comparator_bit": {"const": 0},
+        "next_comparator_bit": {"enum": [0, 1]},
+        "comparator_obstruction": {"type": "boolean"},
+        "proof_route": {"type": ["string", "null"]},
+        "proof_statement": {"type": ["string", "null"]},
+        "symbolically_unreachable": {"type": "boolean"},
+        "context_universe": {
+          "type": "array", "minItems": 8, "maxItems": 8,
+          "items": {"$ref": "#/$defs/context"}
+        },
+        "raw_seeded_succession_capable_contexts": {"$ref": "#/$defs/identity_array"},
+        "succession_capable_contexts": {"$ref": "#/$defs/identity_array"},
+        "causal_capable_contexts": {"$ref": "#/$defs/identity_array"},
+        "joint_pass_capable_contexts": {"$ref": "#/$defs/identity_array"}
+      }
+    },
+    "identity_array": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "#/$defs/identity"}
+    },
+    "stage_role": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["layer", "anchor"],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 1},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63}
+      }
+    },
+    "stage_successor": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["layer", "anchor", "successor_anchor"],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 1},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "successor_anchor": {"type": "integer", "minimum": 0, "maximum": 63}
+      }
+    },
+    "pass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer", "anchor", "signed_anchor", "successor_anchor",
+        "successor_displacement", "sham_future", "breaking_future",
+        "seeded_state_hex", "baseline_state_hex"
+      ],
+      "properties": {
+        "layer": {"type": "integer", "minimum": 1000001},
+        "anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "signed_anchor": {"type": "integer", "minimum": -31, "maximum": 32},
+        "successor_anchor": {"type": "integer", "minimum": 0, "maximum": 63},
+        "successor_displacement": {"enum": [0, 1]},
+        "sham_future": {"enum": [0, 1]},
+        "breaking_future": {"enum": [0, 1]},
+        "seeded_state_hex": {"$ref": "#/$defs/state_hex"},
+        "baseline_state_hex": {"$ref": "#/$defs/state_hex"}
+      }
+    },
+    "prefix_replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundary_layer", "parent_trace_sha256", "exact_match",
+        "boundary_seeded_state_hex", "boundary_comparator_state_hex",
+        "brent_checkpoint_layer", "brent_checkpoint_seeded_state_hex",
+        "brent_checkpoint_comparator_state_hex", "brent_power", "brent_distance"
+      ],
+      "properties": {
+        "boundary_layer": {"const": 1000000},
+        "parent_trace_sha256": {"$ref": "#/$defs/sha256"},
+        "exact_match": {"const": true},
+        "boundary_seeded_state_hex": {"$ref": "#/$defs/state_hex"},
+        "boundary_comparator_state_hex": {"$ref": "#/$defs/state_hex"},
+        "brent_checkpoint_layer": {"type": "integer", "minimum": 32, "maximum": 1000000},
+        "brent_checkpoint_seeded_state_hex": {"$ref": "#/$defs/state_hex"},
+        "brent_checkpoint_comparator_state_hex": {"$ref": "#/$defs/state_hex"},
+        "brent_power": {"type": "integer", "minimum": 1},
+        "brent_distance": {"type": "integer", "minimum": 0}
+      }
+    },
+    "recurrence_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seeded_state_hex", "comparator_state_hex"],
+      "properties": {
+        "seeded_state_hex": {"$ref": "#/$defs/state_hex"},
+        "comparator_state_hex": {"$ref": "#/$defs/state_hex"}
+      }
+    },
+    "recurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cone_saturation_layer", "checkpoint_layer", "repeat_layer", "period",
+        "checkpoint_state", "repeat_state", "exact_full_state_equality"
+      ],
+      "properties": {
+        "cone_saturation_layer": {"const": 32},
+        "checkpoint_layer": {"type": "integer", "minimum": 32},
+        "repeat_layer": {"type": "integer", "minimum": 1000001},
+        "period": {"type": "integer", "minimum": 1},
+        "checkpoint_state": {"$ref": "#/$defs/recurrence_state"},
+        "repeat_state": {"$ref": "#/$defs/recurrence_state"},
+        "exact_full_state_equality": {"const": true}
+      }
+    },
+    "size_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cycle_size", "evaluated_through_layer", "first_complete_pass",
+        "matches_primary_witness", "pre_wrap_agreement_required",
+        "exact_pre_wrap_agreement"
+      ],
+      "properties": {
+        "cycle_size": {"enum": [96, 128]},
+        "evaluated_through_layer": {"type": "integer", "minimum": 1000001},
+        "first_complete_pass": {"type": ["object", "null"]},
+        "matches_primary_witness": {"type": "boolean"},
+        "pre_wrap_agreement_required": {"const": false},
+        "exact_pre_wrap_agreement": {"type": "null"}
+      }
+    },
+    "dynamic_continuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification", "prefix_replay", "last_assessed_layer", "first_role",
+        "first_successor", "first_intervention_eligible", "first_complete_pass",
+        "recurrence", "full_trace_sha256", "cross_size_controls"
+      ],
+      "properties": {
+        "classification": {"enum": ["exact_pass_on_fixed_orbit", "recurrence_excluded_on_fixed_orbit"]},
+        "prefix_replay": {"$ref": "#/$defs/prefix_replay"},
+        "last_assessed_layer": {"type": "integer", "minimum": 1000001},
+        "first_role": {"$ref": "#/$defs/stage_role"},
+        "first_successor": {"$ref": "#/$defs/stage_successor"},
+        "first_intervention_eligible": {"$ref": "#/$defs/stage_successor"},
+        "first_complete_pass": {"oneOf": [{"$ref": "#/$defs/pass"}, {"type": "null"}]},
+        "recurrence": {"oneOf": [{"$ref": "#/$defs/recurrence"}, {"type": "null"}]},
+        "full_trace_sha256": {"$ref": "#/$defs/sha256"},
+        "cross_size_controls": {
+          "type": "array", "maxItems": 2,
+          "items": {"$ref": "#/$defs/size_control"}
+        }
+      }
+    },
+    "candidate_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id", "wolfram_rule_number", "atomic_n_l",
+        "parent_candidate_index", "parent_record_sha256", "classification",
+        "symbolic_certificate", "dynamic_continuation", "future_unreachable"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^MIR-RS-P2-L4-"},
+        "wolfram_rule_number": {"type": "integer", "minimum": 0, "maximum": 255},
+        "atomic_n_l": {"const": 4},
+        "parent_candidate_index": {"type": "integer", "minimum": 0, "maximum": 255},
+        "parent_record_sha256": {"$ref": "#/$defs/sha256"},
+        "classification": {
+          "enum": ["symbolically_unreachable", "exact_pass_on_fixed_orbit", "recurrence_excluded_on_fixed_orbit"]
+        },
+        "symbolic_certificate": {"$ref": "#/$defs/symbolic_certificate"},
+        "dynamic_continuation": {
+          "oneOf": [{"$ref": "#/$defs/dynamic_continuation"}, {"type": "null"}]
+        },
+        "future_unreachable": {"const": true}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"classification": {"const": "symbolically_unreachable"}}},
+          "then": {
+            "properties": {
+              "dynamic_continuation": {"type": "null"},
+              "symbolic_certificate": {
+                "properties": {"symbolically_unreachable": {"const": true}}
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"classification": {"const": "exact_pass_on_fixed_orbit"}}},
+          "then": {
+            "properties": {
+              "symbolic_certificate": {
+                "properties": {"symbolically_unreachable": {"const": false}}
+              },
+              "dynamic_continuation": {
+                "properties": {
+                  "classification": {"const": "exact_pass_on_fixed_orbit"},
+                  "first_complete_pass": {"$ref": "#/$defs/pass"},
+                  "recurrence": {"type": "null"},
+                  "cross_size_controls": {"minItems": 2, "maxItems": 2}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"classification": {"const": "recurrence_excluded_on_fixed_orbit"}}},
+          "then": {
+            "properties": {
+              "symbolic_certificate": {
+                "properties": {"symbolically_unreachable": {"const": false}}
+              },
+              "dynamic_continuation": {
+                "properties": {
+                  "classification": {"const": "recurrence_excluded_on_fixed_orbit"},
+                  "first_complete_pass": {"type": "null"},
+                  "recurrence": {"$ref": "#/$defs/recurrence"},
+                  "cross_size_controls": {"maxItems": 0}
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

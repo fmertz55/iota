@@ -5543,3 +5543,70 @@ result.
 At this freeze point the outcome seal exists with the production command
 disabled. No open manifest and no result may exist. Do not run or inspect the
 new candidate family until the freeze commit and tag are present.
+
+### Role-succession result and remaining exact frontier — 2026-07-13
+
+The alternative grammar was frozen at commit `8d701d3` and annotated tag
+`mir-role-succession-001-v0.1-frozen`, opened by the manifest-only direct child
+`1ee4ad5`, and recorded by the result-only direct child `9b83fc8`. The committed
+result SHA-256 is
+`1af33377789c117c913c0a5a613f2f102e2a5511f720714a609739c5d362a6f5`.
+The production validator and algorithmically independent replay pass from the
+clean result commit. The prior MIR exact-orbit validator also passes from its
+own historical result commit; its intentional later-commit guard is not
+weakened to accommodate this new experiment.
+
+The grammar moved the mechanism boundary. Of 255 nonempty rules, 59 form the
+attributed isolated dyad by the exact pre-wrap horizon, 6 exhibit the registered
+same-or-forward role succession, and all 6 reach intervention eligibility.
+None produces unequal sham and breaking values at the outward endpoint. Thus
+there is no localized pre-wrap construction and no minimum-law winner. Relative
+to the prior exact-orbit grammar, role-bearing candidates increased from 2 to
+59 and succession candidates from 0 to 6, while complete causal passes remained
+zero.
+
+The exact fixed-ring family conclusion is not yet closed by that ledger alone.
+There are 245 exact recurrence exclusions and 10 resource-censored `N_L=4`
+rules at layer 1,000,000. No later layer of those ten has been evaluated or
+inspected. Their post-boundary futures therefore remain reachable in the
+inferential sense even though the pre-wrap question is fully resolved.
+
+### Exact closure protocol awaiting freeze
+
+The next registered search is `MIR-ROLE-SUCCESSION-EXACT-001`, controlled by
+[`docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_ROLE_SUCCESSION_EXACT_CONTRACT.md`](docs/ICP_MINIMAL_INFORMATIONAL_REALIZATION_ROLE_SUCCESSION_EXACT_CONTRACT.md).
+It binds the exact parent result above and rederives, without reordering, the ten
+records satisfying the complete frozen censor predicate.
+
+The closure is symbolic first. A complete pass at any layer requires only eight
+distinct current offsets `a-2..a+5`; the role and endpoint guard fix five bits,
+leaving exactly eight local contexts. For every selected rule the protocol
+exhausts those contexts and tests both allowed successor displacements and the
+two exact matched-arm endpoints. If row `000` emits one, a separate homogeneous
+comparator proof blocks attribution of any next-layer successor. If row `000`
+emits zero, an empty intersection between attributed-succession contexts and
+causal-discrimination contexts proves that no global state at any future layer
+can pass.
+
+This is a necessary-local-condition impossibility proof, not a heuristic. The
+primary implementation uses direct truth-table evaluation; the independent
+verifier reconstructs Boolean algebraic normal form by a Mobius transform. Both
+expressions have been audited generically over all 256 truth tables and all
+eight contexts without applying or reporting the registered ten-candidate
+allocation.
+
+Any candidate with a nonempty local pass set survives the symbolic screen. It
+must then replay the canonical orbit from layer 0 through 1,000,000, reproduce
+the exact parent trace digest and inherited detector witnesses, retain the
+unreset Brent recurrence schedule, and continue from layer 1,000,001 with no
+layer or wall-clock censor. A same-layer pass precedes recurrence; all survivors
+must end in first pass or exact full joint-state recurrence. Interrupted work
+emits no scientific result. Every late C64 passer still triggers C96 and C128
+controls through its first-passage layer.
+
+The required chronology is a direct-child freeze commit from `9b83fc8`, tagged
+`mir-role-succession-exact-001-v0.1-frozen`; an open-manifest-only direct child;
+and, only after every registered future is resolved, a result-only direct child.
+At the time of this note, the continuation protocol is still outcome-disabled:
+do not apply the symbolic certificate to the named ten candidates and do not
+evaluate layer 1,000,001 until the disabled seal is committed and tagged.

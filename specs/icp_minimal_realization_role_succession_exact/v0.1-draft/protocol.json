@@ -1,0 +1,239 @@
+{
+  "protocol_version": "0.1-draft",
+  "base_contract_version": "0.2-draft",
+  "search_id": "MIR-ROLE-SUCCESSION-EXACT-001",
+  "status": "outcome_free_exact_continuation_design",
+  "data_class": "development_outcome_contingent_exact_closure",
+  "question": "can every resource-censored parent candidate be exactly resolved as unable to pass, or does at least one pass on its fixed C64 orbit",
+  "parent": {
+    "search_id": "MIR-ROLE-SUCCESSION-001",
+    "result_commit": "9b83fc8e1c9f0a034d6240677c9220bbcafa04cf",
+    "result_path": "output/minimal_realization/MIR-ROLE-SUCCESSION-001/role_succession_results.json",
+    "result_sha256": "1af33377789c117c913c0a5a613f2f102e2a5511f720714a609739c5d362a6f5",
+    "prefix_boundary_layer": 1000000,
+    "dynamic_candidate_count": 255,
+    "exact_recurrence_excluded_count": 245,
+    "resource_censored_count": 10,
+    "exact_pass_count": 0
+  },
+  "inherited_protocol": {
+    "grammar_id": "MIR-CENTERED-INCIDENCE-PRODUCTION-ROW-V0.1",
+    "detector_id": "MIR-ISOLATED-DYAD-OUTWARD-EFFECT-CENTERED-V0.1",
+    "normalized_n_p": 2,
+    "primary_cycle_size": 64,
+    "embedding_cycle_sizes": [
+      96,
+      128
+    ],
+    "canonical_origin": 0,
+    "seed": "one_event_at_origin_0",
+    "comparator": "all_zero_evolved_under_same_rule",
+    "scheduler": "synchronous_atomic_layer",
+    "formation_role_offsets": [-1, 0, 1, 2],
+    "formation_role_values": [0, 1, 1, 0],
+    "successor_anchor_displacements": [0, 1],
+    "intervention_window_offsets": [0, 1, 2],
+    "role_preserving_sham": [0, 1, 1],
+    "role_breaking_arm": [1, 0, 1],
+    "external_guard_and_endpoint_offset": 3,
+    "endpoint_lag_layers": 2,
+    "anchor_order": "0,+1,-1,+2,-2,...,+31,-31,+32",
+    "cone_saturation_layer": 32,
+    "pre_wrap_formation_horizon": 29
+  },
+  "candidate_selection": {
+    "selection_rule": "retain parent candidate_results with evaluation_status exactly resource_censored_before_recurrence without reordering",
+    "expected_count": 10,
+    "required_parent_fields": {
+      "atomic_n_l": 4,
+      "evaluation_status": "resource_censored_before_recurrence",
+      "last_assessed_layer": 1000000,
+      "resource_limit": 1000000,
+      "t_proto_exact": null,
+      "first_complete_pass": null,
+      "recurrence": null
+    },
+    "candidate_order": [
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-001-010-111",
+        "production_rows": ["000", "001", "010", "111"],
+        "wolfram_rule_number": 135
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-001-011-110",
+        "production_rows": ["000", "001", "011", "110"],
+        "wolfram_rule_number": 75
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-010-011-101",
+        "production_rows": ["000", "010", "011", "101"],
+        "wolfram_rule_number": 45
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-010-100-111",
+        "production_rows": ["000", "010", "100", "111"],
+        "wolfram_rule_number": 149
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-010-101-110",
+        "production_rows": ["000", "010", "101", "110"],
+        "wolfram_rule_number": 101
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-011-100-110",
+        "production_rows": ["000", "011", "100", "110"],
+        "wolfram_rule_number": 89
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-011-101-111",
+        "production_rows": ["000", "011", "101", "111"],
+        "wolfram_rule_number": 169
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-000-101-110-111",
+        "production_rows": ["000", "101", "110", "111"],
+        "wolfram_rule_number": 225
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-001-010-011-100",
+        "production_rows": ["001", "010", "011", "100"],
+        "wolfram_rule_number": 30
+      },
+      {
+        "candidate_id": "MIR-RS-P2-L4-001-010-100-110",
+        "production_rows": ["001", "010", "100", "110"],
+        "wolfram_rule_number": 86
+      }
+    ]
+  },
+  "static_certificate": {
+    "evaluation_order": "all ten candidates in parent order before any post-boundary orbit continuation",
+    "branch_condition": "selected output bit f(000)",
+    "branch_if_f000_is_one": {
+      "method": "homogeneous_comparator_obstruction",
+      "proof": [
+        "the uniform comparator remains uniform under a deterministic radius-one rule",
+        "an attributed role requires comparator value zero at both active loci and therefore uniform comparator 0^64",
+        "f(000)=1 makes the next comparator 1^64",
+        "an attributed successor requires comparator value zero at both active successor loci",
+        "therefore an attributed successor and complete pass are unreachable at every layer"
+      ],
+      "context_evaluations": 8,
+      "context_note": "all contexts are retained for transparent raw seeded succession and endpoint calculations; comparator attribution empties the joint set"
+    },
+    "branch_if_f000_is_zero": {
+      "method": "exhaustive_local_context_obstruction",
+      "comparator_invariant": "0^64",
+      "context_offsets": [-2, -1, 0, 1, 2, 3, 4, 5],
+      "fixed_context_values": {
+        "-1": 0,
+        "0": 1,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "free_context_offsets": [-2, 4, 5],
+      "free_context_order": ["000", "001", "010", "011", "100", "101", "110", "111"],
+      "natural_next_offsets": [-1, 0, 1, 2, 3],
+      "successor_pattern": [0, 1, 1, 0],
+      "successor_displacement_order": [0, 1],
+      "intervention_endpoint_offset": 3,
+      "intervention_endpoint_lag": 2,
+      "joint_witness": "eligible attributed successor at displacement 0 or 1 and unequal sham-versus-breaking endpoint bits",
+      "exclusion_rule": "the union of joint witnesses over all eight contexts is empty"
+    },
+    "production_expression": "direct exact truth-table evaluation",
+    "independent_expression": "Boolean algebraic normal form reconstructed by Mobius transform and independently exhausted over the same finite domains",
+    "forbidden_inputs": [
+      "parent trajectory states",
+      "post-boundary states",
+      "Wolfram behavior classifications",
+      "learned or heuristic satisfiability"
+    ]
+  },
+  "dynamic_continuation": {
+    "entry_rule": "only candidates not excluded by static_certificate",
+    "initial_layer": 0,
+    "prefix_boundary_layer": 1000000,
+    "first_new_layer": 1000001,
+    "prefix_replay": [
+      "replay the canonical seeded and comparator joint state from layer zero",
+      "assess the inherited detector on every layer through the boundary",
+      "reconstruct the inherited trace SHA-256 without deserializing hash state",
+      "reconstruct the inherited Brent checkpoint schedule without resetting at the boundary",
+      "match parent trace digest stage witnesses nonpass and nonrecurrence claims exactly"
+    ],
+    "layer_ceiling": null,
+    "wall_clock_ceiling": null,
+    "resource_censored_status_permitted": false,
+    "terminal_check_order": [
+      "evolve and hash exact joint state",
+      "evaluate complete detector at every inherited anchor and award any pass",
+      "test exact post-saturation full joint-state checkpoint equality",
+      "update inherited Brent power-of-two checkpoint schedule"
+    ],
+    "recurrence_state": [
+      "full C64 seeded state",
+      "full C64 comparator state"
+    ],
+    "recurrence_equality": "exact full-state equality only",
+    "finite_state_upper_bound": "at most 2^65 post-saturation joint states because the seeded state has 64 bits and the comparator is homogeneous",
+    "interruption_rule": "no result artifact and no scientific classification; restart from the beginning",
+    "registered_worker_processes": 4,
+    "parallel_execution_rule": "candidate-level spawned workers only; finish every selected resolution and triggered control; collect in fixed parent order; workers write no scientific artifact"
+  },
+  "trace_and_state_encoding": {
+    "inheritance": "byte-for-byte MIR-ROLE-SUCCESSION-001 trace encoding and candidate domain",
+    "locus_bit_mapping": "event at locus i is unsigned-state bit i; locus 0 is the least-significant bit",
+    "state_hex_primary": "unsigned C64 state as exactly 16 lowercase hexadecimal digits, most-significant digit first",
+    "trace_hash": "SHA-256",
+    "trace_prefix_ascii_plus_nul": "ASCII IOTA-MIR-ROLE-SUCCESSION-TRACE-V1 followed by byte 0x00",
+    "candidate_domain": "parent ASCII search_id + NUL + parent candidate_id + NUL + parent candidate_sha256",
+    "length_encoding": "unsigned 8-byte big-endian",
+    "layer_encoding": "nonnegative decimal ASCII preceded by its 8-byte big-endian byte length",
+    "state_byte_encoding": "unsigned big-endian in exactly ceil(N/8) bytes",
+    "digest_sequence": "prefix; domain byte length; domain; then every natural joint state from layer 0 through terminal with no boundary marker or reset",
+    "prefix_assertion": "digest immediately after layer 1000000 exactly equals the parent candidate trace_sha256",
+    "excluded_from_trace": "intervention arms and conditional larger-ring controls"
+  },
+  "cross_size_controls": {
+    "cycle_sizes": [96, 128],
+    "trigger": "every exact C64 passer",
+    "horizon": "inclusive through the primary C64 first complete-pass layer",
+    "completion_rule": "both controls must finish before result serialization",
+    "interpretation": "diagnostic finite-ring comparison only because every possible continuation pass is post-wrap and finite_ring_exposed"
+  },
+  "terminal_resolutions": [
+    "symbolically_unreachable",
+    "exact_pass_on_fixed_orbit",
+    "recurrence_excluded_on_fixed_orbit"
+  ],
+  "completion_rule": "all ten selected candidates receive one terminal resolution and all triggered controls finish; interruption has no ledger",
+  "combined_family_decisions": {
+    "one_or_more_continuation_passes": "one_or_more_exact_passes",
+    "zero_passes_and_all_ten_excluded": "all_dynamic_candidates_exactly_no_pass"
+  },
+  "minimum_law_ranking": "if a pass occurs, reconcile all lower parent shells and the complete N_L=4 shell before family-relative co-winner ranking",
+  "run_command_enabled": false,
+  "registered_candidate_manifest_path": "experiments/minimal_realization/MIR-ROLE-SUCCESSION-EXACT-001/role_succession_exact_candidates.jsonl",
+  "registered_outcome_seal_path": "experiments/minimal_realization/MIR-ROLE-SUCCESSION-EXACT-001/role_succession_exact_outcome_seal.json",
+  "registered_open_manifest_path": "experiments/minimal_realization/MIR-ROLE-SUCCESSION-EXACT-001/role_succession_exact_open_manifest.json",
+  "registered_result_path": "output/minimal_realization/MIR-ROLE-SUCCESSION-EXACT-001/role_succession_exact_results.json",
+  "required_freeze_tag": "mir-role-succession-exact-001-v0.1-frozen",
+  "freeze_parent_commit": "9b83fc8e1c9f0a034d6240677c9220bbcafa04cf",
+  "opening_rule": "the annotated freeze tag peels to the seal-introduction direct child of the parent result; a direct child adds only the registered open manifest",
+  "result_write_rule": "atomic exactly-once write after every resolution and control; commit only the registered result path in the direct child of opening",
+  "independent_verification_rule": "post-result-commit clean-worktree verification re-derives candidate selection and static proofs and separately replays every dynamic continuation without production scientific helpers",
+  "claim_limits": [
+    "development data only",
+    "family-relative fixed-C64 closure only",
+    "not global N_P=2 minimality",
+    "not an exclusion of other grammars seeds backgrounds sizes topologies or detectors",
+    "not an infinite-line conclusion",
+    "not a coherent-structure or glider classification",
+    "not a localized construction if a continuation pass occurs",
+    "not carrier independence",
+    "not current-physics role recovery",
+    "not a novelty claim"
+  ]
+}
