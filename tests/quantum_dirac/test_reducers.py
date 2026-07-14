@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from decimal import Decimal
 
 from flint import acb_mat, arb
 from mpmath import mp
@@ -14,9 +15,17 @@ from src.quantum_dirac.reducers import (
     theta_ball,
     witness_metrics_ball,
 )
+from src.quantum_dirac.runner import _upper_gate
 
 
 class CertifiedReducerTests(unittest.TestCase):
+    def test_serialized_upper_enclosure_is_the_gate_source_of_truth(self) -> None:
+        with ball_precision():
+            value = arb("0.05 +/- 1e-80")
+            text, passed = _upper_gate(value, "0.05")
+        self.assertGreater(Decimal(text), Decimal("0.05"))
+        self.assertFalse(passed)
+
     def test_decimal_interval_serialization_contains_ball(self) -> None:
         with ball_precision():
             value = arb(1) / 7

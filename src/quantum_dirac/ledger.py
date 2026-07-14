@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
-
-from mpmath import mp
 
 from .metrics import refinement_gate
 from .protocol import (
@@ -67,10 +66,10 @@ def _decimal(value: Any, label: str):
     if type(value) is not str or not value:
         raise QuantumDiracSpecError(f"{label} must be a decimal string")
     try:
-        number = mp.mpf(value)
-    except (ValueError, TypeError) as exc:
+        number = Decimal(value)
+    except (InvalidOperation, ValueError, TypeError) as exc:
         raise QuantumDiracSpecError(f"{label} is not a finite decimal") from exc
-    if not mp.isfinite(number):
+    if not number.is_finite():
         raise QuantumDiracSpecError(f"{label} is not finite")
     return number
 
@@ -134,7 +133,7 @@ def _validate_observation(value: Any, expected_time: str) -> bool:
     gates = _exact(record["gates"], set(thresholds), "witness gates")
     expected_gates = {}
     for gate, (field, threshold) in thresholds.items():
-        expected_gates[gate] = _nonnegative(record[field], field) <= mp.mpf(threshold)
+        expected_gates[gate] = _nonnegative(record[field], field) <= Decimal(threshold)
     if gates != expected_gates or record["pass"] is not all(expected_gates.values()):
         raise QuantumDiracSpecError("witness gate classification mismatch")
     return record["pass"]
@@ -197,7 +196,7 @@ def _validate_witness(value: Any, expected_state: str, macrosteps: int) -> bool:
         supremum = _nonnegative(record["zitter_sup_error_upper"], "Zitterbewegung supremum")
         if supremum < max(errors):
             raise QuantumDiracSpecError("Zitterbewegung supremum is below a series entry")
-        zitter_pass = supremum <= mp.mpf(ZITTER_CURRENT_SUP_MAX)
+        zitter_pass = supremum <= Decimal(ZITTER_CURRENT_SUP_MAX)
     else:
         if series != [] or record["zitter_sup_error_upper"] is not None:
             raise QuantumDiracSpecError("non-Zitterbewegung witness contains a current series")
@@ -302,7 +301,7 @@ def _validate_scenario(value: Any, scenario_id: str, state_ids: tuple[str, ...])
         if maximum < max(observation_values):
             raise QuantumDiracSpecError("scenario maximum is below an observation")
         maxima.append(maximum)
-        absolute = maximum <= mp.mpf(ABSOLUTE_DISTANCE_THRESHOLDS[n_sites])
+        absolute = maximum <= Decimal(ABSOLUTE_DISTANCE_THRESHOLDS[n_sites])
         if item["absolute_pass"] is not absolute:
             raise QuantumDiracSpecError("absolute operator gate classification mismatch")
         absolute_passes.append(absolute)
@@ -346,8 +345,8 @@ def _validate_scenario(value: Any, scenario_id: str, state_ids: tuple[str, ...])
             raise QuantumDiracSpecError("resource accounting arithmetic mismatch")
     refinement_passed = refinement_gate(
         *maxima,
-        ratio=mp.mpf(REFINEMENT_RATIO),
-        margin=mp.mpf(REFINEMENT_MARGIN),
+        ratio=REFINEMENT_RATIO,
+        margin=REFINEMENT_MARGIN,
     )
     if operator["refinement_pass"] is not refinement_passed:
         raise QuantumDiracSpecError("operator refinement classification mismatch")
@@ -415,9 +414,9 @@ def _validate_scenario(value: Any, scenario_id: str, state_ids: tuple[str, ...])
             raise QuantumDiracSpecError("exact structural certificate is false")
         parity = _nonnegative(item["parity_residual_upper"], "parity residual")
         norm = _nonnegative(item["norm_residual_upper"], "norm residual")
-        if item["parity_pass"] is not (parity <= mp.mpf(PARITY_NUMERICAL_RESIDUAL_MAX)):
+        if item["parity_pass"] is not (parity <= Decimal(PARITY_NUMERICAL_RESIDUAL_MAX)):
             raise QuantumDiracSpecError("parity classification mismatch")
-        if item["norm_pass"] is not (norm <= mp.mpf(NUMERICAL_NORM_RESIDUAL_MAX)):
+        if item["norm_pass"] is not (norm <= Decimal(NUMERICAL_NORM_RESIDUAL_MAX)):
             raise QuantumDiracSpecError("norm classification mismatch")
         local_structure_pass &= item["parity_pass"] and item["norm_pass"]
         time_reversal_values.append(
@@ -425,10 +424,10 @@ def _validate_scenario(value: Any, scenario_id: str, state_ids: tuple[str, ...])
         )
     tr_refinement = refinement_gate(
         *time_reversal_values,
-        ratio=mp.mpf(REFINEMENT_RATIO),
-        margin=mp.mpf(REFINEMENT_MARGIN),
+        ratio=REFINEMENT_RATIO,
+        margin=REFINEMENT_MARGIN,
     )
-    tr_fine = time_reversal_values[-1] <= mp.mpf(TIME_REVERSAL_FINE_MAX)
+    tr_fine = time_reversal_values[-1] <= Decimal(TIME_REVERSAL_FINE_MAX)
     if structure["time_reversal_refinement_pass"] is not tr_refinement or structure[
         "time_reversal_fine_pass"
     ] is not tr_fine:
@@ -437,7 +436,7 @@ def _validate_scenario(value: Any, scenario_id: str, state_ids: tuple[str, ...])
         local_structure_pass
         and tr_refinement
         and tr_fine
-        and disagreement <= mp.mpf("1e-11")
+        and disagreement <= Decimal("1e-11")
     )
     if structure["pass"] is not structure_pass:
         raise QuantumDiracSpecError("structure aggregate classification mismatch")
@@ -473,7 +472,7 @@ def _validate_cross_witnesses(value: Any, state_ids: tuple[str, ...]) -> bool:
         record["maximum_independent_state_disagreement_upper"],
         "cross-witness independent disagreement",
     )
-    expected = witnesses_pass and disagreement <= mp.mpf("1e-11")
+    expected = witnesses_pass and disagreement <= Decimal("1e-11")
     if record["pass"] is not expected:
         raise QuantumDiracSpecError("confirmation cross-witness classification mismatch")
     return expected

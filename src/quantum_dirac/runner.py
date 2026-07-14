@@ -21,7 +21,7 @@ from .certified import (
 )
 from .independent_registered import IndependentRegisteredEvaluator
 from .independent_states import build_independent_state
-from .metrics import refinement_gate, spectral_norm_from_gram
+from .metrics import decimal_leq, refinement_gate, spectral_norm_from_gram
 from .production import _interval_value, _observation_steps
 from .protocol import (
     ABSOLUTE_DISTANCE_THRESHOLDS,
@@ -72,12 +72,11 @@ from .reducers import (
 from .spec import QuantumDiracSpecError, load_json, parse_fraction
 
 
-def _threshold(value: str) -> arb:
-    return arb_exact(value)
+def _upper_gate(value: arb, threshold: str) -> tuple[str, bool]:
+    """Classify exactly the canonical serialized outward upper enclosure."""
 
-
-def _passes(value: arb, threshold: str) -> bool:
-    return bool(value.upper() <= _threshold(threshold))
+    text = arb_upper_text(value)
+    return text, decimal_leq(text, threshold)
 
 
 def _fraction_text(value: Fraction) -> str:
@@ -148,10 +147,11 @@ def _interference_negative_control(
         mixture = (first_value + second_value) / 2
         lower = abs(coherent_value - mixture).lower()
         maximum_lower = maximum_lower.max(lower)
-    passed = bool(maximum_lower > 0)
+    lower_text = arb_lower_text(maximum_lower)
+    passed = not decimal_leq(lower_text, "0")
     return {
         "applicable": True,
-        "maximum_position_entry_change_lower": arb_lower_text(maximum_lower),
+        "maximum_position_entry_change_lower": lower_text,
         "pass": passed,
     }
 
@@ -214,35 +214,42 @@ def _witness_records(
             )
             disagreement = candidate_disagreement.max(target_disagreement).upper()
             maximum_disagreement = maximum_disagreement.max(disagreement)
-            gates = {
-                "position_tv": _passes(metrics["position_tv_upper"], POSITION_TV_MAX),
-                "momentum_tv": _passes(metrics["momentum_tv_upper"], MOMENTUM_TV_MAX),
-                "total_current": _passes(
-                    metrics["total_current_error_upper"], TOTAL_CURRENT_ERROR_MAX
+            serialized_metrics = {
+                key: arb_upper_text(value) for key, value in metrics.items()
+            }
+            disagreement_text = arb_upper_text(disagreement)
+            thresholds = {
+                "position_tv": ("position_tv_upper", POSITION_TV_MAX),
+                "momentum_tv": ("momentum_tv_upper", MOMENTUM_TV_MAX),
+                "total_current": (
+                    "total_current_error_upper",
+                    TOTAL_CURRENT_ERROR_MAX,
                 ),
-                "local_current": _passes(
-                    metrics["local_current_l1_upper"], LOCAL_CURRENT_L1_MAX
-                ),
-                "infidelity": _passes(metrics["infidelity_upper"], INFIDELITY_MAX),
-                "candidate_norm": _passes(
-                    metrics["candidate_norm_residual_upper"],
+                "local_current": ("local_current_l1_upper", LOCAL_CURRENT_L1_MAX),
+                "infidelity": ("infidelity_upper", INFIDELITY_MAX),
+                "candidate_norm": (
+                    "candidate_norm_residual_upper",
                     NUMERICAL_NORM_RESIDUAL_MAX,
                 ),
-                "target_norm": _passes(
-                    metrics["target_norm_residual_upper"],
+                "target_norm": (
+                    "target_norm_residual_upper",
                     NUMERICAL_NORM_RESIDUAL_MAX,
-                ),
-                "independent_state_agreement": _passes(
-                    disagreement, INDEPENDENT_STATE_DISAGREEMENT_MAX
                 ),
             }
+            gates = {
+                gate: decimal_leq(serialized_metrics[field], threshold)
+                for gate, (field, threshold) in thresholds.items()
+            }
+            gates["independent_state_agreement"] = decimal_leq(
+                disagreement_text, INDEPENDENT_STATE_DISAGREEMENT_MAX
+            )
             passed = all(gates.values())
             state_pass &= passed
             observation_records.append(
                 {
                     "time": time_text,
-                    **{key: arb_upper_text(value) for key, value in metrics.items()},
-                    "independent_state_disagreement_upper": arb_upper_text(disagreement),
+                    **serialized_metrics,
+                    "independent_state_disagreement_upper": disagreement_text,
                     "gates": gates,
                     "pass": passed,
                 }
@@ -276,7 +283,9 @@ def _witness_records(
                         "error_upper": arb_upper_text(error),
                     }
                 )
-            zitter_pass = _passes(zitter_sup, ZITTER_CURRENT_SUP_MAX)
+            zitter_text, zitter_pass = _upper_gate(
+                zitter_sup, ZITTER_CURRENT_SUP_MAX
+            )
             state_pass &= zitter_pass
         else:
             zitter_pass = True
@@ -289,7 +298,7 @@ def _witness_records(
                 "observations": observation_records,
                 "zitter_current_series": zitter_series,
                 "zitter_sup_error_upper": (
-                    arb_upper_text(zitter_sup) if zitter_series else None
+                    zitter_text if zitter_series else None
                 ),
                 "zitter_pass": zitter_pass,
                 "coherence_negative_fixture": negative,
@@ -351,19 +360,26 @@ def _symmetry_record(
         norm_values.append(operator_gram_residual_upper(candidate_outputs[step]))
         norm_values.append(operator_gram_residual_upper(embedded_target_outputs[step]))
     norm_residual = _ball_max(norm_values)
+    parity_text, parity_pass = _upper_gate(
+        parity_residual, PARITY_NUMERICAL_RESIDUAL_MAX
+    )
+    time_reversal_text = arb_upper_text(time_reversal_residual)
+    norm_text, norm_pass = _upper_gate(
+        norm_residual, NUMERICAL_NORM_RESIDUAL_MAX
+    )
     return {
         "n_sites": primary.n_sites,
         "unitarity_abstract_exact": True,
         "causal_support_structural_exact": True,
         "massless_cone_boundaries_attained": True,
         "parity_abstract_exact": True,
-        "parity_residual_upper": arb_upper_text(parity_residual),
-        "parity_pass": _passes(parity_residual, PARITY_NUMERICAL_RESIDUAL_MAX),
+        "parity_residual_upper": parity_text,
+        "parity_pass": parity_pass,
         "time_reversal_domain": "registered_K_in",
-        "time_reversal_residual_upper": arb_upper_text(time_reversal_residual),
-        "norm_residual_upper": arb_upper_text(norm_residual),
-        "norm_pass": _passes(norm_residual, NUMERICAL_NORM_RESIDUAL_MAX),
-        "_time_reversal_ball": time_reversal_residual,
+        "time_reversal_residual_upper": time_reversal_text,
+        "norm_residual_upper": norm_text,
+        "norm_pass": norm_pass,
+        "_time_reversal_text": time_reversal_text,
     }
 
 
@@ -377,8 +393,8 @@ def _scenario_result(
     refinements: list[dict[str, Any]] = []
     symmetry_records: list[dict[str, Any]] = []
     finest_payload = None
-    distance_maxima: list[arb] = []
-    tr_values: list[arb] = []
+    distance_maxima: list[str] = []
+    tr_values: list[str] = []
     certified_contains_independent = True
     for n_sites in REGISTERED_SIZES:
         validate_registered_permit(permit)
@@ -412,35 +428,42 @@ def _scenario_result(
                         independent_candidate[step] - independent_target[step],
                         dps=INDEPENDENT_DPS,
                     ) + _tail_mp(scenario)
-                contained = bool(distance >= arb(str(mp.nstr(independent_distance, 80))))
+                raw_norm_text = arb_upper_text(raw_norm)
+                tail_text = arb_upper_text(tail)
+                distance_text = arb_upper_text(distance)
+                independent_text = mp_text(independent_distance)
+                contained = decimal_leq(independent_text, distance_text)
                 certified_contains_independent &= contained
                 observations.append(
                     {
                         "time": time_text,
-                        "operator_norm_upper": arb_upper_text(raw_norm),
-                        "target_tail_upper": arb_upper_text(tail),
+                        "operator_norm_upper": raw_norm_text,
+                        "target_tail_upper": tail_text,
                         "numeric_bound": "0",
-                        "certified_distance_upper": arb_upper_text(distance),
-                        "independent_distance": mp_text(independent_distance),
+                        "certified_distance_upper": distance_text,
+                        "independent_distance": independent_text,
                         "certified_contains_independent": contained,
                     }
                 )
         maximum = _ball_max(distances)
-        distance_maxima.append(maximum)
+        maximum_text, absolute_pass = _upper_gate(
+            maximum, ABSOLUTE_DISTANCE_THRESHOLDS[n_sites]
+        )
+        distance_maxima.append(maximum_text)
         absolute_threshold = ABSOLUTE_DISTANCE_THRESHOLDS[n_sites]
         symmetry = _symmetry_record(
             primary, scenario_id, primary_candidate, primary_target
         )
-        tr_values.append(symmetry.pop("_time_reversal_ball"))
+        tr_values.append(symmetry.pop("_time_reversal_text"))
         symmetry_records.append(symmetry)
         refinements.append(
             {
                 "n_sites": n_sites,
                 "delta": _fraction_text(Fraction(PHYSICAL_LENGTH, n_sites)),
                 "observations": observations,
-                "scenario_max_upper": arb_upper_text(maximum),
+                "scenario_max_upper": maximum_text,
                 "absolute_threshold": absolute_threshold,
-                "absolute_pass": _passes(maximum, absolute_threshold),
+                "absolute_pass": absolute_pass,
                 "resources": _resource_record(scenario, n_sites),
             }
         )
@@ -456,16 +479,16 @@ def _scenario_result(
     if finest_payload is None:
         raise QuantumDiracSpecError("finest registered refinement was not evaluated")
     distance_refinement_pass = refinement_gate(
-        *[arb_upper_text(value) for value in distance_maxima],
-        ratio=mp.mpf(REFINEMENT_RATIO),
-        margin=mp.mpf(REFINEMENT_MARGIN),
+        *distance_maxima,
+        ratio=REFINEMENT_RATIO,
+        margin=REFINEMENT_MARGIN,
     )
     tr_refinement_pass = refinement_gate(
-        *[arb_upper_text(value) for value in tr_values],
-        ratio=mp.mpf(REFINEMENT_RATIO),
-        margin=mp.mpf(REFINEMENT_MARGIN),
+        *tr_values,
+        ratio=REFINEMENT_RATIO,
+        margin=REFINEMENT_MARGIN,
     )
-    tr_fine_pass = _passes(tr_values[-1], TIME_REVERSAL_FINE_MAX)
+    tr_fine_pass = decimal_leq(tr_values[-1], TIME_REVERSAL_FINE_MAX)
     (
         primary,
         independent,
@@ -485,11 +508,14 @@ def _scenario_result(
         independent_candidate_outputs=independent_candidate,
         independent_target_outputs=independent_target,
     )
+    disagreement_text, disagreement_pass = _upper_gate(
+        disagreement, INDEPENDENT_STATE_DISAGREEMENT_MAX
+    )
     structure_pass = (
         all(record["parity_pass"] and record["norm_pass"] for record in symmetry_records)
         and tr_fine_pass
         and tr_refinement_pass
-        and _passes(disagreement, INDEPENDENT_STATE_DISAGREEMENT_MAX)
+        and disagreement_pass
     )
     operator_pass = (
         all(record["absolute_pass"] for record in refinements)
@@ -506,7 +532,7 @@ def _scenario_result(
             "pass": operator_pass,
         },
         "witnesses": witnesses,
-        "maximum_independent_state_disagreement_upper": arb_upper_text(disagreement),
+        "maximum_independent_state_disagreement_upper": disagreement_text,
         "symmetry_and_structure": {
             "refinements": symmetry_records,
             "time_reversal_refinement_pass": tr_refinement_pass,
@@ -619,14 +645,15 @@ def _confirmation_cross_witnesses(
         independent_candidate_outputs=independent_candidate,
         independent_target_outputs=independent_target,
     )
-    passed = all(record["pass"] for record in witnesses) and _passes(
+    disagreement_text, disagreement_pass = _upper_gate(
         disagreement, INDEPENDENT_STATE_DISAGREEMENT_MAX
     )
+    passed = all(record["pass"] for record in witnesses) and disagreement_pass
     return {
         "scenario_id": scenario_id,
         "state_partition": "confirmation",
         "witnesses": witnesses,
-        "maximum_independent_state_disagreement_upper": arb_upper_text(disagreement),
+        "maximum_independent_state_disagreement_upper": disagreement_text,
         "pass": passed,
     }
 

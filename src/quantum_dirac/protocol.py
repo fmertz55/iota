@@ -7,24 +7,24 @@ PROTOCOL_VERSION = "0.1-draft"
 SEARCH_ID = "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"
 CANDIDATE_ID = "QDIR-PRODUCT-WALK-001"
 STATUS = "outcome_free_implementation_complete_not_frozen"
-FREEZE_TAG = "icp-quantum-dirac-role-recovery-001-v0.3-frozen"
-COMPLETION_TAG = "icp-quantum-dirac-role-recovery-001-v0.3-complete"
+FREEZE_TAG = "icp-quantum-dirac-role-recovery-001-v0.4-frozen"
+COMPLETION_TAG = "icp-quantum-dirac-role-recovery-001-v0.4-complete"
 
 SPEC_DIR_REF = "specs/icp_quantum_dirac_role_recovery/v0.1-draft"
 CONTRACT_REF = "docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md"
 EXPERIMENT_DIR_REF = (
     "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001"
 )
-OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.3.json"
-DEVELOPMENT_OPEN_REF = f"{EXPERIMENT_DIR_REF}/development_open_manifest_v0.3.json"
-CONFIRMATION_OPEN_REF = f"{EXPERIMENT_DIR_REF}/confirmation_open_manifest_v0.3.json"
+OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.4.json"
+DEVELOPMENT_OPEN_REF = f"{EXPERIMENT_DIR_REF}/development_open_manifest_v0.4.json"
+CONFIRMATION_OPEN_REF = f"{EXPERIMENT_DIR_REF}/confirmation_open_manifest_v0.4.json"
 DEVELOPMENT_RESULT_REF = (
     "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/"
-    "development_results_v0.3.json"
+    "development_results_v0.4.json"
 )
 CONFIRMATION_RESULT_REF = (
     "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/"
-    "confirmation_results_v0.3.json"
+    "confirmation_results_v0.4.json"
 )
 
 DESIGN_FILENAMES = (

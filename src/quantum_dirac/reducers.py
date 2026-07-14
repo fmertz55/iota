@@ -345,7 +345,7 @@ def witness_metrics_ball(
     for row in range(candidate.nrows()):
         overlap += candidate[row, 0].conjugate() * target[row, 0]
     fidelity_lower = overlap.abs_lower() ** 2
-    infidelity_upper = (arb(1) - fidelity_lower).upper()
+    infidelity_upper = (arb(1) - fidelity_lower).upper().max(arb(0)).upper()
     return {
         "position_tv_upper": distribution_tv_upper(candidate_position, target_position),
         "momentum_tv_upper": distribution_tv_upper(candidate_momentum, target_momentum),

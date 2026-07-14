@@ -1,12 +1,12 @@
 # ICP Quantum-Dirac Role-Recovery Contract
 
-Protocol version: `0.1-draft`; implementation-seal retry: `v0.3`
+Protocol version: `0.1-draft`; implementation-seal retry: `v0.4`
 
 Search ID: `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`
 
 Date: `2026-07-14`
 
-Status: **v0.1 and v0.2 execution incomplete with no result; v0.3 outcome-free repair complete, disabled, and not frozen**
+Status: **v0.1-v0.3 execution incomplete with no result; v0.4 outcome-free repair complete, disabled, and not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -454,7 +454,7 @@ Interruptions, exceptions, worker failures, or unfinished certificates write no 
 The future freeze tag is
 
 ```text
-icp-quantum-dirac-role-recovery-001-v0.3-frozen
+icp-quantum-dirac-role-recovery-001-v0.4-frozen
 ```
 
 The required history is:
@@ -480,6 +480,13 @@ sums. It adds public repeated/overlapping-spectrum regression fixtures,
 context-only infrastructure errors, and fresh provenance paths. Scientific
 definitions, scenarios, partitions, states, thresholds, and stopping rules
 are unchanged.
+
+The `v0.3` computation completed its numerical work but the strict validator
+rejected a pre-serialization witness gate classification; no ledger was
+written. The `v0.4` retry makes each canonical serialized outward enclosure
+the sole source of truth for its gate, compares it to the threshold with exact
+decimal arithmetic, and clamps mathematically nonnegative infidelity
+enclosures at zero. Thresholds and all scientific inputs remain unchanged.
 
 At this draft stage, no freeze tag, open manifest, or result artifact may exist. The production command exists but remains disabled by the Git provenance gate until the seal is committed and the corresponding stage opening is its required direct child.
 
