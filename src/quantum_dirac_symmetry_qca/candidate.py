@@ -82,8 +82,10 @@ def direct_qca_step(
         for site in range(n_sites):
             r_row = 2 * site
             l_row = r_row + 1
-            right_r = 2 * ((site + 1) % n_sites)
-            left_l = 2 * ((site - 1) % n_sites) + 1
+            # The target Fourier convention is exp(+ikx).  R therefore reads
+            # from x-1 (right-moving profile) and L from x+1.
+            right_r = 2 * ((site - 1) % n_sites)
+            left_l = 2 * ((site + 1) % n_sites) + 1
             for column in range(state.cols):
                 result[r_row, column] = (
                     normalization * state[right_r, column]

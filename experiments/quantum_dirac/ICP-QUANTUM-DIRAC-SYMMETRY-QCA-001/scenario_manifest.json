@@ -1,0 +1,27 @@
+{
+  "confirmation_batch_indivisible": true,
+  "confirmation_ids": [
+    "HOLDOUT-DIRECT-MASS-PULSE",
+    "HOLDOUT-DIRECT-POTENTIAL-H3"
+  ],
+  "development_batch_indivisible": true,
+  "development_ids": [
+    "DEV-DIRECT-FREE-POS",
+    "DEV-DIRECT-FREE-NEG",
+    "DEV-DIRECT-SIGN-QUENCH",
+    "DEV-DIRECT-POTENTIAL-H2"
+  ],
+  "parent_scenario_reuse": false,
+  "protocol": {
+    "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/protocol.json",
+    "sha256": "2545ad0eb55e3d4c45309ec7ba51aa8c8f193d00ff1893698e0e5336985067b4"
+  },
+  "protocol_version": "0.1-draft",
+  "registered_outcomes_forbidden": true,
+  "scenario_spec": {
+    "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/scenarios.json",
+    "sha256": "f9d00c739f76ecda0081283e9349afabfc2fdadfb01e8123ec835639a699452a"
+  },
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "status": "prospective_outcomes_forbidden"
+}

@@ -3,18 +3,18 @@
 Current state:
 
 ```text
-outcome-free prospective protocol drafted
+outcome-free implementation complete
 localization, continuum, and global-spectrum audits complete
 not registered
 not frozen
-production registered implementation absent
+guarded primary and independent implementations present
 registered outcomes forbidden
 ```
 
 The proposed candidate is the direct two-channel Dirac QCA with
 `n=sqrt(1-mu^2)`, not the completed product-walk candidate. The prospective
-machine-readable protocol is now explicit, but remains outcome-free and
-provisional. The human contract is
+machine-readable protocol and guarded implementation are explicit, but remain
+outcome-free and provisional. The human contract is
 `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`; the controlling design brief
 is `experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/DESIGN.md`.
 

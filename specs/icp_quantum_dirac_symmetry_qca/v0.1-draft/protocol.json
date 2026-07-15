@@ -2,13 +2,13 @@
   "protocol_version": "0.1-draft",
   "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
   "date": "2026-07-15",
-  "status": "outcome_free_protocol_draft_not_frozen",
+  "status": "outcome_free_implementation_complete_not_frozen",
   "human_contract": "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md",
   "literature_basis": "literature_basis.md",
   "threshold_certificate": "threshold_certificate.json",
   "global_spectrum_audit": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md",
   "registered_outcome_authorized": false,
-  "production_implementation_present": false,
+  "production_implementation_present": true,
   "run_command_enabled": false,
   "question": "can a second symmetry-derived strictly local quantum-information architecture recover the same bounded 1+1D Dirac operational role under fixed maps and explicit spectrum resource and verification boundaries",
   "supported_pass_claim": "a second independently designed strictly local quantum-information architecture is constructively sufficient for the frozen bounded 1+1D Dirac role in its registered domain",
@@ -66,12 +66,12 @@
     "registered_sector": "one global excitation",
     "logical_step": "A B_mu P_V with P_V omitted when inactive",
     "direct_update": [
-      "R'(x)=n R(x+1)-i mu L(x)",
-      "L'(x)=-i mu R(x)+n L(x-1)"
+      "R'(x)=n R(x-1)-i mu L(x)",
+      "L'(x)=-i mu R(x)+n L(x+1)"
     ],
     "free_momentum_block": "[[n exp(-i k delta),-i mu],[-i mu,n exp(+i k delta)]]",
     "full_space_layers": [
-      "edge scatter b_mu on every (L_x,R_(x+1))",
+      "edge scatter b_mu on every (L_x,R_(x-1))",
       "ordinary on-site qubit SWAP on every (R_x,L_x)"
     ],
     "active_potential_prefix": "exp(-i delta V(x_j,t_q) (n_Rj+n_Lj))",

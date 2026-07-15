@@ -51,14 +51,14 @@ class DirectSymmetryQCAFixtureTests(unittest.TestCase):
         left = direct_qca_step(
             basis_state(6, 2, "L"), n_sites=6, mu="0"
         )
-        self.assertEqual(right, basis_state(6, 1, "R"))
-        self.assertEqual(left, basis_state(6, 3, "L"))
+        self.assertEqual(right, basis_state(6, 3, "R"))
+        self.assertEqual(left, basis_state(6, 1, "L"))
 
     def test_mass_coupling_and_shift_share_one_direct_update(self) -> None:
         with mp.workdps(90):
             state = basis_state(6, 2, "R")
             result = direct_qca_step(state, n_sites=6, mu="3/5")
-            self.assertLess(abs(result[2, 0] - mp.mpf("4") / 5), mp.mpf("1e-80"))
+            self.assertLess(abs(result[6, 0] - mp.mpf("4") / 5), mp.mpf("1e-80"))
             self.assertLess(
                 abs(result[5, 0] + 1j * mp.mpf("3") / 5), mp.mpf("1e-80")
             )

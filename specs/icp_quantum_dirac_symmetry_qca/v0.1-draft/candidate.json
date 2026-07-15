@@ -26,7 +26,7 @@
   ],
   "gates": {
     "scalar_phase": "exp(-i delta V(x_j,t_q) (n_Rj+n_Lj))",
-    "edge_scatter": "b_mu on (L_j,R_(j+1)) with one-excitation block n X-i mu I and hard-core |00>,|11> phases +1",
+    "edge_scatter": "b_mu on (L_j,R_(j-1)) with one-excitation block n X-i mu I and hard-core |00>,|11> phases +1",
     "on_site_swap": "ordinary qubit SWAP(R_j,L_j)"
   },
   "parameters": {

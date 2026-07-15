@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **outcome-free prospective protocol and absolute-gate certificate complete; production absent; not frozen**
+Status: **outcome-free production and independent implementation complete; not frozen**
 
 Started: `2026-07-14`
 
@@ -37,15 +37,20 @@ The current outcome-free tranche contains:
   leakage rather than assuming later states stay in the input band.
 
 It contains prospective registered lattice, scenario, state, and threshold
-definitions but has never evaluated them. It contains no production registered
-evaluator, registered verifier, prospective manifests, authorization permit,
-outcome seal, opening manifest, or result. The localization/resource clock,
+definitions but has never evaluated them. It now contains a permit-guarded
+certified production evaluator, an algorithmically separate replay, canonical
+reducers, four prospective manifests, and a disabled seal/authorization
+surface. It contains no issued authorization permit, outcome seal, opening
+manifest, or result. The localization/resource clock,
 continuum correction, global spectral boundaries, and protocol audit are in
 `LOCALIZATION_AUDIT.md`, `CONTINUUM_AUDIT.md`, and
 `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`. The controlling human
 contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
 
-The next outcome-free task is production and independent implementation under
-the fixed draft, followed by prospective manifests and a disabled lifecycle
-authorization surface. See `DESIGN.md` for the scientific contrast and stop
-conditions.
+Production construction caught and prospectively corrected a Fourier-sign
+inconsistency between the original real-space edge orientation and the fixed
+target convention. The revised `(L_x,R_(x-1))` pairing, recurrence, and audited
+momentum block now agree. The next task is hostile review of the complete
+outcome-free bytes. Only afterward may the explicit seal-only freeze commit
+and annotated tag be created. See `DESIGN.md` for the scientific contrast and
+stop conditions.

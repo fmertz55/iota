@@ -84,7 +84,7 @@ def full_basis_state(
 
 
 def edge_scatter_gate(*, mu: int | str | Fraction, dps: int = 90) -> mp.matrix:
-    """Return the full two-qubit gate on ``(L_x, R_(x+1))``.
+    """Return the full two-qubit gate on ``(L_x, R_(x-1))``.
 
     The basis order is ``|00>, |01>, |10>, |11>``.  Vacuum and double
     occupation are fixed explicitly.  On the one-excitation block the gate is
@@ -156,7 +156,7 @@ def _apply_edge_layer(
         current = _apply_two_mode_gate(
             current,
             mode_a=2 * site + 1,
-            mode_b=2 * ((site + 1) % n_sites),
+            mode_b=2 * ((site - 1) % n_sites),
             gate=gate,
         )
     return current

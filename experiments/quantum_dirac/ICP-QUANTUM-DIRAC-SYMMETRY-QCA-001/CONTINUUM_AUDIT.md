@@ -47,6 +47,11 @@ b_x = mu,
 b_z = n sin(q).
 ```
 
+The guarded production fixture also reconstructs this block from the
+real-space recurrence using the fixed positive-sign target Fourier convention.
+That cross-layer check caught and prospectively corrected the earlier reversed
+edge orientation before any freeze or registered propagation.
+
 Direct substitution gives
 
 ```text

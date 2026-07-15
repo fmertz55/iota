@@ -4,7 +4,7 @@ Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
 Date: `2026-07-15`
 
-Status: **outcome-free protocol audit complete; production implementation absent; registered outcomes forbidden**
+Status: **outcome-free implementation complete; not frozen; registered outcomes forbidden**
 
 ## Audit question
 
@@ -35,9 +35,9 @@ contract now agree on:
   high momentum, mass endpoint, long horizon, rough potential, and collision
   lift.
 
-This is not an experiment result. The registered evaluator and verifier do not
-exist, all registered sizes and scenarios are rejected by the public draft
-guards, and no seal/open/result artifact exists.
+This is not an experiment result. The permit-guarded registered constructors
+now exist, but all registered sizes and scenarios remain inaccessible without
+the future seal/tag/open lineage. No seal/open/result artifact exists.
 
 ## Seven global-spectrum boundaries
 
@@ -95,15 +95,25 @@ commits, result path, and freeze tag. The result schema fixes numerical
 backends, bindings, three refinements, five observation distances, four state
 witnesses, π-sector accounting, structural gates, and terminal labels.
 
-The current seal helper is preview-only. It reports `seal_ready=false`, hashes
-the design, lists missing production/verification/authorization prerequisites,
-and raises if asked to write an outcome seal.
+The seal preview hashes the complete primary, independent, reducer, manifest,
+test, specification, and command surface. It now reports `seal_ready=true`
+while keeping `run_command_enabled=false`; previewing creates no file. Seal
+creation is a separate clean-worktree command whose output is still disabled
+until a sole-file freeze commit, annotated tag, and stage-opening child exist.
 
-## Next prerequisite
+## Implementation tranche disposition
 
-Implement the registered candidate and target engines and an algorithmically
-separate verifier behind authorization guards, but exercise them before freeze
-only on the disclosed `N=6`, `N=10`, and cutoff-3 fixtures. Then construct and
-validate prospective manifests and the disabled lifecycle surface. Only after
-hostile review may a seal-only freeze commit and annotated tag be created.
+The certified primary applies the leading real-space phase and corrected
+direct recurrence; its target uses Arb/Acb free blocks and spectral
+exponentials. The independent replay uses direct `2x2` momentum blocks for
+free schedules, explicit sparse phase/edge-scatter/routing operators for
+potential schedules, a separately rebuilt harmonic target, and a Taylor
+action. Canonical reducers include arbitrary-size DFT, pi-sector, observable,
+operator, refinement, and resource reductions. Four prospective manifests and
+the disabled Git-linear lifecycle validate.
 
+Implementation also caught the earlier real/local edge orientation as the
+wrong sign under the fixed `exp(+ikx)` convention. The pairing and recurrence
+were reversed before freeze and a cross-layer Fourier fixture was added. No
+registered propagation occurred. Only after hostile review may a seal-only
+freeze commit and annotated tag be created.

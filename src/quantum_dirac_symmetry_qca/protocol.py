@@ -6,7 +6,7 @@ from __future__ import annotations
 PROTOCOL_VERSION = "0.1-draft"
 SEARCH_ID = "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"
 CANDIDATE_ID = "QDIR-DIRECT-SYMMETRY-QCA-001"
-STATUS = "outcome_free_protocol_draft_not_frozen"
+STATUS = "outcome_free_implementation_complete_not_frozen"
 
 SPEC_DIR_REF = "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft"
 CONTRACT_REF = "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md"
@@ -47,6 +47,26 @@ DESIGN_FILENAMES = (
     "README.md",
 )
 
+MANIFEST_FILENAMES = (
+    "candidate_manifest.json",
+    "scenario_manifest.json",
+    "state_manifest.json",
+    "partition_manifest.json",
+)
+
+IMPLEMENTATION_FILENAMES = (
+    "authorization.py",
+    "cli.py",
+    "independent_registered.py",
+    "independent_states.py",
+    "lifecycle.py",
+    "manifest.py",
+    "production.py",
+    "reducers.py",
+    "seal.py",
+    "states.py",
+)
+
 REGISTERED_SIZES = (320, 640, 1280)
 REGISTERED_DELTAS = ("1/20", "1/40", "1/80")
 REGISTERED_OBSERVATION_TIMES = ("2/5", "4/5", "6/5", "8/5", "2")
@@ -83,6 +103,8 @@ PHYSICAL_HORIZON = 2
 PRECISION_BITS = 256
 WORK_DPS = 90
 INDEPENDENT_DPS = 110
+PRIMARY_LIBRARY_VERSION = "0.9.0"
+INDEPENDENT_LIBRARY_VERSION = "1.3.0"
 
 ALLOWED_FIXTURE_SIZES = (6, 10)
 ALLOWED_TARGET_FIXTURE_CUTOFF = 3
@@ -109,3 +131,15 @@ DIRECT_REFINEMENT_RATIO = "0.35"
 POTENTIAL_REFINEMENT_RATIO = "0.62"
 REFINEMENT_MARGIN = "1e-10"
 NEAR_ZERO_THRESHOLD = "1e-12"
+
+POSITION_TV_MAX = "0.010"
+MOMENTUM_TV_MAX = "0.010"
+TOTAL_CURRENT_ERROR_MAX = "0.020"
+LOCAL_CURRENT_L1_MAX = "0.020"
+INFIDELITY_MAX = "0.0001"
+ZITTER_CURRENT_SUP_MAX = "0.020"
+PI_SECTOR_PROBABILITY_MAX = "1e-24"
+NUMERICAL_NORM_RESIDUAL_MAX = "1e-12"
+INDEPENDENT_STATE_DISAGREEMENT_MAX = "1e-11"
+PARITY_NUMERICAL_RESIDUAL_MAX = "1e-12"
+TIME_REVERSAL_FINE_MAX = "0.020"

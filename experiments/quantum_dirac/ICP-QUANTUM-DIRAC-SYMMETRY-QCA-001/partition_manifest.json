@@ -1,0 +1,38 @@
+{
+  "confirmation_scenarios": [
+    "HOLDOUT-DIRECT-MASS-PULSE",
+    "HOLDOUT-DIRECT-POTENTIAL-H3"
+  ],
+  "confirmation_single_use": true,
+  "confirmation_states": [
+    "HOLDOUT-DIRECT-STATE-POS",
+    "HOLDOUT-DIRECT-STATE-NEG",
+    "HOLDOUT-DIRECT-STATE-INTERFERENCE",
+    "HOLDOUT-DIRECT-STATE-ZITTER"
+  ],
+  "development_scenarios": [
+    "DEV-DIRECT-FREE-POS",
+    "DEV-DIRECT-FREE-NEG",
+    "DEV-DIRECT-SIGN-QUENCH",
+    "DEV-DIRECT-POTENTIAL-H2"
+  ],
+  "development_states": [
+    "DEV-DIRECT-STATE-POS",
+    "DEV-DIRECT-STATE-NEG",
+    "DEV-DIRECT-STATE-INTERFERENCE",
+    "DEV-DIRECT-STATE-ZITTER"
+  ],
+  "open_confirmation_only_after_verified_development_pass": true,
+  "partition_spec": {
+    "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/partitions.json",
+    "sha256": "8bcee39a89287c00855a053f858a8f982cea4e275e3662c1aa16e274db973286"
+  },
+  "protocol": {
+    "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/protocol.json",
+    "sha256": "2545ad0eb55e3d4c45309ec7ba51aa8c8f193d00ff1893698e0e5336985067b4"
+  },
+  "protocol_version": "0.1-draft",
+  "registered_outcomes_forbidden": true,
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "status": "prospective_outcomes_forbidden"
+}

@@ -28,7 +28,7 @@ H_x = C^2_(R_x) tensor C^2_(L_x),       dim(H_x) = 4.
 The full Hilbert space is `tensor_x H_x`, of dimension `4^N`.  No restriction
 to one excitation is imposed on the construction.
 
-Let `n = sqrt(1 - mu^2)`.  On the edge subcells `(L_x, R_(x+1))`, in basis
+Let `n = sqrt(1 - mu^2)`.  On the edge subcells `(L_x, R_(x-1))`, in basis
 `|00>, |01>, |10>, |11>`, define
 
 ```text
@@ -39,12 +39,18 @@ b_mu =           [ 0    -i mu     n     0 ]
 ```
 
 Thus vacuum and double occupation on an edge pair are fixed, while the
-one-excitation block in mode-amplitude order `(L_x, R_(x+1))` is
+one-excitation block in mode-amplitude order `(L_x, R_(x-1))` is
 
 ```text
 C_mu = [[-i mu, n],
         [n, -i mu]].
 ```
+
+The `x-1` orientation is prospective and candidate-defining. The first draft
+used `x+1`; guarded production construction showed that choice has the wrong
+massless phase under the contract's fixed `exp(+ikx)` convention. Reversing
+the edge orientation before freeze makes this localized layer restrict to the
+audited momentum block rather than its sign-reversed partner.
 
 The on-site gate `a_x` is the ordinary qubit SWAP on `(R_x,L_x)`, including
 identity action on `|00>` and `|11>`.
@@ -52,7 +58,7 @@ identity action on `|00>` and `|11>`.
 The two global partition layers are
 
 ```text
-B_mu = product_x b_mu[L_x, R_(x+1)]     edge scatter
+B_mu = product_x b_mu[L_x, R_(x-1)]     edge scatter
 A    = product_x SWAP[R_x, L_x]         on-site routing
 
 U_full(mu) = A B_mu.                    causal order: B_mu then A
@@ -88,15 +94,15 @@ matrix.
 Before the routing layer, the edge gates give one-excitation amplitudes
 
 ```text
-(B_mu psi)_R(x) = -i mu R(x) + n L(x-1),
-(B_mu psi)_L(x) =  n R(x+1) - i mu L(x).
+(B_mu psi)_R(x) = -i mu R(x) + n L(x+1),
+(B_mu psi)_L(x) =  n R(x-1) - i mu L(x).
 ```
 
 The on-site SWAP exchanges these two output channels.  Therefore
 
 ```text
-(A B_mu psi)_R(x) = n R(x+1) - i mu L(x),
-(A B_mu psi)_L(x) = -i mu R(x) + n L(x-1),
+(A B_mu psi)_R(x) = n R(x-1) - i mu L(x),
+(A B_mu psi)_L(x) = -i mu R(x) + n L(x+1),
 ```
 
 which is exactly the candidate law, coefficient by coefficient.  No equality
@@ -156,7 +162,7 @@ One physical macrostep advances the direct-QCA time by `delta_t` and contains
 the following elapsed elementary layers:
 
 ```text
-1. N parallel edge-scatter gates b_mu[L_x, R_(x+1)]
+1. N parallel edge-scatter gates b_mu[L_x, R_(x-1)]
 2. N parallel on-site SWAP gates SWAP[R_x, L_x]
 ```
 

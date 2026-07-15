@@ -2,7 +2,7 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **prospective protocol and absolute-gate certificate complete; production absent; registered outcomes forbidden**
+Status: **outcome-free implementation complete; not frozen; registered outcomes forbidden**
 
 ## Question
 
@@ -40,8 +40,8 @@ U_delta(k) = [[n exp(-i k delta), -i mu],
 Equivalently in real space,
 
 ```text
-R'(x) = n R(x + 1) - i mu L(x)
-L'(x) = -i mu R(x) + n L(x - 1).
+R'(x) = n R(x - 1) - i mu L(x)
+L'(x) = -i mu R(x) + n L(x + 1).
 ```
 
 The update is exactly unitary when `n^2 + mu^2 = 1`. Unlike the successful
@@ -142,8 +142,14 @@ envelopes are `0.019662`, `0.007805`, and `0.002914`, below the prospective
 absolute gates. Refinement ratios, witnesses, implementation agreement,
 symmetry-role residuals, and all classifications remain uncomputed outcomes.
 
-The next task is the outcome-free production and independent implementation,
-prospective manifests, and disabled authorization/lifecycle surface. No
-registered size or scenario may be evaluated, and no development or
-confirmation partition may be opened, before that work is complete, reviewed,
-committed, sealed, and frozen through the declared linear chain.
+The outcome-free production tranche is complete. It includes a 256-bit
+Arb/Acb real-space candidate and spectral target, an independent 110-digit
+momentum/sparse-circuit/Taylor reconstruction, canonical reducers, prospective
+manifests, and a Git-linear seal/authorization surface. Building it exposed an
+opposite Fourier sign in the earlier edge orientation; the pairing was
+prospectively reversed before freeze so the real-space, localized, momentum,
+and target conventions now agree. No registered size or scenario was run.
+
+The next task is hostile review of these bytes. No development or confirmation
+partition may be opened before the implementation is committed, explicitly
+sealed in a sole-file freeze commit, and bound by the declared annotated tag.

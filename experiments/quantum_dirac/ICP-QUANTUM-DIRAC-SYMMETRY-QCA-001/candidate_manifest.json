@@ -1,0 +1,38 @@
+{
+  "architecture": {
+    "canonical_fermionic_substitution_allowed": false,
+    "family": "direct_symmetry_derived_Dirac_QCA",
+    "full_space_extension": "hard_core_occupation_qubits",
+    "gate_order": [
+      "scalar_phase_if_active",
+      "edge_scatter",
+      "on_site_swap"
+    ],
+    "hard_core_double_occupation_phase": "+1 on both gate layers"
+  },
+  "candidate": {
+    "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/candidate.json",
+    "sha256": "d32825141f7dcce32827b6371e3f6f922530243bec7077feeedd8ca66354d80d"
+  },
+  "candidate_id": "QDIR-DIRECT-SYMMETRY-QCA-001",
+  "protocol": {
+    "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/protocol.json",
+    "sha256": "2545ad0eb55e3d4c45309ec7ba51aa8c8f193d00ff1893698e0e5336985067b4"
+  },
+  "protocol_version": "0.1-draft",
+  "registered_outcomes_forbidden": true,
+  "resource_accounting": {
+    "active_potential_depth": 3,
+    "active_potential_gate_work": "3N",
+    "ancillas": 0,
+    "causal_radius_per_macrostep": 1,
+    "free_depth": 2,
+    "free_gate_work": "2N",
+    "local_hilbert_dimension": 4,
+    "modes_per_site": ["R", "L"],
+    "precision_bits": 256,
+    "storage": "2N occupation qubits"
+  },
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "status": "prospective_outcomes_forbidden"
+}

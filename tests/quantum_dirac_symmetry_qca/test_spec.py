@@ -10,10 +10,9 @@ from src.quantum_dirac_symmetry_qca.protocol import (
     SEARCH_ID,
 )
 from src.quantum_dirac_symmetry_qca.seal import (
-    SymmetryQCASealError,
     preview_disabled_seal,
-    write_outcome_seal,
 )
+from src.quantum_dirac_symmetry_qca.manifest import validate_committed_manifests
 from src.quantum_dirac_symmetry_qca.spec import (
     SymmetryQCASpecError,
     audit_design,
@@ -30,7 +29,9 @@ class SymmetryQCAProtocolDraftTests(unittest.TestCase):
         audit = audit_design(ROOT)
         self.assertEqual(audit["search_id"], SEARCH_ID)
         self.assertTrue(audit["registered_outcomes_forbidden"])
-        self.assertFalse(audit["production_implementation_present"])
+        self.assertTrue(audit["production_implementation_present"])
+        self.assertIn("production.py", audit["implementation_files"])
+        self.assertIn("independent_registered.py", audit["implementation_files"])
         self.assertTrue(audit["threshold_interval_certificate_present"])
 
     def test_candidate_guard_allows_only_disclosed_sizes(self) -> None:
@@ -56,15 +57,20 @@ class SymmetryQCAProtocolDraftTests(unittest.TestCase):
                 with self.assertRaises(SymmetryQCASpecError):
                     guard_pre_freeze_target(cutoff=cutoff)
 
-    def test_disabled_preview_cannot_write_a_seal(self) -> None:
+    def test_disabled_preview_is_freeze_ready_but_writes_nothing(self) -> None:
         preview = preview_disabled_seal(ROOT)
-        self.assertFalse(preview["seal_ready"])
+        self.assertTrue(preview["seal_ready"])
         self.assertFalse(preview["run_command_enabled"])
-        self.assertGreaterEqual(len(preview["missing_prerequisites"]), 3)
-        with self.assertRaises(SymmetryQCASealError):
-            write_outcome_seal()
+        self.assertTrue(preview["registered_outcomes_forbidden_until_stage_open"])
         for relative in FORBIDDEN_PRE_FREEZE_PATHS:
             self.assertFalse((ROOT / relative).exists())
+
+    def test_prospective_manifests_are_canonical_and_outcome_free(self) -> None:
+        manifests = validate_committed_manifests(ROOT)
+        self.assertEqual(len(manifests), 4)
+        self.assertTrue(
+            all(value["registered_outcomes_forbidden"] for value in manifests.values())
+        )
 
     def test_registered_size_constants_are_not_fixture_sizes(self) -> None:
         self.assertEqual(REGISTERED_SIZES, (320, 640, 1280))

@@ -6,7 +6,7 @@ Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
 Date: `2026-07-15`
 
-Status: **outcome-free protocol draft; not frozen; production implementation absent; registered outcomes forbidden**
+Status: **outcome-free implementation complete; not frozen; registered outcomes forbidden**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -114,8 +114,8 @@ sector has exactly one excitation globally and dimension `2N`.
 For `mu_q=delta m_q` and `n_q=sqrt(1-mu_q^2)`, the free one-excitation law is
 
 ```text
-R'(x) = n_q R(x+1) - i mu_q L(x)
-L'(x) = -i mu_q R(x) + n_q L(x-1),
+R'(x) = n_q R(x-1) - i mu_q L(x)
+L'(x) = -i mu_q R(x) + n_q L(x+1),
 ```
 
 with momentum block
@@ -133,7 +133,7 @@ U[q] = A B_mu[q] P_V[q],
 
 where `P_V` is omitted when the scalar potential is inactive. `P_V` is the
 on-site number phase `exp(-i delta V(x_j,t_q)(n_Rj+n_Lj))`; `B_mu` applies the
-same edge-scatter gate to all disjoint pairs `(L_j,R_(j+1))`; and `A` applies
+same edge-scatter gate to all disjoint pairs `(L_j,R_(j-1))`; and `A` applies
 ordinary on-site qubit SWAPs `(R_j,L_j)`. The order is candidate-defining.
 
 The edge gate fixes `|00>` and `|11>` with phase `+1` and has one-excitation
@@ -141,6 +141,13 @@ block `n X-i mu I` in edge-mode order. The on-site SWAP also fixes double
 occupation with phase `+1`. Canonical fermionic lifts instead carry
 determinant phase `-1` on `|11>`. Substituting either fermionic phase changes
 the architecture.
+
+The edge orientation above is fixed by the declared positive-sign target
+Fourier convention. During guarded production construction, the earlier draft
+pairing `(L_j,R_(j+1))` was found to yield the opposite massless Fourier phase.
+Before any freeze or registered evaluation it was corrected to
+`(L_j,R_(j-1))`. A disclosed fixture now requires the real-space recurrence,
+localized layers, and momentum block to agree on the same sign.
 
 The registered largest physical mass is `3/5`. At the coarsest refinement,
 `|mu|<=3/100`, leaving margin `97/100` from the localization endpoint
@@ -366,8 +373,11 @@ Only these disclosed outcome-free fixtures may run:
 
 Analytic tail and threshold design calculations are allowed only when they do
 not propagate a registered candidate or registered state. A disabled seal
-preview may hash the design but must report `seal_ready=false` and may not
-write a seal.
+preview may hash the complete implementation and report `seal_ready=true` only
+after the primary, independent, reducer, manifest, and authorization fixtures
+pass. It must still report `run_command_enabled=false` and must not create a
+seal. Seal creation is a separate explicit clean-worktree lifecycle action and
+the resulting seal remains execution-disabled.
 
 ## 16. Required negative fixtures
 
@@ -425,7 +435,11 @@ The only terminal labels are:
 Localization, continuum, and global-spectrum audits are complete. The
 prospective target, maps, interventions, state formulas, partitions, metrics,
 proposed gates, their outward-rounded absolute-gate certificate, schemas, and
-lifecycle paths are now explicit. No registered outcome has been authorized or
-generated. The next prerequisites are the production and independent
-implementations, prospective manifests, lifecycle authorization, and their
-guarded tests.
+lifecycle paths are explicit. The certified real-space candidate and spectral
+target, algorithmically separate momentum/sparse-circuit/Taylor replay,
+canonical reducers, four prospective manifests, content-seal builder, and
+Git-linear authorization surface now pass disclosed-fixture validation. The
+Fourier-orientation defect found during implementation was corrected before
+freeze. No registered outcome has been authorized or generated. The next
+prerequisite is hostile review of these outcome-free bytes before the explicit
+seal-only freeze commit and annotated tag.

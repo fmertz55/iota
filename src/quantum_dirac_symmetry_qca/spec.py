@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -26,6 +27,7 @@ from .protocol import (
     FORBIDDEN_PRE_FREEZE_PATHS,
     INPUT_R_MAX,
     INPUT_R_MIN,
+    IMPLEMENTATION_FILENAMES,
     PRECISION_BITS,
     PROTOCOL_VERSION,
     REGISTERED_OBSERVATION_TIMES,
@@ -103,7 +105,7 @@ def _validate_protocol(protocol: Any) -> None:
         "search_id": SEARCH_ID,
         "status": STATUS,
         "registered_outcome_authorized": False,
-        "production_implementation_present": False,
+        "production_implementation_present": True,
         "run_command_enabled": False,
     }
     if type(protocol) is not dict:
@@ -317,7 +319,9 @@ def _validate_forbidden_paths(root: Path) -> None:
         )
 
 
-def audit_design(root: Path | None = None) -> dict[str, Any]:
+def audit_design(
+    root: Path | None = None, *, allow_lifecycle_artifacts: bool = False
+) -> dict[str, Any]:
     root = repository_root() if root is None else root.resolve()
     spec_dir = root / SPEC_DIR_REF
     if not spec_dir.is_dir() or spec_dir.is_symlink():
@@ -348,7 +352,15 @@ def audit_design(root: Path | None = None) -> dict[str, Any]:
     _validate_maps(maps)
     _validate_fixtures(fixtures)
     _validate_threshold_certificate(threshold_certificate)
-    _validate_forbidden_paths(root)
+    implementation_dir = root / "src/quantum_dirac_symmetry_qca"
+    implementation_bindings: dict[str, str] = {}
+    for filename in IMPLEMENTATION_FILENAMES:
+        path = implementation_dir / filename
+        if not path.is_file() or path.is_symlink():
+            raise SymmetryQCASpecError(f"implementation file is missing: {filename}")
+        implementation_bindings[filename] = sha256_file(path)
+    if not allow_lifecycle_artifacts:
+        _validate_forbidden_paths(root)
     return {
         "protocol_version": PROTOCOL_VERSION,
         "search_id": SEARCH_ID,
@@ -356,7 +368,8 @@ def audit_design(root: Path | None = None) -> dict[str, Any]:
         "design_files": bindings,
         "contract_sha256": sha256_file(contract),
         "registered_outcomes_forbidden": True,
-        "production_implementation_present": False,
+        "production_implementation_present": True,
+        "implementation_files": implementation_bindings,
         "threshold_interval_certificate_present": True,
     }
 
@@ -383,3 +396,26 @@ def guard_pre_freeze_target(*, cutoff: int, scenario_id: str | None = None) -> N
         if scenario_id in REGISTERED_SCENARIOS:
             raise SymmetryQCASpecError("registered scenario evaluation is forbidden")
         raise SymmetryQCASpecError("undeclared scenario evaluation is forbidden")
+
+
+def write_canonical_json_once(path: Path, value: Any) -> None:
+    """Atomically create canonical ASCII JSON without ever overwriting bytes."""
+
+    if path.exists():
+        raise SymmetryQCASpecError(f"refusing to overwrite artifact: {path}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = (canonical_json(value) + "\n").encode("ascii")
+    temporary = path.with_name(path.name + ".tmp")
+    if temporary.exists():
+        raise SymmetryQCASpecError(f"stale temporary file exists: {temporary}")
+    try:
+        with temporary.open("xb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.link(temporary, path)
+        temporary.unlink()
+    except Exception:
+        if temporary.exists():
+            temporary.unlink()
+        raise

@@ -23,9 +23,10 @@ The active continuation is the outcome-free breadth experiment
 `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` on branch
 `icp-quantum-dirac-symmetry-qca-001`. It tests a direct symmetry-derived Dirac
 QCA rather than another parameterization of the successful product walk. The
-candidate law and its strictly local full-space Margolus realization are
-implemented and tested on small disclosed fixtures, but no registered
-scenarios, tolerances, freeze, or candidate outcome exists. The localization
+candidate law, its strictly local full-space Margolus realization, the
+prospective protocol, and its guarded production/independent implementation
+are tested only on small disclosed fixtures. No registered scenario, freeze,
+authorization permit, or candidate outcome exists. The localization
 audit passes with a mass-bearing edge scatter followed by an on-site routing
 SWAP; its full collision-sector choice and elementary-layer/resource clock are
 explicit. The continuum audit also passes: the direct law has the Dirac
@@ -34,10 +35,12 @@ correction, with exact signed-step reversal. The outcome-free global-spectrum
 and literature audit is also complete. It finds no traditional zero-energy
 doubler in `1+1D`, but it identifies the exact opposite-mass pi-mode
 pseudodoubler and shows that the declared hard-core qubit collision phases are
-not a canonical fermionic lift. The next scientific task is prospective
-protocol design under the seven mandatory boundaries in
-`GLOBAL_SPECTRUM_AUDIT.md`. Do not register outcomes or copy the v0.4
-product-walk gates into this experiment merely to force a pass.
+not a canonical fermionic lift. Production construction also caught and
+prospectively corrected the earlier edge orientation's Fourier-sign mismatch
+before freeze. The next scientific task is hostile review of the complete
+outcome-free implementation before any seal-only freeze. Do not register
+outcomes or copy the v0.4 product-walk gates into this experiment merely to
+force a pass.
 
 ## Local Checkout State
 
@@ -6138,8 +6141,8 @@ n = sqrt(1 - mu^2)
 with real-space update
 
 ```text
-R'(x) = n R(x+1) - i mu L(x)
-L'(x) = -i mu R(x) + n L(x-1).
+R'(x) = n R(x-1) - i mu L(x)
+L'(x) = -i mu R(x) + n L(x+1).
 ```
 
 The current artifacts are:
@@ -6194,16 +6197,17 @@ six-test kickoff state at commit `94ed42c` in 1 minute 28 seconds.
 
 ### Scientific state and immediate next task
 
-The new experiment is outcome-free and not frozen. It now has a prospective
-registered scenario set, state allocation, refinement ladder, and acceptance
-gates, but none has been evaluated. It has no production registered evaluator,
-registered verifier, prospective manifest set, authorization permit, outcome
-seal, open manifest, result file, or result interpretation. Do not reuse the
-parent's registered outcomes as evidence for this architecture.
+The new experiment is outcome-free and not frozen. It has a prospective
+registered scenario set, state allocation, refinement ladder, acceptance
+gates, guarded certified evaluator, algorithmically separate replay, canonical
+reducers, four prospective manifests, and disabled Git-linear lifecycle. None
+of the registered inputs has been evaluated. It has no issued authorization
+permit, outcome seal, open manifest, result file, or result interpretation. Do
+not reuse the parent's registered outcomes as evidence for this architecture.
 
 The full-space localization audit in `LOCALIZATION_AUDIT.md` passes. Each cell
 is two declared occupation qubits, with no ancilla. The first layer applies
-the same gate to every disjoint pair `(L_x,R_(x+1))`; in basis
+the same gate to every disjoint pair `(L_x,R_(x-1))`; in basis
 `|00>,|01>,|10>,|11>` that gate is
 
 ```text
@@ -6312,15 +6316,45 @@ remain uncomputed outcomes.
 The public package now has strict design validation; registered and parent-size
 guards; a cutoff-3 harmonic-2 target cross-check; a leading local-phase/full-
 space equivalence and causal-support fixture; candidate-specific opening and
-result schemas; and a seal preview that reports `seal_ready=false` and raises
-if asked to write a seal. All 47 direct-QCA tests pass. No future seal, opening,
-or result artifact exists.
+result schemas; and a freeze-ready preview that reports `seal_ready=true` but
+keeps `run_command_enabled=false` and writes nothing. All 58 direct-QCA tests
+pass. No future seal, opening, permit, or result artifact exists.
 
-The next task is outcome-free production and independent implementation,
-prospective manifests, authorization, and lifecycle validation. Before freeze,
-exercise those paths only on disclosed `N=6`, `N=10`, and cutoff-3 fixtures.
-Any registered run still requires the new linear seal-only freeze, annotated
-tag, stage-open, result, and independent-verification provenance chain.
+### Outcome-free implementation and lifecycle tranche — 2026-07-15
+
+The guarded primary uses 256-bit Arb/Acb arithmetic, applies the charged
+real-space potential phase followed by the direct recurrence, and constructs
+the target from exact free Dirac blocks or the spectral harmonic generator.
+The independent 110-digit mpmath replay imports no primary constructor: it
+uses `2x2` direct momentum blocks for free schedules, explicit sparse
+phase/edge-scatter/routing operators for potential schedules, a separately
+rebuilt target action, and a Taylor exponential. Canonical reducers cover
+operator bounds, arbitrary-size DFT observables, pi-sector leakage,
+refinement gates, and resource accounting.
+
+Implementation exposed a pre-freeze sign inconsistency. With the fixed target
+convention `exp(+ikx)`, the earlier `(L_x,R_(x+1))` edge pairing produced the
+opposite massless phase from the audited block. The prospective law and local
+pairing were corrected to
+
+```text
+R'(x) = n R(x-1) - i mu L(x)
+L'(x) = -i mu R(x) + n L(x+1),
+edge pairs = (L_x,R_(x-1)).
+```
+
+The corrected real-space, localized, momentum-space, and target conventions
+now agree on disclosed fixtures. No registered propagation was used to find or
+validate the correction. Four canonical prospective manifests validate, and
+the lifecycle requires a clean seal-only freeze, annotated tag, sole-file
+stage opening, and opaque permit. The CLI deliberately has no registered run
+command in this tranche.
+
+The next task is hostile review of these complete outcome-free bytes. Only
+after review may the explicit disabled seal be created and committed alone,
+followed by the annotated freeze tag. Any later registered run still requires
+the declared stage-open, result-only, and independent-verification provenance
+chain.
 
 ### Submission-oriented program
 
@@ -6365,16 +6399,18 @@ The submission sequence is:
 2. **Outcome-free protocol construction (complete 2026-07-15).** Fix encoding, measurement, and
    intervention maps; candidate-specific scenarios; refinement gates;
    registered domains; thresholds with rationale; resource reporting;
-   independent implementation; schemas; production guards; and a disabled
+   independent requirements; schemas; production guards; and a disabled
    seal. Do not copy parent holdouts or thresholds automatically. The design,
-   schemas, guarded fixtures, and absolute-gate certificate are complete;
-   production and independent registered implementations remain the next
-   tranche.
-3. **Outcome-free production and independent implementation.** Build the
-   registered candidate and target engines, algorithmically separate replay,
-   canonical reducers, prospective manifests, and disabled authorization.
-   Test only on disclosed nonregistered fixtures before freeze.
-4. **Linear experimental lifecycle.** Commit and tag the freeze, open and run
+   schemas, guarded fixtures, and absolute-gate certificate are complete.
+3. **Outcome-free production and independent implementation (complete
+   2026-07-15).** The registered candidate and target engines,
+   algorithmically separate replay, canonical reducers, prospective manifests,
+   and disabled authorization are implemented and tested only on disclosed
+   nonregistered fixtures. This tranche caught and corrected the pre-freeze
+   Fourier orientation defect.
+4. **Linear experimental lifecycle (next after hostile review).** Review and
+   commit the implementation, create and commit the disabled seal alone, tag
+   the freeze, then open and run
    development, commit its result before inspection, and only after a pass open
    the single-use confirmation. Require independent replay and completion
    documentation exactly as in the verified parent lineage.
@@ -6455,7 +6491,7 @@ worktree changes and the sealed ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001 v0.4
 archive. Carry forward the program-level ICP definition clarified in that
 section. Do not generate or inspect a registered outcome.
 
-Continue the outcome-free implementation of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
+Continue ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
 branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md`,
 `CONTINUUM_AUDIT.md`, `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`, with
 their guarded and independently checked fixtures, as completed outcome-free
@@ -6467,16 +6503,22 @@ gate certificate are complete. The certificate explicitly charges
 potential-generated amplitude outside refinement-specific intermediate bands;
 do not replace it with an input-band-only bound.
 
-Next build the production registered candidate/target engines, an
-algorithmically separate verifier, canonical reducers, prospective manifests,
-and disabled authorization/lifecycle code. Preserve all seven global-audit
-boundaries, the two-layer/`2N` free resource clock, the charged leading
-potential phase, and the derived `delta^2` correction. Do not mutate the law
-into the parent product walk, the Gupta--Short alternative family, or a
-fermionic lift. Before freeze use only disclosed `N=6`, `N=10`, and cutoff-3
-fixtures and do not evaluate prospective registered input. Keep every seal,
-open, and result artifact absent until the complete implementation receives a
-later prospective linear freeze. Treat the
+The guarded 256-bit Arb/Acb production engines, algorithmically separate
+110-digit momentum/sparse-circuit/Taylor replay, canonical reducers, four
+prospective manifests, and disabled authorization/lifecycle code are complete.
+Production construction caught the earlier edge orientation's Fourier-sign
+mismatch under the fixed `exp(+ikx)` convention; the prospective recurrence
+and edge pairs now use `x-1` for R and `(L_x,R_(x-1))`, respectively. Preserve
+that correction, all seven global-audit boundaries, the two-layer/`2N` free
+resource clock, the charged leading potential phase, and the derived `delta^2`
+correction. Do not mutate the law into the parent product walk, the
+Gupta--Short alternative family, or a fermionic lift.
+
+Next perform hostile review of the complete outcome-free bytes. Do not evaluate
+prospective registered input. If review passes, commit the implementation,
+then create the disabled seal as a sole-file freeze commit and add the required
+annotated tag. Keep every open and result artifact absent until that linear
+freeze is valid. Treat the
 existing constraint-lineage paper as separate; build a new quantum-Dirac
 manuscript only after the registered disposition. Carry forward the separate
 cross-cutting drafts in `docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md`,
