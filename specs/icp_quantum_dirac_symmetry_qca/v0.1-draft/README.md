@@ -15,6 +15,8 @@ The proposed candidate is the direct two-channel Dirac QCA with
 outcome protocol exists yet. The controlling design brief is
 `experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/DESIGN.md`.
 
-The next required design artifact is a full-space local-unitary localization
-and resource clock. Scenario, state, threshold, and partition files are
-forbidden until that obligation is resolved.
+The full-space local-unitary localization and resource clock are now resolved
+in the experiment's `LOCALIZATION_AUDIT.md` and guarded fixtures. The next
+required design artifact is the small-`delta` effective-generator and
+first-correction derivation. Scenario, state, threshold, and partition files
+remain forbidden until the outcome-free algebraic stages are closed.

@@ -23,12 +23,14 @@ The active continuation is the outcome-free breadth experiment
 `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` on branch
 `icp-quantum-dirac-symmetry-qca-001`. It tests a direct symmetry-derived Dirac
 QCA rather than another parameterization of the successful product walk. The
-candidate law and small disclosed fixtures are implemented and tested, but no
-registered scenarios, tolerances, freeze, or candidate outcome exists. The
-next scientific task is to resolve a strictly local full-space Margolus
-realization and its elementary-layer/resource clock. Do not register outcomes
-or copy the v0.4 product-walk gates into this experiment merely to force a
-pass.
+candidate law and its strictly local full-space Margolus realization are
+implemented and tested on small disclosed fixtures, but no registered
+scenarios, tolerances, freeze, or candidate outcome exists. The localization
+audit passes with a mass-bearing edge scatter followed by an on-site routing
+SWAP; its full collision-sector choice and elementary-layer/resource clock are
+explicit. The next scientific task is the small-`delta` effective-generator
+and first-correction derivation. Do not register outcomes or copy the v0.4
+product-walk gates into this experiment merely to force a pass.
 
 ## Local Checkout State
 
@@ -6140,16 +6142,23 @@ experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/DESIGN.md
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/parent_binding.json
 specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/README.md
 src/quantum_dirac_symmetry_qca/candidate.py
+src/quantum_dirac_symmetry_qca/localization.py
 tests/quantum_dirac_symmetry_qca/test_candidate.py
+tests/quantum_dirac_symmetry_qca/test_localization.py
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/LOCALIZATION_AUDIT.md
 scripts/validate_archived_quantum_dirac.py
 ```
 
 The public candidate accepts only disclosed fixture sizes `N=6` and `N=10`.
 It rejects `N=8`, `N=16`, and registered parent sizes `N=256`, `512`, and
-`1024`; it also enforces the declared precision and mass domain. Six fixture
+`1024`; it also enforces the declared precision and mass domain. Six candidate
 tests establish unitarity, translation covariance, opposite massless
 directions, the direct coupling/shift form, size guarding, and precision/mass
-guarding. These are algebraic design checks, not registered outcomes.
+guarding. Eight localization tests establish four-state local-gate unitarity,
+exact restriction on every disclosed one-excitation basis state, vacuum and
+saturated action, multi-sector inversion, full-space
+translation/parity/time-reversal transforms, and the resource clock. These
+are algebraic design checks, not registered outcomes.
 
 The full command
 
@@ -6159,9 +6168,9 @@ make PYTHON=.venv/bin/python verify
 
 passes the evidence checks, 56 bounded MIR tests, 55 exact-orbit tests, the
 archived v0.4 seal/manifests/ledgers/bindings and 38 archived v0.4 tests, plus
-the 6 new direct-QCA fixture tests. GitHub Actions workflow
-`Research compendium`, run `29395828732`, passed for kickoff commit `94ed42c`
-in 1 minute 28 seconds.
+the 14 direct-QCA candidate/localization fixture tests. The earlier GitHub
+Actions workflow `Research compendium`, run `29395828732`, passed the six-test
+kickoff state at commit `94ed42c` in 1 minute 28 seconds.
 
 ### Scientific state and immediate next task
 
@@ -6170,24 +6179,34 @@ scenario set, acceptance threshold, outcome seal, open manifest, result file,
 or result interpretation. Do not reuse the parent's registered outcomes as
 evidence for this architecture.
 
-The next task is the full-space localization audit described in `DESIGN.md`:
+The full-space localization audit in `LOCALIZATION_AUDIT.md` passes. Each cell
+is two declared occupation qubits, with no ancilla. The first layer applies
+the same gate to every disjoint pair `(L_x,R_(x+1))`; in basis
+`|00>,|01>,|10>,|11>` that gate is
 
-1. derive or implement a homogeneous nearest-neighbor Margolus/partitioned
-   realization whose complete Hilbert-space action is exactly the declared
-   direct QCA, not merely its one-particle restriction;
-2. state the elementary gate layers, causal order, elapsed tick, storage, and
-   gate-work accounting without hiding a nonlocal translation primitive;
-3. prove exact unitarity, translation covariance, parity/time-reversal
-   transforms, causal radius, and the relationship between the full-space law
-   and the disclosed single-particle fixtures; and
-4. stop this architecture if strict locality requires extra hidden structure,
-   if the proposed partitioning changes the candidate law, or if the resource
-   clock cannot be made commensurable with the parent experiment.
+```text
+[[1, 0,     0,    0],
+ [0, -i mu, n,    0],
+ [0, n,    -i mu, 0],
+ [0, 0,     0,    1]].
+```
 
-Only after this audit succeeds should the outcome-free design proceed to fixed
-maps, registered domains, independent verification, thresholds, failure
-controls, schemas, and a disabled seal. Any registered run still requires a
-new linear freeze/open/result provenance chain.
+The second layer swaps `(R_x,L_x)` on every cell. Their full-space product is
+unitary on dimension `4^N`, has radius one, commutes with cell translation and
+parity, obeys antiunitary time reversal, and restricts coefficient-by-
+coefficient to the declared direct law. The clock is two elapsed elementary
+layers and `2N` two-mode gates per macrostep with `2N` occupation qubits and
+no hidden global translation. Vacuum and double-occupation edge sectors are
+fixed explicitly. This is an honest existence witness, but the collision-
+sector extension is a declared choice not uniquely fixed by the one-particle
+law.
+
+The next task is to derive the small-`delta` effective generator and first
+nonzero correction independently, still using only disclosed fixtures for
+any executable checks. After that, the outcome-free design may proceed to
+fixed maps, registered domains, independent verification, thresholds,
+failure controls, schemas, and a disabled seal. Any registered run still
+requires a new linear freeze/open/result provenance chain.
 
 If this approach eventually passes independently, the next breadth candidates
 remain a time-symmetric Strang-split circuit and a separate reversible
@@ -6204,14 +6223,13 @@ archive. Carry forward the program-level ICP definition clarified in that
 section. Do not generate or inspect a registered outcome.
 
 Continue the outcome-free design of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
-branch icp-quantum-dirac-symmetry-qca-001. First resolve the full-Hilbert-space
-strictly local Margolus/partitioned realization of the direct symmetry-derived
-Dirac QCA, including exact law equivalence, elementary-layer causal order,
-translation accounting, resource clock, symmetry transforms, and stop
-conditions. Use only the disclosed N=6 and N=10 fixtures while designing. If
-the localization audit succeeds, implement and test the outcome-free
-full-space construction and document its resource accounting. If it fails a
-declared stop condition, record that cleanly instead of mutating the law into
-the parent product walk. Keep all registered scenario, threshold, seal, open,
-and result artifacts absent until a later prospective freeze.
+branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md` and
+its guarded full-space fixture implementation as the completed strict-locality
+stage. Next derive the small-`delta` effective generator and first nonzero
+correction independently, then decide whether the remaining outcome-free
+protocol design may proceed. Use only disclosed N=6 and N=10 fixtures while
+designing. Preserve the explicit collision-sector claim boundary and the
+two-layer/`2N`-gate resource clock; do not mutate the law into the parent
+product walk. Keep all registered scenario, threshold, seal, open, and result
+artifacts absent until a later prospective freeze.
 ```

@@ -11,17 +11,20 @@ This experiment is the first breadth follow-up to the independently verified
 finite-lattice architecture from a product mass-mix/transport walk to the
 direct symmetry-derived Dirac QCA family.
 
-The current tranche contains only:
+The current outcome-free tranche contains only:
 
 - an explicit parent-result binding;
 - a scoped outcome-free design brief;
 - a high-precision implementation of the direct update on nonregistered
   fixture sizes; and
-- algebraic unitarity, translation, ballistic, and access-guard tests.
+- an explicit full-Hilbert-space two-layer Margolus localization with
+  algebraic unitarity, translation, parity, time-reversal, multi-excitation,
+  resource-clock, ballistic, and access-guard tests.
 
 It contains no registered lattice, scenario, state partition, threshold,
-outcome seal, production permit, or result. The next thread should resolve the
-Margolus localization and resource clock before defining any prospective
-outcome protocol.
+outcome seal, production permit, or result. The localization and resource
+clock are resolved in `LOCALIZATION_AUDIT.md`; the next outcome-free task is
+the small-`delta` continuum and first-correction derivation before defining
+any prospective outcome protocol.
 
 See `DESIGN.md` for the scientific contrast and stop conditions.

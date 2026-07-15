@@ -2,7 +2,7 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **conceptual and algebraic fixtures only; registered outcomes forbidden**
+Status: **full-space localization passed; continuum stage pending; registered outcomes forbidden**
 
 ## Question
 
@@ -55,21 +55,23 @@ direct QCA update rather than a sequential coin/transport product.
 | Finite-lattice law | Product phase, mass mix, swaps | Direct symmetry-derived block |
 | Mass/transport relation | Ordered sublayers | One exact QCA update |
 | Leading discretization mechanism | Lie-Trotter ordering | Nonlinear `n=sqrt(1-mu^2)` normalization |
-| Localization obligation | Two declared swap layers | Explicit Margolus or equivalent construction still required |
-| Symmetry question | Numerically certified on input sector | Must be derived for the localized update before registration |
+| Localization | Two declared swap layers | Edge scatter then on-site SWAP; full-space audit passed |
+| Symmetry status | Numerically certified on input sector | Full-space parity and time reversal derived |
 
 ## Outcome-free work stages
 
-1. **Algebraic fixture stage (started).** On nonregistered sizes only, verify
+1. **Algebraic fixture stage (complete).** On nonregistered sizes only, verify
    exact update construction, high-precision unitarity, translation
    covariance, massless directional motion, and rejection of registered sizes.
-2. **Localization stage.** Give an explicit finite-depth Margolus or equivalent
-   local-unitary realization on the full local Hilbert space, including vacuum
-   and multi-excitation action. Count elementary gates without borrowing the
-   parent's resource normalization.
-3. **Symmetry and continuum stage.** Derive parity and time-reversal maps for
-   the localized update; derive the small-`delta` effective generator and
-   identify the first nonzero correction independently.
+2. **Localization stage (complete).** Give an explicit finite-depth Margolus
+   or equivalent local-unitary realization on the full local Hilbert space,
+   including vacuum and multi-excitation action. Count elementary gates
+   without borrowing the parent's resource normalization. The proof and
+   accounting are in `LOCALIZATION_AUDIT.md`.
+3. **Symmetry and continuum stage (symmetries complete; continuum pending).**
+   Derive parity and time-reversal maps for the localized update; derive the
+   small-`delta` effective generator and identify the first nonzero correction
+   independently.
 4. **Protocol stage.** Only after stages 1–3 pass, freeze target maps,
    interventions, states, scenario partitions, refinement sizes, metrics,
    thresholds, failure controls, and a separately implemented verifier.
@@ -90,8 +92,15 @@ Stop before any registered outcome if:
 - any registered size, state, scenario, or threshold is evaluated before a
   new outcome seal and opening manifest exist.
 
-## Next concrete task
+## Current disposition and next concrete task
 
-Construct and test the full-space Margolus localization. The output should be
-a gate-level identity proof or a precise no-go result, plus resource counts.
-Do not define development/confirmation partitions until that task is closed.
+The full-space Margolus localization succeeds with a mass-bearing edge
+scatter followed by an on-site routing SWAP. It has depth `2`, gate-work
+`2N`, storage `2N` qubits, local dimension `4`, causal radius `1`, and no
+ancillas. Its one-excitation restriction is exactly the declared law, while
+vacuum and collision-sector actions are explicitly declared rather than
+inferred. See `LOCALIZATION_AUDIT.md` and the guarded fixture implementation.
+
+Next derive the small-`delta` effective generator and first nonzero correction
+without evaluating a registered size or defining development/confirmation
+partitions.
