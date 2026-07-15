@@ -8583,3 +8583,42 @@ state-conditioned repair-affordance hypothesis remains untested, not refuted.
 - [Common-donor audit cases](../output/findings/finding079/factorial_common_donor_cases.csv)
 - [Frozen feasible manifest](../output/findings/finding079/factorial_common_donor_manifest.csv)
 - [Common-donor implementation](../src/finding079_common_donor_freeze.py)
+
+---
+
+## Finding 080 — Quantum-information primitives constructively recover a frozen Dirac sector
+
+The prospectively sealed `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001` experiment
+tested a homogeneous nearest-neighbor product quantum walk against a frozen
+1+1D single-particle Dirac operational role. The registration included three
+lattice refinements, operator-norm bounds, four state families, measurement
+and current witnesses, interventions, parity, time reversal, conservation,
+causal support, negative coherence controls, and an algorithmically separate
+`mpmath` replay.
+
+Development passed all four scenarios. The single-use confirmation partition
+then passed both held-out scenarios and the held-out-state cross-witness suite.
+Both canonical ledgers passed independent clean-checkpoint replay. The
+terminal classification is
+`constructive_sufficiency_passed_frozen_dirac_sector`.
+
+The largest operator bounds across all scenarios were `0.0300073`,
+`0.0149955`, and `0.00749669` at lattice sizes 256, 512, and 1024, against
+absolute gates `0.20`, `0.10`, and `0.05`. The largest position-TV,
+local-current-L1, infidelity, and Zitterbewegung errors were respectively
+`0.00194047`, `0.00844655`, `0.0000450699`, and `0.00881467`, all inside their
+frozen gates.
+
+This is a bounded constructive-sufficiency result, not a minimality or
+ontology result. It establishes that the declared local quantum-information
+architecture can realize the registered operational role. The next breadth
+test should switch architecture to the direct symmetry-derived Dirac QCA,
+with explicit Margolus localization, instead of varying parameters of the
+successful product walk.
+
+### Finding 080 artifacts
+
+- [Result summary](quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/RESULTS.md)
+- [Development ledger](../output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results_v0.4.json)
+- [Confirmation ledger](../output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results_v0.4.json)
+- [Frozen contract](../docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md)
