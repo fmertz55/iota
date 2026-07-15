@@ -163,6 +163,17 @@ def _require_confirmation_parent(root: Path, freeze: str) -> str:
         or value.get("aggregate", {}).get("stage_pass") is not True
     ):
         raise SymmetryQCASpecError("confirmation requires a complete development pass")
+    # Confirmation opening itself performs the clean-checkpoint independent
+    # replay.  This makes the "verified development pass" prerequisite causal,
+    # without inserting an extra commit into the fixed linear history.
+    from .authorization import issue_verification_permit
+    from .independent_verifier import verify_ledger_independently
+    from .ledger import validate_result_ledger
+
+    permit = issue_verification_permit(stage="development", root=root)
+    validate_result_ledger(value, expected_stage="development")
+    verify_ledger_bindings(value, stage="development", root=root)
+    verify_ledger_independently(permit, value)
     return development_result
 
 
@@ -196,3 +207,14 @@ def result_bindings(*, stage: str, root: Path | None = None) -> dict[str, dict[s
         "result_schema": _binding(root, f"{SPEC_DIR_REF}/result.schema.json"),
         **sealed_bindings(root),
     }
+
+
+def verify_ledger_bindings(
+    ledger: dict[str, Any], *, stage: str, root: Path | None = None
+) -> None:
+    root = repository_root() if root is None else root.resolve()
+    expected = result_bindings(stage=stage, root=root)
+    if ledger.get("bindings") != expected:
+        raise SymmetryQCASpecError(
+            "result ledger bindings differ from the registered bytes"
+        )

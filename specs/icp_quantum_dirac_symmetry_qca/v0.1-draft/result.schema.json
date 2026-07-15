@@ -106,7 +106,17 @@
         "all_scenarios_complete": {"const": true},
         "stage_pass": {"type": "boolean"},
         "confirmation_authorized": {"type": "boolean"},
-        "failure_controls": {"type": ["array", "null"]},
+        "failure_controls": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 6,
+              "maxItems": 6,
+              "items": {"$ref": "#/$defs/failure_control"}
+            },
+            {"type": "null"}
+          ]
+        },
         "classification": {
           "enum": [
             "development_gate_failed_confirmation_unopened",
@@ -121,12 +131,32 @@
   },
   "$defs": {
     "decimal": {"type": "string", "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"},
+    "signed_decimal": {"type": "string", "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"},
     "binding": {
       "type": "object",
       "required": ["path", "sha256"],
       "properties": {
         "path": {"type": "string", "minLength": 1},
         "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "failure_control": {
+      "type": "object",
+      "required": ["id", "metric", "value"],
+      "properties": {
+        "id": {
+          "enum": [
+            "PI-PARTNER",
+            "HIGH-Q",
+            "MASS-ENDPOINT",
+            "LONG-HORIZON",
+            "ROUGH-POTENTIAL",
+            "FERMIONIC-LIFT"
+          ]
+        },
+        "metric": {"type": "string", "minLength": 1},
+        "value": {"$ref": "#/$defs/decimal"}
       },
       "additionalProperties": false
     },
@@ -139,7 +169,8 @@
         "target_tail_upper",
         "numerical_enclosure_upper",
         "absolute_threshold",
-        "absolute_pass"
+        "absolute_pass",
+        "resources"
       ],
       "properties": {
         "n_sites": {"enum": [320, 640, 1280]},
@@ -153,7 +184,54 @@
         "target_tail_upper": {"$ref": "#/$defs/decimal"},
         "numerical_enclosure_upper": {"$ref": "#/$defs/decimal"},
         "absolute_threshold": {"$ref": "#/$defs/decimal"},
-        "absolute_pass": {"type": "boolean"}
+        "absolute_pass": {"type": "boolean"},
+        "resources": {"$ref": "#/$defs/resources"}
+      },
+      "additionalProperties": false
+    },
+    "resources": {
+      "type": "object",
+      "required": [
+        "n_sites",
+        "macrosteps",
+        "active_potential_steps",
+        "elementary_layers",
+        "gate_work",
+        "occupation_qubits",
+        "ancillas",
+        "causal_radius_per_macrostep"
+      ],
+      "properties": {
+        "n_sites": {"enum": [320, 640, 1280]},
+        "macrosteps": {"type": "integer", "minimum": 0},
+        "active_potential_steps": {"type": "integer", "minimum": 0},
+        "elementary_layers": {"type": "integer", "minimum": 0},
+        "gate_work": {"type": "integer", "minimum": 0},
+        "occupation_qubits": {"type": "integer", "minimum": 0},
+        "ancillas": {"const": 0},
+        "causal_radius_per_macrostep": {"const": 1}
+      },
+      "additionalProperties": false
+    },
+    "zitter_entry": {
+      "type": "object",
+      "required": [
+        "step",
+        "time",
+        "candidate_current_lower",
+        "candidate_current_upper",
+        "target_current_lower",
+        "target_current_upper",
+        "error_upper"
+      ],
+      "properties": {
+        "step": {"type": "integer", "minimum": 1, "maximum": 160},
+        "time": {"type": "string", "minLength": 1},
+        "candidate_current_lower": {"$ref": "#/$defs/signed_decimal"},
+        "candidate_current_upper": {"$ref": "#/$defs/signed_decimal"},
+        "target_current_lower": {"$ref": "#/$defs/signed_decimal"},
+        "target_current_upper": {"$ref": "#/$defs/signed_decimal"},
+        "error_upper": {"$ref": "#/$defs/decimal"}
       },
       "additionalProperties": false
     },
@@ -166,6 +244,7 @@
         "total_current_error_max",
         "local_current_l1_max",
         "infidelity_max",
+        "zitter_current_series",
         "zitter_current_series_sup_error",
         "pass"
       ],
@@ -176,6 +255,11 @@
         "total_current_error_max": {"$ref": "#/$defs/decimal"},
         "local_current_l1_max": {"$ref": "#/$defs/decimal"},
         "infidelity_max": {"$ref": "#/$defs/decimal"},
+        "zitter_current_series": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {"$ref": "#/$defs/zitter_entry"}
+        },
         "zitter_current_series_sup_error": {
           "oneOf": [{"$ref": "#/$defs/decimal"}, {"type": "null"}]
         },
@@ -239,16 +323,31 @@
         "symmetry_and_structure": {
           "type": "object",
           "required": [
+            "unitarity_residual_upper",
             "unitarity_pass",
             "causality_pass",
+            "parity_residual_upper",
             "parity_pass",
+            "time_reversal_role_residual_uppers",
+            "time_reversal_role_refinement_pass",
+            "time_reversal_role_fine_pass",
             "time_reversal_role_pass",
             "architecture_integrity_pass"
           ],
           "properties": {
+            "unitarity_residual_upper": {"$ref": "#/$defs/decimal"},
             "unitarity_pass": {"type": "boolean"},
             "causality_pass": {"type": "boolean"},
+            "parity_residual_upper": {"$ref": "#/$defs/decimal"},
             "parity_pass": {"type": "boolean"},
+            "time_reversal_role_residual_uppers": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {"$ref": "#/$defs/decimal"}
+            },
+            "time_reversal_role_refinement_pass": {"type": "boolean"},
+            "time_reversal_role_fine_pass": {"type": "boolean"},
             "time_reversal_role_pass": {"type": "boolean"},
             "architecture_integrity_pass": {"type": "boolean"}
           },

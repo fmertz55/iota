@@ -17,7 +17,7 @@
   "candidate_id": "QDIR-DIRECT-SYMMETRY-QCA-001",
   "protocol": {
     "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/protocol.json",
-    "sha256": "2545ad0eb55e3d4c45309ec7ba51aa8c8f193d00ff1893698e0e5336985067b4"
+    "sha256": "dc2ed8e255998070203e225cb9cb99dec6296172a968039150663367924933db"
   },
   "protocol_version": "0.1-draft",
   "registered_outcomes_forbidden": true,

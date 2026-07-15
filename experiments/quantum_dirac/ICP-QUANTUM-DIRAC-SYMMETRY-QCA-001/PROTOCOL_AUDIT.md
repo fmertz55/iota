@@ -95,11 +95,11 @@ commits, result path, and freeze tag. The result schema fixes numerical
 backends, bindings, three refinements, five observation distances, four state
 witnesses, π-sector accounting, structural gates, and terminal labels.
 
-The seal preview hashes the complete primary, independent, reducer, manifest,
-test, specification, and command surface. It reports `seal_ready=false`, keeps
-`run_command_enabled=false`, and names the missing runner, ledger, writer, and
-full-ledger verifier prerequisites; previewing creates no file and the seal
-writer refuses to run.
+The seal preview hashes the complete primary, independent, reducer, runner,
+ledger, verifier, manifest, test, specification, and command surface. After
+outcome-free hostile review it reports `seal_ready=true`, keeps
+`run_command_enabled=false`, and names no missing prerequisite; previewing
+still creates no file.
 
 ## Implementation tranche disposition
 
@@ -115,8 +115,10 @@ the disabled Git-linear lifecycle validate.
 Implementation also caught the earlier real/local edge orientation as the
 wrong sign under the fixed `exp(+ikx)` convention. The pairing and recurrence
 were reversed before freeze and a cross-layer Fourier fixture was added. No
-registered propagation occurred. The remaining pre-seal tranche is the
-registered stage runner, canonical result-ledger builder/validator, atomic
-no-clobber writer, and full-ledger independent verifier, tested only through
-disclosed fixtures. Only after that tranche and hostile review may a seal-only
-freeze commit and annotated tag be created.
+registered propagation occurred. The permit-gated stage runner, canonical
+result-ledger builder/validator, atomic no-clobber writer, and replay-tight
+full-ledger independent verifier now pass disclosed-fixture and Git-linear
+lifecycle tests. Hostile review also made every post-confirmation control exact
+and restored the contract-required full current series. The next action is to
+commit these implementation bytes; only then may the seal be created as a
+sole-file freeze commit and bound by the annotated tag.

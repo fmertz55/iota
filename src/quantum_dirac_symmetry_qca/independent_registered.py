@@ -113,12 +113,22 @@ class _SparseOperator:
                 result[target, column] += coefficient * value[source, column]
         return result
 
+    def adjoint(self) -> "_SparseOperator":
+        return _SparseOperator(
+            self.rows,
+            tuple(
+                (source, target, mp.conj(coefficient))
+                for target, source, coefficient in self.entries
+            ),
+        )
+
 
 def _phase_operator(
     n_sites: int,
     *,
     delta: Fraction,
     potential: tuple[int, Fraction, Fraction] | None,
+    reflect: bool = False,
 ) -> _SparseOperator:
     entries: list[tuple[int, int, Any]] = []
     for site in range(n_sites):
@@ -126,8 +136,10 @@ def _phase_operator(
             phase = mp.mpc(1)
         else:
             harmonic, amplitude, phase_pi = potential
+            coordinate = -site if reflect else site
             value = _mpf(amplitude) * mp.cos(
-                2 * mp.pi * harmonic * site / n_sites + mp.pi * _mpf(phase_pi)
+                2 * mp.pi * harmonic * coordinate / n_sites
+                + mp.pi * _mpf(phase_pi)
             )
             phase = mp.exp(-1j * _mpf(delta) * value)
         entries.extend(
@@ -365,6 +377,96 @@ class IndependentRegisteredEvaluator:
                 if every_step or layer in observations:
                     outputs[layer] = _copy(current)
         return outputs
+
+    def _sparse_candidate_final(
+        self,
+        scenario: dict[str, Any],
+        *,
+        initial: mp.matrix,
+        reflect_potential: bool = False,
+    ) -> mp.matrix:
+        observations = _observation_steps(self.delta)
+        current = _copy(initial)
+        routing = _routing_swap_operator(self.n_sites)
+        with mp.workdps(self.dps):
+            for step in range(max(observations)):
+                time = step * self.delta
+                mass = _interval_value(scenario["mass"], time)
+                potential = _potential_parameters(scenario["potential"], time)
+                current = _phase_operator(
+                    self.n_sites,
+                    delta=self.delta,
+                    potential=potential,
+                    reflect=reflect_potential,
+                ).apply(current)
+                current = _edge_scatter_operator(
+                    self.n_sites, self.delta * mass
+                ).apply(current)
+                current = routing.apply(current)
+        return current
+
+    @staticmethod
+    def _parity(value: mp.matrix, n_sites: int) -> mp.matrix:
+        result = mp.matrix(value.rows, value.cols)
+        for site in range(n_sites):
+            reflected = (-site) % n_sites
+            for column in range(value.cols):
+                result[2 * site, column] = value[2 * reflected + 1, column]
+                result[2 * site + 1, column] = value[2 * reflected, column]
+        return result
+
+    @staticmethod
+    def _theta(value: mp.matrix, n_sites: int) -> mp.matrix:
+        result = mp.matrix(value.rows, value.cols)
+        for site in range(n_sites):
+            for column in range(value.cols):
+                result[2 * site, column] = mp.conj(value[2 * site + 1, column])
+                result[2 * site + 1, column] = mp.conj(value[2 * site, column])
+        return result
+
+    def parity_role_pair(self, scenario_id: str) -> tuple[mp.matrix, mp.matrix]:
+        scenario = self._scenario(scenario_id)
+        basis = self.input_basis_columns()
+        left = self._parity(
+            self._sparse_candidate_final(
+                scenario,
+                initial=self._parity(basis, self.n_sites),
+            ),
+            self.n_sites,
+        )
+        right = self._sparse_candidate_final(
+            scenario, initial=basis, reflect_potential=True
+        )
+        return left, right
+
+    def time_reversal_role_pair(
+        self, scenario_id: str
+    ) -> tuple[mp.matrix, mp.matrix]:
+        scenario = self._scenario(scenario_id)
+        observations = _observation_steps(self.delta)
+        basis = self.input_basis_columns()
+        routing = _routing_swap_operator(self.n_sites)
+        with mp.workdps(self.dps):
+            left = self._theta(
+                self._sparse_candidate_final(
+                    scenario,
+                    initial=self._theta(basis, self.n_sites),
+                ),
+                self.n_sites,
+            )
+            right = _copy(basis)
+            for step in range(max(observations)):
+                time = step * self.delta
+                mass = _interval_value(scenario["mass"], time)
+                potential = _potential_parameters(scenario["potential"], time)
+                right = routing.adjoint().apply(right)
+                right = _edge_scatter_operator(
+                    self.n_sites, self.delta * mass
+                ).adjoint().apply(right)
+                right = _phase_operator(
+                    self.n_sites, delta=self.delta, potential=potential
+                ).adjoint().apply(right)
+        return left, right
 
     def candidate_outputs(self, scenario_id: str) -> dict[int, mp.matrix]:
         scenario = self._scenario(scenario_id)

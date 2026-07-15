@@ -6,7 +6,7 @@ from __future__ import annotations
 PROTOCOL_VERSION = "0.1-draft"
 SEARCH_ID = "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"
 CANDIDATE_ID = "QDIR-DIRECT-SYMMETRY-QCA-001"
-STATUS = "outcome_free_implementation_complete_not_frozen"
+STATUS = "outcome_free_execution_pipeline_reviewed_seal_ready_not_frozen"
 
 SPEC_DIR_REF = "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft"
 CONTRACT_REF = "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md"
@@ -57,12 +57,15 @@ MANIFEST_FILENAMES = (
 IMPLEMENTATION_FILENAMES = (
     "authorization.py",
     "cli.py",
+    "independent_verifier.py",
     "independent_registered.py",
     "independent_states.py",
+    "ledger.py",
     "lifecycle.py",
     "manifest.py",
     "production.py",
     "reducers.py",
+    "runner.py",
     "seal.py",
     "states.py",
 )

@@ -37,6 +37,7 @@ from .spec import (
     canonical_json,
     repository_root,
     sha256_file,
+    write_canonical_json_once,
 )
 
 
@@ -120,15 +121,11 @@ def _payload(root: Path, *, freeze_parent_commit: str) -> dict[str, Any]:
         "independent_library_version": INDEPENDENT_LIBRARY_VERSION,
         "independent_decimal_digits": INDEPENDENT_DPS,
         "required_freeze_tag": FREEZE_TAG,
-        "seal_ready": False,
+        "seal_ready": True,
         "run_command_enabled": False,
         "registered_outcomes_forbidden_until_stage_open": True,
-        "missing_prerequisites": [
-            "registered stage runner",
-            "canonical result-ledger builder validator and atomic writer",
-            "full-ledger independent verifier",
-            "hostile review of the complete outcome-free execution path",
-        ],
+        "outcome_free_hostile_review": "passed",
+        "missing_prerequisites": [],
         "development_result_path": DEVELOPMENT_RESULT_REF,
         "confirmation_result_path": CONFIRMATION_RESULT_REF,
     }
@@ -157,10 +154,10 @@ def preview_disabled_seal(root: Path | None = None) -> dict[str, Any]:
 
 
 def write_disabled_seal(root: Path | None = None) -> Path:
-    raise SymmetryQCASealError(
-        "outcome seal is disabled until the registered runner, canonical ledger "
-        "pipeline, full-ledger independent verifier, and hostile review are complete"
-    )
+    root = repository_root() if root is None else root.resolve()
+    path = root / OUTCOME_SEAL_REF
+    write_canonical_json_once(path, build_disabled_seal(root))
+    return path
 
 
 def _strict_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

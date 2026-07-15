@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **outcome-free production and independent implementation complete; not frozen**
+Status: **outcome-free execution pipeline reviewed and seal-ready; not frozen**
 
 Started: `2026-07-14`
 
@@ -50,9 +50,11 @@ contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
 Production construction caught and prospectively corrected a Fourier-sign
 inconsistency between the original real-space edge orientation and the fixed
 target convention. The revised `(L_x,R_(x-1))` pairing, recurrence, and audited
-momentum block now agree. The next task is the missing outcome-free stage
-runner, canonical result-ledger builder/validator, atomic result writer, and
-full-ledger independent verifier, exercised only on disclosed fixtures. After
-that tranche and hostile review, the explicit seal-only freeze commit and
-annotated tag may be created. See `DESIGN.md` for the scientific contrast and
-stop conditions.
+momentum block now agree. The registered stage runner, canonical strict result
+ledger, atomic no-clobber writer, and algorithmically separate full-ledger
+verifier are complete and hostile-reviewed. The result schema now records the
+full Zitterbewegung current series and exact resource clock, and the six
+post-confirmation controls have fully specified inputs. All testing remained
+on disclosed fixtures. The package is seal-ready, but no seal, tag, opening,
+permit, or result exists. See `DESIGN.md` for the scientific contrast and stop
+conditions.

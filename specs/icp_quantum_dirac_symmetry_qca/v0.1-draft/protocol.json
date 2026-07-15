@@ -2,7 +2,7 @@
   "protocol_version": "0.1-draft",
   "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
   "date": "2026-07-15",
-  "status": "outcome_free_implementation_complete_not_frozen",
+  "status": "outcome_free_execution_pipeline_reviewed_seal_ready_not_frozen",
   "human_contract": "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md",
   "literature_basis": "literature_basis.md",
   "threshold_certificate": "threshold_certificate.json",
@@ -249,12 +249,36 @@
     ]
   },
   "failure_controls_after_confirmation_primary": [
-    "PI-PARTNER analytic opposite-mass zone-edge identity",
-    "HIGH-Q N=320 r=120 constant mass 1/3 through T=2",
-    "MASS-ENDPOINT abs(mu)=1 flat-band localization",
-    "LONG-HORIZON N=320 low-band constant mass through T=12",
-    "ROUGH-POTENTIAL spatial step control for zone-edge leakage",
-    "FERMIONIC-LIFT collision-phase contrast on a disclosed two-excitation fixture"
+    {
+      "id": "PI-PARTNER",
+      "definition": "maximum entry residual in U_mu(-pi+p)+U_-mu(p) at p=1/7 and mu=1/5",
+      "metric": "maximum_matrix_residual"
+    },
+    {
+      "id": "HIGH-Q",
+      "definition": "N=320 r=120 constant mass 1/3 through T=2 against the continuum target block",
+      "metric": "operator_distance"
+    },
+    {
+      "id": "MASS-ENDPOINT",
+      "definition": "abs(mu)=1 momentum-independent flat-band endpoint",
+      "metric": "flat_band_group_velocity_max"
+    },
+    {
+      "id": "LONG-HORIZON",
+      "definition": "maximum over r=-4..4 at N=320 constant mass 1/3 through T=12 against the continuum target block",
+      "metric": "maximum_low_band_operator_distance"
+    },
+    {
+      "id": "ROUGH-POTENTIAL",
+      "definition": "N=320 initial normalized right-moving r=0 mode, mass 1/3, and V=1/8 on sites 0..159 and -1/8 on sites 160..319 for all 40 macrosteps through T=2",
+      "metric": "candidate_pi_sector_probability"
+    },
+    {
+      "id": "FERMIONIC-LIFT",
+      "definition": "distance between the hard-core double-occupation phase +1 and the canonical fermionic determinant phase -1",
+      "metric": "double_occupation_phase_distance"
+    }
   ],
   "stopping_rule": {
     "development": "indivisible four-scenario batch",

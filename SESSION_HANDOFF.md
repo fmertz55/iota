@@ -37,12 +37,14 @@ doubler in `1+1D`, but it identifies the exact opposite-mass pi-mode
 pseudodoubler and shows that the declared hard-core qubit collision phases are
 not a canonical fermionic lift. Production construction also caught and
 prospectively corrected the earlier edge orientation's Fourier-sign mismatch
-before freeze. The next scientific task is the remaining outcome-free
-execution pipeline: a registered stage runner, canonical result-ledger
-builder/validator and atomic writer, and a full-ledger independent verifier.
-Only after those paths pass disclosed nonregistered fixtures and hostile review
-may a seal-only freeze occur. Do not register outcomes or copy the v0.4
-product-walk gates into this experiment merely to force a pass.
+before freeze. The outcome-free execution pipeline is now complete and
+hostile-reviewed: it includes the permit-gated stage runner, canonical strict
+result ledger, atomic no-clobber writer, full-ledger independent verifier, and
+positive/negative Git-linear tests. The package is seal-ready, but no seal,
+tag, opening, permit, or result exists. The next action is to commit these
+reviewed implementation bytes, then create the disabled seal as a sole-file
+freeze commit and add the required annotated tag. Do not register outcomes or
+copy the v0.4 product-walk gates into this experiment merely to force a pass.
 
 ## Local Checkout State
 
@@ -6318,10 +6320,9 @@ remain uncomputed outcomes.
 The public package now has strict design validation; registered and parent-size
 guards; a cutoff-3 harmonic-2 target cross-check; a leading local-phase/full-
 space equivalence and causal-support fixture; candidate-specific opening and
-result schemas; and a disabled preview that reports `seal_ready=false`, keeps
-`run_command_enabled=false`, names the missing execution/ledger/verifier
-prerequisites, and writes nothing. All 58 direct-QCA tests pass. No future
-seal, opening, permit, or result artifact exists.
+result schemas; and a reviewed disabled preview that reports `seal_ready=true`,
+keeps `run_command_enabled=false`, and writes nothing. All 68 direct-QCA tests
+pass. No future seal, opening, permit, or result artifact exists.
 
 ### Outcome-free implementation and lifecycle tranche — 2026-07-15
 
@@ -6350,21 +6351,26 @@ The corrected real-space, localized, momentum-space, and target conventions
 now agree on disclosed fixtures. No registered propagation was used to find or
 validate the correction. Four canonical prospective manifests validate, and
 the lifecycle requires a clean seal-only freeze, annotated tag, sole-file
-stage opening, and opaque permit. The CLI deliberately has no registered run
-command in this tranche.
+stage opening, and opaque permit.
 
-This tranche is not yet the complete causal execution surface: the package
-deliberately has no `run-stage` command, canonical result-ledger
-builder/validator, atomic result writer, or full-ledger independent verifier.
-Those components must be implemented and exercised only on disclosed
-nonregistered fixtures before hostile review. The seal helper therefore reports
-`seal_ready=false` and refuses to write a seal.
+The complete causal execution surface is now implemented. The CLI exposes a
+permit-gated `run-stage` command only after the Git-linear authorization gate;
+the canonical ledger derives classifications, records the exact resource clock
+and full Zitterbewegung current series, and is persisted by an atomic
+no-clobber writer. The independent verifier imports no primary constructor,
+replays every operator, witness, symmetry, leakage, and failure-control family,
+and rejects both escaped and unjustifiably loose enclosures. Confirmation
+opening itself independently verifies the committed development pass.
 
-The next task is that outcome-free execution/ledger/verifier tranche. Only
-after it passes, and the complete bytes receive hostile review, may the
-explicit disabled seal be created and committed alone, followed by the
-annotated freeze tag. Registered development remains forbidden until the valid
-seal/tag/stage-open chain exists.
+Hostile review fixed two prospective gaps before freeze: the earlier result
+schema omitted the contract-required macrostep current series and resource
+records, and two failure controls lacked exact inputs. The six controls are now
+fully defined. Positive and negative lifecycle tests use only disclosed
+fixtures; all 68 tests pass. The seal helper reports `seal_ready=true` while
+remaining execution-disabled. Next commit these reviewed bytes, then create
+and commit the disabled seal alone and add the annotated freeze tag. Registered
+development remains forbidden until that valid seal/tag/stage-open chain
+exists.
 
 ### Submission-oriented program
 
@@ -6418,15 +6424,14 @@ The submission sequence is:
    and disabled authorization are implemented and tested only on disclosed
    nonregistered fixtures. This tranche caught and corrected the pre-freeze
    Fourier orientation defect.
-4. **Outcome-free execution pipeline, then linear experimental lifecycle
-   (next).** Before seal, implement the registered stage runner, canonical
-   result-ledger builder and validator, atomic no-clobber result writer, and
-   full-ledger independent verifier. Exercise them only through disclosed
-   nonregistered fixtures, then perform hostile review and commit the complete
-   implementation. Create and commit the disabled seal alone, tag the freeze,
-   then open and run development, commit its result before inspection, and only
-   after an independently verified pass open the single-use confirmation.
-   Require completion documentation exactly as in the verified parent lineage.
+4. **Outcome-free execution pipeline complete; linear lifecycle next.** The
+   stage runner, canonical ledger and validator, atomic no-clobber writer,
+   full-ledger independent verifier, disclosed-fixture tests, and hostile
+   review are complete. Commit the complete implementation, create and commit
+   the disabled seal alone, tag the freeze, then open and run development and
+   commit its result before inspection. Only after an independently verified
+   pass may the single-use confirmation open. Require completion documentation
+   exactly as in the verified parent lineage.
 5. **Separate manuscript.** Center the paper on the frozen product-walk result
    plus the direct-QCA architecture and its eventual registered disposition.
    A second-architecture pass supports breadth; a clean failure remains a
@@ -6527,18 +6532,20 @@ resource clock, the charged leading potential phase, and the derived `delta^2`
 correction. Do not mutate the law into the parent product walk, the
 Gupta--Short alternative family, or a fermionic lift.
 
-The current CLI deliberately has no `run-stage` command, and the package lacks
-the canonical result-ledger builder/validator, atomic no-clobber result writer,
-and full-ledger independent verifier. These are mandatory causal inputs and
-must be completed before seal. Next implement that outcome-free execution
-pipeline, including positive and negative lifecycle tests, but exercise it only
-through disclosed `N=6`, `N=10`, and cutoff-3 fixtures. Do not evaluate any
-prospective registered input.
+The permit-gated stage runner, canonical result-ledger builder/validator,
+atomic no-clobber writer, and replay-tight full-ledger independent verifier are
+complete. Positive and negative lifecycle tests exercised only disclosed
+`N=6`, `N=10`, cutoff-3, synthetic-ledger, and temporary-Git fixtures; no
+prospective registered input was evaluated. Hostile review restored the full
+macrostep current series and exact resource records to the schema, made all six
+failure controls exact, removed an independent-path binary64 control-flow use,
+and made confirmation opening independently verify the committed development
+pass. All 68 direct-QCA tests pass. The disabled preview is seal-ready and
+execution-disabled; no lifecycle artifact exists.
 
-After the runner/ledger/verifier tranche passes, perform hostile review of all
-causal bytes. Only then commit the complete implementation, create the disabled
-seal as a sole-file freeze commit, and add the required annotated tag. Keep
-every open and result artifact absent until that linear freeze is valid. Treat the
+Next commit the reviewed implementation bytes, create the disabled seal as a
+sole-file freeze commit, and add the required annotated tag. Keep every open
+and result artifact absent until that linear freeze is valid. Treat the
 existing constraint-lineage paper as separate; build a new quantum-Dirac
 manuscript only after the registered disposition. Carry forward the separate
 cross-cutting drafts in `docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md`,

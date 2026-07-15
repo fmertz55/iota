@@ -372,13 +372,11 @@ Only these disclosed outcome-free fixtures may run:
 - a one-macrostep local-phase causal-support fixture on `N=10`.
 
 Analytic tail and threshold design calculations are allowed only when they do
-not propagate a registered candidate or registered state. A disabled seal
-preview may hash the current implementation but must report `seal_ready=false`
-until the registered stage runner, canonical result-ledger builder/validator,
-atomic no-clobber writer, full-ledger independent verifier, and hostile review
-are complete. It must report `run_command_enabled=false` and must not create a
-seal. Only the later complete implementation may enable the separate explicit
-clean-worktree seal action; that seal must itself remain execution-disabled.
+not propagate a registered candidate or registered state. The completed
+disabled-seal preview hashes the reviewed implementation, reports
+`seal_ready=true` and `run_command_enabled=false`, and creates no file. Seal
+creation remains a separate explicit clean-worktree action; the resulting seal
+must itself remain execution-disabled.
 
 ## 16. Required negative fixtures
 
@@ -404,9 +402,17 @@ fixed order:
 1. the analytic opposite-mass π-partner identity;
 2. high-`q` `N=320`, `r=120`, `m=1/3` through `T=2`;
 3. the `|mu|=1` flat-band mass endpoint;
-4. a low-band `N=320` constant-mass run through `T=12`;
-5. a rough spatial-step potential leakage control; and
+4. a low-band `N=320`, `r=-4..4`, `m=1/3` run through `T=12`;
+5. a rough spatial-step leakage control at `N=320`, initialized in the
+   normalized right-moving `r=0` mode, with `m=1/3` and the site potential
+   `V=1/8` on sites `0..159`, `V=-1/8` on sites `160..319`, active for all 40
+   macrosteps through `T=2`; and
 6. the disclosed hard-core versus fermionic two-excitation collision contrast.
+
+The π-partner is evaluated at `p=1/7`, `mu=1/5`. The collision contrast is the
+distance between the declared hard-core double-occupation phase `+1` and the
+canonical fermionic determinant phase `-1`. These exact control definitions
+and their canonical metrics are serialized in `protocol.json`.
 
 These controls characterize known boundaries. They cannot repair a failed
 primary or broaden a pass claim.
@@ -441,8 +447,10 @@ target, algorithmically separate momentum/sparse-circuit/Taylor replay,
 canonical reducers, four prospective manifests, content-seal builder, and
 Git-linear authorization surface now pass disclosed-fixture validation. The
 Fourier-orientation defect found during implementation was corrected before
-freeze. No registered outcome has been authorized or generated. The remaining
-pre-seal prerequisites are the registered stage runner, canonical result-ledger
-builder/validator and atomic writer, full-ledger independent verifier, their
-nonregistered fixture tests, and hostile review. Only then may the explicit
-seal-only freeze commit and annotated tag be created.
+freeze. No registered outcome has been authorized or generated. The registered
+stage runner, canonical result-ledger builder/validator and atomic writer,
+full-ledger independent verifier, nonregistered fixture tests, and hostile
+review are complete. Review restored the required full macrostep current
+series, exact resource records, replay-tight independent checks, and fully
+specified failure controls. The reviewed bytes are seal-ready; the seal-only
+freeze commit and annotated tag do not yet exist.

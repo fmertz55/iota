@@ -99,6 +99,38 @@ def certified_direct_step(
     return result
 
 
+def _certified_direct_step_adjoint(
+    state: acb_mat,
+    *,
+    n_sites: int,
+    mu: Fraction | int | str,
+) -> acb_mat:
+    """Apply the exact one-excitation adjoint of ``certified_direct_step``."""
+
+    _require_shape(state, n_sites)
+    mass = arb_exact(mu)
+    if not (abs(mass) < 1):
+        raise SymmetryQCASpecError("direct-QCA mu must satisfy abs(mu)<1")
+    normalization = (1 - mass * mass).sqrt()
+    coupling = acb(0, mass)
+    result = acb_mat(state.nrows(), state.ncols())
+    for site in range(n_sites):
+        right = 2 * site
+        left = right + 1
+        next_right = 2 * ((site + 1) % n_sites)
+        previous_left = 2 * ((site - 1) % n_sites) + 1
+        for column in range(state.ncols()):
+            result[right, column] = (
+                normalization * state[next_right, column]
+                + coupling * state[left, column]
+            )
+            result[left, column] = (
+                coupling * state[right, column]
+                + normalization * state[previous_left, column]
+            )
+    return result
+
+
 def certified_phase_layer(
     state: acb_mat,
     *,
@@ -113,6 +145,27 @@ def certified_phase_layer(
     result = acb_mat(state.nrows(), state.ncols())
     for site, potential in enumerate(potentials):
         phase = acb(0, -(time_step * potential)).exp()
+        for component in (0, 1):
+            row = 2 * site + component
+            for column in range(state.ncols()):
+                result[row, column] = phase * state[row, column]
+    return result
+
+
+def _certified_phase_layer_adjoint(
+    state: acb_mat,
+    *,
+    n_sites: int,
+    delta: Fraction,
+    potentials: Sequence[arb],
+) -> acb_mat:
+    _require_shape(state, n_sites)
+    if len(potentials) != n_sites:
+        raise SymmetryQCASpecError("potential vector length mismatch")
+    time_step = arb_exact(delta)
+    result = acb_mat(state.nrows(), state.ncols())
+    for site, potential in enumerate(potentials):
+        phase = acb(0, time_step * potential).exp()
         for component in (0, 1):
             row = 2 * site + component
             for column in range(state.ncols()):
@@ -380,6 +433,115 @@ class CertifiedRegisteredEvaluator:
     ) -> dict[int, acb_mat]:
         initial = certified_input_basis(n_sites=self.n_sites) * coefficients
         return self._candidate_evolve(scenario_id, initial, every_step=True)
+
+    def _candidate_final(
+        self,
+        scenario_id: str,
+        initial: acb_mat,
+        *,
+        reflect_potential: bool = False,
+    ) -> acb_mat:
+        """Apply the registered schedule, optionally with ``V(x)->V(-x)``."""
+
+        validate_registered_permit(self.permit)
+        scenario = self.scenarios.get(scenario_id)
+        observations = _observation_steps(self.delta)
+        with ball_precision(self.bits):
+            current = _copy(initial)
+            for step in range(max(observations)):
+                time = step * self.delta
+                mass = _interval_value(scenario["mass"], time)
+                potential = _potential_parameters(scenario["potential"], time)
+                if potential is not None:
+                    harmonic, amplitude, phase_pi = potential
+                    values = _potential_vector(
+                        n_sites=self.n_sites,
+                        harmonic=harmonic,
+                        amplitude=amplitude,
+                        phase_pi=phase_pi,
+                    )
+                    if reflect_potential:
+                        values = [values[(-site) % self.n_sites] for site in range(self.n_sites)]
+                    current = certified_phase_layer(
+                        current,
+                        n_sites=self.n_sites,
+                        delta=self.delta,
+                        potentials=values,
+                    )
+                current = certified_direct_step(
+                    current, n_sites=self.n_sites, mu=self.delta * mass
+                )
+            return current
+
+    def parity_role_pair(self, scenario_id: str) -> tuple[acb_mat, acb_mat]:
+        """Return both sides of ``P U[V] P = U[V(-x)]`` on the input sector."""
+
+        from .reducers import parity_ball
+
+        basis = certified_input_basis(n_sites=self.n_sites)
+        left = parity_ball(
+            self._candidate_final(
+                scenario_id,
+                parity_ball(basis, n_sites=self.n_sites),
+            ),
+            n_sites=self.n_sites,
+        )
+        right = self._candidate_final(
+            scenario_id, basis, reflect_potential=True
+        )
+        return left, right
+
+    def time_reversal_role_pair(
+        self, scenario_id: str
+    ) -> tuple[acb_mat, acb_mat]:
+        """Return ``Theta U Theta^-1`` and the reversed-schedule adjoint.
+
+        The free direct law agrees exactly.  With the declared prefixed scalar
+        phase, their difference is the prospectively gated splitting residual.
+        """
+
+        from .reducers import theta_ball
+
+        validate_registered_permit(self.permit)
+        scenario = self.scenarios.get(scenario_id)
+        observations = _observation_steps(self.delta)
+        basis = certified_input_basis(n_sites=self.n_sites)
+        with ball_precision(self.bits):
+            left = theta_ball(
+                self._candidate_final(
+                    scenario_id,
+                    theta_ball(basis, n_sites=self.n_sites),
+                ),
+                n_sites=self.n_sites,
+            )
+            # If the reversed schedule is evolved forward and then adjointed,
+            # its adjoint acts by the original schedule's adjoint steps in
+            # chronological order.  Each S=D P contributes S^dagger=P^dagger
+            # D^dagger, hence the direct adjoint is applied first.
+            right = _copy(basis)
+            for step in range(max(observations)):
+                time = step * self.delta
+                mass = _interval_value(scenario["mass"], time)
+                potential = _potential_parameters(scenario["potential"], time)
+                right = _certified_direct_step_adjoint(
+                    right,
+                    n_sites=self.n_sites,
+                    mu=self.delta * mass,
+                )
+                if potential is not None:
+                    harmonic, amplitude, phase_pi = potential
+                    right = _certified_phase_layer_adjoint(
+                        right,
+                        n_sites=self.n_sites,
+                        delta=self.delta,
+                        potentials=_potential_vector(
+                            n_sites=self.n_sites,
+                            harmonic=harmonic,
+                            amplitude=amplitude,
+                            phase_pi=phase_pi,
+                        ),
+                    )
+            return left, right
 
     def target_outputs(self, scenario_id: str) -> dict[int, acb_mat]:
         validate_registered_permit(self.permit)

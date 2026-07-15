@@ -129,6 +129,23 @@ def _validate_protocol(protocol: Any) -> None:
         "refinement ratios and observables remain outcome gates"
     ):
         raise SymmetryQCASpecError("threshold certificate status mismatch")
+    controls = protocol.get("failure_controls_after_confirmation_primary")
+    expected_controls = (
+        ("PI-PARTNER", "maximum_matrix_residual"),
+        ("HIGH-Q", "operator_distance"),
+        ("MASS-ENDPOINT", "flat_band_group_velocity_max"),
+        ("LONG-HORIZON", "maximum_low_band_operator_distance"),
+        ("ROUGH-POTENTIAL", "candidate_pi_sector_probability"),
+        ("FERMIONIC-LIFT", "double_occupation_phase_distance"),
+    )
+    if type(controls) is not list or tuple(
+        (item.get("id"), item.get("metric"))
+        for item in controls
+        if type(item) is dict
+    ) != expected_controls:
+        raise SymmetryQCASpecError("failure-control definitions or order mismatch")
+    if any(type(item.get("definition")) is not str or not item["definition"] for item in controls):
+        raise SymmetryQCASpecError("failure-control definition is missing")
 
 
 def _validate_candidate(candidate: Any) -> None:
@@ -415,6 +432,11 @@ def write_canonical_json_once(path: Path, value: Any) -> None:
             os.fsync(handle.fileno())
         os.link(temporary, path)
         temporary.unlink()
+        directory_fd = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
     except Exception:
         if temporary.exists():
             temporary.unlink()

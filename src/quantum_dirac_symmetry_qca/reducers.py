@@ -98,16 +98,9 @@ def _dft(values: Sequence[acb]) -> list[acb]:
     if size < 1:
         raise SymmetryQCASpecError("momentum reducer received an empty grid")
     normalization = arb(size).sqrt()
-    result: list[acb] = []
-    for r_index in range(size):
-        total = acb(0)
-        for site, value in enumerate(values):
-            phase = acb(
-                0, -2 * arb.pi() * arb(r_index * site) / arb(size)
-            ).exp()
-            total += phase * value
-        result.append(total / normalization)
-    return result
+    # FLINT's arbitrary-length certified DFT avoids an O(N^2) Python loop at
+    # the registered N=1280 while retaining outward ball enclosures.
+    return [value / normalization for value in acb.dft(values)]
 
 
 def momentum_probabilities_ball(state: acb_mat, *, n_sites: int) -> list[arb]:

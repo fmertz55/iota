@@ -3,10 +3,11 @@
 Current state:
 
 ```text
-outcome-free implementation complete
+outcome-free execution pipeline complete and hostile-reviewed
 localization, continuum, and global-spectrum audits complete
 not registered
 not frozen
+seal-ready; no seal artifact has been created
 guarded primary and independent implementations present
 registered outcomes forbidden
 ```
@@ -45,8 +46,9 @@ The absolute thresholds are not frozen, but their scale now has an
 outward-rounded analytic certificate covering the finite-step direct error,
 potential splitting, target truncation, and potential-generated intermediate
 modes. Refinement ratios, observables, and all other empirical gates remain
-uncomputed outcomes. Production registered candidate/target code, an
-algorithmically separate verifier, manifests, and authorization remain absent.
-The disabled preview reports these gaps and cannot create a seal. No registered
-evaluation is permitted before their completion, review, and a later linear
-freeze/open chain.
+uncomputed outcomes. The permit-gated registered candidate/target runner,
+canonical strict ledger and atomic writer, replay-tight algorithmically
+separate verifier, manifests, and authorization are complete and
+hostile-reviewed on disclosed fixtures only. The disabled preview is
+seal-ready but still execution-disabled and creates no artifact. No registered
+evaluation is permitted before the later linear seal/tag/open chain.

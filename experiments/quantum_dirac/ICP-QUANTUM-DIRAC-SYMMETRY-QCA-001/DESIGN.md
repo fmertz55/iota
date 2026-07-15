@@ -150,10 +150,11 @@ opposite Fourier sign in the earlier edge orientation; the pairing was
 prospectively reversed before freeze so the real-space, localized, momentum,
 and target conventions now agree. No registered size or scenario was run.
 
-The next task is the remaining outcome-free execution pipeline: registered
-stage runner, canonical result-ledger builder/validator, atomic no-clobber
-writer, and full-ledger independent verifier. Exercise it only through
-disclosed nonregistered fixtures. After that tranche passes, perform hostile
-review. No development or confirmation partition may be opened before the
-complete implementation is committed, explicitly sealed in a sole-file freeze
-commit, and bound by the declared annotated tag.
+The outcome-free execution pipeline is complete: permit-gated registered stage
+runner, canonical result-ledger builder/validator, atomic no-clobber writer,
+and full-ledger independent verifier. Positive and negative lifecycle tests use
+only disclosed nonregistered fixtures, and hostile review tightened the result
+schema, failure-control definitions, verification-before-confirmation path,
+and replay-tightness checks. No development or confirmation partition may be
+opened before these complete bytes are committed, explicitly sealed in a
+sole-file freeze commit, and bound by the declared annotated tag.
