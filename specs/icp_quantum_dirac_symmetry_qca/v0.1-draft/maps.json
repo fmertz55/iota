@@ -1,0 +1,29 @@
+{
+  "maps_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "E": {
+    "id": "QDIR-DIRECT-FOURIER-ISOMETRY-E-001",
+    "rule": "copy r=-4..4 target spinor Fourier coefficients into identically labelled normalized N-site DFT modes and zero every other construction mode",
+    "aliasing_forbidden": true
+  },
+  "M": {
+    "id": "QDIR-DIRECT-BORN-READOUT-M-001",
+    "outputs": [
+      "position_grid_povm",
+      "momentum_distribution",
+      "total_sigma_z_current",
+      "local_signed_current",
+      "pi_sector_probability",
+      "norm",
+      "fidelity"
+    ],
+    "pi_sector": "sum of momentum probabilities with abs(q)>=3 pi/4"
+  },
+  "Phi": {
+    "id": "QDIR-DIRECT-LOCAL-CONTROL-PHI-001",
+    "mass": "m_q maps to mu_q=delta m_q and n_q=sqrt(1-mu_q^2) in the direct edge scatter",
+    "potential": "V(x_j,t_q) maps to a charged on-site number phase P_V applied before edge scatter and routing",
+    "causal_probe": "a disclosed local phase probe maps to the same construction cells and is used only in algebraic support fixtures before freeze",
+    "target_schedule_sampling": "left endpoint of every macrostep"
+  }
+}

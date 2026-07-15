@@ -209,6 +209,7 @@ remains restricted to disclosed `N=6` and `N=10` fixtures.  The tests verify:
 
 The localization stop conditions are not triggered.  This closes the
 full-space locality obligation only.  No scenario, threshold, partition,
-seal, opening manifest, registered size, or result is introduced.  The next
-outcome-free scientific task is the small-`delta` effective-generator and
-first-correction derivation, followed by an independent implementation audit.
+seal, opening manifest, registered size, or result is introduced.  The later
+small-`delta` and complete-Brillouin-zone obligations are now resolved in
+`CONTINUUM_AUDIT.md` and `GLOBAL_SPECTRUM_AUDIT.md`; the latter preserves this
+document's explicit hard-core-versus-fermionic lift boundary.

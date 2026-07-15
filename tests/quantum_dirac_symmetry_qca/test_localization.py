@@ -6,12 +6,14 @@ from mpmath import mp
 
 from src.quantum_dirac_symmetry_qca.candidate import (
     basis_state,
+    direct_qca_probe_step,
     direct_qca_step,
 )
 from src.quantum_dirac_symmetry_qca.localization import (
     edge_scatter_gate,
     full_basis_state,
     margolus_inverse,
+    margolus_probe_step,
     margolus_step,
     one_excitation_vector,
     parity_full,
@@ -155,9 +157,67 @@ class DirectSymmetryQCAMargolusTests(unittest.TestCase):
                 "ancilla_modes": 0,
                 "macrosteps": 7,
                 "elementary_layers": 14,
-                "two_mode_gate_work": 140,
+                "gate_work": 140,
                 "causal_radius_per_macrostep": 1,
                 "gate_order": "edge_scatter_then_on_site_swap",
+            },
+        )
+
+    def test_leading_phase_localization_matches_one_excitation_law(self) -> None:
+        with mp.workdps(90):
+            state = full_basis_state(10, ((4, "R"),))
+            localized = one_excitation_vector(
+                margolus_probe_step(
+                    state,
+                    n_sites=10,
+                    mu="2/9",
+                    site=4,
+                    phase_pi="1/7",
+                ),
+                n_sites=10,
+            )
+            direct = direct_qca_probe_step(
+                basis_state(10, 4, "R"),
+                n_sites=10,
+                mu="2/9",
+                site=4,
+                phase_pi="1/7",
+            )
+            residual = max(abs(localized[row] - direct[row]) for row in range(20))
+            self.assertLess(residual, self.tolerance)
+
+    def test_local_phase_probe_stays_inside_one_step_cone(self) -> None:
+        with mp.workdps(90):
+            state = mp.matrix(20, 1)
+            for row in range(20):
+                state[row] = mp.mpf(1) / mp.sqrt(20)
+            unprobed = direct_qca_step(state, n_sites=10, mu="2/9")
+            probed = direct_qca_probe_step(
+                state,
+                n_sites=10,
+                mu="2/9",
+                site=4,
+                phase_pi="1/7",
+            )
+            changed_sites = {
+                row // 2
+                for row in range(20)
+                if abs(probed[row] - unprobed[row]) > mp.mpf("1e-80")
+            }
+            self.assertEqual(changed_sites, {3, 4, 5})
+
+    def test_active_potential_clock_charges_leading_phase(self) -> None:
+        self.assertEqual(
+            resource_clock(n_sites=10, macrosteps=7, potential_active=True),
+            {
+                "local_hilbert_dimension": 4,
+                "occupation_modes": 20,
+                "ancilla_modes": 0,
+                "macrosteps": 7,
+                "elementary_layers": 21,
+                "gate_work": 210,
+                "causal_radius_per_macrostep": 1,
+                "gate_order": "scalar_phase_then_edge_scatter_then_on_site_swap",
             },
         )
 

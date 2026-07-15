@@ -1,0 +1,283 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "date": "2026-07-15",
+  "status": "outcome_free_protocol_draft_not_frozen",
+  "human_contract": "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md",
+  "literature_basis": "literature_basis.md",
+  "threshold_certificate": "threshold_certificate.json",
+  "global_spectrum_audit": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md",
+  "registered_outcome_authorized": false,
+  "production_implementation_present": false,
+  "run_command_enabled": false,
+  "question": "can a second symmetry-derived strictly local quantum-information architecture recover the same bounded 1+1D Dirac operational role under fixed maps and explicit spectrum resource and verification boundaries",
+  "supported_pass_claim": "a second independently designed strictly local quantum-information architecture is constructively sufficient for the frozen bounded 1+1D Dirac role in its registered domain",
+  "claim_exclusions": [
+    "ontology",
+    "derivation of quantum theory or the Dirac equation from no supplied structure",
+    "whole-Brillouin-zone Dirac equivalence",
+    "doubler-free dynamics",
+    "multiparticle free-fermion or interacting QFT",
+    "canonical fermionic second quantization",
+    "uniqueness necessity or global minimality"
+  ],
+  "target": {
+    "hamiltonian": "-i sigma_z d_x + m(t) sigma_x + V(x,t) I_2",
+    "units": "hbar=c=1",
+    "boundary": "periodic",
+    "length": "16",
+    "input_modes": "r=-4..4 with two spinor components",
+    "input_dimension": 18,
+    "k_abs_max": "pi/2",
+    "reference_cutoff": 72,
+    "horizon": "2",
+    "observation_times": [
+      "2/5",
+      "4/5",
+      "6/5",
+      "8/5",
+      "2"
+    ],
+    "refinements": [
+      {
+        "n_sites": 320,
+        "delta": "1/20",
+        "macrosteps": 40
+      },
+      {
+        "n_sites": 640,
+        "delta": "1/40",
+        "macrosteps": 80
+      },
+      {
+        "n_sites": 1280,
+        "delta": "1/80",
+        "macrosteps": 160
+      }
+    ]
+  },
+  "candidate": {
+    "family": "direct_symmetry_derived_Dirac_QCA",
+    "local_modes": [
+      "R",
+      "L"
+    ],
+    "local_hilbert_dimension": 4,
+    "registered_sector": "one global excitation",
+    "logical_step": "A B_mu P_V with P_V omitted when inactive",
+    "direct_update": [
+      "R'(x)=n R(x+1)-i mu L(x)",
+      "L'(x)=-i mu R(x)+n L(x-1)"
+    ],
+    "free_momentum_block": "[[n exp(-i k delta),-i mu],[-i mu,n exp(+i k delta)]]",
+    "full_space_layers": [
+      "edge scatter b_mu on every (L_x,R_(x+1))",
+      "ordinary on-site qubit SWAP on every (R_x,L_x)"
+    ],
+    "active_potential_prefix": "exp(-i delta V(x_j,t_q) (n_Rj+n_Lj))",
+    "hard_core_collision_phase": "+1",
+    "canonical_fermionic_collision_phase": "-1",
+    "law_and_lift_are_candidate_defining": true
+  },
+  "resource_accounting": {
+    "classical_n_p_applicable": false,
+    "quantum_degree_schemas": 2,
+    "local_hilbert_dimension": 4,
+    "storage": "2N occupation qubits with one occupied in the registered sector",
+    "relation_schemas": 1,
+    "relation_instances": "N",
+    "free_gate_schemas": [
+      "edge scatter",
+      "on-site qubit SWAP"
+    ],
+    "active_potential_gate_schemas": [
+      "on-site number phase",
+      "edge scatter",
+      "on-site qubit SWAP"
+    ],
+    "free_depth": 2,
+    "active_potential_depth": 3,
+    "free_work": "2N",
+    "active_potential_work": "3N",
+    "causal_radius_per_macrostep": 1,
+    "parameter_precision_bits": 256,
+    "fitted_sitewise_tables_allowed": false
+  },
+  "maps": {
+    "E": "isometric copy of r=-4..4 Fourier coefficients into identical construction DFT modes",
+    "M": [
+      "Fourier-grid position POVM",
+      "momentum distribution",
+      "total sigma_z current",
+      "local signed current",
+      "pi-sector probability for abs(q)>=3pi/4",
+      "norm and fidelity diagnostics"
+    ],
+    "Phi": [
+      "m(t) to mu_q=delta m_q and n_q=sqrt(1-mu_q^2)",
+      "V(x,t) to a charged leading on-site number phase",
+      "disclosed local phase probe to matching construction cells in algebraic fixtures only"
+    ]
+  },
+  "scenario_policy": {
+    "development_count": 4,
+    "confirmation_count": 2,
+    "parent_holdout_reuse": false,
+    "parent_threshold_reuse": false,
+    "direct_only_class": "free or step-aligned mass schedules with expected global O(delta^2) error",
+    "potential_split_class": "smooth scalar potential schedules with expected global O(delta) splitting error"
+  },
+  "state_witnesses": {
+    "definition": "normalized frozen Gaussian Fourier envelopes times fixed-phase target energy spinors",
+    "development": [
+      "DEV-DIRECT-STATE-POS",
+      "DEV-DIRECT-STATE-NEG",
+      "DEV-DIRECT-STATE-INTERFERENCE",
+      "DEV-DIRECT-STATE-ZITTER"
+    ],
+    "confirmation": [
+      "HOLDOUT-DIRECT-STATE-POS",
+      "HOLDOUT-DIRECT-STATE-NEG",
+      "HOLDOUT-DIRECT-STATE-INTERFERENCE",
+      "HOLDOUT-DIRECT-STATE-ZITTER"
+    ],
+    "serialized_amplitude_tables_allowed": false,
+    "primary_gate_is_uniform_over_input_subspace": true
+  },
+  "primary_metric": {
+    "definition": "D_N=U_direct,N E_N-J_N U_target,R P_in",
+    "norm": "spectral operator 2-norm",
+    "target_fourier_cutoff": 72,
+    "certified_distance": "outward upper bound on norm(D_N) plus scenario target tail and numerical enclosure",
+    "scenario_reducer": "maximum over registered observation times",
+    "direct_only_thresholds": {
+      "320": "0.0040",
+      "640": "0.0012",
+      "1280": "0.0004"
+    },
+    "potential_split_thresholds": {
+      "320": "0.020",
+      "640": "0.011",
+      "1280": "0.006"
+    },
+    "direct_only_refinement": [
+      "d_640 <= 0.35 d_320 + 1e-10",
+      "d_1280 <= 0.35 d_640 + 1e-10"
+    ],
+    "potential_split_refinement": [
+      "d_640 <= 0.62 d_320 + 1e-10",
+      "d_1280 <= 0.62 d_640 + 1e-10"
+    ],
+    "near_zero_waiver": "all three certified distances at most 1e-12",
+    "numerical_enclosure_budget_max": "1e-10",
+    "threshold_rationale_status": "outward-rounded analytic absolute-gate certificate present; refinement ratios and observables remain outcome gates"
+  },
+  "tail_and_zone_edge": {
+    "input_mode_abs_max": 4,
+    "target_cutoff": 72,
+    "pi_sector": "abs(q)>=3pi/4",
+    "coarsest_pi_sector_mode_abs_min": 120,
+    "development_h2_target_first_omitted_order": 35,
+    "development_h2_pi_first_order": 58,
+    "confirmation_h3_target_first_omitted_order": 23,
+    "confirmation_h3_pi_first_order": 39,
+    "amplitude_tail_formula": "2 exp(z) z^s/s! with z=abs(amplitude) times active duration",
+    "registered_pi_sector_probability_max": "1e-24",
+    "potential_free_pi_sector_probability": "exactly_zero"
+  },
+  "observable_gates_at_n_1280": {
+    "position_tv_max": "0.010",
+    "momentum_tv_max": "0.010",
+    "total_current_error_max": "0.020",
+    "local_current_l1_max": "0.020",
+    "infidelity_max": "0.0001",
+    "zitter_current_series_sup_error_max": "0.020",
+    "candidate_pi_sector_probability_max": "1e-24"
+  },
+  "structure_and_symmetry": {
+    "abstract_full_space_unitarity": "exact",
+    "numerical_norm_residual_max": "1e-12",
+    "independent_state_disagreement_max": "1e-11",
+    "causal_support": "exact zero beyond one cell per completed macrostep before wrap; massless boundary attainment required",
+    "translation": "exact for homogeneous mass and inactive or spatially constant potential",
+    "parity": {
+      "transform": "ordinary qubit R/L SWAP plus x to -x",
+      "free_full_space_residual": "exactly_zero",
+      "even_potential_residual_max": "1e-12"
+    },
+    "time_reversal": {
+      "transform": "ordinary qubit R/L SWAP times complex conjugation",
+      "free_full_space_relation": "Theta U Theta^-1=U^dagger exactly",
+      "potential_role_finest_residual_max": "0.020",
+      "potential_role_refinement": "same 0.62 successive bound as potential primary metric"
+    },
+    "signed_step_reversal": "exact for the direct free law and not claimed for the prefixed potential split"
+  },
+  "implementation_independence": {
+    "production_candidate": "real-space leading phase followed by direct recurrence using certified ball arithmetic",
+    "production_target": "certified spectral target on r=-72..72",
+    "verifier_candidate_free": "independently constructed 2x2 direct momentum blocks",
+    "verifier_candidate_potential": "explicit sparse phase edge-scatter and routing operators",
+    "verifier_target": "independently rebuilt sparse harmonic generator and Taylor or eigensystem exponential",
+    "verifier_norm": "higher-precision Gram-matrix largest eigenvalue",
+    "same_candidate_constructor_allowed": false,
+    "same_target_constructor_allowed": false
+  },
+  "seven_global_audit_boundaries": [
+    "low-momentum encoding",
+    "zone-edge leakage accounting",
+    "explicit pseudodoubler failure control",
+    "branch-safe effective-Hamiltonian metrics",
+    "strict mass margin",
+    "single-excitation claim",
+    "architecture integrity"
+  ],
+  "pre_freeze_policy": {
+    "allowed": [
+      "N=6 and N=10 direct candidate localization continuum and spectrum fixtures",
+      "target-only cutoff-3 harmonic-2 fixture",
+      "analytic threshold and tail certificates without registered propagation",
+      "disabled seal preview"
+    ],
+    "rejected": [
+      "N=320 N=640 or N=1280 candidate evaluation",
+      "any registered scenario or state evaluation",
+      "parent product-walk substitution",
+      "Gupta-Short walk-family substitution",
+      "canonical fermionic lift substitution",
+      "enabled production seal open manifest or result"
+    ]
+  },
+  "failure_controls_after_confirmation_primary": [
+    "PI-PARTNER analytic opposite-mass zone-edge identity",
+    "HIGH-Q N=320 r=120 constant mass 1/3 through T=2",
+    "MASS-ENDPOINT abs(mu)=1 flat-band localization",
+    "LONG-HORIZON N=320 low-band constant mass through T=12",
+    "ROUGH-POTENTIAL spatial step control for zone-edge leakage",
+    "FERMIONIC-LIFT collision-phase contrast on a disclosed two-excitation fixture"
+  ],
+  "stopping_rule": {
+    "development": "indivisible four-scenario batch",
+    "on_development_fail": "stop with confirmation unopened",
+    "confirmation": "indivisible two-scenario single-use batch after verified development pass",
+    "partial_result_allowed": false,
+    "interruption": "no scientific result"
+  },
+  "future_provenance": {
+    "freeze_tag": "icp-quantum-dirac-symmetry-qca-001-v0.1-frozen",
+    "outcome_seal": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/outcome_seal_v0.1.json",
+    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_open_manifest_v0.1.json",
+    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.1.json",
+    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_open_manifest_v0.1.json",
+    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.1.json",
+    "history": "implementation; seal-only freeze and annotated tag; development-open-only child; development-result-only child; conditional confirmation-open-only child; confirmation-result-only child"
+  },
+  "terminal_classifications": [
+    "development_gate_failed_confirmation_unopened",
+    "development_passed",
+    "development_passed_confirmation_failed",
+    "constructive_sufficiency_passed_direct_symmetry_qca_sector",
+    "execution_incomplete_no_result",
+    "provenance_invalid_no_result"
+  ]
+}

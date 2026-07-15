@@ -1,8 +1,8 @@
-# Direct Symmetry-Derived Dirac QCA — Outcome-Free Design Kickoff
+# Direct Symmetry-Derived Dirac QCA — Outcome-Free Prospective Design
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **localization and continuum audits passed; protocol design next; registered outcomes forbidden**
+Status: **prospective protocol and absolute-gate certificate complete; production absent; registered outcomes forbidden**
 
 ## Question
 
@@ -73,10 +73,18 @@ direct QCA update rather than a sequential coin/transport product.
    small-`delta` effective generator and identify the first nonzero correction
    independently. The derivation and independent matrix-log check are in
    `CONTINUUM_AUDIT.md`.
-4. **Protocol stage.** Only after stages 1–3 pass, freeze target maps,
+4. **Global spectrum and lift stage (complete).** Audit the complete
+   Brillouin zone, quasienergy branches, group velocity, doubling or
+   pseudodoubling, mass endpoints, and the dependence on hard-core versus
+   canonical fermionic collision sectors. The result and mandatory protocol
+   boundaries are in `GLOBAL_SPECTRUM_AUDIT.md`.
+5. **Protocol stage (outcome-free draft complete).** After stages 1–4, fix target maps,
    interventions, states, scenario partitions, refinement sizes, metrics,
-   thresholds, failure controls, and a separately implemented verifier.
-5. **Lifecycle stage.** Build disabled production code, seal all causal inputs,
+   proposed thresholds, failure controls, and the required independent-verifier
+   architecture. Do not freeze until production and independent code pass and
+   all draft inputs receive hostile review.
+6. **Implementation and lifecycle stage.** Build disabled production and
+   independent code, prospective manifests, and authorization; then seal all causal inputs,
    and use a fresh linear freeze/open/result/verification history. No parent
    holdout case may be silently reused as a new holdout.
 
@@ -107,5 +115,35 @@ is `H_D + delta^2 K_2 + O(delta^4)`, with the independently checked correction
 given in `CONTINUUM_AUDIT.md`. Signed-step reversal is exact and the effective
 generator is even in `delta`.
 
-Next begin outcome-free prospective protocol design without evaluating a
-registered size or opening development/confirmation partitions.
+The full-zone audit is complete. It finds no traditional zero-energy doubler
+in `1+1D`, but it does find the exact pi-mode relation
+`U_mu(-pi+p)=-U_-mu(p)`. This is a high-quasienergy opposite-mass
+pseudodoubler and a mandatory low-momentum/leakage boundary. The audit also
+shows that the chosen hard-core qubit collision phases are not the canonical
+fermionic lift. See `GLOBAL_SPECTRUM_AUDIT.md` and the dated literature log.
+
+The outcome-free prospective protocol is now explicit in
+`specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/` and the controlling human
+contract. It uses fresh sizes `N=320,640,1280`, fresh development and
+single-use confirmation allocations, a fixed low-mode encoding, explicit
+pi-sector probability and tail gates, a strict `|mu|<=3/100` registered
+margin, and a single-excitation hard-core claim boundary. The potential is a
+separately charged leading number phase, so direct-only scenarios carry
+second-order global convergence gates while potential-split scenarios carry
+first-order gates.
+
+The absolute-gate scale has a 256-bit outward-rounded analytic certificate.
+The certificate bounds the complete direct one-step unitary discrepancy,
+telescopes it through `T=2`, charges the scalar-potential commutator, target
+tail, and numerical budget, and uses refinement-specific intermediate mode
+bands `|r|<=13,17,20`. This last term prevents an invalid assumption that a
+potential-driven state remains in the input band. The worst potential
+envelopes are `0.019662`, `0.007805`, and `0.002914`, below the prospective
+absolute gates. Refinement ratios, witnesses, implementation agreement,
+symmetry-role residuals, and all classifications remain uncomputed outcomes.
+
+The next task is the outcome-free production and independent implementation,
+prospective manifests, and disabled authorization/lifecycle surface. No
+registered size or scenario may be evaluated, and no development or
+confirmation partition may be opened, before that work is complete, reviewed,
+committed, sealed, and frozen through the declared linear chain.

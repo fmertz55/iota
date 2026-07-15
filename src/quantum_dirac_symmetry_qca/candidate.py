@@ -96,6 +96,60 @@ def direct_qca_step(
         return result
 
 
+def local_phase_probe(
+    state: mp.matrix,
+    *,
+    n_sites: int,
+    site: int,
+    phase_pi: int | str | Fraction,
+    dps: int = 90,
+) -> mp.matrix:
+    """Apply a disclosed on-site number phase to both directional modes.
+
+    This is a causal-support fixture, not a registered scalar-potential
+    evaluator.  The supplied phase is an exact coefficient of ``pi``.
+    """
+
+    _require_fixture_size(n_sites)
+    _require_state(state, n_sites)
+    if type(site) is not int or not 0 <= site < n_sites:
+        raise SymmetryQCAFixtureError("phase-probe site is outside the cycle")
+    if type(dps) is not int or dps < MINIMUM_DPS:
+        raise SymmetryQCAFixtureError("fixture arithmetic requires at least 80 digits")
+    with mp.workdps(dps):
+        coefficient = _number(phase_pi)
+        if not mp.isfinite(coefficient):
+            raise SymmetryQCAFixtureError("phase-probe coefficient must be finite")
+        result = state.copy()
+        phase = mp.exp(-1j * mp.pi * coefficient)
+        for component in (0, 1):
+            row = 2 * site + component
+            for column in range(state.cols):
+                result[row, column] *= phase
+        return result
+
+
+def direct_qca_probe_step(
+    state: mp.matrix,
+    *,
+    n_sites: int,
+    mu: int | str | Fraction,
+    site: int,
+    phase_pi: int | str | Fraction,
+    dps: int = 90,
+) -> mp.matrix:
+    """Apply the leading local phase and then the exact direct recurrence."""
+
+    phased = local_phase_probe(
+        state,
+        n_sites=n_sites,
+        site=site,
+        phase_pi=phase_pi,
+        dps=dps,
+    )
+    return direct_qca_step(phased, n_sites=n_sites, mu=mu, dps=dps)
+
+
 def update_matrix(*, n_sites: int, mu: int | str | Fraction, dps: int = 90) -> mp.matrix:
     _require_fixture_size(n_sites)
     identity = mp.eye(2 * n_sites)

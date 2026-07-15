@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/quantum-dirac-symmetry-qca-result-v0.1-draft",
+  "title": "ICP direct symmetry-QCA canonical stage ledger",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "search_id",
+    "stage",
+    "status",
+    "bindings",
+    "numerics",
+    "scenario_results",
+    "aggregate"
+  ],
+  "properties": {
+    "protocol_version": {"const": "0.1-draft"},
+    "search_id": {"const": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"},
+    "stage": {"enum": ["development", "confirmation"]},
+    "status": {
+      "enum": [
+        "development_gate_failed_confirmation_unopened",
+        "development_passed",
+        "development_passed_confirmation_failed",
+        "constructive_sufficiency_passed_direct_symmetry_qca_sector"
+      ]
+    },
+    "bindings": {
+      "type": "object",
+      "required": [
+        "open_manifest",
+        "outcome_seal",
+        "result_schema",
+        "contract",
+        "protocol",
+        "candidate",
+        "target",
+        "maps",
+        "scenarios",
+        "states",
+        "partitions"
+      ],
+      "properties": {
+        "open_manifest": {"$ref": "#/$defs/binding"},
+        "outcome_seal": {"$ref": "#/$defs/binding"},
+        "result_schema": {"$ref": "#/$defs/binding"},
+        "contract": {"$ref": "#/$defs/binding"},
+        "protocol": {"$ref": "#/$defs/binding"},
+        "candidate": {"$ref": "#/$defs/binding"},
+        "target": {"$ref": "#/$defs/binding"},
+        "maps": {"$ref": "#/$defs/binding"},
+        "scenarios": {"$ref": "#/$defs/binding"},
+        "states": {"$ref": "#/$defs/binding"},
+        "partitions": {"$ref": "#/$defs/binding"}
+      },
+      "additionalProperties": false
+    },
+    "numerics": {
+      "type": "object",
+      "required": [
+        "primary_backend",
+        "primary_library_version",
+        "primary_precision_bits",
+        "primary_rounding",
+        "independent_backend",
+        "independent_library_version",
+        "independent_decimal_digits",
+        "binary64_registered_dynamics",
+        "target_tail_formula",
+        "pi_tail_formula"
+      ],
+      "properties": {
+        "primary_backend": {"const": "python-flint Arb/Acb"},
+        "primary_library_version": {"const": "0.9.0"},
+        "primary_precision_bits": {"const": 256},
+        "primary_rounding": {"const": "outward_ball_enclosures"},
+        "independent_backend": {"const": "mpmath"},
+        "independent_library_version": {"const": "1.3.0"},
+        "independent_decimal_digits": {"const": 110},
+        "binary64_registered_dynamics": {"const": false},
+        "target_tail_formula": {"const": "2 exp(z) z^s/s!"},
+        "pi_tail_formula": {"const": "2 exp(z) z^s/s!"}
+      },
+      "additionalProperties": false
+    },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/scenario_result"}
+    },
+    "aggregate": {
+      "type": "object",
+      "required": [
+        "scenario_count",
+        "scenario_pass_count",
+        "all_scenarios_complete",
+        "stage_pass",
+        "confirmation_authorized",
+        "failure_controls",
+        "classification"
+      ],
+      "properties": {
+        "scenario_count": {"type": "integer", "minimum": 2, "maximum": 4},
+        "scenario_pass_count": {"type": "integer", "minimum": 0, "maximum": 4},
+        "all_scenarios_complete": {"const": true},
+        "stage_pass": {"type": "boolean"},
+        "confirmation_authorized": {"type": "boolean"},
+        "failure_controls": {"type": ["array", "null"]},
+        "classification": {
+          "enum": [
+            "development_gate_failed_confirmation_unopened",
+            "development_passed",
+            "development_passed_confirmation_failed",
+            "constructive_sufficiency_passed_direct_symmetry_qca_sector"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "decimal": {"type": "string", "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"},
+    "binding": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "refinement": {
+      "type": "object",
+      "required": [
+        "n_sites",
+        "observation_distance_uppers",
+        "scenario_distance_upper",
+        "target_tail_upper",
+        "numerical_enclosure_upper",
+        "absolute_threshold",
+        "absolute_pass"
+      ],
+      "properties": {
+        "n_sites": {"enum": [320, 640, 1280]},
+        "observation_distance_uppers": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {"$ref": "#/$defs/decimal"}
+        },
+        "scenario_distance_upper": {"$ref": "#/$defs/decimal"},
+        "target_tail_upper": {"$ref": "#/$defs/decimal"},
+        "numerical_enclosure_upper": {"$ref": "#/$defs/decimal"},
+        "absolute_threshold": {"$ref": "#/$defs/decimal"},
+        "absolute_pass": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "witness": {
+      "type": "object",
+      "required": [
+        "state_id",
+        "position_tv_max",
+        "momentum_tv_max",
+        "total_current_error_max",
+        "local_current_l1_max",
+        "infidelity_max",
+        "zitter_current_series_sup_error",
+        "pass"
+      ],
+      "properties": {
+        "state_id": {"type": "string", "minLength": 1},
+        "position_tv_max": {"$ref": "#/$defs/decimal"},
+        "momentum_tv_max": {"$ref": "#/$defs/decimal"},
+        "total_current_error_max": {"$ref": "#/$defs/decimal"},
+        "local_current_l1_max": {"$ref": "#/$defs/decimal"},
+        "infidelity_max": {"$ref": "#/$defs/decimal"},
+        "zitter_current_series_sup_error": {
+          "oneOf": [{"$ref": "#/$defs/decimal"}, {"type": "null"}]
+        },
+        "pass": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "scenario_result": {
+      "type": "object",
+      "required": [
+        "scenario_id",
+        "scenario_class",
+        "operator",
+        "witnesses",
+        "pi_sector",
+        "maximum_independent_state_disagreement_upper",
+        "symmetry_and_structure",
+        "pass"
+      ],
+      "properties": {
+        "scenario_id": {"type": "string", "minLength": 1},
+        "scenario_class": {"enum": ["direct_only", "potential_split"]},
+        "operator": {
+          "type": "object",
+          "required": ["refinements", "refinement_gates_pass", "pass"],
+          "properties": {
+            "refinements": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {"$ref": "#/$defs/refinement"}
+            },
+            "refinement_gates_pass": {"type": "boolean"},
+            "pass": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        },
+        "witnesses": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {"$ref": "#/$defs/witness"}
+        },
+        "pi_sector": {
+          "type": "object",
+          "required": [
+            "analytic_probability_upper",
+            "candidate_probability_upper",
+            "threshold",
+            "pass"
+          ],
+          "properties": {
+            "analytic_probability_upper": {"$ref": "#/$defs/decimal"},
+            "candidate_probability_upper": {"$ref": "#/$defs/decimal"},
+            "threshold": {"const": "1e-24"},
+            "pass": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        },
+        "maximum_independent_state_disagreement_upper": {"$ref": "#/$defs/decimal"},
+        "symmetry_and_structure": {
+          "type": "object",
+          "required": [
+            "unitarity_pass",
+            "causality_pass",
+            "parity_pass",
+            "time_reversal_role_pass",
+            "architecture_integrity_pass"
+          ],
+          "properties": {
+            "unitarity_pass": {"type": "boolean"},
+            "causality_pass": {"type": "boolean"},
+            "parity_pass": {"type": "boolean"},
+            "time_reversal_role_pass": {"type": "boolean"},
+            "architecture_integrity_pass": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        },
+        "pass": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

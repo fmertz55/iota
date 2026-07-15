@@ -1,0 +1,53 @@
+{
+  "fixtures_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "allowed": [
+    {
+      "id": "FIX-DIRECT-N6-CANDIDATE",
+      "N": 6,
+      "purpose": "direct one-excitation update, exact spectrum, continuum generator, and access guards"
+    },
+    {
+      "id": "FIX-DIRECT-N10-FULL-SPACE",
+      "N": 10,
+      "purpose": "full-space Margolus localization, collision phases, symmetries, and resource clock"
+    },
+    {
+      "id": "FIX-DIRECT-PI-PARTNER",
+      "N": 6,
+      "purpose": "exact identity U_mu(-pi+p)=-U_-mu(p)"
+    },
+    {
+      "id": "FIX-DIRECT-TARGET-R3-H2",
+      "cutoff": 3,
+      "harmonic": 2,
+      "purpose": "small target Hamiltonian, encoding, measurement, and independent exponential agreement"
+    },
+    {
+      "id": "FIX-DIRECT-LOCAL-PHASE-SUPPORT",
+      "N": 10,
+      "purpose": "one-macrostep causal support with a disclosed local phase probe"
+    }
+  ],
+  "forbidden_registered_sizes": [
+    320,
+    640,
+    1280
+  ],
+  "also_rejected_parent_sizes": [
+    256,
+    512,
+    1024
+  ],
+  "required_rejections": [
+    "parent_product_walk_substitution",
+    "Gupta_Short_family_substitution",
+    "canonical_fermionic_lift_substitution",
+    "reversed_gate_order",
+    "wrong_fourier_sign",
+    "missing_edge_scatter_or_swap_layer",
+    "uncharged_potential_phase",
+    "registered_scenario_before_freeze",
+    "enabled_draft_production"
+  ]
+}

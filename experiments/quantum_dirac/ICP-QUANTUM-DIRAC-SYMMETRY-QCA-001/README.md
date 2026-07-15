@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **outcome-free architecture kickoff; not registered and not frozen**
+Status: **outcome-free prospective protocol and absolute-gate certificate complete; production absent; not frozen**
 
 Started: `2026-07-14`
 
@@ -11,7 +11,7 @@ This experiment is the first breadth follow-up to the independently verified
 finite-lattice architecture from a product mass-mix/transport walk to the
 direct symmetry-derived Dirac QCA family.
 
-The current outcome-free tranche contains only:
+The current outcome-free tranche contains:
 
 - an explicit parent-result binding;
 - a scoped outcome-free design brief;
@@ -21,12 +21,31 @@ The current outcome-free tranche contains only:
   algebraic unitarity, translation, parity, time-reversal, multi-excitation,
   resource-clock, ballistic, and access-guard tests; and
 - an exact effective-generator derivation with an independently implemented
-  matrix-log check of the first nonzero continuum correction.
+  matrix-log check of the first nonzero continuum correction; and
+- a complete-Brillouin-zone audit of exact bands, branch cuts, group velocity,
+  the pi-mode pseudodoubler, mass endpoints, and hard-core versus canonical
+  fermionic collision phases;
+- fresh prospective target, map, refinement, scenario, state, partition,
+  metric, and failure-control specifications under all seven spectrum-audit
+  boundaries;
+- candidate-specific design, opening, and result schemas plus strict guards
+  that reject all registered and parent lattice sizes before freeze;
+- a cutoff-3 harmonic target fixture and a leading local-phase support fixture
+  with algorithmically distinct small-matrix checks; and
+- a 256-bit outward-rounded analytic certificate for the proposed absolute
+  operator-distance gates, including potential-generated intermediate-band
+  leakage rather than assuming later states stay in the input band.
 
-It contains no registered lattice, scenario, state partition, threshold,
-outcome seal, production permit, or result. The localization/resource clock
-and continuum correction are resolved in `LOCALIZATION_AUDIT.md` and
-`CONTINUUM_AUDIT.md`; the next outcome-free task is prospective protocol
-design.
+It contains prospective registered lattice, scenario, state, and threshold
+definitions but has never evaluated them. It contains no production registered
+evaluator, registered verifier, prospective manifests, authorization permit,
+outcome seal, opening manifest, or result. The localization/resource clock,
+continuum correction, global spectral boundaries, and protocol audit are in
+`LOCALIZATION_AUDIT.md`, `CONTINUUM_AUDIT.md`, and
+`GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`. The controlling human
+contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
 
-See `DESIGN.md` for the scientific contrast and stop conditions.
+The next outcome-free task is production and independent implementation under
+the fixed draft, followed by prospective manifests and a disabled lifecycle
+authorization surface. See `DESIGN.md` for the scientific contrast and stop
+conditions.

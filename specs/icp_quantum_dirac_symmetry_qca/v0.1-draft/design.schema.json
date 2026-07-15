@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/quantum-dirac-symmetry-qca-design-v0.1-draft",
+  "title": "ICP direct symmetry-QCA design artifact",
+  "type": "object",
+  "required": [
+    "search_id"
+  ],
+  "properties": {
+    "search_id": {
+      "const": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"
+    }
+  },
+  "oneOf": [
+    {
+      "required": ["protocol_version"],
+      "properties": {"protocol_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["candidate_version"],
+      "properties": {"candidate_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["target_version"],
+      "properties": {"target_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["maps_version"],
+      "properties": {"maps_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["scenarios_version"],
+      "properties": {"scenarios_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["states_version"],
+      "properties": {"states_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["partitions_version"],
+      "properties": {"partitions_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["fixtures_version"],
+      "properties": {"fixtures_version": {"const": "0.1-draft"}}
+    },
+    {
+      "required": ["certificate_version"],
+      "properties": {"certificate_version": {"const": "0.1-draft"}}
+    }
+  ],
+  "additionalProperties": true
+}

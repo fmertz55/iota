@@ -1,0 +1,31 @@
+{
+  "partitions_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "development_scenarios": [
+    "DEV-DIRECT-FREE-POS",
+    "DEV-DIRECT-FREE-NEG",
+    "DEV-DIRECT-SIGN-QUENCH",
+    "DEV-DIRECT-POTENTIAL-H2"
+  ],
+  "confirmation_scenarios": [
+    "HOLDOUT-DIRECT-MASS-PULSE",
+    "HOLDOUT-DIRECT-POTENTIAL-H3"
+  ],
+  "development_states": [
+    "DEV-DIRECT-STATE-POS",
+    "DEV-DIRECT-STATE-NEG",
+    "DEV-DIRECT-STATE-INTERFERENCE",
+    "DEV-DIRECT-STATE-ZITTER"
+  ],
+  "confirmation_states": [
+    "HOLDOUT-DIRECT-STATE-POS",
+    "HOLDOUT-DIRECT-STATE-NEG",
+    "HOLDOUT-DIRECT-STATE-INTERFERENCE",
+    "HOLDOUT-DIRECT-STATE-ZITTER"
+  ],
+  "development_batch_indivisible": true,
+  "confirmation_batch_indivisible": true,
+  "confirmation_single_use": true,
+  "open_confirmation_only_after_verified_development_pass": true,
+  "cross_architecture_parent_results_count_as_candidate_data": false
+}

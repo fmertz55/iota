@@ -30,9 +30,14 @@ audit passes with a mass-bearing edge scatter followed by an on-site routing
 SWAP; its full collision-sector choice and elementary-layer/resource clock are
 explicit. The continuum audit also passes: the direct law has the Dirac
 generator at leading order and an independently checked `delta^2` first
-correction, with exact signed-step reversal. The next scientific task is
-outcome-free prospective protocol design. Do not register outcomes or copy
-the v0.4 product-walk gates into this experiment merely to force a pass.
+correction, with exact signed-step reversal. The outcome-free global-spectrum
+and literature audit is also complete. It finds no traditional zero-energy
+doubler in `1+1D`, but it identifies the exact opposite-mass pi-mode
+pseudodoubler and shows that the declared hard-core qubit collision phases are
+not a canonical fermionic lift. The next scientific task is prospective
+protocol design under the seven mandatory boundaries in
+`GLOBAL_SPECTRUM_AUDIT.md`. Do not register outcomes or copy the v0.4
+product-walk gates into this experiment merely to force a pass.
 
 ## Local Checkout State
 
@@ -6144,14 +6149,19 @@ experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/README.md
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/DESIGN.md
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/parent_binding.json
 specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/README.md
+specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/literature_basis.md
 src/quantum_dirac_symmetry_qca/candidate.py
 src/quantum_dirac_symmetry_qca/continuum.py
 src/quantum_dirac_symmetry_qca/localization.py
+src/quantum_dirac_symmetry_qca/spectrum.py
 tests/quantum_dirac_symmetry_qca/test_candidate.py
 tests/quantum_dirac_symmetry_qca/test_continuum.py
 tests/quantum_dirac_symmetry_qca/test_localization.py
+tests/quantum_dirac_symmetry_qca/test_spectrum.py
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/CONTINUUM_AUDIT.md
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/LOCALIZATION_AUDIT.md
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md
+docs/literature/symmetry_qca_global_spectrum_2026-07-15.md
 scripts/validate_archived_quantum_dirac.py
 ```
 
@@ -6165,7 +6175,9 @@ exact restriction on every disclosed one-excitation basis state, vacuum and
 saturated action, multi-sector inversion, full-space
 translation/parity/time-reversal transforms, and the resource clock. These
 are joined by seven continuum tests of the exact effective generator,
-independent matrix logarithm, correction order, and signed-step reversal.
+independent matrix logarithm, correction order, and signed-step reversal, plus
+seven global-spectrum tests of the exact bands, both quasienergy gaps, group
+velocity, mass endpoints, the pi-mode partner, and collision-lift phases.
 These are algebraic design checks, not registered outcomes.
 
 The full command
@@ -6176,16 +6188,18 @@ make PYTHON=.venv/bin/python verify
 
 passes the evidence checks, 56 bounded MIR tests, 55 exact-orbit tests, the
 archived v0.4 seal/manifests/ledgers/bindings and 38 archived v0.4 tests, plus
-the 21 direct-QCA candidate/localization/continuum fixture tests. The earlier
+the 28 direct-QCA candidate/localization/continuum/spectrum fixture tests. The earlier
 GitHub Actions workflow `Research compendium`, run `29395828732`, passed the
 six-test kickoff state at commit `94ed42c` in 1 minute 28 seconds.
 
 ### Scientific state and immediate next task
 
-The new experiment is outcome-free and not frozen. It has no registered
-scenario set, acceptance threshold, outcome seal, open manifest, result file,
-or result interpretation. Do not reuse the parent's registered outcomes as
-evidence for this architecture.
+The new experiment is outcome-free and not frozen. It now has a prospective
+registered scenario set, state allocation, refinement ladder, and acceptance
+gates, but none has been evaluated. It has no production registered evaluator,
+registered verifier, prospective manifest set, authorization permit, outcome
+seal, open manifest, result file, or result interpretation. Do not reuse the
+parent's registered outcomes as evidence for this architecture.
 
 The full-space localization audit in `LOCALIZATION_AUDIT.md` passes. Each cell
 is two declared occupation qubits, with no ancilla. The first layer applies
@@ -6226,11 +6240,206 @@ propagator discrepancy scales as `delta^3`, and signed-step reversal obeys
 `U_(-delta)=U_delta^dagger` exactly. Thus the local interaction clock has a
 detectable continuum correction without a microscopic arrow of time.
 
-The next task is outcome-free prospective protocol design: fixed maps,
-candidate-specific scenario and refinement logic, independent verification,
-threshold rationale, failure controls, schemas, and a disabled seal. No
-registered input may be evaluated. Any registered run still requires a new
-linear freeze/open/result provenance chain.
+The complete-Brillouin-zone and novelty audit in `GLOBAL_SPECTRUM_AUDIT.md` is
+now complete. The exact principal bands obey
+
+```text
+cos(omega) = sqrt(1-mu^2) cos(q),
+asin(|mu|) <= omega <= pi-asin(|mu|),
+|v_group| <= sqrt(1-mu^2).
+```
+
+Both the zero- and pi-quasienergy circular gaps are `2 asin(|mu|)`. There is no
+additional zero-energy Dirac cone in `1+1D`, but the zone edge obeys the exact
+identity `U_mu(-pi+p)=-U_-mu(p)`: after the Floquet phase shift it is a
+Dirac-like opposite-mass pi-mode pseudodoubler. This is a known global failure
+boundary, not a failure of the bounded low-momentum single-particle question.
+The audit also proves that the current hard-core qubit gates use `+1` on local
+double occupation while canonical fermionic lifts use the one-particle
+determinant `-1`. Thus the current full-space witness is not a free-fermion
+Fock lift and supports no multiparticle or interacting-field claim.
+
+The dated primary-literature record is
+`docs/literature/symmetry_qca_global_spectrum_2026-07-15.md`. It positions the
+law and dispersion against Bisio--D'Ariano--Tosini, local implementation
+against Gross--Nesme--Vogts--Werner, fermionic lifts against
+Farrelly--Short and Mlodinow--Brun, and the pseudodoubler against the
+Gupta--Short paper accepted by *Physical Review A* on 2026-07-01. No novelty
+is claimed for those established ingredients.
+
+### Outcome-free prospective protocol audit — 2026-07-15
+
+The protocol-design stage is complete. The controlling contract is
+`docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`; the machine-readable package
+is `specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/`; and the concise audit is
+`experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/PROTOCOL_AUDIT.md`.
+
+The draft fixes fresh refinements `N=320,640,1280`, deltas
+`1/20,1/40,1/80`, horizon `T=2`, observations
+`[2/5,4/5,6/5,8/5,2]`, target cutoff `|r|<=72`, four development scenarios,
+two single-use confirmation scenarios, and eight new formula-defined state
+witnesses. No parent holdout, state, threshold, or finite-lattice law is reused
+as candidate evidence. The active potential is a separately charged leading
+number phase, so direct-only cases have prospective global `O(delta^2)` gates
+and potential cases have prospective global `O(delta)` gates.
+
+All seven global-audit boundaries are now structural protocol requirements:
+fixed low-mode encoding, target and π-sector tail accounting, an opposite-mass
+π-partner failure control, propagator rather than global-log primary metrics, a
+strict coarsest `|mu|<=3/100` margin, a single-excitation claim, and exact
+gate-order/lift architecture integrity.
+
+The proposed absolute thresholds have a 256-bit outward-rounded analytic
+certificate. A first draft incorrectly risked extending the input-band free
+bound after a potential had generated higher modes; that assumption was caught
+before the certificate was committed. The final proof uses refinement-specific
+intermediate bands `|r|<=13,17,20` and charges the outward Dyson tail beyond
+each band at every remaining telescoping step. It also charges the complete
+direct one-step remainder, scalar-potential commutator, target-cutoff tail, and
+a `1e-10` numerical budget. The committed upper envelopes are:
+
+| `N` | direct | H2 potential | H3 potential | prospective gates |
+|---:|---:|---:|---:|---:|
+| 320 | `0.002357` | `0.017069` | `0.019662` | `0.0040` / `0.020` |
+| 640 | `0.000590` | `0.007191` | `0.007805` | `0.0012` / `0.011` |
+| 1280 | `0.000148` | `0.002641` | `0.002914` | `0.0004` / `0.006` |
+
+This certificate performs no registered propagation and fixes only the
+absolute-gate rationale. Refinement ratios, witnesses, independent agreement,
+symmetry-role residuals, failure controls, and every pass/fail classification
+remain uncomputed outcomes.
+
+The public package now has strict design validation; registered and parent-size
+guards; a cutoff-3 harmonic-2 target cross-check; a leading local-phase/full-
+space equivalence and causal-support fixture; candidate-specific opening and
+result schemas; and a seal preview that reports `seal_ready=false` and raises
+if asked to write a seal. All 47 direct-QCA tests pass. No future seal, opening,
+or result artifact exists.
+
+The next task is outcome-free production and independent implementation,
+prospective manifests, authorization, and lifecycle validation. Before freeze,
+exercise those paths only on disclosed `N=6`, `N=10`, and cutoff-3 fixtures.
+Any registered run still requires the new linear seal-only freeze, annotated
+tag, stage-open, result, and independent-verification provenance chain.
+
+### Submission-oriented program
+
+The quantum-Dirac work now has a strong paper nucleus but is not yet a
+submission-ready manuscript. The existing `paper/main.tex` manuscript is a
+separate approximately 5,000-word paper about constraint transport and
+expression lineage; do not graft the quantum result onto it. Build a separate
+quantum-Dirac manuscript only after the scientific gates below are resolved.
+
+The literature already contains the direct one-dimensional Dirac QCA, general
+one-dimensional partition/index results, and multiparticle fermionic QCA
+lifts. Therefore do not claim discovery of the Dirac automaton, the general
+existence of partitioned QCA representations, or the general quantum-
+information origin of Dirac dynamics. The paper's prospective novelty target
+is their operational and reproducible combination here:
+
+- a frozen causal-role criterion rather than visual resemblance alone;
+- two genuinely different local informational architectures;
+- explicit full-space locality, collision-sector, and resource accounting;
+- prospective development/confirmation separation and independent replay;
+- an exact continuum correction and signed-step reversal; and
+- carefully bounded constructive-sufficiency claims without particle
+  ontology, uniqueness, or global-minimality claims.
+
+Use these primary works as mandatory novelty and failure-boundary anchors:
+
+```text
+Bisio, D'Ariano, Tosini, Phys. Rev. A 88, 032301 (2013)
+Gross, Nesme, Vogts, Werner, Commun. Math. Phys. 310, 419-454 (2012)
+Mlodinow, Brun, Phys. Rev. A 102, 042211 (2020)
+Gupta, Short, Phys. Rev. A accepted 1 July 2026, DOI 10.1103/kkz3-fthm
+```
+
+The submission sequence is:
+
+1. **Global spectral and literature audit (complete 2026-07-15).** Map the full quasienergy spectrum,
+   doubling/pseudodoubling behavior, branch conventions, group velocity, and
+   full-space-extension dependence. Convert every material limitation into a
+   prospective protocol boundary or failure control. The audit identified the
+   pi-mode pseudodoubler and hard-core/fermionic lift distinction and converted
+   them into seven mandatory protocol boundaries.
+2. **Outcome-free protocol construction (complete 2026-07-15).** Fix encoding, measurement, and
+   intervention maps; candidate-specific scenarios; refinement gates;
+   registered domains; thresholds with rationale; resource reporting;
+   independent implementation; schemas; production guards; and a disabled
+   seal. Do not copy parent holdouts or thresholds automatically. The design,
+   schemas, guarded fixtures, and absolute-gate certificate are complete;
+   production and independent registered implementations remain the next
+   tranche.
+3. **Outcome-free production and independent implementation.** Build the
+   registered candidate and target engines, algorithmically separate replay,
+   canonical reducers, prospective manifests, and disabled authorization.
+   Test only on disclosed nonregistered fixtures before freeze.
+4. **Linear experimental lifecycle.** Commit and tag the freeze, open and run
+   development, commit its result before inspection, and only after a pass open
+   the single-use confirmation. Require independent replay and completion
+   documentation exactly as in the verified parent lineage.
+5. **Separate manuscript.** Center the paper on the frozen product-walk result
+   plus the direct-QCA architecture and its eventual registered disposition.
+   A second-architecture pass supports breadth; a clean failure remains a
+   publishable architectural boundary and must not trigger post-outcome tuning.
+6. **Submission audit.** Include a targeted literature matrix, a hostile-reader
+   claim review, exact reproduction instructions, and at minimum figures for
+   the local circuit, resource/causal comparison, continuum convergence and
+   dispersion, and the claim/failure boundary.
+
+### Cross-cutting paper and socialization action items — 2026-07-15
+
+Carry the following work alongside the submission sequence without allowing it
+to alter the prospective experiment, acceptance gates, or frozen claims:
+
+1. **Lay version for socialization (pre-outcome draft complete 2026-07-15).**
+   The current companion is `docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md`. It
+   separates supplied inputs from constructed mechanisms, distinguishes the
+   verified parent from the unrun second architecture, and includes safe and
+   unsafe socialization language. Revise its status and result sections after
+   the direct architecture reaches a valid disposition. Its remit is to explain
+   the ICP question, what was supplied, what
+   was constructed, what the experiments can and cannot establish, and why two
+   independent architectures matter. Keep it traceable to the technical paper
+   and clearly separate verified results, active tests, and future hypotheses.
+2. **Paper-visualization audit (complete 2026-07-15).** The audit is
+   `docs/ICP_QUANTUM_DIRAC_VISUALIZATION_AUDIT.md`. The existing directory is an
+   unimplemented IOTA-video scaffold, not a source of reusable quantum figures.
+   The audit specifies six main figures, seven supplementary candidates,
+   provenance rules, and a build order. It records what can be reused,
+   what must be revised for the quantum-Dirac argument, and what must be newly
+   produced. At minimum evaluate the need for figures covering the local
+   circuit, causal/resource accounting, continuum convergence and dispersion,
+   the two-architecture comparison, and the claim/failure boundary. Every
+   figure must distinguish disclosed algebraic illustrations from registered
+   experimental outcomes.
+3. **ICP-aligned physics for further research (initial assessment complete
+   2026-07-15).** The assessment is
+   `docs/ICP_ALIGNED_PHYSICS_FURTHER_RESEARCH.md`. It recommends a short paper
+   subsection limited to canonical fermionic/interacting causal QCA,
+   process-tensor tests of retained quantum history, and curved-spacetime Dirac
+   role recovery. Constructor theory merits brief positioning. Quantum
+   Darwinism and holographic/tensor-network geometry remain separate program
+   ideas until a falsifiable bridge is preregistered. At each later manuscript-planning
+   stage, revisit the literature-grounded discussion of physical ideas
+   that appear closely aligned with ICP and decide whether a tightly bounded
+   future-research section belongs in the paper. Treat these as analogies,
+   candidate bridges, or research questions—not results of the present work.
+   Include an idea only if its relationship to ICP, supplied assumptions,
+   nearest prior work, and a possible falsifiable mathematical or experimental
+   bridge can be stated clearly. Do not reopen claims that time, quantum theory,
+   particles, or the Dirac equation were derived from no supplied structure.
+
+The desired pass-contingent paper claim is:
+
+> Two independently designed strictly local quantum-information architectures
+> recover the same frozen bounded `1+1D` Dirac causal role under explicit
+> intervention, resource, and verification accounting.
+
+Even after a pass, do not claim that time itself, quantum theory, particles,
+or the Dirac equation were derived from no supplied structure. The lattice,
+quantum primitive, update schedule, constants, precision, and intervention
+class remain declared construction inputs.
 
 If this approach eventually passes independently, the next breadth candidates
 remain a time-symmetric Strang-split circuit and a separate reversible
@@ -6246,15 +6455,32 @@ worktree changes and the sealed ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001 v0.4
 archive. Carry forward the program-level ICP definition clarified in that
 section. Do not generate or inspect a registered outcome.
 
-Continue the outcome-free design of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
-branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md` and
-`CONTINUUM_AUDIT.md`, with their guarded and independently checked fixtures,
-as completed algebraic stages. Next design the outcome-free prospective
-protocol: fixed encoding/measurement/intervention maps, candidate-specific
-scenarios and refinement logic, failure controls, independent verification,
-threshold rationale, schemas, and a disabled lifecycle seal. Do not evaluate
-any prospective registered input. Preserve the explicit collision-sector
-claim boundary, the two-layer/`2N`-gate resource clock, and the derived
-`delta^2` correction; do not mutate the law into the parent product walk. Keep
-all open and result artifacts absent until a later prospective freeze.
+Continue the outcome-free implementation of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
+branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md`,
+`CONTINUUM_AUDIT.md`, `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`, with
+their guarded and independently checked fixtures, as completed outcome-free
+stages. The global audit finds an exact opposite-mass pi-mode pseudodoubler and
+distinguishes the declared hard-core qubit lift from canonical fermionic second
+quantization. The prospective contract, JSON specifications, fresh scenario/
+state partitions, candidate-specific schemas, and outward-rounded absolute-
+gate certificate are complete. The certificate explicitly charges
+potential-generated amplitude outside refinement-specific intermediate bands;
+do not replace it with an input-band-only bound.
+
+Next build the production registered candidate/target engines, an
+algorithmically separate verifier, canonical reducers, prospective manifests,
+and disabled authorization/lifecycle code. Preserve all seven global-audit
+boundaries, the two-layer/`2N` free resource clock, the charged leading
+potential phase, and the derived `delta^2` correction. Do not mutate the law
+into the parent product walk, the Gupta--Short alternative family, or a
+fermionic lift. Before freeze use only disclosed `N=6`, `N=10`, and cutoff-3
+fixtures and do not evaluate prospective registered input. Keep every seal,
+open, and result artifact absent until the complete implementation receives a
+later prospective linear freeze. Treat the
+existing constraint-lineage paper as separate; build a new quantum-Dirac
+manuscript only after the registered disposition. Carry forward the separate
+cross-cutting drafts in `docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md`,
+`docs/ICP_QUANTUM_DIRAC_VISUALIZATION_AUDIT.md`, and
+`docs/ICP_ALIGNED_PHYSICS_FURTHER_RESEARCH.md`. Keep their pre-outcome and
+future-research labels current as the experiment advances.
 ```

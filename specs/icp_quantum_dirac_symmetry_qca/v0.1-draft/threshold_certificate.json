@@ -1,0 +1,78 @@
+{
+  "certificate_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "status": "outward_analytic_absolute_gate_certificate",
+  "precision_bits": 256,
+  "registered_propagation_performed": false,
+  "scope": "absolute operator-distance threshold rationale only; refinement ratios observables and outcomes remain uncomputed",
+  "uniform_box": {
+    "input_mode_abs_max": 4,
+    "input_k_abs_max": "pi/2",
+    "mass_abs_max": "3/5",
+    "delta_max": "1/20",
+    "free_step_error_form": "norm(U_direct-exp(-i delta H_D)) <= C_R delta^3",
+    "input_band_cubic_coefficient_upper": "0.472"
+  },
+  "proof_lemmas": [
+    "1-sin(s)/s <= s^2/6 for real s",
+    "abs(d/du sinc(sqrt(u))) <= 1/6 by its cosine integral",
+    "the scalar cancellation is retained by an integral sinc bound",
+    "unitary telescoping sums one-step norm errors without growth",
+    "intermediate-band projection adds at most two times its amplitude tail per step",
+    "Lie product error <= delta^2 norm([H_D,V])/2",
+    "norm([H_D,V])=norm(V prime)<=2 pi h abs(A)/16"
+  ],
+  "tail_formula": "2 exp(z) z^s/s!",
+  "numerical_enclosure_budget_max": "1e-10",
+  "potential_tail_uppers": {
+    "harmonic_2_target_amplitude": "6e-72",
+    "harmonic_2_pi_probability": "2e-261",
+    "harmonic_3_target_amplitude": "6e-44",
+    "harmonic_3_pi_probability": "2e-164"
+  },
+  "refinements": [
+    {
+      "n_sites": 320,
+      "delta": "1/20",
+      "potential_intermediate_mode_abs_max": 13,
+      "direct_distance_envelope_upper": "0.002357",
+      "potential_h2_distance_envelope_upper": "0.017069",
+      "potential_h3_distance_envelope_upper": "0.019662",
+      "direct_threshold": "0.0040",
+      "potential_threshold": "0.020",
+      "direct_absolute_gate_certified": true,
+      "potential_absolute_gate_certified": true
+    },
+    {
+      "n_sites": 640,
+      "delta": "1/40",
+      "potential_intermediate_mode_abs_max": 17,
+      "direct_distance_envelope_upper": "0.000590",
+      "potential_h2_distance_envelope_upper": "0.007191",
+      "potential_h3_distance_envelope_upper": "0.007805",
+      "direct_threshold": "0.0012",
+      "potential_threshold": "0.011",
+      "direct_absolute_gate_certified": true,
+      "potential_absolute_gate_certified": true
+    },
+    {
+      "n_sites": 1280,
+      "delta": "1/80",
+      "potential_intermediate_mode_abs_max": 20,
+      "direct_distance_envelope_upper": "0.000148",
+      "potential_h2_distance_envelope_upper": "0.002641",
+      "potential_h3_distance_envelope_upper": "0.002914",
+      "direct_threshold": "0.0004",
+      "potential_threshold": "0.006",
+      "direct_absolute_gate_certified": true,
+      "potential_absolute_gate_certified": true
+    }
+  ],
+  "unresolved_outcome_gates": [
+    "successive refinement ratios",
+    "state witnesses",
+    "independent implementation agreement",
+    "symmetry role residuals",
+    "failure controls"
+  ]
+}

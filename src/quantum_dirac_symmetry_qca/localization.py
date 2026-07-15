@@ -177,6 +177,34 @@ def _apply_on_site_layer(
     return current
 
 
+def local_number_phase_probe(
+    state: Mapping[int, object],
+    *,
+    n_sites: int,
+    site: int,
+    phase_pi: int | str | Fraction,
+    dps: int = 90,
+) -> SparseFullState:
+    """Apply ``exp(-i*pi*phase_pi*(n_R+n_L))`` at one disclosed site."""
+
+    _require_precision(dps)
+    if type(site) is not int or not 0 <= site < n_sites:
+        raise SymmetryQCAFixtureError("phase-probe site is outside the cycle")
+    with mp.workdps(dps):
+        coefficient = _number(phase_pi)
+        if not mp.isfinite(coefficient):
+            raise SymmetryQCAFixtureError("phase-probe coefficient must be finite")
+        current = _require_sparse_state(state, n_sites)
+        result: SparseFullState = {}
+        mask = (1 << (2 * site)) | (1 << (2 * site + 1))
+        for basis, amplitude in current.items():
+            occupancy = (basis & mask).bit_count()
+            result[basis] = amplitude * mp.exp(
+                -1j * mp.pi * coefficient * occupancy
+            )
+        return result
+
+
 def margolus_step(
     state: Mapping[int, object],
     *,
@@ -194,6 +222,28 @@ def margolus_step(
             gate=edge_scatter_gate(mu=mu, dps=dps),
         )
         return _apply_on_site_layer(current, n_sites=n_sites)
+
+
+def margolus_probe_step(
+    state: Mapping[int, object],
+    *,
+    n_sites: int,
+    mu: int | str | Fraction,
+    site: int,
+    phase_pi: int | str | Fraction,
+    dps: int = 90,
+) -> SparseFullState:
+    """Apply the leading local number phase, edge scatter, and on-site SWAP."""
+
+    with mp.workdps(dps):
+        current = local_number_phase_probe(
+            state,
+            n_sites=n_sites,
+            site=site,
+            phase_pi=phase_pi,
+            dps=dps,
+        )
+        return margolus_step(current, n_sites=n_sites, mu=mu, dps=dps)
 
 
 def margolus_inverse(
@@ -289,19 +339,29 @@ def one_excitation_vector(
     return result
 
 
-def resource_clock(*, n_sites: int, macrosteps: int = 1) -> dict[str, int | str]:
+def resource_clock(
+    *, n_sites: int, macrosteps: int = 1, potential_active: bool = False
+) -> dict[str, int | str]:
     """Return explicit storage, depth, and gate-work coordinates."""
 
     _require_fixture_size(n_sites)
     if type(macrosteps) is not int or macrosteps < 0:
         raise SymmetryQCAFixtureError("macrosteps must be a nonnegative integer")
+    if type(potential_active) is not bool:
+        raise SymmetryQCAFixtureError("potential_active must be boolean")
+    layers_per_step = 3 if potential_active else 2
+    work_per_step = 3 * n_sites if potential_active else 2 * n_sites
     return {
         "local_hilbert_dimension": 4,
         "occupation_modes": 2 * n_sites,
         "ancilla_modes": 0,
         "macrosteps": macrosteps,
-        "elementary_layers": 2 * macrosteps,
-        "two_mode_gate_work": 2 * n_sites * macrosteps,
+        "elementary_layers": layers_per_step * macrosteps,
+        "gate_work": work_per_step * macrosteps,
         "causal_radius_per_macrostep": 1,
-        "gate_order": "edge_scatter_then_on_site_swap",
+        "gate_order": (
+            "scalar_phase_then_edge_scatter_then_on_site_swap"
+            if potential_active
+            else "edge_scatter_then_on_site_swap"
+        ),
     }

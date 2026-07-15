@@ -1,0 +1,69 @@
+{
+  "candidate_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "candidate_id": "QDIR-DIRECT-SYMMETRY-QCA-001",
+  "status": "prospective_outcomes_forbidden",
+  "substrate": {
+    "topology": "oriented_periodic_cycle",
+    "sites": [
+      320,
+      640,
+      1280
+    ],
+    "modes_per_site": [
+      "R",
+      "L"
+    ],
+    "local_hilbert_dimension": 4,
+    "sector": "exactly_one_global_excitation",
+    "full_space_extension": "hard_core_occupation_qubits"
+  },
+  "logical_step": "A B_mu P_V with rightmost operation first and P_V omitted when inactive",
+  "gate_order": [
+    "scalar_phase_if_active",
+    "edge_scatter",
+    "on_site_swap"
+  ],
+  "gates": {
+    "scalar_phase": "exp(-i delta V(x_j,t_q) (n_Rj+n_Lj))",
+    "edge_scatter": "b_mu on (L_j,R_(j+1)) with one-excitation block n X-i mu I and hard-core |00>,|11> phases +1",
+    "on_site_swap": "ordinary qubit SWAP(R_j,L_j)"
+  },
+  "parameters": {
+    "mu": "delta m_q",
+    "n": "sqrt(1-mu^2)",
+    "registered_mass_abs_max": "3/5",
+    "registered_mu_abs_max_at_coarsest_refinement": "3/100",
+    "unitarity_domain": "abs(mu)<=1",
+    "registered_endpoint_margin": "97/100"
+  },
+  "free_momentum_block": "[[n exp(-i k delta),-i mu],[-i mu,n exp(+i k delta)]]",
+  "full_space_claim_boundary": {
+    "hard_core_double_occupation_phase": "+1 on both gate layers",
+    "canonical_fermionic_double_occupation_phase": "-1 on both gate layers",
+    "multiparticle_or_fermionic_claim_allowed": false
+  },
+  "resource_accounting": {
+    "free_depth": 2,
+    "active_potential_depth": 3,
+    "free_gate_work": "2N",
+    "active_potential_gate_work": "3N",
+    "storage": "2N occupation qubits",
+    "ancillas": 0,
+    "causal_radius_per_macrostep": 1
+  },
+  "arithmetic": {
+    "certified_library": "python-flint",
+    "certified_minimum_version": "0.9.0",
+    "independent_library": "mpmath",
+    "independent_minimum_version": "1.3.0",
+    "precision_bits": 256,
+    "independent_decimal_digits": 110,
+    "rounding_model": "Arb/Acb outward ball enclosures with algorithmically separate mpmath replay",
+    "binary64_registered_dynamics_allowed": false
+  },
+  "parameter_source": "scenarios.json through fixed Phi",
+  "target_lookup_allowed": false,
+  "detector_feedback_allowed": false,
+  "post_outcome_architecture_mutation_allowed": false
+}

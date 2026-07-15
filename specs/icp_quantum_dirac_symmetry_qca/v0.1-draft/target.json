@@ -1,0 +1,53 @@
+{
+  "target_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "theory": "single_particle_Dirac_1_plus_1",
+  "units": {
+    "hbar": 1,
+    "c": 1
+  },
+  "domain": {
+    "length": "16",
+    "boundary": "periodic"
+  },
+  "hamiltonian": "-i sigma_z d_x + m(t) sigma_x + V(x,t) I_2",
+  "fourier": {
+    "convention": "L^(-1/2) sum_r psi_hat[r] exp(i 2 pi r x/L)",
+    "input_r_min": -4,
+    "input_r_max": 4,
+    "input_dimension": 18,
+    "reference_r_min": -72,
+    "reference_r_max": 72
+  },
+  "horizon": "2",
+  "observations": [
+    "2/5",
+    "4/5",
+    "6/5",
+    "8/5",
+    "2"
+  ],
+  "refinements": [
+    {
+      "N": 320,
+      "delta": "1/20",
+      "steps": 40
+    },
+    {
+      "N": 640,
+      "delta": "1/40",
+      "steps": 80
+    },
+    {
+      "N": 1280,
+      "delta": "1/80",
+      "steps": 160
+    }
+  ],
+  "registered_input_momentum_abs_max": "pi/2",
+  "coarsest_dimensionless_input_momentum_abs_max": "pi/40",
+  "pi_sector_definition": "abs(q)>=3 pi/4",
+  "coarsest_pi_sector_mode_abs_min": 120,
+  "target_tail_rule": "scenario-specific Dyson tail from initial abs(r)<=4 to outside abs(r)<=72",
+  "zone_edge_leakage_rule": "scenario-specific interaction-order bound from initial abs(r)<=4 to abs(q)>=3 pi/4"
+}

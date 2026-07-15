@@ -1,0 +1,92 @@
+{
+  "states_version": "0.1-draft",
+  "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
+  "input_modes": "r=-4..4",
+  "energy_spinor": "normalized eigenvector of k_r sigma_z + m_0 sigma_x with first nonzero component real and positive",
+  "envelope": "exp(-(r-r0)^2/(2w^2)) exp(-i k_r x0), r=-4..4",
+  "development": [
+    {
+      "id": "DEV-DIRECT-STATE-POS",
+      "type": "positive",
+      "r0": "3/2",
+      "width": "5/6",
+      "x0": "3"
+    },
+    {
+      "id": "DEV-DIRECT-STATE-NEG",
+      "type": "negative",
+      "r0": "-5/2",
+      "width": "2/3",
+      "x0": "11"
+    },
+    {
+      "id": "DEV-DIRECT-STATE-INTERFERENCE",
+      "type": "positive_interference",
+      "packets": [
+        [
+          "5/2",
+          "4/5",
+          "2"
+        ],
+        [
+          "-3/2",
+          "4/5",
+          "13"
+        ]
+      ],
+      "relative_phase": "2pi/7"
+    },
+    {
+      "id": "DEV-DIRECT-STATE-ZITTER",
+      "type": "energy_mixture",
+      "r0": "1/2",
+      "width": "4/5",
+      "x0": "7",
+      "relative_phase": "2pi/5"
+    }
+  ],
+  "confirmation": [
+    {
+      "id": "HOLDOUT-DIRECT-STATE-POS",
+      "type": "positive",
+      "r0": "-3/2",
+      "width": "7/10",
+      "x0": "5"
+    },
+    {
+      "id": "HOLDOUT-DIRECT-STATE-NEG",
+      "type": "negative",
+      "r0": "5/2",
+      "width": "7/10",
+      "x0": "13"
+    },
+    {
+      "id": "HOLDOUT-DIRECT-STATE-INTERFERENCE",
+      "type": "positive_interference",
+      "packets": [
+        [
+          "1/2",
+          "3/4",
+          "1"
+        ],
+        [
+          "-5/2",
+          "3/4",
+          "10"
+        ]
+      ],
+      "relative_phase": "-pi/6"
+    },
+    {
+      "id": "HOLDOUT-DIRECT-STATE-ZITTER",
+      "type": "energy_mixture",
+      "r0": "-1/2",
+      "width": "3/4",
+      "x0": "4",
+      "relative_phase": "3pi/7"
+    }
+  ],
+  "serialized_amplitudes_allowed": false,
+  "parent_state_reuse": false,
+  "pre_freeze_evaluation_allowed": false
+}

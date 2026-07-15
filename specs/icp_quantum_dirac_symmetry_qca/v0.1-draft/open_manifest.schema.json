@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iota.local/schema/quantum-dirac-symmetry-qca-open-v0.1-draft",
+  "title": "ICP direct symmetry-QCA stage opening",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "search_id",
+    "stage",
+    "status",
+    "freeze_tag",
+    "freeze_commit",
+    "stage_parent_commit",
+    "outcome_seal",
+    "sealed_bindings",
+    "scenario_ids",
+    "state_ids",
+    "run_command_enabled",
+    "result_path"
+  ],
+  "properties": {
+    "protocol_version": {"const": "0.1-draft"},
+    "search_id": {"const": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"},
+    "stage": {"enum": ["development", "confirmation"]},
+    "status": {"const": "outcomes_opened"},
+    "freeze_tag": {"const": "icp-quantum-dirac-symmetry-qca-001-v0.1-frozen"},
+    "freeze_commit": {"$ref": "#/$defs/commit"},
+    "stage_parent_commit": {"$ref": "#/$defs/commit"},
+    "outcome_seal": {"$ref": "#/$defs/binding"},
+    "sealed_bindings": {
+      "type": "object",
+      "required": [
+        "contract",
+        "protocol",
+        "candidate",
+        "target",
+        "maps",
+        "scenarios",
+        "states",
+        "partitions",
+        "result_schema"
+      ],
+      "properties": {
+        "contract": {"$ref": "#/$defs/binding"},
+        "protocol": {"$ref": "#/$defs/binding"},
+        "candidate": {"$ref": "#/$defs/binding"},
+        "target": {"$ref": "#/$defs/binding"},
+        "maps": {"$ref": "#/$defs/binding"},
+        "scenarios": {"$ref": "#/$defs/binding"},
+        "states": {"$ref": "#/$defs/binding"},
+        "partitions": {"$ref": "#/$defs/binding"},
+        "result_schema": {"$ref": "#/$defs/binding"}
+      },
+      "additionalProperties": false
+    },
+    "scenario_ids": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "state_ids": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "run_command_enabled": {"const": true},
+    "result_path": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"stage": {"const": "development"}}},
+      "then": {
+        "properties": {
+          "scenario_ids": {
+            "const": [
+              "DEV-DIRECT-FREE-POS",
+              "DEV-DIRECT-FREE-NEG",
+              "DEV-DIRECT-SIGN-QUENCH",
+              "DEV-DIRECT-POTENTIAL-H2"
+            ]
+          },
+          "state_ids": {
+            "const": [
+              "DEV-DIRECT-STATE-POS",
+              "DEV-DIRECT-STATE-NEG",
+              "DEV-DIRECT-STATE-INTERFERENCE",
+              "DEV-DIRECT-STATE-ZITTER"
+            ]
+          },
+          "result_path": {
+            "const": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.1.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"stage": {"const": "confirmation"}}},
+      "then": {
+        "properties": {
+          "scenario_ids": {
+            "const": [
+              "HOLDOUT-DIRECT-MASS-PULSE",
+              "HOLDOUT-DIRECT-POTENTIAL-H3"
+            ]
+          },
+          "state_ids": {
+            "const": [
+              "HOLDOUT-DIRECT-STATE-POS",
+              "HOLDOUT-DIRECT-STATE-NEG",
+              "HOLDOUT-DIRECT-STATE-INTERFERENCE",
+              "HOLDOUT-DIRECT-STATE-ZITTER"
+            ]
+          },
+          "result_path": {
+            "const": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.1.json"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "binding": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

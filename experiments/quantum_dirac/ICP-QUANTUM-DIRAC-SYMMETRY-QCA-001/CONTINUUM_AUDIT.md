@@ -183,8 +183,9 @@ Together with `LOCALIZATION_AUDIT.md`, the direct architecture now has:
 - the exact principal effective generator; and
 - an independently checked first nonzero continuum correction.
 
-The next outcome-free stage is prospective protocol design: fixed encoding,
-measurement, and intervention maps; candidate-specific scenarios and
-refinement logic; failure controls; independent verification architecture;
-and a disabled lifecycle seal. None may be evaluated before a new linear
-freeze/open/result provenance chain exists.
+The subsequent complete-Brillouin-zone and lift audit is recorded in
+`GLOBAL_SPECTRUM_AUDIT.md`. It closes the remaining pre-protocol spectral
+obligation and adds mandatory pseudodoubler, branch, leakage, mass-margin, and
+single-excitation boundaries. The next outcome-free stage is prospective
+protocol design under those boundaries. None may be evaluated before a new
+linear freeze/open/result provenance chain exists.
