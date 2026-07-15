@@ -19,12 +19,14 @@ The current outcome-free tranche contains only:
   fixture sizes; and
 - an explicit full-Hilbert-space two-layer Margolus localization with
   algebraic unitarity, translation, parity, time-reversal, multi-excitation,
-  resource-clock, ballistic, and access-guard tests.
+  resource-clock, ballistic, and access-guard tests; and
+- an exact effective-generator derivation with an independently implemented
+  matrix-log check of the first nonzero continuum correction.
 
 It contains no registered lattice, scenario, state partition, threshold,
-outcome seal, production permit, or result. The localization and resource
-clock are resolved in `LOCALIZATION_AUDIT.md`; the next outcome-free task is
-the small-`delta` continuum and first-correction derivation before defining
-any prospective outcome protocol.
+outcome seal, production permit, or result. The localization/resource clock
+and continuum correction are resolved in `LOCALIZATION_AUDIT.md` and
+`CONTINUUM_AUDIT.md`; the next outcome-free task is prospective protocol
+design.
 
 See `DESIGN.md` for the scientific contrast and stop conditions.

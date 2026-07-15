@@ -28,9 +28,11 @@ implemented and tested on small disclosed fixtures, but no registered
 scenarios, tolerances, freeze, or candidate outcome exists. The localization
 audit passes with a mass-bearing edge scatter followed by an on-site routing
 SWAP; its full collision-sector choice and elementary-layer/resource clock are
-explicit. The next scientific task is the small-`delta` effective-generator
-and first-correction derivation. Do not register outcomes or copy the v0.4
-product-walk gates into this experiment merely to force a pass.
+explicit. The continuum audit also passes: the direct law has the Dirac
+generator at leading order and an independently checked `delta^2` first
+correction, with exact signed-step reversal. The next scientific task is
+outcome-free prospective protocol design. Do not register outcomes or copy
+the v0.4 product-walk gates into this experiment merely to force a pass.
 
 ## Local Checkout State
 
@@ -71,6 +73,7 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+fbf28f9 Yes—the direct QCA admits an honest strictly local full-Hilbert-space realization.
 94ed42c Kick off direct symmetry-derived Dirac QCA experiment
 490dab6 Document verified quantum-Dirac result
 c7e9a21 Record quantum-Dirac v0.4 confirmation result
@@ -6142,9 +6145,12 @@ experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/DESIGN.md
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/parent_binding.json
 specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/README.md
 src/quantum_dirac_symmetry_qca/candidate.py
+src/quantum_dirac_symmetry_qca/continuum.py
 src/quantum_dirac_symmetry_qca/localization.py
 tests/quantum_dirac_symmetry_qca/test_candidate.py
+tests/quantum_dirac_symmetry_qca/test_continuum.py
 tests/quantum_dirac_symmetry_qca/test_localization.py
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/CONTINUUM_AUDIT.md
 experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/LOCALIZATION_AUDIT.md
 scripts/validate_archived_quantum_dirac.py
 ```
@@ -6158,7 +6164,9 @@ guarding. Eight localization tests establish four-state local-gate unitarity,
 exact restriction on every disclosed one-excitation basis state, vacuum and
 saturated action, multi-sector inversion, full-space
 translation/parity/time-reversal transforms, and the resource clock. These
-are algebraic design checks, not registered outcomes.
+are joined by seven continuum tests of the exact effective generator,
+independent matrix logarithm, correction order, and signed-step reversal.
+These are algebraic design checks, not registered outcomes.
 
 The full command
 
@@ -6168,9 +6176,9 @@ make PYTHON=.venv/bin/python verify
 
 passes the evidence checks, 56 bounded MIR tests, 55 exact-orbit tests, the
 archived v0.4 seal/manifests/ledgers/bindings and 38 archived v0.4 tests, plus
-the 14 direct-QCA candidate/localization fixture tests. The earlier GitHub
-Actions workflow `Research compendium`, run `29395828732`, passed the six-test
-kickoff state at commit `94ed42c` in 1 minute 28 seconds.
+the 21 direct-QCA candidate/localization/continuum fixture tests. The earlier
+GitHub Actions workflow `Research compendium`, run `29395828732`, passed the
+six-test kickoff state at commit `94ed42c` in 1 minute 28 seconds.
 
 ### Scientific state and immediate next task
 
@@ -6201,12 +6209,28 @@ fixed explicitly. This is an honest existence witness, but the collision-
 sector extension is a declared choice not uniquely fixed by the one-particle
 law.
 
-The next task is to derive the small-`delta` effective generator and first
-nonzero correction independently, still using only disclosed fixtures for
-any executable checks. After that, the outcome-free design may proceed to
-fixed maps, registered domains, independent verification, thresholds,
-failure controls, schemas, and a disabled seal. Any registered run still
-requires a new linear freeze/open/result provenance chain.
+The continuum audit in `CONTINUUM_AUDIT.md` also passes. On the principal
+small-step branch the exact effective generator is
+
+```text
+H_eff = k sigma_z + m sigma_x
+        + delta^2[-(m^2 k/3) sigma_z
+                  + (m(k^2+m^2)/6) sigma_x]
+        + O(delta^4).
+```
+
+An independently implemented matrix-log series agrees with the exact SU(2)
+axis--angle generator below `1e-80` on both disclosed fixture labels. The
+corrected-generator residual scales as `delta^4`, the direct one-step
+propagator discrepancy scales as `delta^3`, and signed-step reversal obeys
+`U_(-delta)=U_delta^dagger` exactly. Thus the local interaction clock has a
+detectable continuum correction without a microscopic arrow of time.
+
+The next task is outcome-free prospective protocol design: fixed maps,
+candidate-specific scenario and refinement logic, independent verification,
+threshold rationale, failure controls, schemas, and a disabled seal. No
+registered input may be evaluated. Any registered run still requires a new
+linear freeze/open/result provenance chain.
 
 If this approach eventually passes independently, the next breadth candidates
 remain a time-symmetric Strang-split circuit and a separate reversible
@@ -6224,12 +6248,13 @@ section. Do not generate or inspect a registered outcome.
 
 Continue the outcome-free design of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
 branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md` and
-its guarded full-space fixture implementation as the completed strict-locality
-stage. Next derive the small-`delta` effective generator and first nonzero
-correction independently, then decide whether the remaining outcome-free
-protocol design may proceed. Use only disclosed N=6 and N=10 fixtures while
-designing. Preserve the explicit collision-sector claim boundary and the
-two-layer/`2N`-gate resource clock; do not mutate the law into the parent
-product walk. Keep all registered scenario, threshold, seal, open, and result
-artifacts absent until a later prospective freeze.
+`CONTINUUM_AUDIT.md`, with their guarded and independently checked fixtures,
+as completed algebraic stages. Next design the outcome-free prospective
+protocol: fixed encoding/measurement/intervention maps, candidate-specific
+scenarios and refinement logic, failure controls, independent verification,
+threshold rationale, schemas, and a disabled lifecycle seal. Do not evaluate
+any prospective registered input. Preserve the explicit collision-sector
+claim boundary, the two-layer/`2N`-gate resource clock, and the derived
+`delta^2` correction; do not mutate the law into the parent product walk. Keep
+all open and result artifacts absent until a later prospective freeze.
 ```

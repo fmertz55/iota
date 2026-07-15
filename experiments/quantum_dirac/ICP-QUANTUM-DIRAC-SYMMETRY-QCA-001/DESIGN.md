@@ -2,7 +2,7 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **full-space localization passed; continuum stage pending; registered outcomes forbidden**
+Status: **localization and continuum audits passed; protocol design next; registered outcomes forbidden**
 
 ## Question
 
@@ -68,10 +68,11 @@ direct QCA update rather than a sequential coin/transport product.
    including vacuum and multi-excitation action. Count elementary gates
    without borrowing the parent's resource normalization. The proof and
    accounting are in `LOCALIZATION_AUDIT.md`.
-3. **Symmetry and continuum stage (symmetries complete; continuum pending).**
+3. **Symmetry and continuum stage (complete).**
    Derive parity and time-reversal maps for the localized update; derive the
    small-`delta` effective generator and identify the first nonzero correction
-   independently.
+   independently. The derivation and independent matrix-log check are in
+   `CONTINUUM_AUDIT.md`.
 4. **Protocol stage.** Only after stages 1–3 pass, freeze target maps,
    interventions, states, scenario partitions, refinement sizes, metrics,
    thresholds, failure controls, and a separately implemented verifier.
@@ -101,6 +102,10 @@ ancillas. Its one-excitation restriction is exactly the declared law, while
 vacuum and collision-sector actions are explicitly declared rather than
 inferred. See `LOCALIZATION_AUDIT.md` and the guarded fixture implementation.
 
-Next derive the small-`delta` effective generator and first nonzero correction
-without evaluating a registered size or defining development/confirmation
-partitions.
+The small-`delta` audit also succeeds. The exact principal effective generator
+is `H_D + delta^2 K_2 + O(delta^4)`, with the independently checked correction
+given in `CONTINUUM_AUDIT.md`. Signed-step reversal is exact and the effective
+generator is even in `delta`.
+
+Next begin outcome-free prospective protocol design without evaluating a
+registered size or opening development/confirmation partitions.
