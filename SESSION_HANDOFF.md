@@ -1,6 +1,6 @@
 # IOTA Session Handoff
 
-Date: 2026-07-14
+Date: 2026-07-15
 
 ## Current Continuation Status
 
@@ -6013,6 +6013,49 @@ This section supersedes all earlier continuation instructions and suggested
 new-thread prompts. It begins the first breadth experiment after the verified
 product-walk result. Preserve the earlier sections as historical provenance.
 
+### Program-level ICP definition — clarified 2026-07-15
+
+No foundational reformulation of ICP is required for the new experiment. Use
+the following program-level definition consistently:
+
+> The informational condition of a lattice at time `t` is the causally
+> retained realization of its interaction history: its current local states
+> and active relational topology, together with the constraints they impose
+> on future trajectories reachable under admissible interventions.
+
+The corresponding process statement remains: information changes when an
+interaction changes that reachable-future structure. In compact form,
+
+```text
+H_{<=t} -> (X_t, G_t) --[L, a]--> R_t(a)
+```
+
+Here `H_{<=t}` is realized interaction history, `X_t` is current local state,
+`G_t` is active relational topology, and `R_t(a)` is the set or distribution
+of future trajectories reachable under admissible intervention `a`.
+
+Keep these boundaries crisp:
+
+- only causally retained history counts as present information; histories that
+  leave no distinction in current state, topology, or future intervention
+  response are operationally equivalent at that time;
+- fixed topology, laws, scheduling, constants, ancillas, and precision are
+  supplied construction structure and must be declared and counted;
+- dynamic topology may itself retain realized history and then belongs in the
+  construction state;
+- reachable futures mean trajectories or their distributions under declared
+  interventions, not merely a list of instantaneous states; and
+- quantum information is an explicitly declared primitive class for this
+  experiment, not a redefinition of ICP. The binary primitive grammar belongs
+  to the classical minimal-realization search, not to every ICP construction.
+
+Thus the active breadth question remains operational: can a second,
+symmetry-derived informational architecture independently realize a frozen
+bounded Dirac causal role under honest locality and resource accounting? A
+pass would establish bounded constructive sufficiency only, not ontology,
+uniqueness, necessity, generic derivation of quantum theory, or global
+minimality.
+
 ### Verified parent result
 
 `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001` v0.4 passed every frozen development and
@@ -6157,7 +6200,8 @@ construction families; they are not fallback tuning stages for this search.
 Read SESSION_HANDOFF.md and continue only from “ICP Direct Symmetry-Derived
 Dirac QCA — Authoritative Continuation — 2026-07-14.” Preserve unrelated
 worktree changes and the sealed ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001 v0.4
-archive. Do not generate or inspect a registered outcome.
+archive. Carry forward the program-level ICP definition clarified in that
+section. Do not generate or inspect a registered outcome.
 
 Continue the outcome-free design of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
 branch icp-quantum-dirac-symmetry-qca-001. First resolve the full-Hilbert-space

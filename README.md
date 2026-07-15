@@ -12,6 +12,34 @@ and the live record of the investigation: definitions, laws, experiments,
 negative results, evidence, and interpretations are intended to evolve together
 without erasing their history.
 
+For this program, that hypothesis has complementary condition and change
+forms:
+
+> **Informational condition:** The informational condition of a lattice at
+> time $t$ is the causally retained realization of its interaction history:
+> its current local states and active relational topology, together with the
+> constraints they impose on future trajectories reachable under admissible
+> interventions.
+>
+> **Informational change:** Information changes when an interaction changes
+> that reachable-future structure.
+
+In compact form,
+
+$$
+H_{\leq t}\longrightarrow (X_t,G_t)
+\xrightarrow{\mathcal{L},\,a}\mathcal{R}_t(a),
+$$
+
+where $H_{\leq t}$ is realized interaction history, $X_t$ is current local
+state, $G_t$ is active relational topology, and $\mathcal{R}_t(a)$ is the set
+or distribution of future trajectories reachable under admissible
+intervention $a$. Only causally retained history counts as present information:
+histories that leave no distinction in current state, relational topology, or
+future intervention response are operationally equivalent at that time. Fixed
+topology, laws, scheduling, and constants remain declared and counted
+construction structure; dynamic topology may itself retain history.
+
 The hypothesis is not presented as an established law of physics. It is the root
 question from which the experiments are derived:
 
