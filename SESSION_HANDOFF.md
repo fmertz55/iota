@@ -19,32 +19,35 @@ freeze, stage-open, result, completion, and annotated-tag provenance is linear;
 the sealed v0.4 bytes must not be changed. Human-readable completion evidence
 is in the experiment `RESULTS.md`, experiment `README.md`, and Finding 080.
 
-The active continuation is the outcome-free breadth experiment
+The active continuation is the breadth experiment
 `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` on branch
 `icp-quantum-dirac-symmetry-qca-001`. It tests a direct symmetry-derived Dirac
-QCA rather than another parameterization of the successful product walk. The
-candidate law, its strictly local full-space Margolus realization, the
-prospective protocol, and its guarded production/independent implementation
-are tested only on small disclosed fixtures. No registered scenario, freeze,
-authorization permit, or candidate outcome exists. The localization
-audit passes with a mass-bearing edge scatter followed by an on-site routing
-SWAP; its full collision-sector choice and elementary-layer/resource clock are
-explicit. The continuum audit also passes: the direct law has the Dirac
-generator at leading order and an independently checked `delta^2` first
-correction, with exact signed-step reversal. The outcome-free global-spectrum
-and literature audit is also complete. It finds no traditional zero-energy
-doubler in `1+1D`, but it identifies the exact opposite-mass pi-mode
-pseudodoubler and shows that the declared hard-core qubit collision phases are
-not a canonical fermionic lift. Production construction also caught and
-prospectively corrected the earlier edge orientation's Fourier-sign mismatch
-before freeze. The outcome-free execution pipeline is now complete and
-hostile-reviewed: it includes the permit-gated stage runner, canonical strict
-result ledger, atomic no-clobber writer, full-ledger independent verifier, and
-positive/negative Git-linear tests. The package is seal-ready, but no seal,
-tag, opening, permit, or result exists. The next action is to commit these
-reviewed implementation bytes, then create the disabled seal as a sole-file
-freeze commit and add the required annotated tag. Do not register outcomes or
-copy the v0.4 product-walk gates into this experiment merely to force a pass.
+QCA rather than another parameterization of the successful product walk. Its
+localization, continuum, global-spectrum/literature, prospective-protocol, and
+outcome-free implementation audits are complete. They establish the explicit
+two-layer full-space Margolus witness and resource clock, the leading Dirac
+generator with a `delta^2` correction and exact signed-step reversal, the
+opposite-mass pi-mode pseudodoubler, and the boundary between the declared
+hard-core lift and canonical fermionic second quantization.
+
+The immutable v0.1 lifecycle froze at `283707e`, opened development at
+`0eefcbb`, and then stopped before ledger creation. The independent replay
+passed a complex Hermitian Gram matrix to mpmath's real-symmetric eigensolver,
+which raised `TypeError`. The atomic writer produced no partial artifact and
+none was inspected. Annotated tag
+`icp-quantum-dirac-symmetry-qca-001-v0.1-incomplete` closes that lineage as
+`execution_incomplete_no_result`; this is an infrastructure stop, not a
+scientific gate failure.
+
+The active v0.2 retry changes only the independent spectral-norm call to the
+Hermitian eigensolver, adds a disclosed complex-Gram regression, and uses fresh
+seal/open/result paths. All scientific scenarios, states, maps, thresholds,
+gates, failure controls, and stopping rules are unchanged. All 69 direct-QCA
+tests and the repository-wide verification gate pass. The next action is to
+commit these reviewed repair bytes, create the v0.2 disabled seal as a
+sole-file freeze commit, and add the required annotated v0.2 freeze tag. Do not
+inspect or tune against registered intermediates, and do not copy the v0.4
+product-walk gates into this experiment merely to force a pass.
 
 ## Local Checkout State
 
@@ -6321,7 +6324,7 @@ The public package now has strict design validation; registered and parent-size
 guards; a cutoff-3 harmonic-2 target cross-check; a leading local-phase/full-
 space equivalence and causal-support fixture; candidate-specific opening and
 result schemas; and a reviewed disabled preview that reports `seal_ready=true`,
-keeps `run_command_enabled=false`, and writes nothing. All 68 direct-QCA tests
+keeps `run_command_enabled=false`, and writes nothing. All 69 direct-QCA tests
 pass. No future seal, opening, permit, or result artifact exists.
 
 ### Outcome-free implementation and lifecycle tranche — 2026-07-15
@@ -6366,11 +6369,30 @@ Hostile review fixed two prospective gaps before freeze: the earlier result
 schema omitted the contract-required macrostep current series and resource
 records, and two failure controls lacked exact inputs. The six controls are now
 fully defined. Positive and negative lifecycle tests use only disclosed
-fixtures; all 68 tests pass. The seal helper reports `seal_ready=true` while
+fixtures; all 69 current tests pass. The seal helper reports `seal_ready=true` while
 remaining execution-disabled. Next commit these reviewed bytes, then create
 and commit the disabled seal alone and add the annotated freeze tag. Registered
 development remains forbidden until that valid seal/tag/stage-open chain
 exists.
+
+#### v0.1 no-result closure and v0.2 infrastructure retry — 2026-07-15
+
+The sole-file v0.1 freeze and annotated tag were created at `283707e`, and the
+sole-file development opening was committed at `0eefcbb`. The indivisible
+development command then stopped before ledger creation when
+`spectral_norm_from_gram` called mpmath's real-symmetric `eigsy` on a complex
+Hermitian Gram matrix. The atomic writer left no result file, and no partial
+scientific output was inspected. The annotated
+`icp-quantum-dirac-symmetry-qca-001-v0.1-incomplete` tag closes the opening
+commit under `execution_incomplete_no_result`.
+
+The v0.2 repair substitutes mpmath's Hermitian `eighe` at the same independent
+110-digit norm step, adds a disclosed complex-Gram regression with an analytic
+singular value, and moves only lifecycle provenance to fresh v0.2 paths. It
+does not change the candidate, target, scenario/state partitions, thresholds,
+maps, metrics, gates, controls, or stopping rule. All 69 direct-QCA tests and
+the full repository verification gate pass. The repair is seal-ready and no
+v0.2 lifecycle artifact exists.
 
 ### Submission-oriented program
 
@@ -6507,7 +6529,9 @@ Read SESSION_HANDOFF.md and continue only from “ICP Direct Symmetry-Derived
 Dirac QCA — Authoritative Continuation — 2026-07-14.” Preserve unrelated
 worktree changes and the sealed ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001 v0.4
 archive. Carry forward the program-level ICP definition clarified in that
-section. Do not generate or inspect a registered outcome.
+section. Do not generate or inspect a v0.2 registered outcome before the fresh
+seal/tag/open chain is valid, and commit any generated ledger alone before
+inspection.
 
 Continue ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
 branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md`,
@@ -6535,17 +6559,24 @@ Gupta--Short alternative family, or a fermionic lift.
 The permit-gated stage runner, canonical result-ledger builder/validator,
 atomic no-clobber writer, and replay-tight full-ledger independent verifier are
 complete. Positive and negative lifecycle tests exercised only disclosed
-`N=6`, `N=10`, cutoff-3, synthetic-ledger, and temporary-Git fixtures; no
-prospective registered input was evaluated. Hostile review restored the full
+`N=6`, `N=10`, cutoff-3, synthetic-ledger, and temporary-Git fixtures before
+v0.1 freeze. Hostile review restored the full
 macrostep current series and exact resource records to the schema, made all six
 failure controls exact, removed an independent-path binary64 control-flow use,
 and made confirmation opening independently verify the committed development
-pass. All 68 direct-QCA tests pass. The disabled preview is seal-ready and
-execution-disabled; no lifecycle artifact exists.
+pass. The immutable v0.1 development run stopped before ledger creation when
+the independent norm routine used real-symmetric `eigsy` on a complex
+Hermitian Gram matrix. No partial result was written or inspected; annotated
+tag `icp-quantum-dirac-symmetry-qca-001-v0.1-incomplete` closes it as
+`execution_incomplete_no_result`.
 
-Next commit the reviewed implementation bytes, create the disabled seal as a
-sole-file freeze commit, and add the required annotated tag. Keep every open
-and result artifact absent until that linear freeze is valid. Treat the
+The v0.2 retry uses Hermitian `eighe`, adds the public analytic complex-Gram
+regression, and changes only fresh lifecycle provenance. Scientific inputs and
+gates are unchanged. All 69 direct-QCA tests and the repository-wide verify
+target pass. Next commit the reviewed v0.2 repair bytes, create its disabled
+seal as a sole-file freeze commit, and add the required annotated v0.2 tag.
+Keep every v0.2 open and result artifact absent until that linear freeze is
+valid. Treat the
 existing constraint-lineage paper as separate; build a new quantum-Dirac
 manuscript only after the registered disposition. Carry forward the separate
 cross-cutting drafts in `docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md`,

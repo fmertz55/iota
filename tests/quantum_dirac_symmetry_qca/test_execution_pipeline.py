@@ -14,6 +14,9 @@ from src.quantum_dirac_symmetry_qca.authorization import (
     RegisteredVerificationPermit,
 )
 from src.quantum_dirac_symmetry_qca.independent_verifier import _dft
+from src.quantum_dirac_symmetry_qca.independent_registered import (
+    spectral_norm_from_gram,
+)
 from src.quantum_dirac_symmetry_qca.production import (
     _certified_direct_step_adjoint,
     ball_precision,
@@ -27,6 +30,15 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class OutcomeFreeExecutionPipelineTests(unittest.TestCase):
+    def test_independent_norm_accepts_a_complex_hermitian_gram_matrix(self) -> None:
+        with mp.workdps(120):
+            value = mp.matrix([[1, 1j], [0, 2]])
+            expected = mp.sqrt(3 + mp.sqrt(5))
+            self.assertLess(
+                abs(spectral_norm_from_gram(value) - expected),
+                mp.mpf("1e-105"),
+            )
+
     def test_disclosed_n6_step_has_a_certified_adjoint(self) -> None:
         with ball_precision():
             state = acb_mat(12, 2)

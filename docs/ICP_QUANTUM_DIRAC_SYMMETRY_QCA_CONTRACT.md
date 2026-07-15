@@ -1,12 +1,12 @@
 # ICP Quantum-Dirac Symmetry-QCA Contract
 
-Protocol version: `0.1-draft`
+Protocol version: `0.1-draft`; implementation-seal retry: `v0.2`
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
 Date: `2026-07-15`
 
-Status: **outcome-free implementation complete; not frozen; registered outcomes forbidden**
+Status: **v0.1 execution incomplete with no result; v0.2 outcome-free infrastructure repair complete, disabled, and not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -36,17 +36,17 @@ QFT, uniqueness, necessity, or global minimality.
 
 ## 2. Outcome boundary
 
-No registered candidate state, trajectory, propagator, operator distance,
+No v0.2 registered candidate state, trajectory, propagator, operator distance,
 observable, zone-edge probability, or failure-control result may be generated
-or inspected while this contract is a draft. In particular, candidate sizes
-`N=320`, `640`, and `1280`, all registered scenarios, and all registered state
-witnesses are forbidden before a later reviewed freeze/open chain.
+or inspected before the fresh reviewed freeze/open chain. In particular,
+candidate sizes `N=320`, `640`, and `1280`, all registered scenarios, and all
+registered state witnesses remain forbidden until that chain exists.
 
-The present package is deliberately incomplete. It contains the prospective
-design, schemas, and guarded algebraic fixtures, but it does not contain a
-production registered evaluator. Its seal preview is permanently disabled and
-reports the missing prerequisites. An outcome seal, opening manifest, or
-result file at this stage invalidates the draft.
+The present v0.2 package contains the prospective design, schemas, guarded
+algebraic fixtures, production registered evaluator, and independent replay.
+Its seal preview is disabled until the fresh freeze/open lifecycle is created.
+The archived v0.1 seal and opening remain immutable no-result provenance; a
+v0.2 opening or result before the new freeze invalidates the retry.
 
 Before freezing, the package must additionally contain and pass review for:
 
@@ -420,11 +420,21 @@ primary or broaden a pass claim.
 ## 19. Linear provenance
 
 The future history is: complete implementation; seal-only freeze commit and
-annotated tag `icp-quantum-dirac-symmetry-qca-001-v0.1-frozen`;
+annotated tag `icp-quantum-dirac-symmetry-qca-001-v0.2-frozen`;
 development-open-only child; development-result-only child; conditional
 confirmation-open-only child; confirmation-result-only child. Each child must
 bind its exact parent and every causal input. Reopening, overwriting, or
 side-branch substitution invalidates the result.
+
+The first implementation seal, `v0.1`, opened development but wrote no result.
+Its independent replay passed a complex Hermitian Gram matrix to mpmath's
+real-symmetric eigensolver, which raised `TypeError` before ledger construction
+completed. No partial artifact was written or inspected. Under the registered
+`execution_incomplete_no_result` rule, `v0.1` remains immutable and closed.
+The `v0.2` retry changes only that independent spectral-norm implementation to
+the Hermitian eigensolver, adds a public complex-Gram regression fixture, and
+uses fresh lifecycle paths. Scientific definitions, scenarios, partitions,
+states, thresholds, maps, and stopping rules are unchanged.
 
 ## 20. Terminal classifications
 
@@ -447,10 +457,11 @@ target, algorithmically separate momentum/sparse-circuit/Taylor replay,
 canonical reducers, four prospective manifests, content-seal builder, and
 Git-linear authorization surface now pass disclosed-fixture validation. The
 Fourier-orientation defect found during implementation was corrected before
-freeze. No registered outcome has been authorized or generated. The registered
+the v0.1 freeze. That development run was authorized but stopped before any
+result ledger was generated. The v0.2 registered
 stage runner, canonical result-ledger builder/validator and atomic writer,
 full-ledger independent verifier, nonregistered fixture tests, and hostile
 review are complete. Review restored the required full macrostep current
 series, exact resource records, replay-tight independent checks, and fully
-specified failure controls. The reviewed bytes are seal-ready; the seal-only
-freeze commit and annotated tag do not yet exist.
+specified failure controls. The repaired bytes are seal-ready; the v0.2
+seal-only freeze commit and annotated tag do not yet exist.

@@ -4,7 +4,7 @@ Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
 Date: `2026-07-15`
 
-Status: **outcome-free implementation complete; not frozen; registered outcomes forbidden**
+Status: **v0.1 execution incomplete with no result; v0.2 infrastructure repair pending freeze**
 
 ## Audit question
 
@@ -36,8 +36,9 @@ contract now agree on:
   lift.
 
 This is not an experiment result. The permit-guarded registered constructors
-now exist, but all registered sizes and scenarios remain inaccessible without
-the future seal/tag/open lineage. No seal/open/result artifact exists.
+exist. The archived v0.1 seal/open lineage produced no ledger; all v0.2
+registered sizes and scenarios remain inaccessible without its fresh
+seal/tag/open lineage, and no v0.2 lifecycle artifact exists.
 
 ## Seven global-spectrum boundaries
 

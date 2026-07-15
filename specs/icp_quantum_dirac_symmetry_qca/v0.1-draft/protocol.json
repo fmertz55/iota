@@ -288,12 +288,12 @@
     "interruption": "no scientific result"
   },
   "future_provenance": {
-    "freeze_tag": "icp-quantum-dirac-symmetry-qca-001-v0.1-frozen",
-    "outcome_seal": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/outcome_seal_v0.1.json",
-    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_open_manifest_v0.1.json",
-    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.1.json",
-    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_open_manifest_v0.1.json",
-    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.1.json",
+    "freeze_tag": "icp-quantum-dirac-symmetry-qca-001-v0.2-frozen",
+    "outcome_seal": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/outcome_seal_v0.2.json",
+    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_open_manifest_v0.2.json",
+    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.2.json",
+    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_open_manifest_v0.2.json",
+    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.2.json",
     "history": "implementation; seal-only freeze and annotated tag; development-open-only child; development-result-only child; conditional confirmation-open-only child; confirmation-result-only child"
   },
   "terminal_classifications": [

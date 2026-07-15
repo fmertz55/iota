@@ -14,7 +14,7 @@
   "parent_state_reuse": false,
   "protocol": {
     "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/protocol.json",
-    "sha256": "dc2ed8e255998070203e225cb9cb99dec6296172a968039150663367924933db"
+    "sha256": "c9837c98c694678f15cdab5503b03c56a09eeab042ddb2a238a023f68f13945a"
   },
   "protocol_version": "0.1-draft",
   "registered_outcomes_forbidden": true,

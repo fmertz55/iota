@@ -617,5 +617,5 @@ def spectral_norm_from_gram(value: mp.matrix, *, dps: int = INDEPENDENT_DPS):
         raise SymmetryQCASpecError("independent norm precision is below 110 digits")
     with mp.workdps(dps):
         gram = value.H * value
-        eigenvalues = mp.eigsy(gram, eigvals_only=True)
+        eigenvalues = mp.eighe(gram, eigvals_only=True)
         return mp.sqrt(max(mp.re(eigenvalues[index]) for index in range(eigenvalues.rows)))

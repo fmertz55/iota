@@ -6,8 +6,9 @@ Current state:
 outcome-free execution pipeline complete and hostile-reviewed
 localization, continuum, and global-spectrum audits complete
 not registered
-not frozen
-seal-ready; no seal artifact has been created
+v0.2 not frozen
+v0.2 seal-ready; no v0.2 seal artifact has been created
+v0.1 execution incomplete with no result; v0.2 Hermitian-norm retry pending freeze
 guarded primary and independent implementations present
 registered outcomes forbidden
 ```

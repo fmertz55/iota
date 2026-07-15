@@ -2,7 +2,7 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **outcome-free implementation complete; not frozen; registered outcomes forbidden**
+Status: **v0.1 execution incomplete with no result; v0.2 infrastructure repair pending freeze**
 
 ## Question
 
@@ -147,8 +147,10 @@ Arb/Acb real-space candidate and spectral target, an independent 110-digit
 momentum/sparse-circuit/Taylor reconstruction, canonical reducers, prospective
 manifests, and a Git-linear seal/authorization surface. Building it exposed an
 opposite Fourier sign in the earlier edge orientation; the pairing was
-prospectively reversed before freeze so the real-space, localized, momentum,
-and target conventions now agree. No registered size or scenario was run.
+prospectively reversed before the v0.1 freeze so the real-space, localized,
+momentum, and target conventions now agree. The v0.1 development run later
+stopped before ledger construction on an independent complex-Gram eigensolver
+error; no partial artifact was written or inspected.
 
 The outcome-free execution pipeline is complete: permit-gated registered stage
 runner, canonical result-ledger builder/validator, atomic no-clobber writer,
@@ -156,5 +158,5 @@ and full-ledger independent verifier. Positive and negative lifecycle tests use
 only disclosed nonregistered fixtures, and hostile review tightened the result
 schema, failure-control definitions, verification-before-confirmation path,
 and replay-tightness checks. No development or confirmation partition may be
-opened before these complete bytes are committed, explicitly sealed in a
-sole-file freeze commit, and bound by the declared annotated tag.
+opened for v0.2 before these repaired bytes are committed, explicitly sealed
+in a sole-file freeze commit, and bound by the declared v0.2 annotated tag.

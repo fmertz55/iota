@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **outcome-free execution pipeline reviewed and seal-ready; not frozen**
+Status: **v0.1 execution incomplete with no result; v0.2 infrastructure repair pending freeze**
 
 Started: `2026-07-14`
 
@@ -37,11 +37,12 @@ The current outcome-free tranche contains:
   leakage rather than assuming later states stay in the input band.
 
 It contains prospective registered lattice, scenario, state, and threshold
-definitions but has never evaluated them. It now contains a permit-guarded
+definitions. The v0.1 development evaluation stopped before ledger creation;
+no partial artifact was written or inspected. The v0.2 retry contains a permit-guarded
 certified production evaluator, an algorithmically separate replay, canonical
 reducers, four prospective manifests, and a disabled seal/authorization
-surface. It contains no issued authorization permit, outcome seal, opening
-manifest, or result. The localization/resource clock,
+surface. Its fresh permit, outcome seal, opening manifest, and result do not
+exist. The archived v0.1 seal and opening are immutable. The localization/resource clock,
 continuum correction, global spectral boundaries, and protocol audit are in
 `LOCALIZATION_AUDIT.md`, `CONTINUUM_AUDIT.md`, and
 `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`. The controlling human
@@ -54,7 +55,11 @@ momentum block now agree. The registered stage runner, canonical strict result
 ledger, atomic no-clobber writer, and algorithmically separate full-ledger
 verifier are complete and hostile-reviewed. The result schema now records the
 full Zitterbewegung current series and exact resource clock, and the six
-post-confirmation controls have fully specified inputs. All testing remained
-on disclosed fixtures. The package is seal-ready, but no seal, tag, opening,
-permit, or result exists. See `DESIGN.md` for the scientific contrast and stop
-conditions.
+post-confirmation controls have fully specified inputs. All pre-freeze testing
+remained on disclosed fixtures. The immutable v0.1 opening ended in
+`execution_incomplete_no_result` when mpmath's real-symmetric eigensolver
+rejected a complex Hermitian Gram matrix before ledger creation; no partial
+artifact was written or inspected. The v0.2 retry uses the Hermitian
+eigensolver and a public complex-Gram regression fixture without changing the
+scientific registration. Its fresh seal, tag, opening, permit, and result do
+not yet exist. See `DESIGN.md` for the scientific contrast and stop conditions.

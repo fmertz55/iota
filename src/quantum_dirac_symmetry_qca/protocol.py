@@ -13,22 +13,22 @@ CONTRACT_REF = "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md"
 EXPERIMENT_DIR_REF = (
     "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"
 )
-OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.1.json"
+OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.2.json"
 DEVELOPMENT_OPEN_REF = (
-    f"{EXPERIMENT_DIR_REF}/development_open_manifest_v0.1.json"
+    f"{EXPERIMENT_DIR_REF}/development_open_manifest_v0.2.json"
 )
 CONFIRMATION_OPEN_REF = (
-    f"{EXPERIMENT_DIR_REF}/confirmation_open_manifest_v0.1.json"
+    f"{EXPERIMENT_DIR_REF}/confirmation_open_manifest_v0.2.json"
 )
 DEVELOPMENT_RESULT_REF = (
     "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/"
-    "development_results_v0.1.json"
+    "development_results_v0.2.json"
 )
 CONFIRMATION_RESULT_REF = (
     "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/"
-    "confirmation_results_v0.1.json"
+    "confirmation_results_v0.2.json"
 )
-FREEZE_TAG = "icp-quantum-dirac-symmetry-qca-001-v0.1-frozen"
+FREEZE_TAG = "icp-quantum-dirac-symmetry-qca-001-v0.2-frozen"
 
 DESIGN_FILENAMES = (
     "protocol.json",
