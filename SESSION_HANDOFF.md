@@ -5,34 +5,30 @@ Date: 2026-07-14
 ## Current Continuation Status
 
 The authoritative continuation plan is now
-[ICP Quantum-Dirac Role Recovery](#icp-quantum-dirac-role-recovery--authoritative-continuation--2026-07-14)
+[ICP Direct Symmetry-Derived Dirac QCA](#icp-direct-symmetry-derived-dirac-qca--authoritative-continuation--2026-07-14)
 at the end of this document. It supersedes every earlier `Next Hypothesis`,
 `Acceptance Gate`, `Suggested New Thread Prompt`, and new-thread start point as
 an instruction for new work. Those sections remain as the chronological record
 of the program.
 
-Finding 080 remains preregistered but is paused. Both completed classical
-`N_P=2` minimal-realization paths are closed. The original 15-rule family is
-exactly recurrence-excluded on its fixed canonical `C64` orbit. In the wider
-256-rule centered radius-one family, 59 rules form the registered role and 6
-produce same-or-forward role succession, but none joins succession to the
-registered outward causal discrimination. Exact reconciliation gives 245
-orbit-recurrence exclusions plus 10 symbolic universal exclusions and
-`combined_no_pass_proved_count=255`. Every remaining future in that frozen
-family is unreachable. Do not spend another horizon on either grammar.
+`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001` v0.4 is complete and independently
+verified. Its development primary and independent replay passed, followed by a
+single-use confirmation primary and independent replay. The frozen conclusion
+is `constructive_sufficiency_passed_frozen_dirac_sector`. The implementation,
+freeze, stage-open, result, completion, and annotated-tag provenance is linear;
+the sealed v0.4 bytes must not be changed. Human-readable completion evidence
+is in the experiment `RESULTS.md`, experiment `README.md`, and Finding 080.
 
-The active continuation is the outcome-free design and implementation of
-`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`. Its conceptual contract draft now exists
-at `docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md`; the machine-readable
-design is under `specs/icp_quantum_dirac_role_recovery/v0.1-draft/`. The draft
-is not frozen, production is absent and disabled, and no registered QCA
-outcome has been generated or inspected. The program prioritizes constructive
-existence before minimality: test whether a closed local quantum-informational
-construction can recover a frozen operational sector of 1+1-dimensional Dirac
-dynamics. No registered QCA outcome may be generated or inspected until the
-complete implementation, independent verifier, schemas, fixtures, seal, and
-provenance gate are committed and tagged. Classical-shell minimization is
-paused rather than globally excluded.
+The active continuation is the outcome-free breadth experiment
+`ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` on branch
+`icp-quantum-dirac-symmetry-qca-001`. It tests a direct symmetry-derived Dirac
+QCA rather than another parameterization of the successful product walk. The
+candidate law and small disclosed fixtures are implemented and tested, but no
+registered scenarios, tolerances, freeze, or candidate outcome exists. The
+next scientific task is to resolve a strictly local full-space Margolus
+realization and its elementary-layer/resource clock. Do not register outcomes
+or copy the v0.4 product-walk gates into this experiment merely to force a
+pass.
 
 ## Local Checkout State
 
@@ -73,6 +69,14 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+94ed42c Kick off direct symmetry-derived Dirac QCA experiment
+490dab6 Document verified quantum-Dirac result
+c7e9a21 Record quantum-Dirac v0.4 confirmation result
+0181ce0 Open quantum-Dirac v0.4 confirmation
+e5a5c4e Record quantum-Dirac v0.4 development result
+cfaaabe Open quantum-Dirac v0.4 development
+d942c11 Freeze quantum-Dirac v0.4 outcomes
+323ebb7 Prepare quantum-Dirac v0.4 serialization retry
 83e0f8a Record MIR bounded development result
 f693033 Open MIR development search
 25df5b0 Preregister bounded minimal realization pilot
@@ -6002,3 +6006,168 @@ full-ledger independent replay, atomic result writer, and final linear
 freeze/open/result commands remain to be implemented and audited. Do not run a
 registered lattice or scenario before those pieces are complete and the
 disabled seal is committed and tagged.
+
+## ICP Direct Symmetry-Derived Dirac QCA — Authoritative Continuation — 2026-07-14
+
+This section supersedes all earlier continuation instructions and suggested
+new-thread prompts. It begins the first breadth experiment after the verified
+product-walk result. Preserve the earlier sections as historical provenance.
+
+### Verified parent result
+
+`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001` v0.4 passed every frozen development and
+confirmation gate in both the primary implementation and the algorithmically
+independent replay:
+
+```text
+development:  development_passed
+confirmation: constructive_sufficiency_passed_frozen_dirac_sector
+development scenarios: 4/4
+confirmation scenarios: 2/2
+development witness groups: 16/16
+confirmation witness groups: 8/8
+confirmation cross-witness groups: 4/4
+```
+
+The combined worst uniform operator bounds were `0.0300073` at `N=256`,
+`0.0149955` at `N=512`, and `0.00749669` at `N=1024`, against frozen limits
+`0.20`, `0.10`, and `0.05`. All observable, structural, conservation,
+symmetry, causal-support, refinement, and five declared failure-boundary gates
+passed. The development and confirmation result-file SHA-256 hashes are:
+
+```text
+development:  c9f445358a7ada5d8d20208c485529e6c6da93768f2ee1c9dea76afed2baab7b
+confirmation: 34c16fd959148d99a5e32c4836d69acb33794d548c11c8ac83986990742fac72
+```
+
+The parent provenance checkpoints are:
+
+```text
+323ebb7  implementation
+d942c11  frozen outcome seal
+cfaaabe  development opened
+e5a5c4e  development result committed alone before inspection
+0181ce0  confirmation opened
+c7e9a21  confirmation result committed alone before inspection
+490dab6  verified completion documentation
+```
+
+The annotated tags
+`icp-quantum-dirac-role-recovery-001-v0.4-frozen` and
+`icp-quantum-dirac-role-recovery-001-v0.4-complete` are pushed. Do not alter
+the v0.4 content-sealed files. The current verification command intentionally
+audits that archive in a detached temporary worktree at exact completion
+commit `490dab6b2ce683f397ad37ecbe40d133f063188d` because the seal includes the
+historical Makefile.
+
+### Active breadth experiment
+
+The active branch is `icp-quantum-dirac-symmetry-qca-001`. Its scientific
+kickoff checkpoint is:
+
+```text
+94ed42c5688960d77ef8e7e7c7a8534bf8be2cc0
+Kick off direct symmetry-derived Dirac QCA experiment
+```
+
+The new search identifier is `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`. This is a
+genuinely different construction approach, not a mass, timestep, ordering, or
+threshold variation of the successful product walk. Its direct momentum-space
+candidate is
+
+```text
+U_delta(k) = [[n exp(-i k delta), -i mu],
+              [-i mu, n exp(+i k delta)]]
+mu = m delta
+n = sqrt(1 - mu^2)
+```
+
+with real-space update
+
+```text
+R'(x) = n R(x+1) - i mu L(x)
+L'(x) = -i mu R(x) + n L(x-1).
+```
+
+The current artifacts are:
+
+```text
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/README.md
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/DESIGN.md
+experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/parent_binding.json
+specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/README.md
+src/quantum_dirac_symmetry_qca/candidate.py
+tests/quantum_dirac_symmetry_qca/test_candidate.py
+scripts/validate_archived_quantum_dirac.py
+```
+
+The public candidate accepts only disclosed fixture sizes `N=6` and `N=10`.
+It rejects `N=8`, `N=16`, and registered parent sizes `N=256`, `512`, and
+`1024`; it also enforces the declared precision and mass domain. Six fixture
+tests establish unitarity, translation covariance, opposite massless
+directions, the direct coupling/shift form, size guarding, and precision/mass
+guarding. These are algebraic design checks, not registered outcomes.
+
+The full command
+
+```bash
+make PYTHON=.venv/bin/python verify
+```
+
+passes the evidence checks, 56 bounded MIR tests, 55 exact-orbit tests, the
+archived v0.4 seal/manifests/ledgers/bindings and 38 archived v0.4 tests, plus
+the 6 new direct-QCA fixture tests. GitHub Actions workflow
+`Research compendium`, run `29395828732`, passed for kickoff commit `94ed42c`
+in 1 minute 28 seconds.
+
+### Scientific state and immediate next task
+
+The new experiment is outcome-free and not frozen. It has no registered
+scenario set, acceptance threshold, outcome seal, open manifest, result file,
+or result interpretation. Do not reuse the parent's registered outcomes as
+evidence for this architecture.
+
+The next task is the full-space localization audit described in `DESIGN.md`:
+
+1. derive or implement a homogeneous nearest-neighbor Margolus/partitioned
+   realization whose complete Hilbert-space action is exactly the declared
+   direct QCA, not merely its one-particle restriction;
+2. state the elementary gate layers, causal order, elapsed tick, storage, and
+   gate-work accounting without hiding a nonlocal translation primitive;
+3. prove exact unitarity, translation covariance, parity/time-reversal
+   transforms, causal radius, and the relationship between the full-space law
+   and the disclosed single-particle fixtures; and
+4. stop this architecture if strict locality requires extra hidden structure,
+   if the proposed partitioning changes the candidate law, or if the resource
+   clock cannot be made commensurable with the parent experiment.
+
+Only after this audit succeeds should the outcome-free design proceed to fixed
+maps, registered domains, independent verification, thresholds, failure
+controls, schemas, and a disabled seal. Any registered run still requires a
+new linear freeze/open/result provenance chain.
+
+If this approach eventually passes independently, the next breadth candidates
+remain a time-symmetric Strang-split circuit and a separate reversible
+classical lattice-gas role test. They should remain separate search IDs and
+construction families; they are not fallback tuning stages for this search.
+
+### Suggested new-thread prompt
+
+```text
+Read SESSION_HANDOFF.md and continue only from “ICP Direct Symmetry-Derived
+Dirac QCA — Authoritative Continuation — 2026-07-14.” Preserve unrelated
+worktree changes and the sealed ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001 v0.4
+archive. Do not generate or inspect a registered outcome.
+
+Continue the outcome-free design of ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
+branch icp-quantum-dirac-symmetry-qca-001. First resolve the full-Hilbert-space
+strictly local Margolus/partitioned realization of the direct symmetry-derived
+Dirac QCA, including exact law equivalence, elementary-layer causal order,
+translation accounting, resource clock, symmetry transforms, and stop
+conditions. Use only the disclosed N=6 and N=10 fixtures while designing. If
+the localization audit succeeds, implement and test the outcome-free
+full-space construction and document its resource accounting. If it fails a
+declared stop condition, record that cleanly instead of mutating the law into
+the parent product walk. Keep all registered scenario, threshold, seal, open,
+and result artifacts absent until a later prospective freeze.
+```
