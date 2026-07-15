@@ -50,7 +50,9 @@ contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
 Production construction caught and prospectively corrected a Fourier-sign
 inconsistency between the original real-space edge orientation and the fixed
 target convention. The revised `(L_x,R_(x-1))` pairing, recurrence, and audited
-momentum block now agree. The next task is hostile review of the complete
-outcome-free bytes. Only afterward may the explicit seal-only freeze commit
-and annotated tag be created. See `DESIGN.md` for the scientific contrast and
+momentum block now agree. The next task is the missing outcome-free stage
+runner, canonical result-ledger builder/validator, atomic result writer, and
+full-ledger independent verifier, exercised only on disclosed fixtures. After
+that tranche and hostile review, the explicit seal-only freeze commit and
+annotated tag may be created. See `DESIGN.md` for the scientific contrast and
 stop conditions.

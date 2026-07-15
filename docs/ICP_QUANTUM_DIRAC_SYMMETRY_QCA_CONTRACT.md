@@ -373,11 +373,12 @@ Only these disclosed outcome-free fixtures may run:
 
 Analytic tail and threshold design calculations are allowed only when they do
 not propagate a registered candidate or registered state. A disabled seal
-preview may hash the complete implementation and report `seal_ready=true` only
-after the primary, independent, reducer, manifest, and authorization fixtures
-pass. It must still report `run_command_enabled=false` and must not create a
-seal. Seal creation is a separate explicit clean-worktree lifecycle action and
-the resulting seal remains execution-disabled.
+preview may hash the current implementation but must report `seal_ready=false`
+until the registered stage runner, canonical result-ledger builder/validator,
+atomic no-clobber writer, full-ledger independent verifier, and hostile review
+are complete. It must report `run_command_enabled=false` and must not create a
+seal. Only the later complete implementation may enable the separate explicit
+clean-worktree seal action; that seal must itself remain execution-disabled.
 
 ## 16. Required negative fixtures
 
@@ -440,6 +441,8 @@ target, algorithmically separate momentum/sparse-circuit/Taylor replay,
 canonical reducers, four prospective manifests, content-seal builder, and
 Git-linear authorization surface now pass disclosed-fixture validation. The
 Fourier-orientation defect found during implementation was corrected before
-freeze. No registered outcome has been authorized or generated. The next
-prerequisite is hostile review of these outcome-free bytes before the explicit
-seal-only freeze commit and annotated tag.
+freeze. No registered outcome has been authorized or generated. The remaining
+pre-seal prerequisites are the registered stage runner, canonical result-ledger
+builder/validator and atomic writer, full-ledger independent verifier, their
+nonregistered fixture tests, and hostile review. Only then may the explicit
+seal-only freeze commit and annotated tag be created.

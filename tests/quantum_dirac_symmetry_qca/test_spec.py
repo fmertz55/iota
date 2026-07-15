@@ -10,7 +10,9 @@ from src.quantum_dirac_symmetry_qca.protocol import (
     SEARCH_ID,
 )
 from src.quantum_dirac_symmetry_qca.seal import (
+    SymmetryQCASealError,
     preview_disabled_seal,
+    write_disabled_seal,
 )
 from src.quantum_dirac_symmetry_qca.manifest import validate_committed_manifests
 from src.quantum_dirac_symmetry_qca.spec import (
@@ -57,11 +59,15 @@ class SymmetryQCAProtocolDraftTests(unittest.TestCase):
                 with self.assertRaises(SymmetryQCASpecError):
                     guard_pre_freeze_target(cutoff=cutoff)
 
-    def test_disabled_preview_is_freeze_ready_but_writes_nothing(self) -> None:
+    def test_disabled_preview_reports_remaining_preseal_pipeline(self) -> None:
         preview = preview_disabled_seal(ROOT)
-        self.assertTrue(preview["seal_ready"])
+        self.assertFalse(preview["seal_ready"])
         self.assertFalse(preview["run_command_enabled"])
         self.assertTrue(preview["registered_outcomes_forbidden_until_stage_open"])
+        self.assertIn("registered stage runner", preview["missing_prerequisites"])
+        self.assertIn("full-ledger independent verifier", preview["missing_prerequisites"])
+        with self.assertRaises(SymmetryQCASealError):
+            write_disabled_seal(ROOT)
         for relative in FORBIDDEN_PRE_FREEZE_PATHS:
             self.assertFalse((ROOT / relative).exists())
 

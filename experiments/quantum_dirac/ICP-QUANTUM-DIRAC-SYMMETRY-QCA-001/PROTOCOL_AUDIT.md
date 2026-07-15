@@ -96,10 +96,10 @@ backends, bindings, three refinements, five observation distances, four state
 witnesses, π-sector accounting, structural gates, and terminal labels.
 
 The seal preview hashes the complete primary, independent, reducer, manifest,
-test, specification, and command surface. It now reports `seal_ready=true`
-while keeping `run_command_enabled=false`; previewing creates no file. Seal
-creation is a separate clean-worktree command whose output is still disabled
-until a sole-file freeze commit, annotated tag, and stage-opening child exist.
+test, specification, and command surface. It reports `seal_ready=false`, keeps
+`run_command_enabled=false`, and names the missing runner, ledger, writer, and
+full-ledger verifier prerequisites; previewing creates no file and the seal
+writer refuses to run.
 
 ## Implementation tranche disposition
 
@@ -115,5 +115,8 @@ the disabled Git-linear lifecycle validate.
 Implementation also caught the earlier real/local edge orientation as the
 wrong sign under the fixed `exp(+ikx)` convention. The pairing and recurrence
 were reversed before freeze and a cross-layer Fourier fixture was added. No
-registered propagation occurred. Only after hostile review may a seal-only
+registered propagation occurred. The remaining pre-seal tranche is the
+registered stage runner, canonical result-ledger builder/validator, atomic
+no-clobber writer, and full-ledger independent verifier, tested only through
+disclosed fixtures. Only after that tranche and hostile review may a seal-only
 freeze commit and annotated tag be created.
