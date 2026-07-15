@@ -1,0 +1,14 @@
+{
+  "parent_search_id": "ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001",
+  "parent_completion_tag": "icp-quantum-dirac-role-recovery-001-v0.4-complete",
+  "parent_terminal_classification": "constructive_sufficiency_passed_frozen_dirac_sector",
+  "development_result": {
+    "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results_v0.4.json",
+    "sha256": "c9f445358a7ada5d8d20208c485529e6c6da93768f2ee1c9dea76afed2baab7b"
+  },
+  "confirmation_result": {
+    "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results_v0.4.json",
+    "sha256": "34c16fd959148d99a5e32c4836d69acb33794d548c11c8ac83986990742fac72"
+  },
+  "outcomes_inherited": false
+}

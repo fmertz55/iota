@@ -1,4 +1,4 @@
-.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac verify paper clean-paper
+.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca verify paper clean-paper
 
 PYTHON ?= python3
 
@@ -29,10 +29,12 @@ validate-minimal-realization-exact-orbit:
 	$(PYTHON) -m unittest discover -s tests/minimal_realization_orbit -p 'test_*.py'
 
 validate-quantum-dirac:
-	$(PYTHON) -m src.quantum_dirac.cli validate-manifests
-	$(PYTHON) -m unittest discover -s tests/quantum_dirac -p 'test_*.py'
+	$(PYTHON) scripts/validate_archived_quantum_dirac.py
 
-verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac
+validate-quantum-dirac-symmetry-qca:
+	$(PYTHON) -m unittest discover -s tests/quantum_dirac_symmetry_qca -p 'test_*.py'
+
+verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca
 
 paper:
 	$(PYTHON) scripts/build_paper.py
