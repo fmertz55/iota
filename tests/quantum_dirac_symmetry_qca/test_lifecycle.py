@@ -17,6 +17,8 @@ from src.quantum_dirac_symmetry_qca import cli
 from src.quantum_dirac_symmetry_qca.cli import build_parser
 from src.quantum_dirac_symmetry_qca.lifecycle import expected_open_manifest
 from src.quantum_dirac_symmetry_qca.protocol import (
+    CONFIRMATION_OPEN_REF,
+    CONFIRMATION_RESULT_REF,
     CONTRACT_REF,
     DEVELOPMENT_OPEN_REF,
     DEVELOPMENT_RESULT_REF,
@@ -24,6 +26,7 @@ from src.quantum_dirac_symmetry_qca.protocol import (
     OUTCOME_SEAL_REF,
     SPEC_DIR_REF,
 )
+from src.quantum_dirac_symmetry_qca.seal import verify_outcome_seal
 from src.quantum_dirac_symmetry_qca.spec import (
     SymmetryQCASpecError,
     write_canonical_json_once,
@@ -36,11 +39,22 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class DisabledLifecycleTests(unittest.TestCase):
-    def test_current_checkout_has_no_authorization_or_seal(self) -> None:
+    def test_current_checkout_has_no_authorization_or_stage_opening(self) -> None:
         status = authorization_status(ROOT)
         self.assertFalse(status["registered_outcomes_authorized"])
         self.assertFalse(status["evaluation_permit_issued"])
-        self.assertFalse((ROOT / OUTCOME_SEAL_REF).exists())
+        self.assertFalse(status["verification_permit_issued"])
+        seal_path = ROOT / OUTCOME_SEAL_REF
+        if seal_path.exists():
+            seal = verify_outcome_seal(ROOT)
+            self.assertFalse(seal["run_command_enabled"])
+        for relative in (
+            DEVELOPMENT_OPEN_REF,
+            DEVELOPMENT_RESULT_REF,
+            CONFIRMATION_OPEN_REF,
+            CONFIRMATION_RESULT_REF,
+        ):
+            self.assertFalse((ROOT / relative).exists())
 
     def test_permit_dataclass_cannot_be_forged(self) -> None:
         forged = RegisteredEvaluationPermit(

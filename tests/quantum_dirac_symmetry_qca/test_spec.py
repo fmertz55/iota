@@ -5,12 +5,14 @@ from pathlib import Path
 
 from src.quantum_dirac_symmetry_qca.protocol import (
     FORBIDDEN_PRE_FREEZE_PATHS,
+    OUTCOME_SEAL_REF,
     REGISTERED_SCENARIOS,
     REGISTERED_SIZES,
     SEARCH_ID,
 )
 from src.quantum_dirac_symmetry_qca.seal import (
     preview_disabled_seal,
+    verify_outcome_seal,
 )
 from src.quantum_dirac_symmetry_qca.manifest import validate_committed_manifests
 from src.quantum_dirac_symmetry_qca.spec import (
@@ -26,7 +28,8 @@ ROOT = Path(__file__).resolve().parents[2]
 
 class SymmetryQCAProtocolDraftTests(unittest.TestCase):
     def test_design_audits_without_authorizing_outcomes(self) -> None:
-        audit = audit_design(ROOT)
+        seal_path = ROOT / OUTCOME_SEAL_REF
+        audit = audit_design(ROOT, allow_lifecycle_artifacts=seal_path.exists())
         self.assertEqual(audit["search_id"], SEARCH_ID)
         self.assertTrue(audit["registered_outcomes_forbidden"])
         self.assertTrue(audit["production_implementation_present"])
@@ -57,15 +60,21 @@ class SymmetryQCAProtocolDraftTests(unittest.TestCase):
                 with self.assertRaises(SymmetryQCASpecError):
                     guard_pre_freeze_target(cutoff=cutoff)
 
-    def test_disabled_preview_is_reviewed_and_seal_ready_but_writes_nothing(self) -> None:
-        preview = preview_disabled_seal(ROOT)
-        self.assertTrue(preview["seal_ready"])
-        self.assertFalse(preview["run_command_enabled"])
-        self.assertTrue(preview["registered_outcomes_forbidden_until_stage_open"])
-        self.assertEqual(preview["outcome_free_hostile_review"], "passed")
-        self.assertEqual(preview["missing_prerequisites"], [])
+    def test_disabled_seal_is_previewable_or_verifiable(self) -> None:
+        seal_path = ROOT / OUTCOME_SEAL_REF
+        value = (
+            verify_outcome_seal(ROOT)
+            if seal_path.exists()
+            else preview_disabled_seal(ROOT)
+        )
+        self.assertTrue(value["seal_ready"])
+        self.assertFalse(value["run_command_enabled"])
+        self.assertTrue(value["registered_outcomes_forbidden_until_stage_open"])
+        self.assertEqual(value["outcome_free_hostile_review"], "passed")
+        self.assertEqual(value["missing_prerequisites"], [])
         for relative in FORBIDDEN_PRE_FREEZE_PATHS:
-            self.assertFalse((ROOT / relative).exists())
+            if relative != OUTCOME_SEAL_REF or not seal_path.exists():
+                self.assertFalse((ROOT / relative).exists())
 
     def test_prospective_manifests_are_canonical_and_outcome_free(self) -> None:
         manifests = validate_committed_manifests(ROOT)
