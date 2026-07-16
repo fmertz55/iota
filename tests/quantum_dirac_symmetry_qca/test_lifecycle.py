@@ -4,6 +4,7 @@ import unittest
 import subprocess
 import tempfile
 import inspect
+import sys
 from pathlib import Path
 
 from src.quantum_dirac_symmetry_qca.authorization import (
@@ -26,7 +27,6 @@ from src.quantum_dirac_symmetry_qca.protocol import (
     OUTCOME_SEAL_REF,
     SPEC_DIR_REF,
 )
-from src.quantum_dirac_symmetry_qca.seal import verify_outcome_seal
 from src.quantum_dirac_symmetry_qca.spec import (
     SymmetryQCASpecError,
     write_canonical_json_once,
@@ -38,23 +38,115 @@ from src.quantum_dirac_symmetry_qca.independent_states import build_independent_
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def _git(root: Path, *arguments: str) -> bytes:
+    return subprocess.run(
+        ["git", *arguments],
+        cwd=root,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    ).stdout
+
+
+def _introduction_commit(root: Path, relative: str) -> str:
+    commits = _git(
+        root,
+        "log",
+        "--format=%H",
+        "--diff-filter=A",
+        "HEAD",
+        "--",
+        relative,
+    ).decode("ascii").splitlines()
+    if len(commits) != 1:
+        raise AssertionError(
+            f"lifecycle path must have exactly one introduction commit: {relative}"
+        )
+    return commits[0]
+
+
+def _changes(root: Path, commit: str) -> list[str]:
+    return _git(
+        root,
+        "diff-tree",
+        "--no-commit-id",
+        "--name-status",
+        "--no-renames",
+        "-r",
+        commit,
+    ).decode("utf-8").splitlines()
+
+
+def _verify_archived_freeze(root: Path) -> str:
+    freeze = _git(root, "rev-parse", f"{FREEZE_TAG}^{{commit}}").decode("ascii").strip()
+    with tempfile.TemporaryDirectory(prefix="iota-symmetry-qca-freeze-") as directory:
+        checkpoint = Path(directory) / "checkpoint"
+        _git(root, "worktree", "add", "--detach", str(checkpoint), freeze)
+        try:
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "src.quantum_dirac_symmetry_qca.cli",
+                    "verify-seal",
+                    "--require-freeze-tag-at-head",
+                ],
+                cwd=checkpoint,
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+        finally:
+            _git(root, "worktree", "remove", "--force", str(checkpoint))
+    return freeze
+
+
 class DisabledLifecycleTests(unittest.TestCase):
-    def test_current_checkout_has_no_authorization_or_stage_opening(self) -> None:
+    def test_current_checkout_has_a_valid_disabled_or_linear_lifecycle(self) -> None:
         status = authorization_status(ROOT)
         self.assertFalse(status["registered_outcomes_authorized"])
         self.assertFalse(status["evaluation_permit_issued"])
         self.assertFalse(status["verification_permit_issued"])
         seal_path = ROOT / OUTCOME_SEAL_REF
-        if seal_path.exists():
-            seal = verify_outcome_seal(ROOT)
-            self.assertFalse(seal["run_command_enabled"])
-        for relative in (
+        lifecycle = (
             DEVELOPMENT_OPEN_REF,
             DEVELOPMENT_RESULT_REF,
             CONFIRMATION_OPEN_REF,
             CONFIRMATION_RESULT_REF,
-        ):
-            self.assertFalse((ROOT / relative).exists())
+        )
+        present = tuple((ROOT / relative).exists() for relative in lifecycle)
+        self.assertEqual(
+            present,
+            tuple(index < sum(present) for index in range(len(lifecycle))),
+            "lifecycle artifacts must form an unbroken opening/result prefix",
+        )
+        if not seal_path.exists():
+            self.assertEqual(present, (False, False, False, False))
+            return
+
+        freeze = _verify_archived_freeze(ROOT)
+        self.assertEqual(
+            _git(ROOT, "show", f"{freeze}:{OUTCOME_SEAL_REF}"),
+            seal_path.read_bytes(),
+            "working-tree seal differs from the immutable freeze checkpoint",
+        )
+        parent = freeze
+        for relative, exists in zip(lifecycle, present):
+            if not exists:
+                break
+            commit = _introduction_commit(ROOT, relative)
+            self.assertEqual(_changes(ROOT, commit), [f"A\t{relative}"])
+            self.assertEqual(
+                _git(ROOT, "rev-parse", f"{commit}^").decode("ascii").strip(),
+                parent,
+                f"{relative} is not the direct child of the prior lifecycle commit",
+            )
+            self.assertEqual(
+                _git(ROOT, "show", f"HEAD:{relative}"),
+                (ROOT / relative).read_bytes(),
+                f"working-tree lifecycle bytes are uncommitted: {relative}",
+            )
+            parent = commit
 
     def test_permit_dataclass_cannot_be_forged(self) -> None:
         forged = RegisteredEvaluationPermit(

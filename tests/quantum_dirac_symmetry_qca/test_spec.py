@@ -12,7 +12,6 @@ from src.quantum_dirac_symmetry_qca.protocol import (
 )
 from src.quantum_dirac_symmetry_qca.seal import (
     preview_disabled_seal,
-    verify_outcome_seal,
 )
 from src.quantum_dirac_symmetry_qca.manifest import validate_committed_manifests
 from src.quantum_dirac_symmetry_qca.spec import (
@@ -20,6 +19,7 @@ from src.quantum_dirac_symmetry_qca.spec import (
     audit_design,
     guard_pre_freeze_candidate,
     guard_pre_freeze_target,
+    load_json,
 )
 
 
@@ -60,10 +60,10 @@ class SymmetryQCAProtocolDraftTests(unittest.TestCase):
                 with self.assertRaises(SymmetryQCASpecError):
                     guard_pre_freeze_target(cutoff=cutoff)
 
-    def test_disabled_seal_is_previewable_or_verifiable(self) -> None:
+    def test_disabled_seal_is_previewable_or_archived(self) -> None:
         seal_path = ROOT / OUTCOME_SEAL_REF
         value = (
-            verify_outcome_seal(ROOT)
+            load_json(seal_path)
             if seal_path.exists()
             else preview_disabled_seal(ROOT)
         )
@@ -72,8 +72,8 @@ class SymmetryQCAProtocolDraftTests(unittest.TestCase):
         self.assertTrue(value["registered_outcomes_forbidden_until_stage_open"])
         self.assertEqual(value["outcome_free_hostile_review"], "passed")
         self.assertEqual(value["missing_prerequisites"], [])
-        for relative in FORBIDDEN_PRE_FREEZE_PATHS:
-            if relative != OUTCOME_SEAL_REF or not seal_path.exists():
+        if not seal_path.exists():
+            for relative in FORBIDDEN_PRE_FREEZE_PATHS:
                 self.assertFalse((ROOT / relative).exists())
 
     def test_prospective_manifests_are_canonical_and_outcome_free(self) -> None:
