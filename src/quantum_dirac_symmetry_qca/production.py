@@ -173,17 +173,29 @@ def _certified_phase_layer_adjoint(
     return result
 
 
-def certified_input_basis(*, n_sites: int) -> acb_mat:
-    result = acb_mat(2 * n_sites, 2 * (INPUT_R_MAX - INPUT_R_MIN + 1))
-    normalization = arb(n_sites).sqrt()
-    two_pi = 2 * arb.pi()
-    for r in range(INPUT_R_MIN, INPUT_R_MAX + 1):
-        for component in (0, 1):
-            column = 2 * (r - INPUT_R_MIN) + component
-            for site in range(n_sites):
-                angle = two_pi * arb(r * site) / arb(n_sites)
-                result[2 * site + component, column] = acb(0, angle).exp() / normalization
-    return result
+def certified_input_basis(
+    *, n_sites: int, bits: int = PRECISION_BITS
+) -> acb_mat:
+    """Build Fourier input columns at the declared certified precision.
+
+    The precision context must cover construction itself.  Returning a basis
+    built at the ambient python-flint default and only then entering the
+    registered context preserves low-precision ball radii throughout the run.
+    """
+
+    with ball_precision(bits):
+        result = acb_mat(2 * n_sites, 2 * (INPUT_R_MAX - INPUT_R_MIN + 1))
+        normalization = arb(n_sites).sqrt()
+        two_pi = 2 * arb.pi()
+        for r in range(INPUT_R_MIN, INPUT_R_MAX + 1):
+            for component in (0, 1):
+                column = 2 * (r - INPUT_R_MIN) + component
+                for site in range(n_sites):
+                    angle = two_pi * arb(r * site) / arb(n_sites)
+                    result[2 * site + component, column] = (
+                        acb(0, angle).exp() / normalization
+                    )
+        return result
 
 
 def production_candidate_fixture(
@@ -424,15 +436,17 @@ class CertifiedRegisteredEvaluator:
             return outputs
 
     def candidate_outputs(self, scenario_id: str) -> dict[int, acb_mat]:
-        return self._candidate_evolve(
-            scenario_id, certified_input_basis(n_sites=self.n_sites)
-        )
+        with ball_precision(self.bits):
+            basis = certified_input_basis(n_sites=self.n_sites, bits=self.bits)
+            return self._candidate_evolve(scenario_id, basis)
 
     def candidate_state_series(
         self, scenario_id: str, coefficients: acb_mat
     ) -> dict[int, acb_mat]:
-        initial = certified_input_basis(n_sites=self.n_sites) * coefficients
-        return self._candidate_evolve(scenario_id, initial, every_step=True)
+        with ball_precision(self.bits):
+            basis = certified_input_basis(n_sites=self.n_sites, bits=self.bits)
+            initial = basis * coefficients
+            return self._candidate_evolve(scenario_id, initial, every_step=True)
 
     def _candidate_final(
         self,
@@ -478,18 +492,19 @@ class CertifiedRegisteredEvaluator:
 
         from .reducers import parity_ball
 
-        basis = certified_input_basis(n_sites=self.n_sites)
-        left = parity_ball(
-            self._candidate_final(
-                scenario_id,
-                parity_ball(basis, n_sites=self.n_sites),
-            ),
-            n_sites=self.n_sites,
-        )
-        right = self._candidate_final(
-            scenario_id, basis, reflect_potential=True
-        )
-        return left, right
+        with ball_precision(self.bits):
+            basis = certified_input_basis(n_sites=self.n_sites, bits=self.bits)
+            left = parity_ball(
+                self._candidate_final(
+                    scenario_id,
+                    parity_ball(basis, n_sites=self.n_sites),
+                ),
+                n_sites=self.n_sites,
+            )
+            right = self._candidate_final(
+                scenario_id, basis, reflect_potential=True
+            )
+            return left, right
 
     def time_reversal_role_pair(
         self, scenario_id: str
@@ -505,8 +520,8 @@ class CertifiedRegisteredEvaluator:
         validate_registered_permit(self.permit)
         scenario = self.scenarios.get(scenario_id)
         observations = _observation_steps(self.delta)
-        basis = certified_input_basis(n_sites=self.n_sites)
         with ball_precision(self.bits):
+            basis = certified_input_basis(n_sites=self.n_sites, bits=self.bits)
             left = theta_ball(
                 self._candidate_final(
                     scenario_id,

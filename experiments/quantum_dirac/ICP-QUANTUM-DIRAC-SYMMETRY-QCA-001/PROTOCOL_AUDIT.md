@@ -2,9 +2,9 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Date: `2026-07-15`
+Date: `2026-07-16`
 
-Status: **v0.1 execution incomplete with no result; v0.2 infrastructure repair pending freeze**
+Status: **v0.2 development ledger independently unverified with confirmation unopened; v0.3 precision repair pending freeze**
 
 ## Audit question
 
@@ -35,10 +35,11 @@ contract now agree on:
   high momentum, mass endpoint, long horizon, rough potential, and collision
   lift.
 
-This is not an experiment result. The permit-guarded registered constructors
-exist. The archived v0.1 seal/open lineage produced no ledger; all v0.2
-registered sizes and scenarios remain inaccessible without its fresh
-seal/tag/open lineage, and no v0.2 lifecycle artifact exists.
+The v0.2 development ledger is an immutable experiment artifact, not a verified
+pass. Its mandatory replay exposed a precision-context defect before
+confirmation opening. The confirmation schedules and states remain uninspected.
+The v0.3 repair retains every scientific rule above and moves only corrected
+implementation bytes and lifecycle paths into a fresh disabled package.
 
 ## Seven global-spectrum boundaries
 
@@ -115,11 +116,15 @@ the disabled Git-linear lifecycle validate.
 
 Implementation also caught the earlier real/local edge orientation as the
 wrong sign under the fixed `exp(+ikx)` convention. The pairing and recurrence
-were reversed before freeze and a cross-layer Fourier fixture was added. No
-registered propagation occurred. The permit-gated stage runner, canonical
-result-ledger builder/validator, atomic no-clobber writer, and replay-tight
-full-ledger independent verifier now pass disclosed-fixture and Git-linear
-lifecycle tests. Hostile review also made every post-confirmation control exact
-and restored the contract-required full current series. The next action is to
-commit these implementation bytes; only then may the seal be created as a
-sole-file freeze commit and bound by the annotated tag.
+were reversed before v0.1 freeze and a cross-layer Fourier fixture was added.
+The later v0.2 development result exposed a separate infrastructure defect:
+`certified_input_basis` ran at ambient 53-bit precision before evaluator-local
+256-bit contexts, and caller-side certified reductions lacked an enclosing
+precision context. Rebuilding the first failing `N=320` comparison entirely at
+256 bits matches the independent 110-digit result to about `1e-77`.
+
+The v0.3 repair makes basis precision explicit, wraps registered basis
+transformations and the complete stage reduction batch at 256 bits, and adds a
+disclosed `N=6` ambient-precision regression. The next action is full
+repository verification and hostile diff review; only then may the seal be
+created as a sole-file freeze commit and bound by the annotated v0.3 tag.

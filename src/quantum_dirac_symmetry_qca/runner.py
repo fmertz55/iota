@@ -647,11 +647,17 @@ def build_stage_ledger(
         else CONFIRMATION_SCENARIOS
     )
     state_ids = DEVELOPMENT_STATES if permit.stage == "development" else CONFIRMATION_STATES
-    scenario_results = [
-        _scenario_result(permit, scenario_id=scenario_id, state_ids=state_ids)
-        for scenario_id in scenario_ids
-    ]
-    controls = None if permit.stage == "development" else _failure_controls(permit)
+    # Keep construction, matrix differences, certified reducers, and their
+    # serialization under one precision context.  Evaluator-local contexts do
+    # not protect expressions evaluated by the caller after a method returns.
+    with ball_precision(PRECISION_BITS):
+        scenario_results = [
+            _scenario_result(permit, scenario_id=scenario_id, state_ids=state_ids)
+            for scenario_id in scenario_ids
+        ]
+        controls = (
+            None if permit.stage == "development" else _failure_controls(permit)
+        )
     return build_result_ledger(
         stage=permit.stage,
         bindings=bindings,

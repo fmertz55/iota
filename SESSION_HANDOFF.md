@@ -1,6 +1,6 @@
 # IOTA Session Handoff
 
-Date: 2026-07-15
+Date: 2026-07-16
 
 ## Current Continuation Status
 
@@ -21,8 +21,9 @@ is in the experiment `RESULTS.md`, experiment `README.md`, and Finding 080.
 
 The active continuation is the breadth experiment
 `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` on branch
-`icp-quantum-dirac-symmetry-qca-001`. It tests a direct symmetry-derived Dirac
-QCA rather than another parameterization of the successful product walk. Its
+`icp-quantum-dirac-symmetry-qca-001-v0.3-repair`. It tests a direct
+symmetry-derived Dirac QCA rather than another parameterization of the
+successful product walk. Its
 localization, continuum, global-spectrum/literature, prospective-protocol, and
 outcome-free implementation audits are complete. They establish the explicit
 two-layer full-space Margolus witness and resource clock, the leading Dirac
@@ -39,15 +40,19 @@ none was inspected. Annotated tag
 `execution_incomplete_no_result`; this is an infrastructure stop, not a
 scientific gate failure.
 
-The active v0.2 retry changes only the independent spectral-norm call to the
-Hermitian eigensolver, adds a disclosed complex-Gram regression, and uses fresh
-seal/open/result paths. All scientific scenarios, states, maps, thresholds,
-gates, failure controls, and stopping rules are unchanged. All 69 direct-QCA
-tests and the repository-wide verification gate pass. The next action is to
-commit these reviewed repair bytes, create the v0.2 disabled seal as a
-sole-file freeze commit, and add the required annotated v0.2 freeze tag. Do not
-inspect or tune against registered intermediates, and do not copy the v0.4
-product-walk gates into this experiment merely to force a pass.
+The immutable v0.2 retry repaired that eigensolver and completed its
+development ledger at `1228249`, but mandatory independent replay rejected its
+first certified operator enclosure as insufficiently tight. The primary
+Fourier basis had been constructed at ambient 53-bit precision before the
+declared 256-bit context. The scientific midpoint remained passing;
+confirmation was not opened. The active v0.3 repair owns basis precision and
+encloses the complete registered reduction batch at 256 bits while changing
+no scientific scenario, state, map, threshold, gate, failure control, or
+stopping rule. The next action is full verification and hostile review of
+these bytes, followed by a repair commit. Only then may the v0.3 disabled seal
+be created as a sole-file freeze commit and annotated. Do not inspect or tune
+against confirmation, and do not copy the v0.4 product-walk gates into this
+experiment merely to force a pass.
 
 ## Local Checkout State
 
@@ -6394,6 +6399,45 @@ maps, metrics, gates, controls, or stopping rule. All 69 direct-QCA tests and
 the full repository verification gate pass. The repair is seal-ready and no
 v0.2 lifecycle artifact exists.
 
+#### v0.2 development verification failure and v0.3 precision repair — 2026-07-16
+
+The sole-file v0.2 freeze is `4499a5125312e43248e714ace4941d03b7e70889`,
+the development opening is `16354cc06539c3850c3baacaea10fdd4a65a3a0e`,
+and the committed development result is
+`1228249f545fa05c914bc1b2484bc6cd37f5c0d8`. The ledger SHA-256 is
+`d01787c73af1ebafb0b7ae483c2e4606e5806271903319152ea46258a839ee37` and
+its primary classification is `development_passed`. Mandatory post-commit
+independent verification did not accept that classification. It stopped at
+the first `N=320`, time `2/5` operator-distance enclosure:
+
+```text
+certified ledger upper  0.000144634778248314084438813642563559...
+independent replay      0.000144634778205323970199781378883223...
+conservative slack      4.2990114239e-14
+required tightness      1e-65
+```
+
+The scientific midpoint and thresholds were not the problem. The certified
+Fourier input basis was evaluated before the evaluator entered
+`ball_precision(256)`, so python-flint's ambient 53-bit ball radii propagated
+through the registered primary. Caller-side matrix differences and certified
+reducers also lacked one outer 256-bit context. Rebuilding the basis and
+reduction at 256 bits gives
+`0.000144634778205323970199781378883223...`, agreeing with the independent
+replay to about `1e-77`. Confirmation was never opened or inspected.
+
+The v0.3 repair descends from the immutable v0.2 result plus the lifecycle-aware
+CI test repair. It gives `certified_input_basis` an explicit bit budget, keeps
+all registered basis transformations inside that budget, wraps the complete
+registered construction/reduction/serialization batch in
+`ball_precision(PRECISION_BITS)`, and adds a disclosed `N=6` regression that
+starts from an ambient 53-bit context. It changes no candidate, target,
+scenario, state, partition, threshold, map, metric, gate, control, or stopping
+rule. All causal lifecycle paths move to fresh v0.3 filenames and tag
+`icp-quantum-dirac-symmetry-qca-001-v0.3-frozen`. No v0.3 seal, opening,
+permit, or result may exist until the repaired bytes pass full verification
+and are committed.
+
 ### Submission-oriented program
 
 The quantum-Dirac work now has a strong paper nucleus but is not yet a
@@ -6446,14 +6490,12 @@ The submission sequence is:
    and disabled authorization are implemented and tested only on disclosed
    nonregistered fixtures. This tranche caught and corrected the pre-freeze
    Fourier orientation defect.
-4. **Outcome-free execution pipeline complete; linear lifecycle next.** The
-   stage runner, canonical ledger and validator, atomic no-clobber writer,
-   full-ledger independent verifier, disclosed-fixture tests, and hostile
-   review are complete. Commit the complete implementation, create and commit
-   the disabled seal alone, tag the freeze, then open and run development and
-   commit its result before inspection. Only after an independently verified
-   pass may the single-use confirmation open. Require completion documentation
-   exactly as in the verified parent lineage.
+4. **v0.3 precision-context infrastructure repair.** The v0.2 development
+   ledger is complete but independently unverified; confirmation is unopened.
+   Finish verification and hostile review of the v0.3 precision repair, commit
+   it, create and commit the disabled seal alone, tag the fresh freeze, then
+   open and rerun development. Only after an independently verified v0.3 pass
+   may the single-use confirmation open.
 5. **Separate manuscript.** Center the paper on the frozen product-walk result
    plus the direct-QCA architecture and its eventual registered disposition.
    A second-architecture pass supports breadth; a clean failure remains a
@@ -6529,12 +6571,12 @@ Read SESSION_HANDOFF.md and continue only from “ICP Direct Symmetry-Derived
 Dirac QCA — Authoritative Continuation — 2026-07-14.” Preserve unrelated
 worktree changes and the sealed ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001 v0.4
 archive. Carry forward the program-level ICP definition clarified in that
-section. Do not generate or inspect a v0.2 registered outcome before the fresh
+section. Do not generate or inspect a v0.3 registered outcome before the fresh
 seal/tag/open chain is valid, and commit any generated ledger alone before
 inspection.
 
 Continue ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001 on
-branch icp-quantum-dirac-symmetry-qca-001. Treat `LOCALIZATION_AUDIT.md`,
+branch icp-quantum-dirac-symmetry-qca-001-v0.3-repair. Treat `LOCALIZATION_AUDIT.md`,
 `CONTINUUM_AUDIT.md`, `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`, with
 their guarded and independently checked fixtures, as completed outcome-free
 stages. The global audit finds an exact opposite-mass pi-mode pseudodoubler and
@@ -6570,13 +6612,17 @@ Hermitian Gram matrix. No partial result was written or inspected; annotated
 tag `icp-quantum-dirac-symmetry-qca-001-v0.1-incomplete` closes it as
 `execution_incomplete_no_result`.
 
-The v0.2 retry uses Hermitian `eighe`, adds the public analytic complex-Gram
-regression, and changes only fresh lifecycle provenance. Scientific inputs and
-gates are unchanged. All 69 direct-QCA tests and the repository-wide verify
-target pass. Next commit the reviewed v0.2 repair bytes, create its disabled
-seal as a sole-file freeze commit, and add the required annotated v0.2 tag.
-Keep every v0.2 open and result artifact absent until that linear freeze is
-valid. Treat the
+The immutable v0.2 development ledger at `1228249` is classified passed by its
+primary gates but failed mandatory replay-tight verification because the
+certified Fourier basis was constructed at ambient 53-bit precision before
+the intended 256-bit context. Confirmation remains unopened. The v0.3 repair
+owns basis precision explicitly, encloses basis transformations and the full
+registered reduction batch at 256 bits, adds a disclosed `N=6` regression,
+and moves only lifecycle provenance to fresh v0.3 paths. Scientific inputs and
+gates are unchanged. Finish full verification and hostile review, commit the
+repair, then create its disabled seal as a sole-file freeze commit and add the
+required annotated v0.3 tag. Keep every v0.3 lifecycle artifact absent until
+that repair commit is valid. Treat the
 existing constraint-lineage paper as separate; build a new quantum-Dirac
 manuscript only after the registered disposition. Carry forward the separate
 cross-cutting drafts in `docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md`,

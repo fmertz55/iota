@@ -5,7 +5,7 @@ import unittest
 from fractions import Fraction
 from pathlib import Path
 
-from flint import acb_mat, arb
+from flint import acb, acb_mat, arb, ctx
 from mpmath import mp
 
 from src.quantum_dirac_symmetry_qca import independent_verifier, ledger
@@ -20,6 +20,7 @@ from src.quantum_dirac_symmetry_qca.independent_registered import (
 from src.quantum_dirac_symmetry_qca.production import (
     _certified_direct_step_adjoint,
     ball_precision,
+    certified_input_basis,
     production_candidate_fixture,
 )
 from src.quantum_dirac_symmetry_qca.runner import build_stage_ledger
@@ -30,6 +31,18 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class OutcomeFreeExecutionPipelineTests(unittest.TestCase):
+    def test_disclosed_n6_basis_owns_its_certified_precision(self) -> None:
+        previous = ctx.prec
+        try:
+            ctx.prec = 53
+            basis = certified_input_basis(n_sites=6, bits=256)
+        finally:
+            ctx.prec = previous
+        with ball_precision(256):
+            expected = acb(0, -8 * arb.pi() / 6).exp() / arb(6).sqrt()
+            error = abs(basis[2, 0] - expected).upper()
+            self.assertLess(float(error), 1e-70)
+
     def test_independent_norm_accepts_a_complex_hermitian_gram_matrix(self) -> None:
         with mp.workdps(120):
             value = mp.matrix([[1, 1j], [0, 2]])

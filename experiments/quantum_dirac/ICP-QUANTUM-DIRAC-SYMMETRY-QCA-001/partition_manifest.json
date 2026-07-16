@@ -29,7 +29,7 @@
   },
   "protocol": {
     "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/protocol.json",
-    "sha256": "c9837c98c694678f15cdab5503b03c56a09eeab042ddb2a238a023f68f13945a"
+    "sha256": "61b5f6ca7bbe959df44e7e88470d9b294b41f274172e35d30e881389d2f089f6"
   },
   "protocol_version": "0.1-draft",
   "registered_outcomes_forbidden": true,

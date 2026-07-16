@@ -2,7 +2,7 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **v0.1 execution incomplete with no result; v0.2 infrastructure repair pending freeze**
+Status: **v0.2 development ledger independently unverified with confirmation unopened; v0.3 precision repair pending freeze**
 
 ## Question
 
@@ -152,11 +152,19 @@ momentum, and target conventions now agree. The v0.1 development run later
 stopped before ledger construction on an independent complex-Gram eigensolver
 error; no partial artifact was written or inspected.
 
-The outcome-free execution pipeline is complete: permit-gated registered stage
-runner, canonical result-ledger builder/validator, atomic no-clobber writer,
-and full-ledger independent verifier. Positive and negative lifecycle tests use
-only disclosed nonregistered fixtures, and hostile review tightened the result
-schema, failure-control definitions, verification-before-confirmation path,
-and replay-tightness checks. No development or confirmation partition may be
-opened for v0.2 before these repaired bytes are committed, explicitly sealed
-in a sole-file freeze commit, and bound by the declared v0.2 annotated tag.
+The v0.2 pipeline completed its indivisible development batch and committed a
+ledger classified `development_passed`. Mandatory independent replay then
+rejected the first operator enclosure as insufficiently tight. The primary
+Fourier basis had been constructed under ambient 53-bit python-flint precision
+before the registered 256-bit context; the exact midpoint and all scientific
+gates remained on the passing side, but conservative slack of about `4.299e-14`
+violated the frozen `1e-65` replay-tightness allowance. Confirmation was not
+opened.
+
+The outcome-free v0.3 repair gives basis construction an explicit precision
+budget, encloses basis transformations and the entire registered reduction
+batch at 256 bits, and adds a disclosed `N=6` regression. Candidate, target,
+maps, scenarios, states, partitions, thresholds, metrics, controls, and
+stopping rules are unchanged. No v0.3 development or confirmation partition
+may be opened before these repaired bytes are committed, explicitly sealed in
+a sole-file freeze commit, and bound by the declared v0.3 annotated tag.

@@ -3,12 +3,11 @@
 Current state:
 
 ```text
-outcome-free execution pipeline complete and hostile-reviewed
+outcome-free v0.3 precision repair implemented and under review
 localization, continuum, and global-spectrum audits complete
-not registered
-v0.2 not frozen
-v0.2 seal-ready; no v0.2 seal artifact has been created
-v0.1 execution incomplete with no result; v0.2 Hermitian-norm retry pending freeze
+v0.2 development ledger independently unverified; confirmation unopened
+v0.3 not frozen; no v0.3 lifecycle artifact exists
+v0.1 execution incomplete with no result
 guarded primary and independent implementations present
 registered outcomes forbidden
 ```
@@ -49,7 +48,9 @@ potential splitting, target truncation, and potential-generated intermediate
 modes. Refinement ratios, observables, and all other empirical gates remain
 uncomputed outcomes. The permit-gated registered candidate/target runner,
 canonical strict ledger and atomic writer, replay-tight algorithmically
-separate verifier, manifests, and authorization are complete and
-hostile-reviewed on disclosed fixtures only. The disabled preview is
-seal-ready but still execution-disabled and creates no artifact. No registered
-evaluation is permitted before the later linear seal/tag/open chain.
+separate verifier, manifests, and authorization are complete. The v0.2 replay
+identified a low-precision certified-basis enclosure despite passing
+midpoints; v0.3 repairs precision ownership without changing the scientific
+registration. The disabled preview remains execution-disabled and creates no
+artifact. No v0.3 registered evaluation is permitted before the later linear
+seal/tag/open chain.

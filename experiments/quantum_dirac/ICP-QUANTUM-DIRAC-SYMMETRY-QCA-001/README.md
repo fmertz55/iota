@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **v0.1 execution incomplete with no result; v0.2 infrastructure repair pending freeze**
+Status: **v0.2 development ledger independently unverified with confirmation unopened; v0.3 precision repair pending freeze**
 
 Started: `2026-07-14`
 
@@ -38,12 +38,13 @@ The current outcome-free tranche contains:
 
 It contains prospective registered lattice, scenario, state, and threshold
 definitions. The v0.1 development evaluation stopped before ledger creation;
-no partial artifact was written or inspected. The v0.2 retry contains a permit-guarded
-certified production evaluator, an algorithmically separate replay, canonical
-reducers, four prospective manifests, and a disabled seal/authorization
-surface. Its fresh permit, outcome seal, opening manifest, and result do not
-exist. The archived v0.1 seal and opening are immutable. The localization/resource clock,
-continuum correction, global spectral boundaries, and protocol audit are in
+no partial artifact was written or inspected. The v0.2 retry completed and
+committed its development ledger, but mandatory independent replay rejected a
+loose certified enclosure caused by a 53-bit Fourier-basis construction before
+the intended 256-bit context. Confirmation was not opened. Both earlier
+lineages remain immutable. The v0.3 repair retains the same scientific
+registration and uses fresh disabled lifecycle paths. The localization/resource
+clock, continuum correction, global spectral boundaries, and protocol audit are in
 `LOCALIZATION_AUDIT.md`, `CONTINUUM_AUDIT.md`, and
 `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`. The controlling human
 contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
@@ -59,7 +60,9 @@ post-confirmation controls have fully specified inputs. All pre-freeze testing
 remained on disclosed fixtures. The immutable v0.1 opening ended in
 `execution_incomplete_no_result` when mpmath's real-symmetric eigensolver
 rejected a complex Hermitian Gram matrix before ledger creation; no partial
-artifact was written or inspected. The v0.2 retry uses the Hermitian
-eigensolver and a public complex-Gram regression fixture without changing the
-scientific registration. Its fresh seal, tag, opening, permit, and result do
+artifact was written or inspected. The v0.2 retry repaired that eigensolver but
+exposed the precision-context defect after its complete development ledger was
+committed. The v0.3 package constructs and transforms its certified input basis
+inside the declared bit budget and keeps the full registered reduction batch
+under 256-bit precision. Its fresh seal, tag, opening, permit, and result do
 not yet exist. See `DESIGN.md` for the scientific contrast and stop conditions.

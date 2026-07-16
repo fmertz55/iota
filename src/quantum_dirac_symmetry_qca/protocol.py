@@ -6,29 +6,29 @@ from __future__ import annotations
 PROTOCOL_VERSION = "0.1-draft"
 SEARCH_ID = "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"
 CANDIDATE_ID = "QDIR-DIRECT-SYMMETRY-QCA-001"
-STATUS = "outcome_free_execution_pipeline_reviewed_seal_ready_not_frozen"
+STATUS = "v0.2_development_unverified_v0.3_precision_repair_seal_ready_not_frozen"
 
 SPEC_DIR_REF = "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft"
 CONTRACT_REF = "docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md"
 EXPERIMENT_DIR_REF = (
     "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"
 )
-OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.2.json"
+OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.3.json"
 DEVELOPMENT_OPEN_REF = (
-    f"{EXPERIMENT_DIR_REF}/development_open_manifest_v0.2.json"
+    f"{EXPERIMENT_DIR_REF}/development_open_manifest_v0.3.json"
 )
 CONFIRMATION_OPEN_REF = (
-    f"{EXPERIMENT_DIR_REF}/confirmation_open_manifest_v0.2.json"
+    f"{EXPERIMENT_DIR_REF}/confirmation_open_manifest_v0.3.json"
 )
 DEVELOPMENT_RESULT_REF = (
     "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/"
-    "development_results_v0.2.json"
+    "development_results_v0.3.json"
 )
 CONFIRMATION_RESULT_REF = (
     "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/"
-    "confirmation_results_v0.2.json"
+    "confirmation_results_v0.3.json"
 )
-FREEZE_TAG = "icp-quantum-dirac-symmetry-qca-001-v0.2-frozen"
+FREEZE_TAG = "icp-quantum-dirac-symmetry-qca-001-v0.3-frozen"
 
 DESIGN_FILENAMES = (
     "protocol.json",

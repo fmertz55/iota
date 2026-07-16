@@ -1,12 +1,12 @@
 # ICP Quantum-Dirac Symmetry-QCA Contract
 
-Protocol version: `0.1-draft`; implementation-seal retry: `v0.2`
+Protocol version: `0.1-draft`; implementation-seal retry: `v0.3`
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Date: `2026-07-15`
+Date: `2026-07-16`
 
-Status: **v0.1 execution incomplete with no result; v0.2 outcome-free infrastructure repair complete, disabled, and not frozen**
+Status: **v0.1 execution incomplete with no result; v0.2 development ledger complete but independently unverified with confirmation unopened; v0.3 precision-context repair complete, disabled, and not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -36,17 +36,18 @@ QFT, uniqueness, necessity, or global minimality.
 
 ## 2. Outcome boundary
 
-No v0.2 registered candidate state, trajectory, propagator, operator distance,
+No v0.3 registered candidate state, trajectory, propagator, operator distance,
 observable, zone-edge probability, or failure-control result may be generated
 or inspected before the fresh reviewed freeze/open chain. In particular,
 candidate sizes `N=320`, `640`, and `1280`, all registered scenarios, and all
 registered state witnesses remain forbidden until that chain exists.
 
-The present v0.2 package contains the prospective design, schemas, guarded
-algebraic fixtures, production registered evaluator, and independent replay.
-Its seal preview is disabled until the fresh freeze/open lifecycle is created.
-The archived v0.1 seal and opening remain immutable no-result provenance; a
-v0.2 opening or result before the new freeze invalidates the retry.
+The present v0.3 package contains the prospective design, schemas, guarded
+algebraic fixtures, repaired production registered evaluator, and independent
+replay. Its seal preview is disabled until the fresh freeze/open lifecycle is
+created. The archived v0.1 and v0.2 seal/open/result artifacts remain immutable
+provenance; a v0.3 opening or result before the new freeze invalidates the
+retry. The confirmation partition has not been opened or inspected.
 
 Before freezing, the package must additionally contain and pass review for:
 
@@ -420,7 +421,7 @@ primary or broaden a pass claim.
 ## 19. Linear provenance
 
 The future history is: complete implementation; seal-only freeze commit and
-annotated tag `icp-quantum-dirac-symmetry-qca-001-v0.2-frozen`;
+annotated tag `icp-quantum-dirac-symmetry-qca-001-v0.3-frozen`;
 development-open-only child; development-result-only child; conditional
 confirmation-open-only child; confirmation-result-only child. Each child must
 bind its exact parent and every causal input. Reopening, overwriting, or
@@ -435,6 +436,28 @@ The `v0.2` retry changes only that independent spectral-norm implementation to
 the Hermitian eigensolver, adds a public complex-Gram regression fixture, and
 uses fresh lifecycle paths. Scientific definitions, scenarios, partitions,
 states, thresholds, maps, and stopping rules are unchanged.
+
+The v0.2 development batch then completed and wrote the immutable ledger at
+commit `1228249f545fa05c914bc1b2484bc6cd37f5c0d8`. The ledger classified the
+development gates as passed, but mandatory post-commit independent replay
+stopped at the first operator-distance comparison because the certified upper
+enclosure was not replay-tight. At `N=320`, time `2/5`, the ledger stored
+`0.0001446347782483140844...` while the 110-digit independent replay gave
+`0.0001446347782053239702...`, leaving conservative slack of about
+`4.2990e-14`, far above the registered `1e-65` tightness allowance.
+Confirmation was never opened.
+
+The cause is implementation precision ownership, not a scientific threshold
+failure: the primary Fourier input basis was constructed at python-flint's
+ambient 53-bit precision before the evaluator entered its declared 256-bit
+context, and stage-level certified reductions lacked one enclosing precision
+context. Reconstructing the same basis at 256 bits makes the certified upper
+agree with the independent replay to about `1e-77`. The v0.3 retry moves basis
+construction and basis transformations inside the declared bit budget, wraps
+the full registered construction/reduction/serialization batch at 256 bits,
+adds a disclosed `N=6` precision regression, and uses fresh lifecycle paths.
+It does not change the candidate, target, scenarios, states, partitions,
+thresholds, maps, metrics, gates, controls, or stopping rule.
 
 ## 20. Terminal classifications
 
@@ -458,10 +481,11 @@ canonical reducers, four prospective manifests, content-seal builder, and
 Git-linear authorization surface now pass disclosed-fixture validation. The
 Fourier-orientation defect found during implementation was corrected before
 the v0.1 freeze. That development run was authorized but stopped before any
-result ledger was generated. The v0.2 registered
-stage runner, canonical result-ledger builder/validator and atomic writer,
-full-ledger independent verifier, nonregistered fixture tests, and hostile
-review are complete. Review restored the required full macrostep current
-series, exact resource records, replay-tight independent checks, and fully
-specified failure controls. The repaired bytes are seal-ready; the v0.2
-seal-only freeze commit and annotated tag do not yet exist.
+result ledger was generated. The v0.2 retry completed its development ledger,
+but its mandatory independent verification exposed the 53-bit Fourier-basis
+enclosure described above; the classified pass is therefore unverified and
+confirmation remains unopened. The v0.3 precision-context repair and disclosed
+regression are complete. Its fresh lifecycle paths point only to v0.3
+artifacts, and no v0.3 seal, opening, permit, or result exists. The repaired
+bytes must pass the full repository verification gate before a seal-only freeze
+commit and annotated v0.3 tag are created.
