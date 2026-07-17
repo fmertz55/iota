@@ -1,6 +1,6 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **v0.2 development ledger independently unverified with confirmation unopened; v0.3 precision repair pending freeze**
+Status: **v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 spectral-norm repair pending freeze**
 
 Started: `2026-07-14`
 
@@ -41,10 +41,14 @@ definitions. The v0.1 development evaluation stopped before ledger creation;
 no partial artifact was written or inspected. The v0.2 retry completed and
 committed its development ledger, but mandatory independent replay rejected a
 loose certified enclosure caused by a 53-bit Fourier-basis construction before
-the intended 256-bit context. Confirmation was not opened. Both earlier
-lineages remain immutable. The v0.3 repair retains the same scientific
-registration and uses fresh disabled lifecycle paths. The localization/resource
-clock, continuum correction, global spectral boundaries, and protocol audit are in
+the intended 256-bit context. The v0.3 precision repair completed another
+primary-passing development ledger; mandatory replay verified its three
+potential-free scenarios tightly but rejected the potential scenario because
+the rigorous maximum-Gram-row-sum norm bound was replay-loose under momentum
+coupling. Confirmation was not opened. All earlier lineages remain immutable.
+The v0.4 repair retains the same scientific registration and uses fresh
+disabled lifecycle paths. The localization/resource clock, continuum
+correction, global spectral boundaries, and protocol audit are in
 `LOCALIZATION_AUDIT.md`, `CONTINUUM_AUDIT.md`, and
 `GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`. The controlling human
 contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
@@ -62,7 +66,8 @@ remained on disclosed fixtures. The immutable v0.1 opening ended in
 rejected a complex Hermitian Gram matrix before ledger creation; no partial
 artifact was written or inspected. The v0.2 retry repaired that eigensolver but
 exposed the precision-context defect after its complete development ledger was
-committed. The v0.3 package constructs and transforms its certified input basis
-inside the declared bit budget and keeps the full registered reduction batch
-under 256-bit precision. Its fresh seal, tag, opening, permit, and result do
-not yet exist. See `DESIGN.md` for the scientific contrast and stop conditions.
+committed. The v0.3 package corrected that precision defect but exposed the
+potential-coupled row-sum looseness. The v0.4 package uses a rigorous
+similarity transform and Gershgorin eigenvalue enclosure for a tight certified
+spectral norm. Its fresh seal, tag, opening, permit, and result do not yet
+exist. See `DESIGN.md` for the scientific contrast and stop conditions.

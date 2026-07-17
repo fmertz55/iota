@@ -2,7 +2,7 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **v0.2 development ledger independently unverified with confirmation unopened; v0.3 precision repair pending freeze**
+Status: **v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 spectral-norm repair pending freeze**
 
 ## Question
 
@@ -161,10 +161,24 @@ gates remained on the passing side, but conservative slack of about `4.299e-14`
 violated the frozen `1e-65` replay-tightness allowance. Confirmation was not
 opened.
 
-The outcome-free v0.3 repair gives basis construction an explicit precision
-budget, encloses basis transformations and the entire registered reduction
-batch at 256 bits, and adds a disclosed `N=6` regression. Candidate, target,
+The outcome-free v0.3 repair gave basis construction an explicit precision
+budget, enclosed basis transformations and the entire registered reduction
+batch at 256 bits, and added a disclosed `N=6` regression. Candidate, target,
 maps, scenarios, states, partitions, thresholds, metrics, controls, and
-stopping rules are unchanged. No v0.3 development or confirmation partition
-may be opened before these repaired bytes are committed, explicitly sealed in
-a sole-file freeze commit, and bound by the declared v0.3 annotated tag.
+stopping rules were unchanged. Its primary development batch passed, and
+mandatory replay confirmed every potential-free scenario tightly, but the
+potential case exposed a second infrastructure defect: a maximum-Gram-row-sum
+spectral-norm enclosure was rigorous but too loose when the potential coupled
+registered momentum columns. Confirmation remained unopened.
+
+The outcome-free v0.4 repair chooses a finite-precision similarity basis from
+approximate Gram eigenvectors, rigorously inverts and applies that basis using
+ball arithmetic, and bounds the largest Gram eigenvalue with certified
+Gershgorin discs. The approximate basis is not proof-carrying; only the
+certified inverse, transform, and discs determine the enclosure. On the first
+affected potential comparison this reduces the certified bound from about
+`3.27664e-4` to `2.83580008164455e-4` and agrees with independent replay to
+`2.38e-73`. Scientific definitions and stopping rules remain unchanged. No
+v0.4 development or confirmation partition may be opened before these
+repaired bytes are committed, explicitly sealed in a sole-file freeze commit,
+and bound by the declared v0.4 annotated tag.

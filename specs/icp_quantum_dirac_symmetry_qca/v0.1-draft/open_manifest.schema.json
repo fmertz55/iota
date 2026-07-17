@@ -23,7 +23,7 @@
     "search_id": {"const": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001"},
     "stage": {"enum": ["development", "confirmation"]},
     "status": {"const": "outcomes_opened"},
-    "freeze_tag": {"const": "icp-quantum-dirac-symmetry-qca-001-v0.3-frozen"},
+    "freeze_tag": {"const": "icp-quantum-dirac-symmetry-qca-001-v0.4-frozen"},
     "freeze_commit": {"$ref": "#/$defs/commit"},
     "stage_parent_commit": {"$ref": "#/$defs/commit"},
     "outcome_seal": {"$ref": "#/$defs/binding"},
@@ -88,7 +88,7 @@
             ]
           },
           "result_path": {
-            "const": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.3.json"
+            "const": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.4.json"
           }
         }
       }
@@ -112,7 +112,7 @@
             ]
           },
           "result_path": {
-            "const": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.3.json"
+            "const": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.4.json"
           }
         }
       }

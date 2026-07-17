@@ -23,6 +23,7 @@ from src.quantum_dirac_symmetry_qca.production import (
     certified_input_basis,
     production_candidate_fixture,
 )
+from src.quantum_dirac_symmetry_qca.reducers import certified_spectral_norm_upper
 from src.quantum_dirac_symmetry_qca.runner import build_stage_ledger
 from src.quantum_dirac_symmetry_qca.spec import SymmetryQCASpecError
 
@@ -51,6 +52,19 @@ class OutcomeFreeExecutionPipelineTests(unittest.TestCase):
                 abs(spectral_norm_from_gram(value) - expected),
                 mp.mpf("1e-105"),
             )
+
+    def test_certified_norm_tightly_encloses_a_complex_gram_eigenvalue(self) -> None:
+        with ball_precision(256):
+            value = acb_mat([[1, 1j], [0, 2]])
+            expected = (arb(3) + arb(5).sqrt()).sqrt()
+            certified = certified_spectral_norm_upper(value)
+            self.assertLess(float(abs(certified - expected).upper()), 1e-70)
+
+    def test_certified_norm_handles_a_repeated_gram_eigenvalue(self) -> None:
+        with ball_precision(256):
+            value = acb_mat([[0, 1], [-1, 0]])
+            certified = certified_spectral_norm_upper(value)
+            self.assertLess(float(abs(certified - 1).upper()), 1e-70)
 
     def test_disclosed_n6_step_has_a_certified_adjoint(self) -> None:
         with ball_precision():

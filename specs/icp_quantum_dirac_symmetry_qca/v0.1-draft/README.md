@@ -3,10 +3,10 @@
 Current state:
 
 ```text
-outcome-free v0.3 precision repair implemented and under review
+outcome-free v0.4 certified spectral-norm repair implemented and under review
 localization, continuum, and global-spectrum audits complete
-v0.2 development ledger independently unverified; confirmation unopened
-v0.3 not frozen; no v0.3 lifecycle artifact exists
+v0.2 and v0.3 development ledgers independently unverified; confirmation unopened
+v0.4 not frozen; no v0.4 lifecycle artifact exists
 v0.1 execution incomplete with no result
 guarded primary and independent implementations present
 registered outcomes forbidden
@@ -50,7 +50,9 @@ uncomputed outcomes. The permit-gated registered candidate/target runner,
 canonical strict ledger and atomic writer, replay-tight algorithmically
 separate verifier, manifests, and authorization are complete. The v0.2 replay
 identified a low-precision certified-basis enclosure despite passing
-midpoints; v0.3 repairs precision ownership without changing the scientific
+midpoints; v0.3 repaired precision ownership but exposed a replay-loose
+potential-coupled row-sum norm enclosure. The v0.4 rigorous similarity and
+Gershgorin reducer repairs that enclosure without changing the scientific
 registration. The disabled preview remains execution-disabled and creates no
-artifact. No v0.3 registered evaluation is permitted before the later linear
+artifact. No v0.4 registered evaluation is permitted before the later linear
 seal/tag/open chain.

@@ -64,15 +64,35 @@ def _probability(value: acb) -> arb:
 
 
 def certified_spectral_norm_upper(matrix: acb_mat) -> arb:
+    """Return a tight certified spectral-norm enclosure.
+
+    A maximum Gram row sum is a valid norm upper bound, but it need not be
+    replay-tight when potential scattering couples the registered momentum
+    columns.  A general certified eigensolver can also fail to isolate exact
+    Gram degeneracies.  Use its approximate eigenvectors only to choose an
+    exact finite-precision basis, rigorously invert that basis, and apply
+    Gershgorin bounds after the certified similarity transform.  The
+    approximate step does not carry the proof: the inverse, transform, and
+    final discs are all ball enclosures.
+    """
+
     gram = matrix.conjugate().transpose() * matrix
+    try:
+        _, basis = gram.eig(right=True, algorithm="approx")
+        inverse = basis.inv()
+    except (ValueError, ZeroDivisionError) as exc:
+        raise SymmetryQCASpecError(
+            "certified spectral-norm similarity basis failed"
+        ) from exc
+    reduced = inverse * gram * basis
     maximum = arb(0)
-    for row in range(gram.nrows()):
-        row_sum = sum(
-            (gram[row, column].abs_upper() for column in range(gram.ncols())),
-            arb(0),
-        )
-        maximum = maximum.max(row_sum)
-    return maximum.upper().sqrt()
+    for row in range(reduced.nrows()):
+        upper = reduced[row, row].real.upper()
+        for column in range(reduced.ncols()):
+            if column != row:
+                upper += reduced[row, column].abs_upper()
+        maximum = maximum.max(upper)
+    return maximum.max(arb(0)).upper().sqrt()
 
 
 def operator_gram_residual_upper(columns: acb_mat) -> arb:

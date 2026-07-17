@@ -1,12 +1,12 @@
 # ICP Quantum-Dirac Symmetry-QCA Contract
 
-Protocol version: `0.1-draft`; implementation-seal retry: `v0.3`
+Protocol version: `0.1-draft`; implementation-seal retry: `v0.4`
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Date: `2026-07-16`
+Date: `2026-07-17`
 
-Status: **v0.1 execution incomplete with no result; v0.2 development ledger complete but independently unverified with confirmation unopened; v0.3 precision-context repair complete, disabled, and not frozen**
+Status: **v0.1 execution incomplete with no result; v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 certified spectral-norm repair complete, disabled, and not frozen**
 
 Base program contract: `ICP Minimal Informational Realization Contract 0.2-draft`
 
@@ -36,18 +36,19 @@ QFT, uniqueness, necessity, or global minimality.
 
 ## 2. Outcome boundary
 
-No v0.3 registered candidate state, trajectory, propagator, operator distance,
+No v0.4 registered candidate state, trajectory, propagator, operator distance,
 observable, zone-edge probability, or failure-control result may be generated
 or inspected before the fresh reviewed freeze/open chain. In particular,
 candidate sizes `N=320`, `640`, and `1280`, all registered scenarios, and all
 registered state witnesses remain forbidden until that chain exists.
 
-The present v0.3 package contains the prospective design, schemas, guarded
+The present v0.4 package contains the prospective design, schemas, guarded
 algebraic fixtures, repaired production registered evaluator, and independent
 replay. Its seal preview is disabled until the fresh freeze/open lifecycle is
-created. The archived v0.1 and v0.2 seal/open/result artifacts remain immutable
-provenance; a v0.3 opening or result before the new freeze invalidates the
-retry. The confirmation partition has not been opened or inspected.
+created. The archived v0.1, v0.2, and v0.3 seal/open/result artifacts remain
+immutable provenance; a v0.4 opening or result before the new freeze
+invalidates the retry. The confirmation partition has not been opened or
+inspected.
 
 Before freezing, the package must additionally contain and pass review for:
 
@@ -421,7 +422,7 @@ primary or broaden a pass claim.
 ## 19. Linear provenance
 
 The future history is: complete implementation; seal-only freeze commit and
-annotated tag `icp-quantum-dirac-symmetry-qca-001-v0.3-frozen`;
+annotated tag `icp-quantum-dirac-symmetry-qca-001-v0.4-frozen`;
 development-open-only child; development-result-only child; conditional
 confirmation-open-only child; confirmation-result-only child. Each child must
 bind its exact parent and every causal input. Reopening, overwriting, or
@@ -459,6 +460,25 @@ adds a disclosed `N=6` precision regression, and uses fresh lifecycle paths.
 It does not change the candidate, target, scenarios, states, partitions,
 thresholds, maps, metrics, gates, controls, or stopping rule.
 
+The v0.3 retry then froze at `9da2d87`, opened development at `ae64d7a`, and
+wrote its immutable development ledger at
+`712552b9d5f171a8a133b06c13ef6760bbfeb7f1`. Its primary gates classified the
+batch `development_passed`. Mandatory independent replay confirmed all three
+potential-free scenarios with certified slack below `7e-73`, but rejected the
+potential scenario because the primary certified spectral norm used the
+maximum Gram row sum. That bound is rigorous, yet coupling between registered
+momentum columns made it too loose for the `1e-65` replay-tightness rule.
+Confirmation was never opened.
+
+The v0.4 retry replaces only that norm reducer. Approximate Gram eigenvectors
+choose a finite-precision basis; a rigorous ball-arithmetic inverse and
+similarity transform then carry the proof, followed by certified Gershgorin
+upper discs for the largest Gram eigenvalue. On the first affected potential
+comparison, the old row-sum bound was about `3.27664e-4`; the repaired bound
+and the independently replayed norm both give `2.83580008164455e-4`, with
+certified slack `2.38e-73`. This changes no scientific definition, threshold,
+partition, scenario, state, map, metric, gate, control, or stopping rule.
+
 ## 20. Terminal classifications
 
 The only terminal labels are:
@@ -483,9 +503,12 @@ Fourier-orientation defect found during implementation was corrected before
 the v0.1 freeze. That development run was authorized but stopped before any
 result ledger was generated. The v0.2 retry completed its development ledger,
 but its mandatory independent verification exposed the 53-bit Fourier-basis
-enclosure described above; the classified pass is therefore unverified and
-confirmation remains unopened. The v0.3 precision-context repair and disclosed
-regression are complete. Its fresh lifecycle paths point only to v0.3
-artifacts, and no v0.3 seal, opening, permit, or result exists. The repaired
-bytes must pass the full repository verification gate before a seal-only freeze
-commit and annotated v0.3 tag are created.
+enclosure described above. The v0.3 repair corrected that defect and completed
+another primary-passing development ledger, but mandatory replay exposed the
+potential-coupled row-sum looseness described above. Both classified passes
+are therefore independently unverified, and confirmation remains unopened.
+The v0.4 spectral-norm repair and disclosed regressions are complete. Its fresh
+lifecycle paths point only to v0.4 artifacts, and no v0.4 seal, opening,
+permit, or result exists. The repaired bytes must pass the full repository
+verification gate before a seal-only freeze commit and annotated v0.4 tag are
+created.

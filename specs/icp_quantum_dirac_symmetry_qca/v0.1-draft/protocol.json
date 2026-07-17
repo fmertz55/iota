@@ -1,18 +1,18 @@
 {
   "protocol_version": "0.1-draft",
   "search_id": "ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001",
-  "date": "2026-07-16",
-  "status": "v0.2_development_unverified_v0.3_precision_repair_seal_ready_not_frozen",
+  "date": "2026-07-17",
+  "status": "v0.3_development_unverified_v0.4_spectral_norm_repair_seal_ready_not_frozen",
   "implementation_retry": {
-    "version": "v0.3",
+    "version": "v0.4",
     "predecessor_result": {
-      "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.2.json",
-      "commit": "1228249f545fa05c914bc1b2484bc6cd37f5c0d8",
-      "sha256": "d01787c73af1ebafb0b7ae483c2e4606e5806271903319152ea46258a839ee37"
+      "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.3.json",
+      "commit": "712552b9d5f171a8a133b06c13ef6760bbfeb7f1",
+      "sha256": "34d661b03340b14e47de09230b14d5a52f2e6982562e601058d43be400a8183a"
     },
     "predecessor_disposition": "complete development ledger classified development_passed but rejected by the mandatory independent replay before confirmation opening",
-    "defect": "the certified Fourier input basis was constructed at ambient 53-bit python-flint precision before the registered 256-bit context and stage-level certified reductions were not enclosed by one outer precision context",
-    "repair": "construct and transform the input basis under the declared bit budget and keep the entire registered construction reduction and serialization batch inside ball_precision(PRECISION_BITS)",
+    "defect": "the certified spectral norm used the maximum Gram row sum, a valid upper bound that was replay-tight for free scenarios but too loose when potential scattering coupled registered momentum columns",
+    "repair": "choose a finite-precision similarity basis from approximate Gram eigenvectors, rigorously invert that basis, transform the Gram matrix with certified ball arithmetic, and apply Gershgorin upper discs to tightly enclose its largest eigenvalue",
     "scientific_definitions_changed": false,
     "confirmation_partition_inspected": false
   },
@@ -301,12 +301,12 @@
     "interruption": "no scientific result"
   },
   "future_provenance": {
-    "freeze_tag": "icp-quantum-dirac-symmetry-qca-001-v0.3-frozen",
-    "outcome_seal": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/outcome_seal_v0.3.json",
-    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_open_manifest_v0.3.json",
-    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.3.json",
-    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_open_manifest_v0.3.json",
-    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.3.json",
+    "freeze_tag": "icp-quantum-dirac-symmetry-qca-001-v0.4-frozen",
+    "outcome_seal": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/outcome_seal_v0.4.json",
+    "development_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_open_manifest_v0.4.json",
+    "development_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.4.json",
+    "confirmation_open": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_open_manifest_v0.4.json",
+    "confirmation_result": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.4.json",
     "history": "implementation; seal-only freeze and annotated tag; development-open-only child; development-result-only child; conditional confirmation-open-only child; confirmation-result-only child"
   },
   "terminal_classifications": [

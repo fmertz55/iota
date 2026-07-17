@@ -2,9 +2,9 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Date: `2026-07-16`
+Date: `2026-07-17`
 
-Status: **v0.2 development ledger independently unverified with confirmation unopened; v0.3 precision repair pending freeze**
+Status: **v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 spectral-norm repair pending freeze**
 
 ## Audit question
 
@@ -35,11 +35,12 @@ contract now agree on:
   high momentum, mass endpoint, long horizon, rough potential, and collision
   lift.
 
-The v0.2 development ledger is an immutable experiment artifact, not a verified
-pass. Its mandatory replay exposed a precision-context defect before
-confirmation opening. The confirmation schedules and states remain uninspected.
-The v0.3 repair retains every scientific rule above and moves only corrected
-implementation bytes and lifecycle paths into a fresh disabled package.
+The v0.2 and v0.3 development ledgers are immutable experiment artifacts, not
+verified passes. Their mandatory replays exposed, respectively, a
+precision-context defect and a replay-loose potential-coupled norm enclosure
+before confirmation opening. The confirmation schedules and states remain
+uninspected. The v0.4 repair retains every scientific rule above and moves
+only corrected reducer bytes and lifecycle paths into a fresh disabled package.
 
 ## Seven global-spectrum boundaries
 
@@ -123,8 +124,18 @@ The later v0.2 development result exposed a separate infrastructure defect:
 precision context. Rebuilding the first failing `N=320` comparison entirely at
 256 bits matches the independent 110-digit result to about `1e-77`.
 
-The v0.3 repair makes basis precision explicit, wraps registered basis
-transformations and the complete stage reduction batch at 256 bits, and adds a
-disclosed `N=6` ambient-precision regression. The next action is full
+The v0.3 repair made basis precision explicit, wrapped registered basis
+transformations and the complete stage reduction batch at 256 bits, and added
+a disclosed `N=6` ambient-precision regression. That repair was effective for
+all three potential-free scenarios, where mandatory replay saw less than
+`7e-73` certified slack. The v0.3 potential scenario nevertheless failed the
+same replay-tightness rule because the maximum Gram row sum, though a valid
+upper bound, became loose under potential-induced momentum-column coupling.
+
+The v0.4 reducer instead uses an approximate eigensystem only to select a
+finite-precision basis, then rigorously inverts it, forms a certified similarity
+transform, and applies Gershgorin upper discs. The first affected comparison
+now agrees with the independent norm to `2.38e-73`. Repeated-eigenvalue and
+complex-Gram regressions cover the failure modes. The next action is full
 repository verification and hostile diff review; only then may the seal be
-created as a sole-file freeze commit and bound by the annotated v0.3 tag.
+created as a sole-file freeze commit and bound by the annotated v0.4 tag.
