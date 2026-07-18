@@ -14,7 +14,7 @@ concurrency:
 jobs:
   verify-and-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     steps:
       - name: Check out repository
@@ -40,6 +40,12 @@ jobs:
       - name: Reject stale generated evidence
         run: git diff --exit-code -- docs/definitions.md evidence/manifests paper/generated
 
+      - name: Install pinned Quantum-Dirac paper environment
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install \
+            --requirement quantum_dirac_paper/requirements.txt
+
       - name: Install minimal TeX toolchain
         run: |
           sudo apt-get update
@@ -47,14 +53,47 @@ jobs:
             latexmk \
             texlive-fonts-recommended \
             texlive-latex-base \
-            texlive-latex-recommended
+            texlive-latex-recommended \
+            texlive-latex-extra
 
       - name: Build paper
         run: make paper
+
+      - name: Audit archived Quantum-Dirac result
+        run: make validate-quantum-dirac-symmetry-qca-archive
+
+      - name: Build Quantum-Dirac manuscript
+        env:
+          SOURCE_DATE_EPOCH: "1784353304"
+        run: make quantum-dirac-paper
+
+      # Textual evidence products are platform-stable. The build regenerates
+      # and self-hashes the vector/raster figures, whose font rendering can
+      # differ across operating systems even with Matplotlib pinned.
+      - name: Reject stale Quantum-Dirac generated data
+        run: |
+          git diff --exit-code -- \
+            quantum_dirac_paper/generated/results.tex \
+            quantum_dirac_paper/generated/results_summary.json \
+            quantum_dirac_paper/generated/tables
 
       - name: Upload paper PDF
         uses: actions/upload-artifact@v7
         with:
           name: iota-working-paper
           path: build/paper/main.pdf
+          if-no-files-found: error
+
+      - name: Upload Quantum-Dirac paper artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: quantum-dirac-operational-role-paper
+          path: |
+            output/pdf/quantum_dirac_operational_role_manuscript.pdf
+            output/pdf/quantum_dirac_operational_role_manuscript.pdf.sha256
+            output/pdf/quantum_dirac_operational_role_manuscript.build.json
+            output/pdf/quantum_dirac_operational_role_manuscript.pi_sector_audit.json
+            output/pdf/quantum_dirac_layperson_companion.pdf
+            output/pdf/quantum_dirac_layperson_companion.pdf.sha256
+            output/pdf/quantum_dirac_layperson_companion.build.json
           if-no-files-found: error

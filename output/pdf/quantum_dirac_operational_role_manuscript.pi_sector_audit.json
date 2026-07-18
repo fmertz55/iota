@@ -1,0 +1,28 @@
+{
+  "analytic_probability_uppers": {
+    "DEV-DIRECT-POTENTIAL-H2": "162125730531835594569944950797230590649473617269482281212058908285146066743e-335",
+    "HOLDOUT-DIRECT-POTENTIAL-H3": "183340201803150128132838904005349140003152005358037353907139591944728021486e-238"
+  },
+  "buggy_sector_mode_counts": {
+    "1280": 0,
+    "320": 0,
+    "640": 0
+  },
+  "coarsest_intended_mode_abs_min": 120,
+  "content_addressed_inputs": {
+    "confirmation": "be5a9f85770e1d201abbc269c26da25d821f11f67db364c434473b5c70517e65",
+    "development": "89d7c65a37bf8d38fea3a87b7f656c02cae57664fcf6b53b725fb8ace7c228c4",
+    "protocol": "dc0e718dd176c1d831df50a34750aec3294dc0e97e3ae75a13113ff9a96022b6"
+  },
+  "corrected_non_gating_rough_control": "0.000000034860345440118994972002353502261002456128899030923084954215112790866512090876257",
+  "evidence_use": "audit_only_not_a_registered_outcome",
+  "intended_definition": "abs(q) >= 3*pi/4, equivalently 8*abs(r) >= 3*N",
+  "intended_sector_mode_counts": {
+    "1280": 321,
+    "320": 81,
+    "640": 161
+  },
+  "registered_threshold": "1e-24",
+  "sealed_implemented_predicate": "4*abs(r) >= 3*N",
+  "status": "post_result_pi_sector_defect_reproduced"
+}

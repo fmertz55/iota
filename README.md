@@ -46,6 +46,37 @@ question from which the experiments are derived:
 > Can finite local interactions produce constraints on reachable futures that
 > persist even when the local state that realizes them is replaced?
 
+### Quantum-Dirac construction result
+
+Two separately frozen local update specifications—a product walk and the
+established direct symmetry-derived QCA—recorded positive development and
+single-use confirmation classifications for the same bounded `1+1D` Dirac
+role core. Their uniform evolution bounds, observable witnesses, causal and
+symmetry checks, and pre-outcome analytic leakage bounds remain supported.
+
+A hostile post-result audit also found a shared factor-of-two error in the
+direct QCA's empirical pi-sector predicate: it selected an empty sector in both
+the primary and replay implementations. The measured-zero records and
+rough-potential zero are withdrawn; the content-addressed ledgers are preserved and
+the defect is documented. The valid analytic leakage bound used the correct
+sector boundary and remains far below its frozen gate.
+
+The two one-excitation free laws are exactly related by a half-cell time-frame
+conjugacy after mass-angle remapping, and their declared resource difference
+depends on nonminimal gate-fusion conventions. The product mass mixer's
+full-space collision phase was not frozen. The intact evidence therefore
+supports a qualified constructive-sufficiency claim for the shared bounded
+role core across two registered update specifications, not the complete
+originally registered direct role, architecture-class breadth, algebraically
+independent dynamics, or a resource advantage.
+
+- [Qualified two-registration result and dedicated manuscript](quantum_dirac_paper/README.md)
+- [Plain-language, figure-free manuscript](quantum_dirac_paper/lay_main.tex)
+- [Product-walk result](experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/RESULTS.md)
+- [Direct-QCA result](experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/RESULTS.md)
+- [Post-result reducer and equivalence audit](experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md)
+- [Global-spectrum audit](experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md)
+
 ### Minimal realization objective
 
 The program is not searching for physics that differs from current physics. It

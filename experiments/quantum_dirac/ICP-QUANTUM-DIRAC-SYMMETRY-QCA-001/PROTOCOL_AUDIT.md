@@ -4,7 +4,15 @@ Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
 Date: `2026-07-17`
 
-Status: **v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 spectral-norm repair pending freeze**
+Status: **historical prospective-protocol audit; v0.4 subsequently passed development, confirmation, and independent replay**
+
+> Post-result note (`2026-07-18`): the unchanged scientific registration
+> reached terminal classification
+> `constructive_sufficiency_passed_direct_symmetry_qca_sector`. See
+> `RESULTS.md` for the registered outcome and `POST_RESULT_AUDIT.md` for the
+> later withdrawal of the vacuous empirical pi-sector reducer. The correct
+> pre-outcome analytic tail remains valid. The audit below remains the
+> outcome-free rationale that preceded the v0.4 freeze.
 
 ## Audit question
 

@@ -1,4 +1,4 @@
-.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca verify paper clean-paper
+.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca validate-quantum-dirac-symmetry-qca-archive verify paper quantum-dirac-paper clean-paper clean-quantum-dirac-paper
 
 PYTHON ?= python3
 
@@ -34,10 +34,19 @@ validate-quantum-dirac:
 validate-quantum-dirac-symmetry-qca:
 	$(PYTHON) -m unittest discover -s tests/quantum_dirac_symmetry_qca -p 'test_*.py'
 
+validate-quantum-dirac-symmetry-qca-archive:
+	$(PYTHON) scripts/validate_archived_quantum_dirac_symmetry_qca.py --require-completion-tag
+
 verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca
 
 paper:
 	$(PYTHON) scripts/build_paper.py
 
+quantum-dirac-paper:
+	$(PYTHON) scripts/build_quantum_dirac_paper.py
+
 clean-paper:
 	latexmk -C -outdir=build/paper paper/main.tex
+
+clean-quantum-dirac-paper:
+	latexmk -C -outdir=build/quantum_dirac_paper quantum_dirac_paper/main.tex

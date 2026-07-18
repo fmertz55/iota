@@ -1,0 +1,99 @@
+\documentclass[10pt]{article}
+
+% Suppress volatile pdfTeX metadata.  The build driver also fixes
+% SOURCE_DATE_EPOCH so included Matplotlib PDFs receive stable timestamps.
+\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=15\fi
+
+\usepackage[margin=0.83in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,longtable}
+\usepackage{graphicx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\definecolor{linkblue}{HTML}{1F5A7A}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkblue,
+  citecolor=linkblue,
+  urlcolor=linkblue,
+  pdftitle={Frozen operational tests of a bounded Dirac role across two registered local quantum updates},
+  pdfauthor={Douglas Clark}
+}
+
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.12}
+\emergencystretch=1.5em
+
+\newcommand{\Kin}{\mathcal{K}_{\mathrm{in}}}
+\newcommand{\PW}{\mathrm{PW}}
+\newcommand{\DQCA}{\mathrm{D}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\iu}{\mathrm{i}}
+\newcommand{\registered}{\textsf{REGISTERED RESULT}}
+\newcommand{\analytic}{\textsf{ANALYTIC}}
+\newcommand{\conceptual}{\textsf{CONCEPTUAL}}
+
+\input{quantum_dirac_paper/generated/results.tex}
+
+\title{\textbf{Frozen Operational Tests of a Bounded Dirac Role\\
+Across Two Registered Local Quantum Updates}}
+\author{Douglas Clark}
+\date{Manuscript draft --- July 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The one-dimensional Dirac quantum cellular automaton and continuum limit are
+established.  We ask whether a bounded Dirac operational role can be tested
+prospectively across two separately registered local updates under frozen
+maps, interventions, resources, and verification rules.  The target is the
+$1+1$-dimensional Dirac equation on a periodic domain, with
+inputs restricted to an 18-dimensional low-momentum sector and horizon $T=2$.
+We compare an ordered product walk and the established symmetry-derived direct
+Dirac QCA, with an explicit two-layer hard-core-qubit localization.  Each
+update used four frozen development scenarios and two indivisible, single-use
+confirmation scenarios.  Primary dynamics used
+256-bit outward-rounded ball arithmetic; an algorithmically separate
+110-decimal-digit implementation reconstructed all four counted v0.4 stage
+ledgers, which recorded positive classifications.  Uniform evolution, witness,
+causal, symmetry, and analytic leakage evidence remains intact.  A post-result
+hostile audit found that both implementations shared a factor-of-two empirical
+zone-edge predicate error that selected an empty sector.  Those values and
+pass flags, plus a rough-potential control, are
+withdrawn.  The separate pre-outcome analytic bound used the correct boundary
+and remains below $1.84\times10^{-164}$ against a $10^{-24}$ gate.  The largest
+certified scenario distances were \ProductOperatorMax{} and
+\DirectOperatorMax{} for the product and direct updates.  The free
+one-excitation blocks are exactly related by a half-cell time-frame conjugacy
+after mass-angle remapping, and their declared resource counts depend on
+nonminimal gate-fusion conventions.  The intact evidence therefore supports
+qualified constructive sufficiency for the shared bounded role core across
+the two specifications, not the complete originally registered direct
+role, algebraically independent dynamics, architecture-class breadth,
+whole-zone Dirac equivalence, a canonical fermionic lift, minimality, or
+ontology.  An exact zone-edge opposite-mass pseudodoubler makes the global
+boundary explicit.
+\end{abstract}
+
+\input{quantum_dirac_paper/sections/01_introduction.tex}
+\input{quantum_dirac_paper/sections/02_operational_role.tex}
+\input{quantum_dirac_paper/sections/03_architectures.tex}
+\input{quantum_dirac_paper/sections/04_prospective_protocol.tex}
+\input{quantum_dirac_paper/sections/05_results.tex}
+\input{quantum_dirac_paper/sections/06_discussion.tex}
+\input{quantum_dirac_paper/sections/07_limitations.tex}
+\input{quantum_dirac_paper/sections/07b_conclusion.tex}
+\input{quantum_dirac_paper/sections/08_reproducibility.tex}
+\input{quantum_dirac_paper/sections/09_appendix.tex}
+
+\bibliographystyle{unsrtnat}
+\bibliography{quantum_dirac_paper/bibliography}
+
+\end{document}

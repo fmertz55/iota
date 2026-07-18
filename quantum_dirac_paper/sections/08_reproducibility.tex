@@ -1,0 +1,67 @@
+\section{Reproducibility and content-addressed provenance}
+\label{sec:reproducibility}
+
+All plotted registered-result values and generated result tables derive from
+the four counted v0.4 JSON stage ledgers.  The figure and table generator refuses to run if
+any ledger or registered specification hash differs from its recorded SHA-256.
+It parses serialized outward upper values, preserves scenario order, generates
+vector PDF and inspection PNG assets, and writes a sidecar manifest containing
+input, analytic-source, generator, and output hashes, tool versions, and the
+evidence class of every figure.  No registered number is manually transcribed
+into a plot.  Prose summaries are human-readable transcriptions and should be
+checked against the generated tables and ledgers.
+
+The product history is linear from freeze commit \texttt{d942c114} through
+development opening \texttt{cfaaabe9}, development result
+\texttt{e5a5c4e9}, confirmation opening \texttt{0181ce0f}, confirmation result
+\texttt{c7e9a216}, and verified documentation \texttt{490dab6b}.  The direct
+v0.4 history is linear from freeze \texttt{890962df} through development
+opening \texttt{f5f5d604}, development result \texttt{b96e70a1}, confirmation
+opening \texttt{6398124a}, and confirmation result \texttt{0795a6ef}.  Each
+freeze, opening, and result commit introduces exactly its one registered
+artifact.  Earlier direct lineages remain content-addressed and are not counted
+as positive evidence.
+
+The complete local build is
+\begin{verbatim}
+make quantum-dirac-paper
+\end{verbatim}
+which verifies ledger hashes, regenerates derived tables and all five figures,
+reproduces the post-result $\pi$-sector audit, runs the archived-result
+validator, and compiles this manuscript with \texttt{latexmk}.  A full
+expensive reconstruction can be run separately through the
+checkpoint-specific direct-QCA verification commands documented with the
+result.  The
+registered primary environment records \texttt{python-flint 0.9.0}, 256-bit
+Arb/Acb precision, and outward ball enclosures.  The replay records
+\texttt{mpmath 1.3.0} at 110 decimal digits.  The manuscript plotting layer
+uses pinned NumPy and Matplotlib versions only after ledger validation; it is
+not part of the scientific evaluator.
+
+The generated provenance manifest is
+\texttt{quantum\_dirac\_paper/generated/figure\_manifest.json}.  Human-readable
+terminal summaries sit beside each experiment.  The direct result summary
+also records the stage-specific replay receipt, ledger hashes, seal hash,
+freeze and result commits, terminal classification, the known shared
+$\pi$-predicate exception, and non-gating boundary controls.  The receipt
+certifies reproduction of the implemented checkpoint bytes; it does not cure
+or independently validate the withdrawn predicate.
+
+\begin{table}[t]
+  \centering
+  \caption{Content-addressed registered ledgers.  The direct-QCA positive
+  classifications are historical ledger fields qualified by the withdrawn
+  empirical $\pi$-sector reducer.  Full hashes are recorded in the generated
+  manifest and experiment result summaries.}
+  \label{tab:provenance}
+  \small
+  \input{quantum_dirac_paper/generated/tables/provenance.tex}
+\end{table}
+
+The complete ledger SHA-256 values are recorded in the generated manifest and
+the two experiment result summaries; Table~\ref{tab:provenance} prints
+unambiguous prefixes for reading.  The hashes make local evidence
+tamper-evident; absent an external timestamped deposit they are not themselves
+an archival guarantee, and they do not replace independent scientific review.
+The final PDF hash and build-tool versions are written beside the deliverable
+in \texttt{output/pdf}.

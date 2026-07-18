@@ -1,0 +1,53 @@
+{
+  "artifact": {
+    "path": "output/pdf/quantum_dirac_operational_role_manuscript.pdf",
+    "sha256": "310840043aae989eb1493b32c86980fad27d24d1dc1727c804a30e420d57724a",
+    "sha256_file": "output/pdf/quantum_dirac_operational_role_manuscript.pdf.sha256",
+    "size_bytes": 758854
+  },
+  "build": {
+    "content_addressed_result_commit": "0795a6efa0252411c66479cb87863349e20ec886",
+    "direct_pi_sector_audit": {
+      "path": "output/pdf/quantum_dirac_operational_role_manuscript.pi_sector_audit.json",
+      "sha256": "eaa7c56db86fbf139e2ec94b51be6c29a8032ec0dac6b5b4066bd23647bb5c80",
+      "status": "post_result_pi_sector_defect_reproduced"
+    },
+    "inputs_sha256": {
+      "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md": "0d5d756228fbda1d99d3dbac21cbfda3d35fe1d2f72f9d4ef59a911707879dd9",
+      "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/independent_verification_receipt_v0.4.json": "2f9eced72ccdf31bf6cb792033e814c40095852b811e6d19b6487f7176fed174",
+      "quantum_dirac_paper/bibliography.bib": "a27c5a53bd17e31843b6e9620d7e292a05ddb75dfd7a9ab9326d6a6ccaf08d1d",
+      "quantum_dirac_paper/generated/figure_manifest.json": "043a2278d13372668c851dd28d8747b1db04c0005058bc5d9cdf158f17af765a",
+      "quantum_dirac_paper/generated/results.tex": "00ddd302b34012be5f77b4eb166f69b2bf7bbaf077151743f7f53f60cb93216b",
+      "quantum_dirac_paper/generated/results_summary.json": "19e26345681288bc2349431d8457afc8d4bf5f49a26a5205e67dfdffca845708",
+      "quantum_dirac_paper/main.tex": "11588fcfa05b0980c4b711aa1db113e120144737387ca9f915de7bbe0cd62f66",
+      "quantum_dirac_paper/requirements.txt": "2a3c3a5a4c1a0a8af2a89630f1bdebb9817806dd9e92a60a7b57f3d37a9d6b81",
+      "quantum_dirac_paper/sections/01_introduction.tex": "a15e32c8a5887d959f57906e563a4cb893903c40dd9a78e256bdaae361217061",
+      "quantum_dirac_paper/sections/02_operational_role.tex": "dae036b6326684532946f183ed9bad836dbbf84961f90b56e80d81ac1f4bcb16",
+      "quantum_dirac_paper/sections/03_architectures.tex": "b23fd0a078848450b9a44fea5f4a90c6ae011a671f6b17be28961d2d9a36cadc",
+      "quantum_dirac_paper/sections/04_prospective_protocol.tex": "db7da13fe5f57db8502e4e95fb5c1a60ce17ebe69054c6d1b0aef9fa016e74d6",
+      "quantum_dirac_paper/sections/05_results.tex": "9497c16858dbc7e901706dd0fde6aa516e8606364941aa531723b381da30482a",
+      "quantum_dirac_paper/sections/06_discussion.tex": "4a114829dfb576979f71000484515da7d416fc5d415aabea773c9f5bd262eee4",
+      "quantum_dirac_paper/sections/07_limitations.tex": "071f6d16999a6e5a17b62f07fabefe6c16ad08489cdb61e270cd777490f3a6a8",
+      "quantum_dirac_paper/sections/07b_conclusion.tex": "d5a4ae96ac62efe68bfc48705ddc24d5868883f4f7ce8895e37e80742fb2d52d",
+      "quantum_dirac_paper/sections/08_reproducibility.tex": "7d042a6c700e3fe937af64b11f7674abd062a420f5367646fef8b1c3e774e062",
+      "quantum_dirac_paper/sections/09_appendix.tex": "979493ff3ba999e62332ba7ed1226967ebd2ee105b4d8073c419e794fb241133",
+      "scripts/audit_direct_qca_pi_sector.py": "03688811823516011bb4113db600f8daf53d68144f0b41973cd24d7d36072ac0",
+      "scripts/build_quantum_dirac_paper.py": "0912c8e84548a52b8237da8f860b20f8ca28b432062f9f81854dad258b499bed",
+      "scripts/generate_quantum_dirac_paper.py": "1c1e057461fa5246c8133194455e32113a5bd71aeb6b0a0b22e156305979443e",
+      "scripts/validate_archived_quantum_dirac_symmetry_qca.py": "b21d7d7525fcf725132ae4c68de76226b2e4807bbbe0b16f32080d6ed91eb1d6"
+    },
+    "source_date_epoch": "1784353304",
+    "source_date_utc": "2026-07-18T05:41:44Z"
+  },
+  "schema_version": "1.0",
+  "tool_versions": {
+    "latexmk": "Latexmk, John Collins, 15 June 2025. Version 4.87",
+    "matplotlib": "3.11.0",
+    "mpmath": "1.3.0",
+    "numpy": "2.4.6",
+    "pdftex": "pdfTeX 3.141592653-2.6-1.40.27 (TeX Live 2025)",
+    "python": "3.14.0",
+    "python-flint": "0.9.0",
+    "python_implementation": "CPython"
+  }
+}

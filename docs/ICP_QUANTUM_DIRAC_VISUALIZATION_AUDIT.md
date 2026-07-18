@@ -2,7 +2,50 @@
 
 Date: `2026-07-15`
 
-Status: **figure plan complete; no second-architecture registered figures authorized**
+Status: **minimum five-figure system implemented from both content-addressed v0.4 ledgers**
+
+## Post-result implementation update — 2026-07-18
+
+The direct symmetry-QCA v0.4 subsequently passed four development scenarios,
+two single-use confirmation scenarios, and independent replay. Its canonical
+development and confirmation ledgers now exist with SHA-256 values
+`89d7c65a37bf8d38fea3a87b7f656c02cae57664fcf6b53b725fb8ace7c228c4`
+and `be5a9f85770e1d201abbc269c26da25d821f11f67db364c434473b5c70517e65`.
+
+The dedicated manuscript and figure generator are now in
+`quantum_dirac_paper/` and `scripts/generate_quantum_dirac_paper.py`. The
+implemented main set is:
+
+1. frozen construction maps;
+2. architecture and resource comparison;
+3. certified two-registration convergence;
+4. global spectrum and registered-domain boundary; and
+5. evidence and claim boundary.
+
+Every numeric plot reads canonical JSON after checking content hashes, and
+`quantum_dirac_paper/generated/figure_manifest.json` records input/output
+provenance and evidence class. The pre-result status statements retained below
+are the historical plan that governed implementation; `PENDING` language no
+longer describes the current result.
+
+### Hostile-reader correction — 2026-07-18
+
+The implemented figures supersede two assumptions in the historical plan
+below. First, the one-excitation direct block is exactly a symmetric time-frame
+form of the mass-remapped product block. Figure 2 must therefore compare two
+separately registered decompositions and nonminimal protocol clocks; it must
+not assert two inequivalent architecture classes or a resource advantage.
+Second, the direct empirical `|q| >= 3*pi/4` reducer used a predicate that
+selected an empty sector. Figures 3--5 withdraw that empirical measurement and
+retain only the correctly derived analytic high-momentum certificate. These
+qualifications are part of the evidence display, not caption-only fine print.
+
+Accordingly, historical phrases below such as “two genuinely different local
+architectures,” “architectural breadth,” and “verified pi-sector leakage” are
+design-record language only. They are not current manuscript claims. The
+current five-figure system is: construction map; registered-update comparison;
+certified bounded convergence; spectrum and intended-domain boundary; and
+evidence/claim boundary.
 
 ## Audit result
 
@@ -30,7 +73,7 @@ style.
 | `config/theme.py` | dark-screen video theme | do not use for print figures |
 | `narration/script.md` | conceptual IOTA/constraint-transport outline | do not adapt as quantum-paper narration; several claims are broader than the bounded quantum result |
 | `paper/main.tex` and sections | separate constraint-lineage manuscript | do not insert quantum figures or sections |
-| parent v0.4 result ledgers | immutable structured data | authoritative source for verified product-walk result plots |
+| parent v0.4 result ledgers | content-addressed structured data | authoritative source for verified product-walk result plots |
 | direct-QCA audits and threshold certificate | analytic, outcome-free | authoritative source for analytic circuit/spectrum/bound figures |
 | direct-QCA result ledgers | nonexistent by design | no direct empirical panel until a valid registered disposition |
 
@@ -83,7 +126,7 @@ Recommended form: two aligned log-log facets with lattice spacing on the
 horizontal axis and certified operator-distance upper bound on the vertical
 axis.
 
-- Product-walk facet: plot all six immutable v0.4 scenario series at
+- Product-walk facet: plot all six content-addressed v0.4 scenario series at
   `delta=1/16,1/32,1/64`, with frozen absolute gates and a first-order guide.
 - Direct-QCA facet: after its valid result, plot the six new series at
   `delta=1/20,1/40,1/80`, using separate direct-only and potential-split gate
@@ -94,7 +137,7 @@ certificate is rationale, not outcome. Before a valid direct result, use only a
 clearly labeled empty layout in internal mockups; omit the facet from any
 public evidence figure.
 
-Source/status: parent panel can be built now from immutable ledgers; comparison
+Source/status: parent panel can be built now from content-addressed ledgers; comparison
 figure waits for direct disposition.
 
 Placement: primary results.
@@ -178,7 +221,7 @@ Placement: discussion/limitations or socialization materials.
 ## Build order
 
 1. Build Figures 1, 2, 5, and 6 from contracts and analytic audits.
-2. Add the product-walk panel of Figure 3 directly from the immutable v0.4
+2. Add the product-walk panel of Figure 3 directly from the content-addressed v0.4
    ledgers using a checked extraction script.
 3. Build S2–S5, keeping every direct lifecycle or outcome field visibly
    prospective.
@@ -226,4 +269,3 @@ report the witness gates in a table. If the second experiment ends without a
 valid result, Figures 3 and 4 must show only the verified parent data; the direct
 protocol and failure/incompletion boundary should be explained without
 outcome-like marks.
-

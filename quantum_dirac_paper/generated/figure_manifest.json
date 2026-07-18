@@ -1,0 +1,169 @@
+{
+  "analytic_sources": [
+    {
+      "path": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/LOCALIZATION_AUDIT.md",
+      "sha256": "dcc6606e184c7adfabef3281becc36b1f30881eb41667c48f4aac93325f8254e"
+    },
+    {
+      "path": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/CONTINUUM_AUDIT.md",
+      "sha256": "68823e07d0488796b43d95f2983ff16b0f7d83c0fd588199a3b93ffd95cf0aa4"
+    },
+    {
+      "path": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md",
+      "sha256": "92761cbd1f026968c86671ee8a037cf544e4d4aa7140f70a6e5078412bc1c2e5"
+    },
+    {
+      "path": "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md",
+      "sha256": "0d5d756228fbda1d99d3dbac21cbfda3d35fe1d2f72f9d4ef59a911707879dd9"
+    }
+  ],
+  "figure_classes": {
+    "fig01_construction_map": "conceptual",
+    "fig02_architecture_comparison": "analytic",
+    "fig03_certified_convergence": "registered result",
+    "fig04_spectrum_domain": "analytic",
+    "fig05_claim_boundary": "conceptual synthesis"
+  },
+  "generator": "scripts/generate_quantum_dirac_paper.py",
+  "generator_sha256": "1c1e057461fa5246c8133194455e32113a5bd71aeb6b0a0b22e156305979443e",
+  "inputs": [
+    {
+      "key": "product_development",
+      "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results_v0.4.json",
+      "sha256": "c9f445358a7ada5d8d20208c485529e6c6da93768f2ee1c9dea76afed2baab7b",
+      "status": "content-addressed registered result"
+    },
+    {
+      "key": "product_confirmation",
+      "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results_v0.4.json",
+      "sha256": "34c16fd959148d99a5e32c4836d69acb33794d548c11c8ac83986990742fac72",
+      "status": "content-addressed registered result"
+    },
+    {
+      "key": "direct_development",
+      "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.4.json",
+      "sha256": "89d7c65a37bf8d38fea3a87b7f656c02cae57664fcf6b53b725fb8ace7c228c4",
+      "status": "content-addressed registered result"
+    },
+    {
+      "key": "direct_confirmation",
+      "path": "output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.4.json",
+      "sha256": "be5a9f85770e1d201abbc269c26da25d821f11f67db364c434473b5c70517e65",
+      "status": "content-addressed registered result"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig01_construction_map.pdf",
+      "sha256": "ac791ccc07612d361839a98a504f862d695698aacff0d5903896a1a31e7df5e3"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig01_construction_map.png",
+      "sha256": "445b810afb08f4622e9dda871e1178e8b98c8cba6b4efe112e3041e7bc2ce871"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig02_architecture_comparison.pdf",
+      "sha256": "a780e19cf075ab73b4311faafbb8337a2bf67c3c9dc74fe98bddc654a4fa9bef"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig02_architecture_comparison.png",
+      "sha256": "c7ae2ecea4374b2bcaef6862e10fbae421ae9ee52f410b89581aa7cc17f565b5"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig03_certified_convergence.pdf",
+      "sha256": "c538c3f5ee072f852bb6651930c25f518e72adee63b4785e873b1282aca5d915"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig03_certified_convergence.png",
+      "sha256": "46590d9097567f9849595ca29be8ba2d8fbbf1446a48b693d08b56c9f6a9d66b"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig04_spectrum_domain.pdf",
+      "sha256": "a1823a6db3e6d32a7a912f655d1004ff6f67edef730f881ed18be8ac638ec2ea"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig04_spectrum_domain.png",
+      "sha256": "0ffa18ddb379264c7320b668a47a18f27ae788a4b7b8b50139e3ccd576b43a0f"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig05_claim_boundary.pdf",
+      "sha256": "6f5ebc8f99436a1092e7820f80c434b3ee64caa3da0923dd33180402c0af8f33"
+    },
+    {
+      "path": "quantum_dirac_paper/figures/generated/fig05_claim_boundary.png",
+      "sha256": "72a6545605e0770e9501d97cf61431f2bd1d3f0d7054e2312c709a6696837377"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/results.tex",
+      "sha256": "00ddd302b34012be5f77b4eb166f69b2bf7bbaf077151743f7f53f60cb93216b"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/results_summary.json",
+      "sha256": "19e26345681288bc2349431d8457afc8d4bf5f49a26a5205e67dfdffca845708"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/tables/architecture_comparison.tex",
+      "sha256": "39c3311fe954e34758fc84d1a0df22761f091eba3c26c2a80a4399a2e7111eca"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/tables/provenance.tex",
+      "sha256": "017f3a39026cb684206224dddbd77f357617bc27fac4427ac1c41a232d78b193"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/tables/registered_scenarios.tex",
+      "sha256": "ae5a1d4904720c0b97803b53209bbe8ff76d94bee77ed7184b4620cc630005ae"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/tables/registered_states.tex",
+      "sha256": "536e4c6bb3e6ee4ffc2206bc5d7a718db5f2bd582a937b12bcce81468f587ec4"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/tables/scenario_distances.tex",
+      "sha256": "c274d943d69bb4e967d47f2b72bed67d561e174d912e3e8c34c6a06831f284e5"
+    },
+    {
+      "path": "quantum_dirac_paper/generated/tables/witness_maxima.tex",
+      "sha256": "814c5fb2e069baf8f0120a97f2d83998ab6ec4d6553763d32b8172b91dee7215"
+    }
+  ],
+  "registered_spec_inputs": [
+    {
+      "architecture": "Product walk",
+      "key": "product_scenarios",
+      "kind": "scenario schedule",
+      "path": "specs/icp_quantum_dirac_role_recovery/v0.1-draft/scenarios.json",
+      "sha256": "2d583d01c356f688a8250c5137dc8b6aae646c7bfda7369d468dd13b298a7e83",
+      "status": "frozen registered specification"
+    },
+    {
+      "architecture": "Product walk",
+      "key": "product_states",
+      "kind": "state parameters",
+      "path": "specs/icp_quantum_dirac_role_recovery/v0.1-draft/states.json",
+      "sha256": "c1d06069aae873bbd042c013e6a9fb7acbb7a24267eb07a3f5c1ce905fafbe86",
+      "status": "frozen registered specification"
+    },
+    {
+      "architecture": "Direct QCA",
+      "key": "direct_scenarios",
+      "kind": "scenario schedule",
+      "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/scenarios.json",
+      "sha256": "f9d00c739f76ecda0081283e9349afabfc2fdadfb01e8123ec835639a699452a",
+      "status": "frozen registered specification"
+    },
+    {
+      "architecture": "Direct QCA",
+      "key": "direct_states",
+      "kind": "state parameters",
+      "path": "specs/icp_quantum_dirac_symmetry_qca/v0.1-draft/states.json",
+      "sha256": "bda3155d4fd9401b1eb26763647c3a4de68ac92a90076e93bd4d50eb681bdbcc",
+      "status": "frozen registered specification"
+    }
+  ],
+  "software_versions": {
+    "matplotlib": "3.11.0",
+    "numpy": "2.4.6",
+    "python": "3.14.0",
+    "python_implementation": "CPython"
+  }
+}

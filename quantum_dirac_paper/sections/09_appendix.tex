@@ -1,0 +1,135 @@
+\appendix
+
+\section{Scenario-level certified distances}
+\label{app:scenario-distances}
+
+Table~\ref{tab:scenario-distances} gives every scenario maximum used in
+Fig.~\ref{fig:convergence}.  Values are the serialized outward endpoints of the
+certified bounds.  ``Coarse,'' ``middle,'' and ``fine'' denote
+$N=256,512,1024$ for the product walk and $N=320,640,1280$ for the direct QCA.
+
+\begin{table}[htbp]
+  \centering
+  \caption{All registered scenario-level certified-distance upper bounds.}
+  \label{tab:scenario-distances}
+  \small
+  \input{quantum_dirac_paper/generated/tables/scenario_distances.tex}
+\end{table}
+
+\section{Frozen schedules and formula-defined state witnesses}
+\label{app:registered-inputs}
+
+The manuscript generator verifies the SHA-256 digest of each update
+registration's frozen scenario and state specification before emitting these tables.  Write
+$[t_0,t_1)$ for a schedule interval.  The registered mass is piecewise
+constant, $m(t)=m_j$ on its listed interval, and the potential entries mean
+\begin{equation}
+  V(x,t)=a_j\cos\!\left(2\pi h_j x/L+\phi_j\right),
+  \qquad t\in[t_{0,j},t_{1,j}),
+  \label{eq:registered-potential}
+\end{equation}
+with $V=0$ outside all listed intervals.  The product-walk specification has
+$h_j=1$ throughout.  Table~\ref{tab:registered-scenarios} is therefore an
+exact compact transcription, not a fit to the result ledgers.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Exact frozen mass and potential schedules.  PW denotes the product
+  walk; DQCA denotes the direct symmetry QCA.}
+  \label{tab:registered-scenarios}
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \input{quantum_dirac_paper/generated/tables/registered_scenarios.tex}
+\end{table}
+
+Every state was generated from parameters rather than stored amplitudes.  Let
+$\mathsf N[v]=v/\lVert v\rVert_2$.  For $p=(r_0,w,x_0)$,
+$k_r=2\pi r/L$, and $r=-4,\ldots,4$, first form the raw spinor-valued packet
+and then normalize that packet individually:
+\begin{align}
+ g_s(r;p,m_0)
+   &=e^{-(r-r_0)^2/(2w^2)}e^{-\iu k_rx_0}\chi_s(k_r;m_0),\\
+ \psi_s(p;m_0)&=\mathsf N[g_s(\,\cdot\,;p,m_0)],
+ \qquad s\in\{+,-\}.
+ \label{eq:registered-packet}
+\end{align}
+Here $\chi_s$ is the normalized $s$-energy eigenvector of
+$k_r\sigma_z+m_0\sigma_x$, fixed by taking its first nonzero component real
+and positive, and $m_0=m(0)$ for the scenario.  Positive and negative states
+use $s=+$ and $s=-$, respectively.  The implementation then normalizes each
+composite separately after combining already normalized packets:
+\begin{align}
+ \psi_{\mathrm{int}}(p_1,p_2,\phi;m_0)
+   &=\mathsf N\!\left[\psi_+(p_1;m_0)+e^{\iu\phi}\psi_+(p_2;m_0)\right],\\
+ \psi_{\mathrm Z}(p,\phi;m_0)
+   &=\mathsf N\!\left[\psi_+(p;m_0)+e^{\iu\phi}\psi_-(p;m_0)\right].
+ \label{eq:registered-composite-states}
+\end{align}
+Table~\ref{tab:registered-states} records every exact parameter tuple.  For
+interference rows, $p_1$ and $p_2$ are packet tuples; for all other rows,
+$p=(r_0,w,x_0)$.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Exact frozen formula parameters for all state witnesses.}
+  \label{tab:registered-states}
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \input{quantum_dirac_paper/generated/tables/registered_states.tex}
+\end{table}
+
+\section{Analytic structure and exact boundaries}
+
+For the direct free block, write
+\begin{equation}
+ U_\Delta(k)=aI-\iu(b_x\sigma_x+b_z\sigma_z),\qquad
+ \mu=m\Delta,\quad n=\sqrt{1-\mu^2},\quad
+ a=n\cos(k\Delta),\quad b_x=\mu,\quad b_z=n\sin(k\Delta).
+\end{equation}
+Let $\rho=\sqrt{b_x^2+b_z^2}$ and
+$\omega=\operatorname{atan2}(\rho,a)$ on the principal branch.  Because
+$a^2+\rho^2=1$, the principal effective generator is exactly
+$H_{\mathrm{eff}}=\frac{\omega}{\Delta\rho}
+(b_x\sigma_x+b_z\sigma_z)$, with its continuous $\rho\to0$, $a\to+1$ value
+understood in the registered branch-safe neighborhood of the identity.
+Expanding $\omega/\rho$ and the two
+axis components gives Eqs.~\eqref{eq:direct-effective} and \eqref{eq:k2}.  An independent matrix-log
+fixture reconstructs the same generator from a power series without calling
+the axis--angle implementation.  Halving $\Delta$ produces the predeclared
+$1/16$ corrected-generator residual ratio and $1/8$ one-step propagator ratio
+on disclosed nonregistered fixtures.
+
+The global direct spectrum follows from
+\begin{equation}
+ \det U_\mu(q)=1,\qquad \operatorname{tr}U_\mu(q)=2n\cos q.
+\end{equation}
+For $0<|\mu|<1$, group velocity obeys
+\begin{equation}
+ |v(q)|\le n=\sqrt{1-\mu^2}\le1,
+\end{equation}
+consistent with radius-one causal support.  At $|\mu|=1$ the bands are flat at
+$\pm\pi/2$ and group velocity is zero.  For $|\mu|>1$, $n$ is imaginary and
+the displayed family is not unitary.  The registered direct margin
+$|\mu|\le3/100$ at the coarsest step is therefore strict.
+
+The exact hard-core collision choice appears in Eq.~\eqref{eq:edge-gate}.  For a
+number-preserving one-particle unitary $V$, canonical fermionic second
+quantization acts on double occupation by $\det V$.  Both the edge-scatter
+one-particle block and the routing SWAP have determinant $-1$, while the
+declared qubit gates use phase $+1$.  This algebraic distance of $2$ is the
+post-primary collision control reported in Sec.~\ref{sec:results}.
+
+\section{Interpretation of confirmation}
+
+The primary comparison is a deterministic, certified statement uniform over
+the finite input sector.  Consequently, the confirmation partition does not
+estimate a frequentist population effect.  Its evidential role is procedural
+and interventional: exact schedules and state formulas unused in update
+construction or development assessment are opened once, propagated by the sealed code, and required to
+pass without replacing any map, threshold, or candidate byte.  Reporting
+scenario and witness counts should therefore not be read as a sample-size
+claim.  The correctly implemented members of the registered finite test suite
+passed, and the evolution certificate covers every normalized state in $\Kin$
+for those scenarios.  The empirical $\pi$-sector member is excluded from that
+sentence because its empty-set reducer is withdrawn under
+Sec.~\ref{sec:post-result-audit}.

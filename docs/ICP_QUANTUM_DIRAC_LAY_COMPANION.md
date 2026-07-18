@@ -1,231 +1,216 @@
-# Can Local Information Rules Reproduce a Dirac Particle’s Behavior?
+# Can Local Information Rules Reproduce a Dirac Particle's Behavior?
 
 Lay companion for socialization
 
-Version: `0.1-pre-outcome`
+Version: `0.2-post-result`
 
-Date: `2026-07-15`
+Date: `2026-07-18`
 
-Status: **one architecture verified; a genuinely different second architecture designed but not yet run**
+Status: **two registered local updates reached positive classifications; one
+shared empirical reducer is withdrawn after hostile audit**
 
 ## The one-minute version
 
 This project asks a disciplined construction question:
 
-> If we begin with local quantum-information units connected only to nearby
-> neighbors, can their update rules reproduce a carefully defined slice of the
-> behavior described by the Dirac equation?
+> If we begin with explicitly declared local quantum-information units that
+> interact only with nearby neighbors, can two separately frozen update
+> specifications reproduce the same carefully bounded slice of behavior
+> described by the Dirac equation?
 
-For one local architecture, the answer was yes within a deliberately limited
-test domain. It matched the frozen target across several lattice resolutions,
-interventions, quantum states, observable measurements, symmetry checks, and
-an independent replay.
+Within the registered test domain, both ledger lineages recorded positive
+classifications.
+The first used an ordered product of local phase, mass-mixing, and transport
+operations. The second used the established direct symmetry-derived Dirac
+quantum cellular automaton, localized as an edge scatter followed by an
+on-site routing swap. Each ledger classifier marked the frozen development
+cases and once-opened confirmation partition as passing, and an algorithmically
+separate high-precision implementation reconstructed the recorded computation.
+The direct classification carries the empirical-reducer exception below.
 
-That result does **not** mean that information has been proved to be the
-substance of nature. It does not derive quantum theory, particles, space, time,
-or the Dirac equation from nothing. The quantum building blocks, lattice,
-update schedule, constants, and comparison maps were all supplied explicitly.
+The strongest safe conclusion is qualified constructive sufficiency for the
+intact shared bounded core across these two registered update specifications.
+It does
+**not** mean that information has been proved to be the substance of nature.
+It does not derive quantum theory, particles, space, time, or the Dirac
+equation from nothing. The quantum building blocks, lattice, update schedule,
+constants, target equation, and comparison maps were supplied explicitly.
 
-The next question is whether the success belongs only to that first design or
-extends to a second, independently organized local architecture. The second
-experiment has now been designed and mathematically audited, but its registered
-test has not been opened or run.
+A later hostile audit found that the direct QCA's empirical pi-sector
+predicate had a factor-of-two error and selected no modes in both primary and
+replay implementations. Those measured-zero values and one rough-potential
+control are withdrawn. The pre-outcome analytic leakage calculation used the
+correct boundary and remains far below its frozen threshold, so the central
+low-band conclusion survives with an explicit qualification.
 
 ## What ICP means here
 
-ICP is the program hypothesis that a system’s present informational condition
-is the part of its interaction history that is still causally retained in its
-current local states and relationships—and therefore still constrains what can
-happen next under stated interventions.
+ICP is the program hypothesis that a system's present informational condition
+is the part of its interaction history still retained in current local states
+and relations, and therefore still able to constrain reachable futures under
+stated interventions.
 
-In plain language: two pasts count as informationally different now only if
-they leave some present difference that can affect reachable futures.
+Here that idea becomes a construction test. We declare:
 
-That idea becomes a construction program. We declare:
+- local information-bearing units;
+- local update rules and interaction geometry;
+- the target states and their encoding;
+- the measurements used for comparison;
+- how target interventions map to construction interventions; and
+- the resources, precision, and accuracy gates.
 
-- the local information-bearing units;
-- the rules by which they update;
-- which units can interact;
-- how target states are encoded;
-- what measurements are compared; and
-- how an intervention in the target theory is represented in the construction.
-
-Then we ask whether the construction recovers a frozen causal role from current
-physics. The target theory is the judge. A mismatch is a construction failure,
-not evidence for new physics.
+The target theory is the judge. A mismatch is a construction failure, not
+evidence for new physics.
 
 ## Why use the Dirac equation?
 
-The Dirac equation is a demanding benchmark. Even in one space dimension and
-for a single particle, it combines:
+Even in one space dimension and for one particle, the Dirac equation combines
+two coupled directional components, unitary evolution, a fixed maximum causal
+speed, interference, positive- and negative-energy behavior,
+Zitterbewegung, and nontrivial response to mass and scalar-potential changes.
 
-- two coupled directional components;
-- unitary quantum evolution;
-- a fixed maximum causal speed;
-- interference between amplitudes;
-- positive- and negative-energy behavior;
-- characteristic oscillatory motion called Zitterbewegung; and
-- nontrivial responses to changes in mass and scalar potential.
-
-This makes it more informative than asking whether a lattice pattern merely
-looks particle-like. The construction must reproduce a bundle of related
-operational behaviors under fixed maps and interventions.
+That is much more demanding than asking whether a lattice pattern merely looks
+particle-like. The construction must reproduce a linked bundle of behaviors
+under fixed maps and interventions.
 
 ## What was supplied, and what was constructed
 
-The work does not begin from a blank slate.
+Supplied ingredients included:
 
-Supplied ingredients include:
-
-- quantum two-level occupation modes;
-- a periodic one-dimensional lattice;
-- a local update clock and nearest-neighbor geometry;
-- the target Dirac equation and a bounded low-momentum domain;
+- two-level quantum occupation modes;
+- a periodic one-dimensional nearest-neighbor lattice;
+- a local clock;
+- the bounded `1+1D` Dirac target;
 - mass and scalar-potential schedules;
-- numerical precision and error rules; and
-- the encoding, measurement, and intervention maps used for comparison.
+- 256-bit outward-rounded primary arithmetic and error rules; and
+- fixed encoding, measurement, and intervention maps.
 
-What is constructed is a fully explicit local mechanism that uses those
-ingredients. Every causal substep is counted. Long-distance translation cannot
-be hidden as a free relabeling, and a real-valued parameter cannot conceal an
-arbitrary lookup table.
+The constructed objects were explicit local mechanisms. Every causal substep
+was counted. Long-distance translation could not be hidden as free relabeling,
+and formula-defined interventions could not be replaced by fitted site tables.
 
-This distinction matters. The result is about **constructive sufficiency under
-declared inputs**, not creation from no assumptions.
+The result is therefore about **constructive sufficiency under declared
+inputs**, not creation from no assumptions.
 
-## What the first experiment established
+## The frozen test
 
-The first architecture used a product of local quantum operations: a potential
-phase when active, a local mass-mixing operation, and two layers of swaps that
-move the two directional modes in opposite directions.
+Both registrations used the same role core:
 
-Before any registered outcome was inspected, the experiment fixed:
-
-- four development scenarios and two single-use confirmation scenarios;
-- three successively finer lattices;
-- a whole 18-dimensional low-momentum input space;
-- positive-energy, negative-energy, interference, and Zitterbewegung state
-  witnesses;
+- periodic length `L=16` and horizon `T=2`;
+- an 18-dimensional low-momentum input sector;
+- positive-energy, negative-energy, interference, and Zitterbewegung states;
+- mass changes and scalar-potential interventions;
 - position, momentum, current, fidelity, symmetry, conservation, and causal
-  gates; and
-- an algorithmically separate verification route.
+  checks; and
+- a separately implemented high-precision reconstruction.
 
-The construction passed every development and confirmation gate. The largest
-certified operator discrepancy decreased from about `0.0300` to `0.0150` to
-`0.00750` across the three refinements, comfortably inside the frozen gates.
-All observable, causal, symmetry, resource, and independent-replay checks also
-passed.
+The numerical details were separately frozen for each update. The
+product walk used lattice sizes 256, 512, and 1024. The direct QCA used 320,
+640, and 1280, along with tighter gates justified by its different continuum
+error structure. Neither update inherited a pass, held-out case, or
+threshold from the other.
 
-The supported statement is narrow but real:
+## What passed
 
-> The declared product-walk quantum-information construction is sufficient to
-> realize the frozen, bounded, single-particle `1+1D` Dirac role at the
-> registered accuracy.
+The product walk passed four development scenarios and two single-use
+confirmation scenarios. Its largest certified evolution distance decreased
+from about `0.0300` to `0.0150` to `0.00750` across refinement. All observable,
+causal, symmetry, resource, and replay checks passed.
 
-## Why a second architecture matters
+The direct QCA ledger classified four development and two single-use
+confirmation scenarios as passing. Its largest direct-only certified distance decreased from about
+`0.000560` to `0.000140` to `0.00003498`; its largest potential-split
+discrepancy decreased from about `0.002760` to `0.001376` to `0.0006879`.
+All uniform evolution, observable, causal, symmetry, and analytic leakage
+checks remain supported. The empirical pi-sector values and their duplicated
+replay are not valid evidence and have been withdrawn.
 
-One successful implementation can be a special feature of its design. Breadth
-requires changing the organization, not merely changing parameters.
+The clean conclusion is:
 
-The second candidate is a direct Dirac quantum cellular automaton. In it, mass
-coupling and directional propagation are entries of one symmetry-derived
-update law. Its local circuit uses a mass-bearing edge scatter followed by an
-on-site swap. This is structurally different from the first architecture’s
-ordered mass-mix and transport product.
+> Two separately registered strictly local quantum-information updates support
+> the shared frozen core of a bounded `1+1D` Dirac role under explicit
+> intervention, precision, and verification accounting. The direct ledger's
+> empirical zone-edge gate is withdrawn.
 
-The comparison is intentionally strict:
+The direct law is established prior art, not an automaton invented by this
+project. Its free one-excitation block is exactly related to the product walk
+by a half-cell time-frame change after remapping the mass angle. Adjacent
+product gates can be fused into the same gate form, so the reported depth and
+gate-work difference is a frozen protocol clock, not a minimal resource
+advantage. The novelty is the sequential, separately prospective comparison,
+explicit provenance, and bounded claim audit—not discovery of the direct QCA
+or architecture-class breadth.
 
-- it uses fresh lattice sizes, scenarios, state witnesses, and thresholds;
-- it does not inherit the first experiment’s positive result;
-- it counts the full local Hilbert space, not only the convenient
-  single-excitation vector;
-- it distinguishes its hard-core qubit behavior from a canonical fermionic
-  many-particle lift; and
-- it audits the entire lattice momentum zone, even though the registered claim
-  is low-momentum.
+## The important spectrum boundary
 
-The second architecture has an important known boundary. Near the edge of the
-lattice momentum zone, it contains a high-quasienergy partner that resembles a
-Dirac mode with the opposite mass sign. The bounded experiment therefore tracks
-leakage toward that zone edge and explicitly excludes any claim of global,
-doubler-free Dirac equivalence.
+The direct QCA succeeds only within the declared low-momentum role. Near the
+edge of the lattice momentum zone, it has an exact high-quasienergy partner
+that behaves locally like a Dirac mode with the opposite mass sign after a
+Floquet phase shift. This is a pi-mode pseudodoubler.
 
-## Where the second experiment stands
+The experiment kept its input away from that sector and analytically charged
+potential-driven leakage toward it. The analytic bound is valid, but the
+separate empirical monitor was implemented with an empty sector and is
+withdrawn. The pseudodoubler does not invalidate the bounded low-band result.
+It does forbid a claim that the same construction is globally
+Dirac-equivalent, doubler-free, or automatically safe for a filled interacting
+vacuum.
 
-The second experiment has completed its outcome-free design stage.
+## The important many-particle boundary
 
-Completed work includes:
+The direct circuit is a valid local qubit QCA on its full Hilbert space, but it
+chooses a hard-core collision phase. A canonical fermionic lift would use the
+opposite phase for double occupation. The two choices agree for the one
+particle tested here and can differ for collisions, multiparticle spectra, and
+interactions.
 
-- an exact local-circuit realization on the full qubit space;
-- continuum and complete-spectrum derivations;
-- fresh target, map, intervention, state, partition, and metric definitions;
-- explicit zone-edge and collision-sector controls;
-- strict code guards that reject every registered lattice before freeze; and
-- an outward-rounded mathematical certificate showing that the proposed
-  absolute error gates have a defensible scale, including potential-generated
-  higher-momentum tails.
+The earlier product registration did not comparably freeze the mass mixer's
+vacuum and double-occupation phases. The present one-particle study therefore
+does not establish a product-versus-direct collision distinction.
 
-Still missing are the production registered implementation, a separate
-registered verifier, prospective manifests, lifecycle authorization, and the
-formal freeze/open chain. No registered outcome, pass, or failure exists for
-this architecture yet.
-
-## What either second result would mean
-
-If the second architecture passes without changing the frozen design, the
-strongest warranted conclusion would be:
-
-> Two independently designed strictly local quantum-information architectures
-> recover the same bounded Dirac causal role under explicit intervention,
-> resource, and verification accounting.
-
-That would strengthen architectural breadth. It still would not establish
-ontology, uniqueness, necessity, or all-scale equivalence.
-
-If it fails cleanly, that is also informative. A frozen failure can identify
-which architectural feature does not support the same role or accuracy. The
-protocol forbids tuning the failed architecture after seeing confirmation and
-then presenting the revision as the original test.
+So this work does not establish a fermionic quantum field theory. That would
+require a new, symmetrically specified prospective experiment.
 
 ## What this work does not claim
 
 It does not claim that:
 
 - the universe is literally a lattice or cellular automaton;
-- information has been proved to be the unique foundation of reality;
+- information is the unique foundation of reality;
 - quantum mechanics or the Dirac equation was derived from no assumptions;
-- a single-particle match establishes quantum field theory;
-- the hard-core qubit construction is a canonical fermionic theory;
-- the model works at every momentum, mass, duration, or resolution;
-- the construction is minimal among all possible quantum architectures; or
+- the direct Dirac automaton or its known dynamics were discovered here;
+- the construction works at every momentum, duration, mass, or resolution;
+- one-particle agreement establishes a canonical fermionic or interacting
+  quantum field theory;
+- two registered updates establish an inequivalent architecture class;
+- the declared depth and gate counts are minimal or a hardware advantage;
+- replay independently validates the withdrawn pi-sector predicate;
+- either construction is necessary, unique, or minimal; or
 - a known lattice artifact is new physics.
 
 ## A useful way to talk about the project
 
 Good short description:
 
-> We are testing whether explicitly counted local quantum-information rules can
-> reconstruct a frozen causal role from the `1+1D` Dirac equation. One local
-> architecture passed a preregistered and independently replayed test. A second,
-> genuinely different architecture has been designed but not yet run.
+> We tested whether two separately frozen local quantum-information updates
+> could recover the same bounded Dirac role core. Both ledgers recorded positive
+> development and single-use confirmation classifications. A later audit
+> withdrew one shared empirical pi-sector reducer while preserving the valid
+> analytic leakage bound; the exact time-frame relation and nonminimal resource
+> clocks are disclosed.
 
 Description to avoid:
 
 > We proved that reality is information and derived the electron from bits.
 
-The first description states the actual evidence. The second erases the
-supplied assumptions, the bounded domain, and the single-particle claim.
+The first states the evidence. The second erases the supplied assumptions,
+bounded domain, single-particle scope, and prior literature.
 
 ## Technical traceability
 
-The verified first result is summarized in
-`experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/RESULTS.md`.
-The second architecture’s current status is audited in
-`experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/PROTOCOL_AUDIT.md`.
-Its complete claim boundary is
-`docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
-
-This companion must be revised after the second architecture reaches a valid
-registered disposition. Until then, every socialization use should retain the
-status line at the top.
-
+- Product result: `experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/RESULTS.md`
+- Direct-QCA result: `experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/RESULTS.md`
+- Post-result reducer/equivalence audit: `experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md`
+- Direct global-spectrum boundary: `experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md`
+- Dedicated technical manuscript: `quantum_dirac_paper/main.tex`
+- Figure-free lay manuscript: `quantum_dirac_paper/lay_main.tex`

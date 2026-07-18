@@ -275,10 +275,15 @@ lifting in general.
 ```
 
 The prospective project-level contribution remains the operational and
-reproducible combination of a frozen causal-role benchmark, two genuinely
-different architectures, explicit resource and collision-sector accounting,
-prospective development/confirmation separation, and independent replay.  The
-global audit narrows that claim; it does not enlarge it.
+reproducible combination of a frozen causal-role benchmark, two separately
+registered local update specifications, declared protocol-resource accounting,
+prospective development/confirmation separation, and algorithmically separate
+replay.  A later post-result comparison showed that the free one-excitation
+blocks are exact time-frame conjugates after mass-angle remapping, while the
+product registration did not freeze the full-space phases needed for a
+collision-sector comparison.  The global and post-result audits therefore
+narrow this to enumerative registered-specification coverage; they do not
+support two inequivalent architecture classes or enlarge the claim.
 
 The dated search record is
 `docs/literature/symmetry_qca_global_spectrum_2026-07-15.md`.

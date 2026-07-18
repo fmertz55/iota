@@ -1,0 +1,42 @@
+{
+  "artifact": {
+    "path": "output/pdf/quantum_dirac_layperson_companion.pdf",
+    "sha256": "ec8aed96a773219e941050cf70c5b7cdf3687c3dad81e3cc0130f3400767745c",
+    "sha256_file": "output/pdf/quantum_dirac_layperson_companion.pdf.sha256",
+    "size_bytes": 140256
+  },
+  "build": {
+    "content_addressed_result_commit": "0795a6efa0252411c66479cb87863349e20ec886",
+    "direct_pi_sector_audit": {
+      "path": "output/pdf/quantum_dirac_operational_role_manuscript.pi_sector_audit.json",
+      "sha256": "eaa7c56db86fbf139e2ec94b51be6c29a8032ec0dac6b5b4066bd23647bb5c80",
+      "status": "post_result_pi_sector_defect_reproduced"
+    },
+    "inputs_sha256": {
+      "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md": "0d5d756228fbda1d99d3dbac21cbfda3d35fe1d2f72f9d4ef59a911707879dd9",
+      "experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/independent_verification_receipt_v0.4.json": "2f9eced72ccdf31bf6cb792033e814c40095852b811e6d19b6487f7176fed174",
+      "quantum_dirac_paper/bibliography.bib": "a27c5a53bd17e31843b6e9620d7e292a05ddb75dfd7a9ab9326d6a6ccaf08d1d",
+      "quantum_dirac_paper/generated/results.tex": "00ddd302b34012be5f77b4eb166f69b2bf7bbaf077151743f7f53f60cb93216b",
+      "quantum_dirac_paper/generated/results_summary.json": "19e26345681288bc2349431d8457afc8d4bf5f49a26a5205e67dfdffca845708",
+      "quantum_dirac_paper/lay_main.tex": "8d38d29635f4ba222037bcf44ae7f576212baa85c8937b5ec33010472baac6e5",
+      "quantum_dirac_paper/requirements.txt": "2a3c3a5a4c1a0a8af2a89630f1bdebb9817806dd9e92a60a7b57f3d37a9d6b81",
+      "scripts/audit_direct_qca_pi_sector.py": "03688811823516011bb4113db600f8daf53d68144f0b41973cd24d7d36072ac0",
+      "scripts/build_quantum_dirac_paper.py": "0912c8e84548a52b8237da8f860b20f8ca28b432062f9f81854dad258b499bed",
+      "scripts/generate_quantum_dirac_paper.py": "1c1e057461fa5246c8133194455e32113a5bd71aeb6b0a0b22e156305979443e",
+      "scripts/validate_archived_quantum_dirac_symmetry_qca.py": "b21d7d7525fcf725132ae4c68de76226b2e4807bbbe0b16f32080d6ed91eb1d6"
+    },
+    "source_date_epoch": "1784353304",
+    "source_date_utc": "2026-07-18T05:41:44Z"
+  },
+  "schema_version": "1.0",
+  "tool_versions": {
+    "latexmk": "Latexmk, John Collins, 15 June 2025. Version 4.87",
+    "matplotlib": "3.11.0",
+    "mpmath": "1.3.0",
+    "numpy": "2.4.6",
+    "pdftex": "pdfTeX 3.141592653-2.6-1.40.27 (TeX Live 2025)",
+    "python": "3.14.0",
+    "python-flint": "0.9.0",
+    "python_implementation": "CPython"
+  }
+}

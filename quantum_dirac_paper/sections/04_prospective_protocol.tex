@@ -1,0 +1,167 @@
+\section{Prospective protocol and independent reconstruction}
+\label{sec:protocol}
+
+\subsection{Separate registrations, common logic}
+
+The two studies share a target-domain and decision vocabulary but not a
+numerical registration.  The \emph{same role} means the same continuum target,
+input sector, map semantics, witness families, and causal, symmetry, and
+resource categories.  Candidate law, lattice ladder, intervention cases,
+numerical tolerances, and analytic convergence order are
+realization-specific and were frozen separately.  A content seal binds
+candidate and target code, state and scenario formulas,
+maps, partitions, reducers, result schema, tests, dependencies, precision, and
+stopping rule.  Registered execution remains disabled until the seal is
+committed alone and identified by an annotated freeze tag.  A stage-opening
+manifest is then committed alone.  The stage runs as one indivisible batch and
+writes one no-clobber ledger, which is committed before inspection or replay.
+Confirmation can open only if the committed development ledger passes both
+its primary validator and the independent reconstruction.  This sequence is
+shown at the foot of Fig.~\ref{fig:construction-map}.
+
+The product development partition contains free light-mass, free heavy-mass,
+upward mass-quench, and even-potential schedules.  Its confirmation partition
+contains a downward mass quench and an odd-potential schedule.  The direct
+development partition contains positive mass, negative mass, a sign-changing
+quench, and a harmonic-$2$ potential.  Its confirmation partition contains a
+three-stage mass pulse and a harmonic-$3$ potential.  Each partition uses four
+formula-defined state families.  Product confirmation also includes a
+predeclared cross-witness of its confirmation states against one development
+schedule after the holdout is opened.
+
+The confirmation schedules are single-use intervention holdouts, not draws
+from a population model.  Because Eq.~\eqref{eq:certified-distance} is uniform
+on $\Kin$, a finite witness-state split does not supply its logical force.  The
+holdout tests whether the frozen map from a new exact intervention schedule to
+the unchanged candidate continues to satisfy all uniform, observable,
+structural, and replay gates.
+
+\subsection{Frozen convergence gates}
+
+For the product walk, every scenario must satisfy
+\begin{equation}
+ \begin{aligned}
+ d_{256}&\le0.20,\qquad d_{512}\le0.10,\qquad d_{1024}\le0.05,\\
+ d_{512}&\le0.60d_{256}+10^{-8},\qquad
+ d_{1024}\le0.60d_{512}+10^{-8}.
+ \end{aligned}
+ \label{eq:product-absolute-gates}
+\end{equation}
+The scale was chosen before outcomes from the
+first-order product estimate $T\Delta |km|$, with room for the registered
+potential and certified tail.
+
+The direct QCA uses its analytic finite-step signature.  Direct-only scenarios
+must satisfy
+\begin{equation}
+ \begin{aligned}
+ d_{320}&\le0.0040,\quad d_{640}\le0.0012,\quad d_{1280}\le0.0004,\\
+ d_{640}&\le0.35d_{320}+10^{-10},\quad
+ d_{1280}\le0.35d_{640}+10^{-10}.
+ \end{aligned}
+ \label{eq:direct-gates}
+\end{equation}
+whereas potential-split scenarios must satisfy
+\begin{equation}
+ \begin{aligned}
+ d_{320}&\le0.020,\quad d_{640}\le0.011,\quad d_{1280}\le0.006,\\
+ d_{640}&\le0.62d_{320}+10^{-10},\quad
+ d_{1280}\le0.62d_{640}+10^{-10}.
+ \end{aligned}
+ \label{eq:potential-gates}
+\end{equation}
+An outcome-free 256-bit certificate bounded the complete direct one-step
+remainder, telescoped it through $T=2$, charged the potential commutator,
+target-cutoff tail, and numerical budget, and allowed potential-driven states
+to leave the input band.  It used intermediate mode bands
+$|r|\le13,17,20$ across the three refinements and charged the remaining Dyson
+tail at every later step.  Its worst harmonic-$3$ envelopes were
+$0.019662$, $0.007805$, and $0.002914$, below
+Eq.~\eqref{eq:potential-gates}.  The certificate justified the gate scale; it did
+not compute any registered trajectory, ratio, witness, or classification.
+
+At the finest refinement, every product witness must have position and
+momentum total-variation distance at most $0.05$, total- and local-current
+error at most $0.10$, infidelity at most $0.0025$, and Zitterbewegung
+current-series error at most $0.10$.  The corresponding direct gates are
+$0.010$, $0.010$, $0.020$, $0.020$, $10^{-4}$, and $0.020$.
+Both registrations require norm residual at most $10^{-12}$ and independent
+state disagreement at most $10^{-11}$.  The direct potential scenarios also
+specified candidate $\pi$-sector probability at most $10^{-24}$ in addition
+to their analytic leakage tails; the empirical implementation of that
+requirement is the exception documented in
+Sec.~\ref{sec:post-result-audit}.
+
+\subsection{Numerical and algorithmic separation}
+
+Primary registered dynamics use \texttt{python-flint 0.9.0} Arb/Acb arithmetic
+at 256 bits with outward enclosures; binary64 values are forbidden from the
+registered dynamics.  The product primary evolves the candidate in real space
+and the target in a retained Fourier basis.  Its independent route reconstructs
+candidate gates and target evolution at 110 decimal digits with
+\texttt{mpmath 1.3.0}.
+
+For the direct update, separation is more explicit.  The primary
+candidate applies the leading phase and recurrence in real space; the primary
+target uses certified free blocks and spectral exponentials.  The independent
+free candidate builds separate $2\times2$ momentum blocks.  Its potential
+candidate constructs sparse phase, edge-scatter, and routing operators.  The
+independent target rebuilds the harmonic generator and applies its exponential
+through a separate high-precision route.  Candidate and verifier do not share
+a candidate constructor, and target and verifier do not share a target
+constructor.  This is an algorithmically separate reconstruction by the same
+project, not an external replication.
+
+\subsection{Infrastructure failures preserved rather than hidden}
+
+The direct experiment required four separately sealed lifecycle lineages.  Version
+0.1 stopped before ledger construction when the independent norm routine used
+a real-symmetric eigensolver on a complex Hermitian Gram matrix.  No partial
+ledger was written or inspected.  Version 0.2 wrote a primary-passing
+development ledger, but replay found that a Fourier basis had been constructed
+at ambient 53-bit precision before entry into the registered 256-bit context.
+The certified upper bound was rigorous but failed the frozen $10^{-65}$ replay
+tightness allowance.  Confirmation remained unopened.
+
+Version 0.3 repaired precision ownership and independently reconstructed all
+potential-free development scenarios, but its maximum-Gram-row-sum norm bound
+became materially loose after the potential coupled registered momentum
+columns.  It again stopped before confirmation.  Version 0.4 replaced only
+this norm-bound reducer with a rigorous finite-precision similarity transform and
+Gershgorin eigenvalue enclosure.  Approximate eigenvectors choose a basis but
+carry no proof; the certified inverse, transform, and discs do.  Candidate,
+target, maps, states, scenarios, partitions, thresholds, controls, and stopping
+rules did not change across these infrastructure repairs.  The v0.2 and v0.3
+primary classifications are not counted as verified results.  Their failure
+records demonstrate why a second implementation must test certified
+enclosures, not merely reproduce floating-point midpoints.
+
+\subsection{Post-result semantic audit of the zone-edge reducer}
+\label{sec:post-result-audit}
+
+A hostile-reader audit after the v0.4 result found a shared factor-of-two error
+in one reducer.  The specification defines $|q|\ge3\pi/4$ with
+$q=2\pi r/N$, hence
+\begin{equation}
+ 8|r|\ge3N.
+ \label{eq:pi-sector-correct}
+\end{equation}
+The primary reducer, independent verifier, and non-gating rough-potential
+control instead used $4|r|\ge3N$.  Since every discrete mode has
+$|r|\le N/2$, that predicate selects an empty set.  All serialized empirical
+$\pi$-probabilities and the rough-control value zero are therefore vacuous and
+withdrawn.  The replay duplicated the predicate and is not independent evidence
+for this metric.
+
+The pre-outcome analytic leakage routine is separate and uses the correct
+coarsest boundary $3N/8=120$.  Its serialized ledger values are approximately
+$1.62\times10^{-261}$ for the harmonic-$2$ schedule and
+$1.83\times10^{-164}$ for harmonic $3$, below the frozen $10^{-24}$ gate.
+Thus the low-band leakage threshold remains supported analytically, while the
+claim that its additional empirical reducer was executed correctly is
+withdrawn.  No registered ledger is altered.  An audit-only recomputation of
+the disclosed non-gating rough control with Eq.~\eqref{eq:pi-sector-correct}
+gives $3.4860\times10^{-8}$, confirming the defect but neither repairing nor
+broadening confirmation.  The serialized ledger classification field remains a
+content-addressed historical fact; this manuscript reports it only with this
+qualification.

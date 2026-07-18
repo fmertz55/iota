@@ -16,7 +16,18 @@ This repository is a live research compendium. The README states the organizing 
    and [branch assignments](../output/findings/finding070/independent_persistence_replication_assignments.csv).
 5. Audit the [selector-hash chain](../output/findings/finding070/independent_persistence_replication_selector_hashes.csv)
    against the staged artifacts in `output/findings/finding070/`.
-6. Read the [working paper](../paper/main.tex).
+6. Read the [constraint-lineage working paper](../paper/main.tex).
+7. For the qualified two-registration quantum-Dirac result, start with the
+   [dedicated manuscript](../quantum_dirac_paper/main.tex), then inspect the
+   [product result](../experiments/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/RESULTS.md)
+   and [direct-QCA result](../experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/RESULTS.md).
+   Read the direct-QCA
+   [post-result audit](../experiments/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md)
+   alongside the historical ledger classification: it withdraws the vacuous
+   empirical high-momentum measurement and narrows the architecture claim to
+   enumerative coverage of two separately registered updates whose free
+   one-excitation blocks are exact-time-frame-related after mass-angle
+   remapping.
 
 No execution is required for this path.
 
@@ -68,6 +79,18 @@ make paper
 ```
 
 The PDF is written to `build/paper/main.pdf`. A TeX distribution providing `latexmk` and `pdflatex` is required.
+
+Build and validate the separate quantum-Dirac manuscript with:
+
+```bash
+make quantum-dirac-paper
+```
+
+This checks all four content-addressed ledger hashes, regenerates the five-figure
+system and paper tables, validates the archived direct-QCA seal, bindings, and
+independent-verification receipt, runs the disclosed pi-sector predicate audit,
+and writes
+`output/pdf/quantum_dirac_operational_role_manuscript.pdf`.
 
 ## Extend the experiment
 

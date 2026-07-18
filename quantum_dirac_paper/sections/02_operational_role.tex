@@ -1,0 +1,143 @@
+\section{A frozen bounded Dirac operational role}
+\label{sec:role}
+
+\subsection{Target and registered domain}
+
+In units $\hbar=c=1$, the target spinor on the periodic domain $x\in[0,L)$
+obeys
+\begin{equation}
+  \iu\,\partial_t\psi(x,t)=H_T(t)\psi(x,t),\qquad
+  H_T(t)=-\iu\sigma_z\partial_x+m(t)\sigma_x+V(x,t)I_2,
+  \label{eq:target-hamiltonian}
+\end{equation}
+with $L=16$.  With the convention
+\begin{equation}
+  \psi(x)=L^{-1/2}\sum_{r\in\mathbb Z}\widehat\psi_r
+  e^{\iu k_r x},\qquad k_r=2\pi r/L,
+\end{equation}
+the registered input sector is
+\begin{equation}
+  \Kin=\operatorname{span}\{\lvert r,s\rangle:-4\le r\le4,
+  \ s\in\{R,L\}\}.
+  \label{eq:input-sector}
+\end{equation}
+Thus $\dim\Kin=18$ and $|k|\le\pi/2$.  Every registered state is normalized
+and supported entirely in $\Kin$.  Both registrations use physical horizon
+$T=2$ and exact rational schedule boundaries.  They deliberately use
+different lattice ladders and observation grids: the product walk uses
+$N=256,512,1024$ and times $1/2,1,3/2,2$; the direct QCA uses
+$N=320,640,1280$ and times $2/5,4/5,6/5,8/5,2$.  The distinction prevents a
+failed update from inheriting the successful update's numerical
+registration.
+
+The target is finite-domain continuum Dirac evolution, not the lattice model
+itself.  Potential schedules are piecewise constant in time and
+formula-defined in space.  The product registration retains target Fourier
+modes $|r|\le64$; the direct registration retains $|r|\le72$.  Outward analytic
+tails charge the amplitude that can leave these target cutoffs.  No registered
+input contains a future target trajectory.
+
+\subsection{Fixed maps}
+
+The role is defined by three maps held fixed within each registration
+(Fig.~\ref{fig:construction-map}).  The encoding $E_N$ copies coefficients at
+$r=-4,\ldots,4$ into the identically labelled normalized discrete Fourier
+modes of the $N$-cell construction and zeros all other modes.  It is an
+isometry; interpolation, aliasing, and outcome-dependent reconstruction are
+forbidden.
+
+The intervention map $\Phi_N$ sends the exact mass schedule and scalar
+potential formula to the candidate's local gate parameters at each macrostep.
+It may not alter the encoding, readout, lattice size, transport law, or error
+threshold.  The product walk receives mass angle $\Delta m_q$; the direct QCA
+receives $\mu_q=\Delta m_q$ and $n_q=\sqrt{1-\mu_q^2}$.  In either
+registration, an active scalar potential is a separately charged leading
+number phase sampled at the frozen macrostep convention.
+
+The readout $M_N$ applies the same Born-rule harness to target and candidate.
+It returns the position-grid distribution, momentum distribution, total
+directional current $\langle\sigma_z\rangle$, signed local-current vector,
+norm, and fidelity.  The direct protocol additionally registered an empirical
+probability gate in the zone-edge sector $|q|\ge3\pi/4$; a post-result audit
+found that its implemented predicate selected an empty sector, so those values
+and pass flags are withdrawn (Sec.~\ref{sec:post-result-audit}).  Zitterbewegung states retain
+the complete macrostep current series rather than a fitted frequency,
+amplitude, or phase.
+
+For normalized candidate and embedded target states $\psi_C$ and $\psi_T$ on
+the same $N$-cell grid, define position and momentum probabilities
+$p_j^{C,T}$ and $\widehat p_r^{C,T}$, local current
+$j_j^{C,T}=|R_j^{C,T}|^2-|L_j^{C,T}|^2$, and total current
+$J^{C,T}=\sum_j j_j^{C,T}$.  The six shared witness discrepancies are
+\begin{equation}
+ \begin{aligned}
+ \delta_x&=\tfrac12\sum_j|p_j^C-p_j^T|,&
+ \delta_k&=\tfrac12\sum_r|\widehat p_r^C-\widehat p_r^T|,\\
+ \delta_J&=|J^C-J^T|,&
+ \delta_j&=\sum_j|j_j^C-j_j^T|,\\
+ \delta_F&=\max\{0,1-|\langle\psi_C,\psi_T\rangle|^2\},&
+ \delta_Z&=\max_{t\in\mathcal O_a}|J^C(t)-J^T(t)|.
+ \end{aligned}
+ \label{eq:witness-metrics}
+\end{equation}
+Here $\mathcal O_a$ is the registered macrostep observation grid for a
+Zitterbewegung scenario.  Every reported value is an outward upper enclosure
+of the corresponding expression.
+
+\subsection{Uniform comparison and witness hierarchy}
+
+For scenario $a$, observation time $t$, and lattice size $N$, let
+\begin{equation}
+ D_N(a,t)=U_{C,N}[a](t)E_N-J_NU_{T,R}[a](t)P_{\mathrm{in}},
+ \label{eq:discrepancy}
+\end{equation}
+where $P_{\mathrm{in}}$ projects onto $\Kin$, $U_{T,R}$ is the independently
+constructed truncated target evolution, and $J_N$ embeds retained target
+modes into the candidate grid.  Candidate amplitude outside the retained
+target modes remains in the first term and therefore counts as error.  The
+primary registered quantity is
+\begin{equation}
+ d_N(a,t)=\operatorname{upper}\!\left(\lVert D_N(a,t)\rVert_2\right)
+          +\beta_{\mathrm{tail}}(a,t)+\beta_{\mathrm{num}}(a,t,N),
+ \label{eq:certified-distance}
+\end{equation}
+an outward upper bound rather than a midpoint estimate.  Each scenario is
+judged by the maximum over its registered observation times.
+
+This uniform operator comparison is the primary gate because it applies to
+every normalized input in $\Kin$, including states not explicitly plotted.
+The state witnesses are nevertheless essential.  Four formula-defined state
+families probe positive energy, negative energy, coherent interference, and
+positive/negative-energy Zitterbewegung.  They test whether the uniform bound
+translates into the registered observables and whether coherence was preserved
+rather than replaced by a classical mixture.
+
+The final layer contains structural gates that are not reducible to the
+operator plot: exact radius-one causal support before wrap, attainment of both
+massless cone boundaries, unitarity and numerical norm preservation, parity,
+time-reversal role recovery, implementation integrity, resource accounting,
+and agreement with the separate reconstruction.  The replay shared the
+$\pi$-predicate defect but remains separate for the other numerical families.
+The historical classifier marked a scenario as passing only if every
+implemented applicable layer passed.  The later semantic audit shows why this
+condition is necessary but not sufficient: an empty-set reducer can return a
+passing value without implementing the specified layer.  Apart from that
+disclosed exception, the hierarchy prevents a visually persuasive state
+trajectory from compensating for a failed uniform, causal, or provenance
+criterion.
+
+The tested discrete symmetries are explicit.  With $\mathcal K$ denoting
+componentwise complex conjugation,
+\begin{equation}
+ (\Pi\psi)(x_j)=\sigma_x\psi(-x_j\bmod L),\qquad
+ \Theta=\sigma_x\mathcal K.
+ \label{eq:tested-symmetries}
+\end{equation}
+For a terminal candidate map $U_a$, the parity relation is
+$\Pi U_a\Pi=U_{a^\Pi}$, where $a^\Pi$ reflects the scalar potential, and the
+time-reversal-role relation is
+$\Theta U_a\Theta^{-1}=U_{a^{\mathrm{rev}}}^{\dagger}$, where
+$a^{\mathrm{rev}}$ reverses the frozen schedule.  The registered residuals are
+spectral norms of these differences restricted to the input-basis columns;
+active leading potential phases may leave a prospectively gated splitting
+residual rather than exact equality.

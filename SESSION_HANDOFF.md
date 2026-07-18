@@ -1,15 +1,15 @@
 # IOTA Session Handoff
 
-Date: 2026-07-17
+Date: 2026-07-18
 
 ## Current Continuation Status
 
-The authoritative continuation plan is now
-[ICP Direct Symmetry-Derived Dirac QCA](#icp-direct-symmetry-derived-dirac-qca--authoritative-continuation--2026-07-14)
-at the end of this document. It supersedes every earlier `Next Hypothesis`,
-`Acceptance Gate`, `Suggested New Thread Prompt`, and new-thread start point as
-an instruction for new work. Those sections remain as the chronological record
-of the program.
+The authoritative continuation is now the dedicated quantum-Dirac manuscript
+on branch `quantum-dirac-manuscript`. It supersedes every earlier `Next
+Hypothesis`, `Acceptance Gate`, `Suggested New Thread Prompt`, and direct-QCA
+execution instruction as a direction for new work. Those sections remain as
+the chronological prospective record and must not be followed as if the
+second architecture were still unopened.
 
 `ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001` v0.4 is complete and independently
 verified. Its development primary and independent replay passed, followed by a
@@ -19,17 +19,50 @@ freeze, stage-open, result, completion, and annotated-tag provenance is linear;
 the sealed v0.4 bytes must not be changed. Human-readable completion evidence
 is in the experiment `RESULTS.md`, experiment `README.md`, and Finding 080.
 
-The active continuation is the breadth experiment
-`ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` on branch
-`icp-quantum-dirac-symmetry-qca-001-v0.4-repair`. It tests a direct
-symmetry-derived Dirac QCA rather than another parameterization of the
-successful product walk. Its
-localization, continuum, global-spectrum/literature, prospective-protocol, and
-outcome-free implementation audits are complete. They establish the explicit
-two-layer full-space Margolus witness and resource clock, the leading Dirac
-generator with a `delta^2` correction and exact signed-step reversal, the
-opposite-mass pi-mode pseudodoubler, and the boundary between the declared
-hard-core lift and canonical fermionic second quantization.
+`ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` v0.4 has complete, content-addressed
+development and single-use confirmation ledgers, each with an independent
+reconstruction. Their serialized terminal classification is
+`constructive_sufficiency_passed_direct_symmetry_qca_sector`, but a
+post-result semantic audit found that the registered empirical high-momentum
+sector predicate used `4|r| >= 3N` instead of the specified `8|r| >= 3N`.
+Because `|r| <= N/2`, that implementation selected an empty sector. The
+independent verifier repeated the same predicate. The reported zero empirical
+pi-sector leakage and the zero rough leakage control are therefore withdrawn,
+and the historical terminal classification must always be reported with this
+exception. The separately derived analytic high-momentum tail certificate used
+the correct boundary and remains valid; the operator, refinement, witness,
+symmetry, causality, and declared-resource results are unaffected by this
+defect.
+
+The content-addressed linear history is freeze `890962df`, development open
+`f5f5d604`, development result `b96e70a1`, confirmation open `6398124a`, and
+confirmation result `0795a6ef`. The development and confirmation ledger SHA-256 values are
+`89d7c65a37bf8d38fea3a87b7f656c02cae57664fcf6b53b725fb8ace7c228c4`
+and `be5a9f85770e1d201abbc269c26da25d821f11f67db364c434473b5c70517e65`.
+Do not alter the result commit or sealed bytes.
+
+Together the two registrations support this bounded paper claim:
+
+> The intact evidence supports qualified constructive sufficiency for the
+> shared frozen core of a bounded `1+1D` Dirac operational role across two
+> separately registered strictly local update specifications, under explicit
+> intervention, precision, and declared-resource accounting. The empirical
+> high-momentum gate is withdrawn.
+
+This is realization-level replication across two prospective registrations,
+not evidence for two inequivalent architecture classes. On the one-particle
+sector the direct block is exactly a symmetric time frame of the product block
+after the post-result mass-angle identification `theta = arcsin(mu)`, and the
+apparent gate-count difference can be removed by fusing adjacent one-excitation
+gates. Resource
+counts are therefore frozen, nonminimal protocol clocks rather than a hardware
+advantage. The direct experiment specifies a full hard-core lift; the product
+registration does not fix its `|00>` and `|11>` phases, so full-space
+inequivalence is not established. The result is not discovery of the direct
+automaton or its established Dirac limit, Zitterbewegung, or potential
+scattering. It does not support whole-zone equivalence, a doubler-free global
+theory, a canonical fermionic lift, multiparticle or interacting QFT,
+minimality, necessity, uniqueness, or ontology.
 
 The immutable v0.1 lifecycle froze at `283707e`, opened development at
 `0eefcbb`, and then stopped before ledger creation. The independent replay
@@ -51,16 +84,29 @@ rejected the potential scenario: the maximum Gram row sum was a rigorous yet
 replay-loose norm upper bound once potential scattering coupled momentum
 columns. Confirmation was not opened.
 
-The active v0.4 repair replaces only that certified norm reducer with a
-rigorous similarity transform and Gershgorin eigenvalue enclosure. On the
-first affected potential comparison it agrees with the independent replay to
-`2.38e-73`, safely inside the frozen `1e-65` allowance, while changing no
+The v0.4 repair replaced only the certified norm reducer with a rigorous
+similarity transform and Gershgorin eigenvalue enclosure. It changed no
 scientific scenario, state, map, threshold, gate, failure control, or stopping
-rule. The next action is full verification and hostile review of these bytes,
-followed by a repair commit. Only then may the v0.4 disabled seal be created as
-a sole-file freeze commit and annotated. Do not inspect or tune against
-confirmation, and do not copy the product-walk gates into this experiment
-merely to force a pass.
+rule. The recorded outcome and its post-result qualification are summarized in
+the direct experiment `RESULTS.md`, `POST_RESULT_AUDIT.md`, Findings 081--082,
+and the independent verification receipt.
+
+The dedicated technical manuscript is `quantum_dirac_paper/main.tex`; the
+standalone figure-free lay manuscript is `quantum_dirac_paper/lay_main.tex`.
+Their shared build script
+checks all four content-addressed ledger hashes, regenerates five vector figures and
+derived tables, validates the archived direct-QCA checkpoint and replay
+receipt, and writes both
+`output/pdf/quantum_dirac_operational_role_manuscript.pdf` and
+`output/pdf/quantum_dirac_layperson_companion.pdf`. The existing
+`paper/main.tex` remains a separate constraint-lineage manuscript. Do not
+merge the two papers.
+
+The active allocation is paper-first. Run hostile-reader, citation, figure,
+and reproducibility audits. Do not open a third registered science outcome
+until the manuscript's central claim, figures, and limitations are stable.
+Any Strang-split or classical reversible lattice-gas follow-on must receive a
+new search identifier and prospective registration.
 
 ## Local Checkout State
 
@@ -101,6 +147,12 @@ repo after cleanup:  ~156M
 Most recent relevant commits:
 
 ```text
+0795a6e Record direct symmetry-QCA v0.4 confirmation result
+6398124 Open direct symmetry-QCA v0.4 confirmation
+b96e70a Record direct symmetry-QCA v0.4 development result
+f5f5d60 Open direct symmetry-QCA v0.4 development
+890962d Freeze direct symmetry-QCA v0.4 outcomes
+bd9fa69 Prepare symmetry-QCA v0.4 certified-norm retry
 fbf28f9 Yes—the direct QCA admits an honest strictly local full-Hilbert-space realization.
 94ed42c Kick off direct symmetry-derived Dirac QCA experiment
 490dab6 Document verified quantum-Dirac result
@@ -6489,6 +6541,13 @@ verification and are committed.
 
 ### Submission-oriented program
 
+> **Historical planning record, superseded 2026-07-18.** The current status and
+> claim are the bounded two-registration statement at the top of this file.
+> In particular, the phrases “two genuinely different architectures,”
+> “architectural breadth,” and the unqualified empirical pi-sector pass below
+> are not current claims after the exact time-frame relation and reducer defect
+> were identified.
+
 The quantum-Dirac work now has a strong paper nucleus but is not yet a
 submission-ready manuscript. The existing `paper/main.tex` manuscript is a
 separate approximately 5,000-word paper about constraint transport and
@@ -6597,9 +6656,9 @@ to alter the prospective experiment, acceptance gates, or frozen claims:
    bridge can be stated clearly. Do not reopen claims that time, quantum theory,
    particles, or the Dirac equation were derived from no supplied structure.
 
-The desired pass-contingent paper claim is:
+The then-desired pass-contingent paper claim (now superseded) was:
 
-> Two independently designed strictly local quantum-information architectures
+> Two structurally distinct strictly local quantum-information architectures
 > recover the same frozen bounded `1+1D` Dirac causal role under explicit
 > intervention, resource, and verification accounting.
 

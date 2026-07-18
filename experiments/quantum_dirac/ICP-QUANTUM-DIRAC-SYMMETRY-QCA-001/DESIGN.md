@@ -2,7 +2,17 @@
 
 Search ID: `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001`
 
-Status: **v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 spectral-norm repair pending freeze**
+Status: **historical outcome-free design snapshot; v0.4 subsequently passed development, confirmation, and independent replay**
+
+> Post-result note (`2026-07-18`): the v0.4 lineage froze, passed its
+> independently reconstructed development batch, opened the single-use
+> confirmation partition, and passed confirmation plus independent replay.
+> A later semantic audit withdrew the empirical pi-sector reducer because both
+> implementations selected an empty sector; the correctly derived analytic
+> tail remains valid. The authoritative qualified outcome is in `RESULTS.md`
+> and `POST_RESULT_AUDIT.md`. The remainder of this
+> document preserves the prospective design state and should be read in that
+> historical tense.
 
 ## Question
 

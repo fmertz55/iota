@@ -8622,3 +8622,124 @@ successful product walk.
 - [Development ledger](../output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/development_results_v0.4.json)
 - [Confirmation ledger](../output/quantum_dirac/ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001/confirmation_results_v0.4.json)
 - [Frozen contract](../docs/ICP_QUANTUM_DIRAC_ROLE_RECOVERY_CONTRACT.md)
+
+---
+
+## Finding 081 — A second local architecture independently recovers the same bounded Dirac role
+
+**Post-result status:** the registered ledgers and their historical
+classifications are preserved, but the architecture-breadth and empirical
+pi-sector statements below are superseded by Finding 082.
+
+The prospectively sealed `ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001` experiment
+changed the finite architecture from the successful product walk to the
+established direct symmetry-derived Dirac QCA. Its declared full-space
+hard-core-qubit circuit uses a mass-bearing edge scatter followed by an
+on-site routing SWAP, with free depth `2`, work `2N`, storage `2N`, no
+ancillas, and radius-one causal support.
+
+The v0.4 lineage passed all four development scenarios and mandatory
+independent reconstruction, then passed both single-use confirmation scenarios
+and their independent reconstruction. All 24 state-witness groups, uniform
+operator bounds, refinement gates, observable gates, pi-sector leakage gates,
+architecture-integrity, causality, parity, time-reversal, unitarity, and
+resource checks passed.
+
+The largest direct-only operator bounds were `0.000560191`, `0.000139960`, and
+`0.0000349845` at sizes 320, 640, and 1280. The largest potential-split bounds
+were `0.00275977`, `0.00137608`, and `0.000687867`. Direct-only ratios were
+approximately one quarter and potential-split ratios approximately one half,
+inside their separately frozen second- and first-order gates.
+
+Together with Finding 080, this supports a bounded two-architecture breadth
+claim:
+
+> Two structurally distinct strictly local quantum-information architectures
+> recover the same frozen bounded `1+1D` Dirac operational role under explicit
+> intervention, resource, precision, and verification accounting.
+
+This does not establish discovery of the direct automaton, architecture
+independence, whole-zone equivalence, a doubler-free theory, a canonical
+fermionic lift, multiparticle or interacting QFT, minimality, uniqueness,
+necessity, or ontology. The exact opposite-mass pi-mode pseudodoubler and the
+hard-core/fermionic collision-phase distance are explicit post-primary
+boundaries.
+
+### Finding 081 artifacts
+
+- [Result summary](quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/RESULTS.md)
+- [Development ledger](../output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.4.json)
+- [Confirmation ledger](../output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.4.json)
+- [Global-spectrum audit](quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/GLOBAL_SPECTRUM_AUDIT.md)
+- [Frozen contract](../docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md)
+- [Dedicated manuscript](../quantum_dirac_paper/main.tex)
+
+---
+
+## Finding 082 — Post-result audit narrows the two-registration Dirac claim
+
+A hostile-reader audit of the completed quantum-Dirac archive found one
+semantic implementation defect and one material equivalence relation. Neither
+finding changes the content-addressed result ledgers; both change what may be
+claimed from them.
+
+### Vacuous empirical high-momentum reducer
+
+The direct-QCA specification defines the high-momentum sector by
+`|q| >= 3*pi/4`. With `q = 2*pi*r/N`, the correct integer predicate is
+`8*abs(r) >= 3*N`. The primary reducer, the independent reconstruction, and
+the rough-control complement instead used `4*abs(r) >= 3*N`. Since the signed
+index always satisfies `abs(r) <= N/2`, the implemented sector was empty at
+every registered size.
+
+An independent audit found zero selected modes under the implemented predicate
+and `81`, `161`, and `321` modes under the intended predicate at
+`N = 320`, `640`, and `1280`. Consequently, every serialized zero empirical
+pi-sector leakage value was vacuous, and the serialized zero rough leakage
+control is withdrawn. Re-evaluating only that disclosed rough diagnostic with
+the intended predicate gives `3.4860345440118994972e-8`; this audit-only value
+is not a corrected registered outcome.
+
+The pre-outcome analytic tail certificate did use the correct boundary. Its
+two high-momentum tail bounds are approximately `1.6213e-261` and
+`1.8334e-164`, both below the frozen `1e-24` gate. The analytic certificate,
+uniform evolution bounds, refinement behavior, operational witnesses,
+symmetry/causality checks, and declared resource counts do not consume the
+defective empirical reducer and remain supported. Independent replay correctly
+reproduced the archived computation but repeated the same semantic predicate;
+this is a concrete limit on what replay alone can certify.
+
+### Exact relation between the registered updates
+
+On the one-excitation sector, with `K(q) = exp(-i q sigma_z)` and
+`theta = arcsin(mu)`, the direct block is
+`K(q)^(1/2) exp(-i theta sigma_x) K(q)^(1/2)`. It is therefore exactly
+conjugate to a mass-remapped product-walk block by a chiral half-cell time-frame
+change. Moreover, adjacent product-walk mixing and SWAP gates can be fused into
+the same parameterized one-excitation gate form. The frozen `3N`/depth-3 and
+`2N`/depth-2 counts remain valid descriptions of the registered protocol
+clocks, but they are nonminimal and do not establish a compilation-invariant
+resource advantage.
+
+The direct registration fixes a hard-core full-space lift, whereas the product
+registration does not freeze the phases on `|00>` and `|11>`. Full-space
+inequivalence is therefore also not established. The defensible result is
+realization-level replication across two separately prospective update
+specifications, not breadth across two proven inequivalent architecture
+classes.
+
+The revised paper claim is:
+
+> The intact evidence supports qualified constructive sufficiency for the
+> shared frozen core of a bounded `1+1D` Dirac operational role across two
+> separately registered strictly local update specifications, under explicit
+> intervention, precision, and declared-resource accounting. The direct
+> update is an exact time-frame-related realization of the product block, its
+> empirical high-momentum gate is withdrawn, and the correctly derived
+> analytic high-momentum bound remains valid.
+
+### Finding 082 artifacts
+
+- [Post-result audit](quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/POST_RESULT_AUDIT.md)
+- [Independent predicate audit](../scripts/audit_direct_qca_pi_sector.py)
+- [Dedicated manuscript](../quantum_dirac_paper/main.tex)

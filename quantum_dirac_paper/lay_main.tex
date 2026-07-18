@@ -1,0 +1,395 @@
+\documentclass[11pt]{article}
+
+% Suppress volatile pdfTeX metadata.  The build driver also fixes
+% SOURCE_DATE_EPOCH so the companion PDF is reproducible.
+\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=15\fi
+
+\usepackage[margin=0.92in]{geometry}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\definecolor{linkblue}{HTML}{1F5A7A}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkblue,
+  citecolor=linkblue,
+  urlcolor=linkblue,
+  pdftitle={Can local quantum rules reproduce a Dirac particle? A plain-language account},
+  pdfauthor={Douglas Clark}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\baselinestretch}{1.04}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+\input{quantum_dirac_paper/generated/results.tex}
+
+\title{\textbf{Can Local Quantum Rules Reproduce a Dirac Particle?}\\[0.35em]
+\large A Plain-Language Account of a Prospective, Audited Test}
+\author{Douglas Clark}
+\date{Lay companion --- July 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This project asked a deliberately limited question.  If we place quantum
+information on a one-dimensional ring and allow it to interact only with
+nearby neighbors, can two rulebooks, each fixed before its own counted
+outcomes, reproduce the same
+carefully chosen part of the behavior of a Dirac particle?  Both registered
+rulebooks received positive development and single-use confirmation
+classifications, and a separately written high-precision program reconstructed
+their recorded computations.  The surviving evidence covers finite time, low
+momentum, one particle, declared changes of mass and position-dependent
+external potential, and a
+fixed collection of accuracy, causality, symmetry, and resource checks.
+
+A later hostile audit materially narrowed the headline.  One empirical monitor
+for unwanted zone-edge behavior contained a factor-of-two error in both the
+main and replay programs; it selected no modes.  Those empirical values and one
+related rough control are withdrawn.  A different, pre-outcome analytic bound
+used the correct zone edge and remains far below its frozen threshold.  The
+audit also established that the two free one-particle rules are exactly related
+by a stroboscopic time-frame change represented by opposite half-cell phases,
+after remapping the mass angle.  They are therefore two separately registered specifications, not proof
+of two independent architecture classes.  The defensible result is qualified
+constructive sufficiency for the intact shared test core.  It is not a
+derivation of physics from information, a discovery of the Dirac automaton, or
+a model of an interacting quantum field.
+\end{abstract}
+
+\section{The question behind the test}
+
+Many physical theories describe change through local rules: what happens here
+depends on what is already here and nearby, not on an instantaneous command
+from the other side of the universe.  Quantum cellular automata and quantum
+walks make that idea unusually explicit.  Space is represented by a grid,
+quantum information occupies the grid, and a clock applies a repeating pattern
+of small local operations.
+
+This study asks whether such a construction can reproduce a bounded
+\emph{operational role} of a Dirac particle.  ``Operational role'' means a
+declared bundle of things the construction must do: evolve the right states,
+respond correctly to specified interventions, produce the right measured
+distributions and currents, respect causal and symmetry conditions, and stay
+within fixed error and resource budgets.
+
+The wording matters.  We did not ask whether the construction \emph{is} an
+electron, whether the universe is literally a grid, or whether information is
+the unique substance of reality.  The target Dirac equation, quantum building
+blocks, lattice, clock, constants, input states, measurements, and permitted
+interventions were supplied.  What had to be constructed and tested was an
+explicit local mechanism under those assumptions.
+
+The target was the one-particle Dirac equation in one space dimension on a
+periodic region of length 16, over a time horizon of 2 in the registered units.
+Inputs were confined to an 18-dimensional low-momentum sector.  This is a
+small, controlled laboratory for a relativistic quantum role, not a claim
+about every state, scale, boundary, or duration.
+
+\section{Why matching a curve would not be enough}
+
+Even this reduced Dirac problem combines several demands.  A state has two
+coupled directional components.  Its evolution is quantum and reversible.  It
+has a maximum causal speed.  Positive- and negative-energy components can
+interfere, producing the rapid current oscillation called
+\emph{Zitterbewegung}.  Changing the mass or applying a position-dependent
+scalar potential should change the evolution in a prescribed way.
+
+A lattice animation can look persuasive while getting some of these
+relationships wrong.  We therefore froze a linked collection of tests rather
+than judging trajectories by eye.  The primary comparison bounded the largest
+possible evolution error across the entire declared input sector, not just a
+few attractive example states.  Additional witnesses compared position and
+momentum probabilities, total and local current, state fidelity, and the
+Zitterbewegung current history.  Other checks covered normalization, causal
+support, parity, time reversal, intervention mapping, and counted circuit
+resources.
+
+The study also included mass changes and spatial potentials.  These matter
+because a construction that works only when left alone has not reproduced the
+same operational role as one that responds correctly when the target theory is
+intervened on.  The intervention schedules were exact formulas fixed before
+their outcomes were opened; they were not fitted site by site after seeing a
+result.
+
+There is substantial prior work showing that local quantum walks and cellular
+automata can approach Dirac dynamics, including rigorous observational
+convergence and the direct one-dimensional Dirac automaton
+\citep{Arrighi2014DiracWalk,Bisio2015QuantumFieldQCA}.  Zitterbewegung and
+potential scattering in that direct family are also established
+\citep{Bisio2013DiracQCADynamics}.  The novelty here is therefore not the
+existence or discovery of the automaton.  It is the prospective comparison
+protocol: two separately frozen rulebooks, explicit interventions and
+resources, single-use confirmation, high-precision reconstruction, and a
+claim boundary that records what later audit did and did not preserve.
+
+\section{The two registered rulebooks}
+
+The first rulebook was an \emph{ordered product walk}.  In each small time step
+it applied three kinds of local action in a declared order: a phase associated
+with the scalar potential, an on-site mixing associated with mass, and
+conditional transport that moved the two directional components to neighboring
+sites.  Repeating these simple pieces approximates the combined Dirac
+evolution.  Because the pieces are applied one after another, their ordering
+creates a leading finite-step error.  The registration therefore expected the
+certified error to fall by roughly one half whenever the spatial and temporal
+resolution doubled.
+
+The second rulebook used the established \emph{direct Dirac quantum cellular
+automaton} (QCA).  Its one-particle update was realized locally as an edge operation
+followed by an on-site routing swap.  In free evolution its leading global
+error was expected to fall by roughly a factor of four under refinement;
+splitting in a spatial potential restored a leading factor-of-two pattern.
+The direct registration had its own lattice sizes, thresholds, and resource
+clock, frozen for that construction rather than copied from the first one.
+
+These descriptions sound architecturally different, and the registered gate
+partitions really are different.  But the later algebraic audit found an exact
+relationship underneath them.  After translating the mass parameter, the free
+one-particle updates are related by a stroboscopic ``time-frame'' change,
+represented mathematically by opposite half-cell phases on the two directional
+components \citep{AsbothObuse2013TimeFrames}.  Those phases are not themselves
+registered integer-cell transport layers.  In this same one-excitation
+description, neighboring product gates can also be fused into the direct
+parameterized form.  Consequently, the declared
+three-layer versus two-layer counts are faithful descriptions of the frozen
+protocol clocks, but they are not minimal hardware costs.  The experiment
+covers two registered specifications.  It does not establish two algebraically
+independent laws or a broad class of inequivalent architectures.
+
+\section{How the test tried to prevent moving the goalposts}
+
+The product study completed first.  The direct study was then registered as a
+separate follow-on, so this was not a simultaneous two-arm trial.  Within each
+study, however, the scientific rule, target, states, interventions,
+measurements, thresholds, numerical precision, and stopping logic were sealed
+before the counted outcomes.
+
+Each rulebook first faced one indivisible development batch containing four
+scenarios.  Only a committed development pass accepted by the replay could
+open a fresh confirmation batch.  Confirmation contained two new intervention
+scenarios and could be used only once.  The held-out cases were not intended as
+a large statistical sample.  Their purpose was narrower: to check that the
+unchanged construction and maps still met the full frozen bundle when given
+new exact schedules.
+
+The main dynamics used 256-bit outward-rounded arithmetic.  Rather than
+reporting a floating-point estimate and hoping rounding was harmless, the
+calculation carried certified enclosures that had to contain the true numerical
+answer.  A separately written implementation then rebuilt the candidate and
+target evolutions at 110 decimal digits through different numerical routes.
+This was an algorithmically separate reconstruction by the same project, not
+an external replication.
+
+The audit trail includes failed infrastructure attempts.  One used a
+mathematical tool that assumed real rather than complex data.  Another created
+part of the calculation at ordinary machine precision before switching to the
+required high precision.  A third produced a rigorous error bar that became too
+wide under a spatial potential.  Each stopped under its frozen rules before
+confirmation.  Those failures show why plausible decimal outputs are weaker
+than a successfully reconstructed certified bound.
+
+\section{What the recorded results showed}
+
+All four counted version-0.4 permanent result records (called
+``ledgers'')---development and confirmation for each rulebook---recorded
+positive classifications.  The product walk covered four
+development scenarios and two confirmation scenarios, as did the direct QCA.
+The intact shared checks included the uniform evolution bound, observable
+witnesses, causal support, symmetry requirements, resource accounting, and
+algorithmically separate reconstruction.
+
+For the product walk, the largest certified evolution distances across its
+scenarios fell from \ProductOperatorMax{} to about 0.0150 to
+\ProductFineOperatorMax{} as resolution doubled.
+For the direct rulebook, the largest free or mass-only distances fell from
+about 0.000560 to 0.000140 to 0.00003498.  Its potential-split distances fell
+from \DirectOperatorMax{} to about 0.00138 to \DirectFineOperatorMax{}.  These
+are upper bounds, so smaller is better.  Their refinement patterns matched the separately frozen
+expectations.
+
+Those numbers should not be used as a race between the rulebooks.  The two
+registrations used different lattice sizes, schedules, gates, and compilation
+clocks.  The meaningful result is that each met its own intact, prospectively
+justified criteria---excluding the direct empirical zone-edge monitor---and that
+the detailed position, momentum, current, fidelity,
+Zitterbewegung, causal, and symmetry checks supported the same bounded role
+core.
+
+At the finest declared resolutions, the product construction counted 384
+serial rounds of local gates for a free run and 448 with an active potential.  The direct
+construction counted 320 free layers, 400 for one potential schedule, and 416
+for the other.  These totals expose rather than hide the work charged by each
+registration.  Because gate fusion can change them, they do not establish a
+fundamental efficiency advantage.
+
+\section{The audit that changed the headline}
+
+The direct QCA has a special issue near the far edge of the lattice momentum
+zone.  The registered low-momentum inputs were kept far away from that region,
+and the protocol included both an analytic leakage bound and an empirical
+monitor intended to measure any probability that reached it.
+
+After the result, a hostile-reader audit found a factor-of-two error in the
+empirical monitor.  The intended zone-edge condition began at three quarters
+of the maximum lattice momentum.  The implemented integer test instead placed
+the boundary beyond every momentum that could exist on the lattice.  It
+therefore selected an empty set and returned zero regardless of the state.
+The main measurement program, the separately written replay, and one extra
+stress diagnostic that did not decide pass or fail all copied the same mistaken
+condition.
+
+All empirical zone-edge probabilities, their pass flags, and the zero reported
+by that stress diagnostic are withdrawn.  They are not repaired in place, and the historical
+ledgers are not rewritten.  An audit-only use of the correct condition makes
+that rough stress diagnostic nonzero, about $3.49\times10^{-8}$, confirming
+that the old zero was vacuous.  This was a post-confirmation, non-gating rough
+potential case, not one of the registered analytic leakage schedules described
+next.
+
+The analytic leakage calculation was a different route and used the correct
+zone-edge boundary.  Its largest pre-outcome bound was about
+$1.84\times10^{-164}$ against a frozen threshold of $10^{-24}$.  That analytic
+support remains intact.  So the defect does not erase the low-band result, but
+it does mean the complete originally registered direct role was not correctly
+executed.  The surviving conclusion must carry that qualification.
+
+This episode also exposes an important limit of ``independent'' software.
+Different algorithms can still share the same misunderstanding of a written
+specification.  Replay was valuable for precision, construction, and numerical
+separation, but it did not independently check the written meaning of this
+predicate.  Reconstruction, specification review, and hostile audit solve
+different problems; a strong workflow needs all three.
+
+\section{What survives, and what does not follow}
+
+The intact evidence supports the following bounded statement:
+
+\begin{quote}
+Two separately registered, strictly local quantum update specifications are
+constructively sufficient for the intact shared core of a declared
+one-dimensional Dirac role over the tested low-momentum, one-particle,
+finite-time domain, under the frozen interventions, precision, resources, and
+verification rules.  The direct registration's empirical zone-edge monitor is
+withdrawn.
+\end{quote}
+
+``Constructively sufficient'' means that explicit mechanisms were built and
+met the intact stated tests.  ``Qualified'' means that the invalid monitor is excluded
+and that the claim stops at the supplied domain.  ``Two specifications'' means
+two prospective records with different declared decompositions and numerical
+signatures, not two proven architecture classes.
+
+Several stronger conclusions do not follow:
+
+\begin{itemize}
+  \item The study does not derive quantum theory, spacetime, the Dirac
+  equation, or particles from information alone.
+  \item It does not show that the universe is literally a cellular automaton
+  or that information is the unique foundation of nature.
+  \item It does not discover the direct Dirac automaton, its continuum limit,
+  Zitterbewegung, or potential scattering; those are prior results.
+  \item It does not establish accuracy for every momentum, duration, mass,
+  potential, boundary condition, or resolution.
+  \item It does not show that the registered layer and gate counts are minimal
+  or predict a hardware advantage.
+  \item It does not establish necessity, uniqueness, or architecture
+  independence.
+\end{itemize}
+
+\section{The spectrum and many-particle boundaries}
+
+The low-momentum restriction is scientifically important.  Near the opposite
+edge of the lattice momentum zone, the direct automaton has an exact partner at
+high quasienergy, the discrete-time analogue of band energy.  After removing a
+global phase, this partner behaves locally
+like a Dirac mode with the opposite mass sign.  Recent work distinguishes such
+a high-quasienergy \emph{pseudodoubler} from an ordinary extra low-energy
+particle \citep{Gupta2026FermionDoubling,Gupta2025DiracVacuum}.  It does not
+invalidate the registered low-band comparison, whose valid analytic bound
+charges leakage toward that region.  It does rule out saying that the same
+construction is Dirac-equivalent across the whole momentum zone or simply
+``doubler-free.''
+
+The one-particle boundary is equally important.  The direct local circuit is a
+well-defined hard-core qubit automaton---its local subcells do not allow more
+than one excitation---but its phase
+when two excitations meet is not the phase of the standard many-fermion
+extension.  The
+product registration did not freeze the corresponding vacuum and
+double-occupation phases in a directly comparable way.  Because every primary
+test used one excitation, this study establishes no collision, interacting
+field, filled-vacuum, particle-creation, or product-versus-direct many-particle
+claim.  Such questions require a new, symmetrically specified prospective
+experiment; published multiparticle constructions make clear that extra
+structure is needed \citep{Farrelly2014CausalFermions,Mlodinow2020QFTQCA}.
+
+\section{Why the result is worth having}
+
+The scientific value is not a surprising new lattice formula.  It is a worked
+example of how to ask a construction question without allowing the claim to
+expand after the result looks encouraging.
+
+The test made the target behavior executable rather than rhetorical.  It
+charged local operations and numerical uncertainty.  It separated development
+from single-use confirmation.  It preserved failed verification lineages.  It
+reconstructed the calculation through a second algorithm.  Most importantly,
+when later analysis found both an exact equivalence and a shared reducer bug,
+the project narrowed the claim instead of protecting the original headline.
+
+That combination leaves a result that is smaller but more durable.  The two
+rulebooks provide disciplined coverage of two frozen implementations of a
+common bounded role.  The exact time-frame relationship explains why that
+coverage is not architecture-class breadth.  The valid analytic leakage bound
+explains why the low-band result survives.  The withdrawn empirical monitor
+shows why cryptographic fingerprints and replay are valuable but not
+sufficient.
+
+The appropriate next science is therefore a separate registration: for
+example, a genuinely distinct local construction defined under an explicit
+equivalence rule, or a symmetric many-particle test with both many-particle rules
+fixed in advance.  It should not be added retroactively to make the present
+paper look broader.
+
+\section{Conclusion}
+
+Within a finite, low-momentum, one-particle domain, two separately registered
+local quantum rulebooks met the intact shared core of a demanding Dirac test.
+Their ledgers recorded positive development and single-use confirmation
+classifications, and a separately implemented high-precision route reproduced
+the committed computations as implemented.  A later audit withdrew an
+empirical zone-edge
+monitor shared by both programs while preserving a correctly derived analytic
+leakage bound.  The same audit showed that the free one-particle rules are
+exactly related by a change of time frame, so they cannot support a claim of
+independent architecture classes.
+
+The honest conclusion is qualified constructive sufficiency under declared
+inputs and boundaries.  That is less dramatic than deriving reality from
+information.  It is also more useful: it says exactly what was built, exactly
+what was tested, exactly what broke under audit, and exactly what evidence is
+left.
+
+\section*{Evidence and reproducibility}
+
+The technical manuscript, qualified result, post-result audit, generated data,
+and build scripts are archived together in the project repository.  This
+companion contains no figures, and its numerical result macros are generated
+from the same content-addressed ledgers used by the technical paper.  The
+repository manuscript README records the exact paths and build command.
+
+\bibliographystyle{unsrtnat}
+\bibliography{quantum_dirac_paper/bibliography}
+
+\end{document}

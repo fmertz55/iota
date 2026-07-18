@@ -1,73 +1,139 @@
 # ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001
 
-Status: **v0.2 and v0.3 development ledgers independently unverified with confirmation unopened; v0.4 spectral-norm repair pending freeze**
+Status: **v0.4 ledgers complete with positive classifications; independent
+replay complete with one shared-reducer exception disclosed**
 
 Started: `2026-07-14`
 
-Active branch: `icp-quantum-dirac-symmetry-qca-001`
+Content-addressed result commit: `0795a6efa0252411c66479cb87863349e20ec886`
 
-This experiment is the first breadth follow-up to the independently verified
-`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001` result. It deliberately changes the
-finite-lattice architecture from a product mass-mix/transport walk to the
-direct symmetry-derived Dirac QCA family.
+Terminal classification:
+`constructive_sufficiency_passed_direct_symmetry_qca_sector`
 
-The current outcome-free tranche contains:
+This experiment is the first separately registered follow-up to
+`ICP-QUANTUM-DIRAC-ROLE-RECOVERY-001`. It replaces the parent's ordered
+product mass-mix/transport walk with the established direct symmetry-derived
+Dirac QCA family, under a fresh registration.
 
-- an explicit parent-result binding;
-- a scoped outcome-free design brief;
-- a high-precision implementation of the direct update on nonregistered
-  fixture sizes; and
-- an explicit full-Hilbert-space two-layer Margolus localization with
-  algebraic unitarity, translation, parity, time-reversal, multi-excitation,
-  resource-clock, ballistic, and access-guard tests; and
-- an exact effective-generator derivation with an independently implemented
-  matrix-log check of the first nonzero continuum correction; and
-- a complete-Brillouin-zone audit of exact bands, branch cuts, group velocity,
-  the pi-mode pseudodoubler, mass endpoints, and hard-core versus canonical
-  fermionic collision phases;
-- fresh prospective target, map, refinement, scenario, state, partition,
-  metric, and failure-control specifications under all seven spectrum-audit
-  boundaries;
-- candidate-specific design, opening, and result schemas plus strict guards
-  that reject all registered and parent lattice sizes before freeze;
-- a cutoff-3 harmonic target fixture and a leading local-phase support fixture
-  with algorithmically distinct small-matrix checks; and
-- a 256-bit outward-rounded analytic certificate for the proposed absolute
-  operator-distance gates, including potential-generated intermediate-band
-  leakage rather than assuming later states stay in the input band.
+The content-addressed v0.4 ledgers record:
 
-It contains prospective registered lattice, scenario, state, and threshold
-definitions. The v0.1 development evaluation stopped before ledger creation;
-no partial artifact was written or inspected. The v0.2 retry completed and
-committed its development ledger, but mandatory independent replay rejected a
-loose certified enclosure caused by a 53-bit Fourier-basis construction before
-the intended 256-bit context. The v0.3 precision repair completed another
-primary-passing development ledger; mandatory replay verified its three
-potential-free scenarios tightly but rejected the potential scenario because
-the rigorous maximum-Gram-row-sum norm bound was replay-loose under momentum
-coupling. Confirmation was not opened. All earlier lineages remain immutable.
-The v0.4 repair retains the same scientific registration and uses fresh
-disabled lifecycle paths. The localization/resource clock, continuum
-correction, global spectral boundaries, and protocol audit are in
-`LOCALIZATION_AUDIT.md`, `CONTINUUM_AUDIT.md`, and
-`GLOBAL_SPECTRUM_AUDIT.md`, and `PROTOCOL_AUDIT.md`. The controlling human
-contract is `docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md`.
+- 4/4 development scenarios and 16/16 development witness groups;
+- clean-checkpoint development replay of the committed result;
+- 2/2 single-use confirmation scenarios and 8/8 confirmation witness groups;
+- clean-checkpoint confirmation replay of the committed result;
+- positive operator, refinement, observable, analytic-leakage,
+  architecture-integrity, causality, parity, time-reversal, unitarity, and
+  resource classifications; and
+- six serialized post-primary boundary controls.
 
-Production construction caught and prospectively corrected a Fourier-sign
-inconsistency between the original real-space edge orientation and the fixed
-target convention. The revised `(L_x,R_(x-1))` pairing, recurrence, and audited
-momentum block now agree. The registered stage runner, canonical strict result
-ledger, atomic no-clobber writer, and algorithmically separate full-ledger
-verifier are complete and hostile-reviewed. The result schema now records the
-full Zitterbewegung current series and exact resource clock, and the six
-post-confirmation controls have fully specified inputs. All pre-freeze testing
-remained on disclosed fixtures. The immutable v0.1 opening ended in
-`execution_incomplete_no_result` when mpmath's real-symmetric eigensolver
-rejected a complex Hermitian Gram matrix before ledger creation; no partial
-artifact was written or inspected. The v0.2 retry repaired that eigensolver but
-exposed the precision-context defect after its complete development ledger was
-committed. The v0.3 package corrected that precision defect but exposed the
-potential-coupled row-sum looseness. The v0.4 package uses a rigorous
-similarity transform and Gershgorin eigenvalue enclosure for a tight certified
-spectral norm. Its fresh seal, tag, opening, permit, and result do not yet
-exist. See `DESIGN.md` for the scientific contrast and stop conditions.
+A post-result semantic audit found that the primary empirical pi-sector
+reducer, the algorithmically separate replay reducer, and the non-gating
+`ROUGH-POTENTIAL` control all used `4*abs(r) >= 3*N` instead of the registered
+`8*abs(r) >= 3*N`. The implemented predicate selects no lattice modes. The
+serialized measured pi-sector zeros, their pass flags, and the
+`ROUGH-POTENTIAL` zero are withdrawn as evidence. Replay reproduced the same
+defect and therefore did not independently validate that predicate. The
+pre-outcome analytic tails used the correct registered boundary and remain
+valid. See [POST_RESULT_AUDIT.md](POST_RESULT_AUDIT.md).
+
+The authoritative human-readable result is [RESULTS.md](RESULTS.md). Canonical
+numeric evidence is in:
+
+- `output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.4.json`;
+- `output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.4.json`; and
+- `independent_verification_receipt_v0.4.json` in this directory.
+
+The outcome-free localization, continuum, global-spectrum, and prospective
+protocol audits remain the construction record. They establish the two-layer
+full-space Margolus witness, exact resource clock, leading Dirac generator
+with a quadratic finite-step correction, exact signed-step reversal, the
+opposite-mass pi-mode pseudodoubler, and the boundary between the declared
+hard-core qubit lift and canonical fermionic second quantization.
+
+Historical infrastructure lineages are preserved:
+
+- v0.1 stopped before ledger creation on an independent complex-Gram
+  eigensolver error;
+- v0.2 wrote a primary-passing development ledger rejected by replay because
+  the Fourier basis was constructed at ambient 53-bit precision;
+- v0.3 wrote a primary-passing development ledger rejected by replay because
+  a rigorous row-sum norm bound was too loose under potential coupling; and
+- v0.4 changed only the certified norm reducer and lifecycle paths, not any
+  scientific scenario, state, map, threshold, gate, control, or stopping rule.
+
+Together with the verified product walk, the intact evidence supports a
+qualified constructive-sufficiency claim for the shared bounded role core
+across two registered update specifications. It does not establish the
+complete originally registered direct role because the empirical zone-edge
+gate is withdrawn. For free one-excitation evolution, the direct block is
+exactly a half-cell time-frame
+conjugate of the product block after mass-angle remapping, and adjacent product
+gates can be fused into the same parameterized two-mode form. The product
+registration also did not freeze the mass mixer's vacuum and
+double-occupation phases. Consequently this comparison does not establish
+architecture-class breadth, full-space update inequivalence, or a
+resource advantage. The depth and gate-work totals are exact only for the two
+sealed, nonminimal protocol clocks. It also does not support a new-automaton,
+whole-zone, fermionic-QFT, minimality, uniqueness, necessity, or ontological
+claim.
+
+## Exact clean-detached-worktree replay
+
+Run each replay at the stage checkpoint whose ledger it verifies. From the
+repository root, with the recorded CPython 3.14.0 environment containing
+`python-flint==0.9.0` and `mpmath==1.3.0`:
+
+```sh
+IOTA_QCA_REPLAY_PYTHON="$PWD/.venv/bin/python"
+IOTA_QCA_DEV_REPLAY=$(mktemp -d /tmp/iota-qca-v04-dev-replay.XXXXXX)
+git worktree add --detach "$IOTA_QCA_DEV_REPLAY/worktree" b96e70a1c0c61f64bd1bd51a0ecb9d021d9bef50
+(
+  cd "$IOTA_QCA_DEV_REPLAY/worktree"
+  PYTHONDONTWRITEBYTECODE=1 "$IOTA_QCA_REPLAY_PYTHON" -m src.quantum_dirac_symmetry_qca.cli --root . verify-result --stage development
+)
+git worktree remove "$IOTA_QCA_DEV_REPLAY/worktree"
+rmdir "$IOTA_QCA_DEV_REPLAY"
+```
+
+The verifier's exact stdout line is:
+
+```json
+{"classification":"development_passed","path":"output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/development_results_v0.4.json","stage":"development","status":"registered_stage_result_independently_verified"}
+```
+
+Then replay confirmation independently:
+
+```sh
+IOTA_QCA_REPLAY_PYTHON="$PWD/.venv/bin/python"
+IOTA_QCA_CONFIRM_REPLAY=$(mktemp -d /tmp/iota-qca-v04-confirm-replay.XXXXXX)
+git worktree add --detach "$IOTA_QCA_CONFIRM_REPLAY/worktree" 0795a6efa0252411c66479cb87863349e20ec886
+(
+  cd "$IOTA_QCA_CONFIRM_REPLAY/worktree"
+  PYTHONDONTWRITEBYTECODE=1 "$IOTA_QCA_REPLAY_PYTHON" -m src.quantum_dirac_symmetry_qca.cli --root . verify-result --stage confirmation
+)
+git worktree remove "$IOTA_QCA_CONFIRM_REPLAY/worktree"
+rmdir "$IOTA_QCA_CONFIRM_REPLAY"
+```
+
+The verifier's exact stdout line is:
+
+```json
+{"classification":"constructive_sufficiency_passed_direct_symmetry_qca_sector","path":"output/quantum_dirac/ICP-QUANTUM-DIRAC-SYMMETRY-QCA-001/confirmation_results_v0.4.json","stage":"confirmation","status":"registered_stage_result_independently_verified"}
+```
+
+These commands establish byte-bound, algorithmically separate reconstruction
+at the two exact checkpoint commits. They are not external replication, and—by
+the disclosed shared predicate—do not independently validate the withdrawn
+empirical pi-sector records. The `--skip-receipt` form is preparation-only and
+is not a release check:
+
+```sh
+.venv/bin/python scripts/validate_archived_quantum_dirac_symmetry_qca.py --skip-receipt
+```
+
+Normal archive validation requires the canonical receipt by omitting that
+flag. Release validation additionally requires the annotated completion tag:
+
+```sh
+.venv/bin/python scripts/validate_archived_quantum_dirac_symmetry_qca.py --require-completion-tag
+```
