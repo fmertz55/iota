@@ -105,3 +105,124 @@ of state-conditioned repair affordance is therefore untested, not negative.
 This distinction preserves the positive causal placement result from Finding
 074 while preventing developmental instrument behavior from becoming a
 confirmation claim.
+
+\subsection{Candidate bridge to Gravity from Entropy}
+\label{sec:gfe-bridge}
+
+The exact identity in Equation~\ref{eq:uniform-relative-entropy} supplies a
+nonverbal bridge from the current support ratio to relative entropy. It does not
+yet connect Iota dynamics to gravity. In GfE, the local Lagrangian is
+
+\begin{equation}
+\mathcal{L}_{\mathrm{GfE}}(x)
+=-\operatorname{Tr}_{F}\ln\boldsymbol{\Theta}_x,
+\qquad
+\boldsymbol{\Theta}_x
+=\widetilde{\mathbf{G}}_x\widetilde{g}_x^{-1},
+\label{eq:gfe-lagrangian}
+\end{equation}
+
+where $\widetilde{g}$ is the physical higher-order metric,
+$\widetilde{\mathbf{G}}$ is the metric induced by matter and curvature, and
+$\boldsymbol{\Theta}$ is required to be positive
+\cite{bianconi2025gravity,bianconi2026thermodynamics}. These metrics are not
+normalized probability distributions. In the finite flattened representation,
+Equation~\ref{eq:gfe-lagrangian} is a log-determinant contrast,
+$\mathcal{L}_{\mathrm{GfE}}=-\ln\det_F\boldsymbol{\Theta}$.
+
+A concrete bridge theorem would require a positive future-law operator
+$\mathbf{Q}_x$ derived from the Iota transition structure such that
+
+\begin{equation}
+\begin{aligned}
+\boldsymbol{\Theta}_x
+&\stackrel{?}{=}
+(\mathbf{Q}^{\mathrm{prior}}_x)^{-1/2}
+\mathbf{Q}^{\mathrm{post}}_x
+(\mathbf{Q}^{\mathrm{prior}}_x)^{-1/2}
+\sim
+\mathbf{Q}^{\mathrm{post}}_x
+(\mathbf{Q}^{\mathrm{prior}}_x)^{-1},\\
+\det_F\mathbf{Q}_x&=a\,\mu(\mathcal{R}_x),
+\qquad a>0\ \text{common to prior and post}.
+\end{aligned}
+\label{eq:iota-gfe-operator-bridge}
+\end{equation}
+
+Here $\sim$ denotes similarity, so the first representative is positive while
+retaining the determinant ratio of the original product. For the present finite
+Iota identity, $\mu$ is counting measure. A non-counting extension would define
+a new $\Delta I_x^{(\mu)}$ rather than silently replace the cardinality-based
+$\Delta I_x$. Under these algebraic conditions,
+
+\begin{equation}
+\begin{aligned}
+\mathcal{L}_{\mathrm{GfE}}(x)
+&=\ln\frac{\mu(\mathcal{R}^{\mathrm{prior}}_x)}
+{\mu(\mathcal{R}^{\mathrm{post}}_x)}\\
+&=\ln\frac{|\mathcal{R}^{\mathrm{prior}}_x|}
+{|\mathcal{R}^{\mathrm{post}}_x|}
+=\Delta I_x.
+\end{aligned}
+\label{eq:iota-gfe-scalar-bridge}
+\end{equation}
+
+The question mark is substantive: a physical bridge must still derive the
+operators, metric, covariance, variation, and continuum limit. Matching
+determinants after the fact would only reproduce a scalar.
+
+GfE thermodynamics further writes a local mode contribution as
+$\delta s_k/\delta v=\ln\mathcal{G}_k$, so that
+$\mathcal{G}_k=\exp(\delta s_k/\delta v)$ and its intrinsic geometric
+temperature is $\theta_k=\mathcal{G}_k-1$
+\cite{bianconi2026thermodynamics}. If an Iota mode-resolved contribution
+$\chi_{x,k}$ and a physical mode dictionary were independently derived, the
+conditional sectorwise crosswalk would be
+
+\begin{equation}
+\begin{aligned}
+\chi_{x,k}&\widehat{=}c_k:=\frac{\delta s_k}{\delta v},\\
+\mathcal{G}_k&=e^{\chi_{x,k}},\qquad
+\theta_k=e^{\chi_{x,k}}-1,\qquad
+\frac{\delta\epsilon_k}{\delta v}
+=e^{\chi_{x,k}}-1-\chi_{x,k}.
+\end{aligned}
+\label{eq:gfe-conditional-crosswalk}
+\end{equation}
+
+Here $k\in\{0,\ldots,4\}$ labels the five GfE sectors and $z_k$ is the
+corresponding degeneracy, with $z_0=z_1=1$ and $z_2=z_3=z_4=3$. In the
+reported weak-curvature Friedmann expansion, $u_k=\omega_kH^2$ with
+$\omega_k=\omega'_k\ell_{\mathrm P}^2$, and
+$\bar\omega_{[1]}:=\sum_{k=0}^{4}z_k\omega_k$.
+
+This cannot be imposed generally: individual GfE $c_k$ can be signed, whereas
+Equation~\ref{eq:future-law-divergence} is nonnegative. Nor does an aggregate
+$\chi_x\widehat{=}\sum_k z_kc_k$ determine a single temperature or energy,
+because $\delta\epsilon/\delta v=\sum_kz_k(e^{c_k}-1-c_k)$ depends on the full
+mode vector. The reference, normalization, mode dictionary, aggregation, and
+sign structure must be derived rather than selected for agreement.
+
+For weak-curvature, late-time Friedmann backgrounds, modes with
+$\omega_k\neq0$ obey $c_k\simeq\omega_kH^2$ and
+$\delta\epsilon_k/\delta v\simeq\tfrac12\omega_k^2H^4$. For non-de Sitter
+solutions with $H\sim t^{-1}$ these scale as $t^{-2}$ and $t^{-4}$.
+After summation, the leading entropy coefficient $\bar\omega_{[1]}$ can vanish,
+including in the reported Milne and $w=1$ cases, so an aggregate $H^2$ scaling
+requires $\bar\omega_{[1]}\neq0$. Under the conditional mode map, an Iota
+quantity would inherit a scaling only in the corresponding nonvanishing sector.
+That is not yet a novel Iota prediction: it is inherited from the Friedmann
+approximation. Novel evidence would require an Iota-derived
+correction, transition, or invariant tied to measured succession variables
+such as opportunity lifetime or ordered cut depth, followed by a prediction
+that defeats ordinary branching, percolation, complete-state dynamics, and
+competing gravity models.
+
+The bridge is therefore a precise research program. Construct
+$\mathbf{Q}_x$ from policy-indexed future laws; prove positivity, covariance,
+and robustness to scheduler, encoding, topology, and coarse-graining; recover
+the GfE metric operator and action at the functional-variation level; establish
+a controlled continuum limit; and only then derive an astrophysical or
+cosmological discriminator. The current simulator results supply a causal
+testbed for the first step, not evidence that the GfE action or gravity has
+emerged.

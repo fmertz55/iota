@@ -44,6 +44,60 @@ When interaction strictly reduces the reachable set, a cardinality measure is
 Equation~\ref{eq:information} does not distinguish all set reshapings that
 preserve cardinality. A set- or distribution-sensitive extension remains open.
 
+\subsection{A distribution-sensitive constraint diagnostic}
+
+Let $P_{x,\tau}^{\mathrm{prior},\pi}$ and
+$P_{x,\tau}^{\mathrm{post},\pi}$ be probability laws for the same declared
+future observable $F_{t:t+\tau}$ under policy or intervention $\pi$, before and
+after the focal interaction. The outcome space, measure, boundary,
+coarse-graining, resources, and horizon are held fixed. A candidate
+distribution-sensitive diagnostic is
+
+\begin{equation}
+\mathfrak{C}_{x,\tau}^{\pi}
+:=
+D_{\mathrm{KL}}\!\left(
+P_{x,\tau}^{\mathrm{post},\pi}
+\middle\|
+P_{x,\tau}^{\mathrm{prior},\pi}
+\right).
+\label{eq:future-law-divergence}
+\end{equation}
+
+Equation~\ref{eq:future-law-divergence} requires
+$P_{x,\tau}^{\mathrm{post},\pi}\ll
+P_{x,\tau}^{\mathrm{prior},\pi}$; otherwise it may diverge. It is directional,
+reference-relative, and indexed by a declared future task. It is an
+interventional constraint diagnostic, not a new definition of information or
+of the Information--Constraint Principle.
+
+The existing support-ratio measure is an exact special case. If
+$\mathcal{R}^{\mathrm{post}}\subseteq\mathcal{R}^{\mathrm{prior}}$ and
+$U_{\mathrm{post}}$, $U_{\mathrm{prior}}$ are uniform laws on those supports,
+then
+
+\begin{align}
+D_{\mathrm{KL}}(U_{\mathrm{post}}\|U_{\mathrm{prior}})
+&=
+\sum_{r\in\mathcal{R}^{\mathrm{post}}}
+\frac{1}{|\mathcal{R}^{\mathrm{post}}|}
+\log\frac{1/|\mathcal{R}^{\mathrm{post}}|}
+{1/|\mathcal{R}^{\mathrm{prior}}|} \nonumber\\
+&=
+\log\frac{|\mathcal{R}^{\mathrm{prior}}|}
+{|\mathcal{R}^{\mathrm{post}}|}
+=\Delta I_x.
+\label{eq:uniform-relative-entropy}
+\end{align}
+
+The orientation is essential: reversing the arguments diverges for strict
+support pruning because the posterior law assigns zero probability to some
+prior alternatives. More generally, a scalar divergence can register soft
+reweighting but still suppresses the identity and relational organization of
+the changed futures. The complete indexed future-law family therefore remains
+the primary object; any aggregation over policies must be declared
+\cite{kullback1951information}.
+
 \subsection{Relation to prior work}
 
 The logarithm of a finite number of alternatives is Hartley information
@@ -68,7 +122,12 @@ At the physical-foundations level, constructor theory formulates information in
 terms of possible and impossible transformations
 \cite{deutsch2015constructor}. A recent preprint also describes information and
 computation through persistent relational constraints on
-admissible transitions \cite{witte2026computation}. The present work therefore
+admissible transitions \cite{witte2026computation}. Gravity from Entropy (GfE)
+instead proposes a continuum gravitational action built from a geometric
+quantum relative entropy between a spacetime metric and a metric induced by
+matter and curvature \cite{bianconi2025gravity,bianconi2026thermodynamics}.
+Its operands are metric operators, not reachable-future distributions; the
+possible bridge is addressed in Section~\ref{sec:gfe-bridge}. The present work therefore
 does not claim novelty for information-as-restriction, organization across
 turnover, or causal intervention on future possibilities. Its narrower novelty
 target is the exact operational combination of disjoint bridge replacement,
