@@ -1,4 +1,4 @@
-\section{Provisional Model}
+\section{Finite Local Model}
 \label{sec:model}
 
 At permanent lattice address $x$, write an iota provisionally as
@@ -7,19 +7,56 @@ At permanent lattice address $x$, write an iota provisionally as
 I_x(t)=\left(x,A_x(t),E_x(t)\right),
 \end{equation}
 
-where $A_x(t)$ is its attribute state and $E_x(t)$ is its expression state. The
-26-cell Moore neighborhood is denoted by $N_{26}(x,t)$. A fixed local law
-$\mathcal{L}$ defines the generative kernel
+where $A_x(t)$ is its integer amplitude and $E_x(t)$ collects the remaining
+local expression coordinates. The experiments use a $64^3$ periodic lattice.
+The endogenous implementation state comprises the arrays
+\texttt{active}, $A$, $R$, $V$, $P$, \texttt{latent\_A}, angular memory $L$,
+and previous-activity bookkeeping. A fixed local law $\mathcal{L}$, fixed
+scheduler, and pseudorandom generator define the stochastic kernel
 
 \begin{equation}
-\left(A_x(t+1),E_x(t+1)\right)
-=
-\mathcal{L}\left(A_x(t),E_x(t),N_{26}(x,t)\right).
+S_{t+1}\sim\mathcal{L}(S_t,\xi_t;\vartheta),
 \label{eq:kernel}
 \end{equation}
 
-Equation~\ref{eq:kernel} is a model definition. No identification with a
-fundamental physical particle is assumed.
+where $\xi_t$ is the declared exogenous random stream and $\vartheta$ is the
+frozen parameter vector. Equation~\ref{eq:kernel} is a model definition. No
+identification with a fundamental physical particle is assumed.
+
+The update is ordered rather than a purely synchronous cellular-automaton map.
+Tick-start active sources are visited in lexicographic array order. A source's
+primary vector target and scored local candidates are then considered in a
+deterministic candidate order. Source fields are read from the tick-start state,
+while target eligibility and remaining source amplitude may reflect earlier
+events in the same tick. Random gate draws are consumed sequentially. These
+scheduler semantics are part of the law and are held fixed in every paired
+intervention.
+
+Each successful hard transfer debits one amplitude quantum from its source and
+credits the target. An inactive target with latent budget activates by combining
+that budget with the transferred quantum; an eligible depleted target may be
+recruited only through the declared residual channel. A gate with effective
+influence $q$ succeeds with probability
+$\min(1,k_Aq)$; failure changes no amplitude state. At tick end, a source whose
+amplitude is exhausted deactivates. The integer ledger
+
+\begin{equation}
+\sum_{x:\,\mathrm{active}} A_x(t)
++\sum_{x:\,\mathrm{inactive}}\mathrm{latent\_A}_x(t)
+=A_{\mathrm{total}}
+\label{eq:amplitude-ledger}
+\end{equation}
+
+is required to remain exact. Payload and vector-label updates are conditional
+on successful exchange and do not alter this ledger.
+
+The principal experiments use the versioned v0.3.6 component-bridge
+configuration. Table~\ref{tab:model-parameters} reports its principal values
+and is generated directly from the complete canonical YAML file under
+\path{output/findings/configs/}, so manuscript values cannot drift from the
+executable configuration.
+
+\input{paper/generated/model_parameters.tex}
 
 \subsection{Operational vocabulary}
 

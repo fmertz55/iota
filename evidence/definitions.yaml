@@ -29,6 +29,33 @@
       "latex": "\\Delta I_x=\\log\\frac{|\\mathcal{R}_x^{\\mathrm{prior}}|}{|\\mathcal{R}_x^{\\mathrm{posterior}}|}"
     },
     {
+      "id": "DEF-ADJACENT-FRONTIER",
+      "term": "Adjacent frontier",
+      "symbol": "\\mathcal{J}_{x,t,\\tau}^{\\pi,\\ell}",
+      "kind": "working theoretical construct",
+      "status": "provisional; unmeasured in the reported experiments",
+      "definition": "For a declared state, policy, horizon, resource boundary, scale-specific type map, and previously actualized type repertoire, the types represented among reachable futures that have not yet been actualized. It is a bounded and observer-indexed accessibility construct, not an observer-free or open-ended phase space.",
+      "latex": "\\mathcal{J}_{x,t,\\tau}^{\\pi,\\ell}(s_t)=r_\\ell(\\mathcal{R}_{x,\\tau}^{\\pi}(s_t))\\setminus V_t^\\ell"
+    },
+    {
+      "id": "DEF-POSSIBILITY-FLUX-LEDGER",
+      "term": "Possibility-flux ledger",
+      "symbol": "(K,E,L)",
+      "kind": "set diagnostic",
+      "status": "formal; unmeasured in the reported experiments",
+      "definition": "For prior and post-interaction reachable supports defined on the same outcome space, the ordered decomposition into retained outcomes K, enabled outcomes E, and lost outcomes L. The ledger preserves outcome identity when a scalar net-volume change would hide turnover.",
+      "latex": "K=R_0\\cap R_1,\\qquad E=R_1\\setminus R_0,\\qquad L=R_0\\setminus R_1"
+    },
+    {
+      "id": "DEF-SIGNED-SUPPORT-DEFORMATION",
+      "term": "Signed support deformation",
+      "symbol": "\\chi(R_1\\!:\\!R_0)",
+      "kind": "support-volume diagnostic",
+      "status": "formal; unmeasured in the reported experiments",
+      "definition": "The logarithm of prior reachable-support measure divided by post-interaction reachable-support measure, using one declared base measure on finite nonempty supports. Positive values denote net pruning, negative values denote net enabling, and zero does not exclude complete outcome turnover.",
+      "latex": "\\chi(R_1\\!:\\!R_0)=\\log\\frac{\\mu(R_0)}{\\mu(R_1)}"
+    },
+    {
       "id": "DEF-COHERENCE",
       "term": "Coherence",
       "symbol": "",

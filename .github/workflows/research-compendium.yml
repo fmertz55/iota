@@ -56,7 +56,12 @@ jobs:
             texlive-latex-recommended \
             texlive-latex-extra
 
-      - name: Build paper
+      - name: Validate IOTA BioSystems submission source
+        run: make validate-iota-submission
+
+      - name: Build IOTA BioSystems submission
+        env:
+          SOURCE_DATE_EPOCH: "1784649139"
         run: make paper
 
       - name: Audit archived Quantum-Dirac result
@@ -77,11 +82,19 @@ jobs:
             quantum_dirac_paper/generated/results_summary.json \
             quantum_dirac_paper/generated/tables
 
-      - name: Upload paper PDF
+      - name: Upload IOTA BioSystems submission artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: iota-working-paper
-          path: build/paper/main.pdf
+          name: iota-biosystems-submission
+          path: |
+            output/pdf/iota_constraint_transport_biosystems.pdf
+            output/pdf/iota_constraint_transport_biosystems.pdf.sha256
+            output/pdf/iota_constraint_transport_biosystems.build.json
+            output/submission/iota_constraint_transport_biosystems_sources.zip
+            output/submission/iota_constraint_transport_biosystems_sources.zip.sha256
+            submission/biosystems/highlights.txt
+            submission/biosystems/cover_letter.md
+            submission/biosystems/checklist.md
           if-no-files-found: error
 
       - name: Upload Quantum-Dirac paper artifacts

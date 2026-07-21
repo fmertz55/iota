@@ -46,9 +46,9 @@
       "sha256": "356f62fa4963d09b908eb881637de6aedd4d7ca7fdaa21c8920a74aaa8e736fc"
     },
     {
-      "bytes": 10591,
+      "bytes": 12555,
       "path": "evidence/definitions.yaml",
-      "sha256": "f07f9e7f809479b4b3cad584d82ee60227505b26b59ba5cedc919c9155bb0fa9"
+      "sha256": "dd0c1e7e09bdfc206a79e9f31b7539988325d503d6506c09c17e447c2e62f8b1"
     }
   ],
   "claim_id": "GC-014",

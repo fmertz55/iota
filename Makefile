@@ -1,6 +1,10 @@
-.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca validate-quantum-dirac-symmetry-qca-archive verify paper quantum-dirac-paper clean-paper clean-quantum-dirac-paper
+.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca validate-quantum-dirac-symmetry-qca-archive verify validate-iota-submission iota-submission paper quantum-dirac-paper clean-paper clean-quantum-dirac-paper
 
-PYTHON ?= python3
+PYTHON ?= $(shell command -v python3 2>/dev/null || command -v python 2>/dev/null)
+
+ifeq ($(strip $(PYTHON)),)
+$(error Python 3 is required but neither python3 nor python was found)
+endif
 
 finding069-evidence:
 	$(PYTHON) src/summarize_sequential_cut.py --through-depth 8 --quiet
@@ -39,8 +43,13 @@ validate-quantum-dirac-symmetry-qca-archive:
 
 verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca
 
-paper:
+validate-iota-submission:
+	$(PYTHON) scripts/validate_iota_submission.py
+
+iota-submission:
 	$(PYTHON) scripts/build_paper.py
+
+paper: iota-submission
 
 quantum-dirac-paper:
 	$(PYTHON) scripts/build_quantum_dirac_paper.py

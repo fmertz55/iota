@@ -29,6 +29,33 @@ The set of next local states admissible from state s_t under the declared local 
 
 The change in the reachable caused by interaction. For strict reachable-set reduction, the current cardinality measure is the logarithm of the prior-to-posterior reachable-set size ratio.
 
+## Adjacent frontier
+
+- ID: `DEF-ADJACENT-FRONTIER`
+- Kind: working theoretical construct
+- Status: provisional; unmeasured in the reported experiments
+- Symbol: `\mathcal{J}_{x,t,\tau}^{\pi,\ell}`
+
+For a declared state, policy, horizon, resource boundary, scale-specific type map, and previously actualized type repertoire, the types represented among reachable futures that have not yet been actualized. It is a bounded and observer-indexed accessibility construct, not an observer-free or open-ended phase space.
+
+## Possibility-flux ledger
+
+- ID: `DEF-POSSIBILITY-FLUX-LEDGER`
+- Kind: set diagnostic
+- Status: formal; unmeasured in the reported experiments
+- Symbol: `(K,E,L)`
+
+For prior and post-interaction reachable supports defined on the same outcome space, the ordered decomposition into retained outcomes K, enabled outcomes E, and lost outcomes L. The ledger preserves outcome identity when a scalar net-volume change would hide turnover.
+
+## Signed support deformation
+
+- ID: `DEF-SIGNED-SUPPORT-DEFORMATION`
+- Kind: support-volume diagnostic
+- Status: formal; unmeasured in the reported experiments
+- Symbol: `\chi(R_1\!:\!R_0)`
+
+The logarithm of prior reachable-support measure divided by post-interaction reachable-support measure, using one declared base measure on finite nonempty supports. Positive values denote net pruning, negative values denote net enabling, and zero does not exclude complete outcome turnover.
+
 ## Coherence
 
 - ID: `DEF-COHERENCE`

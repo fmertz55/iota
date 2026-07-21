@@ -22,6 +22,8 @@ observables, if they emerge, are downstream quantities to explain rather than
 primitive variables to imitate. Accordingly, a proposed experiment must state
 which aspect of the successor structure it causally changes and measures.
 
+\subsection{Reachable supports and signed possibility-space flux}
+
 For a state $s_t$, define the locally reachable next-state set as
 
 \begin{equation}
@@ -31,18 +33,55 @@ For a state $s_t$, define the locally reachable next-state set as
 \label{eq:reachable}
 \end{equation}
 
-When interaction strictly reduces the reachable set, a cardinality measure is
+When interaction strictly reduces the reachable set, the original cardinality
+measure is
 
 \begin{equation}
 \Delta I_x
 =
 \log\frac{|\mathcal{R}_x^{\mathrm{prior}}(t+1)|}
-{|\mathcal{R}_x^{\mathrm{posterior}}(t+1)|}.
+{|\mathcal{R}_x^{\mathrm{post}}(t+1)|}.
 \label{eq:information}
 \end{equation}
 
-Equation~\ref{eq:information} does not distinguish all set reshapings that
-preserve cardinality. A set- or distribution-sensitive extension remains open.
+To distinguish pruning from enabling, let $R_0$ and $R_1$ be nonempty prior
+and post-interaction supports measured with the same base measure $\mu$. Define
+
+\begin{equation}
+K=R_0\cap R_1,\qquad
+E=R_1\setminus R_0,\qquad
+L=R_0\setminus R_1,
+\label{eq:possibility-ledger}
+\end{equation}
+
+and the signed net-volume deformation
+
+\begin{equation}
+\chi(R_1\!:\!R_0)
+:=\log\frac{\mu(R_0)}{\mu(R_1)}.
+\label{eq:signed-support-deformation}
+\end{equation}
+
+Thus $\chi>0$ denotes net pruning and $\chi<0$ net enabling. For
+$0<\mu(R)<\infty$, let $U_R$ be the normalized restriction of the same measure,
+$U_R(A)=\mu(A\cap R)/\mu(R)$. When the supports are nested,
+
+\begin{equation}
+\chi(R_1\!:\!R_0)=
+\begin{cases}
+D_{\mathrm{KL}}(U_{R_1}\Vert U_{R_0}), & R_1\subseteq R_0,\\[2pt]
+-D_{\mathrm{KL}}(U_{R_0}\Vert U_{R_1}), & R_0\subseteq R_1.
+\end{cases}
+\label{eq:signed-kl-duality}
+\end{equation}
+
+Counting measure gives Equation~\ref{eq:information} in the pruning case. For
+nonnested supports, however, $\chi$ reports only signed net volume: it can vanish
+even when every outcome identity turns over. Equation~\ref{eq:possibility-ledger}
+must therefore accompany it; a bounded common-support diagnostic such as
+Jensen--Shannon divergence may be added when probability turnover is the task
+\cite{lin1991divergence}. Empty supports require explicit set reporting or a
+declared absorbing outcome, not an arbitrary pseudocount.
 
 \subsection{A distribution-sensitive constraint diagnostic}
 
@@ -67,36 +106,34 @@ P_{x,\tau}^{\mathrm{prior},\pi}
 Equation~\ref{eq:future-law-divergence} requires
 $P_{x,\tau}^{\mathrm{post},\pi}\ll
 P_{x,\tau}^{\mathrm{prior},\pi}$; otherwise it may diverge. It is directional,
-reference-relative, and indexed by a declared future task. It is an
-interventional constraint diagnostic, not a new definition of information or
-of the Information--Constraint Principle.
+reference-relative, nonnegative, and indexed by a declared future task. It is
+not the signed quantity $\chi$: $\mathfrak C$ detects probability reweighting,
+whereas $\chi$ records only net support-volume change. Neither scalar preserves
+the full identity and relational organization of changed futures. The complete
+indexed future-law family therefore remains the primary object; any aggregation
+over policies must be declared \cite{kullback1951information}.
 
-The existing support-ratio measure is an exact special case. If
-$\mathcal{R}^{\mathrm{post}}\subseteq\mathcal{R}^{\mathrm{prior}}$ and
-$U_{\mathrm{post}}$, $U_{\mathrm{prior}}$ are uniform laws on those supports,
-then
+\subsection{The adjacent frontier}
 
-\begin{align}
-D_{\mathrm{KL}}(U_{\mathrm{post}}\|U_{\mathrm{prior}})
-&=
-\sum_{r\in\mathcal{R}^{\mathrm{post}}}
-\frac{1}{|\mathcal{R}^{\mathrm{post}}|}
-\log\frac{1/|\mathcal{R}^{\mathrm{post}}|}
-{1/|\mathcal{R}^{\mathrm{prior}}|} \nonumber\\
-&=
-\log\frac{|\mathcal{R}^{\mathrm{prior}}|}
-{|\mathcal{R}^{\mathrm{post}}|}
-=\Delta I_x.
-\label{eq:uniform-relative-entropy}
-\end{align}
+Let $r_\ell$ map reachable microstates or trajectories to a frozen alphabet of
+types at scale $\ell$, and let $V_t^\ell$ be the types already actualized by
+time $t$. For policy $\pi$ and horizon $\tau$, define the adjacent frontier
 
-The orientation is essential: reversing the arguments diverges for strict
-support pruning because the posterior law assigns zero probability to some
-prior alternatives. More generally, a scalar divergence can register soft
-reweighting but still suppresses the identity and relational organization of
-the changed futures. The complete indexed future-law family therefore remains
-the primary object; any aggregation over policies must be declared
-\cite{kullback1951information}.
+\begin{equation}
+\mathcal{J}_{x,t,\tau}^{\pi,\ell}(s_t)
+:=
+r_\ell\!\left(\mathcal{R}_{x,\tau}^{\pi}(s_t)\right)
+\setminus V_t^\ell.
+\label{eq:adjacent-frontier}
+\end{equation}
+
+This is not observer-free. The state, type map, policy, horizon, resources,
+boundary, and actualized repertoire are constitutive. With a chemical type map
+and a one-reaction horizon it can specialize to Kauffman's chemical adjacent
+possible: molecular types not yet actual but producible from the actual set
+\cite{kauffman2000investigations}. No such chemical map is instantiated here.
+At longer horizons it is accessible novelty rather than literal one-step
+adjacency.
 
 \subsection{Relation to prior work}
 
@@ -108,6 +145,29 @@ also identified information with limitations on possible variable values
 \cite{zadeh2015information}. Cause--effect repertoires and effective information
 likewise quantify how mechanisms or interventions constrain possible states in
 discrete dynamical systems \cite{balduzzi2008integrated,hoel2013causal}.
+
+The adjacent-possible literature is especially close prior art. Triggering urns
+generate correlated novelty and Heaps--Zipf regularities
+\cite{tria2014novelties}; reinforced concept networks model discovery on a
+prestated topology \cite{iacopini2018innovation}; and dynamic scaffolding changes
+which possibilities become developmentally accessible
+\cite{griesemer2024scaffolded}. Kauffman later described realized novelties as
+enabling constraints for typically unprestatable biological functions
+\cite{kauffman2014prolegomenon}; Patra and Kauffman sharpened that position into
+a proposed distinction between fixed lawful spaces and an indefinite domain of
+contextual novelty \cite{patra2025domains}. Numerical intervention in a Kauffman
+chemical model also links autocatalytic closure to complexity dynamics
+\cite{faggian2025closure}. History-dependent accessibility, correlated novelty,
+constraint-enabled novelty, and causal organization-to-complexity effects are
+therefore not Iota discoveries.
+
+Geometric expansion is prior art as well. Fari\~na and Vallejo define a
+biological cosmological constant from the squared fractional expansion rate of
+Fisher-information volume and interpret life as a geometric transition into the
+adjacent possible \cite{farina2026lambdaB}. Their sign-blind global volume rate
+does not provide the local $E/L/K$ ledger or a replaceable-carrier intervention,
+but it precludes any claim that Iota first introduced a geometric
+adjacent-possible measure or generic phase transition.
 
 Counterfactual approaches to semantic information test whether scrambling or
 erasure changes a system's future or viability
@@ -121,25 +181,26 @@ cellular automata \cite{rupe2018local,holme2012temporal,hintze2026rethinking}.
 At the physical-foundations level, constructor theory formulates information in
 terms of possible and impossible transformations
 \cite{deutsch2015constructor}. A recent preprint also describes information and
-computation through persistent relational constraints on
-admissible transitions \cite{witte2026computation}. Gravity from Entropy (GfE)
-instead proposes a continuum gravitational action built from a geometric
-quantum relative entropy between a spacetime metric and a metric induced by
-matter and curvature \cite{bianconi2025gravity,bianconi2026thermodynamics}.
-Its operands are metric operators, not reachable-future distributions; the
-possible bridge is addressed in Section~\ref{sec:gfe-bridge}. The present work therefore
-does not claim novelty for information-as-restriction, organization across
-turnover, or causal intervention on future possibilities. Its narrower novelty
-target is the exact operational combination of disjoint bridge replacement,
-paired stochastic intervention, and ordered realization cuts in this finite
-local system. Whether that diagnostic is new and general remains to be tested
-against the cited methods and matched controls.
+computation through persistent relational constraints on admissible transitions
+\cite{witte2026computation}. Gravity from Entropy (GfE) instead proposes a
+continuum gravitational action built from a geometric quantum relative entropy
+between a spacetime metric and a metric induced by matter and curvature
+\cite{bianconi2025gravity,bianconi2026thermodynamics}. Its operands are metric
+operators, not reachable-future distributions; the possible bridge is addressed
+in Section~\ref{sec:gfe-bridge}.
+
+The present novelty target is therefore narrow: complete bridge replacement,
+paired stochastic intervention, ordered realization cuts, and a prospective
+signed frontier response in this finite local system. Whether that combination
+generalizes beyond the supplied simulator remains to be tested against the
+native models above.
 
 The experiments also distinguish a state-level possibility from its lifetime
 under ordered resolution. Let $\mathcal{R}^{(k)}$ denote the routes still
 admissible after event position $k$ within a declared update. A route may be
 lawful in $\mathcal{R}^{(k)}$ yet disappear from $\mathcal{R}^{(k+1)}$ when a
 competing lawful event exhausts its source or preempts its target. This notation
-does not assert non-Markovian physics: the complete simulator state, RNG state,
-and scheduler determine the update. It makes the causal question operational:
-must an ancestry-preserving successor be realized before its route closes?
+does not assert non-Markovian physics: the complete simulator state, random
+number generator state, and scheduler determine the update. It makes the causal
+question operational: must an ancestry-preserving successor be realized before
+its route closes?

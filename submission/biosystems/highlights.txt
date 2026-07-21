@@ -1,0 +1,5 @@
+- Three local constraints persisted through complete replacement of bridge cells.
+- Single-event interventions separated route availability from realization.
+- Vetoes exposed alternate lineage continuations in 122 of 164 branches.
+- A signed support measure distinguishes pruning from enabling of futures.
+- The adjacent possible is prior art, not independent confirmation.

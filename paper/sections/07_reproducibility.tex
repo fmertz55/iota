@@ -19,6 +19,11 @@ replication synthesis are in \path{output/findings/finding070/}. Its synthesis
 revalidates the fixed source and selector hashes, nested risk sets, exact
 selector-to-case joins, shams, endpoints, and safety invariants.
 
+Later Findings 074--079 remain registered in the same evidence system but are
+not part of this article's claim set.
+
 \texttt{make verify} rebuilds both eight-stage syntheses, regenerates derived
 files, and validates expectations, provenance, paths, and freshness.
-\texttt{make paper} then compiles this PDF.
+\texttt{make paper} then compiles the review PDF and produces a stable PDF,
+SHA-256 checksums, build manifest, and self-contained LaTeX source archive under
+\path{output/pdf/} and \path{output/submission/}.

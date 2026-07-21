@@ -1,25 +1,37 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{booktabs}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,array}
 \usepackage[numbers,sort&compress]{natbib}
-\usepackage{hyperref}
+\usepackage{microtype}
 \usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{lineno}
+\usepackage{setspace}
 
-\emergencystretch=1em
+\emergencystretch=2em
+\onehalfspacing
 
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
   urlcolor=blue,
-  citecolor=blue
+  citecolor=blue,
+  pdftitle={Constraint Transport and History-Dependent Successor Accessibility in a Finite Local Artificial-Life System},
+  pdfauthor={Douglas Clark},
+  pdfsubject={BioSystems full-length article submission},
+  pdfkeywords={artificial life, biological organization, adjacent possible, constraint transport, causal intervention, cellular automata, self-organization}
 }
 
-\title{Constraint Transport and Temporally Gated Expression Lineage\\
-in a Finite Local Iota System}
-\author{Douglas Clark}
-\date{Working draft}
+\title{Constraint Transport and History-Dependent Successor Accessibility\\
+in a Finite Local Artificial-Life System}
+\author{Douglas Clark\\
+\small Independent Researcher\\
+\small Corresponding author: \href{mailto:clarkdd@gmail.com}{clarkdd@gmail.com}}
+\date{}
 
 \input{paper/generated/results.tex}
 
@@ -27,42 +39,40 @@ in a Finite Local Iota System}
 
 \maketitle
 
+\noindent\textbf{Article type:} Full-length Article
+
 \begin{abstract}
-Information is investigated as an interaction-induced change in reachable
-future states. For uniform laws on nested reachable supports, the logarithmic
-support-ratio measure is exactly a Kullback--Leibler relative entropy. This
-identity motivates a policy- and horizon-indexed future-law divergence and a
-prospective bridge to the geometric quantum relative entropy used in Gravity
-from Entropy (GfE). A finite local lattice system is used to test whether
-relational constraints can persist when the local cells realizing them are
-replaced.
-Three strict constraint-transport events show tracked regions disconnecting
-after bridge loss and reconnecting through a causally necessary disjoint bridge
-under payload-free dynamics. Prospective ancestry then shows expression lineage
-surviving stationary-address death. In 192 fresh branches, one-decision
-interventions reopened all 36 targeted successor routes; all six gate
-interventions produced immediate children and 28 of 30 exhaustion interventions
-eventually handed off. A complete screen of 16 unused initialization seeds froze
-two new geometries before terminal outcomes; the same protocol rescued all eight
-new gate-failure cases and produced directionally correct exhaustion and
-preemption mediators. The result is bounded causal evidence that a lawful
-successor must remain available and be realized before closure. A separately
-committed reverse intervention vetoed 164 natural unique-child events: 122
-branches realized an alternate child and handed off, while 42 realized none and
-lost the lineage. Extending those branches through prospectively frozen
-sequential vetoes produced an observed ordered cut in \GCTenCutTotal{} of
-\GCTenInitial{} branches by depth eight; \GCTenAboveMax{} remained above the
-protocol maximum and \GCTenSourceCensored{} retained the original source at the
-fixed horizon. A preregistered independent replication then screened new
-initializations before outcomes, selected \GCElevenSources{} geometries, and
-repeated the policy on \GCElevenInitial{} factual continuations. All four
-geometries retained a continuation after the first veto; \GCElevenCutTotal{}
-branches cut by depth eight, \GCElevenAboveMax{} remained above the cap, and
-\GCElevenSourceCensored{} was source-survival censored. These are bounded
-simulator-level causal results, not a globally minimal cut or a claim of
-physical correspondence. The distributional diagnostic and GfE mapping are
-formal research proposals; neither is tested by the reported events.
+Biological organization can persist while the material components that realize
+it turn over. We tested whether a relational constraint and an expression
+lineage can survive such replacement in a finite local stochastic lattice
+model. Three strict events disconnected tracked regions after loss of an
+original bridge and reconnected them through a causally necessary, disjoint
+bridge under payload-free dynamics. Prospective ancestry showed lineage
+survival after death of its initial address. In 192 fresh branches,
+one-decision interventions reopened all 36 targeted successor routes; all six
+gate interventions produced an immediate child, and 28 of 30 exhaustion
+interventions eventually produced handoff. Vetoing 164 naturally realized
+unique-child events exposed an alternate continuation in 122 branches and
+lineage loss in 42. Sequentially vetoing the next realized child produced an
+observed policy cut by depth eight in 143 branches; an independent cohort
+reproduced cuts in 68 of 79 branches across four new source geometries. These
+results show, within the frozen simulator, that continuation depends on both
+the availability and timely realization of lawful successors and that
+counterfactual redundancy can recur along changed histories. To distinguish
+contraction from enabling, we define a signed support deformation,
+$\chi(R_1\!:\!R_0)=\log[\mu(R_0)/\mu(R_1)]$. For nested uniform supports it
+equals forward Kullback--Leibler divergence under pruning and negative reverse
+Kullback--Leibler divergence under expansion. This formalizes a bounded
+connection to the adjacent possible, but the experiments did not enumerate
+complete reachable supports or establish open-ended evolution, substrate
+independence, or physical correspondence.
 \end{abstract}
+
+\noindent\textbf{Keywords:} artificial life; biological organization;
+adjacent possible; constraint transport; causal intervention; cellular
+automata; self-organization
+
+\linenumbers
 
 \input{paper/sections/01_hypothesis.tex}
 \input{paper/sections/02_model.tex}
@@ -71,6 +81,37 @@ formal research proposals; neither is tested by the reported events.
 \input{paper/sections/05_discussion.tex}
 \input{paper/sections/06_limitations.tex}
 \input{paper/sections/07_reproducibility.tex}
+\input{paper/sections/08_conclusion.tex}
+
+\section*{Data and code availability}
+The simulator, frozen configurations, intervention code, evidence manifests,
+generated tables, and manuscript sources are publicly available at
+\url{https://github.com/fmertz55/iota}. Each registered result links its source
+artifacts by path, byte count, and SHA-256 digest.
+
+\section*{Ethics statement}
+This theoretical and computational study used no human participants, human
+tissue, animals, or field samples; ethics approval and consent were not
+applicable.
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+
+\section*{Declaration of competing interests}
+The author declares no known competing financial interests or personal
+relationships that could have appeared to influence the work reported here.
+
+\section*{CRediT author statement}
+Douglas Clark: Conceptualization; Methodology; Software; Validation; Formal
+analysis; Investigation; Data curation; Writing -- original draft; Writing --
+review and editing; Project administration.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During preparation of this work, the author used OpenAI Codex to assist with
+literature discovery, code and manuscript review, and language editing. The
+author verified the cited sources, analyses, code, and text, revised the
+material as needed, and accepts full responsibility for the content.
 
 \bibliographystyle{plainnat}
 \bibliography{paper/bibliography}

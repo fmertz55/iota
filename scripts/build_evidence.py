@@ -25,6 +25,239 @@ from evidence_common import (
 
 
 GENERATED = ROOT / "paper" / "generated"
+CANONICAL_V036_CONFIG = (
+    ROOT
+    / "output"
+    / "findings"
+    / "configs"
+    / (
+        "v036_component_bridge_seed42_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_"
+        "amc0p5_amr0p5_cap2_amrb2p0_cb0p25_lb0p05_ffn0p05_een0p05.yaml"
+    )
+)
+CANONICAL_V036_VERSION = "iota-rig-v0.3.6-component-bridge-residual-recruitment"
+
+
+def tex_code(value: object) -> str:
+    return rf"\texttt{{{tex_escape(value)}}}"
+
+
+def yes_no(value: object) -> str:
+    if not isinstance(value, bool):
+        raise ValueError(f"expected a boolean parameter, observed {value!r}")
+    return "yes" if value else "no"
+
+
+def math_range(symbol: str, bounds: object) -> str:
+    if not isinstance(bounds, list) or len(bounds) != 2:
+        raise ValueError(f"expected a two-value range for {symbol}, observed {bounds!r}")
+    lower, upper = bounds
+    if lower == upper:
+        return rf"${symbol}={lower}$"
+    return rf"${symbol}\in[{lower},{upper}]$"
+
+
+def render_model_parameters(config: dict) -> str:
+    version = config.get("simulation_version")
+    if version != CANONICAL_V036_VERSION:
+        raise ValueError(
+            "canonical model-parameter source has unexpected simulation version: "
+            f"{version!r}"
+        )
+
+    grid = config["grid"]
+    init = config["init"]
+    vectors = config["vectors"]
+    constants = config["constants"]
+    run = config["run"]
+    if init.get("seed") != 42:
+        raise ValueError(
+            "canonical model-parameter source must retain reference seed 42"
+        )
+
+    behavior_bands = "; ".join(
+        f"{tex_escape(name)} {bounds[0]}--{bounds[1]}"
+        for name, bounds in vectors["behavior_bands"].items()
+    )
+    geometry_weights = constants["angular_momentum_residual_geometry_weights"]
+    nonzero_weights = [
+        f"{tex_escape(name.replace('_', ' '))} {weight}"
+        for name, weight in geometry_weights.items()
+        if float(weight) != 0.0
+    ]
+    zero_weight_count = sum(
+        float(weight) == 0.0 for weight in geometry_weights.values()
+    )
+    weight_summary = "; ".join(nonzero_weights)
+    if zero_weight_count:
+        weight_summary += f"; remaining {zero_weight_count} classes 0"
+
+    rows = [
+        (
+            "System",
+            "Simulation version",
+            rf"{{\scriptsize\path{{{tex_escape(version)}}}}}",
+        ),
+        (
+            "",
+            "Lattice and boundary",
+            rf"${grid['size']}^3$; periodic = {yes_no(grid['wrap'])}",
+        ),
+        (
+            "Initialization",
+            "Reference realization",
+            (
+                f"{tex_code(init['mode'])}; seed {init['seed']}; "
+                f"{init['active_iotas']} active iotas"
+            ),
+        ),
+        (
+            "",
+            "Initial expression ranges",
+            "; ".join(
+                [
+                    math_range("A", init["amplitude_range"]),
+                    math_range("R", init["range_range"]),
+                    math_range("P", init["payload_range"]),
+                ]
+            ),
+        ),
+        (
+            "Local law",
+            "Neighborhood and vectors",
+            (
+                f"neighbor mode {tex_code(constants['neighbor_mode'])}; "
+                f"vector mode {tex_code(vectors['mode'])}; "
+                f"{vectors['vector_count']} vectors"
+            ),
+        ),
+        (
+            "",
+            "Vector behavior bands",
+            behavior_bands,
+        ),
+        (
+            "",
+            "Transfer and conservation",
+            (
+                rf"$k_A={constants['amplitude_coupling']}$; "
+                rf"range coupling $={constants['range_coupling']}$; "
+                rf"bond probability $={constants['bond_probability']}$; "
+                f"valence {constants['valence']}; "
+                f"conservation {tex_code(constants['conservation'])}"
+            ),
+        ),
+        (
+            "",
+            "Decay and deactivation",
+            (
+                f"decay {tex_code(constants['decay_mode'])}; "
+                f"deactivation {tex_code(constants['deactivation'])}; "
+                f"vacuum amplitude {constants['vacuum_amplitude']}"
+            ),
+        ),
+        (
+            "",
+            "Payload dynamics",
+            (
+                rf"takeover $={constants['payload_takeover']}$; "
+                rf"same/cross couplings $={constants['same_payload_coupling']}/"
+                rf"{constants['cross_payload_coupling']}$"
+            ),
+        ),
+        (
+            "",
+            "Residual recruitment",
+            (
+                rf"probability $={constants['residual_participation_probability']}$; "
+                "secondary-only = "
+                f"{yes_no(constants['residual_participation_secondary_only'])}"
+            ),
+        ),
+        (
+            "Angular control",
+            "Received rotation",
+            (
+                rf"probability $={constants['received_rotation_probability']}$; "
+                f"maximum offset {constants['received_rotation_max_offset']}; "
+                "preserve behavior = "
+                f"{yes_no(constants['received_rotation_preserve_behavior'])}"
+            ),
+        ),
+        (
+            "",
+            "Angular memory",
+            (
+                f"enabled = {yes_no(constants['angular_momentum_enabled'])}; "
+                rf"decay/coupling/retention $={constants['angular_momentum_decay']}/"
+                rf"{constants['angular_momentum_coupling']}/"
+                rf"{constants['angular_momentum_retention']}$; "
+                rf"cap $={constants['angular_momentum_cap']}$"
+            ),
+        ),
+        (
+            "",
+            "Residual angular bias",
+            (
+                f"enabled = {yes_no(constants['angular_momentum_residual_bias_enabled'])}; "
+                rf"strength $={constants['angular_momentum_residual_bias_strength']}$; "
+                f"gate {tex_code(constants['angular_momentum_residual_bias_gate'])}; "
+                "mean-preserving = "
+                f"{yes_no(constants['angular_momentum_residual_bias_mean_preserving'])}"
+            ),
+        ),
+        (
+            "",
+            "Residual-bias score",
+            tex_code(constants["angular_momentum_residual_bias_score_mode"]),
+        ),
+        (
+            "",
+            "Nonzero geometry weights",
+            weight_summary,
+        ),
+        (
+            "Run",
+            "Registered horizon",
+            (
+                f"{run['ticks']} ticks; snapshots every {run['snapshot_every']}; "
+                f"metrics every {run['metric_every']}"
+            ),
+        ),
+    ]
+
+    lines = [
+        "% Generated by scripts/build_evidence.py. Do not edit.",
+        r"\begin{table}[tbp]",
+        r"\centering",
+        r"\footnotesize",
+        r"\setlength{\tabcolsep}{4pt}",
+        r"\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.27\linewidth}X@{}}",
+        r"\toprule",
+        r"Component & Parameter & Frozen value \\",
+        r"\midrule",
+    ]
+    previous_component = ""
+    for component, parameter, value in rows:
+        if component and previous_component:
+            lines.append(r"\addlinespace[2pt]")
+        lines.append(
+            " & ".join([tex_escape(component), tex_escape(parameter), value])
+            + r" \\"
+        )
+        if component:
+            previous_component = component
+    lines.extend(
+        [
+            r"\bottomrule",
+            r"\end{tabularx}",
+            r"\caption{Principal frozen parameters of the canonical v0.3.6 component-bridge reference configuration. Values are generated directly from the complete registered YAML source.}",
+            r"\label{tab:model-parameters}",
+            r"\end{table}",
+            "",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def render_results(
@@ -295,9 +528,9 @@ def render_definitions_tex(registry: dict) -> str:
         r"\begin{description}",
     ]
     for item in registry["definitions"]:
-        symbol = f" ({item['symbol']})" if item.get("symbol") else ""
+        symbol = rf" ($ {item['symbol']} $)" if item.get("symbol") else ""
         lines.append(
-            rf"\item[{tex_escape(item['term'] + symbol)}] {tex_escape(item['definition'])}"
+            rf"\item[{tex_escape(item['term'])}{symbol}] {tex_escape(item['definition'])}"
         )
     lines.extend([r"\end{description}", ""])
     return "\n".join(lines)
@@ -397,6 +630,7 @@ def outputs() -> dict[Path, str]:
         gc017_donor = json.load(handle)
     claims_registry = load_registry(ROOT / "evidence" / "claims.yaml")
     definitions = load_registry(ROOT / "evidence" / "definitions.yaml")
+    canonical_v036 = load_registry(CANONICAL_V036_CONFIG)
     metrics = evidence_metrics(summary, events)
     rendered = {
         GENERATED / "results.tex": render_results(
@@ -435,6 +669,9 @@ def outputs() -> dict[Path, str]:
             gc011_depths
         ),
         GENERATED / "definitions.tex": render_definitions_tex(definitions),
+        GENERATED / "model_parameters.tex": render_model_parameters(
+            canonical_v036
+        ),
         ROOT / "docs" / "definitions.md": render_definitions_md(definitions),
     }
     for registered_claim in claims_registry["claims"]:
