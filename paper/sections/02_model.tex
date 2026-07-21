@@ -1,7 +1,7 @@
-\section{Finite Local Model}
+\section{IOTA Model and Frozen Lattice Implementation}
 \label{sec:model}
 
-At permanent lattice address $x$, write an iota provisionally as
+At permanent lattice address $x$, write a local iota provisionally as
 
 \begin{equation}
 I_x(t)=\left(x,A_x(t),E_x(t)\right),
@@ -20,8 +20,9 @@ S_{t+1}\sim\mathcal{L}(S_t,\xi_t;\vartheta),
 \end{equation}
 
 where $\xi_t$ is the declared exogenous random stream and $\vartheta$ is the
-frozen parameter vector. Equation~\ref{eq:kernel} is a model definition. No
-identification with a fundamental physical particle is assumed.
+frozen parameter vector. Equation~\ref{eq:kernel} is a computational model
+definition. No identification with a fundamental physical particle or
+validated physical substrate is assumed.
 
 The update is ordered rather than a purely synchronous cellular-automaton map.
 Tick-start active sources are visited in lexicographic array order. A source's

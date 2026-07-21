@@ -2,7 +2,11 @@
 
 This directory contains the journal-facing support files for the full-length
 article, “Constraint Transport and History-Dependent Successor Accessibility
-in a Finite Local Artificial-Life System.”
+in IOTA: An Information-First Finite Local Physics Model.”
+
+The manuscript is an artificial-life application of IOTA's information-first
+finite local physics research model; it does not classify IOTA itself as a
+living system or validated physical substrate.
 
 Build and validate the complete package from the repository root:
 

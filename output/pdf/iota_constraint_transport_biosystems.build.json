@@ -1,6 +1,6 @@
 {
   "git": {
-    "commit": "b2abab97049b14876950b5d248f8b772d2797d64",
+    "commit": "43ce9b093b76b3654b28643c9ed94a5054e5ea43",
     "tracked_files_dirty": true
   },
   "inputs": {
@@ -33,16 +33,16 @@
       "sha256": "226f81bf1526fd73091e5bc6e8c9bcb0f92f2d0352753fe99fb17730f6219b45"
     },
     "paper/main.tex": {
-      "bytes": 5063,
-      "sha256": "6f39287eebd5c9665872f1bbc812462110bcd533f9c31202cd712ee1cda81bc6"
+      "bytes": 5234,
+      "sha256": "2a446afb993ba70c305400feb2f7b2551e489fee673cc9b1a0af6b409ecfbe20"
     },
     "paper/sections/01_hypothesis.tex": {
-      "bytes": 9742,
-      "sha256": "aa6b10de03525539043fbffe45e5a36833e51b7fd5aa20e113e6f6bf930e688e"
+      "bytes": 9985,
+      "sha256": "0b6d985045de68a9faf7e44375b8d54e595bbfcd8a48138003744ace351d1857"
     },
     "paper/sections/02_model.tex": {
-      "bytes": 2713,
-      "sha256": "1e94a2f63a8f6299e1f3563a68bebcbeab71442b28d9ad5bfbd4561454bdca5e"
+      "bytes": 2790,
+      "sha256": "652416e1e0e205c3fa177e1f0a3d471addf3ed8bdb9b28279ab136c0c771c091"
     },
     "paper/sections/03_methods.tex": {
       "bytes": 6277,
@@ -54,7 +54,7 @@
     },
     "paper/sections/05_discussion.tex": {
       "bytes": 9441,
-      "sha256": "42fea78bd6ce57e9b9c4018fcc293cbd146b6f8cbee82e068df0036d123c4a66"
+      "sha256": "c81002cdfe0dab83c1edc2aed22569439a1322adf3bf6196683445f7022bd13c"
     },
     "paper/sections/06_limitations.tex": {
       "bytes": 3929,
@@ -65,20 +65,20 @@
       "sha256": "bb41f62ad60e030e5f64d858724723e6670e82b94f7730d1f690c18740017bdf"
     },
     "paper/sections/08_conclusion.tex": {
-      "bytes": 1529,
-      "sha256": "aefa137e984551926e5c7ffc38f1df43e88ea2aa48e18b8b19b7390c4199a7be"
+      "bytes": 1567,
+      "sha256": "2f0a6eb8cead19e10ebf3416149f571d47620b9685880123df83d025c08f074f"
     },
     "submission/biosystems/README.md": {
-      "bytes": 1919,
-      "sha256": "d6847f09e1b73a5613040362e3d5dca5daf8684d38bc6364933d7e5015a702bf"
+      "bytes": 2135,
+      "sha256": "e025df60c54c27308549fc7370fb00a0547ce5f855cea4f69fd824a9e432368f"
     },
     "submission/biosystems/checklist.md": {
-      "bytes": 1605,
-      "sha256": "a24c07cda2daefb5f3c961a0491d90224c511a94a34ac1d7c77ff226231e0f57"
+      "bytes": 1762,
+      "sha256": "b8b7127006ff9601104a9d0191106104d15f1cc5ec655636bfc8b9d110ee64e8"
     },
     "submission/biosystems/cover_letter.md": {
-      "bytes": 2620,
-      "sha256": "087fcf78f68071e97cf35a512510ae8ebd4de7cd65055b4fb7e65115aa78963f"
+      "bytes": 2895,
+      "sha256": "68da1815325bcf582331a96925329e9c9b0d9329480975b84a7738eaa952fd58"
     },
     "submission/biosystems/highlights.txt": {
       "bytes": 374,
@@ -87,18 +87,18 @@
   },
   "package": "IOTA BioSystems full-length article",
   "pdf": {
-    "bytes": 499152,
+    "bytes": 500318,
     "path": "output/pdf/iota_constraint_transport_biosystems.pdf",
-    "sha256": "ce5754dec8156f0da55255bffa9dcedbd98ffdc33f92a77539ed044386cf607a"
+    "sha256": "44a6b8910fbfed0fa9a417e51ef60062a0026b056a00263bb20d4c0c3e879779"
   },
   "schema_version": 1,
   "source_archive": {
-    "bytes": 40108,
+    "bytes": 40551,
     "path": "output/submission/iota_constraint_transport_biosystems_sources.zip",
-    "sha256": "dab0c118bd6247f1cef822c1b4f547a770580b3bd63bf633ddbafa2087389921"
+    "sha256": "e0cfbec26da9e8c6190bd70d263f0a526cb183a7f13565a920405064c358216b"
   },
-  "source_date_epoch": 1784649139,
-  "source_date_utc": "2026-07-21T15:52:19Z",
+  "source_date_epoch": 1784658438,
+  "source_date_utc": "2026-07-21T18:27:18Z",
   "toolchain": {
     "latexmk": "Latexmk, John Collins, 15 June 2025. Version 4.87",
     "pdflatex": "pdfTeX 3.141592653-2.6-1.40.27 (TeX Live 2025)",

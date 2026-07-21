@@ -6,11 +6,14 @@
 >
 > **Information is the change in the reachable caused by interaction.**
 
-Iota Rig is an open, automation-first experimental program for making that
-hypothesis precise, measurable, and falsifiable. The repository is both the lab
-and the live record of the investigation: definitions, laws, experiments,
-negative results, evidence, and interpretations are intended to evolve together
-without erasing their history.
+Iota Rig is an open, automation-first experimental program for an
+information-first, finite-local approach to physics. Its current stochastic
+lattice implementation is a candidate computational research model, not an
+established physical substrate or living system. The BioSystems manuscript uses
+it as an artificial-life application focused on organizational persistence.
+The repository is both the lab and the live record of the investigation:
+definitions, laws, experiments, negative results, evidence, and interpretations
+are intended to evolve together without erasing their history.
 
 For this program, that hypothesis has complementary condition and change
 forms:

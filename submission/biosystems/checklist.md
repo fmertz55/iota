@@ -16,6 +16,8 @@
 ## Author confirmation before upload
 
 - [ ] Confirm the title, author name, affiliation, email, and corresponding-author role.
+- [ ] Confirm every journal-facing file identifies IOTA as the information-first
+      physics model and this manuscript as its artificial-life application.
 - [ ] Confirm every numerical claim against the final evidence manifests.
 - [ ] Confirm every reference and DOI against the cited primary source.
 - [ ] Create an immutable repository release and DOI-backed archive; replace the

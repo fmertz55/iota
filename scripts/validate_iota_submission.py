@@ -22,6 +22,12 @@ SOURCE_ZIP_CHECKSUM_PATH = SOURCE_ZIP_PATH.with_name(
     SOURCE_ZIP_PATH.name + ".sha256"
 )
 LATEX_LOG_PATH = ROOT / "build" / "paper" / "main.log"
+CANONICAL_TITLE = (
+    "Constraint Transport and History-Dependent Successor Accessibility in IOTA: "
+    "An Information-First Finite Local Physics Model"
+)
+LEGACY_TITLE_PHRASE = "Finite Local Artificial-Life System"
+REQUIRED_KEYWORDS = {"artificial life", "information-first physics"}
 
 CURATED_EXACT_PATHS = (
     "paper/main.tex",
@@ -146,6 +152,33 @@ def validate_source() -> tuple[list[str], dict[str, object]]:
     failures.extend(validate_tex_dependencies(main_path))
     main = strip_tex_comments(main_path.read_text(encoding="utf-8"))
 
+    title_match = re.search(r"\\title\s*\{(.*?)\}", main, flags=re.DOTALL)
+    if title_match is None:
+        failures.append("paper/main.tex has no title")
+    else:
+        title = re.sub(r"\\\\", " ", title_match.group(1))
+        title = re.sub(r"\s+", " ", title).strip()
+        details["title"] = title
+        if title != CANONICAL_TITLE:
+            failures.append(
+                f"manuscript title does not match canonical title: {CANONICAL_TITLE}"
+            )
+
+    pdf_title_match = re.search(r"pdftitle\s*=\s*\{([^}]*)\}", main)
+    if pdf_title_match is None or pdf_title_match.group(1).strip() != CANONICAL_TITLE:
+        failures.append("PDF metadata title does not match canonical manuscript title")
+
+    for support_name in ("README.md", "cover_letter.md"):
+        support_path = SUBMISSION_DIR / support_name
+        if support_path.is_file():
+            support = re.sub(
+                r"\s+", " ", support_path.read_text(encoding="utf-8")
+            )
+            if CANONICAL_TITLE not in support:
+                failures.append(
+                    f"submission/biosystems/{support_name} does not use canonical title"
+                )
+
     abstract_match = re.search(
         r"\\begin\s*\{abstract\}(.*?)\\end\s*\{abstract\}",
         main,
@@ -176,6 +209,13 @@ def validate_source() -> tuple[list[str], dict[str, object]]:
             failures.append(
                 f"manuscript has {len(keywords)} keywords; BioSystems permits 1--7"
             )
+        normalized_keywords = {keyword.lower() for keyword in keywords}
+        missing_keywords = sorted(REQUIRED_KEYWORDS - normalized_keywords)
+        if missing_keywords:
+            failures.append(
+                "manuscript is missing required positioning keyword(s): "
+                + ", ".join(missing_keywords)
+            )
 
     includegraphics = re.compile(r"\\includegraphics\*?(?:\s*\[[^\]]*\])?\s*\{")
     figure_hits: list[str] = []
@@ -199,6 +239,20 @@ def validate_source() -> tuple[list[str], dict[str, object]]:
     )
     if re.search(r"working\s+draft", combined_source, flags=re.IGNORECASE):
         failures.append("manuscript still contains a 'working draft' label")
+
+    legacy_hits = [
+        path.relative_to(ROOT).as_posix()
+        for path in sources
+        if path.is_file()
+        and LEGACY_TITLE_PHRASE.lower()
+        in path.read_text(encoding="utf-8", errors="replace").lower()
+    ]
+    details["legacy_title_hits"] = legacy_hits
+    if legacy_hits:
+        failures.append(
+            "legacy artificial-life-system title remains in: "
+            + ", ".join(legacy_hits)
+        )
 
     labels = re.findall(r"\\label\s*\{([^}]+)\}", combined_source)
     label_counts = {label: labels.count(label) for label in set(labels)}
