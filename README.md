@@ -49,6 +49,48 @@ question from which the experiments are derived:
 > Can finite local interactions produce constraints on reachable futures that
 > persist even when the local state that realizes them is replaced?
 
+The corresponding positioning for organizational persistence is:
+
+> **An organization can persist insofar as its evolving constraint structure
+> preserves a lawful path of role-continuing successors.**
+
+For a complete system state $s$ and a tracked organization $C$, define
+
+$$
+\mathcal{R}_C(s)
+= \{s' : s\to s'\text{ is lawful and }s'\text{ continues the defining role of }C\}.
+$$
+
+The law, allowed interventions, and criterion for role continuation must be
+declared before evaluating outcomes. Continuation concerns the organization's
+role and may survive replacement of the sites that realize it. Under those
+declared conditions,
+
+$$
+\mathcal{R}_C(s)=\varnothing
+$$
+
+means that no lawful next state continues the organization. Its role-continuing
+future has closed; the surrounding lattice may still evolve. This is an
+accessibility criterion for organizational exhaustion, not a retrospective
+reclassification of existing death measurements. A realized stochastic death
+can occur even when a continuing successor was accessible.
+
+A nonempty successor set establishes one-step possibility, not guaranteed or
+indefinite persistence. Indefinite possible persistence requires an infinite
+lawful path of role-continuing successors; observed persistence requires the
+realized path to continue the role over the measured horizon. Finite sampled
+failures alone do not establish that the successor set is empty.
+
+The empirical ICP claim to test is that identifiable constraint structure
+**causally preserves these continuing paths and can carry that capacity across
+replacement of its realization**. The definition itself does not establish
+that claim. Experiments must distinguish changes in successor accessibility,
+changes in successor probabilities, and changes in the outcome of a particular
+replay. In particular, organized-transport tests should ask whether matched
+transport budgets can produce different role-continuing successor sets or
+distributions through differences in transport organization.
+
 ### Quantum-Dirac construction result
 
 Two separately frozen local update specifications—a product walk and the
