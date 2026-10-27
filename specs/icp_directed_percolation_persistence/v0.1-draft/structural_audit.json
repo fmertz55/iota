@@ -1,0 +1,77 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "stage": "A",
+  "status": "design_draft_not_frozen",
+  "purpose": "certify, before any registered seed is evolved, that the implemented IOTA-MIN-L0 is the law in minimal_law.json and has the class-relevant structure that the predictions in iota_spreading.json assume",
+  "outcome_boundary": "Stage A may evolve only disclosed synthetic states (hand-built media of at most 9x9x9 sites with a declared fresh pattern); it may not draw a registered random medium, sweep rho, or compute any Stage S observable",
+  "law_under_audit": {
+    "primary": "minimal_law.json laws.L0",
+    "analytic": "minimal_law.json laws.L1",
+    "canonical_reference": {
+      "engine": "src/iota_rig.py",
+      "engine_sha256_at_design": "79ee9b432e7ed8185fea286da982fe63b6fa730389172a392c7e249b5ca68020",
+      "config": "output/findings/configs/v036_component_bridge_seed42_ka5_vac2_val8_n16_rpp0p02_rrp1p0_mo3_amc0p5_amr0p5_cap2_amrb2p0_cb0p25_lb0p05_ffn0p05_een0p05.yaml",
+      "config_sha256_at_design": "851b6200976a613dee6682fedd269b036224dee3916c605dee0ba347b9504105",
+      "repository_head_at_design": "48c3ce1e9ff90fa4ac31e40a326cc37d323f5b2f",
+      "use": "provenance for the constants v = 2 and a0 = 7 and for the ladder; the canonical law is not run in this version"
+    }
+  },
+  "questions": [
+    {
+      "id": "A1_absorbing_set",
+      "design_answer": "yes: any state in which no active site borders a fresh site",
+      "required_check": "synthetic witnesses: a seed with no fresh neighbours (absorbed at tick 0); a stranded active site enclosed by depleted sites"
+    },
+    {
+      "id": "A2_absorbing_certificate",
+      "design_answer": "exact: 'no active site has a fresh face neighbour' (minimal_law.json absorbing_certificate)",
+      "required_check": "on 1000 synthetic states, certificate true implies the next tick leaves the state unchanged bit for bit, and certificate false implies at least one transfer"
+    },
+    {
+      "id": "A3_spontaneous_creation",
+      "design_answer": "no in L0 (no exogenous channel; depleted sites never receive); yes in L1 (reactivation of depleted sites)",
+      "required_check": "the L1 synthetic test in iota_spreading.json hypotheses.L1_analytic"
+    },
+    {
+      "id": "A4_medium_memory",
+      "design_answer": "depletion is permanent and is the only state left in the vacated medium; it is the immunization condition of dynamic percolation",
+      "required_check": "code inspection that no other field exists"
+    },
+    {
+      "id": "A5_conserved_field",
+      "design_answer": "the ledger is conserved but amplitude never moves between active sites in L0, so no conserved field drives activity in visited regions; the budget acts only as a local service capacity at the front",
+      "required_check": "ledger residual exactly 0 on all synthetic states"
+    },
+    {
+      "id": "A6_range",
+      "design_answer": "1 (face6, one quantum per source per tick)",
+      "required_check": "light-cone test: no site beyond Chebyshev distance t from the seed is touched by tick t"
+    },
+    {
+      "id": "A7_disorder_and_symmetry",
+      "design_answer": "the random medium is quenched disorder by design; it is exactly the site-occupation disorder of percolation, which is why the percolation threshold is the reference. No parity constraint.",
+      "required_check": "none beyond medium-RNG separation"
+    },
+    {
+      "id": "A8_reactivation_ceiling",
+      "design_answer": "L0: zero. L1: r per depleted-neighbour pair per tick",
+      "required_check": "none"
+    },
+    {
+      "id": "A9_control_path_adequacy",
+      "design_answer": "rho is the occupation probability of the medium and cannot be absorbed into a time rescaling; below the site-percolation threshold every run is absorbed (minimal_law.json facts_by_construction), so a subcritical regime exists on the registered path",
+      "required_check": "none"
+    }
+  ],
+  "prediction_record": {
+    "rule": "copied unchanged into the Stage A answer commit; no prediction may be revised after any Stage S data exist",
+    "L0": {
+      "H1_threshold": "registered as a two-sided question ('equal' versus 'budget_shifted'); no direction is predicted, because the design argument cuts both ways: near p_c the fresh cluster is tenuous, so most activated sites have few fresh neighbours and a budget of about 3 usually suffices, but rare high-branching sites can strand parts of a thin cluster",
+      "H2_dynamic_class": "DyP_3, conditional on H1 'equal'",
+      "H3_static_tail": "tau - 2 = 0.18906, conditional on H1 'equal'"
+    },
+    "L1": "no_absorbing_transition (analytic)"
+  },
+  "deliverable": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/structural_audit_answers.json plus the synthetic witness states and test log, committed before Stage S opening"
+}

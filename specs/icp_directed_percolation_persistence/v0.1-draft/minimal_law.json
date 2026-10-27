@@ -1,0 +1,157 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "status": "design_draft_not_frozen",
+  "purpose": "the simplest law that keeps IOTA's defining ingredients (an exact integer amplitude ledger, unspent vacuum budget, activation by transfer, exhaustion into a depleted medium) and nothing else; the registered persistence test runs on this law, and every richer IOTA mechanism is added back later one rung at a time",
+  "kept_from_iota": [
+    "integer amplitude quanta with an exact conserved ledger (v0.2 law L1)",
+    "latent vacuum budget absorbed on activation (v0.2 law L2)",
+    "exhaustion deactivation leaving a permanently depleted site (v0.2 law L3)"
+  ],
+  "deliberately_deferred": {
+    "mechanism": "down-gradient redistribution between active sites",
+    "reason": "with a strict a_y < a_x rule, a one-quantum transfer between amplitudes 3 and 2 reverses the gradient and can oscillate forever, so absorption is no longer guaranteed in a finite region; even a non-reversing a_y <= a_x - 2 rule admits no simple monotone potential under simultaneous many-to-one transfers. It returns as ladder rung 1 with its own termination audit."
+  },
+  "removed_from_iota": [
+    "vector states, vector behaviour bands, and vector-directed primary targets",
+    "payload labels and payload takeover",
+    "range R and inverse-square influence decay",
+    "amplitude_coupling gates (every eligible transfer fires; see 'control parameter')",
+    "valence and secondary relationship slots",
+    "angular memory, received rotation, and residual angular bias",
+    "geometry-weighted residual recruitment",
+    "the sequential lexicographic scheduler (replaced by a synchronous tick)"
+  ],
+  "laws": {
+    "L0": {
+      "law_id": "IOTA-MIN-L0",
+      "lattice": {
+        "shape": "64 x 64 x 64",
+        "boundary": "periodic",
+        "neighbourhood": "face6: the 6 nearest neighbours"
+      },
+      "state_per_site": {
+        "a": "integer active amplitude >= 0; the site is active iff a >= 1",
+        "l": "integer latent budget in {0, v}; always 0 at an active site"
+      },
+      "site_kinds": {
+        "active": "a >= 1",
+        "fresh": "a = 0 and l = v",
+        "depleted": "a = 0 and l = 0"
+      },
+      "constants": {
+        "v": 2,
+        "a0": 7
+      },
+      "control_parameter": {
+        "name": "rho",
+        "meaning": "vacuum occupation: the probability that a non-seed site starts fresh rather than depleted",
+        "why_this_parameter": "rho is a genuine probability of the medium, not a rate, so it cannot be absorbed into a rescaling of time (the defect found in the amplitude_coupling path); it is the site-occupation parameter of the fresh medium"
+      },
+      "initial_state": {
+        "seed": "site (32,32,32): a = a0, l = 0",
+        "medium": "every other site independently fresh with probability rho, otherwise depleted; drawn from the run's medium RNG stream before tick 1"
+      },
+      "ledger": "sum over sites of (a + l) is exactly constant at every tick",
+      "tick": [
+        "1. Read the tick-start state S_t; nothing below reads a partially updated state.",
+        "2. For each active site x, in lexicographic (x, y, z) order, form its eligible set E_x = { y in face6(x) : y is fresh }.",
+        "3. If E_x is non-empty, order E_x by the fixed neighbour order (+x, -x, +y, -y, +z, -z), draw one u = rng.random() from the run's dynamics stream, and record one quantum x -> E_x[floor(u * |E_x|)]. Draws are consumed in lexicographic source order, one per source with non-empty E_x, so any two correct implementations agree bit for bit. Each active site sends at most one quantum per tick. Sites with empty E_x draw nothing.",
+        "4. Apply all recorded quanta simultaneously: each source's a decreases by 1. Only fresh sites receive quanta in L0.",
+        "5. A fresh site that received k >= 1 quanta (from k distinct sources) becomes active with a = v + k and l = 0 (activation absorbs its own budget; no amplitude is created).",
+        "6. Exhaustion: any site with a = 0 after step 4 that was active at tick start becomes depleted (l = 0)."
+      ],
+      "absorbing_certificate": {
+        "definition": "no active site has a fresh face neighbour",
+        "exactness": "if the certificate holds, step 3 records no quanta, so S_(t+1) = S_t and the certificate holds again; the state is absorbing. If it fails, at least one quantum moves with probability 1. The certificate is therefore exact and needs no simulation."
+      },
+      "active_unit": "a site that sends or receives a quantum during the tick",
+      "facts_by_construction": [
+        "total active amplitude never decreases: each activation adds v = 2",
+        "activity ends exactly when no active site borders a fresh site; amplitude left in active sites with no fresh neighbour is stranded",
+        "transfers go only into fresh sites, every tick with a transfer activates at least one fresh site, and each fresh site activates once; so the number of ticks with any transfer is at most the number of fresh sites in the seed's adjacent fresh clusters, and a run on a finite cluster always terminates",
+        "the set of sites ever activated lies inside the union of face6 fresh-site clusters adjacent to the seed",
+        "for rho below the simple-cubic site-percolation threshold those clusters are finite almost surely, so every run is absorbed",
+        "exploration can be incomplete above threshold: an activated site holds a = v + k, typically 3, and can serve at most that many of its up to 5 fresh neighbours before exhausting; unserved neighbours are reached only by other routes. Whether this budget limit shifts the persistence threshold above the percolation threshold is the primary registered question"
+      ],
+      "resource_record": {
+        "dynamic_fields": 2,
+        "constants": 2,
+        "control_parameters": 1,
+        "rng_streams": [
+          "medium",
+          "dynamics"
+        ],
+        "max_hop_per_tick": 1,
+        "exogenous_channels": 0
+      }
+    },
+    "L1": {
+      "law_id": "IOTA-MIN-L1",
+      "definition": "L0 plus reactivation: in step 2, each depleted face neighbour y of x is also placed in E_x independently with probability r per (x, y) pair per tick; a depleted site receiving k quanta becomes active with a = k",
+      "constants": {
+        "r": 0.02
+      },
+      "registered_use": "analytic only; no sweep",
+      "analytic_result": {
+        "statement": "for every r > 0 and every rho, IOTA-MIN-L1 has no absorbing state reachable before wrap contact, so single-seed activity never dies",
+        "argument": "total active amplitude is at least a0 >= 1 forever, so an active set exists; any finite active set has a boundary site with an inactive face neighbour; that neighbour is fresh (eligible with probability 1) or depleted (eligible with probability r > 0); so every tick has positive probability of a transfer and the certificate never holds",
+        "consequence_for_iota": "with an exact amplitude ledger, any reactivation channel makes lattice activity immortal. Persistence questions about IOTA's canonical laws (residual recruitment > 0) therefore cannot be about whether activity survives; they must be about whether a specific organization or role survives (deferred stage R)",
+        "verification_required": "the freeze must include a written proof check and a synthetic-state test of the boundary argument"
+      },
+      "draw_rule": "for each active source in lexicographic order and each depleted neighbour in the fixed neighbour order, draw one u = rng.random() and include the neighbour iff u < r; then draw the target as in L0 step 3 from the same stream"
+    }
+  },
+  "ablation_ladder": {
+    "purpose": "connect the minimal law back to the canonical v0.3.6 law one mechanism at a time, so that any change of threshold or class is attributed to a named mechanism",
+    "status": "planned; each rung needs its own freeze, opened only after the previous rung's result is committed",
+    "rungs": [
+      {
+        "rung": 0,
+        "law": "IOTA-MIN-L0, face6",
+        "registered_here": true
+      },
+      {
+        "rung": 1,
+        "change": "add down-gradient redistribution between active sites with the non-reversing rule a_y <= a_x - 2",
+        "requirement": "a termination audit (absorbing set reachable with probability 1 from every reachable finite state) before any sweep",
+        "question": "does moving stranded amplitude to the front lower the persistence threshold toward the percolation threshold?"
+      },
+      {
+        "rung": "1b",
+        "change": "face6 -> cube26 neighbourhood",
+        "external_prediction": "the percolation bound moves to the NN+2NN+3NN simple-cubic site threshold (reference_classes.json thresholds.simple_cubic_site_percolation_z26)"
+      },
+      {
+        "rung": 2,
+        "change": "every eligible transfer fires -> fires with probability min(1, k * influence), influence from distance decay",
+        "question": "does a sub-unit gate change the static threshold, or only time?"
+      },
+      {
+        "rung": 3,
+        "change": "synchronous tick -> sequential lexicographic scheduler",
+        "question": "does same-tick eligibility change the class?"
+      },
+      {
+        "rung": 4,
+        "change": "add vectors and vector-directed primary targets",
+        "question": "does directed motion change exploration exponents?"
+      },
+      {
+        "rung": 5,
+        "change": "add payload labels and takeover",
+        "expected": "no effect on activity (labels do not touch the ledger); a check of that separation"
+      },
+      {
+        "rung": 6,
+        "change": "add angular memory, rotation, and residual bias at residual probability 0",
+        "question": "does memory carried by active sites change the class?"
+      },
+      {
+        "rung": 7,
+        "change": "residual recruitment > 0",
+        "expected": "activity immortal by the L1 argument; the persistence question moves to roles"
+      }
+    ]
+  }
+}

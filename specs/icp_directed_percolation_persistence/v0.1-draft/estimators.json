@@ -1,0 +1,112 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "status": "design_draft_not_frozen",
+  "scope": "one instrument shared by calibration (Stage C) and IOTA-MIN-L0 (Stage S); no per-model tuning",
+  "observables_per_run": {
+    "n_t": "number of active units at tick t (definition supplied by each model; for IOTA see iota_spreading.json)",
+    "r2_sum_t": "sum over active units at tick t of squared minimum-image Euclidean distance from the seed site",
+    "absorbed_at": "first tick at which the model's absorbing test holds, or null",
+    "censored_at": "first tick at which any active or ever-active unit lies at minimum-image Chebyshev distance >= L/2 - 4 from the seed, or null"
+  },
+  "aggregates": {
+    "P_t": "fraction of runs with absorbed_at null or > t",
+    "N_t": "mean of n_t over all runs, absorbed runs contributing zero",
+    "R2_t": "sum over surviving runs of r2_sum_t divided by sum over surviving runs of n_t"
+  },
+  "censoring": {
+    "rule": "each run contributes to aggregates only for ticks before its censored_at",
+    "fit_window_upper": "t_max = largest tick such that the fraction of runs alive at t with censored_at <= t is at most 0.01; if t_max < 4*t_min the point is classified 'window_too_short'",
+    "fit_window_lower": {
+      "1p1": 32,
+      "3d": 16
+    }
+  },
+  "local_slopes": {
+    "method": "Grassberger local effective exponents on a geometric tick ladder",
+    "ladder": "t_k = round(t_min * 2^(k/4)) for k = 0,1,... while t_k <= t_max",
+    "m": 4,
+    "delta_eff": "-ln(P(t)/P(t/m)) / ln m",
+    "theta_eff": "ln(N(t)/N(t/m)) / ln m",
+    "two_over_z_eff": "ln(R2(t)/R2(t/m)) / ln m",
+    "admissible_ladder_points": "t_k with t_k/m >= t_min"
+  },
+  "criticality_test": {
+    "precheck": "if fewer than 1% of runs are absorbed by t_max, or fewer than 50 runs in absolute number, the point is classified 'no_absorption_observed' and treated as supercritical for bracketing; this prevents a flat P(t) = 1 (zero local slope) from being read as critical",
+    "statistic": "weighted least-squares slope s of delta_eff versus ln t over admissible ladder points, weights from bootstrap variances",
+    "classes": {
+      "subcritical": "s > 0 and its 95% bootstrap interval excludes 0",
+      "supercritical": "s < 0 and its 95% bootstrap interval excludes 0",
+      "critical_compatible": "95% bootstrap interval of s contains 0"
+    },
+    "bootstrap": {
+      "resamples": 1000,
+      "unit": "whole run",
+      "rng": "domain-separated from simulation seeds"
+    }
+  },
+  "bracketing": {
+    "coarse": "evaluate every registered coarse-grid point; the bracket is the first adjacent pair (lower subcritical, upper supercritical) in increasing control order",
+    "no_bracket": "if no adjacent subcritical/supercritical pair exists, the model terminal status is 'no_bracket_in_registered_range' and no exponents are reported",
+    "multiple_brackets": "all adjacent subcritical-to-supercritical pairs are reported; the lowest is primary; more than one is itself a registered finding (re-entrant or multiple transitions)",
+    "bisection": "geometric midpoint for IOTA (control spans decades), arithmetic midpoint for calibration; a critical_compatible midpoint is retained and bisection continues toward the side whose endpoint has the larger |s|",
+    "final_point": "the evaluated point with the smallest |s| among critical_compatible points in the final bracket, else the final bracket midpoint; it is re-run with runs_at_final_point fresh seeds"
+  },
+  "exponent_estimate": {
+    "value": "mean of the local effective exponent over the upper half of admissible ladder points at the final point",
+    "statistical_se": "bootstrap standard error of that mean",
+    "systematic_se": "half the absolute difference between the same estimate at the two final bracket endpoints",
+    "total_se": "sqrt(statistical_se^2 + systematic_se^2)",
+    "drift_report": "the full local-slope series is always reported; a monotone drift across the window is flagged 'crossover_in_window'"
+  },
+  "classification": {
+    "absolute_tolerances": {
+      "1p1": {
+        "delta": 0.03,
+        "theta": 0.03,
+        "z": 0.08
+      },
+      "3d": {
+        "delta": 0.08,
+        "theta_or_eta": 0.08,
+        "z": 0.15
+      }
+    },
+    "per_exponent": {
+      "agrees": "|estimate - reference| <= tolerance",
+      "disagrees": "|estimate - reference| > tolerance + 2*total_se",
+      "indeterminate": "otherwise"
+    },
+    "per_class": {
+      "match": "all three exponents agree",
+      "excluded": "at least one exponent disagrees",
+      "indeterminate": "otherwise"
+    },
+    "verdict": {
+      "<class_id>": "exactly one registered class matches and every other registered class is excluded",
+      "none_of_registered": "every registered class is excluded",
+      "indeterminate": "any other combination"
+    },
+    "registered_classes_3d": [
+      "DP_3p1",
+      "DyP_3"
+    ],
+    "registered_classes_1p1": [
+      "DP_1p1"
+    ],
+    "separation_check": "the 3D tolerances are below half the DP_3p1/DyP_3 separation in every exponent (delta 0.39, theta/eta 0.38, z 0.52), so a single estimate cannot match both"
+  },
+  "consistency_checks": {
+    "DP": "|theta - (d/z - 2*delta)| <= 0.10",
+    "DyP": "|eta - (d/z - 2*delta - 1)| <= 0.10",
+    "use": "reported alongside the verdict; a matched class whose own hyperscaling check fails is downgraded to 'indeterminate'"
+  },
+  "static_cluster_size": {
+    "quantity": "S, the number of sites ever activated (L0) or reached (CAL-SITE-BFS-SC-3) in a run, including the seed",
+    "ccdf": "F(s) = fraction of runs with S >= s, using all runs; a censored run counts as S >= s for every s up to its S at censoring",
+    "exact_range": "s from 16 to s_cut, where s_cut is the smallest S-at-censoring among censored runs (F is exact on this range despite censoring)",
+    "estimate": "tau - 2 = minus the least-squares slope of ln F(s) against ln s on a geometric ladder of s values with ratio 2^(1/4) in the exact range",
+    "se": "bootstrap over runs (1000 resamples) combined in quadrature with half the difference between the estimates at the two final bracket endpoints",
+    "minimum_range": "if s_cut < 256, the static estimate is 'range_too_short' and H3 is indeterminate"
+  }
+}

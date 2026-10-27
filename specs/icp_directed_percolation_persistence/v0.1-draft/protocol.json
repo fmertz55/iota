@@ -1,0 +1,95 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "status": "design_draft_not_frozen",
+  "date_drafted": "2026-10-27",
+  "data_class": "development with single-use confirmation",
+  "contract": "docs/ICP_DIRECTED_PERCOLATION_PERSISTENCE_CONTRACT.md",
+  "question": "In the simplest law that keeps IOTA's amplitude ledger, vacuum budget, and exhaustion (IOTA-MIN-L0), does single-seed activity persist exactly when the fresh vacuum percolates, and is the growth at the persistence threshold in the dynamic-percolation class?",
+  "motivation": "directed percolation and dynamic isotropic percolation are the established, experimentally observed theories of whether locally propagated activity persists or dies; they supply externally fixed exponents against which an IOTA persistence claim can fail",
+  "stages": [
+    {
+      "id": "C",
+      "name": "instrument calibration",
+      "spec": "calibration.json",
+      "gate": "all calibration models pass"
+    },
+    {
+      "id": "A",
+      "name": "implementation and structure audit of IOTA-MIN-L0, plus L1 analytic check",
+      "spec": "structural_audit.json",
+      "gate": "answers, synthetic tests, and prediction record committed"
+    },
+    {
+      "id": "S",
+      "name": "IOTA-MIN-L0 single-seed spreading over vacuum occupation rho",
+      "spec": "iota_spreading.json",
+      "gate": "development result committed"
+    },
+    {
+      "id": "K",
+      "name": "single-use confirmation",
+      "spec": "partitions.json iota_confirmation",
+      "gate": "confirmation result committed"
+    }
+  ],
+  "stage_order": "C and A may run in either order; S opens only after both gates; K opens only after S",
+  "shared_files": {
+    "reference_classes": "reference_classes.json",
+    "estimators": "estimators.json",
+    "partitions": "partitions.json",
+    "result_schema": "result.schema.json",
+    "literature": "literature_basis.md",
+    "minimal_law": "minimal_law.json"
+  },
+  "outcome_boundary": [
+    "no registered random medium may be drawn and no rho sweep run before the freeze commit and its tag",
+    "Stage C calibration outcomes may be generated only after the freeze; a failing calibration ends this version",
+    "Stage A may use only disclosed synthetic states (structural_audit.json outcome_boundary)",
+    "the prediction record is committed before Stage S opens and is never revised from Stage S data"
+  ],
+  "required_before_freeze": [
+    "resolve every pending verification in reference_classes.json",
+    "implement the IOTA-MIN-L0 engine (a new module; src/iota_rig.py is not modified), the calibration models, the shared estimator and classifier, and an independent replay of the engine, estimator, and classifier",
+    "engine tests on synthetic media: exact ledger, exact absorbing certificate, light cone, determinism under the declared RNG streams, and an identical final activated set to CAL-SITE-BFS-SC-3 (timing may differ) on media where the budget cannot bind (every activated site has at most v + 1 fresh neighbours)",
+    "classifier tests on synthetic ledgers with exact DP and DyP power laws and an exact s^-(tau-2) cluster tail",
+    "a content-hash outcome seal with every run command disabled"
+  ],
+  "registered_paths": {
+    "seal": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json",
+    "calibration_result": "output/dp_persistence/ICP-DP-PERSISTENCE-001/calibration_results.json",
+    "structural_audit_answers": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/structural_audit_answers.json",
+    "development_open_manifest": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/development_open_manifest.json",
+    "development_result": "output/dp_persistence/ICP-DP-PERSISTENCE-001/development_results.json",
+    "confirmation_open_manifest": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/confirmation_open_manifest.json",
+    "confirmation_result": "output/dp_persistence/ICP-DP-PERSISTENCE-001/confirmation_results.json"
+  },
+  "required_freeze_tag": "icp-dp-persistence-001-v0.1-frozen",
+  "opening_rule": "linear history as in prior ICP protocols: the seal-introduction commit is tagged with the annotated freeze tag; each open manifest is added alone in a direct child; each result is written atomically exactly once and committed alone in the direct child of its opening",
+  "deferred_stage": {
+    "id": "R",
+    "name": "role-level persistence and replacement near criticality",
+    "status": "not registered in this version",
+    "hypotheses_for_a_later_freeze": [
+      "role-continuing successor counts of a tracked organization, treated as the active unit, show an absorbing transition in the same class as lattice activity",
+      "the fraction of partial carrier replacements that a role survives falls toward zero as the lattice-activity critical point is approached (noise-sensitivity prediction)"
+    ],
+    "requirement": "an already-frozen role detector referenced by content hash"
+  },
+  "claim_limits": [
+    "a result for IOTA-MIN-L0; transfer to richer IOTA laws only through the registered ladder",
+    "lattice-activity persistence only",
+    "not role or organization persistence (deferred stage R)",
+    "not physical substrate validation",
+    "not novelty for percolation, DP, or DyP physics",
+    "effective exponents at L = 64 over the registered window"
+  ],
+  "law": "minimal_law.json laws.L0; L1 analytic only; the canonical v0.3.6 law is reached later through minimal_law.json ablation_ladder",
+  "why_minimal": "a universality-class or threshold match is evidence only if the law was not tuned to produce it; the canonical law accreted mechanisms across versions, so the registered test runs on the minimal law and each mechanism is restored one rung at a time",
+  "icp_mapping": {
+    "sister_project": "/Users/douglasclark/ICP (Information-Constraint Principle literature review and synthesis)",
+    "research_path_rung": "ICP manuscript Section 8, Rung 1, which requires comparison against branching/percolation rivals; this protocol supplies that percolation null for the IOTA substrate",
+    "F001_reading": "H1 'equal' means minimal-IOTA persistence is fully accounted for by site percolation of the medium, the rival null; the amplitude ledger then adds no persistence content at this rung. H1 'budget_shifted' is a measurable effect of the embodied budget beyond connectivity, which is a candidate (not a demonstration) of the 'prediction beyond complete-state ordinary dynamics' that ICP criterion F001 demands; the complete-state L0 dynamics still explains it, so ICP content would require the shift to survive the ladder and carrier interventions",
+    "L1_reading": "the analytic immortality of activity under any reactivation channel moves ICP's carrier-succession question entirely to role-level persistence (deferred stage R), consistent with ICP Pilot Batch 05's novelty target: formation and transport of a constraint role through replacement of the original witness"
+  }
+}

@@ -1,0 +1,473 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "icp_directed_percolation_persistence/v0.1-draft/result.schema.json",
+  "title": "ICP-DP-PERSISTENCE-001 result ledger",
+  "description": "Transport schema for calibration, development, and confirmation results. Cross-field scientific checks live in the sealed validator; JSON Schema alone is not the scientific validator.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "search_id",
+    "protocol_version",
+    "result_kind",
+    "seal_sha256",
+    "parent_commit",
+    "models"
+  ],
+  "properties": {
+    "search_id": {
+      "const": "ICP-DP-PERSISTENCE-001"
+    },
+    "protocol_version": {
+      "const": "0.1-draft"
+    },
+    "result_kind": {
+      "enum": [
+        "calibration",
+        "development",
+        "confirmation"
+      ]
+    },
+    "seal_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "parent_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "predicted_classes": {
+      "type": "object",
+      "description": "required for development and confirmation; copied from the committed Stage A answers",
+      "additionalProperties": {
+        "$ref": "#/$defs/class_label"
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/model_result"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "class_label": {
+      "enum": [
+        "DP_1p1",
+        "DP_3p1",
+        "DyP_3",
+        "no_absorbing_transition",
+        "unregistered_conditions",
+        "none_of_registered",
+        "indeterminate",
+        "no_exact_absorbing_test",
+        "control_path_inadequate"
+      ]
+    },
+    "estimate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "statistical_se",
+        "systematic_se",
+        "total_se"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "statistical_se": {
+          "type": "number",
+          "minimum": 0
+        },
+        "systematic_se": {
+          "type": "number",
+          "minimum": 0
+        },
+        "total_se": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "control_value",
+        "role",
+        "runs",
+        "seed_first",
+        "seed_last",
+        "t_min",
+        "t_max",
+        "criticality",
+        "slope_s",
+        "slope_ci95",
+        "ladder"
+      ],
+      "properties": {
+        "control_value": {
+          "type": "number"
+        },
+        "role": {
+          "enum": [
+            "coarse",
+            "bisection",
+            "final",
+            "confirmation_lower",
+            "confirmation_final",
+            "confirmation_upper"
+          ]
+        },
+        "runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seed_first": {
+          "type": "integer"
+        },
+        "seed_last": {
+          "type": "integer"
+        },
+        "t_min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "t_max": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "censored_run_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "criticality": {
+          "enum": [
+            "subcritical",
+            "supercritical",
+            "critical_compatible",
+            "window_too_short",
+            "resource_censored",
+            "no_absorption_observed"
+          ]
+        },
+        "slope_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "slope_ci95": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "ladder": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "t",
+              "P",
+              "N",
+              "R2",
+              "delta_eff",
+              "theta_eff",
+              "two_over_z_eff"
+            ],
+            "properties": {
+              "t": {
+                "type": "integer"
+              },
+              "P": {
+                "type": "number"
+              },
+              "N": {
+                "type": "number"
+              },
+              "R2": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "delta_eff": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "theta_eff": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "two_over_z_eff": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "ledger_trace_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "model_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "terminal_status",
+        "points"
+      ],
+      "properties": {
+        "model_id": {
+          "type": "string",
+          "description": "a calibration model_id or 'IOTA-MIN-L0'"
+        },
+        "effective_config_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "terminal_status": {
+          "enum": [
+            "classified",
+            "no_bracket_in_registered_range",
+            "multiple_brackets",
+            "window_too_short",
+            "resource_censored",
+            "instrument_failure",
+            "control_path_inadequate"
+          ]
+        },
+        "brackets": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "final_control_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "exponents": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "delta": {
+              "$ref": "#/$defs/estimate"
+            },
+            "theta_or_eta": {
+              "$ref": "#/$defs/estimate"
+            },
+            "z": {
+              "$ref": "#/$defs/estimate"
+            }
+          }
+        },
+        "crossover_in_window": {
+          "type": "boolean"
+        },
+        "per_class": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "match",
+              "excluded",
+              "indeterminate"
+            ]
+          }
+        },
+        "hyperscaling": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "residual",
+              "passes"
+            ],
+            "properties": {
+              "residual": {
+                "type": "number"
+              },
+              "passes": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "verdict": {
+          "$ref": "#/$defs/class_label"
+        },
+        "threshold_gate": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "reference": {
+              "type": "number"
+            },
+            "estimate": {
+              "type": "number"
+            },
+            "tolerance": {
+              "type": "number"
+            },
+            "passes": {
+              "type": "boolean"
+            }
+          }
+        },
+        "prediction_outcome": {
+          "enum": [
+            "supported",
+            "falsified",
+            "indeterminate",
+            "not_applicable"
+          ]
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/point"
+          }
+        },
+        "static_tail": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "tau_minus_2": {
+              "$ref": "#/$defs/estimate"
+            },
+            "s_cut": {
+              "type": "integer"
+            },
+            "status": {
+              "enum": [
+                "estimated",
+                "range_too_short"
+              ]
+            }
+          }
+        },
+        "exploration": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "per evaluated control value: summary of exploration completeness E over absorbed runs",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "control_value",
+              "absorbed_runs",
+              "median_E",
+              "fraction_E_below_1"
+            ],
+            "properties": {
+              "control_value": {
+                "type": "number"
+              },
+              "absorbed_runs": {
+                "type": "integer"
+              },
+              "median_E": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fraction_E_below_1": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "mean_stranded_amplitude": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "hypotheses": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "H1_threshold": {
+              "enum": [
+                "equal",
+                "budget_shifted",
+                "indeterminate",
+                "instrument_failure"
+              ]
+            },
+            "H2_dynamic_class": {
+              "enum": [
+                "supported",
+                "falsified",
+                "indeterminate",
+                "not_applicable",
+                "percolation_statics_non_epidemic_dynamics"
+              ]
+            },
+            "H3_static_tail": {
+              "enum": [
+                "supported",
+                "falsified",
+                "indeterminate",
+                "not_applicable"
+              ]
+            },
+            "rho_c": {
+              "$ref": "#/$defs/estimate"
+            }
+          }
+        },
+        "ledger_max_abs_residual": {
+          "type": "integer",
+          "const": 0
+        }
+      }
+    }
+  }
+}

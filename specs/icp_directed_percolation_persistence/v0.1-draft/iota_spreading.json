@@ -1,0 +1,85 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "stage": "S",
+  "status": "design_draft_not_frozen",
+  "law": "minimal_law.json laws.L0 (IOTA-MIN-L0); the canonical v0.3.6 law is not swept in this version (see minimal_law.json ablation_ladder)",
+  "question": "In the minimal IOTA law, does single-seed activity persist exactly when the fresh vacuum percolates, or does the amplitude budget make persistence harder than connectivity alone; and at the persistence threshold, is the growth in the dynamic-percolation class?",
+  "opening_preconditions": [
+    "every Stage C calibration model returned its registered class, threshold, and static exponent",
+    "the Stage A implementation audit of IOTA-MIN-L0 and the L1 analytic check are committed",
+    "the L0 engine passes its synthetic ledger, certificate, and determinism tests"
+  ],
+  "lattice": {"size": 64, "boundary": "periodic", "neighbourhood": "face6", "seed_site": [32, 32, 32]},
+  "constants": {"v": 2, "a0": 7},
+  "control_grid": {
+    "parameter": "rho",
+    "coarse": [0.25, 0.28, 0.30, 0.31, 0.32, 0.33, 0.35, 0.40, 0.50, 0.70],
+    "bisection": "arithmetic midpoints, 6 steps, per estimators.json bracketing",
+    "runs_per_coarse_point": 2000,
+    "runs_per_bisection_point": 4000,
+    "runs_at_final_point": 20000,
+    "horizon_ticks": 8192
+  },
+  "per_run_record": [
+    "n_t, r2_sum_t per tick (estimators.json observables_per_run)",
+    "absorbed_at and censored_at",
+    "S: number of sites ever activated, including the seed",
+    "C: number of fresh sites in the union of fresh face6 clusters adjacent to the seed, computed from the medium by breadth-first search after the run (absorbed runs only)",
+    "E = (S - 1) / C, the exploration completeness, for absorbed runs with C >= 1",
+    "stranded amplitude at absorption: total a over active sites",
+    "ledger residual (must be exactly 0)"
+  ],
+  "hypotheses": {
+    "H1_threshold": {
+      "role": "primary",
+      "statement": "the persistence threshold of IOTA-MIN-L0 equals the face6 simple-cubic site-percolation threshold",
+      "reference": "reference_classes.json thresholds.simple_cubic_site_percolation_z6.p_c = 0.31160768",
+      "outcomes": {
+        "equal": "|rho_c - p_c| <= 0.005",
+        "budget_shifted": "rho_c - p_c > 0.005 + 2*SE(rho_c)",
+        "indeterminate": "otherwise",
+        "instrument_failure": "rho_c < p_c - 0.005 - 2*SE(rho_c); this is impossible by construction (minimal_law.json facts_by_construction) and voids the run"
+      },
+      "rho_c_estimate": "final bracket midpoint; SE(rho_c) = half the final bracket width combined in quadrature with the bootstrap spread of the bracket decision",
+      "mechanistic_check": "report the distribution of E at every evaluated rho; 'equal' predicts the median E at the final point is 1 and the fraction of absorbed runs with E < 1 is small; 'budget_shifted' predicts a measurable fraction with E < 1 near p_c"
+    },
+    "H2_dynamic_class": {
+      "role": "secondary; conditional",
+      "condition": "H1 outcome is 'equal'",
+      "statement": "spreading exponents delta, eta, z at the final point match DyP_3",
+      "if_condition_fails": "exponents are reported as exploratory with verdict computed but no prediction outcome; a budget-shifted transition is spreading on a supercritical random medium, where quenched disorder is relevant for DP in 3D (Harris criterion: d*nu_perp = 1.75 < 2) and no clean class is registered",
+      "caveat": "each active site serves at most one fresh neighbour per tick, so growth is slower than breadth-first; static connectivity can be percolation while z differs from d_min. A z mismatch with delta and eta matched is reported as 'percolation statics, non-epidemic dynamics', which is a meaningful outcome rather than a failure"
+    },
+    "H3_static_cluster_tail": {
+      "role": "secondary; time-convention free",
+      "condition": "H1 outcome is 'equal'",
+      "statement": "at the final point, P(S >= s) ~ s^-(tau - 2) with tau - 2 = 0.18906",
+      "estimator": "estimators.json static_cluster_size",
+      "tolerance": 0.03
+    },
+    "L1_analytic": {
+      "role": "analytic; no sweep",
+      "statement": "minimal_law.json laws.L1.analytic_result",
+      "check": "a short synthetic-state test that a stranded configuration under L0 becomes non-absorbing under L1 for r > 0"
+    }
+  },
+  "falsification": {
+    "H1": "'equal' is falsified by 'budget_shifted' and vice versa; each is a substantive result",
+    "H2": "falsified if the verdict is DP_3p1 or none_of_registered while H1 is 'equal'",
+    "H3": "falsified if |(tau - 2) estimate - 0.18906| > 0.03 + 2*SE while H1 is 'equal'"
+  },
+  "resource_envelope": {
+    "worker_processes": 4,
+    "parallel_unit": "one complete run",
+    "per_point_wall_clock_ceiling_hours": 12,
+    "on_ceiling": "the point is 'resource_censored'; partial aggregates are not used"
+  },
+  "claim_limits": [
+    "a result for IOTA-MIN-L0 only; it transfers to richer IOTA laws only through the registered ablation ladder",
+    "lattice-activity persistence only; not a claim about any tracked organization's role",
+    "not physical percolation in any material system",
+    "finite-size L = 64 effective exponents over the registered window",
+    "not a novelty claim for percolation, DP, or DyP physics"
+  ]
+}

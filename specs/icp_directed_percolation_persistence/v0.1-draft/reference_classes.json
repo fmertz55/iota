@@ -1,0 +1,236 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "status": "design_draft_not_frozen",
+  "purpose": "external, independently established comparison values; none of these numbers is fitted, tuned, or chosen after any IOTA outcome",
+  "pre_freeze_verification": {
+    "required": true,
+    "rule": "every value whose verified_against field is 'pending' must be checked against its cited primary source and the field replaced by the checked citation before the freeze commit; a value that cannot be verified is removed and its gate is dropped, never loosened",
+    "values_pending": [
+      "thresholds.domany_kinzel_bond_1p1.p_c",
+      "thresholds.domany_kinzel_site_1p1.p_c",
+      "thresholds.simple_cubic_bond_percolation.p_c",
+      "thresholds.simple_cubic_site_percolation_z6.p_c",
+      "thresholds.simple_cubic_site_percolation_z26.p_c",
+      "classes.DyP_3.exponents.static_tau",
+      "all exponent values (secondary tables)"
+    ]
+  },
+  "observable_conventions": {
+    "survival_probability": "P(t) ~ t^(-delta): fraction of single-seed runs not absorbed by tick t",
+    "mean_activity": "N(t) ~ t^(theta): mean number of active units at tick t averaged over all runs, including absorbed runs as zero",
+    "spreading": "R2(t) ~ t^(2/z): activity-weighted mean squared distance from the seed, averaged over surviving runs",
+    "dynamic_percolation_note": "for dynamic isotropic percolation (the general epidemic process) the activity exponent is conventionally written eta and z equals the shortest-path dimension d_min"
+  },
+  "classes": {
+    "DP_1p1": {
+      "label": "directed percolation, 1 spatial + 1 time dimension",
+      "role": "calibration target only",
+      "spatial_dimension": 1,
+      "exponents": {
+        "beta": {
+          "value": 0.276486,
+          "se": 8e-06
+        },
+        "nu_perp": {
+          "value": 1.096854,
+          "se": 4e-06
+        },
+        "nu_par": {
+          "value": 1.733847,
+          "se": 6e-06
+        },
+        "delta": {
+          "value": 0.159464,
+          "se": 6e-06
+        },
+        "theta": {
+          "value": 0.313686,
+          "se": 8e-06
+        },
+        "z": {
+          "value": 1.580745,
+          "se": 1e-05
+        }
+      },
+      "hyperscaling_check": "theta = d/z - 2*delta",
+      "source": "Wikipedia, 'Directed percolation' and 'Percolation critical exponents' (2006 consensus estimates, chiefly I. Jensen series expansions)",
+      "verified_against": "Wikipedia tables read 2026-10-27; primary-source check pending"
+    },
+    "DP_3p1": {
+      "label": "directed percolation, 3 spatial + 1 time dimensions",
+      "role": "registered alternative class in the 3D classifier and 3+1 calibration target",
+      "spatial_dimension": 3,
+      "exponents": {
+        "beta": {
+          "value": 0.813,
+          "se": 0.009
+        },
+        "nu_perp": {
+          "value": 0.584,
+          "se": 0.005
+        },
+        "nu_par": {
+          "value": 1.11,
+          "se": 0.01
+        },
+        "delta": {
+          "value": 0.736,
+          "literature_spread": [
+            0.732,
+            0.7398
+          ],
+          "note": "midpoint of published estimates 0.732(4) and 0.7398(10)"
+        },
+        "theta": {
+          "value": 0.11,
+          "literature_spread": [
+            0.1057,
+            0.114
+          ],
+          "note": "midpoint of published estimates 0.1057(3) and 0.114(4)"
+        },
+        "z": {
+          "value": 1.9,
+          "literature_spread": [
+            1.88746,
+            1.901
+          ],
+          "note": "published estimates 1.88746, 1.8990(4), 1.901(5)"
+        }
+      },
+      "hyperscaling_check": "theta = d/z - 2*delta",
+      "source": "Wikipedia, 'Directed percolation' (beta, nu) and 'Percolation critical exponents' (delta, theta/eta, z), read 2026-10-27; underlying estimates include Grassberger and Zhang (1996), Jensen (1992), Wang et al. arXiv:1201.3006",
+      "verified_against": "secondary tables; primary-source check pending"
+    },
+    "DyP_3": {
+      "label": "dynamic isotropic percolation (general epidemic process with permanent immunization), 3 spatial dimensions",
+      "role": "registered prediction for IOTA-MIN-L0 (conditional on H1 'equal') and 3D calibration target",
+      "spatial_dimension": 3,
+      "exponents": {
+        "delta": {
+          "value": 0.34681
+        },
+        "eta": {
+          "value": 0.48725
+        },
+        "z": {
+          "value": 1.3756,
+          "se": 0.0003,
+          "note": "equals the shortest-path (chemical) dimension d_min"
+        },
+        "static_beta": {
+          "value": 0.4181,
+          "se": 0.0008
+        },
+        "static_nu": {
+          "value": 0.8762,
+          "se": 0.0012
+        },
+        "static_d_f": {
+          "value": 2.5229,
+          "se": 0.0001
+        },
+        "static_tau": {
+          "value": 2.18906,
+          "se": 8e-05,
+          "literature_spread": [
+            2.186,
+            2.1938
+          ],
+          "note": "Fisher exponent; the seed's cluster mass obeys P(S >= s) ~ s^-(tau-2) at threshold"
+        }
+      },
+      "derived_relations": {
+        "delta": "beta/(nu*d_min) = 0.4181/(0.8762*1.3756) = 0.3469",
+        "eta": "d_f/d_min - 1 - delta = 0.4873",
+        "hyperscaling_check": "eta = d/z - 2*delta - 1"
+      },
+      "source": "Wikipedia, 'Percolation critical exponents' (dynamic percolation row and isotropic 3D rows), read 2026-10-27",
+      "verified_against": "secondary table, internally consistent with the static exponents; primary-source check pending"
+    },
+    "DyP_2": {
+      "label": "dynamic isotropic percolation, 2 spatial dimensions",
+      "role": "reference only; no registered use",
+      "spatial_dimension": 2,
+      "exponents": {
+        "delta": {
+          "value": 0.09212
+        },
+        "eta": {
+          "value": 0.584466
+        },
+        "z": {
+          "value": 1.13077,
+          "se": 2e-05
+        }
+      },
+      "source": "Wikipedia, 'Percolation critical exponents', read 2026-10-27"
+    },
+    "CDP_Manna_3": {
+      "label": "conserved directed percolation / Manna class, 3 spatial dimensions",
+      "role": "declared alternative label only",
+      "exponents": null,
+      "rule": "no comparison values are registered in v0.1-draft; if the structural audit routes IOTA here, the outcome can only be reported as 'neither DP_3p1 nor DyP_3' unless cited values are added before the freeze"
+    }
+  },
+  "thresholds": {
+    "domany_kinzel_bond_1p1": {
+      "p_c": 0.644700185,
+      "se": 5e-09,
+      "source": "I. Jensen, 'Low-density series expansions for directed percolation I', J. Phys. A 32 (1999) 5233, arXiv:cond-mat/9906036",
+      "verified_against": "pending"
+    },
+    "domany_kinzel_site_1p1": {
+      "p_c": 0.705485,
+      "se": 5e-06,
+      "source": "I. Jensen (1999), as above",
+      "verified_against": "pending"
+    },
+    "simple_cubic_bond_percolation": {
+      "p_c": 0.24881182,
+      "se": 1e-07,
+      "alternative": "0.2488126(5), Lorenz and Ziff, Phys. Rev. E 57 (1998) 230",
+      "source": "Wikipedia 'Percolation threshold' 3D table, read 2026-10-27",
+      "use": "exact critical transmissibility of the one-tick SIR calibration CAL-SIR-SC-3",
+      "verified_against": "secondary table; primary-source check pending"
+    },
+    "simple_cubic_site_percolation_z6": {
+      "p_c": 0.31160768,
+      "se": 1.5e-07,
+      "alternatives": [
+        "0.3116077(2)",
+        "0.3116080(4)"
+      ],
+      "source": "Wikipedia 'Percolation threshold' 3D table, read 2026-10-27",
+      "use": "H1 reference for IOTA-MIN-L0 and threshold gate of CAL-SITE-BFS-SC-3",
+      "verified_against": "secondary table; primary-source check pending"
+    },
+    "simple_cubic_site_percolation_z26": {
+      "p_c": 0.0976445,
+      "se": 1e-06,
+      "alternatives": [
+        "0.0976444(6)"
+      ],
+      "source": "Wikipedia 'Percolation threshold' 3D table (NN+2NN+3NN), read 2026-10-27",
+      "use": "ladder rung 1b reference only",
+      "verified_against": "secondary table; primary-source check pending"
+    }
+  },
+  "applicability_conditions": {
+    "DP": [
+      "a unique absorbing state or an absorbing set reachable with nonzero probability",
+      "no spontaneous creation of activity from an absorbing configuration",
+      "short-range interactions (bounded hop per tick)",
+      "no additional conservation law coupled to the activity",
+      "no quenched disorder",
+      "no permanent memory of past activity (finite-time memory is admissible)"
+    ],
+    "DyP": [
+      "as DP, except that sites once active become permanently unavailable (immunization)",
+      "finite recovery memory (SIRS-type: immunity expires after a finite time) is a relevant perturbation that drives the asymptotic class to DP after a crossover; only the infinite-memory limit is DyP (arXiv:2311.06306)",
+      "permanent partial immunization (a reduced but nonzero reactivation probability, as in IOTA residual recruitment) has a richer phase diagram: a DyP transition for spreading into fresh territory, a DP transition for the reactivation process, and between them a regime in which an active front survives in fresh territory while its interior dies (Grassberger, Chate and Rousseau 1997; see literature_basis.md)"
+    ],
+    "minimal_law_note": "IOTA-MIN-L0 spreads only into fresh sites of a quenched site-diluted medium and never re-enters depleted sites; its static persistence bound is therefore the site-percolation threshold of the medium, and dynamic percolation is the reference class if the amplitude budget does not limit exploration"
+  }
+}

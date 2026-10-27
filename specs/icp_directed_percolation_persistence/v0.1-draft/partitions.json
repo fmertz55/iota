@@ -1,0 +1,39 @@
+{
+  "protocol_version": "0.1-draft",
+  "search_id": "ICP-DP-PERSISTENCE-001",
+  "status": "design_draft_not_frozen",
+  "calibration": {
+    "seed_domain": "calibration.json rng.seed_derivation",
+    "data_class": "instrument calibration; reported in full whether it passes or fails"
+  },
+  "iota_development": {
+    "data_class": "development",
+    "law": "IOTA-MIN-L0",
+    "run_seed_range": {
+      "first": 10000000,
+      "last": 10999999
+    },
+    "assignment": "for grid point index g (coarse 0-9, bisection 10-15, final 16) and run index r: run_seed = 10000000 + 25000*g + r",
+    "streams": "medium RNG = numpy PCG64 seeded with the integer formed by the first 8 bytes (big-endian) of SHA-256 of ASCII 'ICP-DP-PERSISTENCE-001' + NUL + 'medium' + NUL + decimal run_seed; dynamics RNG identical with 'dynamics'",
+    "capacity_check": "25000 seeds per point exceeds the largest registered run count (20000)",
+    "use": "coarse grid, bisection, final point, H1 to H3",
+    "medium_draw": "draw L^3 uniform variates from the run's medium stream in one call, indexed in lexicographic (x, y, z) order; a site is fresh iff its variate < rho; the seed site's variate is drawn and discarded; run seeds differ across grid points, so points are statistically independent"
+  },
+  "iota_confirmation": {
+    "data_class": "single-use confirmation",
+    "law": "IOTA-MIN-L0",
+    "run_seed_range": {
+      "first": 20000000,
+      "last": 20099999
+    },
+    "assignment": "run_seed = 20000000 + 25000*j + r, j = 0 (bracket lower endpoint), 1 (final point), 2 (bracket upper endpoint)",
+    "runs_per_point": 20000,
+    "registered_endpoint": "at the three development-frozen rho values: lower endpoint subcritical, upper endpoint supercritical, final-point H1 outcome equal to development, and, if H1 is 'equal', H2 verdict and H3 outcome equal to development",
+    "opening_rule": "only after the development result is committed and the three rho values are frozen in a confirmation open manifest; one opening; no re-run",
+    "if_development_unclassified": "no confirmation run if the development terminal status is not 'classified'"
+  },
+  "translations_and_sizes": {
+    "evaluated": "seed site (32,32,32) on L = 64 only",
+    "status": "the law is translation invariant and the medium is i.i.d., so seed position is immaterial; other sizes require a separate freeze"
+  }
+}

@@ -1,4 +1,4 @@
-.PHONY: finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca validate-quantum-dirac-symmetry-qca-archive verify validate-iota-submission iota-submission paper quantum-dirac-paper clean-paper clean-quantum-dirac-paper
+.PHONY: validate-dp-persistence finding069-evidence finding070-evidence evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca validate-quantum-dirac-symmetry-qca-archive verify validate-iota-submission iota-submission paper quantum-dirac-paper clean-paper clean-quantum-dirac-paper
 
 PYTHON ?= $(shell command -v python3 2>/dev/null || command -v python 2>/dev/null)
 
@@ -40,6 +40,13 @@ validate-quantum-dirac-symmetry-qca:
 
 validate-quantum-dirac-symmetry-qca-archive:
 	$(PYTHON) scripts/validate_archived_quantum_dirac_symmetry_qca.py --require-completion-tag
+
+validate-dp-persistence:
+	$(PYTHON) -m src.dp_persistence.cli audit
+	if [ -f experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json ]; then \
+		$(PYTHON) -m src.dp_persistence.cli verify-seal; \
+	fi
+	$(PYTHON) -m unittest discover -s tests/dp_persistence -p 'test_*.py'
 
 verify: evidence validate validate-minimal-realization validate-minimal-realization-exact-orbit validate-quantum-dirac validate-quantum-dirac-symmetry-qca
 
