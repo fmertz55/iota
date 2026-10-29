@@ -1,7 +1,7 @@
 {
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "purpose": "the simplest law that keeps IOTA's defining ingredients (an exact integer amplitude ledger, unspent vacuum budget, activation by transfer, exhaustion into a depleted medium) and nothing else; the registered persistence test runs on this law, and every richer IOTA mechanism is added back later one rung at a time",
   "kept_from_iota": [
     "integer amplitude quanta with an exact conserved ledger (v0.2 law L1)",

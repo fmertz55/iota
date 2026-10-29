@@ -2,8 +2,10 @@
 
 Date reviewed: `2026-10-27`
 
-Status: **pre-registration design evidence only; primary-source verification
-pending for every item marked below**
+Status: **pre-registration design evidence only. Every numeric value entering a
+gate was checked against a primary source on 2026-10-27; the checked citations
+are in `reference_classes.json` (`verified_against`) and the full record is in
+`VERIFICATION_LOG.md`**
 
 Nothing in this protocol claims novelty for directed percolation (DP), dynamic
 isotropic percolation (DyP), partial immunization, or their exponents. They are
@@ -30,8 +32,9 @@ Design use: seed-spreading observables `P(t)`, `N(t)`, `R²(t)`; Domany–Kinzel
 calibration; the list of non-DP classes (parity-conserving, conserved DP, long
 memory).
 
-Verification: pending (exponent tables and thresholds were read from secondary
-sources).
+Verification: Table 1 read for the DK site threshold (0.705489(4), consistent
+with Jensen 1999) and Sec. 3.7 for quenched disorder; other values were checked
+against their own primary sources (`VERIFICATION_LOG.md`).
 
 ## Exponent values
 
@@ -42,7 +45,11 @@ isotropic and dynamic-percolation values used for DyP.
 
 Design use: every exponent in `reference_classes.json`.
 
-Verification: pending; secondary source. The DyP spreading values were checked
+Verification: checked 2026-10-27 against primary sources: DP 1+1 in Jensen 1999;
+DP 3+1 in Wang et al., arXiv:1201.3006, Table VII and Jensen, PRA 45 (1992)
+R563 (with corrected β SE and ν⊥); DyP 3 statics in Wang et al. 2013, Xu et al.
+2014 and Ballesteros et al. 1999; DyP 3 spreading values are derived and agree
+with the direct simulation of Dammer and Hinrichsen 2004. They were also checked
 for internal consistency with the static 3D exponents
 (`delta = beta/(nu d_min)` and `eta = d_f/d_min - 1 - delta`).
 
@@ -53,8 +60,9 @@ I. Jensen, "Low-density series expansions for directed percolation I,"
 
 Design use: Domany–Kinzel bond and site thresholds.
 
-Verification: pending; values `0.644700185(5)` and `0.705485(5)` were entered
-from memory and must be checked against the paper before freeze.
+Verification: checked 2026-10-27. The bond value `0.644700185(5)` is stated in
+the paper; the site value is registered at the paper's final estimate
+`0.70548522(4)` (the earlier `0.705485(5)` was a rounded form).
 
 C. D. Lorenz and R. M. Ziff, *Phys. Rev. E* 57 (1998) 230; J. Wang et al.,
 *Phys. Rev. E* 87 (2013) 052107.
@@ -74,7 +82,12 @@ exponent `τ = 2.18906(8)` (published spread 2.186–2.1938).
 
 Design use: the H3 cluster-tail exponent `τ − 2`.
 
-Verification: secondary tables; primary-source check pending for all three.
+Verification: checked 2026-10-27 against primary sources. Site z = 6:
+Xu, Wang, Lv, Deng, Front. Phys. 9 (2014) 113 (arXiv:1310.5399), Table V.
+Site z = 26: registered at the published `0.0976444(6)` of Xun, Hao, Ziff
+(arXiv:2010.02895); `0.0976445(10)` is unpublished. τ: Ballesteros et al.,
+J. Phys. A 32 (1999) 1 (arXiv:cond-mat/9805125), Table 8, `2.18906(6)(2)`;
+the spread bound 2.1938 could not be verified and was removed.
 
 ## Immunization and memory
 
@@ -84,7 +97,8 @@ P. Grassberger, *J. Phys. A* 18 (1985) L267.
 
 Design use: permanent immunization moves spreading into the DyP class.
 
-Verification: pending.
+Verification: primary not accessed; no value from these papers enters a gate.
+The registered DyP values come from the sources checked above.
 
 P. Grassberger, H. Chaté, and G. Rousseau, "Spreading in media with long-time
 memory," *Phys. Rev. E* 55 (1997) 2488.
@@ -96,7 +110,9 @@ L1 analytic result; with an exact amplitude ledger, IOTA's reactivation channel
 removes the absorbing state entirely, which is stronger than the
 partial-immunization case.
 
-Verification: pending; the summary is from memory and must be checked.
+Verification: primary not accessed (no open copy). The summary is consistent
+with the secondary account in Dammer and Hinrichsen 2004
+(arXiv:cond-mat/0405577). No value enters a gate.
 
 "Crossover from dynamical percolation class to directed percolation class on a
 two dimensional lattice," <https://arxiv.org/abs/2311.06306>.
@@ -111,9 +127,11 @@ A. B. Harris, *J. Phys. C* 7 (1974) 1671 (Harris criterion); for DP,
 `d ν⊥ > 2` is required for weak disorder to be irrelevant.
 
 Design use: the reason no clean class is registered if H1 is "budget_shifted"
-(3D DP: `3 × 0.584 = 1.75 < 2`).
+(3D DP: `3 × 0.582 = 1.75 < 2`).
 
-Verification: pending.
+Verification: Harris 1974 not accessed. The design conclusion is supported by
+Hinrichsen 2000, Sec. 3.7, which finds quenched spatial disorder disrupts DP
+critical behaviour. No value enters a gate.
 
 ## Experimental status of DP
 
@@ -127,7 +145,7 @@ turbulence and at the onset of shear-flow turbulence; puff lifetimes in pipe
 flow give a laboratory example of localized, self-sustaining organization whose
 persistence is set by decay against splitting.
 
-Verification: pending; no value from these papers enters a gate.
+Verification: not checked; no value from these papers enters a gate.
 
 ## Critical-point persistence (context for deferred stage R)
 

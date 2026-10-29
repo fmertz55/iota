@@ -1,7 +1,7 @@
 {
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "calibration": {
     "seed_domain": "calibration.json rng.seed_derivation",
     "data_class": "instrument calibration; reported in full whether it passes or fails"

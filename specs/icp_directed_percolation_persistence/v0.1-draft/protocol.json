@@ -1,7 +1,7 @@
 {
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
-  "status": "design_draft_not_frozen",
+  "status": "design_frozen_outcomes_sealed",
   "date_drafted": "2026-10-27",
   "data_class": "development with single-use confirmation",
   "contract": "docs/ICP_DIRECTED_PERCOLATION_PERSISTENCE_CONTRACT.md",

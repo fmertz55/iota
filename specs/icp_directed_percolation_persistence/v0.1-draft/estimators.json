@@ -1,7 +1,7 @@
 {
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "scope": "one instrument shared by calibration (Stage C) and IOTA-MIN-L0 (Stage S); no per-model tuning",
   "observables_per_run": {
     "n_t": "number of active units at tick t (definition supplied by each model; for IOTA see iota_spreading.json)",
@@ -46,9 +46,9 @@
     }
   },
   "bracketing": {
-    "coarse": "evaluate every registered coarse-grid point; the bracket is the first adjacent pair (lower subcritical, upper supercritical) in increasing control order",
-    "no_bracket": "if no adjacent subcritical/supercritical pair exists, the model terminal status is 'no_bracket_in_registered_range' and no exponents are reported",
-    "multiple_brackets": "all adjacent subcritical-to-supercritical pairs are reported; the lowest is primary; more than one is itself a registered finding (re-entrant or multiple transitions)",
+    "coarse": "evaluate every registered coarse-grid point; in increasing control order, a bracket is a subcritical point followed by a supercritical point with only critical_compatible points (possibly none) between them; the bracket endpoints are those two points, and the critical_compatible points between them are retained as evaluated points; any other classification between them breaks the pair; the primary bracket is the lowest",
+    "no_bracket": "if no bracket exists, the model terminal status is 'no_bracket_in_registered_range' and no exponents are reported",
+    "multiple_brackets": "all brackets are reported; the lowest is primary; more than one is itself a registered finding (re-entrant or multiple transitions)",
     "bisection": "geometric midpoint for IOTA (control spans decades), arithmetic midpoint for calibration; a critical_compatible midpoint is retained and bisection continues toward the side whose endpoint has the larger |s|",
     "final_point": "the evaluated point with the smallest |s| among critical_compatible points in the final bracket, else the final bracket midpoint; it is re-run with runs_at_final_point fresh seeds"
   },

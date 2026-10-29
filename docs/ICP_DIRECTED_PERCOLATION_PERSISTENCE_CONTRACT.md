@@ -4,9 +4,9 @@ Version: `0.1-draft`
 
 Search ID: `ICP-DP-PERSISTENCE-001`
 
-Date: `2026-10-27`
+Date: `2026-10-27` (drafted); frozen `2026-10-29`
 
-Status: **outcome-free design draft; not frozen; no seal**
+Status: **outcome-free design; frozen; outcomes sealed**
 
 Data class: **development with single-use confirmation**
 

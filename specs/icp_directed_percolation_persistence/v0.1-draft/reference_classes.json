@@ -1,20 +1,13 @@
 {
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "purpose": "external, independently established comparison values; none of these numbers is fitted, tuned, or chosen after any IOTA outcome",
   "pre_freeze_verification": {
     "required": true,
     "rule": "every value whose verified_against field is 'pending' must be checked against its cited primary source and the field replaced by the checked citation before the freeze commit; a value that cannot be verified is removed and its gate is dropped, never loosened",
-    "values_pending": [
-      "thresholds.domany_kinzel_bond_1p1.p_c",
-      "thresholds.domany_kinzel_site_1p1.p_c",
-      "thresholds.simple_cubic_bond_percolation.p_c",
-      "thresholds.simple_cubic_site_percolation_z6.p_c",
-      "thresholds.simple_cubic_site_percolation_z26.p_c",
-      "classes.DyP_3.exponents.static_tau",
-      "all exponent values (secondary tables)"
-    ]
+    "values_pending": [],
+    "resolution": "every value previously listed as pending was checked against a primary source on 2026-10-27 (VERIFICATION_LOG.md); each entry's verified_against field records the citation; sourced corrections were applied to the DK site threshold, the z26 threshold, DP_3p1 beta se and nu_perp, and the static tau spread; none of these changes affects a gate"
   },
   "observable_conventions": {
     "survival_probability": "P(t) ~ t^(-delta): fraction of single-seed runs not absorbed by tick t",
@@ -54,8 +47,8 @@
         }
       },
       "hyperscaling_check": "theta = d/z - 2*delta",
-      "source": "Wikipedia, 'Directed percolation' and 'Percolation critical exponents' (2006 consensus estimates, chiefly I. Jensen series expansions)",
-      "verified_against": "Wikipedia tables read 2026-10-27; primary-source check pending"
+      "source": "I. Jensen, J. Phys. A 32 (1999) 5233, arXiv:cond-mat/9906036",
+      "verified_against": "Jensen, J. Phys. A 32 (1999) 5233, arXiv:cond-mat/9906036, Summary section: all six values verbatim (theta is Jensen's eta; z = nu_par/nu_perp); checked 2026-10-27"
     },
     "DP_3p1": {
       "label": "directed percolation, 3 spatial + 1 time dimensions",
@@ -64,15 +57,18 @@
       "exponents": {
         "beta": {
           "value": 0.813,
-          "se": 0.009
+          "se": 0.011,
+          "note": "Jensen 1992 0.813(11); Wang et al. 2013 give 0.818(4)"
         },
         "nu_perp": {
-          "value": 0.584,
-          "se": 0.005
+          "value": 0.582,
+          "se": 0.002,
+          "note": "Wang et al. 2013 (arXiv:1201.3006) Table VII; Hinrichsen 2000 gives 0.581(5); the earlier 0.584(5) had no source"
         },
         "nu_par": {
           "value": 1.11,
-          "se": 0.01
+          "se": 0.01,
+          "note": "Jensen 1992 1.11(1); Wang et al. 2013 give 1.106(3)"
         },
         "delta": {
           "value": 0.736,
@@ -96,12 +92,12 @@
             1.88746,
             1.901
           ],
-          "note": "published estimates 1.88746, 1.8990(4), 1.901(5)"
+          "note": "1.8990(4) Wang et al. 2013; 1.901(5) Jensen 1992; 1.88746 is Janssen 1981 epsilon-expansion (field theory), not a numerical estimate"
         }
       },
       "hyperscaling_check": "theta = d/z - 2*delta",
-      "source": "Wikipedia, 'Directed percolation' (beta, nu) and 'Percolation critical exponents' (delta, theta/eta, z), read 2026-10-27; underlying estimates include Grassberger and Zhang (1996), Jensen (1992), Wang et al. arXiv:1201.3006",
-      "verified_against": "secondary tables; primary-source check pending"
+      "source": "Jensen, Phys. Rev. A 45 (1992) R563 (abstract); Wang, Zhou, Liu, Garoni, Deng, arXiv:1201.3006 Table VII; Janssen, Z. Phys. B 42 (1981) 151 (via Wang Table VII)",
+      "verified_against": "arXiv:1201.3006 v3 Table VII (d=3) read in full; Jensen 1992 abstract read via Flinders repository (symbols mapped via Wang Table VII row [28]); checked 2026-10-27"
     },
     "DyP_3": {
       "label": "dynamic isotropic percolation (general epidemic process with permanent immunization), 3 spatial dimensions",
@@ -109,10 +105,12 @@
       "spatial_dimension": 3,
       "exponents": {
         "delta": {
-          "value": 0.34681
+          "value": 0.34681,
+          "note": "derived: beta/(nu d_min); Wang et al. 2013 statics give 0.34679; direct simulation 0.346(6) (Dammer & Hinrichsen 2004)"
         },
         "eta": {
-          "value": 0.48725
+          "value": 0.48725,
+          "note": "derived: d_f/d_min - 1 - delta; Wang et al. 2013 statics give 0.48728; direct simulation 0.488(7) (Dammer & Hinrichsen 2004)"
         },
         "z": {
           "value": 1.3756,
@@ -136,9 +134,10 @@
           "se": 8e-05,
           "literature_spread": [
             2.186,
-            2.1938
+            2.18906
           ],
-          "note": "Fisher exponent; the seed's cluster mass obeys P(S >= s) ~ s^-(tau-2) at threshold"
+          "note": "Fisher exponent; the seed's cluster mass obeys P(S >= s) ~ s^-(tau-2) at threshold; an earlier spread bound 2.1938 was not verified and was removed",
+          "verified_against": "Ballesteros et al., J. Phys. A 32 (1999) 1, arXiv:cond-mat/9805125, Table 8: tau = 2.18906(6)(2); spread value 2.186(2) (Jan & Stauffer 1998) in same table"
         }
       },
       "derived_relations": {
@@ -146,8 +145,8 @@
         "eta": "d_f/d_min - 1 - delta = 0.4873",
         "hyperscaling_check": "eta = d/z - 2*delta - 1"
       },
-      "source": "Wikipedia, 'Percolation critical exponents' (dynamic percolation row and isotropic 3D rows), read 2026-10-27",
-      "verified_against": "secondary table, internally consistent with the static exponents; primary-source check pending"
+      "source": "Wang et al. PRE 87 (2013) 052107; Xu et al. Front. Phys. 9 (2014) 113; Ballesteros et al. J. Phys. A 32 (1999) 1; Dammer & Hinrichsen J. Stat. Mech. (2004) P07011",
+      "verified_against": "static: Wang et al. PRE 87 (2013) 052107, arXiv:1302.0421 (beta/nu = 0.47705(15), 1/nu = 1.1410(15), d_min = 1.3756(3)); Xu et al. Front. Phys. 9 (2014) 113, arXiv:1310.5399 (yt = 1.1413(15) -> nu = 0.8762(12); yh = d_f = 2.52293(10)); beta = 0.4181 derived; tau Ballesteros et al. 1999. Dynamic: Dammer & Hinrichsen J. Stat. Mech. (2004) P07011, arXiv:cond-mat/0405577, Table C1 d=3: delta = 0.346(6), theta = 0.488(7), z = 1.375(5); 5-digit delta/eta are derived (0.34679, 0.48728 from Wang 2013), not stated in a primary; checked 2026-10-27"
     },
     "DyP_2": {
       "label": "dynamic isotropic percolation, 2 spatial dimensions",
@@ -165,7 +164,8 @@
           "se": 2e-05
         }
       },
-      "source": "Wikipedia, 'Percolation critical exponents', read 2026-10-27"
+      "source": "Wikipedia, 'Percolation critical exponents', read 2026-10-27",
+      "verified_against": "z = d_min = 1.13077(2): Zhou, Yang, Deng, Ziff PRE 86 (2012) 061101, arXiv:1112.3428 abstract; delta, eta derived from exact 2D beta/nu = 5/48, d_f = 91/48 (0.092120, 0.584466)"
     },
     "CDP_Manna_3": {
       "label": "conserved directed percolation / Manna class, 3 spatial dimensions",
@@ -179,21 +179,22 @@
       "p_c": 0.644700185,
       "se": 5e-09,
       "source": "I. Jensen, 'Low-density series expansions for directed percolation I', J. Phys. A 32 (1999) 5233, arXiv:cond-mat/9906036",
-      "verified_against": "pending"
+      "verified_against": "Jensen, J. Phys. A 32 (1999) 5233, arXiv:cond-mat/9906036 v1, Sec. 4.1 and Summary: pc = 0.644700185(5); checked 2026-10-27"
     },
     "domany_kinzel_site_1p1": {
-      "p_c": 0.705485,
-      "se": 5e-06,
+      "p_c": 0.70548522,
+      "se": 4e-08,
       "source": "I. Jensen (1999), as above",
-      "verified_against": "pending"
+      "verified_against": "Jensen, J. Phys. A 32 (1999) 5233, arXiv:cond-mat/9906036, Sec. 4.2 final estimate pc = 0.70548522(4) (directed site percolation, square lattice = DK site-DP point p1 = p2); site-series-only 0.70548515(20); cf. Hinrichsen 2000 Table 1: 0.705489(4); checked 2026-10-27",
+      "previous_registered_value": "0.705485(5), a rounded form of the same estimate"
     },
     "simple_cubic_bond_percolation": {
       "p_c": 0.24881182,
       "se": 1e-07,
       "alternative": "0.2488126(5), Lorenz and Ziff, Phys. Rev. E 57 (1998) 230",
-      "source": "Wikipedia 'Percolation threshold' 3D table, read 2026-10-27",
+      "source": "X. Wang, Z. Zhou, W. Zhang, T. M. Garoni, Y. Deng, Phys. Rev. E 87 (2013) 052107, arXiv:1302.0421",
       "use": "exact critical transmissibility of the one-tick SIR calibration CAL-SIR-SC-3",
-      "verified_against": "secondary table; primary-source check pending"
+      "verified_against": "Wang, Zhou, Zhang, Garoni, Deng, PRE 87 (2013) 052107, arXiv:1302.0421 abstract: 0.24881182(10); alternative Lorenz & Ziff PRE 57 (1998) 230, arXiv:cond-mat/9710044 abstract: 0.2488126(5); checked 2026-10-27"
     },
     "simple_cubic_site_percolation_z6": {
       "p_c": 0.31160768,
@@ -202,19 +203,20 @@
         "0.3116077(2)",
         "0.3116080(4)"
       ],
-      "source": "Wikipedia 'Percolation threshold' 3D table, read 2026-10-27",
+      "source": "X. Xu, J. Wang, J.-P. Lv, Y. Deng, Front. Phys. 9 (2014) 113, arXiv:1310.5399, Table V",
       "use": "H1 reference for IOTA-MIN-L0 and threshold gate of CAL-SITE-BFS-SC-3",
-      "verified_against": "secondary table; primary-source check pending"
+      "verified_against": "Xu, Wang, Lv, Deng, Front. Phys. 9 (2014) 113, arXiv:1310.5399, Table V: 0.31160768(15); alternatives Wang et al. PRE 87 (2013) 052107 (arXiv:1302.0421): 0.3116077(2); Lorenz & Ziff J. Phys. A 31 (1998) 8147: 0.3116080(4) (read in Wang et al. Table VII); checked 2026-10-27"
     },
     "simple_cubic_site_percolation_z26": {
-      "p_c": 0.0976445,
-      "se": 1e-06,
+      "p_c": 0.0976444,
+      "se": 6e-07,
       "alternatives": [
-        "0.0976444(6)"
+        "0.0976445(10) (Ziff & Torquato, unpublished 2010, as cited by Xun-Hao-Ziff)",
+        "0.0976(1) (Kurzawski & Malarz, arXiv:1111.3254)"
       ],
-      "source": "Wikipedia 'Percolation threshold' 3D table (NN+2NN+3NN), read 2026-10-27",
+      "source": "Z. Xun, D. Hao, R. M. Ziff, arXiv:2010.02895",
       "use": "ladder rung 1b reference only",
-      "verified_against": "secondary table; primary-source check pending"
+      "verified_against": "Xun, Hao, Ziff, arXiv:2010.02895, 3D table row sc-1,2,3 (z=26): 0.0976444(6); repeated in Xun & Hao arXiv:2111.10975 (PRE 105 (2022) 024105); 0.0976445(10) is Ziff & Torquato unpublished; checked 2026-10-27 (journal ref of 2010.02895 to be confirmed)"
     }
   },
   "applicability_conditions": {

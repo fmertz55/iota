@@ -2,7 +2,7 @@
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
   "stage": "S",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "law": "minimal_law.json laws.L0 (IOTA-MIN-L0); the canonical v0.3.6 law is not swept in this version (see minimal_law.json ablation_ladder)",
   "question": "In the minimal IOTA law, does single-seed activity persist exactly when the fresh vacuum percolates, or does the amplitude budget make persistence harder than connectivity alone; and at the persistence threshold, is the growth in the dynamic-percolation class?",
   "opening_preconditions": [

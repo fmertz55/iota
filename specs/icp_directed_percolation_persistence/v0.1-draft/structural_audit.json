@@ -2,7 +2,7 @@
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
   "stage": "A",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "purpose": "certify, before any registered seed is evolved, that the implemented IOTA-MIN-L0 is the law in minimal_law.json and has the class-relevant structure that the predictions in iota_spreading.json assume",
   "outcome_boundary": "Stage A may evolve only disclosed synthetic states (hand-built media of at most 9x9x9 sites with a declared fresh pattern); it may not draw a registered random medium, sweep rho, or compute any Stage S observable",
   "law_under_audit": {

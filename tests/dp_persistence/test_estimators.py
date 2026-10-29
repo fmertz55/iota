@@ -284,14 +284,37 @@ class BracketingTests(unittest.TestCase):
         # The critical point with the smallest |s| inside the final bracket.
         self.assertAlmostEqual(search.final_control, 0.29)
 
-    def test_critical_coarse_point_blocks_adjacent_bracket(self) -> None:
+    def test_critical_coarse_points_lie_inside_the_bracket(self) -> None:
+        def classes(c):
+            if 0.305 < c < 0.325:
+                return "critical_compatible", 0.01 * (c - 0.31)
+            return ("subcritical", 1.0) if c < 0.31 else ("supercritical", -1.0)
+
+        search = est.bracket_search(self.fake(classes), [0.29, 0.30, 0.31, 0.32, 0.33, 0.35], 0, "arithmetic")
+        self.assertEqual(search.terminal_status, "classified")
+        self.assertEqual(search.brackets, [[0.30, 0.33]])
+        # With no bisection, the critical coarse point with the smallest |s| is final.
+        self.assertAlmostEqual(search.final_control, 0.31)
+
+    def test_other_classes_break_a_bracket(self) -> None:
         def classes(c):
             if abs(c - 0.31) < 0.001:
-                return "critical_compatible", 0.0
+                return "window_too_short", None
             return ("subcritical", 1.0) if c < 0.31 else ("supercritical", -1.0)
 
         search = est.bracket_search(self.fake(classes), [0.30, 0.31, 0.32], 6, "arithmetic")
         self.assertEqual(search.terminal_status, "no_bracket_in_registered_range")
+
+    def test_only_the_last_subcritical_point_starts_a_bracket(self) -> None:
+        def classes(c):
+            if c in (0.31, 0.32):
+                return "critical_compatible", 0.0
+            return ("subcritical", 1.0) if c < 0.31 else ("supercritical", -1.0)
+
+        pairs = est.adjacent_brackets(
+            [self.fake(classes)(c, "coarse", i) for i, c in enumerate([0.33, 0.29, 0.31, 0.30, 0.32])]
+        )
+        self.assertEqual([[a.control, b.control] for a, b in pairs], [[0.30, 0.33]])
 
     def test_threshold_estimate(self) -> None:
         lo = self.fake(lambda c: ("subcritical", 1.0))(0.31, "x", 0)
@@ -344,7 +367,7 @@ class ReplayAgreementTests(unittest.TestCase):
 
     def test_bracketing_and_hypotheses_agreement(self) -> None:
         def classes(c):
-            if abs(c - 0.312) < 0.0015:
+            if abs(c - 0.312) < 0.004:
                 return "critical_compatible", (c - 0.312) * 3
             return ("subcritical", 0.5) if c < 0.312 else ("supercritical", -0.5)
 

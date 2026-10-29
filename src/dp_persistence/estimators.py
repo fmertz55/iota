@@ -410,14 +410,21 @@ def midpoint(lo: float, hi: float, kind: str) -> float:
 
 
 def adjacent_brackets(points: Sequence[EvaluatedPoint]) -> list[tuple[EvaluatedPoint, EvaluatedPoint]]:
+    """Subcritical then supercritical, with only critical_compatible between."""
+
     ordered = sorted(points, key=lambda p: p.control)
     pairs = []
-    for left, right in zip(ordered, ordered[1:]):
-        if (
-            bracketing_class(left.evaluation.criticality) == "subcritical"
-            and bracketing_class(right.evaluation.criticality) == "supercritical"
-        ):
-            pairs.append((left, right))
+    lower = None
+    for point in ordered:
+        kind = bracketing_class(point.evaluation.criticality)
+        if kind == "subcritical":
+            lower = point
+        elif kind == "supercritical":
+            if lower is not None:
+                pairs.append((lower, point))
+            lower = None
+        elif kind != "critical_compatible":
+            lower = None
     return pairs
 
 

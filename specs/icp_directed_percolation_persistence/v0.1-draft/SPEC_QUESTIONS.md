@@ -1,12 +1,9 @@
 # Spec questions found during implementation
 
-Status: open, for the owner to resolve before the freeze.
-
-Wherever a field was ambiguous, contradictory, or underspecified, the
-implementation in `src/dp_persistence/` uses the most literal reading. Each
-entry below gives the file and field, the reading chosen, and the
-alternatives. Entries marked **consequential** could change a registered
-outcome. Resolve those first.
+Status: **frozen.** Q-EST-7 was resolved before the freeze by changing the
+bracketing rule in `estimators.json`. Every other entry is frozen as the reading
+implemented in `src/dp_persistence/` and described below. Entries marked
+**consequential** could change a registered outcome.
 
 ## Contradictions
 
@@ -21,12 +18,10 @@ outcome. Resolve those first.
 
 ## Bracketing and the criticality test
 
-### Q-EST-7. A critical-compatible coarse point blocks the bracket (consequential)
-- **File:** `estimators.json` → `bracketing.coarse`: "the first adjacent pair (lower subcritical, upper supercritical)".
-- **Reading:** literal. With a coarse sequence `sub, critical_compatible, super`, there is no adjacent sub/super pair. The status is then `no_bracket_in_registered_range`, and no exponents are reported. This is likely near threshold, because the IOTA grid has points 0.31 and 0.32 next to p_c = 0.3116. A test (`test_critical_coarse_point_blocks_adjacent_bracket`) pins this behaviour.
-- **Alternatives:**
-  - Treat a critical-compatible point as either bracket end.
-  - Take the critical-compatible coarse point directly as the final-point candidate.
+### Q-EST-7. A critical-compatible coarse point between the bracket ends (resolved)
+- **File:** `estimators.json` → `bracketing.coarse`.
+- **Original issue:** the draft required an *adjacent* (subcritical, supercritical) pair. A critical-compatible coarse point right at the threshold would have left no bracket, failing a calibration gate and ending the version.
+- **Resolution before the freeze:** a bracket is a subcritical point followed by a supercritical point with only critical-compatible points between them. Those points are retained as final-point candidates. Any other classification between them still breaks the pair. Implemented in `estimators.adjacent_brackets` and the replay, and tested.
 
 ### Q-EST-8. "Bisection continues toward the side whose endpoint has the larger |s|" (consequential)
 - **File:** `estimators.json` → `bracketing.bisection`.

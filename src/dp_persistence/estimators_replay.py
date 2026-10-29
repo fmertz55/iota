@@ -351,12 +351,15 @@ def replay_bracket(evaluate, grid, steps: int, kind: str) -> dict[str, Any]:
     for i, c in enumerate(grid):
         seen.append((float(c), evaluate(float(c), "coarse", i)))
     ordered = sorted(seen, key=lambda item: item[0])
-    found = [
-        (ordered[i], ordered[i + 1])
-        for i in range(len(ordered) - 1)
-        if _side(ordered[i][1]["criticality"]) == "subcritical"
-        and _side(ordered[i + 1][1]["criticality"]) == "supercritical"
-    ]
+    found = []
+    for i, item in enumerate(ordered):
+        if _side(item[1]["criticality"]) != "supercritical":
+            continue
+        j = i - 1
+        while j >= 0 and _side(ordered[j][1]["criticality"]) == "critical_compatible":
+            j -= 1
+        if j >= 0 and _side(ordered[j][1]["criticality"]) == "subcritical":
+            found.append((ordered[j], item))
     brackets = [[a[0], b[0]] for a, b in found]
     if not found:
         return {"seen": seen, "brackets": brackets, "status": "no_bracket_in_registered_range", "final_bracket": None, "final": None}

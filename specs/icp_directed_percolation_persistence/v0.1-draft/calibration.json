@@ -2,7 +2,7 @@
   "protocol_version": "0.1-draft",
   "search_id": "ICP-DP-PERSISTENCE-001",
   "stage": "C",
-  "status": "design_draft_not_frozen",
+  "status": "outcomes_sealed",
   "purpose": "prove that the frozen spreading instrument (seed handling, absorbing test, censoring, local-slope estimator, bracketing, tolerances, classifier) recovers known thresholds and universality classes before it is pointed at IOTA",
   "gate_rule": "Stage S (IOTA spreading) may not be opened unless every calibration model below returns its registered class and, where registered, its threshold and static exponent within tolerance; any calibration failure is a terminal instrument failure for this protocol version, recorded as such, and is repaired only in a new version",
   "shared_instrument": "estimators.json, applied without modification to every calibration model and to IOTA",

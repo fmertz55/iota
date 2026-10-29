@@ -1,9 +1,11 @@
 # ICP Directed-Percolation Persistence `0.1-draft`
 
-This directory is the outcome-free design draft for search ID
-`ICP-DP-PERSISTENCE-001`. It is **not frozen**: no seal exists, no run command
-exists, and several literature values still need primary-source verification
-(`reference_classes.json`, `pre_freeze_verification`).
+This directory is the frozen, outcome-free specification for search ID
+`ICP-DP-PERSISTENCE-001`. The freeze commit adds the disabled content-hash seal
+`experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json` and is
+tagged `icp-dp-persistence-001-v0.1-frozen`. Every literature value entering a
+gate was checked against a primary source (`VERIFICATION_LOG.md`). No outcome
+existed when it was sealed.
 
 ## Question
 
@@ -82,7 +84,7 @@ site-percolation threshold, every run must die.
 - `minimal_law.json`: `L0`, the analytic `L1`, and the ablation ladder.
 - `protocol.json`: stages, gates, outcome boundary, registered paths, deferred
   stage R.
-- `reference_classes.json`: exponents, thresholds, and pending verifications.
+- `reference_classes.json`: exponents, thresholds, and their checked citations.
 - `calibration.json`: Stage C models and gates.
 - `structural_audit.json`: Stage A questions, design answers, required checks,
   and the prediction record.
@@ -96,9 +98,11 @@ site-percolation threshold, every run must die.
 
 The contract is `docs/ICP_DIRECTED_PERCOLATION_PERSISTENCE_CONTRACT.md`.
 
-## Before the freeze
+## Freeze
 
-1. Verify every `pending` literature value against its primary source.
+Each step below was completed before the freeze commit.
+
+1. Verify every literature value against its primary source.
 2. Implement `L0` as a new module (`src/iota_rig.py` is untouched), along with
    the calibration models, the estimator and classifier, and an independent
    replay.
