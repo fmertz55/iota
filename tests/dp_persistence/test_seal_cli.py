@@ -21,6 +21,7 @@ from src.dp_persistence.protocol import (
     SOURCE_DIR_REF,
     SPEC_DIR_REF,
     STRUCTURAL_AUDIT_ANSWERS_REF,
+    SUPERSEDED_SEAL_REF,
     TEST_DIR_REF,
 )
 from src.dp_persistence.seal import SealError, build_outcome_seal, verify_outcome_seal, write_outcome_seal
@@ -71,26 +72,48 @@ class ParserTests(unittest.TestCase):
             parser.parse_args(["structural-audit"])
 
 
+def registered_snapshot() -> dict[str, bytes | None]:
+    """Bytes of every protected path in the real repository (None if absent)."""
+
+    paths = ALL_PROTECTED_PATHS + (SUPERSEDED_SEAL_REF,)
+    return {
+        relative: (ROOT / relative).read_bytes() if (ROOT / relative).is_file() else None
+        for relative in paths
+    }
+
+
 class RegisteredPathTests(unittest.TestCase):
-    def test_no_registered_artifact_exists_in_the_repository(self) -> None:
-        for relative in ALL_PROTECTED_PATHS:
-            self.assertFalse((ROOT / relative).exists(), relative)
+    """Registered artifacts appear over the protocol's life; tests never write one."""
+
+    def test_existing_registered_artifacts_are_tracked(self) -> None:
+        for relative, data in registered_snapshot().items():
+            if data is None:
+                continue
+            tracked = subprocess.run(
+                ["git", "ls-files", "--error-unmatch", relative], cwd=ROOT, capture_output=True
+            )
+            self.assertEqual(tracked.returncode, 0, f"untracked registered artifact {relative}")
 
     def test_structural_audit_refuses_registered_paths(self) -> None:
+        before = registered_snapshot()
         for relative in (STRUCTURAL_AUDIT_ANSWERS_REF, OUTCOME_SEAL_REF, "experiments/dp_persistence/x.json"):
+            existed = (ROOT / relative).exists()
             with self.assertRaises(CommandError):
                 cli.command_structural_audit(argparse.Namespace(output=str(ROOT / relative)))
-            self.assertFalse((ROOT / relative).exists())
+            self.assertEqual((ROOT / relative).exists(), existed)
+        self.assertEqual(registered_snapshot(), before)
 
     def test_structural_audit_writes_only_its_temporary_output(self) -> None:
+        before = registered_snapshot()
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "answers.json"
             self.assertEqual(cli.command_structural_audit(argparse.Namespace(output=str(output))), 0)
             self.assertTrue(output.is_file())
-        self.assertFalse((ROOT / STRUCTURAL_AUDIT_ANSWERS_REF).exists())
+        self.assertEqual(registered_snapshot(), before)
 
     def test_audit_passes(self) -> None:
-        self.assertEqual(cli.audit_outcome_free_design(), [])
+        for note in cli.audit_outcome_free_design():
+            self.assertTrue(note.startswith("registered artifact present: "), note)
 
 
 class GatedRepositoryTests(unittest.TestCase):

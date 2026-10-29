@@ -379,7 +379,7 @@ def replay_bracket(evaluate, grid, steps: int, kind: str) -> dict[str, Any]:
         elif side == "supercritical":
             hi, hi_eval = c, ev
         elif side == "critical_compatible":
-            if abs(hi_eval["slope_s"] or 0.0) > abs(lo_eval["slope_s"] or 0.0):
+            if abs(hi_eval["slope_s"] or 0.0) < abs(lo_eval["slope_s"] or 0.0):
                 lo, lo_eval = c, ev
             else:
                 hi, hi_eval = c, ev

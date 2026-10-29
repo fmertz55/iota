@@ -43,7 +43,7 @@ validate-quantum-dirac-symmetry-qca-archive:
 
 validate-dp-persistence:
 	$(PYTHON) -m src.dp_persistence.cli audit
-	if [ -f experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json ]; then \
+	if [ -f experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal_v0.1.1.json ]; then \
 		$(PYTHON) -m src.dp_persistence.cli verify-seal; \
 	fi
 	$(PYTHON) -m unittest discover -s tests/dp_persistence -p 'test_*.py'

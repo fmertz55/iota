@@ -1,11 +1,21 @@
 # ICP Directed-Percolation Persistence `0.1-draft`
 
 This directory is the frozen, outcome-free specification for search ID
-`ICP-DP-PERSISTENCE-001`. The freeze commit adds the disabled content-hash seal
-`experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json` and is
-tagged `icp-dp-persistence-001-v0.1-frozen`. Every literature value entering a
-gate was checked against a primary source (`VERIFICATION_LOG.md`). No outcome
-existed when it was sealed.
+`ICP-DP-PERSISTENCE-001`, freeze revision `0.1.1`. The freeze commit adds the
+disabled content-hash seal
+`experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal_v0.1.1.json` and
+is tagged `icp-dp-persistence-001-v0.1.1-frozen`. Every literature value entering
+a gate was checked against a primary source (`VERIFICATION_LOG.md`). No outcome
+existed when it was sealed. The resource projection is in
+`COMPUTE_ESTIMATE.md`.
+
+Revision `0.1.1` supersedes the `v0.1` freeze (seal `outcome_seal.json`, tag
+`icp-dp-persistence-001-v0.1-frozen`), which was never opened. It changes one
+rule: a critical-compatible bisection midpoint now replaces the endpoint with the
+larger |s|, so bisection moves toward the threshold rather than away from it
+(`SPEC_QUESTIONS.md` Q-EST-8). It also fixes three sealed tests that assumed no
+registered artifact could exist after a freeze. The full record is in
+`protocol.json` → `superseded_freeze`.
 
 ## Question
 
@@ -111,7 +121,7 @@ Each step below was completed before the freeze commit.
    the budget cannot bind) and the classifier tests on exact synthetic power
    laws.
 4. Write a disabled content-hash seal, commit, and tag
-   `icp-dp-persistence-001-v0.1-frozen`.
+   `icp-dp-persistence-001-v0.1.1-frozen` (revision 0.1.1; see above).
 
 ## Not claimed
 
@@ -140,7 +150,7 @@ The pre-freeze code is in `src/dp_persistence/`, and its tests are in
 Each `open-*` and `run-*` command refuses unless all of these hold:
 
 - the committed seal verifies;
-- the annotated tag `icp-dp-persistence-001-v0.1-frozen` selects the
+- the annotated tag `icp-dp-persistence-001-v0.1.1-frozen` selects the
   seal-introduction commit and is an ancestor of HEAD;
 - the worktree is clean;
 - for `run-*`, HEAD adds only the stage's committed open manifest.

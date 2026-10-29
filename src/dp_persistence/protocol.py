@@ -15,7 +15,16 @@ from typing import Any
 
 SEARCH_ID = "ICP-DP-PERSISTENCE-001"
 PROTOCOL_VERSION = "0.1-draft"
-FREEZE_TAG = "icp-dp-persistence-001-v0.1-frozen"
+FREEZE_TAG = "icp-dp-persistence-001-v0.1.1-frozen"
+# Revision 0.1.1 supersedes the v0.1 freeze before any stage was opened.  The
+# spec directory and result schema keep protocol_version "0.1-draft".
+FREEZE_REVISION = "0.1.1"
+SUPERSEDED_FREEZE_TAG = "icp-dp-persistence-001-v0.1-frozen"
+SUPERSESSION_REASON = (
+    "before any stage was opened: the critical-midpoint bisection rule moved the "
+    "bracket away from the threshold (SPEC_QUESTIONS.md Q-EST-8), and three sealed "
+    "tests assumed no registered artifact could exist after the freeze"
+)
 DATA_CLASS = "development with single-use confirmation"
 LAW_ID = "IOTA-MIN-L0"
 
@@ -28,7 +37,8 @@ RESULT_SCHEMA_REF = f"{SPEC_DIR_REF}/result.schema.json"
 EXPERIMENT_DIR_REF = "experiments/dp_persistence/ICP-DP-PERSISTENCE-001"
 OUTPUT_DIR_REF = "output/dp_persistence/ICP-DP-PERSISTENCE-001"
 
-OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal.json"
+OUTCOME_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal_v0.1.1.json"
+SUPERSEDED_SEAL_REF = f"{EXPERIMENT_DIR_REF}/outcome_seal.json"
 CALIBRATION_RESULT_REF = f"{OUTPUT_DIR_REF}/calibration_results.json"
 STRUCTURAL_AUDIT_ANSWERS_REF = f"{EXPERIMENT_DIR_REF}/structural_audit_answers.json"
 DEVELOPMENT_OPEN_MANIFEST_REF = f"{EXPERIMENT_DIR_REF}/development_open_manifest.json"

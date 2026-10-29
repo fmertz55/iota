@@ -25,6 +25,7 @@ from .protocol import (
     CONFIRMATION_RESULT_REF,
     DEVELOPMENT_OPEN_MANIFEST_REF,
     DEVELOPMENT_RESULT_REF,
+    FREEZE_REVISION,
     FREEZE_TAG,
     OUTCOME_SEAL_REF,
     PROTOCOL_VERSION,
@@ -34,6 +35,8 @@ from .protocol import (
     SEARCH_ID,
     SPEC_FILES,
     STRUCTURAL_AUDIT_ANSWERS_REF,
+    SUPERSEDED_FREEZE_TAG,
+    SUPERSEDED_SEAL_REF,
     load_spec_file,
     repository_root,
 )
@@ -312,6 +315,12 @@ def audit_outcome_free_design(root: Path | None = None) -> list[str]:
     protocol = specs["protocol.json"]
     require(protocol["registered_paths"] == REGISTERED_PATHS, "registered paths differ from protocol.json")
     require(protocol["required_freeze_tag"] == FREEZE_TAG, "freeze tag differs from protocol.json")
+    require(protocol.get("freeze_revision") == FREEZE_REVISION, "freeze revision differs from protocol.json")
+    superseded = protocol.get("superseded_freeze", {})
+    require(
+        superseded.get("freeze_tag") == SUPERSEDED_FREEZE_TAG and superseded.get("seal") == SUPERSEDED_SEAL_REF,
+        "superseded freeze record differs from protocol.json",
+    )
 
     law = specs["minimal_law.json"]["laws"]["L0"]
     require(law["constants"] == {"v": l0_engine.V, "a0": l0_engine.A0}, "L0 constants")

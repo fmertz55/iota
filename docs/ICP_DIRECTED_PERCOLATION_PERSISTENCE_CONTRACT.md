@@ -4,9 +4,13 @@ Version: `0.1-draft`
 
 Search ID: `ICP-DP-PERSISTENCE-001`
 
-Date: `2026-10-27` (drafted); frozen `2026-10-29`
+Date: `2026-10-27` (drafted); frozen `2026-10-29` (revision `0.1.1`)
 
 Status: **outcome-free design; frozen; outcomes sealed**
+
+Freeze: seal `experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal_v0.1.1.json`,
+tag `icp-dp-persistence-001-v0.1.1-frozen`. It supersedes the unopened `v0.1`
+freeze to correct the critical-midpoint bisection direction.
 
 Data class: **development with single-use confirmation**
 
@@ -128,7 +132,7 @@ the following are committed together:
   models, and the estimator and classifier;
 - independent replays of the engine, estimator, and classifier;
 - the engine and classifier tests; and
-- a disabled content-hash seal, tagged `icp-dp-persistence-001-v0.1-frozen`.
+- a disabled content-hash seal, tagged `icp-dp-persistence-001-v0.1.1-frozen`.
 
 A failing calibration ends this version.
 

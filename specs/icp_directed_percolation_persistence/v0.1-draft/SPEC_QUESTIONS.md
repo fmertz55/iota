@@ -1,8 +1,9 @@
 # Spec questions found during implementation
 
-Status: **frozen.** Q-EST-7 was resolved before the freeze by changing the
-bracketing rule in `estimators.json`. Every other entry is frozen as the reading
-implemented in `src/dp_persistence/` and described below. Entries marked
+Status: **frozen (revision 0.1.1).** Q-EST-7 was resolved before the v0.1 freeze
+by changing the bracketing rule in `estimators.json`. Q-EST-8 was resolved by
+revision 0.1.1, which supersedes the unopened v0.1 freeze. Every other entry is
+frozen as the reading implemented in `src/dp_persistence/` and described below. Entries marked
 **consequential** could change a registered outcome.
 
 ## Contradictions
@@ -23,10 +24,10 @@ implemented in `src/dp_persistence/` and described below. Entries marked
 - **Original issue:** the draft required an *adjacent* (subcritical, supercritical) pair. A critical-compatible coarse point right at the threshold would have left no bracket, failing a calibration gate and ending the version.
 - **Resolution before the freeze:** a bracket is a subcritical point followed by a supercritical point with only critical-compatible points between them. Those points are retained as final-point candidates. Any other classification between them still breaks the pair. Implemented in `estimators.adjacent_brackets` and the replay, and tested.
 
-### Q-EST-8. "Bisection continues toward the side whose endpoint has the larger |s|" (consequential)
+### Q-EST-8. Direction of bisection after a critical midpoint (resolved in revision 0.1.1)
 - **File:** `estimators.json` → `bracketing.bisection`.
-- **Reading:** the endpoint with the larger |s| is kept, and the critical-compatible midpoint replaces the other endpoint. This moves the bracket away from the endpoint nearer criticality, which may not be what was meant.
-- **Alternative:** keep the endpoint with the smaller |s|.
+- **Original issue:** the v0.1 text said "continues toward the side whose endpoint has the larger |s|". The endpoint with the smaller |s| is nearer the threshold, so whenever a midpoint was critical-compatible, that rule moved the bracket away from the threshold. H1's tolerance is ±0.005, so this could matter.
+- **Resolution (0.1.1):** bisection continues toward the endpoint with the smaller |s|. The critical midpoint replaces the endpoint with the larger |s|, and on a tie it replaces the upper endpoint. This is implemented in `estimators.bracket_search` and the replay. A test checks that the final bracket contains the threshold for several thresholds.
 
 ### Q-EST-8b. A bisection midpoint that neither brackets nor is critical
 - **File:** `estimators.json` → `bracketing`. The spec does not say what happens when a midpoint is `window_too_short` or `resource_censored`.

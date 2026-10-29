@@ -457,7 +457,8 @@ def bracket_search(
         elif kind == "supercritical":
             hi = point
         elif kind == "critical_compatible":
-            if abs(hi.evaluation.slope_s or 0.0) > abs(lo.evaluation.slope_s or 0.0):
+            # Keep the endpoint with the smaller |s|, which is nearer the threshold.
+            if abs(hi.evaluation.slope_s or 0.0) < abs(lo.evaluation.slope_s or 0.0):
                 lo = point
             else:
                 hi = point

@@ -275,14 +275,27 @@ class BracketingTests(unittest.TestCase):
         search = est.bracket_search(self.fake(classes), [0.28, 0.32], 3, "arithmetic")
         roles = [(p.role, round(p.control, 4), p.evaluation.criticality) for p in search.points]
         self.assertEqual(roles[2], ("bisection", 0.3, "critical_compatible"))
-        # |s| at 0.28 (2.0) > |s| at 0.32 (1.0): bisection continues toward 0.28,
-        # so the critical midpoints replace the upper end.
-        self.assertAlmostEqual(search.points[3].control, 0.29)
+        # |s| at 0.32 (1.0) < |s| at 0.28 (2.0): the upper end is nearer the
+        # threshold, so the critical midpoint replaces the lower end.
+        self.assertAlmostEqual(search.points[3].control, 0.31)
+        # Then 0.30 (|s| ~ 0) is the nearer end, and the midpoints replace the upper end.
+        self.assertAlmostEqual(search.points[4].control, 0.305)
         lo, hi = search.final_bracket
-        self.assertAlmostEqual(lo.control, 0.285)  # third midpoint is subcritical
-        self.assertAlmostEqual(hi.control, 0.29)
+        self.assertAlmostEqual(lo.control, 0.30)
+        self.assertAlmostEqual(hi.control, 0.305)
         # The critical point with the smallest |s| inside the final bracket.
-        self.assertAlmostEqual(search.final_control, 0.29)
+        self.assertAlmostEqual(search.final_control, 0.30)
+
+    def test_critical_midpoint_bracket_keeps_the_threshold(self) -> None:
+        for threshold in (0.302, 0.309, 0.311, 0.318):
+            def classes(c, pc=threshold):
+                s = 5.0 * (pc - c)
+                return ("critical_compatible", s) if abs(s) < 0.06 else (("subcritical", s) if s > 0 else ("supercritical", s))
+
+            search = est.bracket_search(self.fake(classes), [0.29, 0.33], 6, "arithmetic")
+            lo, hi = search.final_bracket
+            self.assertLessEqual(lo.control, threshold)
+            self.assertGreaterEqual(hi.control, threshold)
 
     def test_critical_coarse_points_lie_inside_the_bracket(self) -> None:
         def classes(c):

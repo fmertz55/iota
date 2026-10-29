@@ -56,7 +56,7 @@
     "a content-hash outcome seal with every run command disabled"
   ],
   "registered_paths": {
-    "seal": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json",
+    "seal": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal_v0.1.1.json",
     "calibration_result": "output/dp_persistence/ICP-DP-PERSISTENCE-001/calibration_results.json",
     "structural_audit_answers": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/structural_audit_answers.json",
     "development_open_manifest": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/development_open_manifest.json",
@@ -64,7 +64,19 @@
     "confirmation_open_manifest": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/confirmation_open_manifest.json",
     "confirmation_result": "output/dp_persistence/ICP-DP-PERSISTENCE-001/confirmation_results.json"
   },
-  "required_freeze_tag": "icp-dp-persistence-001-v0.1-frozen",
+  "required_freeze_tag": "icp-dp-persistence-001-v0.1.1-frozen",
+  "freeze_revision": "0.1.1",
+  "superseded_freeze": {
+    "freeze_tag": "icp-dp-persistence-001-v0.1-frozen",
+    "seal": "experiments/dp_persistence/ICP-DP-PERSISTENCE-001/outcome_seal.json",
+    "superseded_before_any_opening": true,
+    "changes": [
+      "estimators.json bracketing.bisection: a critical_compatible midpoint now replaces the endpoint with the larger |s|, so bisection continues toward the endpoint nearer the threshold (SPEC_QUESTIONS.md Q-EST-8); the v0.1 text moved the bracket away from the threshold",
+      "the estimator, its independent replay, and their tests implement that rule",
+      "three seal and CLI tests that assumed no registered artifact exists now check that existing registered artifacts are tracked and that tests leave them unchanged",
+      "COMPUTE_ESTIMATE.md records the outcome-free resource projection"
+    ]
+  },
   "opening_rule": "linear history as in prior ICP protocols: the seal-introduction commit is tagged with the annotated freeze tag; each open manifest is added alone in a direct child; each result is written atomically exactly once and committed alone in the direct child of its opening",
   "deferred_stage": {
     "id": "R",

@@ -15,6 +15,7 @@ from .protocol import (
     ALL_PROTECTED_PATHS,
     CONTRACT_REF,
     DATA_CLASS,
+    FREEZE_REVISION,
     FREEZE_TAG,
     OUTCOME_SEAL_REF,
     PROTOCOL_VERSION,
@@ -23,6 +24,9 @@ from .protocol import (
     SEARCH_ID,
     SOURCE_DIR_REF,
     SPEC_DIR_REF,
+    SUPERSEDED_FREEZE_TAG,
+    SUPERSEDED_SEAL_REF,
+    SUPERSESSION_REASON,
     TEST_DIR_REF,
     repository_root,
 )
@@ -35,8 +39,16 @@ OPENING_CONDITION = (
     "direct child of its opening"
 )
 
+SUPERSEDES = {
+    "freeze_tag": SUPERSEDED_FREEZE_TAG,
+    "seal_path": SUPERSEDED_SEAL_REF,
+    "reason": SUPERSESSION_REASON,
+}
+
 SEAL_KEYS = {
     "protocol_version",
+    "freeze_revision",
+    "supersedes",
     "search_id",
     "status",
     "data_class",
@@ -133,6 +145,8 @@ def build_outcome_seal(root: Path) -> dict[str, Any]:
             raise SealError(f"cannot build seal while registered artifact exists: {forbidden}")
     return {
         "protocol_version": PROTOCOL_VERSION,
+        "freeze_revision": FREEZE_REVISION,
+        "supersedes": dict(SUPERSEDES),
         "search_id": SEARCH_ID,
         "status": "outcomes_sealed",
         "data_class": DATA_CLASS,
@@ -165,6 +179,8 @@ def verify_outcome_seal(path: Path, *, root: Path | None = None) -> dict[str, An
         raise SealError("outcome seal has missing or unexpected fields")
     fixed = {
         "protocol_version": PROTOCOL_VERSION,
+        "freeze_revision": FREEZE_REVISION,
+        "supersedes": dict(SUPERSEDES),
         "search_id": SEARCH_ID,
         "status": "outcomes_sealed",
         "data_class": DATA_CLASS,
