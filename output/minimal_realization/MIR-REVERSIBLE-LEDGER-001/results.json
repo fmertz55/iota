@@ -1,0 +1,281 @@
+{
+ "summary": {
+  "rules": 25,
+  "clean_rules": 13,
+  "residue_rules": 12,
+  "annihilated": 0,
+  "H_I1_complete_carriers": "supported",
+  "H_I2_residue_holds_information": "falsified",
+  "clean_f_internal": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.167,
+   0.0,
+   0.0,
+   0.167,
+   0.0,
+   0.167,
+   0.0
+  ],
+  "clean_f_species": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.167,
+   0.0,
+   0.0,
+   0.167,
+   0.0,
+   0.167,
+   0.0
+  ],
+  "residue_f_objects": [
+   0.0,
+   0.481,
+   0.833,
+   1.0,
+   0.583,
+   0.302,
+   0.847,
+   0.583,
+   0.667,
+   0.889,
+   0.302,
+   0.773
+  ]
+ },
+ "rules": [
+  {
+   "wolfram": 1,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 5,
+   "active_vacuum": true,
+   "any_residue": 64,
+   "annihilated": 0,
+   "f_objects": 0.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 29,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 33,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 37,
+   "active_vacuum": true,
+   "any_residue": 38,
+   "annihilated": 0,
+   "f_objects": 0.48067383981547857,
+   "f_internal": 0.21023554202175262,
+   "f_species": 0.16241490056634214
+  },
+  {
+   "wolfram": 71,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 91,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 95,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 123,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.16666666666666666,
+   "f_species": 0.16666666666666666
+  },
+  {
+   "wolfram": 127,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 139,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.8333333333333334,
+   "f_internal": 0.25,
+   "f_species": 0.25
+  },
+  {
+   "wolfram": 143,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.460197363241812,
+   "f_species": 0.460197363241812
+  },
+  {
+   "wolfram": 147,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.5833333333333334,
+   "f_internal": 0.16666666666666666,
+   "f_species": 0.16666666666666666
+  },
+  {
+   "wolfram": 151,
+   "active_vacuum": true,
+   "any_residue": 48,
+   "annihilated": 0,
+   "f_objects": 0.30187968740985544,
+   "f_internal": 0.13521302074318875,
+   "f_species": 0.13521302074318875
+  },
+  {
+   "wolfram": 171,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.8473870861090423,
+   "f_internal": 0.31944683623091574,
+   "f_species": 0.31944683623091574
+  },
+  {
+   "wolfram": 175,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 183,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.16666666666666666,
+   "f_species": 0.16666666666666666
+  },
+  {
+   "wolfram": 201,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.5833333333333334,
+   "f_internal": 0.16666666666666666,
+   "f_species": 0.16666666666666666
+  },
+  {
+   "wolfram": 205,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  },
+  {
+   "wolfram": 209,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.6666666666666666,
+   "f_internal": 0.25,
+   "f_species": 0.25
+  },
+  {
+   "wolfram": 213,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.8892465494453625,
+   "f_internal": 0.460197363241812,
+   "f_species": 0.460197363241812
+  },
+  {
+   "wolfram": 233,
+   "active_vacuum": true,
+   "any_residue": 48,
+   "annihilated": 0,
+   "f_objects": 0.30187968740985544,
+   "f_internal": 0.13521302074318875,
+   "f_species": 0.13521302074318875
+  },
+  {
+   "wolfram": 237,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.16666666666666666,
+   "f_species": 0.16666666666666666
+  },
+  {
+   "wolfram": 241,
+   "active_vacuum": true,
+   "any_residue": 32,
+   "annihilated": 0,
+   "f_objects": 0.773091968887738,
+   "f_internal": 0.31944683623091574,
+   "f_species": 0.31944683623091574
+  },
+  {
+   "wolfram": 245,
+   "active_vacuum": true,
+   "any_residue": 0,
+   "annihilated": 0,
+   "f_objects": 1.0,
+   "f_internal": 0.0,
+   "f_species": 0.0
+  }
+ ]
+}
