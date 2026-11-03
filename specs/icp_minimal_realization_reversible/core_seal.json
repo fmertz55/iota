@@ -1,0 +1,6 @@
+{
+ "docs/ICP_MIR_REVERSIBLE_CORE_CONTRACT.md": "2c53ce79ddf418818140dd7a1efc8e52199ef1c5c5b2256fdcc9b545dcb14980",
+ "src/minimal_realization_reversible/core.py": "c5f0f4b972140519319d9c3e7be2309404a8f1b98239efe33ae7c0a2e152e8e5",
+ "src/minimal_realization_reversible/engine.py": "b520dfb43124265332c11a8799ec48b548ba01b18a7eb6cf2e0d0bec4f3be2f7",
+ "src/minimal_realization_reversible/run_core.py": "c6d167726fc82b94e44253b223d2d1e5c78ae7170925ccc525b6048e81d17632"
+}
