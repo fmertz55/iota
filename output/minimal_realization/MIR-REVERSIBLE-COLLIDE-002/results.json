@@ -1,0 +1,3403 @@
+{
+ "summary": {
+  "rules": 25,
+  "collisions": 200,
+  "met": 200,
+  "outcomes": {
+   "annihilated": 0,
+   "superposition": 26,
+   "elastic": 101,
+   "transmuted": 20,
+   "bubble": 25,
+   "unresolved": 28
+  },
+  "bounded_count_conserved": 121,
+  "bounded_momentum_conserved": 121,
+  "fusion_2to1": 0,
+  "new_species": 20,
+  "bubbles_silent_vacuum": 0,
+  "bubbles_light_walls": 0,
+  "H_B1_bubbles_need_active_vacuum": "supported",
+  "H_B2_light_speed_walls": "falsified",
+  "H_M_momentum": "121/121"
+ },
+ "rows": [
+  {
+   "wolfram": 1,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 1,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 5,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 29,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 33,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 33,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 248,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.35,
+    5.825
+   ]
+  },
+  {
+   "wolfram": 33,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 33,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 246,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.35,
+    5.775
+   ]
+  },
+  {
+   "wolfram": 33,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 33,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 244,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.35,
+    5.725
+   ]
+  },
+  {
+   "wolfram": 33,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 33,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 242,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.35,
+    5.675
+   ]
+  },
+  {
+   "wolfram": 37,
+   "offset": 24,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 78,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.05,
+    1.85
+   ]
+  },
+  {
+   "wolfram": 37,
+   "offset": 25,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 120,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.35,
+    0.075
+   ]
+  },
+  {
+   "wolfram": 37,
+   "offset": 26,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 37,
+   "offset": 27,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 203,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.275,
+    4.775
+   ]
+  },
+  {
+   "wolfram": 37,
+   "offset": 28,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 37,
+   "offset": 29,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 51,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.125,
+    0.125
+   ]
+  },
+  {
+   "wolfram": 37,
+   "offset": 30,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 37,
+   "offset": 31,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 116,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.35,
+    0.05
+   ]
+  },
+  {
+   "wolfram": 71,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 71,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 91,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 95,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "new"
+    },
+    {
+     "v": "1/3",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "new"
+    },
+    {
+     "v": "1/3",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "new"
+    },
+    {
+     "v": "1/3",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "new"
+    },
+    {
+     "v": "1/3",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 123,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 24,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 25,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 26,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 27,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 28,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 29,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 30,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 127,
+   "offset": 31,
+   "vR": "1/3",
+   "vL": "-1/3",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/3",
+     "species": "L"
+    },
+    {
+     "v": "1/3",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 139,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 139,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 370,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 139,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 139,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 368,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 139,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 139,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 366,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 139,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 139,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 364,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 143,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 143,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 147,
+   "offset": 24,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 185,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    2.375
+   ]
+  },
+  {
+   "wolfram": 147,
+   "offset": 25,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 147,
+   "offset": 26,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 89,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    0.0
+   ]
+  },
+  {
+   "wolfram": 147,
+   "offset": 27,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 147,
+   "offset": 28,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 88,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    -2.075
+   ]
+  },
+  {
+   "wolfram": 147,
+   "offset": 29,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 147,
+   "offset": 30,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 179,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    2.3
+   ]
+  },
+  {
+   "wolfram": 147,
+   "offset": 31,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 151,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 171,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 175,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 183,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 201,
+   "offset": 24,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 201,
+   "offset": 25,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 89,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    0.025
+   ]
+  },
+  {
+   "wolfram": 201,
+   "offset": 26,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 201,
+   "offset": 27,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 87,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    0.0
+   ]
+  },
+  {
+   "wolfram": 201,
+   "offset": 28,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 201,
+   "offset": 29,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 86,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    -0.025
+   ]
+  },
+  {
+   "wolfram": 201,
+   "offset": 30,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "new"
+    },
+    {
+     "v": "1/4",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 201,
+   "offset": 31,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 86,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.25,
+    0.025
+   ]
+  },
+  {
+   "wolfram": 205,
+   "offset": 24,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 25,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 26,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 27,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 28,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 29,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 30,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 205,
+   "offset": 31,
+   "vR": "1/4",
+   "vL": "-1/4",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/4",
+     "species": "L"
+    },
+    {
+     "v": "1/4",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 209,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 209,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 370,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 209,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 209,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 368,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 209,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 209,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 366,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 209,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 209,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "bubble",
+   "bubble_width": 364,
+   "active_vacuum": true,
+   "wall_speeds": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "wolfram": 213,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 213,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 233,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "transmuted",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "new"
+    },
+    {
+     "v": "1/2",
+     "species": "new"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 237,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "unresolved",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 241,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 24,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 25,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 26,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 27,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 28,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 29,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 30,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "superposition",
+   "active_vacuum": true
+  },
+  {
+   "wolfram": 245,
+   "offset": 31,
+   "vR": "1/2",
+   "vL": "-1/2",
+   "contact": true,
+   "outcome": "elastic",
+   "outs": [
+    {
+     "v": "-1/2",
+     "species": "L"
+    },
+    {
+     "v": "1/2",
+     "species": "R"
+    }
+   ],
+   "count_conserved": true,
+   "momentum_conserved": true,
+   "active_vacuum": true
+  }
+ ]
+}
