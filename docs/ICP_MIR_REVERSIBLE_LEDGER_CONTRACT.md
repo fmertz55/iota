@@ -27,3 +27,6 @@ Recoverable fraction f(X) = I(input; X) / H(I) for:
 - Theorem: no run ends in pure vacuum.
 Baseline literature: computational mechanics treats CA particles as information-bearing defects
 (Crutchfield & Hanson 1993); this ledger asks the ICP carrier/shadow question of them.
+
+## Amendment v0.1.1
+The v0.1 run crashed on numpy-int64 JSON serialization before printing or writing anything; no outcome was seen. The fix is limited to serialization. Tag `mir-reversible-ledger-001-v0.1.1-frozen`.

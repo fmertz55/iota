@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
 from minimal_realization_reversible.vacuum_collide import table, step, SEEDS, clusters
 from minimal_realization_reversible import collide2 as C2
-TAG = 'mir-reversible-ledger-001-v0.1-frozen'
+TAG = 'mir-reversible-ledger-001-v0.1.1-frozen'
 SEALED = ['docs/ICP_MIR_REVERSIBLE_LEDGER_CONTRACT.md', 'src/minimal_realization_reversible/ledger.py',
           'src/minimal_realization_reversible/collide2.py', 'src/minimal_realization_reversible/vacuum_collide.py']
 SEAL = ROOT / 'specs/icp_minimal_realization_reversible/ledger_seal.json'
@@ -68,8 +68,8 @@ def main():
              residue_f_objects=[round(x['f_objects'], 3) for x in dirty])
     dst = ROOT / 'output/minimal_realization/MIR-REVERSIBLE-LEDGER-001/results.json'
     dst.parent.mkdir(parents=True, exist_ok=True)
-    dst.write_text(json.dumps(dict(summary=S, rules=out), indent=1) + '\n')
-    print(json.dumps(S))
+    dst.write_text(json.dumps(dict(summary=S, rules=out), indent=1, default=lambda o: o.item()) + '\n')
+    print(json.dumps(S, default=lambda o: o.item()))
 
 if __name__ == '__main__':
     main()
