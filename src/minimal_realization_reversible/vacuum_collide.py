@@ -4,7 +4,7 @@ import hashlib, json, subprocess, sys
 from pathlib import Path
 import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
-TAG = 'mir-reversible-vacuum-collide-001-v0.1-frozen'
+TAG = 'mir-reversible-vacuum-collide-001-v0.1.1-frozen'
 SEALED = ['docs/ICP_MIR_REVERSIBLE_VACUUM_COLLIDE_CONTRACT.md', 'src/minimal_realization_reversible/vacuum_collide.py']
 SEAL = ROOT / 'specs/icp_minimal_realization_reversible/vacuum_collide_seal.json'
 dig = lambda: {p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in SEALED}
@@ -126,8 +126,8 @@ def main():
               still_products=sum(any(abs(v) < 0.07 for v in c['v_out']) for c in inter))
     dst = ROOT / 'output/minimal_realization/MIR-REVERSIBLE-VACUUM-COLLIDE-001/results.json'
     dst.parent.mkdir(parents=True, exist_ok=True)
-    dst.write_text(json.dumps(dict(V=V, C=Cs, rules=rules, collisions=cols), indent=1) + '\n')
-    print(json.dumps(dict(V=V, C=Cs)))
+    dst.write_text(json.dumps(dict(V=V, C=Cs, rules=rules, collisions=cols), indent=1, default=lambda o: o.item()) + '\n')
+    print(json.dumps(dict(V=V, C=Cs), default=lambda o: o.item()))
 
 if __name__ == '__main__':
     main()

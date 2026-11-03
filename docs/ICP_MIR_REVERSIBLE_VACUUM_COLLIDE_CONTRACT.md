@@ -27,3 +27,8 @@ Pre-stated prediction (theorem, not hypothesis): annihilated = 0, because a reve
 only the vacuum to the vacuum. Part C rates are descriptive (no pass threshold).
 Prior art: reversible CA gliders and collisions (Fredkin; Toffoli & Margolus); second-order rule
 families (Wolfram's "R" rules).
+
+## Amendment v0.1.1 (2026-11-03)
+The v0.1 run crashed while serializing numpy int64 to JSON, after computing but before printing or
+writing any outcome; no outcome was seen. Fix: JSON default converts numpy scalars. Nothing else changed.
+New tag `mir-reversible-vacuum-collide-001-v0.1.1-frozen`.
