@@ -24,3 +24,15 @@ the pattern P XOR N at t=1400 (shape and position). Measure I(offset; Y) in bits
   background is pure vacuum). Otherwise the test is invalid.
 - Verdict `shadow_constrains_future` if I > 0 in >= 1 residue rule; else `no_shadow_effect`.
 Reported: I per residue rule, valid run counts, and whether a shadow remained after erasure.
+
+## Amendment v0.2 (2026-11-03), after v0.1 outcome was seen
+v0.1 result (commit cbe5db2): INVALID. 12/13 clean controls gave I=0 exactly, but control rule 205
+gave I=5 bits with material left after erasure in all 64 runs. Cause (design flaw): erasure at
+contact+24 happens before the outgoing coherences have separated, so unresolved collision debris
+was kept as "shadow". The same flaw contaminates the residue-rule values (seen: 3.5-6 bits), which are
+therefore void. Exposure disclosed: v0.1 per-rule I values were seen before v0.2 was frozen.
+v0.2 changes (Part B only): erase at T=600, the ledger's own resolution time, so shadow = ledger
+residue by definition; the probe starts DP = ceil(vR*620)+64 behind R and must still be in exact free
+flight at T (validity); it must be > 3 sites from every carrier and residue at T; both universes run to
+TF = T + ceil(256/vR); N=8192. Control and verdict rules unchanged. Part A is unchanged.
+Tag `mir-reversible-shadow-001-v0.2-frozen`.

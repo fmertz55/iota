@@ -8,12 +8,12 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
 from minimal_realization_reversible.vacuum_collide import table, step, SEEDS
 from minimal_realization_reversible import collide2 as C2
-TAG = 'mir-reversible-shadow-001-v0.1-frozen'
+TAG = 'mir-reversible-shadow-001-v0.2-frozen'
 SEALED = ['docs/ICP_MIR_REVERSIBLE_SHADOW_CONTRACT.md', 'src/minimal_realization_reversible/shadow.py',
           'src/minimal_realization_reversible/collide2.py', 'src/minimal_realization_reversible/vacuum_collide.py']
 SEAL = ROOT / 'specs/icp_minimal_realization_reversible/shadow_seal.json'
 dig = lambda: {p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in SEALED}
-N, X0, OFFS, T, DP, TF = 2048, 900, range(24, 88), 600, 64, 1400
+N, X0, OFFS, T = 8192, 4096, range(24, 88), 600
 
 
 def ucl(p, c, V, t):
@@ -62,41 +62,37 @@ def ledger(w, R, L):
 
 
 def shadow(w, R, L):
-    """Probe = a second copy of R, trailing R by DP sites. After contact + 24 ticks, erase every
-    resolved carrier except the probe; keep residue. Y = final difference between the universes
-    with and without the probe (the probe's own footprint on the future)."""
-    tab = table(w); V = C2.vac_seq(tab, 4000); Ys, valid = [], 0
+    """v0.2. Probe = a copy of R placed far enough behind R that it is still in free flight at the
+    erasure time T=600 (DP = ceil(vR*620)+64). At T, in both universes, erase every resolved carrier
+    (except the probe in P); keep residue (the shadow). Run both to TF = T + ceil(256/vR).
+    Y = P XOR N at TF (shape and position). Valid if at T the probe region in P equals the free probe."""
+    tab = table(w); vR = R['v']; DP = math.ceil(vR * 620) + 64; TF = T + math.ceil(256 / vR)
+    V = C2.vac_seq(tab, TF + C2.PMAX + 4); Ys = []; shadow_n = 0
     for off in OFFS:
         U = {'P': place([(R['seed'], X0 - DP), (R['seed'], X0), (L['seed'], X0 + off)]),
              'N': place([(R['seed'], X0), (L['seed'], X0 + off)])}
-        fr = place([(R['seed'], X0)]); fl = place([(L['seed'], X0 + off)]); t = 0; tc = None
-        while tc is None and t < 2000:
-            r = np.flatnonzero(fr[1] ^ V[t + 1]); l = np.flatnonzero(fl[1] ^ V[t + 1])
-            if l.min() - r.max() <= 3: tc = t
-            U = {k: step(tab, *v) for k, v in U.items()}; fr = step(tab, *fr); fl = step(tab, *fl); t += 1
-        for _ in range(24): U = {k: step(tab, *v) for k, v in U.items()}; t += 1
-        oN, _ = objects(tab, *U['N'], V, t); oP, _ = objects(tab, *U['P'], V, t)
-        # probe = the leftmost object present in P but not in N
-        spansN = {tuple(x['span']) for x in oN}
-        cand = [x for x in oP if tuple(x['span']) not in spansN]
-        if not cand: Ys.append(None); continue
-        probe = min(cand, key=lambda x: x['span'][0])
-        ok = all(abs(probe['span'][0] - x['span'][1]) > 3 and abs(x['span'][0] - probe['span'][1]) > 3 for x in oN)
-        for k, objs in (('N', oN), ('P', oP)):
-            p, c = U[k]; p = p.copy(); c = c.copy()
-            for x in objs:
-                if k == 'P' and x is probe: continue
-                a, b = x['span']; p[a - 2:b + 3] = V[t]; c[a - 2:b + 3] = V[t + 1]
-            U[k] = (p, c)
-        resid_left = bool(((U['N'][0] ^ V[t]) | (U['N'][1] ^ V[t + 1])).any())
-        while t < TF: U = {k: step(tab, *v) for k, v in U.items()}; t += 1
+        F = place([(R['seed'], X0 - DP)])
+        for _ in range(T): U = {k: step(tab, *v) for k, v in U.items()}; F = step(tab, *F)
+        diffP = (U['P'][0] ^ U['N'][0]) | (U['P'][1] ^ U['N'][1])
+        freeP = (F[0] ^ V[T]) | (F[1] ^ V[T + 1])
+        oN, rN = objects(tab, *U['N'], V, T)
+        fp = np.flatnonzero(freeP); a, b = int(fp.min()), int(fp.max())
+        ok = np.array_equal(diffP, freeP) and all(x['span'][0] - b > 3 or a - x['span'][1] > 3 for x in oN) \
+            and all(r0 - b > 3 or a - r1 > 3 for r0, r1 in rN)
         if not ok: Ys.append(None); continue
-        valid += 1
-        Y = np.flatnonzero(U['P'][1] ^ U['N'][1]); Ys.append((tuple((Y - Y.min()).tolist()) if Y.size else (), int(Y.min()) if Y.size else 0, resid_left))
+        for k in ('N', 'P'):
+            p, c = U[k]; p = p.copy(); c = c.copy()
+            for x in oN:
+                x0, x1 = x['span']; p[x0 - 2:x1 + 3] = V[T]; c[x0 - 2:x1 + 3] = V[T + 1]
+            U[k] = (p, c)
+        shadow_n += bool(rN)
+        for _ in range(TF - T): U = {k: step(tab, *v) for k, v in U.items()}
+        Y = np.flatnonzero(U['P'][1] ^ U['N'][1])
+        Ys.append((tuple((Y - Y.min()).tolist()), int(Y.min())) if Y.size else ((), 0))
     vals = [y for y in Ys if y is not None]
     if len(vals) < 2: return dict(valid=len(vals), I_bits=None)
-    I = math.log2(len(vals)) - Hc([y[:2] for y in vals])
-    return dict(valid=len(vals), I_bits=I, H_max=math.log2(len(vals)), shadow_present=sum(y[2] for y in vals))
+    return dict(valid=len(vals), I_bits=math.log2(len(vals)) - Hc(vals), H_max=math.log2(len(vals)),
+                shadow_present=shadow_n, DP=DP, TF=TF)
 
 
 def main():
