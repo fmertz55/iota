@@ -1,6 +1,6 @@
 # Prior art for the reversible-CA shadow result
 
-The shadow result sits where four established literatures meet, and each one takes away part of what might otherwise look new. What remains is narrower but, as far as a systematic OpenAlex sweep (40 keyword queries, then one citation step backward and forward from ten anchor papers) can tell, unclaimed: an *interventional* test, in an *information-conserving* law, that erases every resolved carrier after an interaction and shows that the residual background alone determines what a later coherence can do. That background holds exactly the information the carriers did not take away, and a probe recovers all of it. The test comes with an exact null in rules that leave no residue.
+The shadow result sits where four established literatures meet, and each one takes away part of what might otherwise look new. What remains is narrower but, as far as a systematic OpenAlex sweep (30 keyword queries, then one citation step backward and forward from ten anchor papers) can tell, unclaimed: an *interventional* test, in an *information-conserving* law, that erases every resolved carrier after an interaction and shows that the residual background alone determines what a later coherence can do. That background holds exactly the information the carriers did not take away, and a probe recovers all of it. The test comes with an exact null in rules that leave no residue.
 
 ## What is already established
 
