@@ -1,0 +1,402 @@
+{
+ "summary": {
+  "rules": 25,
+  "clean": 13,
+  "residue": 12,
+  "control_clean_I_all_zero": false,
+  "shadow_rules_I_positive": 12,
+  "shadow_rules_tested": 12,
+  "shadow_I_bits": {
+   "33": 3.5,
+   "37": 5.481,
+   "139": 3.5,
+   "143": 3.5,
+   "147": 6.0,
+   "151": 5.0,
+   "171": 3.5,
+   "201": 6.0,
+   "209": 3.5,
+   "213": 3.5,
+   "233": 5.0,
+   "241": 3.5
+  },
+  "verdict": "invalid_control"
+ },
+ "rules": [
+  {
+   "wolfram": 1,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 5,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 29,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 33,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.5833333333333334,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 37,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 38,
+    "f_objects": 0.48067383981547857,
+    "f_internal": 0.21023554202175262
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 5.4809487351738495,
+    "H_max": 6.0,
+    "shadow_present": 54
+   }
+  },
+  {
+   "wolfram": 71,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 91,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 95,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 123,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 127,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 139,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.5833333333333334,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 143,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.6976656126448747,
+    "f_internal": 0.24778309310799074
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 147,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.5833333333333334,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 6.0,
+    "H_max": 6.0,
+    "shadow_present": 64
+   }
+  },
+  {
+   "wolfram": 151,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 48,
+    "f_objects": 0.30187968740985544,
+    "f_internal": 0.13521302074318875
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 5.0,
+    "H_max": 6.0,
+    "shadow_present": 48
+   }
+  },
+  {
+   "wolfram": 171,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.6693585412139796,
+    "f_internal": 0.24030935501042894
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 175,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 183,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 201,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.5833333333333334,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 6.0,
+    "H_max": 6.0,
+    "shadow_present": 64
+   }
+  },
+  {
+   "wolfram": 205,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 5.0,
+    "H_max": 6.0,
+    "shadow_present": 64
+   }
+  },
+  {
+   "wolfram": 209,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.5833333333333334,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 213,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.6852830931079907,
+    "f_internal": 0.24778309310799074
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 233,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 48,
+    "f_objects": 0.30187968740985544,
+    "f_internal": 0.13521302074318875
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 5.0,
+    "H_max": 6.0,
+    "shadow_present": 48
+   }
+  },
+  {
+   "wolfram": 237,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.16666666666666666
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  },
+  {
+   "wolfram": 241,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 32,
+    "f_objects": 0.6817410607508636,
+    "f_internal": 0.24030935501042894
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 3.5,
+    "H_max": 6.0,
+    "shadow_present": 32
+   }
+  },
+  {
+   "wolfram": 245,
+   "active_vacuum": true,
+   "ledger": {
+    "residue_runs": 0,
+    "f_objects": 1.0,
+    "f_internal": 0.0
+   },
+   "shadow": {
+    "valid": 64,
+    "I_bits": 0.0,
+    "H_max": 6.0,
+    "shadow_present": 0
+   }
+  }
+ ]
+}
