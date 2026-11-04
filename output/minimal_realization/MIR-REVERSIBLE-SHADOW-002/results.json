@@ -1,0 +1,338 @@
+{
+ "summary": {
+  "rules": 25,
+  "clean": 13,
+  "shadow_rules": 12,
+  "control_clean_all_zero": true,
+  "shadow_effect_rules": 12,
+  "capacity_positive_rules": 12,
+  "per_rule": {
+   "33": {
+    "only_shadow": 2.5,
+    "probe": 3.5,
+    "probe_beyond_objects": 2.5,
+    "ratio": 1.0
+   },
+   "37": {
+    "only_shadow": 3.116,
+    "probe": 4.09,
+    "probe_beyond_objects": 3.116,
+    "ratio": 1.0
+   },
+   "139": {
+    "only_shadow": 2.5,
+    "probe": 3.5,
+    "probe_beyond_objects": 2.5,
+    "ratio": 1.0
+   },
+   "143": {
+    "only_shadow": 1.814,
+    "probe": 3.5,
+    "probe_beyond_objects": 1.814,
+    "ratio": 1.0
+   },
+   "147": {
+    "only_shadow": 2.5,
+    "probe": 3.5,
+    "probe_beyond_objects": 2.5,
+    "ratio": 1.0
+   },
+   "151": {
+    "only_shadow": 4.189,
+    "probe": 5.0,
+    "probe_beyond_objects": 4.189,
+    "ratio": 1.0
+   },
+   "171": {
+    "only_shadow": 1.984,
+    "probe": 3.5,
+    "probe_beyond_objects": 1.984,
+    "ratio": 1.0
+   },
+   "201": {
+    "only_shadow": 2.5,
+    "probe": 3.5,
+    "probe_beyond_objects": 2.5,
+    "ratio": 1.0
+   },
+   "209": {
+    "only_shadow": 2.5,
+    "probe": 3.5,
+    "probe_beyond_objects": 2.5,
+    "ratio": 1.0
+   },
+   "213": {
+    "only_shadow": 1.888,
+    "probe": 3.5,
+    "probe_beyond_objects": 1.888,
+    "ratio": 1.0
+   },
+   "233": {
+    "only_shadow": 4.189,
+    "probe": 5.0,
+    "probe_beyond_objects": 4.189,
+    "ratio": 1.0
+   },
+   "241": {
+    "only_shadow": 1.91,
+    "probe": 3.5,
+    "probe_beyond_objects": 1.91,
+    "ratio": 1.0
+   }
+  },
+  "H_S_typical": "typical",
+  "H_C_capacity": "supported"
+ },
+ "rules": [
+  {
+   "shadow_runs": 0,
+   "launch_dist": 208,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 1
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 211,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 5
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 208,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 29
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 208,
+   "I_objects": 3.5,
+   "shadow_only_bits": 2.5,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 2.5,
+   "capacity_ratio": 1.0,
+   "wolfram": 33
+  },
+  {
+   "shadow_runs": 38,
+   "launch_dist": 204,
+   "I_objects": 2.8840430388928713,
+   "shadow_only_bits": 3.1159569611071287,
+   "I_probe": 4.090446364505182,
+   "I_probe_given_objects": 3.1159569611071287,
+   "capacity_ratio": 1.0,
+   "wolfram": 37
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 207,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 71
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 207,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 91
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 207,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 95
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 208,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 123
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 208,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 127
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 307,
+   "I_objects": 3.5,
+   "shadow_only_bits": 2.5,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 2.5,
+   "capacity_ratio": 1.0,
+   "wolfram": 139
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 307,
+   "I_objects": 4.185993675869248,
+   "shadow_only_bits": 1.8140063241307516,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 1.8140063241307516,
+   "capacity_ratio": 1.0,
+   "wolfram": 143
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 161,
+   "I_objects": 3.5,
+   "shadow_only_bits": 2.5,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 2.5,
+   "capacity_ratio": 1.0,
+   "wolfram": 147
+  },
+  {
+   "shadow_runs": 48,
+   "launch_dist": 311,
+   "I_objects": 1.811278124459133,
+   "shadow_only_bits": 4.1887218755408675,
+   "I_probe": 5.0,
+   "I_probe_given_objects": 4.1887218755408675,
+   "capacity_ratio": 1.0,
+   "wolfram": 151
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 308,
+   "I_objects": 4.016151247283877,
+   "shadow_only_bits": 1.9838487527161233,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 1.9838487527161233,
+   "capacity_ratio": 1.0,
+   "wolfram": 171
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 307,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 175
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 306,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 183
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 159,
+   "I_objects": 3.5,
+   "shadow_only_bits": 2.5,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 2.5,
+   "capacity_ratio": 1.0,
+   "wolfram": 201
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 160,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 205
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 309,
+   "I_objects": 3.5,
+   "shadow_only_bits": 2.5,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 2.5,
+   "capacity_ratio": 1.0,
+   "wolfram": 209
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 310,
+   "I_objects": 4.111698558647944,
+   "shadow_only_bits": 1.8883014413520556,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 1.8883014413520556,
+   "capacity_ratio": 1.0,
+   "wolfram": 213
+  },
+  {
+   "shadow_runs": 48,
+   "launch_dist": 309,
+   "I_objects": 1.811278124459133,
+   "shadow_only_bits": 4.1887218755408675,
+   "I_probe": 5.0,
+   "I_probe_given_objects": 4.1887218755408675,
+   "capacity_ratio": 1.0,
+   "wolfram": 233
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 308,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 237
+  },
+  {
+   "shadow_runs": 32,
+   "launch_dist": 309,
+   "I_objects": 4.090446364505182,
+   "shadow_only_bits": 1.9095536354948184,
+   "I_probe": 3.5,
+   "I_probe_given_objects": 1.9095536354948184,
+   "capacity_ratio": 1.0,
+   "wolfram": 241
+  },
+  {
+   "shadow_runs": 0,
+   "launch_dist": 308,
+   "I_objects": 6.0,
+   "shadow_only_bits": 0.0,
+   "I_probe": -0.0,
+   "I_probe_given_objects": 0.0,
+   "capacity_ratio": null,
+   "wolfram": 245
+  }
+ ]
+}
