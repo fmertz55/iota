@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: bibliography.bib
+Warning--string name "sept" is undefined
+--line 5 of file bibliography.bib
+Warning--string name "july" is undefined
+--line 7 of file bibliography.bib
+Warning--string name "july" is undefined
+--line 19 of file bibliography.bib
+Warning--string name "june" is undefined
+--line 25 of file bibliography.bib
+Warning--string name "july" is undefined
+--line 29 of file bibliography.bib
+Warning--string name "sept" is undefined
+--line 33 of file bibliography.bib
+Warning--string name "june" is undefined
+--line 39 of file bibliography.bib
+Warning--string name "june" is undefined
+--line 49 of file bibliography.bib
+Warning--string name "sept" is undefined
+--line 51 of file bibliography.bib
+Warning--string name "sept" is undefined
+--line 53 of file bibliography.bib
+Warning--empty journal in lee2022
+You've used 28 entries,
+            2481 wiz_defined-function locations,
+            808 strings with 10731 characters,
+and the built_in function-call counts, 11654 in all, are:
+= -- 1119
+> -- 484
+< -- 16
++ -- 192
+- -- 136
+* -- 968
+:= -- 1886
+add.period$ -- 161
+call.type$ -- 28
+change.case$ -- 52
+chr.to.int$ -- 28
+cite$ -- 29
+duplicate$ -- 563
+empty$ -- 1004
+format.name$ -- 184
+if$ -- 2508
+int.to.chr$ -- 1
+int.to.str$ -- 29
+missing$ -- 31
+newline$ -- 225
+num.names$ -- 84
+pop$ -- 145
+preamble$ -- 1
+purify$ -- 28
+quote$ -- 0
+skip$ -- 345
+stack$ -- 0
+substring$ -- 513
+swap$ -- 111
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 184
+warning$ -- 1
+while$ -- 75
+width$ -- 0
+write$ -- 521
+(There were 11 warnings)

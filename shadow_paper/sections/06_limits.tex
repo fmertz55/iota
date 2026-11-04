@@ -1,0 +1,14 @@
+\section{Limitations and failed runs}\label{sec:limits}
+The ensembles are finite (64 offsets per pair, at most four pairs per rule) and one-dimensional.
+The entropies are exact for these ensembles, not capacities over all collisions. The footprint is a
+whole-world readout. The probe-state readout is stricter but depends on our object definition (width
+at most 8, exact periodicity). Every shadow observed so far occurs in an active-vacuum rule, so whether
+silent vacua can hold shadows remains open.
+
+The path included failures that shaped the final design. An inherited proto-object detector
+was passed formally by 16 rules that formed only expanding wedges. A collision classifier first
+counted non-meeting pairs as pass-throughs and mislabelled radiation; a bubble-wall speed
+measurement was invalid. An object extractor that clustered on one time layer created a spurious
+null; it was fixed by clustering on both layers. A first shadow design erased carriers before they had
+separated and failed its own control. The ``active vacuum is required for slow objects'' hypothesis
+was falsified. All are recorded in the repository with their commits.

@@ -1,0 +1,34 @@
+\section{Introduction}
+Gliders in cellular automata are the standard example of coherent structures that carry and
+process information: they transmit signals, and their collisions compute
+\cite{park1986,boccara1991,hanson1997,adamatzky2012}. Local information dynamics has made this
+quantitative. Gliders dominate information transfer, collisions dominate information modification,
+and blinkers and background domains dominate information storage
+\cite{lizier2008,lizier2010mod,lizier2012}. These results are statistical: they average over
+ensembles of trajectories, and statistical transfer is not the same as causal influence
+\cite{lizier2010caus,james2016}.
+
+Here we ask an interventional version of the storage question in a setting where it has an exact
+answer. In a \emph{reversible} automaton the global map is a bijection, so the information
+distinguishing two interacting coherences before they meet cannot be lost. After the interaction
+it must be carried by the outgoing coherences or by the background. If we erase the outgoing
+coherences entirely, is a record of the interaction still present, and can a later coherence read
+it? We call such a residual record a \emph{shadow}.
+
+The question is motivated by the Information-Constraint Principle (ICP) \cite{clark2026icp}, which
+treats physically effective information as interaction-formed constraint on reachable futures that
+can persist beyond its original carrier. The present paper does not depend on that framework. It
+reports frozen computational experiments on a complete, well-known rule family, including the rule
+37R singled out by Wolfram for its localized structures \cite{wolfram2002}.
+
+Our contributions are:
+\begin{enumerate}
+\item an outcome-blind identification of bounded, autonomous, slower-than-light coherences across
+all 256 second-order rules;
+\item an exact information ledger for collisions, separating what the outgoing coherences carry
+from what the background holds;
+\item a carrier-erasure intervention showing that the background's share is always present and
+always fully recoverable by a passing probe, with an exact null in every rule whose background
+returns to vacuum;
+\item evidence that the probe coherence itself often carries the recovered record away.
+\end{enumerate}

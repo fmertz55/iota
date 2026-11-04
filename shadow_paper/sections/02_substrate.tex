@@ -1,0 +1,19 @@
+\section{Substrate and protocol}
+\paragraph{Rules.} Cells $x_t(i)\in\{0,1\}$ on a ring evolve by
+$x_{t+1}(i)=f\big(x_t(i-1),x_t(i),x_t(i+1)\big)\oplus x_{t-1}(i)$, where $f$ is any of the 256
+elementary truth tables (Wolfram code). Every such rule is exactly invertible,
+$x_{t-1}=f(x_t)\oplus x_{t+1}$ \cite{toffoli1990,wolfram2002}. The \emph{vacuum} is the orbit of the
+all-zero state. It is silent when $f(000)=0$ and a homogeneous oscillation when $f(000)=1$. All
+observables are differences from the matched vacuum evolved under the same rule.
+
+\paragraph{Objects.} A coherence is a cluster of difference sites, on the union of both time layers
+and with internal gaps of fewer than three sites, of width at most 8, that is exactly periodic up to
+translation (pattern and vacuum phase both recur). Its velocity is the exact ratio of shift to period.
+Its species is the set of states on its orbit.
+
+\paragraph{Discipline.} Each test was written as a contract with fixed hypotheses and decision rules.
+It was committed and tagged in git before the candidate family was evaluated, and the result was then
+committed as a separate child commit. Exposure to earlier outcomes is disclosed in each contract.
+Post-hoc analyses are labelled as such. Two runs crashed during serialization before any output; each
+was refrozen with a disclosed one-line fix. One design was invalidated by its own control and replaced
+(Section~\ref{sec:limits}).
