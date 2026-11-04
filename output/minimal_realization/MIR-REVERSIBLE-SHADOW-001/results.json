@@ -3,24 +3,13 @@
   "rules": 25,
   "clean": 13,
   "residue": 12,
-  "control_clean_I_all_zero": false,
-  "shadow_rules_I_positive": 12,
-  "shadow_rules_tested": 12,
+  "control_clean_I_all_zero": true,
+  "shadow_rules_I_positive": 1,
+  "shadow_rules_tested": 1,
   "shadow_I_bits": {
-   "33": 3.5,
-   "37": 5.481,
-   "139": 3.5,
-   "143": 3.5,
-   "147": 6.0,
-   "151": 5.0,
-   "171": 3.5,
-   "201": 6.0,
-   "209": 3.5,
-   "213": 3.5,
-   "233": 5.0,
-   "241": 3.5
+   "37": 3.839
   },
-  "verdict": "invalid_control"
+  "verdict": "shadow_constrains_future"
  },
  "rules": [
   {
@@ -32,10 +21,8 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -47,10 +34,12 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
+    "valid": 32,
     "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "H_max": 5.0,
+    "shadow_present": 0,
+    "DP": 271,
+    "TF": 1368
    }
   },
   {
@@ -62,10 +51,8 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -77,10 +64,8 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -92,10 +77,12 @@
     "f_internal": 0.21023554202175262
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 5.4809487351738495,
-    "H_max": 6.0,
-    "shadow_present": 54
+    "valid": 21,
+    "I_bits": 3.8394774001865315,
+    "H_max": 4.392317422778761,
+    "shadow_present": 16,
+    "DP": 219,
+    "TF": 1624
    }
   },
   {
@@ -107,10 +94,8 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -122,10 +107,8 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -137,10 +120,12 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
+    "valid": 32,
     "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "H_max": 5.0,
+    "shadow_present": 0,
+    "DP": 271,
+    "TF": 1368
    }
   },
   {
@@ -152,10 +137,8 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -167,10 +150,8 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -182,10 +163,8 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -197,10 +176,8 @@
     "f_internal": 0.24778309310799074
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -212,10 +189,8 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 6.0,
-    "H_max": 6.0,
-    "shadow_present": 64
+    "valid": 1,
+    "I_bits": null
    }
   },
   {
@@ -227,10 +202,8 @@
     "f_internal": 0.13521302074318875
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 5.0,
-    "H_max": 6.0,
-    "shadow_present": 48
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -242,10 +215,8 @@
     "f_internal": 0.24030935501042894
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -257,10 +228,12 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
+    "valid": 32,
     "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "H_max": 5.0,
+    "shadow_present": 0,
+    "DP": 374,
+    "TF": 1112
    }
   },
   {
@@ -272,10 +245,12 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
+    "valid": 32,
     "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "H_max": 5.0,
+    "shadow_present": 0,
+    "DP": 374,
+    "TF": 1112
    }
   },
   {
@@ -287,10 +262,8 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 6.0,
-    "H_max": 6.0,
-    "shadow_present": 64
+    "valid": 1,
+    "I_bits": null
    }
   },
   {
@@ -302,10 +275,8 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 5.0,
-    "H_max": 6.0,
-    "shadow_present": 64
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -317,10 +288,8 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -332,10 +301,8 @@
     "f_internal": 0.24778309310799074
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -347,10 +314,8 @@
     "f_internal": 0.13521302074318875
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 5.0,
-    "H_max": 6.0,
-    "shadow_present": 48
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -362,10 +327,12 @@
     "f_internal": 0.16666666666666666
    },
    "shadow": {
-    "valid": 64,
+    "valid": 32,
     "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "H_max": 5.0,
+    "shadow_present": 0,
+    "DP": 374,
+    "TF": 1112
    }
   },
   {
@@ -377,10 +344,8 @@
     "f_internal": 0.24030935501042894
    },
    "shadow": {
-    "valid": 64,
-    "I_bits": 3.5,
-    "H_max": 6.0,
-    "shadow_present": 32
+    "valid": 0,
+    "I_bits": null
    }
   },
   {
@@ -392,10 +357,12 @@
     "f_internal": 0.0
    },
    "shadow": {
-    "valid": 64,
+    "valid": 32,
     "I_bits": 0.0,
-    "H_max": 6.0,
-    "shadow_present": 0
+    "H_max": 5.0,
+    "shadow_present": 0,
+    "DP": 374,
+    "TF": 1112
    }
   }
  ]
