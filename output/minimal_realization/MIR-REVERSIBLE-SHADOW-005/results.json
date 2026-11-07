@@ -1,0 +1,1556 @@
+{
+ "summary": {
+  "V0_all": true,
+  "V1": true,
+  "shadow_rules": 14,
+  "eligible_H_sat": 0,
+  "gain_256_vs_64": {},
+  "sat": 0,
+  "grow": 0,
+  "bubble_free_cells_with_only": 1,
+  "unrecovered_zero": 0,
+  "cells_with_bubbles": 112,
+  "run_capped": [],
+  "valid": true,
+  "H_sat": "n/a",
+  "H_R": "not_supported"
+ },
+ "rules": [
+  {
+   "wolfram": 33,
+   "role": "shadow",
+   "seedR": 129,
+   "seedL": 36,
+   "q": 3,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 744,
+   "RUN": 1104,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 2.1449800263575574,
+    "footprint": 2.0338689152465124,
+    "probe_state": 0.0,
+    "unrecovered": 0.11111111111104499,
+    "residue_runs": 256,
+    "bubble_runs": 224
+   }
+  },
+  {
+   "wolfram": 37,
+   "role": "shadow",
+   "seedR": 65,
+   "seedL": 34,
+   "q": 3,
+   "J": 8,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 892,
+   "RUN": 2724,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.4512050593046015,
+     "footprint": 1.4512050593046015,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 5,
+     "bubble_runs": 5
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 2.0762050593046015,
+     "footprint": 2.0762050593046015,
+     "probe_state": 0.2931222459933007,
+     "unrecovered": 0.0,
+     "residue_runs": 10,
+     "bubble_runs": 10
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.5222069611071287,
+     "footprint": 2.5222069611071287,
+     "probe_state": 0.35074232669288596,
+     "unrecovered": 0.0,
+     "residue_runs": 19,
+     "bubble_runs": 19
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 3.1159569611071287,
+     "footprint": 3.1159569611071287,
+     "probe_state": 0.5149412433129261,
+     "unrecovered": 0.0,
+     "residue_runs": 38,
+     "bubble_runs": 38
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.64969845146243,
+     "footprint": 3.64969845146243,
+     "probe_state": 0.5914647964089177,
+     "unrecovered": 0.0,
+     "residue_runs": 75,
+     "bubble_runs": 75
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 4.337423202859281,
+     "footprint": 4.337423202859281,
+     "probe_state": 0.8374232028592803,
+     "unrecovered": 0.0,
+     "residue_runs": 153,
+     "bubble_runs": 150
+    }
+   },
+   "B": {
+    "n": 512,
+    "H_in": 9.0,
+    "only": 4.240670655327602,
+    "footprint": 4.1594018262759676,
+    "probe_state": 0.8008067526778655,
+    "unrecovered": 0.08126882905163413,
+    "residue_runs": 274,
+    "bubble_runs": 264
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 5.4954271317590315,
+    "footprint": 5.4463565371297715,
+    "probe_state": 0.683550016822779,
+    "unrecovered": 0.04907059462926,
+    "residue_runs": 449,
+    "bubble_runs": 396
+   }
+  },
+  {
+   "wolfram": 91,
+   "role": "shadow",
+   "seedR": 35,
+   "seedL": 97,
+   "q": 3,
+   "J": 2,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 744,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 128,
+    "H_in": 7.0,
+    "only": 1.25,
+    "footprint": 1.25,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 2.1076388888888644,
+    "footprint": 1.284722222222202,
+    "probe_state": 0.0,
+    "unrecovered": 0.8229166666666625,
+    "residue_runs": 128,
+    "bubble_runs": 128
+   }
+  },
+  {
+   "wolfram": 123,
+   "role": "shadow",
+   "seedR": 35,
+   "seedL": 97,
+   "q": 3,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 744,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 1.6461048612312652,
+    "footprint": 0.9898548612312688,
+    "probe_state": 0.0,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 96,
+    "bubble_runs": 96
+   }
+  },
+  {
+   "wolfram": 139,
+   "role": "shadow",
+   "seedR": 226,
+   "seedL": 71,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 596,
+   "RUN": 1344,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 1.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 1.5,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 2.0,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 2.5,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 3.0,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 3.5,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 2.5,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 3.135959722462596,
+    "footprint": 2.3685986113515014,
+    "probe_state": 1.5229778472483124,
+    "unrecovered": 0.7673611111110947,
+    "residue_runs": 256,
+    "bubble_runs": 192
+   }
+  },
+  {
+   "wolfram": 143,
+   "role": "shadow",
+   "seedR": 486,
+   "seedL": 207,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 596,
+   "RUN": 1352,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.25,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 3
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5,
+     "footprint": 0.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 7
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 1.038102529652301,
+     "footprint": 1.038102529652301,
+     "probe_state": 1.038102529652301,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 12
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 1.9095536354948184,
+     "footprint": 1.9095536354948184,
+     "probe_state": 1.9095536354948184,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 22
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 2.6543976384171817,
+     "footprint": 2.6543976384171817,
+     "probe_state": 2.6543976384171817,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 45
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.3029295124323124,
+     "footprint": 3.3029295124323124,
+     "probe_state": 3.3029295124323124,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 79
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 1.9095536354948184,
+    "footprint": 1.9095536354948184,
+    "probe_state": 1.9095536354948184,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 22
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 2.0008427441302494,
+    "footprint": 1.344592744130253,
+    "probe_state": 1.344592744130253,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 448,
+    "bubble_runs": 369
+   }
+  },
+  {
+   "wolfram": 147,
+   "role": "shadow",
+   "seedR": 831,
+   "seedL": 639,
+   "q": 4,
+   "J": 1,
+   "nR": 2,
+   "nL": 2,
+   "V0": true,
+   "T": 892,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 1.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 1.375,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 1.6371987351738495,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 1.9809487351738495,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 2.27938542282536,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 2.61532292282536,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 1.9809487351738495,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 3.5,
+    "footprint": 3.5,
+    "probe_state": 0.7142204367824254,
+    "unrecovered": 0.0,
+    "residue_runs": 128,
+    "bubble_runs": 128
+   }
+  },
+  {
+   "wolfram": 151,
+   "role": "shadow",
+   "seedR": 180,
+   "seedL": 645,
+   "q": 4,
+   "J": 1,
+   "nR": 1,
+   "nL": 1,
+   "V0": true,
+   "T": 596,
+   "RUN": 1354,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.938721875540867,
+     "footprint": 1.938721875540867,
+     "probe_state": 0.4875168162362655,
+     "unrecovered": 0.0,
+     "residue_runs": 6,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 2.688721875540867,
+     "footprint": 2.688721875540867,
+     "probe_state": 0.3103626377277253,
+     "unrecovered": 0.0,
+     "residue_runs": 12,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 3.438721875540867,
+     "footprint": 3.438721875540867,
+     "probe_state": 0.187411719624889,
+     "unrecovered": 0.0,
+     "residue_runs": 24,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 4.1887218755408675,
+     "footprint": 4.1887218755408675,
+     "probe_state": 0.10957068759010213,
+     "unrecovered": 0.0,
+     "residue_runs": 48,
+     "bubble_runs": 31
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 4.9387218755408675,
+     "footprint": 4.9387218755408675,
+     "probe_state": 0.12519568759010236,
+     "unrecovered": 0.0,
+     "residue_runs": 96,
+     "bubble_runs": 63
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 5.6887218755408675,
+     "footprint": 5.6887218755408675,
+     "probe_state": 0.07046966623274153,
+     "unrecovered": 0.0,
+     "residue_runs": 192,
+     "bubble_runs": 121
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 4.1887218755408675,
+    "footprint": 4.1887218755408675,
+    "probe_state": 0.10957068759010213,
+    "unrecovered": 0.0,
+    "residue_runs": 48,
+    "bubble_runs": 31
+   },
+   "C": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 4.1887218755408675,
+    "footprint": 4.1887218755408675,
+    "probe_state": 0.10957068759010213,
+    "unrecovered": 0.0,
+    "residue_runs": 48,
+    "bubble_runs": 31
+   }
+  },
+  {
+   "wolfram": 171,
+   "role": "shadow",
+   "seedR": 486,
+   "seedL": 207,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 596,
+   "RUN": 1352,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.25,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 3
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.625,
+     "footprint": 0.625,
+     "probe_state": 0.625,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 6
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 1.3377698533491795,
+     "footprint": 1.3377698533491795,
+     "probe_state": 1.3377698533491795,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 13
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.0802632821965172,
+     "footprint": 2.0802632821965172,
+     "probe_state": 2.0802632821965172,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 23
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 2.748678339175876,
+     "footprint": 2.748678339175876,
+     "probe_state": 2.748678339175876,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 47
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.3542350455425387,
+     "footprint": 3.3542350455425387,
+     "probe_state": 3.3542350455425387,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 82
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.0802632821965172,
+    "footprint": 2.0802632821965172,
+    "probe_state": 2.0802632821965172,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 23
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 2.7650049677177684,
+    "footprint": 2.108754967717772,
+    "probe_state": 1.8959019140126898,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 448,
+    "bubble_runs": 378
+   }
+  },
+  {
+   "wolfram": 201,
+   "role": "shadow",
+   "seedR": 259,
+   "seedL": 44,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 892,
+   "RUN": 2116,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 1.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 1.375,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 1.6371987351738495,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 1.9809487351738495,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 2.27938542282536,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 2.61532292282536,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 1.9809487351738495,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 3.885416666666666,
+    "footprint": 3.2291666666666696,
+    "probe_state": 1.692257674452721,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 288,
+    "bubble_runs": 256
+   }
+  },
+  {
+   "wolfram": 209,
+   "role": "shadow",
+   "seedR": 71,
+   "seedL": 226,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 596,
+   "RUN": 1348,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 4
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 8
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 16
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 32
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 64
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 128
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 32
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 3.132487500240373,
+    "footprint": 2.36512638912928,
+    "probe_state": 0.6645908072161237,
+    "unrecovered": 0.767361111111093,
+    "residue_runs": 256,
+    "bubble_runs": 192
+   }
+  },
+  {
+   "wolfram": 213,
+   "role": "shadow",
+   "seedR": 207,
+   "seedL": 486,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 596,
+   "RUN": 1352,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.25,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 3
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5,
+     "footprint": 0.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 7
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 1.186692764094909,
+     "footprint": 1.186692764094909,
+     "probe_state": 1.186692764094909,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 12
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 1.9838487527161233,
+     "footprint": 1.9838487527161233,
+     "probe_state": 1.9838487527161233,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 22
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 2.6915451970278337,
+     "footprint": 2.6915451970278337,
+     "probe_state": 2.6915451970278337,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 45
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.3215032917376393,
+     "footprint": 3.3215032917376393,
+     "probe_state": 3.3215032917376393,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 79
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 1.9838487527161233,
+    "footprint": 1.9838487527161233,
+    "probe_state": 1.9838487527161233,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 22
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 2.7248350184508467,
+    "footprint": 2.0685850184508503,
+    "probe_state": 1.8557319647457682,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 448,
+    "bubble_runs": 369
+   }
+  },
+  {
+   "wolfram": 233,
+   "role": "shadow",
+   "seedR": 843,
+   "seedL": 378,
+   "q": 4,
+   "J": 1,
+   "nR": 1,
+   "nL": 1,
+   "V0": true,
+   "T": 596,
+   "RUN": 1350,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.938721875540867,
+     "footprint": 1.938721875540867,
+     "probe_state": 0.9387218755408671,
+     "unrecovered": 0.0,
+     "residue_runs": 6,
+     "bubble_runs": 3
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 2.688721875540867,
+     "footprint": 2.688721875540867,
+     "probe_state": 1.188721875540867,
+     "unrecovered": 0.0,
+     "residue_runs": 12,
+     "bubble_runs": 7
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 3.438721875540867,
+     "footprint": 3.438721875540867,
+     "probe_state": 1.438721875540867,
+     "unrecovered": 0.0,
+     "residue_runs": 24,
+     "bubble_runs": 15
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 4.1887218755408675,
+     "footprint": 4.1887218755408675,
+     "probe_state": 1.688721875540867,
+     "unrecovered": 0.0,
+     "residue_runs": 48,
+     "bubble_runs": 31
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 4.9387218755408675,
+     "footprint": 4.9387218755408675,
+     "probe_state": 1.938721875540867,
+     "unrecovered": 0.0,
+     "residue_runs": 96,
+     "bubble_runs": 63
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 5.6887218755408675,
+     "footprint": 5.6887218755408675,
+     "probe_state": 2.221679081712488,
+     "unrecovered": 0.0,
+     "residue_runs": 192,
+     "bubble_runs": 121
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 4.1887218755408675,
+    "footprint": 4.1887218755408675,
+    "probe_state": 1.688721875540867,
+    "unrecovered": 0.0,
+    "residue_runs": 48,
+    "bubble_runs": 31
+   },
+   "C": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 4.1887218755408675,
+    "footprint": 4.1887218755408675,
+    "probe_state": 1.688721875540867,
+    "unrecovered": 0.0,
+    "residue_runs": 48,
+    "bubble_runs": 31
+   }
+  },
+  {
+   "wolfram": 241,
+   "role": "shadow",
+   "seedR": 207,
+   "seedL": 486,
+   "q": 4,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 596,
+   "RUN": 1350,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.25,
+     "unrecovered": 0.0,
+     "residue_runs": 4,
+     "bubble_runs": 3
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5,
+     "footprint": 0.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "residue_runs": 8,
+     "bubble_runs": 6
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 1.189179618906571,
+     "footprint": 1.189179618906571,
+     "probe_state": 1.189179618906571,
+     "unrecovered": 0.0,
+     "residue_runs": 16,
+     "bubble_runs": 13
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.0059681649752132,
+     "footprint": 2.0059681649752132,
+     "probe_state": 2.0059681649752132,
+     "unrecovered": 0.0,
+     "residue_runs": 32,
+     "bubble_runs": 23
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 2.711530780565224,
+     "footprint": 2.711530780565224,
+     "probe_state": 2.711530780565224,
+     "unrecovered": 0.0,
+     "residue_runs": 64,
+     "bubble_runs": 47
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.3356612662372127,
+     "footprint": 3.3356612662372127,
+     "probe_state": 3.3356612662372127,
+     "unrecovered": 0.0,
+     "residue_runs": 128,
+     "bubble_runs": 82
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.0059681649752132,
+    "footprint": 2.0059681649752132,
+    "probe_state": 2.0059681649752132,
+    "unrecovered": 0.0,
+    "residue_runs": 32,
+    "bubble_runs": 23
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 2.060894496510639,
+    "footprint": 1.4046444965106426,
+    "probe_state": 1.3762338576623803,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 448,
+    "bubble_runs": 378
+   }
+  },
+  {
+   "wolfram": 1,
+   "role": "null",
+   "seedR": 129,
+   "seedL": 36,
+   "q": 3,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 744,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 0.0,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "residue_runs": 0,
+    "bubble_runs": 0
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": -6.217248937900877e-14,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": -6.217248937900877e-14,
+    "residue_runs": 0,
+    "bubble_runs": 0
+   }
+  },
+  {
+   "wolfram": 5,
+   "role": "null",
+   "seedR": 257,
+   "seedL": 40,
+   "q": 3,
+   "J": 1,
+   "nR": 3,
+   "nL": 3,
+   "V0": true,
+   "T": 744,
+   "RUN": 1740,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "residue_runs": 0,
+     "bubble_runs": 0
+    }
+   },
+   "B": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 0.0,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "residue_runs": 0,
+    "bubble_runs": 0
+   },
+   "C": {
+    "n": 576,
+    "H_in": 9.169925001442312,
+    "only": 1.211805555555535,
+    "footprint": 0.5555555555555385,
+    "probe_state": 0.5555555555555385,
+    "unrecovered": 0.6562499999999964,
+    "residue_runs": 128,
+    "bubble_runs": 0
+   }
+  }
+ ]
+}

@@ -33,3 +33,12 @@ We asked whether truly empty space (a background that does nothing) can keep a m
 colliding objects are removed. In every case where something seemed to be left behind, it was not the empty
 background remembering. Either the collision had created a growing patch of a new, patterned background, or a
 moving object was too wide for our detector. Empty space kept nothing; memory needed structure to live in.
+
+## Addendum (2026-11-07, after SHADOW-005): the verdict above used a stricter criterion than SHADOW-003
+SHADOW-003 counted every residue holding unique information that a probe reads; most of those shadows are
+extended domains of the opposite vacuum phase (see SHADOW-005 RESULT). By that same criterion, the silent
+vacuum DOES hold shadows here: 31 pairs in 12 silent rules, footprint ratio 1 in 26/31, all as collision-nucleated
+domains of a new periodic background (one rule-222 pair is a 9-wide unerased carrier and does not count).
+What silent rules lack, at this depth, is a compact or stationary shadow. Whether active rules have compact
+stationary shadows has not been checked by the strict criterion either. Corrected reading: a featureless vacuum
+cannot store a record as it is; a collision can store one by creating structured background (a domain).
