@@ -1,0 +1,24 @@
+COMPLEX SYSTEMS SUBMISSION FORM — copy/paste sheet
+
+Paper Title:
+The Shadow Knows: Interaction Records That Outlive Their Carriers in Reversible Second-Order Cellular Automata
+
+Abstract:
+In a reversible dynamics no information is destroyed, so the record of an interaction must persist somewhere. Where it goes is determined exactly in the 256 second-order extensions of the elementary cellular automata. Bounded, autonomous, slower-than-light coherences are first identified by frozen, outcome-blind searches and then collided. For each collision an exact ledger separates the information carried away by the outgoing coherences from the information left in the background. Every resolved coherence is then erased and a fresh probe is sent through the residue. Across 91 collision pairs in 25 rules, pairs whose background returns to vacuum give the probe no information, while in all 45 pairs that leave a residue the probe recovers all of the information held only by the background, and in 27 of them the probe coherence carries part of it away. All such shadows occur in rules with an oscillating vacuum.
+
+Keywords:
+reversible cellular automata; second-order cellular automata; information dynamics; gliders; information storage; causal intervention
+
+File upload:
+clark_shadow_complexsystems_submission.zip
+
+Contributor: Douglas Clark | clarkdd@gmail.com | Affiliation: Independent Researcher
+
+Suggested referees (affiliations per OpenAlex; take emails from their institutional pages):
+- Joseph T. Lizier, The University of Sydney (local information storage and transfer in cellular automata)
+- Tomaž Prosen, University of Ljubljana (exactly solvable reversible cellular automata)
+- James P. Crutchfield, University of California, Davis (computational mechanics, particles and domains)
+- Andrew Adamatzky, University of the West of England (collision-based computing)
+
+Comments:
+The upload is a ZIP containing the single LaTeX source file (prepared with the journal's ComplexSystems.sty), the compiled 9-page PDF, the style file and three figures (two PNG, one PDF). All numbers in the paper are generated from committed result files in the public repository https://github.com/fmertz55/iota; each experiment was frozen and tagged before it was run. A companion conceptual paper, "The Constrained Future: A Testable Information-Constraint Principle for Persistent Organization", is under review at BioSystems; the two papers do not overlap.
