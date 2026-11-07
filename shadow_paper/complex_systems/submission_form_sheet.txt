@@ -12,13 +12,13 @@ reversible cellular automata; second-order cellular automata; information dynami
 File upload:
 clark_shadow_complexsystems_submission.zip
 
-Contributor: Douglas Clark | clarkdd@gmail.com | Affiliation: Independent Researcher
+Contributor: Douglas Clark | clarkdd@gmail.com | Affiliation: Independent Researcher | Postal address: leave blank
 
-Suggested referees (affiliations per OpenAlex; take emails from their institutional pages):
-- Joseph T. Lizier, The University of Sydney (local information storage and transfer in cellular automata)
-- Tomaž Prosen, University of Ljubljana (exactly solvable reversible cellular automata)
-- James P. Crutchfield, University of California, Davis (computational mechanics, particles and domains)
-- Andrew Adamatzky, University of the West of England (collision-based computing)
+Suggested referees:
+- Joseph T. Lizier, Associate Professor in Complex Systems, School of Computer Science, The University of Sydney, NSW 2006, Australia. joseph.lizier@sydney.edu.au. Local information storage and transfer in cellular automata.
+- Tomaž Prosen, Professor of Physics, Faculty of Mathematics and Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia. tomaz.prosen@fmf.uni-lj.si. Exactly solvable reversible cellular automata.
+- James P. Crutchfield, Complexity Sciences Center, Department of Physics, University of California, Davis, One Shields Avenue, Davis, CA 95616, USA. chaos@ucdavis.edu. Computational mechanics, particles and domains.
+- Andrew Adamatzky, Professor in Unconventional Computing, Unconventional Computing Laboratory, University of the West of England, Bristol BS16 1QY, UK. andrew.adamatzky@uwe.ac.uk. Collision-based computing.
 
 Comments:
 The upload is a ZIP containing the single LaTeX source file (prepared with the journal's ComplexSystems.sty), the compiled 9-page PDF, the style file and three figures (two PNG, one PDF). All numbers in the paper are generated from committed result files in the public repository https://github.com/fmertz55/iota; each experiment was frozen and tagged before it was run. A companion conceptual paper, "The Constrained Future: A Testable Information-Constraint Principle for Persistent Organization", is under review at BioSystems; the two papers do not overlap.
