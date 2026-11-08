@@ -47,3 +47,28 @@ can't be seen from either side by the passers-by we have: the memory is there, b
 ## Next
 What a single reader misses (which edge; which bits of 26s, 82s, 94s, 218s neither reader reaches), then
 question 3 (2D reversible rules).
+
+## Addendum (post hoc, not frozen): is the left/right difference chirality?
+Scripts: shadow7_mirror_species_posthoc.py, shadow7_mirror_posthoc.py, shadow7_mirror_shapes_posthoc.py; outputs
+posthoc_mirror_check.json, posthoc_mirror_control.json, posthoc_mirror_shapes.json. The vacuum is homogeneous (achiral).
+1. Rule chirality. 12/25 shadow pairs use rules that are not their own mirror image (139/209, 143/213, 171/241,
+   26/82, 58/114 are mirror pairs within the set; 154, 186 have partners 210, 242 outside it). There the physics is
+   handed and a left/right difference is expected. Included: 26s and 82s, two of the four pairs neither reader completes.
+2. Exact mirror control on the 13 mirror-symmetric shadow rules: reader a's own procedure applied to the reflected
+   state (the mirror image of reader a reading the right edge with exactly mirrored geometry). Reader a reproduced in
+   all 13. It matches the stored reader b except 37 (4.685 vs 4.664) and 218s (0 vs 0.25): the one-cell launch
+   asymmetry (reader a GAP cells from the record, reader b GAP-1) is not the cause. chi = footprint_a - footprint_mirror
+   is nonzero in 10/13 (33: 1.875, 151: 2.0, 233: 2.0, 54s: 2.0, 94s: 1.258, 147: -0.779, 123: 0.625, 91: 0.25,
+   201: -0.18, 37: -0.017); 0 in 22s, 182s, 218s. Null 5: 0.625.
+3. Where the handedness sits (shape closure; carriers erased, translation-normalised):
+   - Handed shadows: in 91, 123, 54s, 182s, no shadow's mirror image occurs in the ensemble. The record is a chiral
+     object. (182s is chiral yet reads the same from both sides: chi = 0.)
+   - Handed placement: in 151 and 233 every shadow is individually mirror-symmetric, yet chi = 2 bits; 33 and 147 have
+     mirror-closed shape sets, and chi = 1.875 and -0.779. Here the asymmetry is not in the shapes but in the preparation:
+     inputs anchor the right-mover at X0 and vary the left-mover's offset, so which shape sits where (and when each reader arrives) is
+     not mirror-symmetric. This is a handedness of the experiment, not of the record.
+   - 218s: mirror-closed shapes, chi = 0, still 1.25 bits unread by both. Not chirality.
+Reading: the reader asymmetry has three sources: handed rules (12 pairs), handed shadows (4 pairs), and handed preparation
+(at least 151, 233, 33, 147, plus null 5). The frozen counts (partial_b 20 vs partial_a 11) mix all three. A clean chirality test
+needs a mirror-closed preparation (each input together with its mirror image), where chi is then exactly a property
+of the rule and the record.

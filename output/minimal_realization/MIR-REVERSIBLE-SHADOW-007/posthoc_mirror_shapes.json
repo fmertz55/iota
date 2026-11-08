@@ -1,0 +1,146 @@
+[
+ {
+  "w": 33,
+  "role": "shadow_active",
+  "residue": 128,
+  "distinct_shapes": 128,
+  "runs_whose_mirror_shape_occurs": 128,
+  "self_mirror_runs": 64,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 37,
+  "role": "shadow_active",
+  "residue": 188,
+  "distinct_shapes": 188,
+  "runs_whose_mirror_shape_occurs": 186,
+  "self_mirror_runs": 70,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 91,
+  "role": "shadow_active",
+  "residue": 64,
+  "distinct_shapes": 64,
+  "runs_whose_mirror_shape_occurs": 0,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 123,
+  "role": "shadow_active",
+  "residue": 32,
+  "distinct_shapes": 32,
+  "runs_whose_mirror_shape_occurs": 0,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 147,
+  "role": "shadow_active",
+  "residue": 128,
+  "distinct_shapes": 128,
+  "runs_whose_mirror_shape_occurs": 128,
+  "self_mirror_runs": 64,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 151,
+  "role": "shadow_active",
+  "residue": 48,
+  "distinct_shapes": 48,
+  "runs_whose_mirror_shape_occurs": 48,
+  "self_mirror_runs": 48,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 201,
+  "role": "shadow_active",
+  "residue": 128,
+  "distinct_shapes": 97,
+  "runs_whose_mirror_shape_occurs": 32,
+  "self_mirror_runs": 32,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 233,
+  "role": "shadow_active",
+  "residue": 48,
+  "distinct_shapes": 48,
+  "runs_whose_mirror_shape_occurs": 48,
+  "self_mirror_runs": 48,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 22,
+  "role": "shadow_silent",
+  "residue": 48,
+  "distinct_shapes": 48,
+  "runs_whose_mirror_shape_occurs": 46,
+  "self_mirror_runs": 16,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 54,
+  "role": "shadow_silent",
+  "residue": 32,
+  "distinct_shapes": 32,
+  "runs_whose_mirror_shape_occurs": 0,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 94,
+  "role": "shadow_silent",
+  "residue": 64,
+  "distinct_shapes": 64,
+  "runs_whose_mirror_shape_occurs": 62,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 182,
+  "role": "shadow_silent",
+  "residue": 32,
+  "distinct_shapes": 32,
+  "runs_whose_mirror_shape_occurs": 0,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": false
+ },
+ {
+  "w": 218,
+  "role": "shadow_silent",
+  "residue": 64,
+  "distinct_shapes": 64,
+  "runs_whose_mirror_shape_occurs": 64,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 1,
+  "role": "null_active",
+  "residue": 0,
+  "distinct_shapes": 0,
+  "runs_whose_mirror_shape_occurs": 0,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 5,
+  "role": "null_active",
+  "residue": 64,
+  "distinct_shapes": 2,
+  "runs_whose_mirror_shape_occurs": 64,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": true
+ },
+ {
+  "w": 90,
+  "role": "null_silent",
+  "residue": 0,
+  "distinct_shapes": 0,
+  "runs_whose_mirror_shape_occurs": 0,
+  "self_mirror_runs": 0,
+  "multiset_mirror_closed": true
+ }
+]
