@@ -3,13 +3,10 @@
 Supersedes HANDOFF_REVERSIBLE_SHADOW_2026-11-07.md. Working rules there still apply (contract, seal, frozen tag,
 run, result commit; information-first vocabulary; check pictures; token thrift).
 
-## In flight
-SHADOW-007 (tag mir-reversible-shadow-007-v0.1-frozen; shadow7.py; contract docs/ICP_MIR_REVERSIBLE_SHADOW_007_CONTRACT.md)
-was started 2026-11-08 in the background. It writes output/minimal_realization/MIR-REVERSIBLE-SHADOW-007/results.json
-and run.log. If results.json exists, write RESULT.md from it and commit. If not, rerun:
-`python src/minimal_realization_reversible/shadow7.py > output/minimal_realization/MIR-REVERSIBLE-SHADOW-007/run.log 2>&1`
-(deterministic; about 15-30 min on 6 workers). Questions: H_P (alias-free species mixes still partial for one reader,
->= 1/3 of pairs) and H_J (a second reader from the other side completes the read in >= 2/3 of partial pairs).
+## Done since writing
+SHADOW-007 finished and is committed: read output/minimal_realization/MIR-REVERSIBLE-SHADOW-007/RESULT.md.
+H_P supported (partial reading replicates without aliasing); H_J not supported (a second reader from the
+other side mostly does not complete the read).
 
 ## Results so far (read each RESULT.md)
 - SHADOW-004 (+ addendum): silent vacuum holds shadows by the SHADOW-003 criterion, but only as collision-nucleated
@@ -24,5 +21,6 @@ and run.log. If results.json exists, write RESULT.md from it and commit. If not,
 - Deduplicate inputs by physical starting state, not by label; catalogue lists can repeat a species shifted.
 
 ## Next after SHADOW-007
-What a single reader misses (if H_J holds, which edge it fails to read), then question 3: 2D reversible rules,
+What the readers miss when species vary (not simply the far edge, since H_J failed): e.g. condition on outline and
+reader footprints to locate the unread bits; or readers of the other species, then question 3: 2D reversible rules,
 where an outline is a curve and outline capacity could scale differently.
