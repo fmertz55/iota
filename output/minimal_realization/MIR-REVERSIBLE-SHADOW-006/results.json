@@ -1,0 +1,4011 @@
+{
+ "summary": {
+  "V0_all": true,
+  "V1": false,
+  "pairs": 28,
+  "shadow_pairs_eligible": 25,
+  "gain_512_vs_256": {
+   "33_": 0.5,
+   "37_": 0.6237355939988474,
+   "91_": 0.5,
+   "123_": 0.5,
+   "139_": 0.5,
+   "143_": 1.6897370059390493,
+   "147_": 0.5,
+   "151_": 0.75,
+   "171_": 1.2112645705642047,
+   "201_": 0.5,
+   "209_": 0.5,
+   "213_": 1.2076249132943886,
+   "233_": 0.75,
+   "241_": 1.7059155584784103,
+   "22_": 0.25,
+   "26_": 0.5,
+   "54_": 0.5,
+   "58_": 0.5,
+   "82_": 0.5,
+   "94_": 0.5,
+   "114_": 0.5,
+   "154_": -0.19486612434898998,
+   "182_": 0.5,
+   "186_": 0.12351050350861925,
+   "218_": 0.5
+  },
+  "content_share_512": {
+   "33_": 0.0,
+   "37_": 0.0,
+   "91_": 0.0,
+   "123_": 0.0,
+   "139_": 0.0,
+   "143_": 0.0,
+   "147_": 0.0,
+   "151_": 0.0,
+   "171_": 0.0,
+   "201_": 0.0,
+   "209_": 0.0,
+   "213_": 0.0,
+   "233_": 0.0,
+   "241_": 0.0,
+   "22_": 0.0,
+   "26_": 0.0,
+   "54_": 0.0,
+   "58_": 0.0,
+   "82_": 0.0,
+   "94_": 0.0,
+   "114_": 0.0,
+   "154_": 0.0,
+   "182_": 0.0,
+   "186_": 0.0,
+   "218_": 0.0
+  },
+  "n_log": 19,
+  "n_sat": 2,
+  "n_full": 4,
+  "n_outline": 25,
+  "n_content": 0,
+  "regimes": {
+   "A512": {
+    "clean": 0,
+    "partial": 3,
+    "full": 22
+   },
+   "C": {
+    "clean": 0,
+    "partial": 15,
+    "full": 10
+   }
+  },
+  "types_A512": {
+   "none": 6226,
+   "compact": 0,
+   "extended": 6574
+  },
+  "all_compact_pairs": [],
+  "run_capped": [],
+  "valid": false,
+  "H1": "invalid",
+  "H2": "invalid"
+ },
+ "rules": [
+  {
+   "wolfram": 33,
+   "role": "shadow_active",
+   "vR0": "1/3",
+   "vL0": "-1/3",
+   "V0": true,
+   "T": 1128,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 3.5,
+    "footprint": 3.5,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 37,
+   "role": "shadow_active",
+   "vR0": "1/4",
+   "vL0": "-1/4",
+   "V0": true,
+   "T": 1404,
+   "RUN": 3356,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.4512050593046015,
+     "footprint": 1.4512050593046015,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 3,
+      "compact": 0,
+      "extended": 5
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 2.0762050593046015,
+     "footprint": 2.0762050593046015,
+     "probe_state": 0.2931222459933007,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 6,
+      "compact": 0,
+      "extended": 10
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.5222069611071287,
+     "footprint": 2.4597069611071287,
+     "probe_state": 0.35074232669288596,
+     "unrecovered": 0.0625,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 13,
+      "compact": 0,
+      "extended": 19
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 3.1159569611071287,
+     "footprint": 2.9909569611071287,
+     "probe_state": 0.5149412433129261,
+     "unrecovered": 0.125,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 26,
+      "compact": 0,
+      "extended": 38
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.64969845146243,
+     "footprint": 3.50907345146243,
+     "probe_state": 0.5914647964089177,
+     "unrecovered": 0.140625,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 53,
+      "compact": 0,
+      "extended": 75
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 4.23563595146243,
+     "footprint": 4.07938595146243,
+     "probe_state": 0.73563595146243,
+     "unrecovered": 0.15625,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 106,
+      "compact": 0,
+      "extended": 150
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.859371545461277,
+     "footprint": 4.699215295461277,
+     "probe_state": 0.8039939155573368,
+     "unrecovered": 0.16015625,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 210,
+      "compact": 0,
+      "extended": 302
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 5.232824313008992,
+    "footprint": 5.175188033703666,
+    "probe_state": 0.8457730346222156,
+    "unrecovered": 0.057636279305326,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "partial",
+    "types": {
+     "none": 63,
+     "compact": 0,
+     "extended": 193
+    }
+   }
+  },
+  {
+   "wolfram": 91,
+   "role": "shadow_active",
+   "vR0": "1/3",
+   "vL0": "-1/3",
+   "V0": true,
+   "T": 1128,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.5,
+    "footprint": 1.5,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 192,
+     "compact": 0,
+     "extended": 64
+    }
+   }
+  },
+  {
+   "wolfram": 123,
+   "role": "shadow_active",
+   "vR0": "1/3",
+   "vL0": "-1/3",
+   "V0": true,
+   "T": 1128,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 0.625,
+    "footprint": 0.625,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 224,
+     "compact": 0,
+     "extended": 32
+    }
+   }
+  },
+  {
+   "wolfram": 139,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 1.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 1.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 2.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 2.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 3.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 3.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 4.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 3.9921875,
+    "footprint": 3.0078125,
+    "probe_state": 2.5,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 0.2465753424657534,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 143,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.07676361115001296,
+     "footprint": 0.07676361115001296,
+     "probe_state": 0.07676361115001296,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 1.7665006170890623,
+     "footprint": 1.7665006170890623,
+     "probe_state": 1.7665006170890623,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 0.984375,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 1.0,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 147,
+   "role": "shadow_active",
+   "vR0": "1/4",
+   "vL0": "-1/4",
+   "V0": true,
+   "T": 1404,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.40563906222956625,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.27178222159979804,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.16864503330850678,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.10031116215635727,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.05805753765238464,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.03295720617162079,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.018437253126935893,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 3.5,
+    "footprint": 2.720664941389348,
+    "probe_state": 0.03295720617162079,
+    "unrecovered": 0.779335058610652,
+    "content": 0.25,
+    "content_share": 0.07142857142857142,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 151,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.938721875540867,
+     "footprint": 1.938721875540867,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 2,
+      "compact": 0,
+      "extended": 6
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 2.688721875540867,
+     "footprint": 2.688721875540867,
+     "probe_state": 0.3103626377277253,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 12
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 3.438721875540867,
+     "footprint": 3.438721875540867,
+     "probe_state": 0.187411719624889,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 24
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 4.1887218755408675,
+     "footprint": 4.1887218755408675,
+     "probe_state": 0.10957068759010213,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 48
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 4.9387218755408675,
+     "footprint": 4.9387218755408675,
+     "probe_state": 0.06265716623274153,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 96
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 5.6887218755408675,
+     "footprint": 5.6887218755408675,
+     "probe_state": 0.07046966623274153,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 192
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 6.4387218755408675,
+     "footprint": 6.4387218755408675,
+     "probe_state": 0.039155835873569966,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 384
+     }
+    }
+   },
+   "C": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 4.1887218755408675,
+    "footprint": 4.1887218755408675,
+    "probe_state": 0.10957068759010213,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 16,
+     "compact": 0,
+     "extended": 48
+    }
+   }
+  },
+  {
+   "wolfram": 171,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.25,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5,
+     "footprint": 0.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.75,
+     "footprint": 0.75,
+     "probe_state": 0.75,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.7528251479278758,
+     "footprint": 0.7528251479278758,
+     "probe_state": 0.7528251479278758,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.8869216274887766,
+     "footprint": 0.8869216274887766,
+     "probe_state": 0.8869216274887766,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 1.0684608137443883,
+     "footprint": 1.0684608137443883,
+     "probe_state": 1.0684608137443883,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 2.279725384308593,
+     "footprint": 2.279725384308593,
+     "probe_state": 2.279725384308593,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.7439525241021547,
+    "footprint": 0.7595775241021547,
+    "probe_state": 0.7595775241021547,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 0.5644505721317095,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 201,
+   "role": "shadow_active",
+   "vR0": "1/4",
+   "vL0": "-1/4",
+   "V0": true,
+   "T": 1404,
+   "RUN": 3140,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 1.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 1.25,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 1.6875,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 1.9917292966721751,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 2.3946338413964394,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 2.7540088413964394,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 3.1251025913964394,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 2.4693609377704338,
+    "footprint": 2.4693609377704338,
+    "probe_state": 1.1129952412487398,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 209,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 3.9921875,
+    "footprint": 3.0078125,
+    "probe_state": 0.9134515622295662,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 0.2465753424657534,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 213,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.25,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5,
+     "footprint": 0.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.75,
+     "footprint": 0.75,
+     "probe_state": 0.75,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.7528251479278758,
+     "footprint": 0.7528251479278758,
+     "probe_state": 0.7528251479278758,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.8869216274887766,
+     "footprint": 0.8869216274887766,
+     "probe_state": 0.8869216274887766,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 1.0595615757446604,
+     "footprint": 1.0595615757446604,
+     "probe_state": 1.0595615757446604,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 2.267186489039049,
+     "footprint": 2.267186489039049,
+     "probe_state": 2.267186489039049,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.737200147927875,
+    "footprint": 0.7528251479278749,
+    "probe_state": 0.7528251479278749,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 0.5666445522550515,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 233,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.938721875540867,
+     "footprint": 1.938721875540867,
+     "probe_state": 0.9387218755408671,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 2,
+      "compact": 0,
+      "extended": 6
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 2.688721875540867,
+     "footprint": 2.688721875540867,
+     "probe_state": 1.188721875540867,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 12
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 3.438721875540867,
+     "footprint": 3.438721875540867,
+     "probe_state": 1.438721875540867,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 24
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 4.1887218755408675,
+     "footprint": 4.1887218755408675,
+     "probe_state": 1.688721875540867,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 48
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 4.9387218755408675,
+     "footprint": 4.9387218755408675,
+     "probe_state": 1.9967794131932517,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 96
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 5.6887218755408675,
+     "footprint": 5.6887218755408675,
+     "probe_state": 2.287460017795707,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 192
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 6.4387218755408675,
+     "footprint": 6.4387218755408675,
+     "probe_state": 2.5124044131932517,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 384
+     }
+    }
+   },
+   "C": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 4.1887218755408675,
+    "footprint": 4.1887218755408675,
+    "probe_state": 1.688721875540867,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 16,
+     "compact": 0,
+     "extended": 48
+    }
+   }
+  },
+  {
+   "wolfram": 241,
+   "role": "shadow_active",
+   "vR0": "1/2",
+   "vL0": "-1/2",
+   "V0": true,
+   "T": 852,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.060585058610652,
+     "footprint": 0.060585058610652,
+     "probe_state": 0.060585058610652,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 1.7665006170890623,
+     "footprint": 1.7665006170890623,
+     "probe_state": 1.7665006170890623,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 0.984375,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 1.0,
+    "regime": "partial",
+    "types": {
+     "none": 128,
+     "compact": 0,
+     "extended": 128
+    }
+   }
+  },
+  {
+   "wolfram": 22,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.25,
+     "footprint": 0.25,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 6,
+      "compact": 0,
+      "extended": 2
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5,
+     "footprint": 0.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 12,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.75,
+     "footprint": 0.75,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 24,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 48,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 1.25,
+     "footprint": 1.25,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 96,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 192,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 1.75,
+     "footprint": 1.75,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 384,
+      "compact": 0,
+      "extended": 128
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.0471804688852169,
+    "footprint": 1.0471804688852169,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.125,
+    "content_share": 0.11936815450069424,
+    "regime": "full",
+    "types": {
+     "none": 208,
+     "compact": 0,
+     "extended": 48
+    }
+   }
+  },
+  {
+   "wolfram": 26,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 0.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 2.4693609377704338,
+    "footprint": 1.9693609377704338,
+    "probe_state": 0.0,
+    "unrecovered": 0.5,
+    "content": 0.25,
+    "content_share": 0.10124076888724214,
+    "regime": "partial",
+    "types": {
+     "none": 160,
+     "compact": 0,
+     "extended": 96
+    }
+   }
+  },
+  {
+   "wolfram": 54,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 0.5,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 32,
+     "compact": 0,
+     "extended": 32
+    }
+   }
+  },
+  {
+   "wolfram": 58,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 6.3137218755408675,
+    "footprint": 5.4801222170757615,
+    "probe_state": 1.1125168162362655,
+    "unrecovered": 0.833599658465106,
+    "content": 0.4921875,
+    "content_share": 0.0779552076734195,
+    "regime": "partial",
+    "types": {
+     "none": 32,
+     "compact": 0,
+     "extended": 224
+    }
+   }
+  },
+  {
+   "wolfram": 82,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 2.4693609377704338,
+    "footprint": 1.8857612793053278,
+    "probe_state": 0.0,
+    "unrecovered": 0.583599658465106,
+    "content": 0.25,
+    "content_share": 0.10124076888724214,
+    "regime": "partial",
+    "types": {
+     "none": 160,
+     "compact": 0,
+     "extended": 96
+    }
+   }
+  },
+  {
+   "wolfram": 94,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.5,
+    "footprint": 1.2578125,
+    "probe_state": 0.0,
+    "unrecovered": 0.2421875,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "partial",
+    "types": {
+     "none": 192,
+     "compact": 0,
+     "extended": 64
+    }
+   }
+  },
+  {
+   "wolfram": 114,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 5.6887218755408675,
+    "footprint": 4.275444573832152,
+    "probe_state": 0.0,
+    "unrecovered": 1.4132773017087157,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "partial",
+    "types": {
+     "none": 32,
+     "compact": 0,
+     "extended": 224
+    }
+   }
+  },
+  {
+   "wolfram": 154,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.5943609377704338,
+     "footprint": 0.5943609377704338,
+     "probe_state": 0.34436093777043375,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.5471804688852169,
+     "footprint": 0.5471804688852169,
+     "probe_state": 0.2971804688852169,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 1.249192764094909,
+     "footprint": 1.249192764094909,
+     "probe_state": 0.29515135743925835,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.015098752716123,
+     "footprint": 2.015098752716123,
+     "probe_state": 0.16984242858537124,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 2.7071701970278337,
+     "footprint": 2.7071701970278337,
+     "probe_state": 0.15082741862763172,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.296630231298396,
+     "footprint": 3.296630231298396,
+     "probe_state": 0.083804786635719,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 3.101764106949406,
+     "footprint": 3.101764106949406,
+     "probe_state": 0.4160758113016749,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.532904493117094,
+    "footprint": 1.532904493117094,
+    "probe_state": 0.2006120300757619,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 160,
+     "compact": 0,
+     "extended": 96
+    }
+   }
+  },
+  {
+   "wolfram": 182,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 3.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 3.5,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 4.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 64,
+    "H_in": 6.0,
+    "only": 2.5,
+    "footprint": 2.5,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "full",
+    "types": {
+     "none": 32,
+     "compact": 0,
+     "extended": 32
+    }
+   }
+  },
+  {
+   "wolfram": 186,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 1.0,
+     "probe_state": 1.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 1.5,
+     "probe_state": 1.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 2.0,
+     "probe_state": 2.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 2.5,
+     "probe_state": 2.5,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 2.3692933739347426,
+     "footprint": 2.3692933739347426,
+     "probe_state": 2.3692933739347426,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 2.2721346346434386,
+     "footprint": 2.2721346346434386,
+     "probe_state": 2.2721346346434386,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 2.395645138152058,
+     "footprint": 2.395645138152058,
+     "probe_state": 2.395645138152058,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "full",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 3.525052483345746,
+    "footprint": 3.282864983345746,
+    "probe_state": 2.23085633694623,
+    "unrecovered": 0.2421875,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "partial",
+    "types": {
+     "none": 96,
+     "compact": 0,
+     "extended": 160
+    }
+   }
+  },
+  {
+   "wolfram": 218,
+   "role": "shadow_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 1.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 1.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 4,
+      "compact": 0,
+      "extended": 4
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 1.5,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 1.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 8
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 2.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 2.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 16
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 2.5,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 2.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 32
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 3.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 3.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 64
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 3.5,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 3.5,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 128
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 4.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 4.0,
+     "content": 0.0,
+     "content_share": 0.0,
+     "regime": "partial",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 256
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 1.5,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 1.5,
+    "content": 0.0,
+    "content_share": 0.0,
+    "regime": "partial",
+    "types": {
+     "none": 192,
+     "compact": 0,
+     "extended": 64
+    }
+   }
+  },
+  {
+   "wolfram": 1,
+   "role": "null_active",
+   "vR0": "1/3",
+   "vL0": "-1/3",
+   "V0": true,
+   "T": 1128,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 512,
+      "compact": 0,
+      "extended": 0
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 0.0,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": null,
+    "regime": "clean",
+    "types": {
+     "none": 256,
+     "compact": 0,
+     "extended": 0
+    }
+   }
+  },
+  {
+   "wolfram": 5,
+   "role": "null_active",
+   "vR0": "1/3",
+   "vL0": "-1/3",
+   "V0": true,
+   "T": 1128,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 512,
+      "compact": 0,
+      "extended": 0
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 0.984375,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.984375,
+    "content": 0.984375,
+    "content_share": 1.0,
+    "regime": "partial",
+    "types": {
+     "none": 256,
+     "compact": 0,
+     "extended": 0
+    }
+   }
+  },
+  {
+   "wolfram": 90,
+   "role": "null_silent",
+   "vR0": "1",
+   "vL0": "-1",
+   "V0": true,
+   "T": 576,
+   "RUN": 1500,
+   "run_capped": false,
+   "A": {
+    "8": {
+     "n": 8,
+     "H_in": 3.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 8,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "16": {
+     "n": 16,
+     "H_in": 4.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 16,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "32": {
+     "n": 32,
+     "H_in": 5.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 32,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "64": {
+     "n": 64,
+     "H_in": 6.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 64,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "128": {
+     "n": 128,
+     "H_in": 7.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 128,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "256": {
+     "n": 256,
+     "H_in": 8.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 256,
+      "compact": 0,
+      "extended": 0
+     }
+    },
+    "512": {
+     "n": 512,
+     "H_in": 9.0,
+     "only": 0.0,
+     "footprint": 0.0,
+     "probe_state": 0.0,
+     "unrecovered": 0.0,
+     "content": 0.0,
+     "content_share": null,
+     "regime": "clean",
+     "types": {
+      "none": 512,
+      "compact": 0,
+      "extended": 0
+     }
+    }
+   },
+   "C": {
+    "n": 256,
+    "H_in": 8.0,
+    "only": 0.0,
+    "footprint": 0.0,
+    "probe_state": 0.0,
+    "unrecovered": 0.0,
+    "content": 0.0,
+    "content_share": null,
+    "regime": "clean",
+    "types": {
+     "none": 256,
+     "compact": 0,
+     "extended": 0
+    }
+   }
+  }
+ ]
+}

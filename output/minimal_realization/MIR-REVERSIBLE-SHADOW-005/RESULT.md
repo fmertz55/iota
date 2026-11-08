@@ -26,3 +26,6 @@ Frozen tag mir-reversible-shadow-005-v0.1-frozen (8d4b614). 14 shadow rules + 2 
 ## Consequence
 Shadow type must be a measured variable, not a gate: extended domain (walls) versus compact residue.
 Next frozen test should classify each residue run by type and measure capacity per type, in active and silent rules.
+
+## Addendum (2026-11-08)
+Family C has input aliasing (duplicate physical starting states under distinct species labels); see SHADOW-006 RESULT. Do not cite family C numbers; families A and B are unaffected.
