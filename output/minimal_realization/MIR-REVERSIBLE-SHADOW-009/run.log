@@ -1,0 +1,5 @@
+{"valid": true, "V0_all": true, "V2_all": true, "H_B": "supported", "H_Phi": "supported", "H_E": "not_supported", "unexposed": 21}
+
+real	78m26.058s
+user	99m54.500s
+sys	0m51.261s
