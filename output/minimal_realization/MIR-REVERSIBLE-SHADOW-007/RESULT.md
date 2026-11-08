@@ -1,18 +1,49 @@
 # MIR-REVERSIBLE-SHADOW-007: result (2026-11-08)
 
-Frozen tag mir-reversible-shadow-007-v0.1-frozen (bf78658). 25 shadow pairs + 3 nulls; 0 duplicate starting states.
-Valid: V0 (all pairs reproduce SHADOW-003/004) and V1 (no-residue cells give 0 everywhere, aliasing check included).
+Frozen tag mir-reversible-shadow-007-v0.1-frozen (bf78658). 25 shadow pairs (14 active, 11 silent) + 3 nulls (1, 5, 90).
+Inputs per pair: 256 (2 R species x 2 L species x 64 offsets; 4 pairs had only 1 alias-free species per direction:
+151, 233, 54s, 182s). Duplicate starting states dropped: 0 of 7168.
 
-- H_P partial replicates: SUPPORTED. Reader a (from the left) is partial in 11/25 pairs: ['33a', '37a', '147a', '201a', '26s', '58s', '82s', '94s', '114s', '186s', '218s'].
-- H_J second reader completes: NOT SUPPORTED. Joint reading is complete in 7/11 of those: ['33a', '37a', '147a', '201a', '58s', '114s', '186s'].
-  Reader b (from the right) alone is partial in 20 pairs: ['33a', '37a', '91a', '123a', '139a', '143a', '151a', '171a', '209a', '213a', '233a', '241a', '26s', '54s', '58s', '82s', '94s', '154s', '186s', '218s'].
-  Pairs partial for each reader alone but complete jointly: ['33a', '37a', '58s', '186s'].
-  Joint reading complete overall in 21/25 pairs.
-- Per pair [only, unrecovered_a, unrecovered_b, unrecovered_joint] (bits): {"33a": [2.469, 0.25, 2.125, 0.0], "37a": [5.024, 0.355, 0.36, 0.0], "91a": [1.5, 0.0, 0.25, 0.0], "123a": [0.625, 0.0, 0.625, 0.0], "139a": [1.75, 0.0, 1.375, 0.0], "143a": [0.25, 0.0, 0.25, 0.0], "147a": [3.5, 0.779, 0.0, 0.0], "151a": [4.189, 0.0, 2.0, 0.0], "171a": [0.782, 0.0, 0.25, 0.0], "201a": [2.469, 0.18, 0.0, 0.0], "209a": [1.75, 0.0, 1.375, 0.0], "213a": [0.782, 0.0, 0.25, 0.0], "233a": [4.189, 0.0, 2.0, 0.0], "241a": [0.25, 0.0, 0.25, 0.0], "22s": [1.047, 0.0, 0.0, 0.0], "26s": [2.469, 0.5, 0.584, 0.25], "54s": [2.5, 0.0, 2.0, 0.0], "58s": [6.314, 0.834, 0.477, 0.0], "82s": [2.469, 0.584, 0.584, 0.242], "94s": [1.5, 0.242, 1.5, 0.242], "114s": [5.689, 1.413, 0.0, 0.0], "154s": [1.533, 0.0, 0.308, 0.0], "182s": [2.5, 0.0, 0.0, 0.0], "186s": [3.525, 0.242, 3.025, 0.0], "218s": [1.5, 1.5, 1.25, 1.25]}
-- Species per direction: {"33a": [2, 2], "37a": [2, 2], "91a": [2, 2], "123a": [2, 2], "139a": [2, 2], "143a": [2, 2], "147a": [2, 2], "151a": [1, 1], "171a": [2, 2], "201a": [2, 2], "209a": [2, 2], "213a": [2, 2], "233a": [1, 1], "241a": [2, 2], "22s": [2, 2], "26s": [2, 2], "54s": [1, 1], "58s": [2, 2], "82s": [2, 2], "94s": [2, 2], "114s": [2, 2], "154s": [2, 2], "182s": [1, 1], "186s": [2, 2], "218s": [2, 2], "1t": [2, 2], "5t": [2, 2], "90l": [2, 2]}
+## Frozen verdict: VALID; H_P supported; H_J not supported (narrow miss)
+- V0 passed for every pair (reader a at T=600 reproduces stored SHADOW-003/004 values). V1 holds (no residue-free
+  cell carries information; aliasing check included).
+- H_P (single reader partial in >= 1/3 of pairs): reader a is partial in 11/25 = 0.44. Supported. The SHADOW-006
+  family-C gap was not only an aliasing artifact: with alias-free species mixes, one probe type still misses
+  part of the record.
+- H_J (second reader completes in >= 2/3 of pair partial for a): 7/11 = 0.636 (8 needed). Not supported.
+  Stated prior (supported) failed by one pair.
 
-Reading: H_J fails narrowly (7/11 against a frozen bar of 8/11). A second, independent reader from the other side
-completes the read in most pairs that one reader leaves partial, and the two readers jointly read everything in 21/25
-pairs; in 4 pairs (26s, 82s, 94s, 218s) part of the record stays unread by both. Reader b alone is partial far more
-often (20/25) than reader a (11/25): reading is direction-dependent. Lay version: a mark that one passer-by cannot
-fully read is usually fully read by two passers-by from opposite sides, but not always.
+## Per-pair (bits; only / unrecovered by a / by b / by both jointly)
+Partial for a, completed jointly (7): 33 (2.47/0.25/2.13/0), 37 (5.02/0.36/0.36/0), 147 (3.50/0.78/0/0),
+201 (2.47/0.18/0/0), 58s (6.31/0.83/0.48/0), 114s (5.69/1.41/0/0), 186s (3.53/0.24/3.03/0).
+Partial for a, not completed (4, all silent): 26s (2.47/0.50/0.58/0.25), 82s (2.47/0.58/0.58/0.24),
+94s (1.50/0.24/1.50/0.24), 218s (1.50/1.50/1.25/1.25).
+Full for a (14): 91, 123, 139, 143, 151, 171, 209, 213, 233, 241, 22s, 54s, 154s, 182s.
+
+## Descriptive
+- Reader b alone is partial in 20/25 pairs; reader a in 11/25. The right-going probe from the left reads more.
+- Pairs partial for both readers alone but full jointly: 33, 37, 58s, 186s. Here each edge of the record is read
+  only by the reader that reaches it first; the two readers read complementary parts.
+- b alone completes what a misses in 147, 201, 114s (unrecovered_b = 0).
+- Split by type (post hoc, not frozen): active pairs partial for a are completed jointly in 4/4; silent pairs
+  in 3/7. The H_J failure is entirely a silent-vacuum effect.
+- 218s: reader a reads 0 of 1.5 bits; reader b reads 0.25; 1.25 bits are unread by either reader. The record
+  is there (carriers erased, residue determines input) but neither L0 nor R0 probes read it.
+- Null rule 5 is not clean under species mixes: 64/256 runs leave residue, 0.625 bit, fully read by reader a.
+  This does not violate V1 (V1 concerns residue-free cells only), but rule 5 is a null only for single-species
+  inputs. Flag it before using rule 5 as a null again.
+
+## Reading
+A single probe type reads only part of the shadow's record in nearly half the pairs, also with alias-free inputs.
+In active vacua a second reader from the other side recovers the rest (4/4). In silent vacua, some of the record
+(0.24-1.25 bit in 4 pairs) is out of reach of both probe types, even when each reads a fresh copy of the shadow.
+The missing part is not lost (it is in the residue), but the two available probes cannot read it.
+
+## Lay version
+A collision's mark is like a footprint's outline. Look from one side and you often miss part of the outline.
+In busy backgrounds, looking from the other side fills in the gap. In quiet backgrounds some of the outline
+can't be seen from either side by the passers-by we have: the memory is there, but these readers can't see it.
+
+## Next
+What a single reader misses (which edge; which bits of 26s, 82s, 94s, 218s neither reader reaches), then
+question 3 (2D reversible rules).
