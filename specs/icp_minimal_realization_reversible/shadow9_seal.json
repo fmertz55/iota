@@ -1,0 +1,10 @@
+{
+ "docs/ICP_MIR_REVERSIBLE_SHADOW_009_CONTRACT.md": "66928827ffde364abcf7c1d3884ec69c75a1decbb4d9d614fb40668bb7a25f9a",
+ "src/minimal_realization_reversible/collide2.py": "8033e5df048bb462855f2fbbd9558e37b58cd84a0964d583a73ba74c54713d41",
+ "src/minimal_realization_reversible/shadow.py": "37dc596fa21f4f3672e07d57a6808438a93f7b08a5d36233701fc1014e9f2cca",
+ "src/minimal_realization_reversible/shadow3.py": "7aa00d1f1df9e08979ad07eede430d727ca0646043290723a033e949c9aaf78f",
+ "src/minimal_realization_reversible/shadow6.py": "f463bed44ac794e64d11335374378fb789f221c17af65e265890529d053ef8fe",
+ "src/minimal_realization_reversible/shadow7.py": "87d57c3c83067aed0a7e2f7c0e338a4df11cc24e8cf7866f3fbcd3ed27c5b955",
+ "src/minimal_realization_reversible/shadow9.py": "0616ada05c24a7d3910303da3a110fb2671f88ae4005349b38061bb3c2eaea00",
+ "src/minimal_realization_reversible/vacuum_collide.py": "d7ecd5cae0f9681fa4ab8de09f60d7a2b4e8a4b8b6f5de3ca7d5ff770c9c36f6"
+}
