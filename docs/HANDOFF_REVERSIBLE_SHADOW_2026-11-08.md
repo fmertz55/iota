@@ -5,8 +5,8 @@ run, result commit; information-first vocabulary; check pictures; token thrift).
 
 ## Done since writing
 SHADOW-007 finished and is committed: read output/minimal_realization/MIR-REVERSIBLE-SHADOW-007/RESULT.md.
-H_P supported (partial reading replicates without aliasing); H_J not supported (a second reader from the
-other side mostly does not complete the read).
+H_P supported (partial reading replicates without aliasing); H_J narrowly not supported (7/11 vs bar 8/11): a second
+reader from the other side usually completes the read; jointly complete in 21/25; 4 silent pairs stay partial.
 
 ## Results so far (read each RESULT.md)
 - SHADOW-004 (+ addendum): silent vacuum holds shadows by the SHADOW-003 criterion, but only as collision-nucleated
@@ -21,6 +21,6 @@ other side mostly does not complete the read).
 - Deduplicate inputs by physical starting state, not by label; catalogue lists can repeat a species shifted.
 
 ## Next after SHADOW-007
-What the readers miss when species vary (not simply the far edge, since H_J failed): e.g. condition on outline and
+What the readers miss when species vary (4 silent pairs, 26/82/94/218, stay partial for both readers): e.g. condition on outline and
 reader footprints to locate the unread bits; or readers of the other species, then question 3: 2D reversible rules,
 where an outline is a curve and outline capacity could scale differently.
