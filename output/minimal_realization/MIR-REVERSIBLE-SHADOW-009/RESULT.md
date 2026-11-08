@@ -16,7 +16,8 @@ Run: 78 min wall, 4 workers.
 ## Which edge reader a misses (descriptive; reader a = R0 from the left, s=0)
 - Far edge: unread bits lie outside its near (left) edge window, a_near = 0: 33 (0.25), 58s (0.83), 114s (1.41), 186s (0.24), 82s (0.58).
 - Near edge, crossed transparently or at the wrong phase: 218s (1.5 of 1.5), 94s (0.24), 26s (0.25 near + 0.25 far).
-- In 37, 91, 147, 201, 22s reader a reads more than its left window holds (a_near < 0): it reads past the near edge.
+- In 91, 147, 201, 22s reader a reads more than its left window holds (a_near < 0): it reads past the near edge.
+- 37: mostly far edge (a_far 0.302) plus a small near-edge shortfall (a_near 0.053).
 - The record is its outline: I(in; E_L, E_R | O) = only in 23/25 (37: 5.016 of 5.024, 147: 3.25 of 3.5).
 
 ## Reading
