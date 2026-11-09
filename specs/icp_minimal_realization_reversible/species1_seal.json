@@ -1,0 +1,13 @@
+{
+ "docs/ICP_MIR_REVERSIBLE_SPECIES_001_CONTRACT.md": "01de77c63e34cd0e64c290553783df48302ebf6e3d848728b0e7242cc5fd0d1c",
+ "output/minimal_realization/MIR-REVERSIBLE-SHADOW-004/results.json": "6180d94e8c07937a725c6444324c8b5d6185d94378e7c9834c167bfaca2f9a00",
+ "output/minimal_realization/MIR-REVERSIBLE-VACUUM-COLLIDE-001/results.json": "b83f8a5a8d3d101b1fc986bbff54ae8adccd803ac7e3e5e25e22df776212316a",
+ "src/minimal_realization_reversible/collide2.py": "8033e5df048bb462855f2fbbd9558e37b58cd84a0964d583a73ba74c54713d41",
+ "src/minimal_realization_reversible/shadow.py": "37dc596fa21f4f3672e07d57a6808438a93f7b08a5d36233701fc1014e9f2cca",
+ "src/minimal_realization_reversible/shadow3.py": "7aa00d1f1df9e08979ad07eede430d727ca0646043290723a033e949c9aaf78f",
+ "src/minimal_realization_reversible/shadow4.py": "9ade54224a3f14c2ed14f957e6c7c8edc9c6ccae1c8ee0987e90393be4b15b63",
+ "src/minimal_realization_reversible/shadow6.py": "f463bed44ac794e64d11335374378fb789f221c17af65e265890529d053ef8fe",
+ "src/minimal_realization_reversible/shadow7.py": "87d57c3c83067aed0a7e2f7c0e338a4df11cc24e8cf7866f3fbcd3ed27c5b955",
+ "src/minimal_realization_reversible/species1.py": "662d744a2ce56ac4602a9709f8b7fd31b08174414fff0bbe9bbc1bc37bfefabc",
+ "src/minimal_realization_reversible/vacuum_collide.py": "d7ecd5cae0f9681fa4ab8de09f60d7a2b4e8a4b8b6f5de3ca7d5ff770c9c36f6"
+}
