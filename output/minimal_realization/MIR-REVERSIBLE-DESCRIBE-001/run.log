@@ -1,0 +1,5 @@
+{"valid": true, "V0_all": true, "V1_tracked": true, "V_S": true, "H_D": "supported"} pass: ['147', '201', '22s', '26s', '58s', '82s', '114s']
+
+real	6m6.489s
+user	21m53.327s
+sys	0m10.336s
