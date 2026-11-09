@@ -1,0 +1,2149 @@
+{
+ "summary": {
+  "V0_all": true,
+  "V1_closed": true,
+  "V2_covariance": true,
+  "V3_edges": true,
+  "V4_order": true,
+  "V5_nulls": true,
+  "eligible": [
+   "147",
+   "201",
+   "22s",
+   "26s",
+   "58s",
+   "82s",
+   "114s"
+  ],
+  "H_1_pass": [
+   "147",
+   "201",
+   "22s"
+  ],
+  "H_T_pass": [
+   "147",
+   "58s",
+   "114s"
+  ],
+  "H_I_pass": [],
+  "valid": true,
+  "H_1": "not_supported",
+  "H_T": "not_supported",
+  "H_I": "not_supported",
+  "table": {
+   "37": {
+    "rec": 3.917,
+    "r_W": 2.726,
+    "r_clock": 2.757,
+    "r_place": 2.81,
+    "r_subplace": 2.726,
+    "r_sub": 2.955,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.984,
+    "r_allwalls": 0.984,
+    "r_left_edge": 1.262,
+    "r_right_edge": 1.481,
+    "one_static": false,
+    "n_sub": 17,
+    "n_clock": 36,
+    "n_place": 29,
+    "n_state": 45
+   },
+   "147": {
+    "rec": 3.5,
+    "r_W": 0.0,
+    "r_clock": 2.177,
+    "r_place": 0.934,
+    "r_subplace": 0.227,
+    "r_sub": 2.75,
+    "clock_beyond_place": 0.227,
+    "r_outer": 0.25,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.972,
+    "r_right_edge": 2.75,
+    "one_static": true,
+    "n_sub": 3,
+    "n_clock": 7,
+    "n_place": 37,
+    "n_state": 128
+   },
+   "201": {
+    "rec": 2.469,
+    "r_W": 0.0,
+    "r_clock": 1.552,
+    "r_place": 0.573,
+    "r_subplace": 0.0,
+    "r_sub": 1.875,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.25,
+    "r_right_edge": 1.875,
+    "one_static": true,
+    "n_sub": 3,
+    "n_clock": 6,
+    "n_place": 34,
+    "n_state": 96
+   },
+   "33": {
+    "rec": 2.469,
+    "r_W": 2.469,
+    "r_clock": 2.469,
+    "r_place": 2.469,
+    "r_subplace": 2.469,
+    "r_sub": 2.469,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.25,
+    "r_right_edge": 2.125,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "91": {
+    "rec": 1.5,
+    "r_W": 0.625,
+    "r_clock": 1.125,
+    "r_place": 0.75,
+    "r_subplace": 0.625,
+    "r_sub": 1.125,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.125,
+    "r_right_edge": 0.875,
+    "one_static": false,
+    "n_sub": 2,
+    "n_clock": 2,
+    "n_place": 16,
+    "n_state": 32
+   },
+   "123": {
+    "rec": 0.625,
+    "r_W": 0.625,
+    "r_clock": 0.625,
+    "r_place": 0.625,
+    "r_subplace": 0.625,
+    "r_sub": 0.625,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.625,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "1": {
+    "rec": 0.0,
+    "r_W": 0.0,
+    "r_clock": 0.0,
+    "r_place": 0.0,
+    "r_subplace": 0.0,
+    "r_sub": 0.0,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.0,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "5": {
+    "rec": 0.0,
+    "r_W": 0.0,
+    "r_clock": 0.0,
+    "r_place": 0.0,
+    "r_subplace": 0.0,
+    "r_sub": 0.0,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.0,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "139": {
+    "rec": 1.5,
+    "r_W": 1.5,
+    "r_clock": 1.5,
+    "r_place": 1.5,
+    "r_subplace": 1.5,
+    "r_sub": 1.5,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 1.125,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "143": {
+    "rec": 0.25,
+    "r_W": 0.25,
+    "r_clock": 0.25,
+    "r_place": 0.25,
+    "r_subplace": 0.25,
+    "r_sub": 0.25,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.25,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "151": {
+    "rec": 2.0,
+    "r_W": 2.0,
+    "r_clock": 2.0,
+    "r_place": 2.0,
+    "r_subplace": 2.0,
+    "r_sub": 2.0,
+    "clock_beyond_place": 0.0,
+    "r_outer": 1.0,
+    "r_allwalls": 1.0,
+    "r_left_edge": 1.0,
+    "r_right_edge": 2.0,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "171": {
+    "rec": 0.782,
+    "r_W": 0.782,
+    "r_clock": 0.782,
+    "r_place": 0.782,
+    "r_subplace": 0.782,
+    "r_sub": 0.782,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.532,
+    "r_allwalls": 0.532,
+    "r_left_edge": 0.532,
+    "r_right_edge": 0.782,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "209": {
+    "rec": 1.5,
+    "r_W": 1.5,
+    "r_clock": 1.5,
+    "r_place": 1.5,
+    "r_subplace": 1.5,
+    "r_sub": 1.5,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 1.125,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "213": {
+    "rec": 0.782,
+    "r_W": 0.782,
+    "r_clock": 0.782,
+    "r_place": 0.782,
+    "r_subplace": 0.782,
+    "r_sub": 0.782,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.532,
+    "r_allwalls": 0.532,
+    "r_left_edge": 0.532,
+    "r_right_edge": 0.782,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "233": {
+    "rec": 2.0,
+    "r_W": 2.0,
+    "r_clock": 2.0,
+    "r_place": 2.0,
+    "r_subplace": 2.0,
+    "r_sub": 2.0,
+    "clock_beyond_place": 0.0,
+    "r_outer": 1.0,
+    "r_allwalls": 1.0,
+    "r_left_edge": 1.0,
+    "r_right_edge": 2.0,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "241": {
+    "rec": 0.25,
+    "r_W": 0.25,
+    "r_clock": 0.25,
+    "r_place": 0.25,
+    "r_subplace": 0.25,
+    "r_sub": 0.25,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.25,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "22s": {
+    "rec": 1.047,
+    "r_W": 0.0,
+    "r_clock": 0.465,
+    "r_place": 0.125,
+    "r_subplace": 0.0,
+    "r_sub": 0.75,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.125,
+    "r_right_edge": 0.75,
+    "one_static": true,
+    "n_sub": 3,
+    "n_clock": 10,
+    "n_place": 32,
+    "n_state": 48
+   },
+   "26s": {
+    "rec": 2.469,
+    "r_W": 0.584,
+    "r_clock": 2.094,
+    "r_place": 0.584,
+    "r_subplace": 0.584,
+    "r_sub": 2.469,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.25,
+    "r_right_edge": 2.125,
+    "one_static": true,
+    "n_sub": 1,
+    "n_clock": 2,
+    "n_place": 33,
+    "n_state": 33
+   },
+   "54s": {
+    "rec": 0.0,
+    "r_W": 0.0,
+    "r_clock": 0.0,
+    "r_place": 0.0,
+    "r_subplace": 0.0,
+    "r_sub": 0.0,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.0,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "58s": {
+    "rec": 6.314,
+    "r_W": 1.413,
+    "r_clock": 4.927,
+    "r_place": 1.896,
+    "r_subplace": 1.896,
+    "r_sub": 6.314,
+    "clock_beyond_place": 0.482,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.834,
+    "r_right_edge": 4.875,
+    "one_static": true,
+    "n_sub": 1,
+    "n_clock": 3,
+    "n_place": 34,
+    "n_state": 66
+   },
+   "82s": {
+    "rec": 2.469,
+    "r_W": 0.584,
+    "r_clock": 2.094,
+    "r_place": 0.584,
+    "r_subplace": 0.584,
+    "r_sub": 2.469,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.584,
+    "r_right_edge": 1.875,
+    "one_static": true,
+    "n_sub": 1,
+    "n_clock": 2,
+    "n_place": 33,
+    "n_state": 33
+   },
+   "94s": {
+    "rec": 1.5,
+    "r_W": 1.5,
+    "r_clock": 1.5,
+    "r_place": 1.5,
+    "r_subplace": 1.5,
+    "r_sub": 1.5,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 1.25,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "114s": {
+    "rec": 5.689,
+    "r_W": 1.413,
+    "r_clock": 4.5,
+    "r_place": 1.896,
+    "r_subplace": 1.896,
+    "r_sub": 5.689,
+    "clock_beyond_place": 0.482,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 1.413,
+    "r_right_edge": 3.75,
+    "one_static": true,
+    "n_sub": 1,
+    "n_clock": 3,
+    "n_place": 34,
+    "n_state": 67
+   },
+   "154s": {
+    "rec": 1.533,
+    "r_W": 1.533,
+    "r_clock": 1.533,
+    "r_place": 1.533,
+    "r_subplace": 1.533,
+    "r_sub": 1.533,
+    "clock_beyond_place": 0.0,
+    "r_outer": 1.533,
+    "r_allwalls": 1.533,
+    "r_left_edge": 1.533,
+    "r_right_edge": 1.533,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "182s": {
+    "rec": 2.5,
+    "r_W": 2.5,
+    "r_clock": 2.5,
+    "r_place": 2.5,
+    "r_subplace": 2.5,
+    "r_sub": 2.5,
+    "clock_beyond_place": 0.0,
+    "r_outer": 2.5,
+    "r_allwalls": 2.5,
+    "r_left_edge": 2.5,
+    "r_right_edge": 2.5,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "186s": {
+    "rec": 3.025,
+    "r_W": 3.025,
+    "r_clock": 3.025,
+    "r_place": 3.025,
+    "r_subplace": 3.025,
+    "r_sub": 3.025,
+    "clock_beyond_place": 0.0,
+    "r_outer": 3.025,
+    "r_allwalls": 3.025,
+    "r_left_edge": 3.025,
+    "r_right_edge": 3.025,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "218s": {
+    "rec": 1.5,
+    "r_W": 1.5,
+    "r_clock": 1.5,
+    "r_place": 1.5,
+    "r_subplace": 1.5,
+    "r_sub": 1.5,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 1.25,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   },
+   "90s": {
+    "rec": 0.0,
+    "r_W": 0.0,
+    "r_clock": 0.0,
+    "r_place": 0.0,
+    "r_subplace": 0.0,
+    "r_sub": 0.0,
+    "clock_beyond_place": 0.0,
+    "r_outer": 0.0,
+    "r_allwalls": 0.0,
+    "r_left_edge": 0.0,
+    "r_right_edge": 0.0,
+    "one_static": false,
+    "n_sub": 0,
+    "n_clock": 0,
+    "n_place": 0,
+    "n_state": 0
+   }
+  }
+ },
+ "rules": [
+  {
+   "wolfram": 37,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 30,
+   "speed_mismatch": 0,
+   "T": 1404,
+   "E": 126,
+   "pv": 3,
+   "tw": 6950,
+   "rec": 3.9165575878534877,
+   "r_W": 2.7257583102311305,
+   "r_clock": 2.7570083102311305,
+   "r_place": 2.8097808688417825,
+   "r_subplace": 2.7257583102311305,
+   "r_sub": 2.955479541899779,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.9836899675565549,
+   "r_allwalls": 0.9836899675565549,
+   "r_left_edge": 1.2617538232012198,
+   "r_right_edge": 1.4810573757405807,
+   "shadow_runs": 180,
+   "run_classes": {
+    "followed": 134,
+    "none": 62,
+    "open": 46,
+    "movers": 14
+   },
+   "lost_or_open_walls": 30,
+   "one_static_all": false,
+   "static_periods": [
+    [
+     6,
+     19
+    ],
+    [
+     18,
+     2
+    ],
+    [
+     27,
+     11
+    ],
+    [
+     36,
+     4
+    ],
+    [
+     54,
+     2
+    ],
+    [
+     60,
+     4
+    ],
+    [
+     78,
+     3
+    ]
+   ],
+   "n_static_sub": 17,
+   "n_static_clock": 36,
+   "n_static_place": 29,
+   "n_static_state": 45,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     18
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 12), Fraction(1, 12))),)",
+     10
+    ],
+    [
+     "(('static', (), (Fraction(0, 1),)),)",
+     9
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(1, 12), Fraction(1, 3))),)",
+     7
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 9), Fraction(1, 9), Fraction(1, 3))),)",
+     7
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 9), Fraction(1, 9))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(1, 3))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))), ('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))))",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 9), Fraction(1, 9))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(1, 12), Fraction(1, 3))),)",
+     5
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(0, 1))),)",
+     3
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(0, 1), Fraction(1, 3))),)",
+     3
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 12), Fraction(1, 9))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 12))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 12), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(0, 1), Fraction(1, 3), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(-1, 3), Fraction(0, 1))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 12), Fraction(0, 1), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 9), Fraction(1, 12))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 12))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(-1, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 12), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(2, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(0, 1))), ('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 12), Fraction(1, 4), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 9), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 9))),)",
+     1
+    ],
+    [
+     "(('static', (), (Fraction(0, 1),)), ('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(0, 1), Fraction(1, 12), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-2, 9), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))), ('growing', ((1, 'vac', 1),), (Fraction(0, 1), Fraction(1, 3))))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 4), Fraction(1, 12))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 2)), (Fraction(-1, 9), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))), ('static', (), (Fraction(0, 1),)))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(0, 1))),)",
+     1
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 147,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1404,
+   "E": 126,
+   "pv": 4,
+   "tw": 6950,
+   "rec": 3.5,
+   "r_W": 0.0,
+   "r_clock": 2.1770577209331803,
+   "r_place": 0.933670117221304,
+   "r_subplace": 0.2265625,
+   "r_sub": 2.75,
+   "clock_beyond_place": 0.2265625,
+   "r_outer": 0.25,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.971698779305326,
+   "r_right_edge": 2.75,
+   "shadow_runs": 128,
+   "run_classes": {
+    "followed": 128,
+    "none": 128
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     8,
+     96
+    ],
+    [
+     12,
+     32
+    ]
+   ],
+   "n_static_sub": 3,
+   "n_static_clock": 7,
+   "n_static_place": 37,
+   "n_static_state": 128,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 4), Fraction(0, 1), Fraction(1, 4))),)",
+     128
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 201,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1404,
+   "E": 126,
+   "pv": 4,
+   "tw": 6950,
+   "rec": 2.4693609377704338,
+   "r_W": 0.0,
+   "r_clock": 1.5520577209331803,
+   "r_place": 0.57283837915978,
+   "r_subplace": 0.0,
+   "r_sub": 1.875,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.25,
+   "r_right_edge": 1.875,
+   "shadow_runs": 96,
+   "run_classes": {
+    "none": 128,
+    "followed": 96,
+    "movers": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     4,
+     32
+    ],
+    [
+     8,
+     32
+    ],
+    [
+     12,
+     32
+    ]
+   ],
+   "n_static_sub": 3,
+   "n_static_clock": 6,
+   "n_static_place": 34,
+   "n_static_state": 96,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 4), Fraction(0, 1), Fraction(1, 4))),)",
+     64
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 3)), (Fraction(-1, 4), Fraction(0, 1), Fraction(1, 4))),)",
+     32
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 33,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "tw": 6642,
+   "rec": 2.4693609377704338,
+   "r_W": 2.4693609377704338,
+   "r_clock": 2.4693609377704338,
+   "r_place": 2.4693609377704338,
+   "r_subplace": 2.4693609377704338,
+   "r_sub": 2.4693609377704338,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.25,
+   "r_right_edge": 2.125,
+   "shadow_runs": 128,
+   "run_classes": {
+    "none": 128,
+    "followed": 128
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     96
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     32
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 91,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "tw": 6642,
+   "rec": 1.5,
+   "r_W": 0.625,
+   "r_clock": 1.125,
+   "r_place": 0.75,
+   "r_subplace": 0.625,
+   "r_sub": 1.125,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.125,
+   "r_right_edge": 0.875,
+   "shadow_runs": 64,
+   "run_classes": {
+    "followed": 64,
+    "none": 192
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [
+    [
+     6,
+     32
+    ]
+   ],
+   "n_static_sub": 2,
+   "n_static_clock": 2,
+   "n_static_place": 16,
+   "n_static_state": 32,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 9), Fraction(1, 3))),)",
+     16
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 9))),)",
+     16
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     16
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 123,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "tw": 6642,
+   "rec": 0.625,
+   "r_W": 0.625,
+   "r_clock": 0.625,
+   "r_place": 0.625,
+   "r_subplace": 0.625,
+   "r_sub": 0.625,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.625,
+   "shadow_runs": 32,
+   "run_classes": {
+    "followed": 32,
+    "none": 224
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     32
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 1,
+   "role": "null_active",
+   "n": 256,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "tw": 6642,
+   "rec": 0.0,
+   "r_W": 0.0,
+   "r_clock": 0.0,
+   "r_place": 0.0,
+   "r_subplace": 0.0,
+   "r_sub": 0.0,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.0,
+   "shadow_runs": 0,
+   "run_classes": {
+    "none": 256
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 5,
+   "role": "null_active",
+   "n": 256,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "tw": 6642,
+   "rec": 0.0,
+   "r_W": 0.0,
+   "r_clock": 0.0,
+   "r_place": 0.0,
+   "r_subplace": 0.0,
+   "r_sub": 0.0,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.0,
+   "shadow_runs": 0,
+   "run_classes": {
+    "none": 192,
+    "movers": 64
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 139,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 1.5,
+   "r_W": 1.5,
+   "r_clock": 1.5,
+   "r_place": 1.5,
+   "r_subplace": 1.5,
+   "r_sub": 1.5,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 1.125,
+   "shadow_runs": 64,
+   "run_classes": {
+    "none": 160,
+    "followed": 64,
+    "movers": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     64
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 143,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 0.25,
+   "r_W": 0.25,
+   "r_clock": 0.25,
+   "r_place": 0.25,
+   "r_subplace": 0.25,
+   "r_sub": 0.25,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.25,
+   "shadow_runs": 224,
+   "run_classes": {
+    "open": 208,
+    "none": 32,
+    "followed": 16
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 151,
+   "role": "shadow_active",
+   "n": 64,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 2.0,
+   "r_W": 2.0,
+   "r_clock": 2.0,
+   "r_place": 2.0,
+   "r_subplace": 2.0,
+   "r_sub": 2.0,
+   "clock_beyond_place": 0.0,
+   "r_outer": 1.0,
+   "r_allwalls": 1.0,
+   "r_left_edge": 1.0,
+   "r_right_edge": 2.0,
+   "shadow_runs": 32,
+   "run_classes": {
+    "movers": 16,
+    "none": 16,
+    "open": 16,
+    "followed": 16
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 3),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 171,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 0.781956286981969,
+   "r_W": 0.781956286981969,
+   "r_clock": 0.781956286981969,
+   "r_place": 0.781956286981969,
+   "r_subplace": 0.781956286981969,
+   "r_sub": 0.781956286981969,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.531956286981969,
+   "r_allwalls": 0.531956286981969,
+   "r_left_edge": 0.531956286981969,
+   "r_right_edge": 0.781956286981969,
+   "shadow_runs": 224,
+   "run_classes": {
+    "open": 208,
+    "none": 32,
+    "followed": 16
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 209,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 1.5,
+   "r_W": 1.5,
+   "r_clock": 1.5,
+   "r_place": 1.5,
+   "r_subplace": 1.5,
+   "r_sub": 1.5,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 1.125,
+   "shadow_runs": 64,
+   "run_classes": {
+    "none": 160,
+    "followed": 64,
+    "movers": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     64
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 213,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 0.781956286981969,
+   "r_W": 0.781956286981969,
+   "r_clock": 0.781956286981969,
+   "r_place": 0.781956286981969,
+   "r_subplace": 0.781956286981969,
+   "r_sub": 0.781956286981969,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.531956286981969,
+   "r_allwalls": 0.531956286981969,
+   "r_left_edge": 0.531956286981969,
+   "r_right_edge": 0.781956286981969,
+   "shadow_runs": 224,
+   "run_classes": {
+    "open": 208,
+    "none": 32,
+    "followed": 16
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 233,
+   "role": "shadow_active",
+   "n": 64,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 2.0,
+   "r_W": 2.0,
+   "r_clock": 2.0,
+   "r_place": 2.0,
+   "r_subplace": 2.0,
+   "r_sub": 2.0,
+   "clock_beyond_place": 0.0,
+   "r_outer": 1.0,
+   "r_allwalls": 1.0,
+   "r_left_edge": 1.0,
+   "r_right_edge": 2.0,
+   "shadow_runs": 32,
+   "run_classes": {
+    "open": 16,
+    "followed": 16,
+    "movers": 16,
+    "none": 16
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 3),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 241,
+   "role": "shadow_active",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "tw": 6335,
+   "rec": 0.25,
+   "r_W": 0.25,
+   "r_clock": 0.25,
+   "r_place": 0.25,
+   "r_subplace": 0.25,
+   "r_sub": 0.25,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.25,
+   "shadow_runs": 224,
+   "run_classes": {
+    "open": 208,
+    "none": 32,
+    "followed": 16
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 22,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 1.0471804688852169,
+   "r_W": 0.0,
+   "r_clock": 0.464920117221304,
+   "r_place": 0.125,
+   "r_subplace": 0.0,
+   "r_sub": 0.75,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.125,
+   "r_right_edge": 0.75,
+   "shadow_runs": 48,
+   "run_classes": {
+    "followed": 48,
+    "none": 208
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     4,
+     32
+    ],
+    [
+     12,
+     16
+    ]
+   ],
+   "n_static_sub": 3,
+   "n_static_clock": 10,
+   "n_static_place": 32,
+   "n_static_state": 48,
+   "word_counts": [
+    [
+     "(('growing', ((4, (1, 2, 1, 3), None), (4, (1, 2, 1, 3), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     48
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 26,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 2.4693609377704338,
+   "r_W": 0.583599658465106,
+   "r_clock": 2.0943609377704338,
+   "r_place": 0.583599658465106,
+   "r_subplace": 0.583599658465106,
+   "r_sub": 2.4693609377704338,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.25,
+   "r_right_edge": 2.125,
+   "shadow_runs": 96,
+   "run_classes": {
+    "followed": 96,
+    "none": 160
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     2,
+     96
+    ]
+   ],
+   "n_static_sub": 1,
+   "n_static_clock": 2,
+   "n_static_place": 33,
+   "n_static_state": 33,
+   "word_counts": [
+    [
+     "(('growing', ((1, (3,), None), (2, (1, 2), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     96
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 54,
+   "role": "shadow_silent",
+   "n": 64,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 0.0,
+   "r_W": 0.0,
+   "r_clock": 0.0,
+   "r_place": 0.0,
+   "r_subplace": 0.0,
+   "r_sub": 0.0,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.0,
+   "shadow_runs": 0,
+   "run_classes": {
+    "none": 32,
+    "movers": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 58,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 6.3137218755408675,
+   "r_W": 1.4132773017087148,
+   "r_clock": 4.927145779633744,
+   "r_place": 1.89567675831956,
+   "r_subplace": 1.89567675831956,
+   "r_sub": 6.3137218755408675,
+   "clock_beyond_place": 0.48239945661084516,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.833599658465106,
+   "r_right_edge": 4.875,
+   "shadow_runs": 224,
+   "run_classes": {
+    "followed": 224,
+    "none": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     3,
+     224
+    ]
+   ],
+   "n_static_sub": 1,
+   "n_static_clock": 3,
+   "n_static_place": 34,
+   "n_static_state": 66,
+   "word_counts": [
+    [
+     "(('growing', ((1, (3,), None), (3, (0, 2, 1), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     224
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 82,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 2.4693609377704338,
+   "r_W": 0.583599658465106,
+   "r_clock": 2.0943609377704338,
+   "r_place": 0.583599658465106,
+   "r_subplace": 0.583599658465106,
+   "r_sub": 2.4693609377704338,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.583599658465106,
+   "r_right_edge": 1.875,
+   "shadow_runs": 96,
+   "run_classes": {
+    "followed": 96,
+    "none": 160
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     2,
+     96
+    ]
+   ],
+   "n_static_sub": 1,
+   "n_static_clock": 2,
+   "n_static_place": 33,
+   "n_static_state": 33,
+   "word_counts": [
+    [
+     "(('growing', ((2, (1, 2), None), (1, (3,), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     96
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 94,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 1.5,
+   "r_W": 1.5,
+   "r_clock": 1.5,
+   "r_place": 1.5,
+   "r_subplace": 1.5,
+   "r_sub": 1.5,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 1.25,
+   "shadow_runs": 64,
+   "run_classes": {
+    "none": 192,
+    "followed": 64
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((1, (3,), None),), (Fraction(-1, 1), Fraction(1, 1))),)",
+     64
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 114,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 5.6887218755408675,
+   "r_W": 1.4132773017087148,
+   "r_clock": 4.500088058700563,
+   "r_place": 1.89567675831956,
+   "r_subplace": 1.89567675831956,
+   "r_sub": 5.6887218755408675,
+   "clock_beyond_place": 0.48239945661084516,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 1.4132773017087148,
+   "r_right_edge": 3.75,
+   "shadow_runs": 224,
+   "run_classes": {
+    "followed": 224,
+    "none": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": true,
+   "static_periods": [
+    [
+     3,
+     224
+    ]
+   ],
+   "n_static_sub": 1,
+   "n_static_clock": 3,
+   "n_static_place": 34,
+   "n_static_state": 67,
+   "word_counts": [
+    [
+     "(('growing', ((3, (0, 1, 2), None), (1, (3,), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     224
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 154,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 1.532904493117094,
+   "r_W": 1.532904493117094,
+   "r_clock": 1.532904493117094,
+   "r_place": 1.532904493117094,
+   "r_subplace": 1.532904493117094,
+   "r_sub": 1.532904493117094,
+   "clock_beyond_place": 0.0,
+   "r_outer": 1.532904493117094,
+   "r_allwalls": 1.532904493117094,
+   "r_left_edge": 1.532904493117094,
+   "r_right_edge": 1.532904493117094,
+   "shadow_runs": 96,
+   "run_classes": {
+    "dis": 96,
+    "none": 160
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))))",
+     96
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 182,
+   "role": "shadow_silent",
+   "n": 64,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 2.5,
+   "r_W": 2.5,
+   "r_clock": 2.5,
+   "r_place": 2.5,
+   "r_subplace": 2.5,
+   "r_sub": 2.5,
+   "clock_beyond_place": 0.0,
+   "r_outer": 2.5,
+   "r_allwalls": 2.5,
+   "r_left_edge": 2.5,
+   "r_right_edge": 2.5,
+   "shadow_runs": 32,
+   "run_classes": {
+    "none": 32,
+    "dis": 32
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))),)",
+     32
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 186,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 3.025052483345746,
+   "r_W": 3.025052483345746,
+   "r_clock": 3.025052483345746,
+   "r_place": 3.025052483345746,
+   "r_subplace": 3.025052483345746,
+   "r_sub": 3.025052483345746,
+   "clock_beyond_place": 0.0,
+   "r_outer": 3.025052483345746,
+   "r_allwalls": 3.025052483345746,
+   "r_left_edge": 3.025052483345746,
+   "r_right_edge": 3.025052483345746,
+   "shadow_runs": 160,
+   "run_classes": {
+    "dis": 160,
+    "none": 96
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))),)",
+     64
+    ],
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))))",
+     64
+    ],
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))))",
+     32
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 218,
+   "role": "shadow_silent",
+   "n": 256,
+   "ctrl": {
+    "translate": true,
+    "delay": true
+   },
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 1.5,
+   "r_W": 1.5,
+   "r_clock": 1.5,
+   "r_place": 1.5,
+   "r_subplace": 1.5,
+   "r_sub": 1.5,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 1.25,
+   "shadow_runs": 64,
+   "run_classes": {
+    "followed": 64,
+    "none": 192
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [
+    [
+     "(('growing', ((2, (1, 2), None),), (Fraction(-1, 1), Fraction(1, 1))),)",
+     64
+    ]
+   ],
+   "V0": true,
+   "V4": true
+  },
+  {
+   "wolfram": 90,
+   "role": "null_silent",
+   "n": 256,
+   "ctrl": null,
+   "lost": 0,
+   "edge_hits": 0,
+   "noclose": 0,
+   "speed_mismatch": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "tw": 6027,
+   "rec": 0.0,
+   "r_W": 0.0,
+   "r_clock": 0.0,
+   "r_place": 0.0,
+   "r_subplace": 0.0,
+   "r_sub": 0.0,
+   "clock_beyond_place": 0.0,
+   "r_outer": 0.0,
+   "r_allwalls": 0.0,
+   "r_left_edge": 0.0,
+   "r_right_edge": 0.0,
+   "shadow_runs": 0,
+   "run_classes": {
+    "none": 256
+   },
+   "lost_or_open_walls": 0,
+   "one_static_all": false,
+   "static_periods": [],
+   "n_static_sub": 0,
+   "n_static_clock": 0,
+   "n_static_place": 0,
+   "n_static_state": 0,
+   "word_counts": [],
+   "V0": true,
+   "V4": true
+  }
+ ]
+}

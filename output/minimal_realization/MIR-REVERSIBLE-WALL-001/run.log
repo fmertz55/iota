@@ -1,0 +1,5 @@
+{"valid": true, "V0_all": true, "V1_closed": true, "V2_covariance": true, "V3_edges": true, "V4_order": true, "V5_nulls": true, "H_1": "not_supported", "H_T": "not_supported", "H_I": "not_supported"}
+
+real	4m43.458s
+user	17m50.135s
+sys	0m2.808s
