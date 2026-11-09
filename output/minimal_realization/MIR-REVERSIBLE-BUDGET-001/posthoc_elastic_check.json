@@ -1,0 +1,74 @@
+{
+ "33": {
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 96,
+  "residue=True elastic=False n_out=2": 32
+ },
+ "37": {
+  "residue=False elastic=False n_out=2": 8,
+  "residue=False elastic=False n_out=3": 2,
+  "residue=False elastic=True n_out=2": 58,
+  "residue=True elastic=False n_out=0": 173,
+  "residue=True elastic=False n_out=1": 14,
+  "residue=True elastic=False n_out=2": 1
+ },
+ "91": {
+  "residue=False elastic=False n_out=2": 32,
+  "residue=False elastic=True n_out=2": 160,
+  "residue=True elastic=False n_out=0": 64
+ },
+ "123": {
+  "residue=False elastic=False n_out=2": 192,
+  "residue=False elastic=True n_out=2": 32,
+  "residue=True elastic=False n_out=0": 32
+ },
+ "139": {
+  "residue=False elastic=False n_out=2": 32,
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 64,
+  "residue=True elastic=False n_out=1": 32
+ },
+ "147": {
+  "residue=False elastic=False n_out=2": 128,
+  "residue=True elastic=False n_out=0": 128
+ },
+ "201": {
+  "residue=False elastic=False n_out=2": 128,
+  "residue=True elastic=False n_out=0": 96,
+  "residue=True elastic=False n_out=2": 32
+ },
+ "209": {
+  "residue=False elastic=False n_out=2": 32,
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 64,
+  "residue=True elastic=False n_out=1": 32
+ },
+ "22": {
+  "residue=False elastic=True n_out=2": 208,
+  "residue=True elastic=False n_out=0": 48
+ },
+ "26": {
+  "residue=False elastic=False n_out=2": 32,
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 96
+ },
+ "54": {
+  "residue=False elastic=True n_out=2": 32,
+  "residue=True elastic=False n_out=0": 32
+ },
+ "82": {
+  "residue=False elastic=False n_out=2": 32,
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 96
+ },
+ "94": {
+  "residue=False elastic=False n_out=2": 64,
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 64
+ },
+ "218": {
+  "residue=False elastic=False n_out=2": 64,
+  "residue=False elastic=True n_out=2": 128,
+  "residue=True elastic=False n_out=0": 64
+ }
+}

@@ -1,0 +1,1745 @@
+{
+ "summary": {
+  "V0_all": true,
+  "V1_all": true,
+  "V2_excluded": [],
+  "V3_all": true,
+  "V4_all": true,
+  "included": 14,
+  "H_A_pass": [
+   "91",
+   "123",
+   "22s",
+   "26s",
+   "82s",
+   "218s"
+  ],
+  "H_A3_pass": [
+   "37",
+   "91",
+   "123",
+   "22s",
+   "26s",
+   "82s",
+   "218s"
+  ],
+  "H_Z_pass": [
+   "37",
+   "147",
+   "201",
+   "33",
+   "139",
+   "209",
+   "54s",
+   "94s"
+  ],
+  "H_Z3_pass": [
+   "147",
+   "201",
+   "33",
+   "139",
+   "209",
+   "54s",
+   "94s"
+  ],
+  "H_W_pass": [
+   "91"
+  ],
+  "valid": true,
+  "H_A": "not_supported",
+  "H_A3": "supported",
+  "H_Z": "supported",
+  "H_Z3": "supported",
+  "H_W": "supported",
+  "table": {
+   "37": {
+    "only": 5.024,
+    "bound": 1.329,
+    "IB2": 0.0,
+    "IB": 0.923,
+    "Z2": 5.024,
+    "Z": 0.0,
+    "bear2": 0.0,
+    "bear": 1.0,
+    "Iseg": 1.125,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 2.631,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 4.722,
+    "IR9": 4.425,
+    "elastic": 0.0,
+    "cut": 184,
+    "drift": 0,
+    "nseg": [
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      58
+     ],
+     [
+      3,
+      78
+     ],
+     [
+      4,
+      44
+     ],
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "147": {
+    "only": 3.5,
+    "bound": 1.0,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 3.5,
+    "Z": 3.5,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 2.528,
+    "IR9": 0.75,
+    "elastic": 0.0,
+    "cut": 128,
+    "drift": 0,
+    "nseg": [
+     [
+      3,
+      128
+     ]
+    ]
+   },
+   "201": {
+    "only": 2.469,
+    "bound": 0.594,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 2.469,
+    "Z": 2.469,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.344,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 2.219,
+    "IR9": 0.594,
+    "elastic": 0.0,
+    "cut": 96,
+    "drift": 0,
+    "nseg": [
+     [
+      1,
+      32
+     ],
+     [
+      3,
+      96
+     ]
+    ]
+   },
+   "33": {
+    "only": 2.469,
+    "bound": 0.594,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 2.469,
+    "Z": 2.469,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 2.219,
+    "IR9": 0.344,
+    "elastic": 0.0,
+    "cut": 128,
+    "drift": 0,
+    "nseg": [
+     [
+      2,
+      128
+     ]
+    ]
+   },
+   "91": {
+    "only": 1.5,
+    "bound": 0.375,
+    "IB2": 0.0,
+    "IB": 0.25,
+    "Z2": 0.0,
+    "Z": 0.0,
+    "bear2": 1.0,
+    "bear": 1.0,
+    "Iseg": 0.5,
+    "Isegfl": 0.125,
+    "HW": 0.125,
+    "Ifl": 0.375,
+    "IsL": 0.375,
+    "IsR": 0.375,
+    "IL9": 1.375,
+    "IR9": 0.625,
+    "elastic": 0.0,
+    "cut": 64,
+    "drift": 0,
+    "nseg": [
+     [
+      2,
+      32
+     ],
+     [
+      3,
+      32
+     ]
+    ]
+   },
+   "123": {
+    "only": 0.625,
+    "bound": 0.0,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 0.0,
+    "Z": 0.0,
+    "bear2": 1.0,
+    "bear": 1.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 0.625,
+    "IR9": 0.0,
+    "elastic": 0.0,
+    "cut": 32,
+    "drift": 0,
+    "nseg": [
+     [
+      2,
+      32
+     ]
+    ]
+   },
+   "139": {
+    "only": 1.75,
+    "bound": 0.375,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 1.75,
+    "Z": 1.75,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 1.75,
+    "IR9": 0.625,
+    "elastic": 0.0,
+    "cut": 64,
+    "drift": 0,
+    "nseg": [
+     [
+      1,
+      32
+     ],
+     [
+      2,
+      64
+     ]
+    ]
+   },
+   "209": {
+    "only": 1.75,
+    "bound": 0.375,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 1.75,
+    "Z": 1.75,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 1.75,
+    "IR9": 0.625,
+    "elastic": 0.0,
+    "cut": 64,
+    "drift": 0,
+    "nseg": [
+     [
+      1,
+      32
+     ],
+     [
+      2,
+      64
+     ]
+    ]
+   },
+   "22s": {
+    "only": 1.047,
+    "bound": 0.297,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 0.0,
+    "Z": 0.0,
+    "bear2": 1.0,
+    "bear": 1.0,
+    "Iseg": 0.297,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.297,
+    "IsL": 0.172,
+    "IsR": 0.172,
+    "IL9": 0.922,
+    "IR9": 0.297,
+    "elastic": 0.0,
+    "cut": 48,
+    "drift": 0,
+    "nseg": [
+     [
+      3,
+      48
+     ]
+    ]
+   },
+   "26s": {
+    "only": 2.469,
+    "bound": 0.594,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 0.0,
+    "Z": 0.0,
+    "bear2": 1.0,
+    "bear": 1.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 2.219,
+    "IR9": 0.344,
+    "elastic": 0.0,
+    "cut": 96,
+    "drift": 0,
+    "nseg": [
+     [
+      3,
+      96
+     ]
+    ]
+   },
+   "54s": {
+    "only": 2.5,
+    "bound": 0.0,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 2.5,
+    "Z": 2.5,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 2.5,
+    "IR9": 0.5,
+    "elastic": 0.0,
+    "cut": 32,
+    "drift": 0,
+    "nseg": [
+     [
+      2,
+      32
+     ]
+    ]
+   },
+   "82s": {
+    "only": 2.469,
+    "bound": 0.594,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 0.0,
+    "Z": 0.0,
+    "bear2": 1.0,
+    "bear": 1.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 1.886,
+    "IR9": 0.594,
+    "elastic": 0.0,
+    "cut": 96,
+    "drift": 0,
+    "nseg": [
+     [
+      3,
+      96
+     ]
+    ]
+   },
+   "94s": {
+    "only": 1.5,
+    "bound": 0.25,
+    "IB2": 0.0,
+    "IB": 0.0,
+    "Z2": 1.5,
+    "Z": 1.5,
+    "bear2": 0.0,
+    "bear": 0.0,
+    "Iseg": 0.0,
+    "Isegfl": 0.0,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.0,
+    "IsR": 0.0,
+    "IL9": 1.5,
+    "IR9": 0.25,
+    "elastic": 0.0,
+    "cut": 64,
+    "drift": 0,
+    "nseg": [
+     [
+      2,
+      64
+     ]
+    ]
+   },
+   "218s": {
+    "only": 1.5,
+    "bound": 0.25,
+    "IB2": 0.25,
+    "IB": 0.25,
+    "Z2": 0.0,
+    "Z": 0.0,
+    "bear2": 1.0,
+    "bear": 1.0,
+    "Iseg": 0.25,
+    "Isegfl": 0.25,
+    "HW": 0.0,
+    "Ifl": 0.0,
+    "IsL": 0.25,
+    "IsR": 0.25,
+    "IL9": 1.5,
+    "IR9": 0.25,
+    "elastic": 0.0,
+    "cut": 64,
+    "drift": 0,
+    "nseg": [
+     [
+      2,
+      64
+     ]
+    ]
+   }
+  },
+  "invariant_free_pairs": {
+   "58": "B identically 0 (no additive invariant up to window 4)",
+   "114": "B identically 0 (no additive invariant up to window 4)",
+   "143": "B identically 0 (no additive invariant up to window 4)",
+   "151": "B identically 0 (no additive invariant up to window 4)",
+   "154": "B identically 0 (no additive invariant up to window 4)",
+   "171": "B identically 0 (no additive invariant up to window 4)",
+   "182": "B identically 0 (no additive invariant up to window 4)",
+   "186": "B identically 0 (no additive invariant up to window 4)",
+   "213": "B identically 0 (no additive invariant up to window 4)",
+   "233": "B identically 0 (no additive invariant up to window 4)",
+   "241": "B identically 0 (no additive invariant up to window 4)"
+  }
+ },
+ "rules": [
+  {
+   "wolfram": 37,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 1404,
+   "residue_runs": 188,
+   "only": 5.02418235695763,
+   "n_w2": 1,
+   "n_full": 3,
+   "bound": 1.329467271725119,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 5.02418235695763,
+    "only_Z": 5.02418235695763,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.9232172717251186,
+    "I_free": 4.100965085232511,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(0, 0, -2)",
+     "(0, 0, -3)",
+     "(0, 0, -4)",
+     "(0, 0, -5)",
+     "(0, 0, -6)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 1.1250485108506032,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 2.6307410768027495,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 184,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     58
+    ],
+    [
+     3,
+     78
+    ],
+    [
+     4,
+     44
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "flank_periods": [
+    1,
+    2,
+    4
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0',), ('0',), ('0',))",
+     78
+    ],
+    [
+     "(('0',), ('0',))",
+     58
+    ],
+    [
+     "(('0',), ('0',), ('0',), ('0',))",
+     44
+    ],
+    [
+     "(('0',),)",
+     4
+    ],
+    [
+     "(('0',), ('0',), ('0',), ('0',), ('0',))",
+     4
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0,
+     0,
+     -2
+    ],
+    "R1": [
+     0,
+     0,
+     -3
+    ],
+    "L0": [
+     0,
+     0,
+     -2
+    ],
+    "L1": [
+     0,
+     0,
+     -3
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 4.721737349280988,
+   "I_R_s9": 4.424725182143987
+  },
+  {
+   "wolfram": 147,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 1404,
+   "residue_runs": 128,
+   "only": 3.5,
+   "n_w2": 1,
+   "n_full": 3,
+   "bound": 1.0,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 3.5,
+    "only_Z": 3.5,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 3.5,
+    "only_Z": 3.5,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0, 0, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 128,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     3,
+     128
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('-1',), ('0',), ('1',))",
+     128
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0,
+     0,
+     0
+    ],
+    "R1": [
+     0,
+     0,
+     0
+    ],
+    "L0": [
+     0,
+     0,
+     0
+    ],
+    "L1": [
+     0,
+     0,
+     0
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 2.528301220694674,
+   "I_R_s9": 0.75
+  },
+  {
+   "wolfram": 201,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 1404,
+   "residue_runs": 128,
+   "only": 2.4693609377704338,
+   "n_w2": 1,
+   "n_full": 3,
+   "bound": 0.5943609377704338,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 2.4693609377704338,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 2.4693609377704338,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0, 0, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.34436093777043375,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 96,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     1,
+     32
+    ],
+    [
+     3,
+     96
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0',), ('0',), ('0',))",
+     96
+    ],
+    [
+     "(('0',),)",
+     32
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0,
+     0,
+     0
+    ],
+    "R1": [
+     0,
+     0,
+     0
+    ],
+    "L0": [
+     0,
+     0,
+     0
+    ],
+    "L1": [
+     0,
+     0,
+     0
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 2.2193609377704338,
+   "I_R_s9": 0.5943609377704338
+  },
+  {
+   "wolfram": 33,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 1128,
+   "residue_runs": 128,
+   "only": 2.4693609377704338,
+   "n_w2": 2,
+   "n_full": 4,
+   "bound": 0.5943609377704338,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 2.4693609377704338,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 2.4693609377704338,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0, 0, 0, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 128,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     2,
+     128
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0', '0'), ('0', '0'))",
+     128
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "R1": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "L0": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "L1": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 2.2193609377704338,
+   "I_R_s9": 0.34436093777043375
+  },
+  {
+   "wolfram": 91,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 1128,
+   "residue_runs": 64,
+   "only": 1.5,
+   "n_w2": 2,
+   "n_full": 3,
+   "bound": 0.375,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 1.5,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(4, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.25,
+    "I_free": 1.25,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(4, 0, 12)",
+     "(4, 0, 13)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.5,
+   "I_seg_flank": 0.125,
+   "H_W_bits": 0.125,
+   "I_flank": 0.375,
+   "I_segL": 0.375,
+   "I_segR": 0.375,
+   "runs_with_cut": 64,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     2,
+     32
+    ],
+    [
+     3,
+     32
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('3', '1'), ('1', '-1'))",
+     16
+    ],
+    [
+     "(('1', '1'), ('3', '-1'))",
+     16
+    ],
+    [
+     "(('0', '0'), ('3', '1'), ('1', '-1'))",
+     16
+    ],
+    [
+     "(('1', '1'), ('1', '-1'), ('2', '0'))",
+     16
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     1,
+     -1,
+     6
+    ],
+    "R1": [
+     1,
+     -1,
+     7
+    ],
+    "L0": [
+     3,
+     1,
+     6
+    ],
+    "L1": [
+     3,
+     1,
+     7
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 1.375,
+   "I_R_s9": 0.625
+  },
+  {
+   "wolfram": 123,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 1128,
+   "residue_runs": 32,
+   "only": 0.625,
+   "n_w2": 2,
+   "n_full": 2,
+   "bound": 0.0,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 0.625,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(4, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 0.625,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(4, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 32,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     2,
+     32
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('1', '0'), ('3', '0'))",
+     32
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     1,
+     -1
+    ],
+    "R1": [
+     1,
+     -1
+    ],
+    "L0": [
+     3,
+     1
+    ],
+    "L1": [
+     3,
+     1
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 0.625,
+   "I_R_s9": 0.0
+  },
+  {
+   "wolfram": 139,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 852,
+   "residue_runs": 96,
+   "only": 1.75,
+   "n_w2": 1,
+   "n_full": 1,
+   "bound": 0.375,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 1.75,
+    "only_Z": 1.75,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 1.75,
+    "only_Z": 1.75,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 64,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     1,
+     32
+    ],
+    [
+     2,
+     64
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0',), ('0',))",
+     64
+    ],
+    [
+     "(('0',),)",
+     32
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0
+    ],
+    "R1": [
+     0
+    ],
+    "L0": [
+     0
+    ],
+    "L1": [
+     0
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 1.75,
+   "I_R_s9": 0.625
+  },
+  {
+   "wolfram": 209,
+   "role": "shadow_active",
+   "n": 256,
+   "dropped": 0,
+   "T": 852,
+   "residue_runs": 96,
+   "only": 1.75,
+   "n_w2": 1,
+   "n_full": 1,
+   "bound": 0.375,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 1.75,
+    "only_Z": 1.75,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 1.75,
+    "only_Z": 1.75,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 64,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     1,
+     32
+    ],
+    [
+     2,
+     64
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('-1',), ('1',))",
+     64
+    ],
+    [
+     "(('0',),)",
+     32
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0
+    ],
+    "R1": [
+     0
+    ],
+    "L0": [
+     0
+    ],
+    "L1": [
+     0
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 1.75,
+   "I_R_s9": 0.625
+  },
+  {
+   "wolfram": 22,
+   "role": "shadow_silent",
+   "n": 256,
+   "dropped": 0,
+   "T": 576,
+   "residue_runs": 48,
+   "only": 1.0471804688852169,
+   "n_w2": 2,
+   "n_full": 3,
+   "bound": 0.2971804688852169,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 1.0471804688852169,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(2, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 1.0471804688852169,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(2, 0, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.2971804688852169,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.2971804688852169,
+   "I_segL": 0.17218046888521688,
+   "I_segR": 0.17218046888521688,
+   "runs_with_cut": 48,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     3,
+     48
+    ]
+   ],
+   "flank_periods": [
+    4
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('1', '0'), ('0', '0'), ('1', '0'))",
+     16
+    ],
+    [
+     "(('0', '0'), ('1', '0'), ('1', '0'))",
+     16
+    ],
+    [
+     "(('0', '0'), ('0', '0'), ('2', '0'))",
+     16
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     1,
+     0,
+     0
+    ],
+    "R1": [
+     1,
+     0,
+     0
+    ],
+    "L0": [
+     1,
+     0,
+     0
+    ],
+    "L1": [
+     1,
+     0,
+     0
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 0.9221804688852169,
+   "I_R_s9": 0.2971804688852169
+  },
+  {
+   "wolfram": 26,
+   "role": "shadow_silent",
+   "n": 256,
+   "dropped": 0,
+   "T": 576,
+   "residue_runs": 96,
+   "only": 2.4693609377704338,
+   "n_w2": 1,
+   "n_full": 1,
+   "bound": 0.5943609377704338,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(2,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(2,)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 96,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     3,
+     96
+    ]
+   ],
+   "flank_periods": [
+    1,
+    2
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0',), ('1',), ('1',))",
+     96
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     1
+    ],
+    "R1": [
+     1
+    ],
+    "L0": [
+     1
+    ],
+    "L1": [
+     1
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 2.2193609377704338,
+   "I_R_s9": 0.34436093777043375
+  },
+  {
+   "wolfram": 54,
+   "role": "shadow_silent",
+   "n": 64,
+   "dropped": 0,
+   "T": 576,
+   "residue_runs": 32,
+   "only": 2.5,
+   "n_w2": 1,
+   "n_full": 3,
+   "bound": 0.0,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 2.5,
+    "only_Z": 2.5,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 2.5,
+    "only_Z": 2.5,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0, 0, 0)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 32,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     2,
+     32
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0',), ('0',))",
+     32
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     0,
+     0,
+     -6
+    ],
+    "L0": [
+     0,
+     0,
+     6
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 2.5,
+   "I_R_s9": 0.5
+  },
+  {
+   "wolfram": 82,
+   "role": "shadow_silent",
+   "n": 256,
+   "dropped": 0,
+   "T": 576,
+   "residue_runs": 96,
+   "only": 2.4693609377704338,
+   "n_w2": 1,
+   "n_full": 1,
+   "bound": 0.5943609377704338,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(2,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 2.4693609377704338,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(2,)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 96,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     3,
+     96
+    ]
+   ],
+   "flank_periods": [
+    1,
+    2
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('0',), ('0',), ('2',))",
+     96
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     1
+    ],
+    "R1": [
+     1
+    ],
+    "L0": [
+     1
+    ],
+    "L1": [
+     1
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 1.8857612793053278,
+   "I_R_s9": 0.5943609377704338
+  },
+  {
+   "wolfram": 94,
+   "role": "shadow_silent",
+   "n": 256,
+   "dropped": 0,
+   "T": 576,
+   "residue_runs": 64,
+   "only": 1.5,
+   "n_w2": 1,
+   "n_full": 1,
+   "bound": 0.25,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.0,
+    "I_free": 1.5,
+    "only_Z": 1.5,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.0,
+    "I_free": 1.5,
+    "only_Z": 1.5,
+    "f_bear": 0.0,
+    "distinct": [
+     "(0,)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.0,
+   "I_seg_flank": 0.0,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.0,
+   "I_segR": 0.0,
+   "runs_with_cut": 64,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     2,
+     64
+    ]
+   ],
+   "flank_periods": [
+    1
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('-2',), ('2',))",
+     64
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     2
+    ],
+    "R1": [
+     2
+    ],
+    "L0": [
+     -2
+    ],
+    "L1": [
+     -2
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 1.5,
+   "I_R_s9": 0.25
+  },
+  {
+   "wolfram": 218,
+   "role": "shadow_silent",
+   "n": 256,
+   "dropped": 0,
+   "T": 576,
+   "residue_runs": 64,
+   "only": 1.5,
+   "n_w2": 2,
+   "n_full": 3,
+   "bound": 0.25,
+   "V1": true,
+   "V1a_fail": 0,
+   "V1b": true,
+   "V2_fail": 0,
+   "V4_fail": 0,
+   "w2": {
+    "I_B": 0.25,
+    "I_free": 1.25,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(1, -1)",
+     "(3, 1)"
+    ],
+    "elastic_Bres": []
+   },
+   "full": {
+    "I_B": 0.25,
+    "I_free": 1.25,
+    "only_Z": 0.0,
+    "f_bear": 1.0,
+    "distinct": [
+     "(1, -1, -7)",
+     "(3, 1, -5)"
+    ],
+    "elastic_Bres": []
+   },
+   "I_seg": 0.25,
+   "I_seg_flank": 0.25,
+   "H_W_bits": 0.0,
+   "I_flank": 0.0,
+   "I_segL": 0.25,
+   "I_segR": 0.25,
+   "runs_with_cut": 64,
+   "drifting_stretches": 0,
+   "nseg": [
+    [
+     2,
+     64
+    ]
+   ],
+   "flank_periods": [
+    2
+   ],
+   "elastic_frac": 0.0,
+   "seg_values": [
+    [
+     "(('-1/2', '-3/2'), ('3/2', '1/2'))",
+     32
+    ],
+    [
+     "(('-1/2', '-1/2'), ('7/2', '3/2'))",
+     32
+    ]
+   ],
+   "species_budget": {
+    "R0": [
+     2,
+     1,
+     -3
+    ],
+    "R1": [
+     3,
+     2,
+     0
+    ],
+    "L0": [
+     -1,
+     -2,
+     -4
+    ],
+    "L1": [
+     0,
+     -1,
+     -5
+    ]
+   },
+   "V0": true,
+   "V3": true,
+   "I_L_s9": 1.5,
+   "I_R_s9": 0.25
+  }
+ ]
+}
