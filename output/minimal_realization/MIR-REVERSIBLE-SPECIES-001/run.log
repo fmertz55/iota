@@ -1,0 +1,5 @@
+{"valid": true, "V0_all": true, "V1_all": true} rising_at_8: ['91', '123', '151', '233', '22s', '26s', '58s', '82s', '94s', '114s', '154s', '186s', '218s', '90s']
+
+real	3m51.904s
+user	12m21.982s
+sys	1m53.954s
