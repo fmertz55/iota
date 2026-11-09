@@ -1,0 +1,901 @@
+{
+ "id": "MIR-REVERSIBLE-BUDGET-000",
+ "monomials": [
+  "p0",
+  "c0",
+  "p0c0",
+  "p0p1",
+  "p0c1",
+  "c0p1",
+  "c0c1",
+  "p0c0p1",
+  "p0c0c1",
+  "p0p1c1",
+  "c0p1c1",
+  "p0c0p1c1"
+ ],
+ "rules": {
+  "22": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 2,
+    "3": 3,
+    "4": 4
+   },
+   "window2_basis": [
+    "p0 + c0 - p0c0 - p0c1 - c0p1",
+    "p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     1,
+     1,
+     -1,
+     0,
+     -1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0
+    ],
+    [
+     0.0
+    ]
+   ]
+  },
+  "26": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 1,
+    "4": 1
+   },
+   "window2_basis": [
+    "p0 + c0 - p0c1 - c0p1"
+   ],
+   "window2_coeffs": [
+    [
+     1,
+     1,
+     0,
+     0,
+     -1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0
+    ]
+   ]
+  },
+  "33": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 1,
+    "2": 2,
+    "3": 4,
+    "4": 10
+   },
+   "window2_basis": [
+    "p0c0",
+    "p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "37": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 3,
+    "4": 4
+   },
+   "window2_basis": [
+    "p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "54": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 3,
+    "4": 6
+   },
+   "window2_basis": [
+    "p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0
+    ]
+   ]
+  },
+  "82": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 1,
+    "4": 1
+   },
+   "window2_basis": [
+    "p0 + c0 - p0c1 - c0p1"
+   ],
+   "window2_coeffs": [
+    [
+     1,
+     1,
+     0,
+     0,
+     -1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0
+    ]
+   ]
+  },
+  "91": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 2,
+    "3": 3,
+    "4": 3
+   },
+   "window2_basis": [
+    "2p0 + 2c0 - 3p0c0 - 2p0p1 - 2c0p1 - 2c0c1 + 2p0c0p1 + 2p0c0c1 + 2p0p1c1 + 2c0p1c1 - 2p0c0p1c1",
+    "p0c1 - c0p1"
+   ],
+   "window2_coeffs": [
+    [
+     2,
+     2,
+     -3,
+     -2,
+     0,
+     -2,
+     -2,
+     2,
+     2,
+     2,
+     2,
+     -2
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "94": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 1,
+    "4": 1
+   },
+   "window2_basis": [
+    "p0c1 - c0p1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0
+    ]
+   ]
+  },
+  "123": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 2,
+    "3": 2,
+    "4": 2
+   },
+   "window2_basis": [
+    "2p0 + 2c0 - 3p0c0 - 2p0p1 - 2c0p1 - 2c0c1 + 2p0c0p1 + 2p0c0c1 + 2p0p1c1 + 2c0p1c1 - 2p0c0p1c1",
+    "p0c1 - c0p1"
+   ],
+   "window2_coeffs": [
+    [
+     2,
+     2,
+     -3,
+     -2,
+     0,
+     -2,
+     -2,
+     2,
+     2,
+     2,
+     2,
+     -2
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "139": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 1,
+    "4": 2
+   },
+   "window2_basis": [
+    "p0c0 - p0c0p1 - p0c0c1 + p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     -1,
+     -1,
+     0,
+     0,
+     1
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "147": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 3,
+    "4": 5
+   },
+   "window2_basis": [
+    "2p0 + 2c0 - 4p0c0 - 2p0p1 - p0c1 - c0p1 - 2c0c1 + 2p0c0p1 + 2p0c0c1 + 2p0p1c1 + 2c0p1c1 - 2p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     2,
+     2,
+     -4,
+     -2,
+     -1,
+     -1,
+     -2,
+     2,
+     2,
+     2,
+     2,
+     -2
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "201": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 3,
+    "4": 5
+   },
+   "window2_basis": [
+    "p0c1 + c0p1 - 2p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     -2
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "209": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 1,
+    "3": 1,
+    "4": 2
+   },
+   "window2_basis": [
+    "p0c0 - p0p1c1 - c0p1c1 + p0c0p1c1"
+   ],
+   "window2_coeffs": [
+    [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     -1,
+     -1,
+     1
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "218": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 2,
+    "3": 3,
+    "4": 3
+   },
+   "window2_basis": [
+    "p0 + c0 - p0c0 - 2c0p1 + 2p0c0p1c1",
+    "p0c1 - c0p1"
+   ],
+   "window2_coeffs": [
+    [
+     1,
+     1,
+     -1,
+     0,
+     0,
+     -2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     -1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "simulation_conserved": true,
+   "vacuum_orbit": [
+    [
+     0,
+     0
+    ]
+   ],
+   "vacuum_density": [
+    [
+     0.0
+    ],
+    [
+     0.0
+    ]
+   ]
+  },
+  "58": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "114": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "143": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "151": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "154": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "171": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "182": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "186": {
+   "silent": 1,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "213": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "233": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "241": {
+   "silent": 0,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+   }
+  },
+  "1": {
+   "silent": null,
+   "nontrivial_by_window": {
+    "1": 1,
+    "2": 5,
+    "3": 16,
+    "4": 50
+   }
+  },
+  "5": {
+   "silent": null,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 2,
+    "3": 7,
+    "4": 19
+   }
+  },
+  "90": {
+   "silent": null,
+   "nontrivial_by_window": {
+    "1": 0,
+    "2": 2,
+    "3": 4,
+    "4": 8
+   }
+  }
+ }
+}
