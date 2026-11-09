@@ -12,8 +12,8 @@ review and the paper do not cite. This note records it and states the difference
   and Computation* (PhysComp '96), 1996; no DOI (Santa Fe Institute working paper; PDXScholar compsci_fac/118).
 - Full text read: the authors' PDF of the 1998 paper (melaniemitchell.me/PapersContent/mecca.pdf, 12 pp.). The 1996
   paper was not read. Its abstract describes the same model class and evaluation.
-- One step forward from the 1998 paper: all 63 citing works in OpenAlex, screened by title (abstracts read for the
-  three below). Relevant: Hordijk, Shalizi & Crutchfield 2001 and Pivato 2007, defect particle kinematics (both already
+- One step forward from the 1998 paper: all 63 citing works in OpenAlex, screened by title (abstracts read only for
+  the Becker/Durand-Lose and Marques-Pita papers; Pivato 2006 is title-screened only). Relevant: Hordijk, Shalizi & Crutchfield 2001 and Pivato 2007, defect particle kinematics (both already
   cited); Pivato 2006, algebraic invariants for crystallographic defects (not cited); Becker, Durand-Lose et al.,
   "Abstract geometrical computation 10" (ACM ToCT 2021, doi 10.1145/3442359; arXiv 1804.09018). Signal machines are the
   idealized limit of a particle model, with dimensionless signals at constant speeds and collision replacement rules.
