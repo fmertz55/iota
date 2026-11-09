@@ -71,3 +71,19 @@ Marks made by penniless travellers remember just as much as marks made by rich o
 Additive invariants up to window 3 only (window 4 counted, not extracted). One input ensemble per pair (SHADOW-009).
 The segment split uses w2 only, with background stretches of at least 16 cells and period at most 8. The H_A and H_A3
 verdicts sit on the threshold.
+
+## Addendum (post hoc, not frozen): the one wall-budget bit, rule 91
+Script budget1_91_posthoc.py; outputs posthoc_91.json, posthoc_91_states.npz, posthoc_91_walls.png.
+- H_W's 0.125 bit is one bit in one class: species pair (R0, L0), the 32 even offsets 24..86 (odd offsets leave no
+  residue). Outcome, single homogeneous interior (cell state 1) and total budget (4, 0) are identical across the class.
+  The walls split the budget two ways, alternating with offset mod 4: left (3, 1) / right (1, -1) at 0 mod 4, and
+  left (1, 1) / right (3, -1) at 2 mod 4. 1 bit x 32/256 of the inputs = 0.125 bit.
+- Picture: the domain is asymmetric. One wall moves at 1/3 (the carriers' speed) and one at 1/9 (measured exactly at
+  offset 24: -1/9 and +1/3). The bit is which side the fast wall goes. The fast wall carries first component 1 and the
+  slow wall 3; the second component (+1/-1) marks the side. The budget labels the two wall species.
+- Cause: not the vacuum clock (vacuum period 3; contact tick = 2 mod 3 for every offset). Both carriers have period 6
+  and shift 2 per cycle; offset +2 delays contact by 3 ticks, i.e. half a carrier cycle. The internal phase in which the
+  carriers meet decides which way the domain drifts, and with it which wall holds the extra (2, 0).
+- Reading: here the budget's distribution does track a record bit, but only because the bit chooses between two wall
+  species that have different budgets. The same bit is also written in the geometry (drift direction, wall positions).
+  The budget is a label on the coherences that hold the record, not an independent store.
