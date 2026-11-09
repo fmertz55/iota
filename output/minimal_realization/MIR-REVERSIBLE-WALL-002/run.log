@@ -1,0 +1,5 @@
+{"valid": true, "V0_all": true, "V1_eligible": true, "V_L": true, "V_L_checked": 1728, "V_id": true, "V_track": true, "H_C0": "not_supported", "H_S": "not_supported", "P_age0_pass": ["147", "201", "22s", "26s", "58s", "82s", "114s"], "P_gate_pass": ["26s", "82s"]}
+
+real	4m43.019s
+user	17m15.562s
+sys	0m3.015s
