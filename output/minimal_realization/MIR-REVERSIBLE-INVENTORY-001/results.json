@@ -1,0 +1,3223 @@
+{
+ "summary": {
+  "V0_all": true,
+  "V1_all": true,
+  "V2_nulls": true,
+  "V3_orbits": true,
+  "V4_edges": true,
+  "V5_identity": true,
+  "unexposed": 24,
+  "eligible": [
+   "139",
+   "209",
+   "58s",
+   "114s",
+   "182s",
+   "186s"
+  ],
+  "B_eligible": [
+   "37",
+   "147",
+   "201",
+   "33",
+   "123",
+   "139",
+   "209",
+   "22s",
+   "26s",
+   "82s",
+   "94s",
+   "218s"
+  ],
+  "H_S_pass": [
+   "186s"
+  ],
+  "H_D_pass": [
+   "186s"
+  ],
+  "B_function_desc": [
+   "37",
+   "147",
+   "201",
+   "33",
+   "123",
+   "139",
+   "209",
+   "22s",
+   "26s",
+   "82s",
+   "94s"
+  ],
+  "valid": true,
+  "H_S": "not_supported",
+  "H_D": "not_supported",
+  "table": {
+   "37": {
+    "only": 5.024,
+    "rec": 3.917,
+    "movers": 1.108,
+    "rec_word": 2.03,
+    "G_sh": 0.712,
+    "H_C": 3.861,
+    "I_word": 3.241,
+    "H_detail": 0.62,
+    "I_sp_word": 1.641,
+    "n_words": 46,
+    "n_shapes_p1": 135,
+    "n_dom": 2,
+    "n_wall": 37,
+    "n_mover": 4,
+    "kinds": {
+     "growing": 133,
+     "mover": 29,
+     "static": 11
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 134,
+     "disordered": 0,
+     "open": 46
+    },
+    "open_frac": 0.256
+   },
+   "147": {
+    "only": 3.5,
+    "rec": 3.5,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 1.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 4,
+    "n_dom": 1,
+    "n_wall": 3,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 128
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 128,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "201": {
+    "only": 2.469,
+    "rec": 2.469,
+    "movers": 0.0,
+    "rec_word": 0.344,
+    "G_sh": 0.75,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.918,
+    "n_words": 2,
+    "n_shapes_p1": 4,
+    "n_dom": 2,
+    "n_wall": 5,
+    "n_mover": 1,
+    "kinds": {
+     "growing": 96,
+     "mover": 32
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 96,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "33": {
+    "only": 2.469,
+    "rec": 2.469,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 1.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.811,
+    "n_words": 2,
+    "n_shapes_p1": 4,
+    "n_dom": 2,
+    "n_wall": 4,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 128
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 128,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "91": {
+    "only": 1.5,
+    "rec": 1.5,
+    "movers": 0.0,
+    "rec_word": 0.5,
+    "G_sh": 0.656,
+    "H_C": 0.5,
+    "I_word": 0.5,
+    "H_detail": 0.0,
+    "I_sp_word": 1.5,
+    "n_words": 4,
+    "n_shapes_p1": 4,
+    "n_dom": 2,
+    "n_wall": 8,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 64
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 64,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "123": {
+    "only": 0.625,
+    "rec": 0.625,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 1,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 32
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 32,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "1": {
+    "only": 0.0,
+    "rec": 0.0,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 0,
+    "n_shapes_p1": 0,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 0,
+    "kinds": {},
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "5": {
+    "only": 0.625,
+    "rec": 0.0,
+    "movers": 0.625,
+    "rec_word": 0.0,
+    "G_sh": 0.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 0,
+    "n_shapes_p1": 2,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 2,
+    "kinds": {
+     "mover": 64
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "139": {
+    "only": 1.75,
+    "rec": 1.5,
+    "movers": 0.25,
+    "rec_word": 0.0,
+    "G_sh": 0.656,
+    "H_C": 0.5,
+    "I_word": 0.0,
+    "H_detail": 0.5,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 6,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 2,
+    "kinds": {
+     "growing": 64,
+     "mover": 32
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 64,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "143": {
+    "only": 0.25,
+    "rec": 0.25,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 14,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 16
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 16,
+     "disordered": 0,
+     "open": 208
+    },
+    "open_frac": 0.929
+   },
+   "151": {
+    "only": 4.189,
+    "rec": 2.0,
+    "movers": 2.189,
+    "rec_word": 0.0,
+    "G_sh": 1.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 3,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 2,
+    "kinds": {
+     "mover": 32,
+     "growing": 16
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 16,
+     "disordered": 0,
+     "open": 16
+    },
+    "open_frac": 0.5
+   },
+   "171": {
+    "only": 0.782,
+    "rec": 0.782,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 14,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 16
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 16,
+     "disordered": 0,
+     "open": 208
+    },
+    "open_frac": 0.929
+   },
+   "209": {
+    "only": 1.75,
+    "rec": 1.5,
+    "movers": 0.25,
+    "rec_word": 0.0,
+    "G_sh": 0.656,
+    "H_C": 0.5,
+    "I_word": 0.0,
+    "H_detail": 0.5,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 6,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 2,
+    "kinds": {
+     "growing": 64,
+     "mover": 32
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 64,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "213": {
+    "only": 0.782,
+    "rec": 0.782,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 14,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 16
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 16,
+     "disordered": 0,
+     "open": 208
+    },
+    "open_frac": 0.929
+   },
+   "233": {
+    "only": 4.189,
+    "rec": 2.0,
+    "movers": 2.189,
+    "rec_word": 0.0,
+    "G_sh": 1.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 3,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 2,
+    "kinds": {
+     "growing": 16,
+     "mover": 32
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 16,
+     "disordered": 0,
+     "open": 16
+    },
+    "open_frac": 0.5
+   },
+   "241": {
+    "only": 0.25,
+    "rec": 0.25,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 14,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 16
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 16,
+     "disordered": 0,
+     "open": 208
+    },
+    "open_frac": 0.929
+   },
+   "22s": {
+    "only": 1.047,
+    "rec": 1.047,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.608,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 3,
+    "n_dom": 1,
+    "n_wall": 3,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 48
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 48,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "26s": {
+    "only": 2.469,
+    "rec": 2.469,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.75,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 3,
+    "n_dom": 2,
+    "n_wall": 3,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 96
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 96,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "54s": {
+    "only": 2.5,
+    "rec": 0.0,
+    "movers": 2.5,
+    "rec_word": 0.0,
+    "G_sh": 0.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 0,
+    "n_shapes_p1": 2,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 2,
+    "kinds": {
+     "mover": 64
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "58s": {
+    "only": 6.314,
+    "rec": 6.314,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.857,
+    "I_word": 0.0,
+    "H_detail": 0.857,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 6,
+    "n_dom": 2,
+    "n_wall": 3,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 224
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 224,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "82s": {
+    "only": 2.469,
+    "rec": 2.469,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.75,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 3,
+    "n_dom": 2,
+    "n_wall": 3,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 96
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 96,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "94s": {
+    "only": 1.5,
+    "rec": 1.5,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.5,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 2,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 64
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 64,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "114s": {
+    "only": 5.689,
+    "rec": 5.689,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.25,
+    "H_C": 0.857,
+    "I_word": 0.0,
+    "H_detail": 0.857,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 6,
+    "n_dom": 2,
+    "n_wall": 3,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 224
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 224,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "154s": {
+    "only": 1.533,
+    "rec": 1.533,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.75,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 3,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 2,
+    "kinds": {
+     "disordered": 384,
+     "mover": 288
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 96,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "182s": {
+    "only": 2.5,
+    "rec": 2.5,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 1.0,
+    "H_C": 1.0,
+    "I_word": 0.0,
+    "H_detail": 1.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 2,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 0,
+    "kinds": {
+     "disordered": 32
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 32,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "186s": {
+    "only": 3.525,
+    "rec": 3.025,
+    "movers": 0.5,
+    "rec_word": 0.0,
+    "G_sh": 0.75,
+    "H_C": 0.4,
+    "I_word": 0.4,
+    "H_detail": 0.0,
+    "I_sp_word": 1.122,
+    "n_words": 3,
+    "n_shapes_p1": 5,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 14,
+    "kinds": {
+     "disordered": 288,
+     "mover": 1280
+    },
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 160,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "218s": {
+    "only": 1.5,
+    "rec": 1.5,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.5,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 1,
+    "n_shapes_p1": 2,
+    "n_dom": 1,
+    "n_wall": 2,
+    "n_mover": 0,
+    "kinds": {
+     "growing": 64
+    },
+    "B_fn": false,
+    "classes": {
+     "settled": 64,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   },
+   "90s": {
+    "only": 0.0,
+    "rec": 0.0,
+    "movers": 0.0,
+    "rec_word": 0.0,
+    "G_sh": 0.0,
+    "H_C": 0.0,
+    "I_word": 0.0,
+    "H_detail": 0.0,
+    "I_sp_word": 0.0,
+    "n_words": 0,
+    "n_shapes_p1": 0,
+    "n_dom": 0,
+    "n_wall": 0,
+    "n_mover": 0,
+    "kinds": {},
+    "B_fn": true,
+    "classes": {
+     "settled": 0,
+     "disordered": 0,
+     "open": 0
+    },
+    "open_frac": 0.0
+   }
+  }
+ },
+ "rules": [
+  {
+   "wolfram": 37,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 194,
+   "unsettled": 46,
+   "unresolved": 20,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 63,
+   "disordered_runs": 0,
+   "T": 1404,
+   "E": 126,
+   "pv": 3,
+   "kinds": {
+    "growing": 133,
+    "mover": 29,
+    "static": 11
+   },
+   "Delta": {
+    "00": 12,
+    "01": 70,
+    "10": 70,
+    "11": 10
+   },
+   "only_phase": 5.02418235695763,
+   "rec": 3.9165575878534877,
+   "carried_by_movers": 1.1076247691041425,
+   "rec_word": 2.0296268375805804,
+   "G_shadow": 0.7116769460605399,
+   "open_runs": 46,
+   "open_frac": 0.25555555555555554,
+   "class_counts": {
+    "settled": 134,
+    "disordered": 0,
+    "open": 46
+   },
+   "shadow_runs": 134,
+   "n_contact_shadow": 81,
+   "H_C": 3.8611349517946607,
+   "I_word": 3.240648033677294,
+   "H_detail": 0.6204869181173667,
+   "I_sp_word": 1.6405268627728589,
+   "n_words": 46,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 1)",
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 0), Fraction(0, 1))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 12))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 3))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 9))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-2, 9))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(0, 1))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(1, 9))",
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))",
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 9))",
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(0, 1))",
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(1, 9))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(-1, 9))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(0, 1))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 12))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 3))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 9))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(2, 9))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(-1, 12))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(-1, 4))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(0, 1))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(1, 12))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(1, 4))",
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(-1, 12))",
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(-1, 3))",
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(-1, 9))",
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(0, 1))",
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(1, 9))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(-1, 9))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(0, 1))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 9))",
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(-1, 9))",
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(0, 1))",
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(1, 12))",
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(1, 3))",
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(1, 9))",
+    "((1, 'vac', 2), (1, 'vac', 2), Fraction(0, 1))"
+   ],
+   "mover_species": [
+    "(((1, 'vac', 2),), Fraction(-1, 3))",
+    "(((1, 'vac', 2),), Fraction(1, 3))",
+    "((), Fraction(-1, 3))",
+    "((), Fraction(1, 3))"
+   ],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 0), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 12))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 3))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-2, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(-1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 12))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(2, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(-1, 4))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(1, 4))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(-1, 12))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(-1, 3))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(-1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(-1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(-1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(1, 12))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(1, 3))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(1, 9))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 2), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     18
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 12), Fraction(1, 12))),)",
+     10
+    ],
+    [
+     "(('static', (), (Fraction(0, 1),)),)",
+     9
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(1, 12), Fraction(1, 3))),)",
+     7
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 9), Fraction(1, 9), Fraction(1, 3))),)",
+     7
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 9), Fraction(1, 9))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(1, 3))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))), ('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))))",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 9), Fraction(1, 9))),)",
+     6
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(1, 12), Fraction(1, 3))),)",
+     5
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(0, 1))),)",
+     3
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(0, 1), Fraction(1, 3))),)",
+     3
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 12), Fraction(1, 9))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 12))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 12), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(0, 1), Fraction(1, 3), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(-1, 3), Fraction(0, 1))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 12), Fraction(0, 1), Fraction(1, 3))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 9), Fraction(1, 12))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 12))),)",
+     2
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(-1, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 12), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(2, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(0, 1))), ('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 12), Fraction(1, 4), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 9), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 9))),)",
+     1
+    ],
+    [
+     "(('static', (), (Fraction(0, 1),)), ('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(0, 1), Fraction(1, 12), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-2, 9), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))), ('growing', ((1, 'vac', 1),), (Fraction(0, 1), Fraction(1, 3))))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 4), Fraction(1, 12))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 2)), (Fraction(-1, 9), Fraction(0, 1), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))), ('static', (), (Fraction(0, 1),)))",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(-1, 9))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(-1, 9), Fraction(1, 3))),)",
+     1
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(-1, 12), Fraction(0, 1))),)",
+     1
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 147,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 128,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1404,
+   "E": 126,
+   "pv": 4,
+   "kinds": {
+    "growing": 128
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 3.5,
+   "rec": 3.5,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 1.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 128,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 128,
+   "n_contact_shadow": 4,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 1)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 4))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 4))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(0, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 4))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 4))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 4), Fraction(0, 1), Fraction(1, 4))),)",
+     128
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 201,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 128,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1404,
+   "E": 126,
+   "pv": 4,
+   "kinds": {
+    "growing": 96,
+    "mover": 32
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 2.4693609377704338,
+   "rec": 2.4693609377704338,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.34436093777043375,
+   "G_shadow": 0.75,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 96,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 96,
+   "n_contact_shadow": 3,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.9182958340544896,
+   "n_words": 2,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 1)",
+    "(1, 'vac', 3)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 4))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 4))",
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(0, 1))",
+    "((1, 'vac', 1), (1, 'vac', 3), Fraction(0, 1))",
+    "((1, 'vac', 3), (1, 'vac', 0), Fraction(1, 4))"
+   ],
+   "mover_species": [
+    "((), Fraction(1, 4))"
+   ],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 4))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 4))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 1), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 3), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 3), (1, 'vac', 0), Fraction(1, 4))": [
+     [
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 1)), (Fraction(-1, 4), Fraction(0, 1), Fraction(1, 4))),)",
+     64
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 3)), (Fraction(-1, 4), Fraction(0, 1), Fraction(1, 4))),)",
+     32
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 33,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 128,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "kinds": {
+    "growing": 128
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 2.4693609377704338,
+   "rec": 2.4693609377704338,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 1.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 128,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 128,
+   "n_contact_shadow": 4,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.8112781244591329,
+   "n_words": 2,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 1)",
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 3))",
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 3))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 3))": [
+     [
+      "0",
+      "0"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))": [
+     [
+      "0",
+      "0"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "0",
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "0",
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     96
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     32
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 91,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 64,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "kinds": {
+    "growing": 64
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 2
+   },
+   "only_phase": 1.5,
+   "rec": 1.5,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.5,
+   "G_shadow": 0.6556390622295662,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 64,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 64,
+   "n_contact_shadow": 4,
+   "H_C": 0.5,
+   "I_word": 0.5,
+   "H_detail": 0.0,
+   "I_sp_word": 1.5,
+   "n_words": 4,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 1)",
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 3))",
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 9))",
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 3))",
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 9))",
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(0, 1))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))",
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(0, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 3))": [
+     [
+      "4/3",
+      "1/3"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 1), Fraction(-1, 9))": [
+     [
+      "10/3",
+      "1/3"
+     ]
+    ],
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))": [
+     [
+      "5/3",
+      "2/3"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "2/3",
+      "-1/3"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 0), Fraction(1, 9))": [
+     [
+      "8/3",
+      "-1/3"
+     ]
+    ],
+    "((1, 'vac', 1), (1, 'vac', 2), Fraction(0, 1))": [
+     [
+      "7/3",
+      "1/3"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "1/3",
+      "-2/3"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 1), Fraction(0, 1))": [
+     [
+      "5/3",
+      "-1/3"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 9), Fraction(1, 3))),)",
+     16
+    ],
+    [
+     "(('growing', ((1, 'vac', 1),), (Fraction(-1, 3), Fraction(1, 9))),)",
+     16
+    ],
+    [
+     "(('growing', ((1, 'vac', 2), (1, 'vac', 1)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     16
+    ],
+    [
+     "(('growing', ((1, 'vac', 1), (1, 'vac', 2)), (Fraction(-1, 3), Fraction(0, 1), Fraction(1, 3))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 123,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 32,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "kinds": {
+    "growing": 32
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 0.625,
+   "rec": 0.625,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 32,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 32,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 3))": [
+     [
+      "8/3",
+      "2/3"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 3))": [
+     [
+      "4/3",
+      "-2/3"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 3), Fraction(1, 3))),)",
+     32
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 1,
+   "role": "null_active",
+   "n": 256,
+   "residue_runs_aligned": 0,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "kinds": {},
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 0.0,
+   "rec": 0.0,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 0,
+   "n_contact_shadow": 0,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 0,
+   "disordered_edges": [],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [],
+   "V0": true
+  },
+  {
+   "wolfram": 5,
+   "role": "null_active",
+   "n": 256,
+   "residue_runs_aligned": 64,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 1128,
+   "E": 94,
+   "pv": 3,
+   "kinds": {
+    "mover": 64
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 0.625,
+   "rec": 0.0,
+   "carried_by_movers": 0.625,
+   "rec_word": 0.0,
+   "G_shadow": 0.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 0,
+   "n_contact_shadow": 0,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 0,
+   "disordered_edges": [],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [
+    "((), Fraction(-1, 3))",
+    "((), Fraction(1, 3))"
+   ],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [],
+   "V0": true
+  },
+  {
+   "wolfram": 139,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 96,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 64,
+    "mover": 32
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 1.75,
+   "rec": 1.5,
+   "carried_by_movers": 0.25,
+   "rec_word": 0.0,
+   "G_shadow": 0.6556390622295662,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 64,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 64,
+   "n_contact_shadow": 4,
+   "H_C": 0.5,
+   "I_word": 0.0,
+   "H_detail": 0.5,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [
+    "((), Fraction(-1, 2))",
+    "((), Fraction(1, 2))"
+   ],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))": [
+     [
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     64
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 143,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 224,
+   "unsettled": 208,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 16
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 0.25,
+   "rec": 0.25,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 208,
+   "open_frac": 0.9285714285714286,
+   "class_counts": {
+    "settled": 16,
+    "disordered": 0,
+    "open": 208
+   },
+   "shadow_runs": 16,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 151,
+   "role": "shadow_active",
+   "n": 64,
+   "residue_runs_aligned": 48,
+   "unsettled": 16,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "mover": 32,
+    "growing": 16
+   },
+   "Delta": {
+    "00": 4
+   },
+   "only_phase": 4.1887218755408675,
+   "rec": 2.0,
+   "carried_by_movers": 2.1887218755408675,
+   "rec_word": 0.0,
+   "G_shadow": 1.0,
+   "open_runs": 16,
+   "open_frac": 0.5,
+   "class_counts": {
+    "settled": 16,
+    "disordered": 0,
+    "open": 16
+   },
+   "shadow_runs": 16,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 3)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 3), Fraction(-1, 2))",
+    "((1, 'vac', 3), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [
+    "((), Fraction(-1, 2))",
+    "((), Fraction(1, 2))"
+   ],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 3),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 171,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 224,
+   "unsettled": 208,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 16
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 0.781956286981969,
+   "rec": 0.781956286981969,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 208,
+   "open_frac": 0.9285714285714286,
+   "class_counts": {
+    "settled": 16,
+    "disordered": 0,
+    "open": 208
+   },
+   "shadow_runs": 16,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 209,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 96,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 64,
+    "mover": 32
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 1.75,
+   "rec": 1.5,
+   "carried_by_movers": 0.25,
+   "rec_word": 0.0,
+   "G_shadow": 0.6556390622295662,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 64,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 64,
+   "n_contact_shadow": 4,
+   "H_C": 0.5,
+   "I_word": 0.0,
+   "H_detail": 0.5,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [
+    "((), Fraction(-1, 2))",
+    "((), Fraction(1, 2))"
+   ],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))": [
+     [
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     64
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 213,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 224,
+   "unsettled": 208,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 16
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 0.781956286981969,
+   "rec": 0.781956286981969,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 208,
+   "open_frac": 0.9285714285714286,
+   "class_counts": {
+    "settled": 16,
+    "disordered": 0,
+    "open": 208
+   },
+   "shadow_runs": 16,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 233,
+   "role": "shadow_active",
+   "n": 64,
+   "residue_runs_aligned": 48,
+   "unsettled": 16,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 16,
+    "mover": 32
+   },
+   "Delta": {
+    "00": 4
+   },
+   "only_phase": 4.1887218755408675,
+   "rec": 2.0,
+   "carried_by_movers": 2.1887218755408675,
+   "rec_word": 0.0,
+   "G_shadow": 1.0,
+   "open_runs": 16,
+   "open_frac": 0.5,
+   "class_counts": {
+    "settled": 16,
+    "disordered": 0,
+    "open": 16
+   },
+   "shadow_runs": 16,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 3)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 3), Fraction(-1, 2))",
+    "((1, 'vac', 3), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [
+    "((), Fraction(-1, 2))",
+    "((), Fraction(1, 2))"
+   ],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 3),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 241,
+   "role": "shadow_active",
+   "n": 256,
+   "residue_runs_aligned": 224,
+   "unsettled": 208,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 852,
+   "E": 63,
+   "pv": 4,
+   "kinds": {
+    "growing": 16
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 0.25,
+   "rec": 0.25,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 208,
+   "open_frac": 0.9285714285714286,
+   "class_counts": {
+    "settled": 16,
+    "disordered": 0,
+    "open": 208
+   },
+   "shadow_runs": 16,
+   "n_contact_shadow": 1,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, 'vac', 2)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, 'vac', 2), Fraction(-1, 2))",
+    "((1, 'vac', 2), (1, 'vac', 0), Fraction(1, 2))"
+   ],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, 'vac', 2),), (Fraction(-1, 2), Fraction(1, 2))),)",
+     16
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 22,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 48,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 96,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 48
+   },
+   "Delta": {
+    "00": 4,
+    "01": 4,
+    "10": 4,
+    "11": 4
+   },
+   "only_phase": 1.0471804688852169,
+   "rec": 1.0471804688852169,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.6084585933443494,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 48,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 48,
+   "n_contact_shadow": 3,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(4, (1, 2, 1, 3), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (4, (1, 2, 1, 3), None), Fraction(-1, 1))",
+    "((4, (1, 2, 1, 3), None), (1, 'vac', 0), Fraction(1, 1))",
+    "((4, (1, 2, 1, 3), None), (4, (1, 2, 1, 3), None), Fraction(0, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (4, (1, 2, 1, 3), None), Fraction(-1, 1))": [
+     [
+      "0",
+      "0"
+     ]
+    ],
+    "((4, (1, 2, 1, 3), None), (1, 'vac', 0), Fraction(1, 1))": [
+     [
+      "1",
+      "0"
+     ]
+    ],
+    "((4, (1, 2, 1, 3), None), (4, (1, 2, 1, 3), None), Fraction(0, 1))": [
+     [
+      "1",
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((4, (1, 2, 1, 3), None), (4, (1, 2, 1, 3), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     48
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 26,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 96,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 96
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 2.4693609377704338,
+   "rec": 2.4693609377704338,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.75,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 96,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 96,
+   "n_contact_shadow": 3,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, (3,), None)",
+    "(2, (1, 2), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, (3,), None), Fraction(-1, 1))",
+    "((1, (3,), None), (2, (1, 2), None), Fraction(0, 1))",
+    "((2, (1, 2), None), (1, 'vac', 0), Fraction(1, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, (3,), None), Fraction(-1, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, (3,), None), (2, (1, 2), None), Fraction(0, 1))": [
+     [
+      "1"
+     ]
+    ],
+    "((2, (1, 2), None), (1, 'vac', 0), Fraction(1, 1))": [
+     [
+      "1"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, (3,), None), (2, (1, 2), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     96
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 54,
+   "role": "shadow_silent",
+   "n": 64,
+   "residue_runs_aligned": 32,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "mover": 64
+   },
+   "Delta": {
+    "00": 4
+   },
+   "only_phase": 2.5,
+   "rec": 0.0,
+   "carried_by_movers": 2.5,
+   "rec_word": 0.0,
+   "G_shadow": 0.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 0,
+   "n_contact_shadow": 0,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 0,
+   "disordered_edges": [],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [
+    "((), Fraction(-1, 1))",
+    "((), Fraction(1, 1))"
+   ],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [],
+   "V0": true
+  },
+  {
+   "wolfram": 58,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 224,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 224
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 6.3137218755408675,
+   "rec": 6.3137218755408675,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 224,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 224,
+   "n_contact_shadow": 7,
+   "H_C": 0.8571428571428577,
+   "I_word": 0.0,
+   "H_detail": 0.8571428571428577,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, (3,), None)",
+    "(3, (0, 2, 1), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, (3,), None), Fraction(-1, 1))",
+    "((1, (3,), None), (3, (0, 2, 1), None), Fraction(0, 1))",
+    "((3, (0, 2, 1), None), (1, 'vac', 0), Fraction(1, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((1, (3,), None), (3, (0, 2, 1), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     224
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 82,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 96,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 96
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 2.4693609377704338,
+   "rec": 2.4693609377704338,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.75,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 96,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 96,
+   "n_contact_shadow": 3,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, (3,), None)",
+    "(2, (1, 2), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (2, (1, 2), None), Fraction(-1, 1))",
+    "((1, (3,), None), (1, 'vac', 0), Fraction(1, 1))",
+    "((2, (1, 2), None), (1, (3,), None), Fraction(0, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (2, (1, 2), None), Fraction(-1, 1))": [
+     [
+      "0"
+     ]
+    ],
+    "((1, (3,), None), (1, 'vac', 0), Fraction(1, 1))": [
+     [
+      "2"
+     ]
+    ],
+    "((2, (1, 2), None), (1, (3,), None), Fraction(0, 1))": [
+     [
+      "0"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((2, (1, 2), None), (1, (3,), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     96
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 94,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 64,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 64
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 1.5,
+   "rec": 1.5,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.5,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 64,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 64,
+   "n_contact_shadow": 2,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, (3,), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (1, (3,), None), Fraction(-1, 1))",
+    "((1, (3,), None), (1, 'vac', 0), Fraction(1, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": true,
+   "wall_budgets": {
+    "((1, 'vac', 0), (1, (3,), None), Fraction(-1, 1))": [
+     [
+      "-2"
+     ]
+    ],
+    "((1, (3,), None), (1, 'vac', 0), Fraction(1, 1))": [
+     [
+      "2"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((1, (3,), None),), (Fraction(-1, 1), Fraction(1, 1))),)",
+     64
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 114,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 224,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 224
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 5.6887218755408675,
+   "rec": 5.6887218755408675,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.25,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 224,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 224,
+   "n_contact_shadow": 7,
+   "H_C": 0.8571428571428577,
+   "I_word": 0.0,
+   "H_detail": 0.8571428571428577,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(1, (3,), None)",
+    "(3, (0, 1, 2), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (3, (0, 1, 2), None), Fraction(-1, 1))",
+    "((1, (3,), None), (1, 'vac', 0), Fraction(1, 1))",
+    "((3, (0, 1, 2), None), (1, (3,), None), Fraction(0, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('growing', ((3, (0, 1, 2), None), (1, (3,), None)), (Fraction(-1, 1), Fraction(0, 1), Fraction(1, 1))),)",
+     224
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 154,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 96,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 96,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "disordered": 384,
+    "mover": 288
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 1.532904493117094,
+   "rec": 1.532904493117094,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.75,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 96,
+    "open": 0
+   },
+   "shadow_runs": 96,
+   "n_contact_shadow": 3,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [
+    "((None, None, Fraction(-1, 1)), (None, None, Fraction(1, 1)))",
+    "((None, None, Fraction(1, 1)), (None, None, Fraction(1, 1)))"
+   ],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [
+    "(((5, (0, 2, 1, 2, 1), None), (3, (0, 2, 1), None)), Fraction(1, 1))",
+    "(((5, (0, 2, 1, 2, 1), None), (4, (0, 0, 2, 1), None)), Fraction(1, 1))"
+   ],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))))",
+     96
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 182,
+   "role": "shadow_silent",
+   "n": 64,
+   "residue_runs_aligned": 32,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 32,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "disordered": 32
+   },
+   "Delta": {
+    "00": 4
+   },
+   "only_phase": 2.5,
+   "rec": 2.5,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 1.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 32,
+    "open": 0
+   },
+   "shadow_runs": 32,
+   "n_contact_shadow": 2,
+   "H_C": 1.0,
+   "I_word": 0.0,
+   "H_detail": 1.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [
+    "((None, None, Fraction(-1, 1)), (None, None, Fraction(1, 1)))"
+   ],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))),)",
+     32
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 186,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 160,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 160,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "disordered": 288,
+    "mover": 1280
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 3.525052483345746,
+   "rec": 3.025052483345746,
+   "carried_by_movers": 0.5,
+   "rec_word": 0.0,
+   "G_shadow": 0.75,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 160,
+    "open": 0
+   },
+   "shadow_runs": 160,
+   "n_contact_shadow": 5,
+   "H_C": 0.3999999999999999,
+   "I_word": 0.3999999999999999,
+   "H_detail": 0.0,
+   "I_sp_word": 1.121928094887362,
+   "n_words": 3,
+   "disordered_edges": [
+    "((None, None, Fraction(-1, 1)), (None, None, Fraction(1, 1)))",
+    "((None, None, Fraction(1, 1)), (None, None, Fraction(1, 1)))"
+   ],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [
+    "(((3, (0, 2, 1), None), (3, (0, 2, 1), None), (3, (0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None), (3, (0, 2, 1), None), (3, (0, 2, 1), None), (7, (0, 0, 2, 1, 0, 2, 1), None), (8, (0, 0, 0, 2, 1, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None), (3, (0, 2, 1), None), (4, (0, 0, 2, 1), None), (3, (0, 2, 1), None), (7, (0, 0, 2, 1, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None), (3, (0, 2, 1), None), (7, (0, 0, 2, 1, 0, 2, 1), None), (7, (0, 0, 2, 1, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None), (3, (0, 2, 1), None), (8, (0, 0, 0, 2, 1, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None), (4, (0, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None), (7, (0, 0, 2, 1, 0, 2, 1), None), (8, (0, 0, 0, 2, 1, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((3, (0, 2, 1), None),), Fraction(1, 1))",
+    "(((4, (0, 0, 2, 1), None),), Fraction(1, 1))",
+    "(((7, (0, 0, 2, 1, 0, 2, 1), None), (3, (0, 2, 1), None)), Fraction(1, 1))",
+    "(((7, (0, 0, 2, 1, 0, 2, 1), None), (8, (0, 0, 0, 2, 1, 0, 2, 1), None), (7, (0, 0, 2, 1, 0, 2, 1), None), (4, (0, 0, 2, 1), None)), Fraction(1, 1))",
+    "(((8, (0, 0, 0, 2, 1, 0, 2, 1), None), (3, (0, 2, 1), None)), Fraction(1, 1))",
+    "(((8, (0, 0, 0, 2, 1, 0, 2, 1), None),), Fraction(1, 1))",
+    "((), Fraction(1, 1))"
+   ],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))),)",
+     64
+    ],
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))))",
+     64
+    ],
+    [
+     "(('disordered', (), (Fraction(-1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))), ('disordered', (), (Fraction(1, 1), Fraction(1, 1))))",
+     32
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 218,
+   "role": "shadow_silent",
+   "n": 256,
+   "residue_runs_aligned": 64,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {
+    "growing": 64
+   },
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 1.5,
+   "rec": 1.5,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.5,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 64,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 64,
+   "n_contact_shadow": 2,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 1,
+   "disordered_edges": [],
+   "domain_species": [
+    "(2, (1, 2), None)"
+   ],
+   "wall_species": [
+    "((1, 'vac', 0), (2, (1, 2), None), Fraction(-1, 1))",
+    "((2, (1, 2), None), (1, 'vac', 0), Fraction(1, 1))"
+   ],
+   "mover_species": [],
+   "B_eligible": true,
+   "B_function": false,
+   "wall_budgets": {
+    "((1, 'vac', 0), (2, (1, 2), None), Fraction(-1, 1))": [
+     [
+      "-1/2",
+      "-1/2"
+     ],
+     [
+      "-1/2",
+      "-3/2"
+     ]
+    ],
+    "((2, (1, 2), None), (1, 'vac', 0), Fraction(1, 1))": [
+     [
+      "3/2",
+      "1/2"
+     ],
+     [
+      "7/2",
+      "3/2"
+     ]
+    ]
+   },
+   "words": [
+    [
+     "(('growing', ((2, (1, 2), None),), (Fraction(-1, 1), Fraction(1, 1))),)",
+     64
+    ]
+   ],
+   "V0": true
+  },
+  {
+   "wolfram": 90,
+   "role": "null_silent",
+   "n": 256,
+   "residue_runs_aligned": 0,
+   "unsettled": 0,
+   "unresolved": 0,
+   "opencap": 0,
+   "edge_hits": 0,
+   "V1_fail": 0,
+   "bud_aper": 0,
+   "disordered_runs": 0,
+   "T": 576,
+   "E": 31,
+   "pv": 1,
+   "kinds": {},
+   "Delta": {
+    "00": 2,
+    "01": 2,
+    "10": 2,
+    "11": 2
+   },
+   "only_phase": 0.0,
+   "rec": 0.0,
+   "carried_by_movers": 0.0,
+   "rec_word": 0.0,
+   "G_shadow": 0.0,
+   "open_runs": 0,
+   "open_frac": 0.0,
+   "class_counts": {
+    "settled": 0,
+    "disordered": 0,
+    "open": 0
+   },
+   "shadow_runs": 0,
+   "n_contact_shadow": 0,
+   "H_C": 0.0,
+   "I_word": 0.0,
+   "H_detail": 0.0,
+   "I_sp_word": 0.0,
+   "n_words": 0,
+   "disordered_edges": [],
+   "domain_species": [],
+   "wall_species": [],
+   "mover_species": [],
+   "B_eligible": false,
+   "B_function": true,
+   "wall_budgets": {},
+   "words": [],
+   "V0": true
+  }
+ ]
+}

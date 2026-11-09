@@ -1,0 +1,5 @@
+{"valid": true, "V0_all": true, "V1_all": true, "V2_nulls": true, "V3_orbits": true, "V4_edges": true, "V5_identity": true, "H_S": "not_supported", "H_D": "not_supported"}
+
+real	4m40.721s
+user	17m40.355s
+sys	0m5.860s
