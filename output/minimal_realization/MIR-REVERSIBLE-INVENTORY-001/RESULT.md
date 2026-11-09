@@ -13,13 +13,13 @@ Run: 4 min 41 s, 4 workers.
   giving H_S 2/7 and H_D 1/7. Verdicts unchanged.
 
 ## Descriptive (question 1: is a shadow a bound state of a small alphabet?)
-- Yes, in most rules, and the alphabet is tiny. Settled in all runs, with one word per rule: 147 33 123 139 209 22s 26s
-  58s 82s 94s 114s 218s (201: 2 words; 91 exposed: 4). Per rule: 1-2 domain species, 2-5 wall species.
+- Yes, in most rules, and the alphabet is tiny. Settled in all runs, with one word per rule: 147 123 139 209 22s 26s 58s
+  82s 94s 114s 218s (33 and 201: 2 words; 91 exposed: 4). Per rule: 1-2 domain species, 2-5 wall species.
 - Anatomy of the common word: two domains meeting at a **static central wall** (speed 0), with outer walls running into
   the vacuum at +-v (147, 201: phase-shifted vacuum domains, +-1/4; 58s, 22s: periodic domains, +-1). The static wall
   is the stationary record and the domains are the spreading part (picture).
 - No small-alphabet description: 143 171 213 241 (open in 208/224: light-cone expansion with fragmenting interior),
-  151 233 (16/48 open), 154s 182s 186s (disordered in all runs), 37 (46 words in 134 settled runs; 46 open).
+  151 233 (16 of 32 shadow runs open; 16 further residue runs are movers only), 154s 182s 186s (disordered in all runs), 37 (46 words in 134 settled runs; 46 open).
 - Wall budgets (invariant rules) are a function of wall species in 11/12 eligible rules (all but 218s, where one wall
   species carries two averaged budgets). Descriptive only.
 
