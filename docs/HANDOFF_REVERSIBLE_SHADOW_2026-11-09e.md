@@ -11,7 +11,7 @@ workers; commit from bash). Strategic rule: no tests for their own sake.
   114s); 33 123 139 209 94s 218s have one domain and two edges, no static wall.
 - Method note: re-decomposing every tick with inventory1.domains() fails at some tick parities (22s); walls are tracked
   locally by flank-periodicity breaks. 22s static wall is a phase slip (negative width allowed).
-- Valid. H_1 3/7 (147 201 22s), H_T 3/7 (147 58s 114s; <= 0.48 bit), H_I 0/7. Static wall = placement (59-88% of rec)
+- Valid. H_1 3/7 (147 201 22s), H_T 3/7 (147 58s 114s; <= 0.48 bit), H_I 0/7. Static wall = placement (67-88% of rec)
   + sub-species; clock periods 2-12, short. In 26s 82s 58s 114s 0.58-1.41 bit lives only in the moving outer walls; outer
   walls alone hold everything in 6/7. Reading: a stationary wall remembers where; when needs a moving edge.
 

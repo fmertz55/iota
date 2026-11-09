@@ -33,7 +33,7 @@ r_allwalls = 0 in all 7: the wall set holds the whole record. r_outer (outer wal
 
 ## Reading
 The static wall does not keep the collision's timing in its internal phase. It keeps mainly *where* the contact
-happened (placement, 59-88% of the record), plus which sub-species of wall formed. Its clock adds a fraction of a bit
+happened (placement, 67-88% of the record), plus which sub-species of wall formed. Its clock adds a fraction of a bit
 in three rules, and the clock alone never suffices. In four of seven rules, part of the record (0.58-1.41 bit) is
 absent from the stationary wall and present only in the moving outer walls. Their positions are place plus
 velocity times age, so a moving edge registers *when* as well as *where*. In every rule the outer walls alone hold the
