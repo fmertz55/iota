@@ -9,7 +9,7 @@ Companion to `shadow_prior_art_addendum_embedded_particles_2026-11-09.md`. Quest
 | histories with the same response to every probe are "the same object state" | Myhill-Nerode equivalence; minimal machine | Nerode, Proc. AMS 1958 (existence confirmed via McNaughton's review, doi 10.2307/2271612) |
 | the minimal summary of the past that predicts the future | causal state, epsilon-machine | Shalizi & Crutchfield, J. Stat. Phys. 2001, doi 10.1023/a:1010388907793 |
 | minimal state that predicts the response to a probe (input) | epsilon-transducer | Barnett & Crutchfield, J. Stat. Phys. 2015, doi 10.1007/s10955-015-1327-5 |
-| state as predictions of probe outcomes | predictive state representation (tests) | Littman, Sutton & Singh 2001; Singh, James & Rudary 2004 (arXiv 1207.4167) |
+| state as predictions of probe outcomes | predictive state representation (tests) | Singh, James & Rudary, "Predictive state representations: a new theory for modeling dynamical systems" (arXiv 1207.4167, posted 2012; original venue and year not checked); the earlier Littman, Sutton & Singh paper is cited from memory, record not checked |
 | coherent structures in CA space-time as causal-state objects | local causal states, coherent-structure filters | Shalizi et al., PRE 2006, doi 10.1103/physreve.73.036104; Rupe & Crutchfield 2018 (cited) |
 | particle catalog + collision table predicts CA behaviour | embedded-particle models | Hordijk, Crutchfield & Mitchell 1996, 1998 (addendum) |
 | idealized collision law | signal machines | Becker, Durand-Lose et al., ACM ToCT 2021 (addendum) |
