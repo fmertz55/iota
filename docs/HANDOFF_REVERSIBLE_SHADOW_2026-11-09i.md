@@ -19,6 +19,34 @@ Supersedes HANDOFF_REVERSIBLE_SHADOW_2026-11-09h.md. Working rules and the user'
    describe open runs (37 143 151 171 213 233 241), dis runs (154s 182s 186s) or 37's walls longer than 96 ticks.
    None of these is in an eligible pair.
 
+## Update 2026-11-10: prior-art check done; PREDICT reframed (commit 55d2533)
+User asked whether PREDICT "rolls over prior art with our unique terms". Yes for the concept: see
+docs/literature/predict_prior_art_mapping_2026-11-10.md. "Same response to every probe = same state" is the
+Myhill-Nerode partition / epsilon-transducer (Barnett & Crutchfield 2015). One citation step from that paper finds no
+transducer of CA collision products. Candidate results: physical fields generate the minimal partition; position acts
+only as a shift; held-out probes; compositional law (strongest).
+
+### Revised lay version (sent to the user 2026-11-10; awaiting his OK before the pilot/contract)
+A collision leaves a footprint (the shadow), and DESCRIBE-001 showed it can be written on a short index card. The idea
+that "two things are the same if they react the same to everything you throw at them", and that the smallest such card
+is the true state, is old (automata theory 1958; Crutchfield's epsilon-transducer 2015). So PREDICT-001 does not claim
+it. It asks three narrower things. (1) Is the smallest card made of our physical lines (wall types, beats, domain
+phases), and which lines? Our bet, written down first: a ridge's position only shifts the response in space and time;
+which objects collided and their relative beat decide everything else. (2) Does it hold for wide probes never used to
+find it? (3) Later, the main prize: can a table measured on single ridges predict whole footprints, like a rulebook for
+collisions?
+
+### Open decisions (proposed defaults in brackets)
+- Arrival beats and times per probe [every vacuum beat, 3 arrival times].
+- All 944 histories or a pre-registered sample [time a pilot first, then decide].
+- Same response = equal up to a space-time shift [yes, fixed before any run].
+
+### Pick-up point
+Next action: get the user's OK on the lay version and defaults, then a timing pilot (print time only), then the
+PREDICT-001 contract. Unpushed: local main is ahead of origin by about 11 commits plus tags
+mir-reversible-species-001-v0.1-frozen and mir-reversible-describe-001-v0.1-frozen. The push needs the user's
+approval.
+
 ## Next: PREDICT-001 (lay version to the user first)
 - Pairs: the 7 eligible ones (147 201 22s 26s 58s 82s 114s). Histories = their described shadow runs (944). Probes =
   SPECIES-001 species, discovery set for the field-subset search and confirmation set for the test, at several
