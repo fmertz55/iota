@@ -2,6 +2,77 @@
 
 [![Research compendium](https://github.com/fmertz55/iota/actions/workflows/research-compendium.yml/badge.svg)](https://github.com/fmertz55/iota/actions/workflows/research-compendium.yml)
 
+## Start here
+
+Iota is an open lab notebook for one idea: **information comes first**, and what we call physics is how
+information is kept, moved and constrained. We test that idea in very simple computer worlds, where every
+cell and every rule is known exactly, so nothing has to be taken on trust.
+
+Every experiment here follows the same discipline. The question, the method and the pass/fail criteria are
+written down and frozen (a git tag) **before** the experiment runs. Then it runs, and the result is committed
+whether it supports the idea or not. Failed and invalid runs stay in the record with their explanations.
+
+### Papers
+
+| Paper | Status | Read |
+|---|---|---|
+| **The Shadow Knows: Interaction Records That Outlive Their Carriers in Reversible Second-Order Cellular Automata** | Submitted to *Complex Systems* (Nov 2026) | [PDF](shadow_paper/complex_systems/clark_shadow_complexsystems.pdf) · [source](shadow_paper/complex_systems/clark_shadow_complexsystems.tex) |
+| **The Constrained Future: A Testable Information-Constraint Principle for Persistent Organization** (the ICP) | Submitted to *BioSystems* (Hypothesis article, Nov 2026) | [PDF](https://github.com/fmertz55/ICP/blob/main/output/pdf/icp_biosystems_revision_r1.pdf) · [plain-language companion](https://github.com/fmertz55/ICP/blob/main/output/pdf/how_the_past_changes_what_can_happen_next.pdf) (written for the earlier, longer version) · [ICP repository](https://github.com/fmertz55/ICP) |
+| **Quantum-Dirac operational role construction** | Manuscript | [PDF](output/pdf/quantum_dirac_operational_role_manuscript.pdf) · [lay companion](output/pdf/quantum_dirac_layperson_companion.pdf) · [details](quantum_dirac_paper/README.md) |
+| **Constraint transport in the Iota lattice** | Earlier manuscript, not under submission | [PDF](output/pdf/iota_constraint_transport_biosystems.pdf) |
+
+Submitted papers are preprints: not yet peer reviewed.
+
+### The shadow, in plain language
+
+Picture two travellers walking toward each other across fresh snow. They meet, something happens, and they
+leave. Now remove the travellers entirely. Is the meeting still recorded anywhere? In the worlds we study,
+yes: the meeting leaves a **shadow**, a lasting change in the background itself, like footprints in the snow.
+A later traveller who passes through can read what happened from the footprints alone.
+
+These worlds are *reversible*: nothing is ever lost or rubbed out, so the shadow is a genuine memory, and
+we can count exactly how much it holds, in bits. What we have found so far:
+
+1. **The record outlives the objects that made it.** Erase the colliding objects, send in a fresh one, and its
+   path depends on the collision. In every collision that left a shadow (45 collision types in 14 rule worlds),
+   the newcomer reads *all* of the information that only the shadow held; collisions that leave no shadow give
+   exactly zero. ([SHADOW-002](output/minimal_realization/MIR-REVERSIBLE-SHADOW-002/), [SHADOW-003](output/minimal_realization/MIR-REVERSIBLE-SHADOW-003/RESULT.md))
+2. **The memory is a shape.** The record sits in *where the edges of the changed region are*, like the outline
+   of a footprint, not in the pattern inside it. ([SHADOW-006](output/minimal_realization/MIR-REVERSIBLE-SHADOW-006/RESULT.md), [SHADOW-009](output/minimal_realization/MIR-REVERSIBLE-SHADOW-009/RESULT.md))
+3. **It grows, but slowly.** Each doubling of the variety of collisions adds only about half a bit to the shadow.
+   ([SHADOW-005](output/minimal_realization/MIR-REVERSIBLE-SHADOW-005/RESULT.md), [SHADOW-006](output/minimal_realization/MIR-REVERSIBLE-SHADOW-006/RESULT.md); see the caveats in those files)
+4. **Nothing is out of reach, but one reader may not see it all.** A single passer-by can miss part of the record,
+   depending on which side it comes from; a small set of readers recovers every bit in all 25 cases tested.
+   ([SHADOW-007](output/minimal_realization/MIR-REVERSIBLE-SHADOW-007/RESULT.md), [SHADOW-009](output/minimal_realization/MIR-REVERSIBLE-SHADOW-009/RESULT.md))
+5. **Empty space keeps nothing by itself.** A background that does nothing can hold a record only when the
+   collision first creates new structure in it. ([SHADOW-004](output/minimal_realization/MIR-REVERSIBLE-SHADOW-004/RESULT.md))
+6. **Memory costs nothing.** Records need no conserved "currency" to exist; the colliding objects usually turn
+   into the edges of the shadow. ([write-up for collaborators](docs/BUDGET_LINE_WRITEUP_2026-11-09.md))
+7. **A shadow can be written on an index card.** A short description of its edges and regions reproduces its
+   future exactly, cell by cell. ([DESCRIBE-001](output/minimal_realization/MIR-REVERSIBLE-DESCRIBE-001/RESULT.md))
+
+All of this is in one-dimensional toy worlds. Whether anything like it holds in richer worlds, or says anything
+about our universe, is open. **Now working on:** whether the shortest such description is built from physical
+features and predicts how a shadow answers *any* probe.
+
+### Finding your way around
+
+| You want | Look in |
+|---|---|
+| What each experiment set out to test (frozen before running) | `docs/ICP_MIR_REVERSIBLE_*_CONTRACT.md` |
+| What each experiment found | `output/minimal_realization/MIR-REVERSIBLE-*/RESULT.md` |
+| The code | [`src/minimal_realization_reversible/`](src/minimal_realization_reversible/) |
+| Proof that nothing changed after freezing | `specs/icp_minimal_realization_reversible/*_seal.json` (file hashes) and git tags `mir-reversible-*-frozen` |
+| Where the work stands right now | the newest `docs/HANDOFF_REVERSIBLE_SHADOW_*.md` |
+| Prior work we build on | [`docs/literature/`](docs/literature/) |
+
+Everything below this line is the full research program: the organizing hypothesis in formal terms, the
+earlier lattice experiments, and how to install and run the rig.
+
+---
+
+## Research program in full
+
 > **Organizing hypothesis**
 >
 > **Information is the change in the reachable caused by interaction.**
