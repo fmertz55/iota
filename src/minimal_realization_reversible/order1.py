@@ -24,7 +24,7 @@ from minimal_realization_reversible.vacuum_collide import table, step
 from minimal_realization_reversible import collide2 as C2
 import minimal_realization_reversible.inventory1 as I1
 import minimal_realization_reversible.species1 as SPc
-TAG = 'mir-reversible-order-001-v0.1-frozen'
+TAG = 'mir-reversible-order-001-v0.1.1-frozen'
 P_ = 'src/minimal_realization_reversible/'
 SEALED = ['docs/ICP_MIR_REVERSIBLE_ORDER_001_CONTRACT.md'] + [P_ + f for f in (
     'order1.py', 'species1.py', 'inventory1.py', 'shadow4.py', 'shadow7.py', 'shadow6.py', 'shadow3.py', 'shadow.py',
@@ -166,17 +166,28 @@ def classify(x):
     return out
 
 
+class Grid:
+    """The case grid, indexed lazily in the v0.1 enumeration order (X sorted by id; pair; tau; d; Delta), so that
+    rng.choice(len(G)) picks exactly the cases v0.1 would have picked (v0.1.1: memory fix only)."""
+    def __init__(s, R, side, pairs):
+        s.blocks = []; off = 0
+        for X in sorted([o for o in R.sp if o['v'] * side < 0], key=lambda o: o['id']):
+            L = L_of(R, X); Ds = [L * math.ceil(m / L) for m in DMIN]; taus = [X['phase'] + m * R.pv for m in range(X['P'] // R.pv)]
+            n = len(pairs) * len(taus) * len(DS) * len(Ds); s.blocks.append((off, n, X['id'], taus, Ds)); off += n
+        s.n = off
+    def __len__(s): return s.n
+    def __getitem__(s, g):
+        for off, n, Xid, taus, Ds in s.blocks:
+            if g < off + n:
+                r = g - off; De = Ds[r % len(Ds)]; r //= len(Ds); d = DS[r % len(DS)]; r //= len(DS)
+                tau = taus[r % len(taus)]; pi = r // len(taus); return (Xid, pi, tau, d, De)
+        raise IndexError(g)
+
+
 def grid(R, side):
-    T = [o for o in R.sp if o['v'] * side < 0]; Rd = sorted([o for o in R.sp if o['v'] * side > 0], key=lambda o: o['id'])
+    Rd = sorted([o for o in R.sp if o['v'] * side > 0], key=lambda o: o['id'])
     pairs = [(Rd[i], Rd[j]) for i in range(len(Rd)) for j in range(i + 1, len(Rd))]
-    G = []
-    for X in sorted(T, key=lambda o: o['id']):
-        L = L_of(R, X); Ds = [L * math.ceil(m / L) for m in DMIN]; taus = [X['phase'] + m * R.pv for m in range(X['P'] // R.pv)]
-        for pi in range(len(pairs)):
-            for tau in taus:
-                for d in DS:
-                    for De in Ds: G.append((X['id'], pi, tau, d, De))
-    return G, pairs
+    return Grid(R, side, pairs), pairs
 
 
 def job(a):
@@ -280,7 +291,12 @@ def main():
     assert json.loads(SEAL.read_text()) == dig(), 'seal mismatch'
     OUT.mkdir(parents=True, exist_ok=True)
     J = sorted(jobs_list(), key=lambda j: -(j[3] or 0))
-    with ProcessPoolExecutor(6) as ex: res = list(ex.map(job, J))
+    CK = OUT / 'jobs'; CK.mkdir(exist_ok=True)
+    ck = lambda j: CK / f"{j[0]}_{j[4]}_{j[5]}.json"
+    todo = [j for j in J if not ck(j).exists()]
+    with ProcessPoolExecutor(5) as ex:
+        for j, r in zip(todo, ex.map(job, todo)): ck(j).write_text(json.dumps(r, default=str))   # v0.1.1: per-job checkpoint
+    res = [json.loads(ck(j).read_text()) for j in J]
     S = verdicts(res)
     rows = [dict(lab=r['lab'], side=r.get('side'), n_grid=r.get('n_grid'), rows=r.get('rows'), v0=r if r.get('mode') == 'v0' else None) for r in res]
     (OUT / 'results.json').write_text(json.dumps(dict(summary=S, jobs=rows), indent=1, default=str) + '\n')

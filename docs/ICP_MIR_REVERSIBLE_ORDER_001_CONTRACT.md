@@ -1,6 +1,6 @@
 # MIR-REVERSIBLE-ORDER-001: does the background remember the ORDER of two interactions? (v0.1)
 
-Status: **frozen at tag `mir-reversible-order-001-v0.1-frozen`**. 2026-11-15. Code: `order1.py`. Line: replaces the
+Status: **frozen at tag `mir-reversible-order-001-v0.1-frozen`; implementation erratum v0.1.1 (tag `mir-reversible-order-001-v0.1.1-frozen`)**. 2026-11-15. Code: `order1.py`. Line: replaces the
 PREDICT/COMPOSE plan (see `docs/literature/compose_prior_art_screen_2026-11-15.md`: PREDICT-001's held-out-probe test and
 separated-regime composition are guaranteed by DESCRIBE-001 + locality + determinism and cannot fail). Approved by the
 user 2026-11-15 ("ORDER-001: does the background remember order").
@@ -81,3 +81,11 @@ Integrable RCA scattering and order-independence (Bobenko et al. 1993, cited fro
 commuting diagrams (Israeli & Goldenfeld 2006). Screen of 5 OpenAlex queries found no study measuring which part of a
 reversible CA (movers vs. background) holds the order of interactions. Candidate contribution: that measurement, against
 an exact integrable control in the same engine.
+
+## Erratum v0.1.1 (2026-11-15, implementation only; no output was read)
+The v0.1 run was stopped after 4.5 h with no output written (results are written only at the end). Cause: the case grid
+was materialised as a Python list (16.5 million entries for 90s, in two concurrent workers) on an 8 GB machine, with
+heavy paging (about 900k pageouts) and a load average of 35-70 from other processes. Changes: (1) the grid is indexed
+lazily in the same enumeration order (checked element by element against the v0.1 grid for 22s, 147 and 26s, both
+sides: identical), so the fixed seed draws exactly the same cases; (2) each job writes a checkpoint file; (3) 5 workers
+instead of 6. Hypotheses, sample, controls and readouts are unchanged.
