@@ -1,0 +1,83 @@
+{
+ "147": {
+  "n": 1115,
+  "order": 1098,
+  "bg_only": 134,
+  "written": 974,
+  "gate": 84,
+  "mov_only": 40,
+  "both": 924
+ },
+ "201": {
+  "n": 1268,
+  "order": 1260,
+  "bg_only": 110,
+  "written": 1085,
+  "gate": 116,
+  "mov_only": 59,
+  "both": 1091
+ },
+ "22s": {
+  "n": 1291,
+  "order": 1219,
+  "bg_only": 402,
+  "written": 1115,
+  "gate": 26,
+  "mov_only": 57,
+  "both": 739
+ },
+ "26s": {
+  "n": 1359,
+  "order": 1159,
+  "bg_only": 46,
+  "written": 661,
+  "gate": 7,
+  "mov_only": 301,
+  "both": 612
+ },
+ "58s": {
+  "n": 1044,
+  "order": 813,
+  "bg_only": 73,
+  "written": 590,
+  "gate": 55,
+  "mov_only": 125,
+  "both": 572
+ },
+ "82s": {
+  "n": 1375,
+  "order": 1145,
+  "bg_only": 64,
+  "written": 636,
+  "gate": 1,
+  "mov_only": 342,
+  "both": 553
+ },
+ "114s": {
+  "n": 1151,
+  "order": 931,
+  "bg_only": 113,
+  "written": 608,
+  "gate": 39,
+  "mov_only": 157,
+  "both": 534
+ },
+ "1": {
+  "n": 426,
+  "order": 367,
+  "bg_only": 0,
+  "written": 0,
+  "gate": 0,
+  "mov_only": 367,
+  "both": 0
+ },
+ "5": {
+  "n": 476,
+  "order": 0,
+  "bg_only": 0,
+  "written": 0,
+  "gate": 0,
+  "mov_only": 0,
+  "both": 0
+ }
+}
