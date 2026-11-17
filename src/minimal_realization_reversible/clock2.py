@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
 import minimal_realization_reversible.order2 as O2
 import minimal_realization_reversible.clock1 as C1
-TAG = 'mir-reversible-clock-002-v0.1-frozen'
+TAG = 'mir-reversible-clock-002-v0.1.1-frozen'
 P_ = 'src/minimal_realization_reversible/'
 SEALED = ['docs/ICP_MIR_REVERSIBLE_CLOCK_002_CONTRACT.md'] + [P_ + f for f in ('clock2.py', 'clock1.py', 'order2.py', 'species1.py',
           'inventory1.py', 'collide2.py', 'vacuum_collide.py')] + ['output/minimal_realization/MIR-REVERSIBLE-SPECIES-001/results.json']
@@ -39,7 +39,7 @@ def medium_maker(R, side, T=600):
                         doms = eval(bg[0])
                         if doms and doms[0] != ('nodom',):
                             dm = doms[0] if side == 1 else doms[-1]
-                            if dm[1] != 'vac': return objs, (X['id'], a['id'], m, d), dm
+                            if isinstance(dm, tuple) and len(dm) == 3 and dm[1] != 'vac': return objs, (X['id'], a['id'], m, d), dm
     return None, None, None
 
 

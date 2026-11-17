@@ -35,3 +35,7 @@ Only the medium scan's domain types (above). No transit in rule 37 has been run.
 
 ## Limits
 One rule, one medium type, 1-D. Clock = exact orbit period (moving clocks only). No Lorentz structure.
+
+## Erratum v0.1.1 (2026-11-17; no outcome existed)
+The v0.1 run crashed: a background word ("nodom",) evaluates to the string "nodom", which passed the non-vacuum check
+and was used as a domain. Fix: the medium must be a 3-field domain record. Tag mir-reversible-clock-002-v0.1.1-frozen.
