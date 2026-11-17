@@ -50,10 +50,15 @@ we can count exactly how much it holds, in bits. What we have found so far:
    into the edges of the shadow. ([write-up for collaborators](docs/BUDGET_LINE_WRITEUP_2026-11-09.md))
 7. **A shadow can be written on an index card.** A short description of its edges and regions reproduces its
    future exactly, cell by cell. ([DESCRIBE-001](output/minimal_realization/MIR-REVERSIBLE-DESCRIBE-001/RESULT.md))
+8. **The footprints remember who went first.** Two travellers take turns walking into the same target; then the
+   order is swapped. In the textbook "perfect" world (Rule 54) the outcome is identical either way. In every shadow
+   world tested, the world almost always records the order, mostly in the footprints, and in 3-22% of cases *only*
+   there: the travellers walking away are the same species either way. Worlds without footprints forget the order or
+   carry it in the travellers. ([ORDER-002](output/minimal_realization/MIR-REVERSIBLE-ORDER-002/RESULT.md))
 
 All of this is in one-dimensional toy worlds. Whether anything like it holds in richer worlds, or says anything
-about our universe, is open. **Now working on:** whether the shortest such description is built from physical
-features and predicts how a shadow answers *any* probe.
+about our universe, is open. **Now working on:** how much of the order is held where (including the travellers'
+timing), and what the footprints' order record does to what can happen next.
 
 ### Finding your way around
 
