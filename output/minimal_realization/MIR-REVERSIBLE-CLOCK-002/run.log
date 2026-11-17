@@ -1,0 +1,5 @@
+{"valid": true, "V_lag": true, "U_eligible": ["37L"], "H_S": "supported", "H_U": "not_supported", "H_M": "not_supported", "H_S_pass": ["37L"], "H_U_pass": []}
+
+real	3m33.205s
+user	9m49.822s
+sys	0m1.434s
