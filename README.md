@@ -55,6 +55,9 @@ we can count exactly how much it holds, in bits. What we have found so far:
    world tested, the world almost always records the order, mostly in the footprints, and in 3-22% of cases *only*
    there: the travellers walking away are the same species either way. Worlds without footprints forget the order or
    carry it in the travellers. ([ORDER-002](output/minimal_realization/MIR-REVERSIBLE-ORDER-002/RESULT.md))
+   And the footprints pass it on: in 588 cases nothing about the travellers (kind, place, delay) reveals the order,
+   yet a later traveller comes out different depending on it. Never in Rule 54.
+   ([ORDER-003](output/minimal_realization/MIR-REVERSIBLE-ORDER-003/RESULT.md))
 
 All of this is in one-dimensional toy worlds. Whether anything like it holds in richer worlds, or says anything
 about our universe, is open. **Now working on:** how much of the order is held where (including the travellers'

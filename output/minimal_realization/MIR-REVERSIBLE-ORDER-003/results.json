@@ -1,0 +1,166 @@
+{
+ "summary": {
+  "V0_repro": true,
+  "V_C": true,
+  "valid": true,
+  "H_T_pass": [
+   "147",
+   "201",
+   "22s",
+   "26s",
+   "58s",
+   "82s",
+   "114s"
+  ],
+  "H_R_pass": [
+   "147",
+   "201",
+   "22s",
+   "26s",
+   "58s",
+   "82s",
+   "114s"
+  ],
+  "H_RT_pass": [
+   "147",
+   "201",
+   "22s",
+   "26s",
+   "58s",
+   "82s",
+   "114s"
+  ],
+  "H_T": "supported",
+  "H_R": "supported",
+  "H_RT": "supported",
+  "table": {
+   "147": {
+    "cases": 161,
+    "valid": 161,
+    "timing_ok": 145,
+    "tdir_ok": 161,
+    "reader_timing": {
+     "equal": 145,
+     "unassessable": 16
+    },
+    "pairs_g": 1288,
+    "g_touched": 1288,
+    "readback": 592,
+    "cases_readback": 159,
+    "both": 143,
+    "repro_ok": 161
+   },
+   "201": {
+    "cases": 94,
+    "valid": 94,
+    "timing_ok": 73,
+    "tdir_ok": 94,
+    "reader_timing": {
+     "equal": 73,
+     "unassessable": 21
+    },
+    "pairs_g": 752,
+    "g_touched": 752,
+    "readback": 461,
+    "cases_readback": 94,
+    "both": 73,
+    "repro_ok": 94
+   },
+   "22s": {
+    "cases": 313,
+    "valid": 313,
+    "timing_ok": 272,
+    "tdir_ok": 313,
+    "reader_timing": {
+     "equal": 272,
+     "unassessable": 41
+    },
+    "pairs_g": 939,
+    "g_touched": 913,
+    "readback": 238,
+    "cases_readback": 184,
+    "both": 168,
+    "repro_ok": 313
+   },
+   "26s": {
+    "cases": 39,
+    "valid": 39,
+    "timing_ok": 35,
+    "tdir_ok": 39,
+    "reader_timing": {
+     "equal": 35,
+     "unassessable": 4
+    },
+    "pairs_g": 507,
+    "g_touched": 491,
+    "readback": 320,
+    "cases_readback": 38,
+    "both": 34,
+    "repro_ok": 39
+   },
+   "58s": {
+    "cases": 79,
+    "valid": 79,
+    "timing_ok": 73,
+    "tdir_ok": 79,
+    "reader_timing": {
+     "unassessable": 6,
+     "equal": 73
+    },
+    "pairs_g": 474,
+    "g_touched": 474,
+    "readback": 347,
+    "cases_readback": 75,
+    "both": 69,
+    "repro_ok": 79
+   },
+   "82s": {
+    "cases": 50,
+    "valid": 50,
+    "timing_ok": 48,
+    "tdir_ok": 48,
+    "reader_timing": {
+     "equal": 50
+    },
+    "pairs_g": 650,
+    "g_touched": 642,
+    "readback": 479,
+    "cases_readback": 44,
+    "both": 43,
+    "repro_ok": 50
+   },
+   "114s": {
+    "cases": 87,
+    "valid": 87,
+    "timing_ok": 64,
+    "tdir_ok": 85,
+    "reader_timing": {
+     "equal": 66,
+     "unassessable": 21
+    },
+    "pairs_g": 522,
+    "g_touched": 522,
+    "readback": 403,
+    "cases_readback": 81,
+    "both": 58,
+    "repro_ok": 87
+   },
+   "250c": {
+    "cases": 100,
+    "valid": 100,
+    "timing_ok": 22,
+    "tdir_ok": 100,
+    "reader_timing": {
+     "unassessable": 78,
+     "equal": 22
+    },
+    "pairs_g": 1500,
+    "g_touched": 1470,
+    "readback": 0,
+    "cases_readback": 0,
+    "both": 0,
+    "repro_ok": 100
+   }
+  }
+ }
+}

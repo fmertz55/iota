@@ -1,0 +1,5 @@
+{"valid": true, "V0_repro": true, "V_C": true, "H_T": "supported", "H_R": "supported", "H_RT": "supported"} ['147', '201', '22s', '26s', '58s', '82s', '114s'] ['147', '201', '22s', '26s', '58s', '82s', '114s'] ['147', '201', '22s', '26s', '58s', '82s', '114s']
+
+real	57m39.129s
+user	136m3.021s
+sys	0m28.354s
