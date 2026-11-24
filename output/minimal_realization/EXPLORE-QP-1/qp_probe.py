@@ -84,3 +84,47 @@ def probe(G,mu,c):
     for arm in ['all','coh']:
         d1=run3(0.2,G,mu=mu,c=c,g=1e-5,arm=arm); dx=d1.x-d0.x; w=d1.t>=500; f[arm]=-2*np.polyfit(d1.t[w],dx[w],2)[0]/1e-5
     return dict(G=G,mu=mu,held_T=d.held.iloc[-1],clock=Om,push_over_clock=0.01/v/Om,fall_all=f['all'],fall_coh=f['coh'])
+
+
+# ---- step 2 (fair weight): energy, continuum push, weighed-glue fall ----
+def pocket_energy(a0,G,mu,c,sigma=20,T=3000):
+    # run unkicked; at end compute Omega (phase rate) and glue energy (1/2gam) sum[chi_t^2 + c^2 (dchi)^2 + mu^2 (chi-a0)^2]
+    R,Lc=q.packet(q.x0,sigma,a0); S=2*np.real(np.conj(R)*Lc); gam=G*mu**2
+    ker=1/(c**2*(2-2*np.cos(q.K))+mu**2); chi=a0-np.real(np.fft.ifft(np.fft.fft(gam*S)*ker)); chim=chi.copy(); Om=[]
+    for t in range(T):
+        S=2*np.real(np.conj(R)*Lc); new=2*chi-chim+c**2*(np.roll(chi,1)+np.roll(chi,-1)-2*chi)-mu**2*(chi-a0)-gam*S; chim,chi=chi,new
+        cc,sn=np.cos(chi),np.sin(chi); cR=cc*R-1j*sn*Lc; cL=-1j*sn*R+cc*Lc; R2=np.roll(cR,1); L2=np.roll(cL,-1)
+        if t>=T-500: Om.append(-np.angle(np.sum(np.conj(R)*R2+np.conj(Lc)*L2)))
+        R,Lc=R2,L2
+    chit=chi-chim; dchi=np.roll(chi,-1)-chi
+    Eg=(np.sum(chit**2+c**2*dchi**2+mu**2*(chi-a0)**2))/(2*gam) if gam>0 else 0
+    return np.mean(Om), Eg
+
+def pe2(a0,G,mu,c,sigma,T):
+    R,Lc=q.packet(q.x0,sigma,a0); S=2*np.real(np.conj(R)*Lc); gam=G*mu**2
+    ker=1/(c**2*(2-2*np.cos(q.K))+mu**2); chi=a0-np.real(np.fft.ifft(np.fft.fft(gam*S)*ker)); chim=chi.copy(); Om=[]
+    for t in range(T):
+        S=2*np.real(np.conj(R)*Lc); new=2*chi-chim+c**2*(np.roll(chi,1)+np.roll(chi,-1)-2*chi)-mu**2*(chi-a0)-gam*S; chim,chi=chi,new
+        cc,sn=np.cos(chi),np.sin(chi); cR=cc*R-1j*sn*Lc; cL=-1j*sn*R+cc*Lc; R2=np.roll(cR,1); L2=np.roll(cL,-1)
+        if t>=T-500: Om.append(-np.angle(np.sum(np.conj(R)*R2+np.conj(Lc)*L2)))
+        R,Lc=R2,L2
+    Eg=(np.sum((chi-chim)**2+c**2*(np.roll(chi,-1)-chi)**2+mu**2*(chi-a0)**2))/(2*gam) if gam>0 else 0
+    return np.mean(Om)+Eg
+
+def run4(a0,G,mu,sigma,T,g,c=0.99,weigh_glue=True,every=50):
+    X=q.X; R,Lc=q.packet(q.x0,sigma,a0); N=1+g*(X-q.x0); Nh=1+g*(X+0.5-q.x0)   # N at half-cells
+    S=2*np.real(np.conj(R)*Lc); gam=G*mu**2
+    ker=1/(c**2*(2-2*np.cos(q.K))+mu**2); chi=a0-(np.real(np.fft.ifft(np.fft.fft(gam*S)*ker)) if gam>0 else 0); chim=chi.copy() if gam>0 else np.full(q.L,a0); chi=chi if gam>0 else np.full(q.L,a0)
+    rows=[]
+    for t in range(T+1):
+        if t%every==0:
+            d=abs(R)**2+abs(Lc)**2; rows.append(dict(t=t,x=np.sum(X*d)))
+        if t==T: break
+        S=2*np.real(np.conj(R)*Lc)
+        if weigh_glue:   # lapse on the whole glue Hamiltonian: N d/dx(N dchi/dx) - N^2 (V' + S)
+            flux=Nh*(np.roll(chi,-1)-chi); lap=N*c**2*(flux-np.roll(flux,1)); new=2*chi-chim+lap-N**2*(mu**2*(chi-a0)+gam*S)
+        else:
+            new=2*chi-chim+c**2*(np.roll(chi,1)+np.roll(chi,-1)-2*chi)-mu**2*(chi-a0)-gam*S
+        chim,chi=chi,new
+        a=N*chi; cc,sn=np.cos(a),np.sin(a); cR=cc*R-1j*sn*Lc; cL=-1j*sn*R+cc*Lc; R=np.roll(cR,1); Lc=np.roll(cL,-1)
+    return pd.DataFrame(rows)
