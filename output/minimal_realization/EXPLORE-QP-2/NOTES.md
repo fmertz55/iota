@@ -37,8 +37,17 @@ Reading: the pair's two parts hop together (amplitude n*n) and turn together at 
 - Smooth limit (small mu): pair clock / two lone clocks = |cos(theta/2)|, and push-resistance = own clock for every theta.
 A second, theta-independent pair is held by the frozen edge step: cos(clock) = (1-mu^2)/(1+mu^2) cos K (not derived).
 
+Step 4, smooth limit (`c1_smooth_limit.py`, `c1_smooth_limit.csv`, `c1_gap_profiles.csv`): the theta-held pair at
+rest (K = 0), picked by the law's clock (law error <= 3e-4, mostly 0), mu 0.8 -> 0.05, theta = pi/4, pi/2, 3pi/4,
+rings N = 240 and 360 (agree). The pair SPREADS as mu gets small, and stays held: the chance of finding the two parts
+d nodes apart falls off exponentially in d, so the pair has a finite size at every mu. Rule found (small mu):
+    mean gap (nodes) x mu x sin(theta/2) -> 1/2,  i.e. mean gap ~ 1 / (2 mu sin(theta/2))
+(mu = 0.05: 0.499-0.51 for the three theta). mu = 0.05, theta = pi/2: mean gap 14 nodes; theta = pi/4: about 27 nodes.
+At large mu the pair is tighter than this (mu = 0.8: under 1 node). Reading: mu sets the lattice-to-pair size ratio,
+so small mu gives pairs many nodes across with no new rule. Not derived yet; the scaling is a numerical fit.
+
 ## Limits and cautions
-Two coherences, 1D, empty vacuum. Pairs are about 1 node across (lattice scale). mu supplied. Pairs are settled
+Two coherences, 1D, empty vacuum. Pairs are about 1 node across at mu ~ 0.5-0.8 and spread as 1/(2 mu sin(theta/2)) nodes at small mu (step 4). mu supplied. Pairs are settled
 states; in an empty vacuum a free pair can never become held (the rule loses nothing, so free and held states never
 mix). No shadow and no drift toward slow clocks are possible here: an empty node stays empty, so nothing outside the
 pair can carry a record. Prior-art flag only (no search done): Thirring QCA bound states are the nearby road.
