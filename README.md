@@ -486,6 +486,12 @@ strictly closer to natural versus a required `17/25`. The composite graph-role
 gate failed. All controls and 1,200 branch outcomes were exact. Findings 076 and
 077 were therefore not opened.
 
+The Finding 075 branches share one sequential random stream, so after an
+intervention changes control flow, later draws can fall on different events. The
+paired exact test is therefore a test of equal articulation rates across arms;
+individual discordant pairs are not read as pointwise causal effects (see
+[ICP Gate 0, section 7](docs/ICP_GATE0_OPERATIONAL_DEFINITION.md)).
+
 Finding 078 separated structural placement from inherited state marks and
 enumerated a pre-gate marked successor graph. All 175 development states were
 exact; `25/25` channels were factorially identifiable and `23/25` showed a
@@ -584,6 +590,34 @@ canonical registries are [claims](evidence/claims.yaml) and
 [definitions](evidence/definitions.yaml). Generated files are marked as such and
 must not be edited by hand.
 
+## Repository map
+
+The tree grew with the research program, so several top-level directories hold
+separate versions or separate manuscripts. Paths are kept stable because frozen
+manifests, the experiment databases, and submitted manuscripts cite them.
+
+```text
+src/                  rig code (v0.1 and opt-in v0.2 law paths) and experiment drivers
+src/minimal_realization*/  minimal-realization and reversible-CA lines
+experiments/          v0.1 experiment records and FINDINGS.md
+experiments_v02/      v0.2 (hard-conservation) experiment records
+output/               v0.1 run outputs, findings/, minimal_realization/, quantum_dirac/
+output_v02/           v0.2 run outputs
+data/                 SQLite experiment databases (v0.1, v0.2, pre-migration backup)
+evidence/             canonical claims and definitions registries, generated manifests
+specs/                frozen and draft experiment protocols
+docs/                 law specs, operational definitions, reviewer guide, handoffs
+scripts/              evidence, validation, and paper build scripts
+tests/                unit and replay tests (run by `make verify`)
+paper/                Constraint Transport manuscript (BioSystems); `make paper`
+submission/biosystems/  BioSystems submission support files
+shadow_paper/         reversible-CA shadow manuscript; complex_systems/ is the
+                      Complex Systems version
+quantum_dirac_paper/  quantum-Dirac manuscripts; `make quantum-dirac-paper`
+paper_order/          outline for a planned order-memory manuscript
+visualizations/       visual grammar and figure components
+```
+
 ## Rig overview
 
 The implementation began as a minimal octal-first iota universe test rig.
@@ -627,7 +661,8 @@ Vector state `V` remains a 64-state octal field. With the default `cube26` mode,
 ## Install
 
 ```bash
-cd /Users/douglasclark/iota
+git clone https://github.com/fmertz55/iota.git
+cd iota
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

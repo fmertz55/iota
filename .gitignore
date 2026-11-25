@@ -7,3 +7,15 @@ build/
 
 # Generated image artifacts are tracked in data/iota_lab.db by path/hash.
 output/**/*.png
+
+# Temporary sweep configs written next to config.yaml by src/*_sweep.py
+# (left behind only when a sweep is interrupted).
+.iota_*.yaml
+
+# Local matplotlib cache (MPLCONFIGDIR used by the paper scripts).
+.matplotlib/
+
+# SQLite sidecar files.
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
