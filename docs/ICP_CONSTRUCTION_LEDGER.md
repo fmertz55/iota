@@ -1,5 +1,5 @@
 # ICP Construction Ledger — the node rule (route B), declared and counted
-Version 0.1 (draft for the user's edit), 2026-11-26. Scope: the live construction of the quasi-particle line
+Version 0.2, 2026-11-26 (v0.1 committed as 7ef6342; changes in Section 11). Scope: the live construction of the quasi-particle line
 (QP-002, EXPLORE-QP-2, EXPLORE-QP-3). Earlier substrates (Iota Rig v0.2 stochastic laws; the classical reversible
 cellular automata of MIR-REVERSIBLE-*) are out of scope and get their own ledger if they return to use.
 
@@ -7,7 +7,25 @@ Each entry gives the physics statement first, then **In plain terms** for a read
 
 ---
 
-## 1. Why this ledger exists
+## 1. The research question, and why this ledger exists
+
+**The question (the user's framing).** We are researching whether an information-first universe is feasible, and
+whether it would give rise to the familiar physics we experience today. One observation motivates the whole program:
+a record can persist apart from what physics calls the mass or energy that first produced it. That is puzzling if
+information is a by-product of matter and energy. It is natural if information is the substrate and matter and energy
+are patterns in it.
+
+**Physics.** Working hypothesis: the substrate is local degrees of freedom and their exchange. Quantities usually
+treated as fundamental (in Iota's words: clock, push-resistance, drift toward slow clocks) are to be found as
+properties of coherences in that substrate, never put in as primitives. Corollary: the substrate's state can carry a
+record of an interaction after the coherence that wrote it has moved on or changed, because the record is substrate
+state, not an attribute of the coherence.
+
+**In plain terms.** Most physics treats matter and energy as the real stuff and information as a description of it.
+We are testing the reverse: information is the real stuff, and matter and energy are what certain patterns of it look
+like. If that is right, it is no surprise that a footprint can outlast the foot.
+
+### Why this ledger exists
 
 **Physics.** The program's aim is the smallest set of rules from which basic features of the physical world follow:
 quantum behaviour, relativity-like behaviour at scale, something like chirality, angular momentum, and gravity.
@@ -57,9 +75,58 @@ dictionary, not a design target.
 | P2 | Nodes exchange information only with their nearest neighbours. | P |
 | P3 | No bag of data is held away from a node's own degrees of freedom (no notebook layers, no hand-supplied fields or slopes, no mean-field summaries). | P |
 | P4 | Known physics is never a reason to choose or change a rule. | P |
+| P5 | The rule is reversible: no two different states of the world are ever sent to the same state. | P |
+| P6 | The state of the world is a set of amplitudes over the nodes' configurations, and a tick is a unitary map (quantum, not plain bits). | P (declared; not derived) |
+
+P5 and P6 were added on 2026-11-26 as step 1 of Section 9 (fixing the premises before re-deriving the node).
+**Why P5.** If information is the substrate, a rule that sends two states to one destroys substrate. The observation
+that motivates the program (a record outlasting the coherence that wrote it) is natural only if nothing is erased.
+Cost: the rule has no arrow of time; any arrow must come from the starting state or from coarse-graining.
+**Why P6, and why it is declared.** P1-P5 and the information-first framing do not decide between amplitudes and plain
+reversible bits. Deriving quantum theory is a separate program; folding it into Section 9 would hide an assumption
+instead of counting it. So quantum behaviour is assumed openly, and the scorecard says so (Section 7).
 
 **In plain terms.** The universe is a grid of tiny bookkeepers. Each one only talks to the ones next to it, keeps
-its own books and nothing else, and we are not allowed to rig the rules to copy textbook physics.
+its own books and nothing else, and we are not allowed to rig the rules to copy textbook physics. Nothing is ever
+erased. And the books are kept in quantum amplitudes: that one we assume, and we say so.
+
+### 4.1 A principle that follows from the premises
+
+| ID | Principle | From | Kind |
+|---|---|---|---|
+| H | **Homogeneity.** The rule is the same at every node and at every tick. | P3 | D |
+
+**Why.** A rule that differs from node to node stores, for each node, which rule applies there. No node's degrees of
+freedom hold that, so it is a supplied field, the fault of the retired slope X2. A rule that differs from tick to tick
+needs a clock outside the nodes. A tick may still be built from sub-steps (for example an edge layer, then a node
+layer); that schedule is a structural choice and is counted in Section 9.
+
+*In plain terms.* Every bookkeeper follows the same rulebook, every time. A rulebook that changed from place to place,
+or from moment to moment, would need a hidden map or a hidden clock, and hidden bookkeeping is banned.
+
+### 4.2 Not premises: properties we record, not require
+
+| Label | Property | Treatment |
+|---|---|---|
+| L1 | Mirror symmetry (the rule looks the same reflected) | classify: every listed rule is marked symmetric or not |
+| L2 | Time-reversal symmetry (the backward rule is the forward rule up to a local relabelling; P5 guarantees only that a backward rule exists) | classify |
+| L3 | Conservation of the number of full slots (C5) | classify; conserving rules are listed first, as an order of work, not a filter |
+
+**Why.** No Iota principle says the substrate has no handedness, looks the same run backwards, or keeps its count of
+full slots fixed. Requiring them would build in what might otherwise emerge (Section 6, item 4).
+
+*In plain terms.* Looking the same in a mirror, or run backwards, is not assumed. We list every possible machine and
+note which ones have those properties, so that if handedness shows up, we know it was not put in.
+
+### 4.3 How "simplest" is judged (fixed before any Section 9 work)
+
+Order: (1) fewest slots per node; then (2) fewest sub-steps per tick; then (3) fewest free constants. The result is
+reported with this order, and, where cheap, with what other orders would select.
+
+The borrowed Dirac derivation's five assumptions map onto this list as follows: homogeneity -> H; locality -> P2;
+unitarity -> P5 + P6; parity -> L1 (recorded, not required); time reversal -> L2 (recorded, not required).
+
+*In plain terms.* "Simplest" is decided before we look, so we cannot redefine it to suit the answer.
 
 ## 5. The construction, piece by piece
 
@@ -83,11 +150,27 @@ its own books and nothing else, and we are not allowed to rig the rules to copy 
 "bounded single-particle 1+1D Dirac operational role". The derivation it follows uses homogeneity, locality,
 unitarity, parity and time reversal, which are close to our premises, but the target was Dirac motion. By P4 that
 makes C1–C4 outcome-chosen until shown otherwise. The open question (Section 9) is whether the same node and tick
-follow from P1–P3 alone as the simplest choice. If yes, they become D and the Dirac behaviour becomes a result.
+follow from the premises (Section 4) alone as the simplest choice. If yes, they become D and the Dirac behaviour becomes a result.
 
 *In plain terms.* We borrowed the basic machine from published work whose goal was to reproduce a famous equation of
 quantum physics. That is useful engineering, but it means the machine's good behaviour is partly built in. We now
 have to show the machine is the simplest one our ground rules allow, or admit that it was imported.
+
+**Verification of C1-C4: the quantum-Dirac result (July 2026).** Before route B existed, this machine passed a
+frozen, prospective test. Two separately registered local updates (a product walk, and the direct QCA used here)
+were each tested against a bounded 1+1D Dirac role: every development scenario and the single-use held-out
+confirmation scenarios passed, and an algorithmically separate high-precision rebuild reproduced both. Certified
+error halved with each refinement (product walk 0.0300, 0.0150, 0.0075; direct QCA 0.00056, 0.00014, 0.000035). A
+later hostile audit found a factor-of-two error in the direct QCA's empirical zone-edge check; those values were
+withdrawn in public and the central low-band conclusion survived with a stated qualification. The surviving claim is
+"qualified constructive sufficiency" under declared inputs, and that work listed its supplied ingredients, including
+the Dirac target itself (docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md). So C1-C4 are **verified as a construction**: they
+do what they were built for, to high precision. They are not yet **derived**: that is Section 9.
+
+*In plain terms.* We already proved, carefully and in public (including a mistake we caught and retracted), that the
+borrowed engine runs exactly as its designers said: local information rules can carry the behaviour of a quantum
+particle. What we have not shown is that our own ground rules would have designed that engine. Proven to work is not
+the same as proven to be ours.
 
 **C2 and C6 (the both-full choices).** For one coherence, nothing depends on them. For two or more, they decide how
 coherences affect each other. A different but equally natural choice (fermionic signs, phase -1) would give a
@@ -133,6 +216,7 @@ bookkeeping and a hand-drawn slope. We kept the result and threw out the machine
 
 ### 5.5 The count
 
+- Premises: **6** (P1-P6; P6, quantum amplitudes, is declared, not derived). Principle derived from them: **1** (H).
 - Rule constants supplied by hand: **2** (mu, theta). One more is fixed and never varied: the edge both-full phase (+1).
 - Structural choices: **5** (two slots; plain switches; tick order and orientation; conservation of full slots; ring).
 - Starting states used: **2** (empty; all-R full).
@@ -175,7 +259,8 @@ These are consequences of C1-C9 that nobody asked for. Results marked *explorato
 
 | Feature | Status | Evidence | Honest note |
 |---|---|---|---|
-| Quantum behaviour | **built in** | unitary, reversible QCA (C1-C5) | assumed through the borrowed machine, not derived |
+| Borrowed node works as built | **verified (construction)** | quantum-Dirac branch, July 2026: frozen prospective test passed, independent rebuild, one check withdrawn after audit | verified to carry a bounded Dirac role; not derived from P1-P3 (Section 9) |
+| Quantum behaviour | **built in** | premise P6 (declared 2026-11-26); unitary, reversible QCA (C1-C5) | assumed openly as a premise, not derived |
 | Relativity-like behaviour | **partly** | strict light cone; lone coherence follows the Dirac clock law at long wavelength | the clock law is the borrowed machine's design target |
 | Chirality | **partly built in, partly emergent** | R/L slots (built in); mirror-odd colour count (emergent, item 6.4) | the emergent count needs even N and its meaning is not explored |
 | Angular momentum | **cannot be tested** | 1D has no rotations | needs 2D or 3D; how the node extends into 2D is a new ledger entry and must be derived, not chosen to give spin |
@@ -196,12 +281,18 @@ trail around an object that something else could slide down.
    failure.
 5. **Scans are characterisation only.** A constant scan is declared as such in advance and all results are reported.
 6. **Known physics names what we see and checks it. It never chooses a rule.**
-7. **Corrections stay public.** Retired pieces, wrong statements and their fixes stay in the record.
-8. **Prior-art gate before any paper.**
+7. **Prior work informs, and is counted.** We read what others have done and may learn from it or borrow from it, as
+   with the Dirac QCA (Bisio, D'Ariano, Tosini) and the Quantum Memory Matrix (Neukart et al., arXiv:2504.00039, used
+   in the gold line). Every borrowed piece is cited, enters this ledger as outcome-chosen, and stays there until it
+   is derived from the premises. The question stays ours: is an information-first universe feasible, and does it
+   give familiar physics?
+8. **Corrections stay public.** Retired pieces, wrong statements and their fixes stay in the record.
+9. **Prior-art gate before any paper.**
 
 ## 9. Open decision (the user's)
 
-Re-derive the node and tick from P1-P3 alone: write down every free choice the premises leave open (number of slots,
+Re-derive the node and tick from the premises alone (P1-P6 and principle H, with L1-L3 recorded, not required, and
+"simplest" judged by the order in Section 4.3; all fixed on 2026-11-26 as step 1): write down every free choice the premises leave open (number of slots,
 what counts as one exchange, order of operations, the doubly-full phases, the constants) and count them. Outcomes:
 (a) the borrowed Dirac node is the simplest choice, so C1-C4 move from O to D and the Dirac clock law becomes a
 result; or (b) it is not, and we learn exactly how much of route B was imported.
@@ -212,8 +303,20 @@ a referee.
 
 ## 10. Sources in this repo
 
-docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md (origin of C1-C6); docs/ICP_QP_001_CONTRACT.md (X1-X4);
+docs/ICP_QUANTUM_DIRAC_SYMMETRY_QCA_CONTRACT.md (origin of C1-C6); docs/ICP_QUANTUM_DIRAC_LAY_COMPANION.md
+(verification of C1-C4, July 2026); docs/ICP_QP_001_CONTRACT.md (X1-X4);
 docs/ICP_QP_002_CONTRACT.md and output/quantum_gold/QP-002/RESULTS.md (item 6.3);
 output/minimal_realization/EXPLORE-QP-2/NOTES.md (route B, theta, edge-held pair);
 output/minimal_realization/EXPLORE-QP-3/NOTES.md (items 6.1, 6.2, 6.4, 6.5; probe 3; method audit);
 docs/HANDOFF_FILLED_VACUUM_2026-11-25.md (fork a); README.md ("declared and counted").
+
+## 11. Change log
+
+- **v0.1** (2026-11-26, commit 7ef6342): first declared-and-counted ledger of the route-B node rule.
+- **v0.2** (2026-11-26): added the research question in the user's framing (Section 1); added the July 2026
+  quantum-Dirac result as verification of C1-C4 (Section 5.2) and as a scorecard row (Section 7); added working rule 7,
+  prior work informs and is counted (Section 8). The tally in Section 5.5 is unchanged: verification is not derivation.
+- **v0.2, continued** (2026-11-26): Section 9 step 1, the premise list fixed by the user's decision. Added P5
+  (reversible) and P6 (quantum amplitudes, declared); homogeneity H derived from P3 (Section 4.1); mirror, time
+  reversal and full-slot conservation recorded as labels L1-L3, not premises (Section 4.2); the simplicity order fixed
+  before any derivation (Section 4.3). Quantum row of the scorecard now points to P6. The C-piece tally is unchanged.
