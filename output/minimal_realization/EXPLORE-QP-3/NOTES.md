@@ -79,6 +79,36 @@ object and no local shadow at these sizes and settings.
 Caveats: N <= 12 even, theta = 0.5 pi only, two mu, one disturbance (L_0). Untested: theta near pi, theta = 0
 (mixes slower), pairs of extra slots (the QP-002 held pair) in the full vacuum.
 
+## Probe 3: theta scan, one extra full slot (stopped early at the user's request)
+- `p3_theta.py` -> `p3_theta.csv` (N = 8, 10). `p3_theta_n12.py` -> one file per N = 12 run, joined by
+  `p3_summary.py` into `p3_theta_N12.csv`; `p3_summary.py` -> `p3_summary.csv` (20-tick windows).
+- Same set-up as probe 2 (all R plus L_0 full), 100 ticks, theta/pi = 0, 0.25, 0.5, 0.75, 0.9, 0.95, 1.0,
+  mu = 0.5, 0.8, N = 8, 10, 12. Occupations only.
+- Coverage: all runs done except N = 12, mu = 0.8, theta/pi = 0.95 and 1.0 (stopped). N = 12 runs slowed from
+  ~2 min to 5-37 min each, also in fresh processes (machine-level; not subnormal numbers, checked).
+- New read-out: stag = (-1)^t sum_x (-1)^x dn_x, a node-alternating wave (0 when the slot is evenly spread).
+
+Results
+1. theta/pi = 0.25-0.75: as probe 2. Even spread (spread 7.93 / 9.99 / 12.00 nodes at t >= 80 for N = 8 / 10 / 12),
+   |stag| at t >= 80 at most 0.037 / 0.011 / 0.004.
+2. theta = 0 and theta = pi: a ring-wide node-alternating wave appears and lasts. |stag| at t >= 80 is 0.58-1.24
+   over all N and mu; largest node share at N = 12 is 0.19-0.21 vs even 0.083; nodes go below the plain vacuum by up
+   to 0.57 (the low half of the wave). Not a held object: the pattern covers the whole ring.
+3. theta/pi = 0.9, 0.95: the same wave, fading; slower the closer theta is to pi. N = 12, mu = 0.5: |stag| 0.22 ->
+   0.018 (theta 0.9 pi) and 0.48 -> 0.20 (0.95 pi), from t 20-40 to t >= 80.
+4. Plain vacuum at theta = 0 vs pi: return chance identical to 0.0 over 100 ticks at N = 8 and 12; different at
+   N = 10 (up to 0.58-0.64). Unexplained; looks like a ring-size effect (N divisible by 4). An earlier chat statement
+   that the two are identical in general was wrong (it rested on N = 8 alone).
+5. Extra slot conserved (total = 1 to machine precision) in every run.
+
+Reading: no theta gives a held, local object. theta = 0 and pi mix less and leave a ring-wide wave instead.
+
+## Method audit after probe 3 (user, 2026-11-26)
+The user flagged fitting: quasi-particles had become the goal and pieces were adjusted until they appeared (bags,
+then theta, then the starting vacuum; the theta scan and a proposed "thinner background" were knob-turning toward an
+outcome). The node structure and tick themselves come from the Dirac QCA, i.e. from known physics. Next: a
+declared-and-counted construction ledger (docs/ICP_CONSTRUCTION_LEDGER.md) before any further probe.
+
 ## Notes written before probe 2
 - Risk flagged at step 1 has shown up: at theta = 0.5 pi the vacuum scrambles a change within a few ring lengths, so a
   held object would have to beat this background.
